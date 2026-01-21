@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  /* Background */
+  --canvas: #FAFAF8;
+  --card: #FFFFFF;
+  --inset: #F8F7F5;
+
+  /* Text */
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+
+  /* Energy sources */
+  --coal: #374151;
+  --gas: #F59E0B;
+  --other-fossil: #D97706;
+  --nuclear: #8B5CF6;
+  --hydro: #3B82F6;
+  --wind: #14B8A6;
+  --solar: #FCD34D;
+  --bioenergy: #22C55E;
+
+  /* Semantic */
+  --positive: #22C55E;
+  --negative: #EF4444;
+
+  /* Choropleth scale */
+  --choro-1: #F3F4F6;
+  --choro-2: #DBEAFE;
+  --choro-3: #93C5FD;
+  --choro-4: #3B82F6;
+  --choro-5: #1D4ED8;
+  --choro-6: #1E3A8A;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-card: var(--card);
+  --color-inset: var(--inset);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-coal: var(--coal);
+  --color-gas: var(--gas);
+  --color-other-fossil: var(--other-fossil);
+  --color-nuclear: var(--nuclear);
+  --color-hydro: var(--hydro);
+  --color-wind: var(--wind);
+  --color-solar: var(--solar);
+  --color-bioenergy: var(--bioenergy);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Card style from design system */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.02);
+}
