@@ -1,0 +1,87 @@
+{
+  "ember": {
+    "description": "Blocs from Ember dataset (membership flags in source data)",
+    "blocs": {
+      "EU": {
+        "name": "European Union",
+        "description": "27 member states of the EU",
+        "source": "ember"
+      },
+      "OECD": {
+        "name": "OECD",
+        "description": "Organisation for Economic Co-operation and Development",
+        "source": "ember"
+      },
+      "G20": {
+        "name": "G20",
+        "description": "Group of Twenty major economies",
+        "source": "ember"
+      },
+      "G7": {
+        "name": "G7",
+        "description": "Group of Seven advanced economies",
+        "source": "ember"
+      },
+      "ASEAN": {
+        "name": "ASEAN",
+        "description": "Association of Southeast Asian Nations",
+        "source": "ember"
+      }
+    }
+  },
+  "custom": {
+    "description": "Custom geopolitical blocs (manually curated)",
+    "blocs": {
+      "NATO": {
+        "name": "NATO",
+        "description": "North Atlantic Treaty Organization (32 members as of 2024)",
+        "source": "manual",
+        "members": [
+          "ALB", "BEL", "BGR", "CAN", "HRV", "CZE", "DNK", "EST", "FIN", "FRA",
+          "DEU", "GRC", "HUN", "ISL", "ITA", "LVA", "LTU", "LUX", "MNE", "NLD",
+          "MKD", "NOR", "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE", "TUR",
+          "GBR", "USA"
+        ]
+      },
+      "BRICS": {
+        "name": "BRICS+",
+        "description": "Brazil, Russia, India, China, South Africa + expanded members (2024)",
+        "source": "manual",
+        "members": ["BRA", "RUS", "IND", "CHN", "ZAF", "EGY", "ETH", "IRN", "SAU", "ARE"]
+      },
+      "OPEC_PLUS": {
+        "name": "OPEC+",
+        "description": "OPEC members and allies",
+        "source": "manual",
+        "members": [
+          "DZA", "AGO", "COG", "GNQ", "GAB", "IRN", "IRQ", "KWT", "LBY", "NGA",
+          "SAU", "ARE", "VEN", "RUS", "AZE", "BHR", "BRN", "KAZ", "MYS", "MEX",
+          "OMN", "SDN", "SSD"
+        ]
+      },
+      "THE_WEST": {
+        "name": "The West",
+        "description": "NATO + key allies (Australia, New Zealand, Japan, South Korea)",
+        "source": "manual",
+        "members": [
+          "ALB", "BEL", "BGR", "CAN", "HRV", "CZE", "DNK", "EST", "FIN", "FRA",
+          "DEU", "GRC", "HUN", "ISL", "ITA", "LVA", "LTU", "LUX", "MNE", "NLD",
+          "MKD", "NOR", "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE", "TUR",
+          "GBR", "USA", "AUS", "NZL", "JPN", "KOR"
+        ]
+      },
+      "GLOBAL_SOUTH": {
+        "name": "Global South",
+        "description": "Developing nations (based on UN classification + World Bank income groups)",
+        "source": "manual",
+        "note": "This is an editorial definition - consider refining based on your specific criteria",
+        "members": [
+          "ARG", "BRA", "CHL", "COL", "MEX", "PER", "VEN",
+          "CHN", "IND", "IDN", "MYS", "PHL", "THA", "VNM",
+          "EGY", "NGA", "ZAF", "KEN", "ETH", "MAR", "DZA",
+          "TUR", "SAU", "ARE", "IRN", "IRQ", "PAK", "BGD"
+        ]
+      }
+    }
+  }
+}
