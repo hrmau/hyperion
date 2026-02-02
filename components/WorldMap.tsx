@@ -122,21 +122,24 @@ export default function WorldMap({
         const country = iso3 ? countries[iso3] : undefined;
         const yearData = country?.years[year.toString()];
 
-        if (!yearData) return '#E5E7EB';
+        // No data for this country/year
+        if (!yearData) return '#F3F4F6';
 
+        // Country not in selected bloc — dim it
         if (selectedBloc !== 'ALL' && iso3 && !blocCountryIds.has(iso3)) {
-          return '#E5E7EB';
+          return '#F3F4F6';
         }
 
         return colorScale(yearData.total_generation_twh);
       })
       .attr('stroke', (d) => {
         const iso3 = getIso3(d.id);
-        return selectedCountry?.iso3 === iso3 ? '#1A1A1A' : '#FFFFFF';
+        if (selectedCountry?.iso3 === iso3) return '#1A1A1A';
+        return '#D1D5DB';
       })
       .attr('stroke-width', (d) => {
         const iso3 = getIso3(d.id);
-        return selectedCountry?.iso3 === iso3 ? 2 : 0.5;
+        return selectedCountry?.iso3 === iso3 ? 1.5 : 0.5;
       })
       .attr('cursor', (d) => {
         const iso3 = getIso3(d.id);
@@ -145,7 +148,7 @@ export default function WorldMap({
       .style('opacity', (d) => {
         const iso3 = getIso3(d.id);
         if (selectedBloc === 'ALL') return 1;
-        return iso3 && blocCountryIds.has(iso3) ? 1 : 0.3;
+        return iso3 && blocCountryIds.has(iso3) ? 1 : 0.35;
       })
       .on('mousemove', function (event, d) {
         handleMouseMove(event, getIso3(d.id));
@@ -157,13 +160,15 @@ export default function WorldMap({
         handleClick(getIso3(d.id));
       });
 
-    // Draw clean border mesh
+    // Draw clean border mesh on top
     g.append('path')
       .datum(topojson.mesh(worldData, worldData.objects.countries as GeometryCollection, (a, b) => a !== b))
       .attr('fill', 'none')
-      .attr('stroke', '#FFFFFF')
-      .attr('stroke-width', 0.5)
-      .attr('d', path as never);
+      .attr('stroke', '#D1D5DB')
+      .attr('stroke-width', 0.3)
+      .attr('stroke-linejoin', 'round')
+      .attr('d', path as never)
+      .attr('pointer-events', 'none');
 
   }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover]);
 
