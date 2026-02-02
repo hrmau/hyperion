@@ -113,6 +113,7 @@ export default function WorldMap({
 
     const g = svg.append('g');
 
+    // Layer 1: Country fills — no strokes on individual paths
     g.selectAll('path')
       .data(features)
       .join('path')
@@ -122,25 +123,15 @@ export default function WorldMap({
         const country = iso3 ? countries[iso3] : undefined;
         const yearData = country?.years[year.toString()];
 
-        // No data for this country/year
         if (!yearData) return '#F3F4F6';
 
-        // Country not in selected bloc — dim it
         if (selectedBloc !== 'ALL' && iso3 && !blocCountryIds.has(iso3)) {
           return '#F3F4F6';
         }
 
         return colorScale(yearData.total_generation_twh);
       })
-      .attr('stroke', (d) => {
-        const iso3 = getIso3(d.id);
-        if (selectedCountry?.iso3 === iso3) return '#1A1A1A';
-        return '#D1D5DB';
-      })
-      .attr('stroke-width', (d) => {
-        const iso3 = getIso3(d.id);
-        return selectedCountry?.iso3 === iso3 ? 1.5 : 0.5;
-      })
+      .attr('stroke', 'none')
       .attr('cursor', (d) => {
         const iso3 = getIso3(d.id);
         return iso3 && countries[iso3] ? 'pointer' : 'default';
@@ -160,15 +151,29 @@ export default function WorldMap({
         handleClick(getIso3(d.id));
       });
 
-    // Draw clean border mesh on top
+    // Layer 2: Single border mesh — one consistent line for all borders
     g.append('path')
       .datum(topojson.mesh(worldData, worldData.objects.countries as GeometryCollection, (a, b) => a !== b))
       .attr('fill', 'none')
-      .attr('stroke', '#D1D5DB')
-      .attr('stroke-width', 0.3)
+      .attr('stroke', '#C0C4CA')
+      .attr('stroke-width', 0.5)
       .attr('stroke-linejoin', 'round')
       .attr('d', path as never)
       .attr('pointer-events', 'none');
+
+    // Layer 3: Selected country outline on top
+    if (selectedCountry) {
+      const selectedFeature = features.find(f => getIso3(f.id) === selectedCountry.iso3);
+      if (selectedFeature) {
+        g.append('path')
+          .datum(selectedFeature)
+          .attr('d', path as never)
+          .attr('fill', 'none')
+          .attr('stroke', '#1A1A1A')
+          .attr('stroke-width', 1.5)
+          .attr('pointer-events', 'none');
+      }
+    }
 
   }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover]);
 
