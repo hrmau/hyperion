@@ -151,9 +151,9 @@ export default function WorldMap({
         handleClick(getIso3(d.id));
       });
 
-    // Layer 2: Single border mesh — one consistent line for all borders
+    // Layer 2: All borders — interior (country-country) AND exterior (coastlines)
     g.append('path')
-      .datum(topojson.mesh(worldData, worldData.objects.countries as GeometryCollection, (a, b) => a !== b))
+      .datum(topojson.mesh(worldData, worldData.objects.countries as GeometryCollection))
       .attr('fill', 'none')
       .attr('stroke', '#C0C4CA')
       .attr('stroke-width', 0.5)
