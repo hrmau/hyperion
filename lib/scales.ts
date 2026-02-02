@@ -5,22 +5,27 @@ import type { CountriesData } from './types';
 export function createChoroplethScale(
   countries: CountriesData,
   year: number
-): d3.ScaleQuantize<string, never> {
+): (value: number) => string {
   const values: number[] = [];
 
   for (const country of Object.values(countries)) {
     const yearData = country.years[year.toString()];
-    if (yearData) {
+    if (yearData && yearData.total_generation_twh > 0) {
       values.push(yearData.total_generation_twh);
     }
   }
 
-  const max = d3.max(values) || 1000;
+  if (values.length === 0) {
+    return () => choroColors[0];
+  }
 
-  // Use quantize scale for discrete color bins
-  return d3.scaleQuantize<string>()
-    .domain([0, max])
+  // Use quantile scale: distributes data evenly across color bins
+  // This handles the huge skew (China 10k TWh vs median 50 TWh)
+  const scale = d3.scaleQuantile<string>()
+    .domain(values.sort((a, b) => a - b))
     .range(choroColors);
+
+  return (value: number) => scale(value);
 }
 
 export function formatTWh(value: number): string {
