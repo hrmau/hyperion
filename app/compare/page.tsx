@@ -221,8 +221,7 @@ export default function ComparePage() {
             <h1 className="text-base font-medium text-primary tracking-tight">
               Hyperion
             </h1>
-            <p className="text-[11px] text-secondary">Global electricity, visualized</p>
-            <p className="text-[11px] text-muted">{year}</p>
+            <p className="text-[11px] text-muted"><span className="text-secondary">Global electricity, visualized</span> &middot; {year}</p>
           </div>
           <nav className="flex items-center gap-5">
             <Link
