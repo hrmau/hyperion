@@ -22,23 +22,14 @@ const iso3ToIso2: Record<string, string> = {
   USA: 'US', URY: 'UY', VEN: 'VE', VNM: 'VN',
 };
 
-/** Convert ISO alpha-2 code to flag emoji using regional indicator symbols */
-function alpha2ToEmoji(alpha2: string): string {
-  const codePoints = alpha2
-    .toUpperCase()
-    .split('')
-    .map(c => 0x1f1e6 + c.charCodeAt(0) - 65);
-  return String.fromCodePoint(...codePoints);
-}
-
-/** Get flag emoji from ISO3 country code */
-export function getFlag(iso3: string): string {
-  const iso2 = iso3ToIso2[iso3];
-  if (!iso2) return '';
-  return alpha2ToEmoji(iso2);
-}
-
 /** Get ISO2 code from ISO3 */
 export function getIso2(iso3: string): string | undefined {
   return iso3ToIso2[iso3];
+}
+
+/** Get flag CDN URL for an ISO3 country code */
+export function getFlagUrl(iso3: string, size: number = 24): string | null {
+  const iso2 = iso3ToIso2[iso3];
+  if (!iso2) return null;
+  return `https://flagcdn.com/w${size}/${iso2.toLowerCase()}.png`;
 }

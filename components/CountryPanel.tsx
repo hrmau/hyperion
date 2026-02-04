@@ -3,7 +3,7 @@
 import type { Country, YearData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { getFlag } from '@/lib/flags';
+import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
 const BLOC_LABELS: Record<string, string> = {
@@ -35,7 +35,6 @@ function StatRow({ label, value }: { label: string; value: string }) {
 function CountryDetail({ country, yearData, year }: {
   country: Country; yearData: YearData; year: number;
 }) {
-  const flag = getFlag(country.iso3);
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-2 gap-3">
@@ -57,9 +56,9 @@ function CountryDetail({ country, yearData, year }: {
         </div>
       </div>
       <div>
-        <h3 className="text-xs font-medium text-secondary mb-2">
-          {flag && <span className="mr-1">{flag}</span>}
-          Energy Mix ({year})
+        <h3 className="text-xs font-medium text-secondary mb-2 flex items-center gap-1.5">
+          <FlagImg iso3={country.iso3} size={14} />
+          <span>Energy Mix ({year})</span>
         </h3>
         <EnergyMixChart yearData={yearData} />
       </div>
@@ -95,14 +94,13 @@ function CountryListItem({ country, index, year, onClick }: {
 }) {
   const yd = country.years[year.toString()];
   if (!yd) return null;
-  const flag = getFlag(country.iso3);
   return (
     <button
       onClick={onClick}
       className="w-full flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg hover:bg-inset transition-colors text-left"
     >
       <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
-      {flag && <span className="text-sm">{flag}</span>}
+      <FlagImg iso3={country.iso3} size={18} />
       <div className="flex-1 min-w-0">
         <div className="text-xs font-medium text-primary truncate">{country.name}</div>
         <div className="text-[10px] text-muted">{formatPercent(yd.aggregates.clean_pct)} clean</div>
@@ -120,12 +118,11 @@ export default function CountryPanel({
   // Single country detail
   if (country) {
     const yearData = country.years[year.toString()];
-    const flag = getFlag(country.iso3);
     return (
       <div className="card h-full overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-gray-100 px-4 py-3 flex items-center justify-between z-10">
           <div className="flex items-center gap-2">
-            {flag && <span className="text-lg">{flag}</span>}
+            <FlagImg iso3={country.iso3} size={24} />
             <div>
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
               <p className="text-[11px] text-muted">{country.emberRegion}</p>
