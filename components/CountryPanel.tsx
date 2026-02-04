@@ -120,7 +120,7 @@ export default function CountryPanel({
     const yearData = country.years[year.toString()];
     return (
       <div className="card h-full overflow-y-auto">
-        <div className="sticky top-0 bg-card border-b border-gray-100 px-4 py-3 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-card border-b border-border px-4 py-3 flex items-center justify-between z-10">
           <div className="flex items-center gap-2">
             <FlagImg iso3={country.iso3} size={24} />
             <div>
@@ -145,7 +145,7 @@ export default function CountryPanel({
   if (selectedBloc !== 'ALL' && blocAgg && blocYearData) {
     return (
       <div className="card h-full overflow-y-auto">
-        <div className="sticky top-0 bg-card border-b border-gray-100 px-4 py-3 z-10">
+        <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
           <h2 className="text-sm font-medium text-primary">
             {BLOC_LABELS[selectedBloc] || selectedBloc} Overview
           </h2>
@@ -207,7 +207,7 @@ export default function CountryPanel({
   // Default — top producers ranking
   return (
     <div className="card h-full overflow-y-auto">
-      <div className="sticky top-0 bg-card border-b border-gray-100 px-4 py-3 z-10">
+      <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
         <h2 className="text-sm font-medium text-primary">Top Producers</h2>
         <p className="text-[11px] text-muted">By total generation, {year}</p>
       </div>

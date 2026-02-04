@@ -34,8 +34,8 @@ export default function BlocSelector({ selected, onChange }: BlocSelectorProps) 
             px-2.5 py-1 rounded-full text-xs transition-all
             ${
               selected === bloc.id
-                ? 'bg-primary text-white'
-                : 'bg-inset text-muted hover:text-secondary hover:bg-gray-200'
+                ? 'bg-primary text-canvas'
+                : 'bg-inset text-muted hover:text-secondary hover:bg-inset'
             }
           `}
         >
