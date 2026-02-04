@@ -1,4 +1,4 @@
-import type { CountriesData, BlocsData, Country } from './types';
+import type { CountriesData, BlocsData, Country, YearData, EnergySource } from './types';
 
 let countriesCache: CountriesData | null = null;
 let blocsCache: BlocsData | null = null;
@@ -69,7 +69,13 @@ export interface BlocAggregates {
   renewables_pct: number;
   wind_solar_pct: number;
   country_count: number;
+  /** Aggregated generation by source — compatible with EnergyMixChart via synthetic YearData */
+  generation: Record<EnergySource, { twh: number; pct: number }>;
 }
+
+const ENERGY_SOURCES: EnergySource[] = [
+  'coal', 'gas', 'other_fossil', 'nuclear', 'hydro', 'wind', 'solar', 'bioenergy',
+];
 
 export function aggregateBloc(
   members: Country[],
@@ -79,11 +85,13 @@ export function aggregateBloc(
   let totalGen = 0;
   let totalDemand = 0;
   let totalEmissions = 0;
-  let cleanTwh = 0;
   let fossilTwh = 0;
   let renewablesTwh = 0;
   let windSolarTwh = 0;
   let count = 0;
+
+  const genBySource: Record<string, number> = {};
+  for (const s of ENERGY_SOURCES) genBySource[s] = 0;
 
   for (const c of members) {
     const yd = c.years[yearStr];
@@ -94,15 +102,26 @@ export function aggregateBloc(
     totalEmissions += yd.emissions.total_mtco2;
 
     const gen = yd.generation;
-    const fossil = (gen.coal?.twh || 0) + (gen.gas?.twh || 0) + (gen.other_fossil?.twh || 0);
-    const clean = totalGen > 0 ? yd.total_generation_twh - fossil : 0;
-    cleanTwh += clean;
-    fossilTwh += fossil;
+    for (const s of ENERGY_SOURCES) {
+      genBySource[s] += gen[s]?.twh || 0;
+    }
+
+    fossilTwh += (gen.coal?.twh || 0) + (gen.gas?.twh || 0) + (gen.other_fossil?.twh || 0);
     renewablesTwh += (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) + (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0);
     windSolarTwh += (gen.wind?.twh || 0) + (gen.solar?.twh || 0);
   }
 
   if (count === 0) return null;
+
+  const cleanTwh = totalGen - fossilTwh;
+
+  const generation = {} as Record<EnergySource, { twh: number; pct: number }>;
+  for (const s of ENERGY_SOURCES) {
+    generation[s] = {
+      twh: genBySource[s],
+      pct: totalGen > 0 ? (genBySource[s] / totalGen) * 100 : 0,
+    };
+  }
 
   return {
     total_generation_twh: totalGen,
@@ -113,5 +132,22 @@ export function aggregateBloc(
     renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
     wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
     country_count: count,
+    generation,
+  };
+}
+
+/** Create a synthetic YearData from BlocAggregates (for use with EnergyMixChart) */
+export function blocAggToYearData(agg: BlocAggregates): YearData {
+  return {
+    demand_twh: agg.total_demand_twh,
+    total_generation_twh: agg.total_generation_twh,
+    generation: agg.generation,
+    aggregates: {
+      clean_pct: agg.clean_pct,
+      fossil_pct: agg.fossil_pct,
+      renewables_pct: agg.renewables_pct,
+      wind_solar_pct: agg.wind_solar_pct,
+    },
+    emissions: { total_mtco2: agg.total_emissions_mtco2 },
   };
 }

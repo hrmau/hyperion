@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
@@ -11,6 +12,7 @@ import {
   getCountriesInBloc,
   getLatestYear,
   aggregateBloc,
+  blocAggToYearData,
 } from '@/lib/data';
 import type { CountriesData, BlocsData, Country } from '@/lib/types';
 
@@ -20,11 +22,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
-  const [compareBloc, setCompareBloc] = useState<string | null>(null);
-
-  const [primaryCountry, setPrimaryCountry] = useState<Country | null>(null);
-  const [compareCountry, setCompareCountry] = useState<Country | null>(null);
-
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<Country | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
@@ -58,18 +56,16 @@ export default function Home() {
     return list.slice(0, 10);
   }, [countries, selectedYear, selectedBloc, blocCountryIds]);
 
-  // Bloc aggregates for comparison
-  const selectedBlocAgg = useMemo(() => {
+  const blocAgg = useMemo(() => {
     if (!countries || !blocs || selectedBloc === 'ALL') return null;
     const members = getCountriesInBloc(selectedBloc, countries, blocs);
     return aggregateBloc(members, selectedYear);
   }, [countries, blocs, selectedBloc, selectedYear]);
 
-  const compareBlocAgg = useMemo(() => {
-    if (!countries || !blocs || !compareBloc) return null;
-    const members = getCountriesInBloc(compareBloc, countries, blocs);
-    return aggregateBloc(members, selectedYear);
-  }, [countries, blocs, compareBloc, selectedYear]);
+  const blocYearData = useMemo(() => {
+    if (!blocAgg) return null;
+    return blocAggToYearData(blocAgg);
+  }, [blocAgg]);
 
   const handleHover = useCallback(
     (country: Country | null, event: MouseEvent | null) => {
@@ -85,34 +81,14 @@ export default function Home() {
 
   const handleClick = useCallback((country: Country | null) => {
     if (!country) return;
-
-    setPrimaryCountry(prev => {
-      if (prev?.iso3 === country.iso3) {
-        setCompareCountry(null);
-        return null;
-      }
-      if (prev) {
-        if (compareCountry?.iso3 === country.iso3) {
-          setCompareCountry(null);
-        } else {
-          setCompareCountry(country);
-        }
-        return prev;
-      }
-      return country;
-    });
-  }, [compareCountry]);
-
-  const handleClearSelection = useCallback(() => {
-    setPrimaryCountry(null);
-    setCompareCountry(null);
+    setSelectedCountry(prev =>
+      prev?.iso3 === country.iso3 ? null : country
+    );
   }, []);
 
   const handleBlocChange = useCallback((bloc: string) => {
     setSelectedBloc(bloc);
-    setCompareBloc(null);
-    setPrimaryCountry(null);
-    setCompareCountry(null);
+    setSelectedCountry(null);
   }, []);
 
   if (loading || !countries || !blocs) {
@@ -126,13 +102,26 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-canvas">
       <header className="border-b border-gray-100 bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3">
-          <h1 className="text-base font-medium text-primary tracking-tight">
-            Global Electricity Production
-          </h1>
-          <p className="text-xs text-muted">
-            88 countries &middot; {selectedYear}
-          </p>
+        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center justify-between">
+          <div>
+            <h1 className="text-base font-medium text-primary tracking-tight">
+              Global Electricity Production
+            </h1>
+            <p className="text-xs text-muted">
+              88 countries &middot; {selectedYear}
+            </p>
+          </div>
+          <nav className="flex items-center gap-1">
+            <span className="px-2.5 py-1 rounded-full text-xs bg-primary text-white">
+              Explore
+            </span>
+            <Link
+              href="/compare"
+              className="px-2.5 py-1 rounded-full text-xs text-muted hover:text-secondary hover:bg-inset transition-colors"
+            >
+              Compare
+            </Link>
+          </nav>
         </div>
       </header>
 
@@ -153,28 +142,21 @@ export default function Home() {
                 blocCountryIds={blocCountryIds}
                 onHover={handleHover}
                 onClick={handleClick}
-                selectedCountry={primaryCountry}
-                compareCountry={compareCountry}
+                selectedCountry={selectedCountry}
               />
             </div>
           </div>
 
           <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md">
             <CountryPanel
-              primary={primaryCountry}
-              compare={compareCountry}
+              country={selectedCountry}
               year={selectedYear}
               topCountries={topCountries}
-              onClose={handleClearSelection}
-              onSelectCountry={(c) => {
-                setPrimaryCountry(c);
-                setCompareCountry(null);
-              }}
+              onClose={() => setSelectedCountry(null)}
+              onSelectCountry={setSelectedCountry}
               selectedBloc={selectedBloc}
-              compareBloc={compareBloc}
-              onCompareBloc={setCompareBloc}
-              selectedBlocAgg={selectedBlocAgg}
-              compareBlocAgg={compareBlocAgg}
+              blocAgg={blocAgg}
+              blocYearData={blocYearData}
             />
           </div>
         </div>
