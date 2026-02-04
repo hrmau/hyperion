@@ -73,10 +73,8 @@ function resolveSelection(
   }
 }
 
-function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn }: {
+function ComparisonBar({ label, valueA, valueB, formatFn }: {
   label: string;
-  labelA: string;
-  labelB: string;
   valueA: number;
   valueB: number;
   formatFn: (v: number) => string;
@@ -104,10 +102,6 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn }: {
         <div className="w-20">
           <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueB)}</span>
         </div>
-      </div>
-      <div className="flex justify-between">
-        <span className="text-[10px] text-muted">{labelA}</span>
-        <span className="text-[10px] text-muted">{labelB}</span>
       </div>
     </div>
   );
@@ -233,6 +227,12 @@ export default function ComparePage() {
             <span className="text-sm font-medium text-primary">
               Compare
             </span>
+            <Link
+              href="/rankings"
+              className="text-sm text-muted hover:text-primary transition-colors"
+            >
+              Rankings
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
@@ -305,48 +305,36 @@ export default function ComparePage() {
 
               <ComparisonBar
                 label="Total Generation"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.total_generation_twh}
                 valueB={resolvedB.yearData.total_generation_twh}
                 formatFn={formatTWh}
               />
               <ComparisonBar
                 label="Clean Energy %"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.clean_pct}
                 valueB={resolvedB.yearData.aggregates.clean_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
                 label="Renewables %"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.renewables_pct}
                 valueB={resolvedB.yearData.aggregates.renewables_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
                 label="Wind + Solar %"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.wind_solar_pct}
                 valueB={resolvedB.yearData.aggregates.wind_solar_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
                 label="Fossil Fuels %"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.fossil_pct}
                 valueB={resolvedB.yearData.aggregates.fossil_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
                 label="CO2 Emissions"
-                labelA={resolvedA.label}
-                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.emissions.total_mtco2}
                 valueB={resolvedB.yearData.emissions.total_mtco2}
                 formatFn={formatEmissions}

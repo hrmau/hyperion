@@ -1,0 +1,277 @@
+'use client';
+
+import { useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
+import { loadCountries, getLatestYear } from '@/lib/data';
+import type { CountriesData, Country } from '@/lib/types';
+import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
+import FlagImg from '@/components/FlagImg';
+import DarkModeToggle from '@/components/DarkModeToggle';
+
+type SortKey =
+  | 'name'
+  | 'total_generation_twh'
+  | 'clean_pct'
+  | 'fossil_pct'
+  | 'renewables_pct'
+  | 'wind_solar_pct'
+  | 'nuclear_pct'
+  | 'emissions';
+
+type SortDir = 'asc' | 'desc';
+
+interface ColumnDef {
+  key: SortKey;
+  label: string;
+  shortLabel: string;
+  align: 'left' | 'right';
+  format: (row: RowData) => string;
+}
+
+interface RowData {
+  country: Country;
+  total_generation_twh: number;
+  clean_pct: number;
+  fossil_pct: number;
+  renewables_pct: number;
+  wind_solar_pct: number;
+  nuclear_pct: number;
+  emissions: number;
+}
+
+const columns: ColumnDef[] = [
+  {
+    key: 'name',
+    label: 'Country',
+    shortLabel: 'Country',
+    align: 'left',
+    format: () => '',
+  },
+  {
+    key: 'total_generation_twh',
+    label: 'Generation',
+    shortLabel: 'Gen.',
+    align: 'right',
+    format: (r) => formatTWh(r.total_generation_twh),
+  },
+  {
+    key: 'clean_pct',
+    label: 'Clean %',
+    shortLabel: 'Clean',
+    align: 'right',
+    format: (r) => formatPercent(r.clean_pct),
+  },
+  {
+    key: 'fossil_pct',
+    label: 'Fossil %',
+    shortLabel: 'Fossil',
+    align: 'right',
+    format: (r) => formatPercent(r.fossil_pct),
+  },
+  {
+    key: 'renewables_pct',
+    label: 'Renewables %',
+    shortLabel: 'Renew.',
+    align: 'right',
+    format: (r) => formatPercent(r.renewables_pct),
+  },
+  {
+    key: 'wind_solar_pct',
+    label: 'Wind+Solar %',
+    shortLabel: 'W+S',
+    align: 'right',
+    format: (r) => formatPercent(r.wind_solar_pct),
+  },
+  {
+    key: 'nuclear_pct',
+    label: 'Nuclear %',
+    shortLabel: 'Nucl.',
+    align: 'right',
+    format: (r) => formatPercent(r.nuclear_pct),
+  },
+  {
+    key: 'emissions',
+    label: 'CO₂ Emissions',
+    shortLabel: 'CO₂',
+    align: 'right',
+    format: (r) => formatEmissions(r.emissions),
+  },
+];
+
+function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
+  return (
+    <span className={`inline-block ml-0.5 ${active ? 'text-primary' : 'text-muted/50'}`}>
+      {active ? (dir === 'asc' ? '▲' : '▼') : '▽'}
+    </span>
+  );
+}
+
+export default function RankingsPage() {
+  const [countries, setCountries] = useState<CountriesData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [year, setYear] = useState<number>(2025);
+  const [sortKey, setSortKey] = useState<SortKey>('total_generation_twh');
+  const [sortDir, setSortDir] = useState<SortDir>('desc');
+
+  useEffect(() => {
+    loadCountries()
+      .then((data) => {
+        setCountries(data);
+        setYear(getLatestYear(data));
+        setLoading(false);
+      })
+      .catch(console.error);
+  }, []);
+
+  const rows = useMemo(() => {
+    if (!countries) return [];
+
+    return Object.values(countries)
+      .map((c): RowData | null => {
+        const yd = c.years[year.toString()];
+        if (!yd) return null;
+        return {
+          country: c,
+          total_generation_twh: yd.total_generation_twh,
+          clean_pct: yd.aggregates.clean_pct,
+          fossil_pct: yd.aggregates.fossil_pct,
+          renewables_pct: yd.aggregates.renewables_pct,
+          wind_solar_pct: yd.aggregates.wind_solar_pct,
+          nuclear_pct: yd.generation.nuclear?.pct || 0,
+          emissions: yd.emissions.total_mtco2,
+        };
+      })
+      .filter((r): r is RowData => r !== null);
+  }, [countries, year]);
+
+  const sorted = useMemo(() => {
+    const mult = sortDir === 'asc' ? 1 : -1;
+    return [...rows].sort((a, b) => {
+      if (sortKey === 'name') {
+        return mult * a.country.name.localeCompare(b.country.name);
+      }
+      return mult * ((a[sortKey] as number) - (b[sortKey] as number));
+    });
+  }, [rows, sortKey, sortDir]);
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir(key === 'name' ? 'asc' : 'desc');
+    }
+  };
+
+  if (loading || !countries) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-canvas">
+        <div className="text-secondary text-sm">Loading energy data...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-canvas">
+      <header className="border-b border-border bg-card">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center">
+          <div className="flex-1">
+            <h1 className="text-base font-medium text-primary tracking-tight">
+              Hyperion
+            </h1>
+            <p className="text-[11px] text-muted">
+              <span className="text-secondary">Global electricity explorer</span> &middot; {sorted.length} countries &middot; {year}
+            </p>
+          </div>
+          <nav className="flex items-center gap-5">
+            <Link href="/" className="text-sm text-muted hover:text-primary transition-colors">
+              Explore
+            </Link>
+            <Link href="/compare" className="text-sm text-muted hover:text-primary transition-colors">
+              Compare
+            </Link>
+            <span className="text-sm font-medium text-primary">
+              Rankings
+            </span>
+          </nav>
+          <div className="flex-1 flex justify-end">
+            <DarkModeToggle />
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 py-6">
+        <div className="card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="py-2.5 px-3 text-left text-[11px] text-muted font-medium uppercase tracking-wider w-8">
+                    #
+                  </th>
+                  {columns.map((col) => (
+                    <th
+                      key={col.key}
+                      onClick={() => handleSort(col.key)}
+                      className={`py-2.5 px-3 text-[11px] text-muted font-medium uppercase tracking-wider cursor-pointer hover:text-primary transition-colors select-none whitespace-nowrap ${
+                        col.align === 'right' ? 'text-right' : 'text-left'
+                      }`}
+                    >
+                      <span className="hidden sm:inline">{col.label}</span>
+                      <span className="sm:hidden">{col.shortLabel}</span>
+                      <SortIcon active={sortKey === col.key} dir={sortDir} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sorted.map((row, i) => (
+                  <tr
+                    key={row.country.iso3}
+                    className="border-b border-border-subtle hover:bg-inset transition-colors"
+                  >
+                    <td className="py-2 px-3 text-[11px] text-muted tabular-nums">
+                      {i + 1}
+                    </td>
+                    <td className="py-2 px-3">
+                      <div className="flex items-center gap-2">
+                        <FlagImg iso3={row.country.iso3} size={18} />
+                        <div className="min-w-0">
+                          <div className="text-xs font-medium text-primary truncate">{row.country.name}</div>
+                          <div className="text-[10px] text-muted">{row.country.emberRegion}</div>
+                        </div>
+                      </div>
+                    </td>
+                    {columns.slice(1).map((col) => (
+                      <td
+                        key={col.key}
+                        className="py-2 px-3 text-right text-xs text-primary tabular-nums whitespace-nowrap"
+                      >
+                        {col.format(row)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <footer className="border-t border-border bg-card mt-6">
+        <div className="max-w-6xl mx-auto px-4 py-3 text-center text-xs text-muted">
+          Data:{' '}
+          <a
+            href="https://ember-energy.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary hover:text-primary underline"
+          >
+            Ember
+          </a>{' '}
+          (ember-energy.org), CC BY 4.0
+        </div>
+      </footer>
+    </div>
+  );
+}
