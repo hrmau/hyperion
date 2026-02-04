@@ -17,36 +17,27 @@ export default function CountryTooltip({ country, year, position }: CountryToolt
 
   return (
     <div
-      className="card fixed z-50 px-4 py-3 pointer-events-none"
+      className="card fixed z-50 px-3 py-2.5 pointer-events-none"
       style={{
         left: position.x + 12,
         top: position.y + 12,
-        maxWidth: '280px',
+        maxWidth: '240px',
       }}
     >
-      <div className="font-semibold text-primary mb-2">{country.name}</div>
-      <div className="space-y-1 text-sm">
+      <div className="text-xs font-medium text-primary mb-1.5">{country.name}</div>
+      <div className="space-y-0.5 text-[11px]">
         <div className="flex justify-between gap-4">
-          <span className="text-secondary">Generation</span>
-          <span className="text-primary font-medium">
-            {formatTWh(yearData.total_generation_twh)}
-          </span>
+          <span className="text-muted">Generation</span>
+          <span className="text-primary tabular-nums">{formatTWh(yearData.total_generation_twh)}</span>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-secondary">Clean energy</span>
-          <span className="text-primary font-medium">
-            {formatPercent(yearData.aggregates.clean_pct)}
-          </span>
+          <span className="text-muted">Clean energy</span>
+          <span className="text-primary tabular-nums">{formatPercent(yearData.aggregates.clean_pct)}</span>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-secondary">Fossil fuels</span>
-          <span className="text-primary font-medium">
-            {formatPercent(yearData.aggregates.fossil_pct)}
-          </span>
+          <span className="text-muted">Fossil fuels</span>
+          <span className="text-primary tabular-nums">{formatPercent(yearData.aggregates.fossil_pct)}</span>
         </div>
-      </div>
-      <div className="mt-2 pt-2 border-t border-gray-100 text-xs text-muted">
-        Click for details
       </div>
     </div>
   );
