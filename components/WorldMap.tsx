@@ -61,6 +61,17 @@ export default function WorldMap({
 }: WorldMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [worldData, setWorldData] = useState<Topology | null>(null);
+  const [isDark, setIsDark] = useState(false);
+
+  // Watch for theme changes so the map re-renders with correct colors
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     fetch('/data/world-110m.json')
@@ -177,7 +188,7 @@ export default function WorldMap({
       }
     }
 
-  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover]);
+  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark]);
 
   return (
     <svg
