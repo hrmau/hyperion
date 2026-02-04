@@ -13,7 +13,8 @@ import {
 import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { getFlag } from '@/lib/flags';
+import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
@@ -32,7 +33,7 @@ type SelectionType = 'country' | 'bloc';
 
 interface ResolvedSelection {
   label: string;
-  flag: string;
+  iso3: string | null; // for countries, used to render flag image
   yearData: YearData;
   subtitle: string;
   blocAgg?: BlocAggregates;
@@ -52,7 +53,7 @@ function resolveSelection(
     if (!yd) return null;
     return {
       label: c.name,
-      flag: getFlag(c.iso3),
+      iso3: c.iso3,
       yearData: yd,
       subtitle: c.emberRegion,
     };
@@ -63,7 +64,7 @@ function resolveSelection(
     const blocLabel = BLOC_OPTIONS.find(b => b.id === id)?.label || id;
     return {
       label: blocLabel,
-      flag: '',
+      iso3: null,
       yearData: blocAggToYearData(agg),
       subtitle: `${agg.country_count} countries`,
       blocAgg: agg,
@@ -168,11 +169,14 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
       >
         <option value="">Select {type === 'country' ? 'a country' : 'a bloc'}...</option>
         {type === 'country' ? (
-          sortedCountries.map(c => (
-            <option key={c.iso3} value={c.iso3}>
-              {getFlag(c.iso3)} {c.name}
-            </option>
-          ))
+          sortedCountries.map(c => {
+            const iso2 = getIso2(c.iso3);
+            return (
+              <option key={c.iso3} value={c.iso3}>
+                {iso2 ? `${iso2} ` : ''}{c.name}
+              </option>
+            );
+          })
         ) : (
           BLOC_OPTIONS.map(b => (
             <option key={b.id} value={b.id}>{b.label}</option>
@@ -288,7 +292,7 @@ export default function ComparePage() {
               <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
                 <div className="w-20 text-right">
                   <div className="flex items-center gap-1.5 justify-end">
-                    {resolvedA.flag && <span className="text-base">{resolvedA.flag}</span>}
+                    {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
                     <div className="text-right">
                       <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
                       <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
@@ -304,7 +308,7 @@ export default function ComparePage() {
                       <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
                       <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
                     </div>
-                    {resolvedB.flag && <span className="text-base">{resolvedB.flag}</span>}
+                    {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={20} />}
                   </div>
                 </div>
               </div>
@@ -371,14 +375,14 @@ export default function ComparePage() {
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  {resolvedA.flag && <span className="text-base">{resolvedA.flag}</span>}
+                  {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={18} />}
                   <span className="text-xs font-medium text-primary">{resolvedA.label}</span>
                 </div>
                 <EnergyMixChart yearData={resolvedA.yearData} />
               </div>
               <div className="border-t border-gray-100 pt-5">
                 <div className="flex items-center gap-2 mb-2">
-                  {resolvedB.flag && <span className="text-base">{resolvedB.flag}</span>}
+                  {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={18} />}
                   <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
                 </div>
                 <EnergyMixChart yearData={resolvedB.yearData} />
@@ -404,9 +408,9 @@ export default function ComparePage() {
                           setIdB(iso3);
                         }
                       }}
-                      className="px-2 py-0.5 rounded text-[11px] text-muted hover:text-secondary hover:bg-inset transition-colors"
+                      className="px-2 py-0.5 rounded text-[11px] text-muted hover:text-secondary hover:bg-inset transition-colors inline-flex items-center gap-1"
                     >
-                      {getFlag(iso3)} {c.name}
+                      <FlagImg iso3={iso3} size={14} /> {c.name}
                     </button>
                   );
                 })}
@@ -438,9 +442,9 @@ export default function ComparePage() {
                       setTypeA('country'); setIdA(a);
                       setTypeB('country'); setIdB(b);
                     }}
-                    className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary hover:bg-gray-200 transition-colors inline-flex items-center gap-1"
                   >
-                    {getFlag(a)} {getFlag(b)} {label}
+                    <FlagImg iso3={a} size={14} /> <FlagImg iso3={b} size={14} /> {label}
                   </button>
                 ))}
                 <button
