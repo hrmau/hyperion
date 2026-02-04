@@ -73,29 +73,16 @@ function resolveSelection(
   }
 }
 
-function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higherIsBetter }: {
+function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn }: {
   label: string;
   labelA: string;
   labelB: string;
   valueA: number;
   valueB: number;
   formatFn: (v: number) => string;
-  higherIsBetter?: boolean;
 }) {
   const total = valueA + valueB;
   const pctA = total > 0 ? (valueA / total) * 100 : 50;
-
-  let colorA = 'bg-blue-400';
-  let colorB = 'bg-blue-300';
-  if (higherIsBetter !== undefined && valueA !== valueB) {
-    if (higherIsBetter) {
-      colorA = valueA >= valueB ? 'bg-positive' : 'bg-muted/30';
-      colorB = valueB >= valueA ? 'bg-positive' : 'bg-muted/30';
-    } else {
-      colorA = valueA <= valueB ? 'bg-positive' : 'bg-muted/30';
-      colorB = valueB <= valueA ? 'bg-positive' : 'bg-muted/30';
-    }
-  }
 
   return (
     <div className="space-y-1.5">
@@ -106,11 +93,11 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higher
         </div>
         <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-inset">
           <div
-            className={`${colorA} transition-all duration-500`}
+            className="bg-blue-500 transition-all duration-500"
             style={{ width: `${pctA}%` }}
           />
           <div
-            className={`${colorB} transition-all duration-500`}
+            className="bg-amber-400 transition-all duration-500"
             style={{ width: `${100 - pctA}%` }}
           />
         </div>
@@ -234,6 +221,7 @@ export default function ComparePage() {
             <h1 className="text-base font-medium text-primary tracking-tight">
               Hyperion
             </h1>
+            <p className="text-[11px] text-secondary">Global electricity, visualized</p>
             <p className="text-[11px] text-muted">{year}</p>
           </div>
           <nav className="flex items-center gap-5">
@@ -291,7 +279,10 @@ export default function ComparePage() {
                   <div className="flex items-center gap-1.5 justify-end">
                     {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
                     <div className="text-right">
-                      <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0" />
+                        <span className="text-xs font-medium text-primary">{resolvedA.label}</span>
+                      </div>
                       <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
                     </div>
                   </div>
@@ -302,7 +293,10 @@ export default function ComparePage() {
                 <div className="w-20">
                   <div className="flex items-center gap-1.5">
                     <div>
-                      <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0" />
+                      </div>
                       <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
                     </div>
                     {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={20} />}
@@ -325,7 +319,6 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.aggregates.clean_pct}
                 valueB={resolvedB.yearData.aggregates.clean_pct}
                 formatFn={formatPercent}
-                higherIsBetter
               />
               <ComparisonBar
                 label="Renewables %"
@@ -334,7 +327,6 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.aggregates.renewables_pct}
                 valueB={resolvedB.yearData.aggregates.renewables_pct}
                 formatFn={formatPercent}
-                higherIsBetter
               />
               <ComparisonBar
                 label="Wind + Solar %"
@@ -343,7 +335,6 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.aggregates.wind_solar_pct}
                 valueB={resolvedB.yearData.aggregates.wind_solar_pct}
                 formatFn={formatPercent}
-                higherIsBetter
               />
               <ComparisonBar
                 label="Fossil Fuels %"
@@ -352,7 +343,6 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.aggregates.fossil_pct}
                 valueB={resolvedB.yearData.aggregates.fossil_pct}
                 formatFn={formatPercent}
-                higherIsBetter={false}
               />
               <ComparisonBar
                 label="CO2 Emissions"
@@ -361,7 +351,6 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.emissions.total_mtco2}
                 valueB={resolvedB.yearData.emissions.total_mtco2}
                 formatFn={formatEmissions}
-                higherIsBetter={false}
               />
             </div>
 
