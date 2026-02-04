@@ -6,6 +6,7 @@ import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
+import DarkModeToggle from '@/components/DarkModeToggle';
 import {
   loadCountries,
   loadBlocs,
@@ -101,31 +102,34 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-canvas">
-      <header className="border-b border-gray-100 bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center justify-between">
-          <div>
+      <header className="border-b border-border bg-card">
+        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
+          <div className="flex-1">
             <h1 className="text-base font-medium text-primary tracking-tight">
-              Global Electricity Production
+              Hyperion
             </h1>
-            <p className="text-xs text-muted">
+            <p className="text-[11px] text-muted">
               88 countries &middot; {selectedYear}
             </p>
           </div>
-          <nav className="flex items-center gap-4">
-            <span className="text-xs font-medium text-primary">
+          <nav className="flex items-center gap-5">
+            <span className="text-sm font-medium text-primary">
               Explore
             </span>
             <Link
               href="/compare"
-              className="text-xs text-muted hover:text-primary transition-colors"
+              className="text-sm text-muted hover:text-primary transition-colors"
             >
               Compare
             </Link>
           </nav>
+          <div className="flex-1 flex justify-end">
+            <DarkModeToggle />
+          </div>
         </div>
       </header>
 
-      <div className="border-b border-gray-100 bg-card">
+      <div className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3">
           <BlocSelector selected={selectedBloc} onChange={handleBlocChange} />
         </div>
@@ -162,7 +166,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="border-t border-gray-100 bg-card mt-6">
+      <footer className="border-t border-border bg-card mt-6">
         <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
           Data:{' '}
           <a

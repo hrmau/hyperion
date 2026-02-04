@@ -16,6 +16,7 @@ import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'EU', label: 'EU' },
@@ -33,7 +34,7 @@ type SelectionType = 'country' | 'bloc';
 
 interface ResolvedSelection {
   label: string;
-  iso3: string | null; // for countries, used to render flag image
+  iso3: string | null;
   yearData: YearData;
   subtitle: string;
   blocAgg?: BlocAggregates;
@@ -72,7 +73,6 @@ function resolveSelection(
   }
 }
 
-/** A single split bar showing A vs B with labels on each end */
 function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higherIsBetter }: {
   label: string;
   labelA: string;
@@ -85,16 +85,15 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higher
   const total = valueA + valueB;
   const pctA = total > 0 ? (valueA / total) * 100 : 50;
 
-  // Determine who "wins" this metric
   let colorA = 'bg-blue-400';
   let colorB = 'bg-blue-300';
   if (higherIsBetter !== undefined && valueA !== valueB) {
     if (higherIsBetter) {
-      colorA = valueA >= valueB ? 'bg-positive' : 'bg-gray-300';
-      colorB = valueB >= valueA ? 'bg-positive' : 'bg-gray-300';
+      colorA = valueA >= valueB ? 'bg-positive' : 'bg-muted/30';
+      colorB = valueB >= valueA ? 'bg-positive' : 'bg-muted/30';
     } else {
-      colorA = valueA <= valueB ? 'bg-positive' : 'bg-gray-300';
-      colorB = valueB <= valueA ? 'bg-positive' : 'bg-gray-300';
+      colorA = valueA <= valueB ? 'bg-positive' : 'bg-muted/30';
+      colorB = valueB <= valueA ? 'bg-positive' : 'bg-muted/30';
     }
   }
 
@@ -105,7 +104,7 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higher
         <div className="w-20 text-right">
           <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueA)}</span>
         </div>
-        <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-gray-100">
+        <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-inset">
           <div
             className={`${colorA} transition-all duration-500`}
             style={{ width: `${pctA}%` }}
@@ -145,7 +144,7 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
           onClick={() => onTypeChange('country')}
           className={`px-3 py-1 rounded-full text-xs transition-all ${
             type === 'country'
-              ? 'bg-primary text-white'
+              ? 'bg-primary text-canvas'
               : 'bg-inset text-muted hover:text-secondary'
           }`}
         >
@@ -155,7 +154,7 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
           onClick={() => onTypeChange('bloc')}
           className={`px-3 py-1 rounded-full text-xs transition-all ${
             type === 'bloc'
-              ? 'bg-primary text-white'
+              ? 'bg-primary text-canvas'
               : 'bg-inset text-muted hover:text-secondary'
           }`}
         >
@@ -165,7 +164,7 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 bg-inset border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-gray-300"
+        className="w-full px-3 py-2 bg-inset border border-border rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-border"
       >
         <option value="">Select {type === 'country' ? 'a country' : 'a bloc'}...</option>
         {type === 'country' ? (
@@ -229,32 +228,34 @@ export default function ComparePage() {
 
   return (
     <div className="min-h-screen bg-canvas">
-      <header className="border-b border-gray-100 bg-card">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div>
+      <header className="border-b border-border bg-card">
+        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center">
+          <div className="flex-1">
             <h1 className="text-base font-medium text-primary tracking-tight">
-              Energy Comparison
+              Hyperion
             </h1>
-            <p className="text-xs text-muted">{year}</p>
+            <p className="text-[11px] text-muted">{year}</p>
           </div>
-          <nav className="flex items-center gap-4">
+          <nav className="flex items-center gap-5">
             <Link
               href="/"
-              className="text-xs text-muted hover:text-primary transition-colors"
+              className="text-sm text-muted hover:text-primary transition-colors"
             >
               Explore
             </Link>
-            <span className="text-xs font-medium text-primary">
+            <span className="text-sm font-medium text-primary">
               Compare
             </span>
           </nav>
+          <div className="flex-1 flex justify-end">
+            <DarkModeToggle />
+          </div>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
-        {/* Selection area */}
         <div>
-          <div className="text-[10px] text-muted uppercase tracking-wider mb-3">
+          <div className="text-[11px] text-muted uppercase tracking-wider mb-3">
             Locations to compare
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -275,21 +276,17 @@ export default function ComparePage() {
           </div>
         </div>
 
-        {/* Results */}
         {resolvedA && resolvedB && (
           <>
-            {/* Summary card */}
-            <div className="card p-5 bg-blue-50/50 border-blue-100">
-              <div className="text-xs text-secondary font-medium mb-2 uppercase tracking-wider">
+            <div className="card p-5 border-border bg-inset">
+              <div className="text-[11px] text-secondary font-medium mb-2 uppercase tracking-wider">
                 Comparison Summary
               </div>
               <ComparisonSummary a={resolvedA} b={resolvedB} />
             </div>
 
-            {/* Stat bars — single split bar per metric */}
             <div className="card p-5 space-y-5">
-              {/* Header row with labels */}
-              <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
                 <div className="w-20 text-right">
                   <div className="flex items-center gap-1.5 justify-end">
                     {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
@@ -368,9 +365,8 @@ export default function ComparePage() {
               />
             </div>
 
-            {/* Energy breakdowns */}
             <div className="card p-5 space-y-6">
-              <div className="text-xs text-secondary font-medium uppercase tracking-wider">
+              <div className="text-[11px] text-secondary font-medium uppercase tracking-wider">
                 Energy Breakdown
               </div>
               <div>
@@ -380,7 +376,7 @@ export default function ComparePage() {
                 </div>
                 <EnergyMixChart yearData={resolvedA.yearData} />
               </div>
-              <div className="border-t border-gray-100 pt-5">
+              <div className="border-t border-border pt-5">
                 <div className="flex items-center gap-2 mb-2">
                   {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={18} />}
                   <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
@@ -389,7 +385,6 @@ export default function ComparePage() {
               </div>
             </div>
 
-            {/* Quick country links */}
             <div className="text-center py-4">
               <div className="text-[11px] text-muted mb-2">Try other countries:</div>
               <div className="flex flex-wrap justify-center gap-2">
@@ -419,7 +414,6 @@ export default function ComparePage() {
           </>
         )}
 
-        {/* Show prompt when no selections or only one */}
         {(!resolvedA || !resolvedB) && (
           <div className="card p-8 text-center">
             <div className="text-sm text-secondary mb-2">
@@ -442,7 +436,7 @@ export default function ComparePage() {
                       setTypeA('country'); setIdA(a);
                       setTypeB('country'); setIdB(b);
                     }}
-                    className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary hover:bg-gray-200 transition-colors inline-flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors inline-flex items-center gap-1"
                   >
                     <FlagImg iso3={a} size={14} /> <FlagImg iso3={b} size={14} /> {label}
                   </button>
@@ -452,7 +446,7 @@ export default function ComparePage() {
                     setTypeA('bloc'); setIdA('EU');
                     setTypeB('bloc'); setIdB('BRICS');
                   }}
-                  className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary hover:bg-gray-200 transition-colors"
+                  className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors"
                 >
                   EU vs BRICS+
                 </button>
@@ -462,7 +456,7 @@ export default function ComparePage() {
         )}
       </main>
 
-      <footer className="border-t border-gray-100 bg-card mt-6">
+      <footer className="border-t border-border bg-card mt-6">
         <div className="max-w-3xl mx-auto px-4 py-3 text-center text-xs text-muted">
           Data:{' '}
           <a

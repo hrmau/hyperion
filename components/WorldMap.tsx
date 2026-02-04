@@ -107,6 +107,12 @@ export default function WorldMap({
     const geomCollection = worldData.objects.countries as GeometryCollection;
     const features = topojson.feature(worldData, geomCollection).features;
 
+    // Read theme-aware colors from CSS variables
+    const styles = getComputedStyle(document.documentElement);
+    const noDataColor = styles.getPropertyValue('--choro-1').trim() || '#F3F4F6';
+    const borderColor = styles.getPropertyValue('--border').trim() || 'rgba(0,0,0,0.08)';
+    const selectionColor = styles.getPropertyValue('--text-primary').trim() || '#1A1A1A';
+
     const g = svg.append('g');
 
     // Layer 1: Country fills
@@ -119,10 +125,10 @@ export default function WorldMap({
         const country = iso3 ? countries[iso3] : undefined;
         const yearData = country?.years[year.toString()];
 
-        if (!yearData) return '#F3F4F6';
+        if (!yearData) return noDataColor;
 
         if (selectedBloc !== 'ALL' && iso3 && !blocCountryIds.has(iso3)) {
-          return '#F3F4F6';
+          return noDataColor;
         }
 
         return colorScale(yearData.total_generation_twh);
@@ -151,7 +157,7 @@ export default function WorldMap({
     g.append('path')
       .datum(topojson.mesh(worldData, worldData.objects.countries as GeometryCollection))
       .attr('fill', 'none')
-      .attr('stroke', '#C0C4CA')
+      .attr('stroke', borderColor)
       .attr('stroke-width', 0.5)
       .attr('stroke-linejoin', 'round')
       .attr('d', path as never)
@@ -165,7 +171,7 @@ export default function WorldMap({
           .datum(selectedFeature)
           .attr('d', path as never)
           .attr('fill', 'none')
-          .attr('stroke', '#1A1A1A')
+          .attr('stroke', selectionColor)
           .attr('stroke-width', 1.5)
           .attr('pointer-events', 'none');
       }
