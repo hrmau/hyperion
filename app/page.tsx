@@ -122,6 +122,12 @@ export default function Home() {
             >
               Compare
             </Link>
+            <Link
+              href="/rankings"
+              className="text-sm text-muted hover:text-primary transition-colors"
+            >
+              Rankings
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
