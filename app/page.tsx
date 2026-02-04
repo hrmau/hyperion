@@ -109,7 +109,7 @@ export default function Home() {
               Hyperion
             </h1>
             <p className="text-[11px] text-muted">
-              <span className="text-secondary">Global electricity, visualized</span> &middot; 88 countries &middot; {selectedYear}
+              <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; {selectedYear}
             </p>
           </div>
           <nav className="flex items-center gap-5">
