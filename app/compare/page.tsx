@@ -106,8 +106,8 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn }: {
         </div>
       </div>
       <div className="flex justify-between">
-        <span className="text-[10px] text-muted inline-flex items-center gap-1">{labelA} <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" /></span>
-        <span className="text-[10px] text-muted inline-flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" /> {labelB}</span>
+        <span className="text-[10px] text-muted">{labelA}</span>
+        <span className="text-[10px] text-muted">{labelB}</span>
       </div>
     </div>
   );
@@ -273,24 +273,30 @@ export default function ComparePage() {
             </div>
 
             <div className="card p-5 space-y-5">
-              <div className="flex items-center gap-2 pb-3 border-b border-border">
-                <div className="w-20 text-right">
-                  <div className="flex items-center gap-1.5 justify-end">
+              <div className="flex items-center pb-3 border-b border-border">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 justify-start">
                     {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
-                    <div className="text-right">
-                      <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
-                      <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-medium text-primary flex items-center gap-1.5">
+                        <span className="truncate">{resolvedA.label}</span>
+                        <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                      </div>
+                      <div className="text-[10px] text-muted truncate">{resolvedA.subtitle}</div>
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 text-center">
+                <div className="px-3 shrink-0">
                   <span className="text-[10px] text-muted">vs</span>
                 </div>
-                <div className="w-20">
-                  <div className="flex items-center gap-1.5">
-                    <div>
-                      <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
-                      <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 justify-end">
+                    <div className="min-w-0 text-right">
+                      <div className="text-xs font-medium text-primary flex items-center gap-1.5 justify-end">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                        <span className="truncate">{resolvedB.label}</span>
+                      </div>
+                      <div className="text-[10px] text-muted truncate">{resolvedB.subtitle}</div>
                     </div>
                     {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={20} />}
                   </div>
