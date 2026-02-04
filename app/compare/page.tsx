@@ -11,7 +11,7 @@ import {
   blocAggToYearData,
 } from '@/lib/data';
 import type { BlocAggregates } from '@/lib/data';
-import type { CountriesData, BlocsData, Country, YearData } from '@/lib/types';
+import type { CountriesData, BlocsData, YearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { getFlag } from '@/lib/flags';
 import EnergyMixChart from '@/components/EnergyMixChart';
@@ -30,11 +30,6 @@ const BLOC_OPTIONS: { id: string; label: string }[] = [
 
 type SelectionType = 'country' | 'bloc';
 
-interface Selection {
-  type: SelectionType;
-  id: string; // iso3 for country, bloc id for bloc
-}
-
 interface ResolvedSelection {
   label: string;
   flag: string;
@@ -44,13 +39,14 @@ interface ResolvedSelection {
 }
 
 function resolveSelection(
-  sel: Selection,
+  type: SelectionType,
+  id: string,
   countries: CountriesData,
   blocs: BlocsData,
   year: number
 ): ResolvedSelection | null {
-  if (sel.type === 'country') {
-    const c = countries[sel.id];
+  if (type === 'country') {
+    const c = countries[id];
     if (!c) return null;
     const yd = c.years[year.toString()];
     if (!yd) return null;
@@ -61,10 +57,10 @@ function resolveSelection(
       subtitle: c.emberRegion,
     };
   } else {
-    const members = getCountriesInBloc(sel.id, countries, blocs);
+    const members = getCountriesInBloc(id, countries, blocs);
     const agg = aggregateBloc(members, year);
     if (!agg) return null;
-    const blocLabel = BLOC_OPTIONS.find(b => b.id === sel.id)?.label || sel.id;
+    const blocLabel = BLOC_OPTIONS.find(b => b.id === id)?.label || id;
     return {
       label: blocLabel,
       flag: '',
@@ -75,19 +71,22 @@ function resolveSelection(
   }
 }
 
-function ComparisonBar({ label, valueA, valueB, formatFn, higherIsBetter }: {
+/** A single split bar showing A vs B with labels on each end */
+function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn, higherIsBetter }: {
   label: string;
+  labelA: string;
+  labelB: string;
   valueA: number;
   valueB: number;
   formatFn: (v: number) => string;
   higherIsBetter?: boolean;
 }) {
-  const max = Math.max(valueA, valueB, 0.01);
-  const pctA = (valueA / max) * 100;
-  const pctB = (valueB / max) * 100;
+  const total = valueA + valueB;
+  const pctA = total > 0 ? (valueA / total) * 100 : 50;
 
+  // Determine who "wins" this metric
   let colorA = 'bg-blue-400';
-  let colorB = 'bg-blue-400';
+  let colorB = 'bg-blue-300';
   if (higherIsBetter !== undefined && valueA !== valueB) {
     if (higherIsBetter) {
       colorA = valueA >= valueB ? 'bg-positive' : 'bg-gray-300';
@@ -99,31 +98,29 @@ function ComparisonBar({ label, valueA, valueB, formatFn, higherIsBetter }: {
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       <div className="text-xs text-secondary font-medium">{label}</div>
-      <div className="space-y-1.5">
-        <div className="flex items-center gap-3">
-          <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
-            <div
-              className={`h-full rounded-full ${colorA} transition-all duration-500`}
-              style={{ width: `${pctA}%` }}
-            />
-          </div>
-          <span className="text-xs font-medium text-primary w-24 text-right tabular-nums">
-            {formatFn(valueA)}
-          </span>
+      <div className="flex items-center gap-2">
+        <div className="w-20 text-right">
+          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueA)}</span>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
-            <div
-              className={`h-full rounded-full ${colorB} transition-all duration-500`}
-              style={{ width: `${pctB}%` }}
-            />
-          </div>
-          <span className="text-xs font-medium text-primary w-24 text-right tabular-nums">
-            {formatFn(valueB)}
-          </span>
+        <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-gray-100">
+          <div
+            className={`${colorA} transition-all duration-500`}
+            style={{ width: `${pctA}%` }}
+          />
+          <div
+            className={`${colorB} transition-all duration-500`}
+            style={{ width: `${100 - pctA}%` }}
+          />
         </div>
+        <div className="w-20">
+          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueB)}</span>
+        </div>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-[10px] text-muted">{labelA}</span>
+        <span className="text-[10px] text-muted">{labelB}</span>
       </div>
     </div>
   );
@@ -210,12 +207,12 @@ export default function ComparePage() {
 
   const resolvedA = useMemo(() => {
     if (!countries || !blocs || !idA) return null;
-    return resolveSelection({ type: typeA, id: idA }, countries, blocs, year);
+    return resolveSelection(typeA, idA, countries, blocs, year);
   }, [countries, blocs, typeA, idA, year]);
 
   const resolvedB = useMemo(() => {
     if (!countries || !blocs || !idB) return null;
-    return resolveSelection({ type: typeB, id: idB }, countries, blocs, year);
+    return resolveSelection(typeB, idB, countries, blocs, year);
   }, [countries, blocs, typeB, idB, year]);
 
   if (loading || !countries || !blocs) {
@@ -236,14 +233,14 @@ export default function ComparePage() {
             </h1>
             <p className="text-xs text-muted">{year}</p>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav className="flex items-center gap-4">
             <Link
               href="/"
-              className="px-2.5 py-1 rounded-full text-xs text-muted hover:text-secondary hover:bg-inset transition-colors"
+              className="text-xs text-muted hover:text-primary transition-colors"
             >
               Explore
             </Link>
-            <span className="px-2.5 py-1 rounded-full text-xs bg-primary text-white">
+            <span className="text-xs font-medium text-primary">
               Compare
             </span>
           </nav>
@@ -285,34 +282,45 @@ export default function ComparePage() {
               <ComparisonSummary a={resolvedA} b={resolvedB} />
             </div>
 
-            {/* Stat bars */}
+            {/* Stat bars — single split bar per metric */}
             <div className="card p-5 space-y-5">
-              <div className="flex items-center gap-4 pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2 flex-1">
-                  {resolvedA.flag && <span className="text-lg">{resolvedA.flag}</span>}
-                  <div>
-                    <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
-                    <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
+              {/* Header row with labels */}
+              <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+                <div className="w-20 text-right">
+                  <div className="flex items-center gap-1.5 justify-end">
+                    {resolvedA.flag && <span className="text-base">{resolvedA.flag}</span>}
+                    <div className="text-right">
+                      <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
+                      <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
+                    </div>
                   </div>
                 </div>
-                <div className="text-[10px] text-muted">vs</div>
-                <div className="flex items-center gap-2 flex-1 justify-end text-right">
-                  <div>
-                    <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
-                    <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
+                <div className="flex-1 text-center">
+                  <span className="text-[10px] text-muted">vs</span>
+                </div>
+                <div className="w-20">
+                  <div className="flex items-center gap-1.5">
+                    <div>
+                      <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
+                      <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
+                    </div>
+                    {resolvedB.flag && <span className="text-base">{resolvedB.flag}</span>}
                   </div>
-                  {resolvedB.flag && <span className="text-lg">{resolvedB.flag}</span>}
                 </div>
               </div>
 
               <ComparisonBar
                 label="Total Generation"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.total_generation_twh}
                 valueB={resolvedB.yearData.total_generation_twh}
                 formatFn={formatTWh}
               />
               <ComparisonBar
                 label="Clean Energy %"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.clean_pct}
                 valueB={resolvedB.yearData.aggregates.clean_pct}
                 formatFn={formatPercent}
@@ -320,6 +328,8 @@ export default function ComparePage() {
               />
               <ComparisonBar
                 label="Renewables %"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.renewables_pct}
                 valueB={resolvedB.yearData.aggregates.renewables_pct}
                 formatFn={formatPercent}
@@ -327,6 +337,8 @@ export default function ComparePage() {
               />
               <ComparisonBar
                 label="Wind + Solar %"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.wind_solar_pct}
                 valueB={resolvedB.yearData.aggregates.wind_solar_pct}
                 formatFn={formatPercent}
@@ -334,6 +346,8 @@ export default function ComparePage() {
               />
               <ComparisonBar
                 label="Fossil Fuels %"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.aggregates.fossil_pct}
                 valueB={resolvedB.yearData.aggregates.fossil_pct}
                 formatFn={formatPercent}
@@ -341,6 +355,8 @@ export default function ComparePage() {
               />
               <ComparisonBar
                 label="CO2 Emissions"
+                labelA={resolvedA.label}
+                labelB={resolvedB.label}
                 valueA={resolvedA.yearData.emissions.total_mtco2}
                 valueB={resolvedB.yearData.emissions.total_mtco2}
                 formatFn={formatEmissions}
