@@ -111,13 +111,13 @@ export default function Home() {
               88 countries &middot; {selectedYear}
             </p>
           </div>
-          <nav className="flex items-center gap-1">
-            <span className="px-2.5 py-1 rounded-full text-xs bg-primary text-white">
+          <nav className="flex items-center gap-4">
+            <span className="text-xs font-medium text-primary">
               Explore
             </span>
             <Link
               href="/compare"
-              className="px-2.5 py-1 rounded-full text-xs text-muted hover:text-secondary hover:bg-inset transition-colors"
+              className="text-xs text-muted hover:text-primary transition-colors"
             >
               Compare
             </Link>
