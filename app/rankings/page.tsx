@@ -174,7 +174,7 @@ export default function RankingsPage() {
   return (
     <div className="min-h-screen bg-canvas">
       <header className="border-b border-border bg-card">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center">
+        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
             <h1 className="text-base font-medium text-primary tracking-tight">
               Hyperion
@@ -259,7 +259,7 @@ export default function RankingsPage() {
       </main>
 
       <footer className="border-t border-border bg-card mt-6">
-        <div className="max-w-6xl mx-auto px-4 py-3 text-center text-xs text-muted">
+        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
           Data:{' '}
           <a
             href="https://ember-energy.org"
