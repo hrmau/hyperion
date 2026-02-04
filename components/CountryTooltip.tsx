@@ -2,6 +2,7 @@
 
 import type { Country } from '@/lib/types';
 import { formatTWh, formatPercent } from '@/lib/scales';
+import { getFlag } from '@/lib/flags';
 
 interface CountryTooltipProps {
   country: Country | null;
@@ -24,7 +25,10 @@ export default function CountryTooltip({ country, year, position }: CountryToolt
         maxWidth: '240px',
       }}
     >
-      <div className="text-xs font-medium text-primary mb-1.5">{country.name}</div>
+      <div className="text-xs font-medium text-primary mb-1.5">
+        {getFlag(country.iso3) && <span className="mr-1">{getFlag(country.iso3)}</span>}
+        {country.name}
+      </div>
       <div className="space-y-0.5 text-[11px]">
         <div className="flex justify-between gap-4">
           <span className="text-muted">Generation</span>
