@@ -106,8 +106,8 @@ function ComparisonBar({ label, labelA, labelB, valueA, valueB, formatFn }: {
         </div>
       </div>
       <div className="flex justify-between">
-        <span className="text-[10px] text-muted">{labelA}</span>
-        <span className="text-[10px] text-muted">{labelB}</span>
+        <span className="text-[10px] text-muted inline-flex items-center gap-1">{labelA} <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" /></span>
+        <span className="text-[10px] text-muted inline-flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" /> {labelB}</span>
       </div>
     </div>
   );
@@ -279,10 +279,7 @@ export default function ComparePage() {
                   <div className="flex items-center gap-1.5 justify-end">
                     {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
                     <div className="text-right">
-                      <div className="flex items-center gap-1.5 justify-end">
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0" />
-                        <span className="text-xs font-medium text-primary">{resolvedA.label}</span>
-                      </div>
+                      <div className="text-xs font-medium text-primary">{resolvedA.label}</div>
                       <div className="text-[10px] text-muted">{resolvedA.subtitle}</div>
                     </div>
                   </div>
@@ -293,10 +290,7 @@ export default function ComparePage() {
                 <div className="w-20">
                   <div className="flex items-center gap-1.5">
                     <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0" />
-                      </div>
+                      <div className="text-xs font-medium text-primary">{resolvedB.label}</div>
                       <div className="text-[10px] text-muted">{resolvedB.subtitle}</div>
                     </div>
                     {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={20} />}
