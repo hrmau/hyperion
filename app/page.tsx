@@ -10,6 +10,7 @@ import {
   loadBlocs,
   getCountriesInBloc,
   getLatestYear,
+  aggregateBloc,
 } from '@/lib/data';
 import type { CountriesData, BlocsData, Country } from '@/lib/types';
 
@@ -19,8 +20,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
+  const [compareBloc, setCompareBloc] = useState<string | null>(null);
 
-  // Support comparing two countries
   const [primaryCountry, setPrimaryCountry] = useState<Country | null>(null);
   const [compareCountry, setCompareCountry] = useState<Country | null>(null);
 
@@ -44,7 +45,6 @@ export default function Home() {
     return new Set(countriesInBloc.map(c => c.iso3));
   }, [countries, blocs, selectedBloc]);
 
-  // Top countries for the default panel view
   const topCountries = useMemo(() => {
     if (!countries) return [];
     const yearStr = selectedYear.toString();
@@ -57,6 +57,19 @@ export default function Home() {
       );
     return list.slice(0, 10);
   }, [countries, selectedYear, selectedBloc, blocCountryIds]);
+
+  // Bloc aggregates for comparison
+  const selectedBlocAgg = useMemo(() => {
+    if (!countries || !blocs || selectedBloc === 'ALL') return null;
+    const members = getCountriesInBloc(selectedBloc, countries, blocs);
+    return aggregateBloc(members, selectedYear);
+  }, [countries, blocs, selectedBloc, selectedYear]);
+
+  const compareBlocAgg = useMemo(() => {
+    if (!countries || !blocs || !compareBloc) return null;
+    const members = getCountriesInBloc(compareBloc, countries, blocs);
+    return aggregateBloc(members, selectedYear);
+  }, [countries, blocs, compareBloc, selectedYear]);
 
   const handleHover = useCallback(
     (country: Country | null, event: MouseEvent | null) => {
@@ -75,12 +88,10 @@ export default function Home() {
 
     setPrimaryCountry(prev => {
       if (prev?.iso3 === country.iso3) {
-        // Clicking same country — deselect
         setCompareCountry(null);
         return null;
       }
       if (prev) {
-        // Already have a primary — set compare
         if (compareCountry?.iso3 === country.iso3) {
           setCompareCountry(null);
         } else {
@@ -88,12 +99,18 @@ export default function Home() {
         }
         return prev;
       }
-      // No primary yet — set it
       return country;
     });
   }, [compareCountry]);
 
   const handleClearSelection = useCallback(() => {
+    setPrimaryCountry(null);
+    setCompareCountry(null);
+  }, []);
+
+  const handleBlocChange = useCallback((bloc: string) => {
+    setSelectedBloc(bloc);
+    setCompareBloc(null);
     setPrimaryCountry(null);
     setCompareCountry(null);
   }, []);
@@ -108,7 +125,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-canvas">
-      {/* Header */}
       <header className="border-b border-gray-100 bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3">
           <h1 className="text-base font-medium text-primary tracking-tight">
@@ -120,17 +136,14 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Controls */}
       <div className="border-b border-gray-100 bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3">
-          <BlocSelector selected={selectedBloc} onChange={setSelectedBloc} />
+          <BlocSelector selected={selectedBloc} onChange={handleBlocChange} />
         </div>
       </div>
 
-      {/* Main content — always 70/30 split */}
       <main className="max-w-[1800px] mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-4">
-          {/* Map */}
           <div className="card flex-1 p-3">
             <div className="aspect-[16/9] lg:aspect-[2/1]">
               <WorldMap
@@ -141,11 +154,11 @@ export default function Home() {
                 onHover={handleHover}
                 onClick={handleClick}
                 selectedCountry={primaryCountry}
+                compareCountry={compareCountry}
               />
             </div>
           </div>
 
-          {/* Side panel — always visible */}
           <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md">
             <CountryPanel
               primary={primaryCountry}
@@ -157,12 +170,16 @@ export default function Home() {
                 setPrimaryCountry(c);
                 setCompareCountry(null);
               }}
+              selectedBloc={selectedBloc}
+              compareBloc={compareBloc}
+              onCompareBloc={setCompareBloc}
+              selectedBlocAgg={selectedBlocAgg}
+              compareBlocAgg={compareBlocAgg}
             />
           </div>
         </div>
       </main>
 
-      {/* Attribution */}
       <footer className="border-t border-gray-100 bg-card mt-6">
         <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
           Data:{' '}

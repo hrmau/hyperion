@@ -7,6 +7,10 @@ import type { Topology, GeometryCollection } from 'topojson-specification';
 import type { CountriesData, Country } from '@/lib/types';
 import { createChoroplethScale } from '@/lib/scales';
 
+// Border colors for selected countries — exported so the panel can match them
+export const PRIMARY_COLOR = '#1A1A1A';
+export const COMPARE_COLOR = '#E87722';
+
 interface WorldMapProps {
   countries: CountriesData;
   year: number;
@@ -15,6 +19,7 @@ interface WorldMapProps {
   onHover: (country: Country | null, event: MouseEvent | null) => void;
   onClick: (country: Country | null) => void;
   selectedCountry: Country | null;
+  compareCountry: Country | null;
 }
 
 // Complete ISO numeric → ISO3 mapping for all 88 data countries
@@ -59,6 +64,7 @@ export default function WorldMap({
   onHover,
   onClick,
   selectedCountry,
+  compareCountry,
 }: WorldMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [worldData, setWorldData] = useState<Topology | null>(null);
@@ -161,7 +167,7 @@ export default function WorldMap({
       .attr('d', path as never)
       .attr('pointer-events', 'none');
 
-    // Layer 3: Selected country outline on top
+    // Layer 3: Selected country outlines on top
     if (selectedCountry) {
       const selectedFeature = features.find(f => getIso3(f.id) === selectedCountry.iso3);
       if (selectedFeature) {
@@ -169,13 +175,26 @@ export default function WorldMap({
           .datum(selectedFeature)
           .attr('d', path as never)
           .attr('fill', 'none')
-          .attr('stroke', '#1A1A1A')
+          .attr('stroke', PRIMARY_COLOR)
           .attr('stroke-width', 1.5)
           .attr('pointer-events', 'none');
       }
     }
 
-  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover]);
+    if (compareCountry) {
+      const compareFeature = features.find(f => getIso3(f.id) === compareCountry.iso3);
+      if (compareFeature) {
+        g.append('path')
+          .datum(compareFeature)
+          .attr('d', path as never)
+          .attr('fill', 'none')
+          .attr('stroke', COMPARE_COLOR)
+          .attr('stroke-width', 1.5)
+          .attr('pointer-events', 'none');
+      }
+    }
+
+  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, compareCountry, handleMouseMove, handleClick, onHover]);
 
   return (
     <svg
