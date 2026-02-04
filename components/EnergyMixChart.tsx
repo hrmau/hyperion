@@ -2,7 +2,7 @@
 
 import type { YearData, EnergySource } from '@/lib/types';
 import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
-import { formatPercent, formatTWh } from '@/lib/scales';
+import { formatPercent } from '@/lib/scales';
 
 interface EnergyMixChartProps {
   yearData: YearData;
@@ -11,7 +11,6 @@ interface EnergyMixChartProps {
 export default function EnergyMixChart({ yearData }: EnergyMixChartProps) {
   const { generation } = yearData;
 
-  // Build data for chart
   const data = energyOrder.map(source => ({
     source,
     label: energyLabels[source],
@@ -21,9 +20,8 @@ export default function EnergyMixChart({ yearData }: EnergyMixChartProps) {
   })).filter(d => d.twh > 0);
 
   return (
-    <div className="space-y-3">
-      {/* Stacked horizontal bar */}
-      <div className="h-8 rounded-lg overflow-hidden flex">
+    <div className="space-y-2">
+      <div className="h-5 rounded overflow-hidden flex">
         {data.map((d) => (
           <div
             key={d.source}
@@ -36,16 +34,15 @@ export default function EnergyMixChart({ yearData }: EnergyMixChartProps) {
         ))}
       </div>
 
-      {/* Legend / breakdown */}
-      <div className="grid grid-cols-2 gap-2 text-sm">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-1">
         {data.map((d) => (
-          <div key={d.source} className="flex items-center gap-2">
+          <div key={d.source} className="flex items-center gap-1.5">
             <div
-              className="w-3 h-3 rounded-sm shrink-0"
+              className="w-2 h-2 rounded-sm shrink-0"
               style={{ backgroundColor: d.color }}
             />
-            <span className="text-secondary truncate">{d.label}</span>
-            <span className="text-primary font-medium ml-auto">
+            <span className="text-[11px] text-muted truncate">{d.label}</span>
+            <span className="text-[11px] text-primary ml-auto tabular-nums">
               {formatPercent(d.pct)}
             </span>
           </div>

@@ -25,17 +25,17 @@ interface BlocSelectorProps {
 
 export default function BlocSelector({ selected, onChange }: BlocSelectorProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       {blocOptions.map(bloc => (
         <button
           key={bloc.id}
           onClick={() => onChange(bloc.id)}
           className={`
-            px-3 py-1.5 rounded-full text-sm font-medium transition-all
+            px-2.5 py-1 rounded-full text-xs transition-all
             ${
               selected === bloc.id
-                ? 'bg-primary text-white shadow-sm'
-                : 'bg-inset text-secondary hover:bg-gray-200'
+                ? 'bg-primary text-white'
+                : 'bg-inset text-muted hover:text-secondary hover:bg-gray-200'
             }
           `}
         >

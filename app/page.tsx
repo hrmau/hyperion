@@ -5,12 +5,10 @@ import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
-import YearSlider from '@/components/YearSlider';
 import {
   loadCountries,
   loadBlocs,
   getCountriesInBloc,
-  getAvailableYears,
   getLatestYear,
 } from '@/lib/data';
 import type { CountriesData, BlocsData, Country } from '@/lib/types';
@@ -19,15 +17,16 @@ export default function Home() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+
+  // Support comparing two countries
+  const [primaryCountry, setPrimaryCountry] = useState<Country | null>(null);
+  const [compareCountry, setCompareCountry] = useState<Country | null>(null);
 
   const [hoveredCountry, setHoveredCountry] = useState<Country | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
-  // Load data
   useEffect(() => {
     Promise.all([loadCountries(), loadBlocs()])
       .then(([countriesData, blocsData]) => {
@@ -39,16 +38,25 @@ export default function Home() {
       .catch(console.error);
   }, []);
 
-  const years = useMemo(() => {
-    if (!countries) return [];
-    return getAvailableYears(countries);
-  }, [countries]);
-
   const blocCountryIds = useMemo(() => {
     if (!countries || !blocs) return new Set<string>();
     const countriesInBloc = getCountriesInBloc(selectedBloc, countries, blocs);
     return new Set(countriesInBloc.map(c => c.iso3));
   }, [countries, blocs, selectedBloc]);
+
+  // Top countries for the default panel view
+  const topCountries = useMemo(() => {
+    if (!countries) return [];
+    const yearStr = selectedYear.toString();
+    const list = Object.values(countries)
+      .filter(c => c.years[yearStr])
+      .filter(c => selectedBloc === 'ALL' || blocCountryIds.has(c.iso3))
+      .sort((a, b) =>
+        (b.years[yearStr]?.total_generation_twh || 0) -
+        (a.years[yearStr]?.total_generation_twh || 0)
+      );
+    return list.slice(0, 10);
+  }, [countries, selectedYear, selectedBloc, blocCountryIds]);
 
   const handleHover = useCallback(
     (country: Country | null, event: MouseEvent | null) => {
@@ -63,17 +71,37 @@ export default function Home() {
   );
 
   const handleClick = useCallback((country: Country | null) => {
-    setSelectedCountry(country);
-  }, []);
+    if (!country) return;
 
-  const handleClosePanel = useCallback(() => {
-    setSelectedCountry(null);
+    setPrimaryCountry(prev => {
+      if (prev?.iso3 === country.iso3) {
+        // Clicking same country — deselect
+        setCompareCountry(null);
+        return null;
+      }
+      if (prev) {
+        // Already have a primary — set compare
+        if (compareCountry?.iso3 === country.iso3) {
+          setCompareCountry(null);
+        } else {
+          setCompareCountry(country);
+        }
+        return prev;
+      }
+      // No primary yet — set it
+      return country;
+    });
+  }, [compareCountry]);
+
+  const handleClearSelection = useCallback(() => {
+    setPrimaryCountry(null);
+    setCompareCountry(null);
   }, []);
 
   if (loading || !countries || !blocs) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-canvas">
-        <div className="text-secondary">Loading energy data...</div>
+        <div className="text-secondary text-sm">Loading energy data...</div>
       </div>
     );
   }
@@ -82,37 +110,28 @@ export default function Home() {
     <div className="min-h-screen bg-canvas">
       {/* Header */}
       <header className="border-b border-gray-100 bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-4">
-          <h1 className="text-xl font-semibold text-primary">
+        <div className="max-w-[1800px] mx-auto px-4 py-3">
+          <h1 className="text-base font-medium text-primary tracking-tight">
             Global Electricity Production
           </h1>
-          <p className="text-sm text-secondary">
-            Visualizing energy generation across 88 countries
+          <p className="text-xs text-muted">
+            88 countries &middot; {selectedYear}
           </p>
         </div>
       </header>
 
       {/* Controls */}
       <div className="border-b border-gray-100 bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-4 space-y-4">
+        <div className="max-w-[1800px] mx-auto px-4 py-3">
           <BlocSelector selected={selectedBloc} onChange={setSelectedBloc} />
-          <YearSlider
-            years={years}
-            selected={selectedYear}
-            onChange={setSelectedYear}
-          />
         </div>
       </div>
 
-      {/* Main content */}
+      {/* Main content — always 70/30 split */}
       <main className="max-w-[1800px] mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Map */}
-          <div
-            className={`card flex-1 p-4 transition-all ${
-              selectedCountry ? 'lg:w-[70%]' : 'w-full'
-            }`}
-          >
+          <div className="card flex-1 p-3">
             <div className="aspect-[16/9] lg:aspect-[2/1]">
               <WorldMap
                 countries={countries}
@@ -121,27 +140,31 @@ export default function Home() {
                 blocCountryIds={blocCountryIds}
                 onHover={handleHover}
                 onClick={handleClick}
-                selectedCountry={selectedCountry}
+                selectedCountry={primaryCountry}
               />
             </div>
           </div>
 
-          {/* Side panel */}
-          {selectedCountry && (
-            <div className="lg:w-[30%] lg:max-w-md">
-              <CountryPanel
-                country={selectedCountry}
-                year={selectedYear}
-                onClose={handleClosePanel}
-              />
-            </div>
-          )}
+          {/* Side panel — always visible */}
+          <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md">
+            <CountryPanel
+              primary={primaryCountry}
+              compare={compareCountry}
+              year={selectedYear}
+              topCountries={topCountries}
+              onClose={handleClearSelection}
+              onSelectCountry={(c) => {
+                setPrimaryCountry(c);
+                setCompareCountry(null);
+              }}
+            />
+          </div>
         </div>
       </main>
 
-      {/* Attribution footer */}
-      <footer className="border-t border-gray-100 bg-card mt-8">
-        <div className="max-w-[1800px] mx-auto px-4 py-4 text-center text-sm text-muted">
+      {/* Attribution */}
+      <footer className="border-t border-gray-100 bg-card mt-6">
+        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
           Data:{' '}
           <a
             href="https://ember-energy.org"
@@ -155,7 +178,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Tooltip */}
       <CountryTooltip
         country={hoveredCountry}
         year={selectedYear}
