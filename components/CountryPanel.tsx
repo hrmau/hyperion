@@ -3,6 +3,7 @@
 import type { Country, YearData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
+import { calculateIndependenceScore, formatIndependenceScore, getIndependenceDescription } from '@/lib/independence';
 import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
@@ -32,11 +33,40 @@ function StatRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+function IndependenceScoreDisplay({ yearData }: { yearData: YearData }) {
+  const score = calculateIndependenceScore(yearData);
+  if (!score) return null;
+
+  const barWidth = Math.min(score.score, 150); // Cap visual at 150% for display
+
+  return (
+    <div className="bg-inset rounded-lg p-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <div className="text-[10px] text-muted uppercase tracking-wider">Energy Independence</div>
+        <div className="text-xs font-medium" style={{ color: score.color }}>{score.label}</div>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-2 bg-card rounded-full overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all"
+            style={{ width: `${(barWidth / 150) * 100}%`, backgroundColor: score.color }}
+          />
+        </div>
+        <span className="text-sm font-semibold text-primary tabular-nums w-12 text-right">
+          {formatIndependenceScore(score.score)}
+        </span>
+      </div>
+      <div className="text-[10px] text-muted mt-1">{getIndependenceDescription(score)}</div>
+    </div>
+  );
+}
+
 function CountryDetail({ country, yearData, year }: {
   country: Country; yearData: YearData; year: number;
 }) {
   return (
     <div className="space-y-5">
+      <IndependenceScoreDisplay yearData={yearData} />
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-inset rounded-lg p-3">
           <div className="text-[10px] text-muted uppercase tracking-wider mb-0.5">Generation</div>
