@@ -219,20 +219,20 @@ export default function RankingsPage() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6">
+      <main className="max-w-[1400px] mx-auto px-4 py-6">
         <div className="card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b-2 border-border bg-inset/50">
-                  <th className="py-4 px-3 text-left text-xs text-secondary font-semibold uppercase tracking-wider w-8">
+                  <th className="py-3.5 px-2 text-left text-xs text-secondary font-semibold uppercase tracking-wider w-8">
                     #
                   </th>
                   {columns.map((col) => (
                     <th
                       key={col.key}
                       onClick={() => handleSort(col.key)}
-                      className={`py-4 px-3 text-xs text-secondary font-semibold uppercase tracking-wider cursor-pointer hover:text-primary transition-colors select-none whitespace-nowrap ${
+                      className={`py-3.5 px-2 text-xs text-secondary font-semibold uppercase tracking-wider cursor-pointer hover:text-primary transition-colors select-none whitespace-nowrap ${
                         col.align === 'right' ? 'text-right' : 'text-left'
                       }`}
                     >
@@ -249,10 +249,10 @@ export default function RankingsPage() {
                     key={row.country.iso3}
                     className="border-b border-border-subtle hover:bg-inset transition-colors"
                   >
-                    <td className="py-2 px-3 text-[11px] text-muted tabular-nums">
+                    <td className="py-2 px-2 text-[11px] text-muted tabular-nums">
                       {i + 1}
                     </td>
-                    <td className="py-2 px-3">
+                    <td className="py-2 px-2">
                       <div className="flex items-center gap-2">
                         <FlagImg iso3={row.country.iso3} size={18} />
                         <div className="min-w-0">
@@ -266,7 +266,7 @@ export default function RankingsPage() {
                       return (
                         <td
                           key={col.key}
-                          className={`py-2 px-3 text-right text-xs tabular-nums whitespace-nowrap ${cellColor ? 'font-medium' : 'text-primary'}`}
+                          className={`py-2 px-2 text-right text-xs tabular-nums whitespace-nowrap ${cellColor ? 'font-medium' : 'text-primary'}`}
                           style={cellColor ? { color: cellColor } : undefined}
                         >
                           {col.format(row)}
