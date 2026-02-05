@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { loadCountries, getLatestYear } from '@/lib/data';
 import type { CountriesData, Country } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
+import { calculateIndependenceScore, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
 import DarkModeToggle from '@/components/DarkModeToggle';
 
 type SortKey =
   | 'name'
   | 'total_generation_twh'
+  | 'independence_score'
   | 'clean_pct'
   | 'fossil_pct'
   | 'renewables_pct'
@@ -26,11 +28,14 @@ interface ColumnDef {
   shortLabel: string;
   align: 'left' | 'right';
   format: (row: RowData) => string;
+  colorFn?: (row: RowData) => string | undefined;
 }
 
 interface RowData {
   country: Country;
   total_generation_twh: number;
+  independence_score: number;
+  independence_color: string | undefined;
   clean_pct: number;
   fossil_pct: number;
   renewables_pct: number;
@@ -53,6 +58,14 @@ const columns: ColumnDef[] = [
     shortLabel: 'Gen.',
     align: 'right',
     format: (r) => formatTWh(r.total_generation_twh),
+  },
+  {
+    key: 'independence_score',
+    label: 'Independence',
+    shortLabel: 'Indep.',
+    align: 'right',
+    format: (r) => formatIndependenceScore(r.independence_score),
+    colorFn: (r) => r.independence_color,
   },
   {
     key: 'clean_pct',
@@ -130,9 +143,12 @@ export default function RankingsPage() {
       .map((c): RowData | null => {
         const yd = c.years[year.toString()];
         if (!yd) return null;
+        const indep = calculateIndependenceScore(yd);
         return {
           country: c,
           total_generation_twh: yd.total_generation_twh,
+          independence_score: indep?.score ?? 0,
+          independence_color: indep?.color,
           clean_pct: yd.aggregates.clean_pct,
           fossil_pct: yd.aggregates.fossil_pct,
           renewables_pct: yd.aggregates.renewables_pct,
@@ -193,6 +209,9 @@ export default function RankingsPage() {
             <span className="text-sm font-medium text-primary">
               Rankings
             </span>
+            <Link href="/story" className="text-sm text-muted hover:text-primary transition-colors">
+              Story
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
@@ -242,14 +261,18 @@ export default function RankingsPage() {
                         </div>
                       </div>
                     </td>
-                    {columns.slice(1).map((col) => (
-                      <td
-                        key={col.key}
-                        className="py-2 px-3 text-right text-xs text-primary tabular-nums whitespace-nowrap"
-                      >
-                        {col.format(row)}
-                      </td>
-                    ))}
+                    {columns.slice(1).map((col) => {
+                      const cellColor = col.colorFn?.(row);
+                      return (
+                        <td
+                          key={col.key}
+                          className={`py-2 px-3 text-right text-xs tabular-nums whitespace-nowrap ${cellColor ? 'font-medium' : 'text-primary'}`}
+                          style={cellColor ? { color: cellColor } : undefined}
+                        >
+                          {col.format(row)}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>

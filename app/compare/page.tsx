@@ -13,6 +13,7 @@ import {
 import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
+import { calculateIndependenceScore, formatIndependenceScore } from '@/lib/independence';
 import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
@@ -233,6 +234,12 @@ export default function ComparePage() {
             >
               Rankings
             </Link>
+            <Link
+              href="/story"
+              className="text-sm text-muted hover:text-primary transition-colors"
+            >
+              Story
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
@@ -308,6 +315,12 @@ export default function ComparePage() {
                 valueA={resolvedA.yearData.total_generation_twh}
                 valueB={resolvedB.yearData.total_generation_twh}
                 formatFn={formatTWh}
+              />
+              <ComparisonBar
+                label="Energy Independence"
+                valueA={calculateIndependenceScore(resolvedA.yearData)?.score ?? 0}
+                valueB={calculateIndependenceScore(resolvedB.yearData)?.score ?? 0}
+                formatFn={formatIndependenceScore}
               />
               <ComparisonBar
                 label="Clean Energy %"
