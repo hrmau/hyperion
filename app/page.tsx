@@ -128,6 +128,12 @@ export default function Home() {
             >
               Rankings
             </Link>
+            <Link
+              href="/story"
+              className="text-sm text-muted hover:text-primary transition-colors"
+            >
+              Story
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />

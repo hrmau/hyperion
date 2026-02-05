@@ -209,6 +209,9 @@ export default function RankingsPage() {
             <span className="text-sm font-medium text-primary">
               Rankings
             </span>
+            <Link href="/story" className="text-sm text-muted hover:text-primary transition-colors">
+              Story
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
