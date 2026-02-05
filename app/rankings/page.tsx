@@ -224,15 +224,15 @@ export default function RankingsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border">
-                  <th className="py-2.5 px-3 text-left text-[11px] text-muted font-medium uppercase tracking-wider w-8">
+                <tr className="border-b-2 border-border bg-inset/50">
+                  <th className="py-4 px-3 text-left text-xs text-secondary font-semibold uppercase tracking-wider w-8">
                     #
                   </th>
                   {columns.map((col) => (
                     <th
                       key={col.key}
                       onClick={() => handleSort(col.key)}
-                      className={`py-2.5 px-3 text-[11px] text-muted font-medium uppercase tracking-wider cursor-pointer hover:text-primary transition-colors select-none whitespace-nowrap ${
+                      className={`py-4 px-3 text-xs text-secondary font-semibold uppercase tracking-wider cursor-pointer hover:text-primary transition-colors select-none whitespace-nowrap ${
                         col.align === 'right' ? 'text-right' : 'text-left'
                       }`}
                     >
@@ -277,6 +277,81 @@ export default function RankingsPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+
+        {/* Metrics Legend */}
+        <div className="card p-6 mt-6">
+          <h3 className="text-sm font-semibold text-primary mb-4">Understanding the Metrics</h3>
+          <div className="grid md:grid-cols-2 gap-6 text-xs">
+            <div className="space-y-4">
+              <div>
+                <div className="font-medium text-secondary mb-1">Generation (TWh)</div>
+                <p className="text-muted leading-relaxed">
+                  Total electricity produced in terawatt-hours. This includes all sources: fossil fuels, nuclear, and renewables.
+                  China leads with ~10,400 TWh, while smaller nations may produce under 50 TWh.
+                </p>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">Energy Independence</div>
+                <p className="text-muted leading-relaxed">
+                  Ratio of electricity generation to demand. <strong className="text-primary">100% = self-sufficient</strong>.
+                  Above 100% means net exporter (e.g., France at 110% exports surplus).
+                  Below 100% means net importer (e.g., Italy at 85% imports 15% of electricity needs).
+                </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>100%+ Surplus</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#22C55E10', color: '#22C55E' }}>80-100% Independent</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EAB30810', color: '#EAB308' }}>50-80% Moderate</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#F9731610', color: '#F97316' }}>30-50% Dependent</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EF444410', color: '#EF4444' }}>&lt;30% Critical</span>
+                </div>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">Clean Energy %</div>
+                <p className="text-muted leading-relaxed">
+                  Percentage from non-fossil sources: nuclear + renewables (hydro, wind, solar, bioenergy).
+                  Sweden leads at ~98% clean, while Poland is ~25% due to coal dependence.
+                </p>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">Fossil Fuels %</div>
+                <p className="text-muted leading-relaxed">
+                  Percentage from coal, gas, and other fossil fuels. The inverse of clean energy.
+                  High fossil = higher CO₂ emissions and price volatility exposure.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <div className="font-medium text-secondary mb-1">Renewables %</div>
+                <p className="text-muted leading-relaxed">
+                  Percentage from renewable sources only: hydro, wind, solar, and bioenergy.
+                  Excludes nuclear. Norway leads at ~98% (mostly hydro), while Middle Eastern countries are under 5%.
+                </p>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">Wind + Solar %</div>
+                <p className="text-muted leading-relaxed">
+                  Combined share of wind and solar generation. The fastest-growing energy sources globally.
+                  Denmark leads at ~80%, showing what&apos;s possible with policy commitment.
+                </p>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">Nuclear %</div>
+                <p className="text-muted leading-relaxed">
+                  Percentage from nuclear power plants. Provides reliable, low-carbon baseload power.
+                  France leads at ~65%, while many countries have 0% (either by policy choice or lacking infrastructure).
+                </p>
+              </div>
+              <div>
+                <div className="font-medium text-secondary mb-1">CO₂ Emissions</div>
+                <p className="text-muted leading-relaxed">
+                  Total carbon dioxide from electricity generation in megatonnes (Mt) or gigatonnes (Gt).
+                  Directly correlates with fossil fuel percentage. China emits ~5.9 Gt, while Iceland emits near zero.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </main>
