@@ -2,10 +2,10 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
-import { loadCountries, getLatestYear } from '@/lib/data';
-import type { CountriesData, Country } from '@/lib/types';
+import { loadCountries, loadFossilFuelData, getLatestYear } from '@/lib/data';
+import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScore, formatIndependenceScore } from '@/lib/independence';
+import { calculateIndependenceScoreV2, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
 import DarkModeToggle from '@/components/DarkModeToggle';
 
@@ -121,15 +121,17 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
 
 export default function RankingsPage() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
+  const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
   const [year, setYear] = useState<number>(2025);
   const [sortKey, setSortKey] = useState<SortKey>('total_generation_twh');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
 
   useEffect(() => {
-    loadCountries()
-      .then((data) => {
+    Promise.all([loadCountries(), loadFossilFuelData()])
+      .then(([data, fossilData]) => {
         setCountries(data);
+        setFossilFuelData(fossilData);
         setYear(getLatestYear(data));
         setLoading(false);
       })
@@ -143,7 +145,8 @@ export default function RankingsPage() {
       .map((c): RowData | null => {
         const yd = c.years[year.toString()];
         if (!yd) return null;
-        const indep = calculateIndependenceScore(yd);
+        const fossilYear = fossilFuelData?.countries[c.iso3]?.years[year.toString()] || null;
+        const indep = calculateIndependenceScoreV2(yd, fossilYear);
         return {
           country: c,
           total_generation_twh: yd.total_generation_twh,
@@ -158,7 +161,7 @@ export default function RankingsPage() {
         };
       })
       .filter((r): r is RowData => r !== null);
-  }, [countries, year]);
+  }, [countries, year, fossilFuelData]);
 
   const sorted = useMemo(() => {
     const mult = sortDir === 'asc' ? 1 : -1;
@@ -293,16 +296,17 @@ export default function RankingsPage() {
                 </p>
               </div>
               <div>
-                <div className="font-medium text-secondary mb-1">Energy Independence</div>
+                <div className="font-medium text-secondary mb-1">Energy Independence (v2)</div>
                 <p className="text-muted leading-relaxed">
-                  Ratio of electricity generation to demand. <strong className="text-primary">100% = self-sufficient</strong>.
-                  Above 100% means net exporter (e.g., France at 110% exports surplus).
-                  Below 100% means net importer (e.g., Italy at 85% imports 15% of electricity needs).
+                  Weighted score accounting for fossil fuel import dependency. Renewables and nuclear count as 100% independent.
+                  Fossil fuels are weighted by domestic production/consumption ratio (e.g., if a country imports 97% of its gas,
+                  gas-based electricity only contributes 3% to independence). Germany scores ~69% despite high production
+                  because of gas import dependency.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>100%+ Surplus</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#22C55E10', color: '#22C55E' }}>80-100% Independent</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EAB30810', color: '#EAB308' }}>50-80% Moderate</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>90%+ Fortress</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#22C55E10', color: '#22C55E' }}>70-90% Strong</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EAB30810', color: '#EAB308' }}>50-70% Moderate</span>
                   <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#F9731610', color: '#F97316' }}>30-50% Dependent</span>
                   <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EF444410', color: '#EF4444' }}>&lt;30% Critical</span>
                 </div>

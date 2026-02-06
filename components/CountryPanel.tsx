@@ -1,9 +1,9 @@
 'use client';
 
-import type { Country, YearData } from '@/lib/types';
+import type { Country, YearData, FossilFuelData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScore, formatIndependenceScore, getIndependenceDescription } from '@/lib/independence';
+import { calculateIndependenceScoreV2, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
@@ -22,6 +22,7 @@ interface CountryPanelProps {
   selectedBloc: string;
   blocAgg: BlocAggregates | null;
   blocYearData: YearData | null;
+  fossilFuelData: FossilFuelData | null;
 }
 
 function StatRow({ label, value }: { label: string; value: string }) {
@@ -33,40 +34,156 @@ function StatRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-function IndependenceScoreDisplay({ yearData }: { yearData: YearData }) {
-  const score = calculateIndependenceScore(yearData);
-  if (!score) return null;
-
-  const barWidth = Math.min(score.score, 150); // Cap visual at 150% for display
+function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
+  const barWidth = Math.min(score.score, 100); // Max 100% for v2
 
   return (
-    <div className="bg-inset rounded-lg p-3">
-      <div className="flex items-center justify-between mb-1.5">
-        <div className="text-[10px] text-muted uppercase tracking-wider">Energy Independence</div>
-        <div className="text-xs font-medium" style={{ color: score.color }}>{score.label}</div>
-      </div>
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-2 bg-card rounded-full overflow-hidden">
-          <div
-            className="h-full rounded-full transition-all"
-            style={{ width: `${(barWidth / 150) * 100}%`, backgroundColor: score.color }}
-          />
+    <div className="bg-inset rounded-lg p-3 space-y-3">
+      <div>
+        <div className="flex items-center justify-between mb-1.5">
+          <div className="text-[10px] text-muted uppercase tracking-wider">Energy Independence</div>
+          <div className="text-xs font-medium" style={{ color: score.color }}>{score.label}</div>
         </div>
-        <span className="text-sm font-semibold text-primary tabular-nums w-12 text-right">
-          {formatIndependenceScore(score.score)}
-        </span>
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-2 bg-card rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all"
+              style={{ width: `${barWidth}%`, backgroundColor: score.color }}
+            />
+          </div>
+          <span className="text-sm font-semibold text-primary tabular-nums w-12 text-right">
+            {formatIndependenceScore(score.score)}
+          </span>
+        </div>
+        <div className="text-[10px] text-muted mt-1">{getIndependenceDescription(score)}</div>
       </div>
-      <div className="text-[10px] text-muted mt-1">{getIndependenceDescription(score)}</div>
+
+      {/* Breakdown section */}
+      <div className="border-t border-border-subtle pt-2">
+        <div className="text-[10px] text-muted uppercase tracking-wider mb-2">Score Breakdown</div>
+        <div className="space-y-1.5">
+          <BreakdownRow
+            label="Renewables"
+            pct={score.breakdown.renewable.pct}
+            contribution={score.breakdown.renewable.contribution}
+            color="#22C55E"
+            isIndependent
+          />
+          <BreakdownRow
+            label="Nuclear"
+            pct={score.breakdown.nuclear.pct}
+            contribution={score.breakdown.nuclear.contribution}
+            color="#8B5CF6"
+            isIndependent
+          />
+          {score.breakdown.coal.pct > 0.5 && (
+            <BreakdownRow
+              label="Coal"
+              pct={score.breakdown.coal.pct}
+              contribution={score.breakdown.coal.contribution}
+              independence={score.breakdown.coal.independence}
+              color="#374151"
+            />
+          )}
+          {score.breakdown.gas.pct > 0.5 && (
+            <BreakdownRow
+              label="Gas"
+              pct={score.breakdown.gas.pct}
+              contribution={score.breakdown.gas.contribution}
+              independence={score.breakdown.gas.independence}
+              color="#F59E0B"
+            />
+          )}
+          {score.breakdown.oil.pct > 0.5 && (
+            <BreakdownRow
+              label="Other Fossil"
+              pct={score.breakdown.oil.pct}
+              contribution={score.breakdown.oil.contribution}
+              independence={score.breakdown.oil.independence}
+              color="#D97706"
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Strengths and Vulnerabilities */}
+      {(score.strengths.length > 0 || score.vulnerabilities.length > 0) && (
+        <div className="border-t border-border-subtle pt-2 space-y-2">
+          {score.strengths.length > 0 && (
+            <div>
+              <div className="text-[10px] text-positive font-medium mb-1">Strengths</div>
+              <ul className="text-[10px] text-muted space-y-0.5">
+                {score.strengths.map((s, i) => (
+                  <li key={i} className="flex items-start gap-1">
+                    <span className="text-positive">+</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {score.vulnerabilities.length > 0 && (
+            <div>
+              <div className="text-[10px] text-negative font-medium mb-1">Vulnerabilities</div>
+              <ul className="text-[10px] text-muted space-y-0.5">
+                {score.vulnerabilities.map((v, i) => (
+                  <li key={i} className="flex items-start gap-1">
+                    <span className="text-negative">!</span>
+                    <span>{v}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
-function CountryDetail({ country, yearData, year }: {
-  country: Country; yearData: YearData; year: number;
+function BreakdownRow({
+  label,
+  pct,
+  contribution,
+  independence,
+  color,
+  isIndependent = false,
+}: {
+  label: string;
+  pct: number;
+  contribution: number;
+  independence?: number;
+  color: string;
+  isIndependent?: boolean;
 }) {
   return (
+    <div className="flex items-center gap-2 text-[10px]">
+      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+      <span className="text-secondary w-16">{label}</span>
+      <span className="text-muted w-10 text-right">{formatPercent(pct)}</span>
+      {!isIndependent && independence !== undefined && (
+        <span className="text-muted w-16 text-right">
+          ({Math.round(independence * 100)}% dom.)
+        </span>
+      )}
+      {isIndependent && (
+        <span className="text-muted w-16 text-right">(100% dom.)</span>
+      )}
+      <span className="text-primary font-medium ml-auto">+{contribution.toFixed(1)}</span>
+    </div>
+  );
+}
+
+function CountryDetail({ country, yearData, year, fossilFuelData }: {
+  country: Country; yearData: YearData; year: number; fossilFuelData: FossilFuelData | null;
+}) {
+  // Get fossil fuel data for this country and year
+  const fossilYear = fossilFuelData?.countries[country.iso3]?.years[year.toString()] || null;
+  const score = calculateIndependenceScoreV2(yearData, fossilYear);
+
+  return (
     <div className="space-y-5">
-      <IndependenceScoreDisplay yearData={yearData} />
+      {score && <IndependenceScoreDisplay score={score} />}
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-inset rounded-lg p-3">
           <div className="text-[10px] text-muted uppercase tracking-wider mb-0.5">Generation</div>
@@ -142,7 +259,7 @@ function CountryListItem({ country, index, year, onClick }: {
 
 export default function CountryPanel({
   country, year, topCountries, onClose, onSelectCountry,
-  selectedBloc, blocAgg, blocYearData,
+  selectedBloc, blocAgg, blocYearData, fossilFuelData,
 }: CountryPanelProps) {
 
   // Single country detail
@@ -164,7 +281,7 @@ export default function CountryPanel({
           <div className="p-4 text-xs text-muted">No data for {year}</div>
         ) : (
           <div className="p-4">
-            <CountryDetail country={country} yearData={yearData} year={year} />
+            <CountryDetail country={country} yearData={yearData} year={year} fossilFuelData={fossilFuelData} />
           </div>
         )}
       </div>

@@ -66,3 +66,23 @@ export type EnergySource =
   | 'solar'
   | 'bioenergy'
   | 'other_fossil';
+
+// Fossil fuel independence data types
+export interface FossilFuelYearData {
+  coal: { production: number; consumption: number };
+  gas: { production: number; consumption: number };
+  oil: { production: number; consumption: number };
+}
+
+export interface FossilFuelCountry {
+  name: string;
+  years: Record<string, FossilFuelYearData>;
+}
+
+export interface FossilFuelData {
+  description: string;
+  source: string;
+  license: string;
+  lastUpdated: string;
+  countries: Record<string, FossilFuelCountry>;
+}
