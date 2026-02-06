@@ -8,6 +8,7 @@ import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import FlagImg from '@/components/FlagImg';
+import Footer from '@/components/Footer';
 
 interface Chapter {
   id: string;
@@ -273,17 +274,23 @@ export default function StoryPage() {
       </header>
 
       {/* Progress indicator */}
-      <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2">
+      <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1">
         {chapters.map((ch, i) => (
           <button
             key={ch.id}
             onClick={() => chapterRefs.current[i]?.scrollIntoView({ behavior: 'smooth' })}
-            className={`w-2 h-2 rounded-full transition-all ${
-              i === activeChapter ? 'scale-150' : 'opacity-50 hover:opacity-100'
+            className={`w-8 h-8 rounded-full transition-all flex items-center justify-center cursor-pointer ${
+              i === activeChapter ? '' : 'opacity-60 hover:opacity-100'
             }`}
-            style={{ backgroundColor: ch.color }}
             title={ch.title}
-          />
+          >
+            <span
+              className={`rounded-full transition-all ${
+                i === activeChapter ? 'w-4 h-4' : 'w-3 h-3 hover:w-3.5 hover:h-3.5'
+              }`}
+              style={{ backgroundColor: ch.color }}
+            />
+          </button>
         ))}
       </div>
 
@@ -340,20 +347,7 @@ export default function StoryPage() {
         ))}
       </main>
 
-      <footer className="border-t border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
-          Data:{' '}
-          <a
-            href="https://ember-energy.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-secondary hover:text-primary underline"
-          >
-            Ember
-          </a>{' '}
-          (ember-energy.org), CC BY 4.0
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

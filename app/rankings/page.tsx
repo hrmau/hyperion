@@ -8,6 +8,7 @@ import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Footer from '@/components/Footer';
 
 type SortKey =
   | 'name'
@@ -360,20 +361,7 @@ export default function RankingsPage() {
         </div>
       </main>
 
-      <footer className="border-t border-border bg-card mt-6">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
-          Data:{' '}
-          <a
-            href="https://ember-energy.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-secondary hover:text-primary underline"
-          >
-            Ember
-          </a>{' '}
-          (ember-energy.org), CC BY 4.0
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

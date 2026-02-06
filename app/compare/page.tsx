@@ -19,6 +19,7 @@ import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Footer from '@/components/Footer';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'EU', label: 'EU' },
@@ -454,20 +455,7 @@ export default function ComparePage() {
         )}
       </main>
 
-      <footer className="border-t border-border bg-card mt-6">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
-          Data:{' '}
-          <a
-            href="https://ember-energy.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-secondary hover:text-primary underline"
-          >
-            Ember
-          </a>{' '}
-          (ember-energy.org), CC BY 4.0
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

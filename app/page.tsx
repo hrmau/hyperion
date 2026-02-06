@@ -7,6 +7,7 @@ import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Footer from '@/components/Footer';
 import {
   loadCountries,
   loadBlocs,
@@ -182,20 +183,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="border-t border-border bg-card mt-6">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 text-center text-xs text-muted">
-          Data:{' '}
-          <a
-            href="https://ember-energy.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-secondary hover:text-primary underline"
-          >
-            Ember
-          </a>{' '}
-          (ember-energy.org), CC BY 4.0
-        </div>
-      </footer>
+      <Footer />
 
       <CountryTooltip
         country={hoveredCountry}
