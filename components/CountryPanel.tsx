@@ -3,7 +3,7 @@
 import type { Country, YearData, FossilFuelData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScoreV2, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
+import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
@@ -177,8 +177,11 @@ function BreakdownRow({
 function CountryDetail({ country, yearData, year, fossilFuelData }: {
   country: Country; yearData: YearData; year: number; fossilFuelData: FossilFuelData | null;
 }) {
-  // Get fossil fuel data for this country and year
-  const fossilYear = fossilFuelData?.countries[country.iso3]?.years[year.toString()] || null;
+  // Get fossil fuel data for this country, falling back to nearest available year
+  const { data: fossilYear, actualYear } = getFossilDataForYear(
+    fossilFuelData?.countries[country.iso3],
+    year
+  );
   const score = calculateIndependenceScoreV2(yearData, fossilYear);
 
   return (

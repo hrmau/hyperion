@@ -1,4 +1,4 @@
-import type { YearData, FossilFuelYearData } from './types';
+import type { YearData, FossilFuelYearData, FossilFuelCountry } from './types';
 
 export interface IndependenceScore {
   score: number; // 0-100 (final weighted score)
@@ -16,6 +16,51 @@ export interface IndependenceScore {
   // Strengths and vulnerabilities
   strengths: string[];
   vulnerabilities: string[];
+  // Data year used (may differ from requested year)
+  fossilDataYear?: number;
+}
+
+/**
+ * Get fossil fuel data for a country, falling back to nearest available year
+ */
+export function getFossilDataForYear(
+  countryFossil: FossilFuelCountry | undefined,
+  targetYear: number
+): { data: FossilFuelYearData | null; actualYear: number | null } {
+  if (!countryFossil?.years) {
+    return { data: null, actualYear: null };
+  }
+
+  const years = Object.keys(countryFossil.years).map(Number).sort((a, b) => b - a);
+
+  // Try exact year first
+  if (countryFossil.years[targetYear.toString()]) {
+    return {
+      data: countryFossil.years[targetYear.toString()],
+      actualYear: targetYear
+    };
+  }
+
+  // Find closest year (prefer most recent if target is in future)
+  for (const year of years) {
+    if (year <= targetYear) {
+      return {
+        data: countryFossil.years[year.toString()],
+        actualYear: year
+      };
+    }
+  }
+
+  // If target is older than all data, use oldest available
+  if (years.length > 0) {
+    const oldestYear = years[years.length - 1];
+    return {
+      data: countryFossil.years[oldestYear.toString()],
+      actualYear: oldestYear
+    };
+  }
+
+  return { data: null, actualYear: null };
 }
 
 /**
