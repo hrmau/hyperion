@@ -1,951 +1,7431 @@
 {
-  "description": "Fossil fuel production and consumption data for calculating energy independence scores (v2). Data derived from OWID Energy Dataset and IEA statistics. Values in TWh equivalent.",
-  "source": "Our World in Data (owid-energy-data), IEA World Energy Balances",
+  "description": "Fossil fuel production and consumption data for calculating energy independence scores (v2). Data from Our World in Data Energy Dataset.",
+  "source": "Our World in Data (owid-energy-data)",
   "license": "CC BY 4.0",
   "lastUpdated": "2024",
   "countries": {
-    "DEU": {
-      "name": "Germany",
+    "DZA": {
+      "name": "Algeria",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.5
+          },
+          "gas": {
+            "production": 814.2,
+            "consumption": 433.5
+          },
+          "oil": {
+            "production": 670.2,
+            "consumption": 211.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 3.1
+          },
+          "gas": {
+            "production": 1011,
+            "consumption": 481.5
+          },
+          "oil": {
+            "production": 676.9,
+            "consumption": 221.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 2.2
+          },
+          "gas": {
+            "production": 976.3,
+            "consumption": 503.4
+          },
+          "oil": {
+            "production": 721.8,
+            "consumption": 226.9
+          }
+        },
         "2023": {
-          "coal": { "production": 140, "consumption": 280 },
-          "gas": { "production": 20, "consumption": 850 },
-          "oil": { "production": 10, "consumption": 1200 }
+          "coal": {
+            "production": 0,
+            "consumption": 2.1
+          },
+          "gas": {
+            "production": 1015.3,
+            "consumption": 542.3
+          },
+          "oil": {
+            "production": 732.8,
+            "consumption": 238.2
+          }
         },
         "2024": {
-          "coal": { "production": 130, "consumption": 260 },
-          "gas": { "production": 18, "consumption": 800 },
-          "oil": { "production": 9, "consumption": 1150 }
+          "coal": {
+            "production": 0,
+            "consumption": 1.7
+          },
+          "gas": {
+            "production": 947.2,
+            "consumption": 505.5
+          },
+          "oil": {
+            "production": 689.3,
+            "consumption": 251
+          }
         }
       }
     },
-    "FRA": {
-      "name": "France",
+    "AGO": {
+      "name": "Angola",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 751,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 664.3,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 672,
+            "consumption": 0
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 25 },
-          "gas": { "production": 0, "consumption": 380 },
-          "oil": { "production": 8, "consumption": 680 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 649,
+            "consumption": 0
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 22 },
-          "gas": { "production": 0, "consumption": 360 },
-          "oil": { "production": 7, "consumption": 660 }
-        }
-      }
-    },
-    "GBR": {
-      "name": "United Kingdom",
-      "years": {
-        "2023": {
-          "coal": { "production": 5, "consumption": 30 },
-          "gas": { "production": 350, "consumption": 700 },
-          "oil": { "production": 380, "consumption": 720 }
-        },
-        "2024": {
-          "coal": { "production": 4, "consumption": 25 },
-          "gas": { "production": 340, "consumption": 680 },
-          "oil": { "production": 360, "consumption": 700 }
-        }
-      }
-    },
-    "USA": {
-      "name": "United States",
-      "years": {
-        "2023": {
-          "coal": { "production": 4500, "consumption": 4000 },
-          "gas": { "production": 10200, "consumption": 8500 },
-          "oil": { "production": 7800, "consumption": 9200 }
-        },
-        "2024": {
-          "coal": { "production": 4300, "consumption": 3800 },
-          "gas": { "production": 10500, "consumption": 8700 },
-          "oil": { "production": 8200, "consumption": 9400 }
-        }
-      }
-    },
-    "CHN": {
-      "name": "China",
-      "years": {
-        "2023": {
-          "coal": { "production": 25000, "consumption": 27500 },
-          "gas": { "production": 2300, "consumption": 4000 },
-          "oil": { "production": 2400, "consumption": 7800 }
-        },
-        "2024": {
-          "coal": { "production": 25500, "consumption": 28000 },
-          "gas": { "production": 2400, "consumption": 4200 },
-          "oil": { "production": 2450, "consumption": 8100 }
-        }
-      }
-    },
-    "JPN": {
-      "name": "Japan",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 1100 },
-          "gas": { "production": 20, "consumption": 1000 },
-          "oil": { "production": 5, "consumption": 1600 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 1050 },
-          "gas": { "production": 18, "consumption": 980 },
-          "oil": { "production": 5, "consumption": 1550 }
-        }
-      }
-    },
-    "NOR": {
-      "name": "Norway",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 1200, "consumption": 50 },
-          "oil": { "production": 2000, "consumption": 200 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 1250, "consumption": 52 },
-          "oil": { "production": 2100, "consumption": 210 }
-        }
-      }
-    },
-    "RUS": {
-      "name": "Russia",
-      "years": {
-        "2023": {
-          "coal": { "production": 4500, "consumption": 2000 },
-          "gas": { "production": 6500, "consumption": 4500 },
-          "oil": { "production": 5500, "consumption": 1800 }
-        },
-        "2024": {
-          "coal": { "production": 4600, "consumption": 2050 },
-          "gas": { "production": 6600, "consumption": 4600 },
-          "oil": { "production": 5600, "consumption": 1850 }
-        }
-      }
-    },
-    "SAU": {
-      "name": "Saudi Arabia",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 1200, "consumption": 1200 },
-          "oil": { "production": 5900, "consumption": 1600 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 1250, "consumption": 1250 },
-          "oil": { "production": 5800, "consumption": 1650 }
-        }
-      }
-    },
-    "IND": {
-      "name": "India",
-      "years": {
-        "2023": {
-          "coal": { "production": 5600, "consumption": 6800 },
-          "gas": { "production": 350, "consumption": 600 },
-          "oil": { "production": 380, "consumption": 2500 }
-        },
-        "2024": {
-          "coal": { "production": 5800, "consumption": 7100 },
-          "gas": { "production": 360, "consumption": 620 },
-          "oil": { "production": 390, "consumption": 2600 }
-        }
-      }
-    },
-    "BRA": {
-      "name": "Brazil",
-      "years": {
-        "2023": {
-          "coal": { "production": 30, "consumption": 180 },
-          "gas": { "production": 150, "consumption": 350 },
-          "oil": { "production": 1800, "consumption": 1400 }
-        },
-        "2024": {
-          "coal": { "production": 32, "consumption": 175 },
-          "gas": { "production": 160, "consumption": 360 },
-          "oil": { "production": 1900, "consumption": 1450 }
-        }
-      }
-    },
-    "CAN": {
-      "name": "Canada",
-      "years": {
-        "2023": {
-          "coal": { "production": 300, "consumption": 200 },
-          "gas": { "production": 1900, "consumption": 1200 },
-          "oil": { "production": 2800, "consumption": 1100 }
-        },
-        "2024": {
-          "coal": { "production": 280, "consumption": 190 },
-          "gas": { "production": 2000, "consumption": 1250 },
-          "oil": { "production": 2900, "consumption": 1150 }
-        }
-      }
-    },
-    "AUS": {
-      "name": "Australia",
-      "years": {
-        "2023": {
-          "coal": { "production": 3800, "consumption": 1800 },
-          "gas": { "production": 1500, "consumption": 450 },
-          "oil": { "production": 180, "consumption": 520 }
-        },
-        "2024": {
-          "coal": { "production": 3700, "consumption": 1750 },
-          "gas": { "production": 1550, "consumption": 460 },
-          "oil": { "production": 175, "consumption": 530 }
-        }
-      }
-    },
-    "POL": {
-      "name": "Poland",
-      "years": {
-        "2023": {
-          "coal": { "production": 950, "consumption": 1100 },
-          "gas": { "production": 40, "consumption": 200 },
-          "oil": { "production": 10, "consumption": 340 }
-        },
-        "2024": {
-          "coal": { "production": 920, "consumption": 1050 },
-          "gas": { "production": 38, "consumption": 195 },
-          "oil": { "production": 10, "consumption": 350 }
-        }
-      }
-    },
-    "ITA": {
-      "name": "Italy",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 80 },
-          "gas": { "production": 30, "consumption": 650 },
-          "oil": { "production": 45, "consumption": 620 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 75 },
-          "gas": { "production": 28, "consumption": 620 },
-          "oil": { "production": 43, "consumption": 600 }
-        }
-      }
-    },
-    "ESP": {
-      "name": "Spain",
-      "years": {
-        "2023": {
-          "coal": { "production": 10, "consumption": 50 },
-          "gas": { "production": 1, "consumption": 350 },
-          "oil": { "production": 10, "consumption": 600 }
-        },
-        "2024": {
-          "coal": { "production": 8, "consumption": 45 },
-          "gas": { "production": 1, "consumption": 340 },
-          "oil": { "production": 9, "consumption": 590 }
-        }
-      }
-    },
-    "KOR": {
-      "name": "South Korea",
-      "years": {
-        "2023": {
-          "coal": { "production": 10, "consumption": 1300 },
-          "gas": { "production": 3, "consumption": 600 },
-          "oil": { "production": 0, "consumption": 1350 }
-        },
-        "2024": {
-          "coal": { "production": 9, "consumption": 1250 },
-          "gas": { "production": 3, "consumption": 620 },
-          "oil": { "production": 0, "consumption": 1380 }
-        }
-      }
-    },
-    "IDN": {
-      "name": "Indonesia",
-      "years": {
-        "2023": {
-          "coal": { "production": 5000, "consumption": 1400 },
-          "gas": { "production": 600, "consumption": 400 },
-          "oil": { "production": 350, "consumption": 900 }
-        },
-        "2024": {
-          "coal": { "production": 5100, "consumption": 1450 },
-          "gas": { "production": 620, "consumption": 420 },
-          "oil": { "production": 340, "consumption": 920 }
-        }
-      }
-    },
-    "NLD": {
-      "name": "Netherlands",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 60 },
-          "gas": { "production": 120, "consumption": 350 },
-          "oil": { "production": 10, "consumption": 400 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 55 },
-          "gas": { "production": 100, "consumption": 330 },
-          "oil": { "production": 9, "consumption": 390 }
-        }
-      }
-    },
-    "TUR": {
-      "name": "Turkey",
-      "years": {
-        "2023": {
-          "coal": { "production": 600, "consumption": 900 },
-          "gas": { "production": 4, "consumption": 550 },
-          "oil": { "production": 35, "consumption": 500 }
-        },
-        "2024": {
-          "coal": { "production": 620, "consumption": 920 },
-          "gas": { "production": 5, "consumption": 570 },
-          "oil": { "production": 36, "consumption": 520 }
-        }
-      }
-    },
-    "ZAF": {
-      "name": "South Africa",
-      "years": {
-        "2023": {
-          "coal": { "production": 2400, "consumption": 2000 },
-          "gas": { "production": 10, "consumption": 50 },
-          "oil": { "production": 5, "consumption": 350 }
-        },
-        "2024": {
-          "coal": { "production": 2350, "consumption": 1950 },
-          "gas": { "production": 10, "consumption": 52 },
-          "oil": { "production": 5, "consumption": 360 }
-        }
-      }
-    },
-    "MEX": {
-      "name": "Mexico",
-      "years": {
-        "2023": {
-          "coal": { "production": 50, "consumption": 100 },
-          "gas": { "production": 400, "consumption": 900 },
-          "oil": { "production": 1000, "consumption": 950 }
-        },
-        "2024": {
-          "coal": { "production": 48, "consumption": 95 },
-          "gas": { "production": 410, "consumption": 920 },
-          "oil": { "production": 980, "consumption": 960 }
-        }
-      }
-    },
-    "ARE": {
-      "name": "United Arab Emirates",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 600, "consumption": 700 },
-          "oil": { "production": 2000, "consumption": 500 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 620, "consumption": 720 },
-          "oil": { "production": 2100, "consumption": 520 }
-        }
-      }
-    },
-    "SWE": {
-      "name": "Sweden",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 20 },
-          "gas": { "production": 0, "consumption": 10 },
-          "oil": { "production": 0, "consumption": 180 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 18 },
-          "gas": { "production": 0, "consumption": 9 },
-          "oil": { "production": 0, "consumption": 175 }
-        }
-      }
-    },
-    "ISL": {
-      "name": "Iceland",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 0, "consumption": 0 },
-          "oil": { "production": 0, "consumption": 8 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 0, "consumption": 0 },
-          "oil": { "production": 0, "consumption": 8 }
-        }
-      }
-    },
-    "SGP": {
-      "name": "Singapore",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 0, "consumption": 130 },
-          "oil": { "production": 0, "consumption": 650 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 0, "consumption": 135 },
-          "oil": { "production": 0, "consumption": 670 }
-        }
-      }
-    },
-    "DNK": {
-      "name": "Denmark",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 15 },
-          "gas": { "production": 20, "consumption": 25 },
-          "oil": { "production": 35, "consumption": 75 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 12 },
-          "gas": { "production": 18, "consumption": 22 },
-          "oil": { "production": 32, "consumption": 72 }
-        }
-      }
-    },
-    "FIN": {
-      "name": "Finland",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 40 },
-          "gas": { "production": 0, "consumption": 20 },
-          "oil": { "production": 0, "consumption": 100 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 35 },
-          "gas": { "production": 0, "consumption": 18 },
-          "oil": { "production": 0, "consumption": 95 }
-        }
-      }
-    },
-    "BEL": {
-      "name": "Belgium",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 30 },
-          "gas": { "production": 0, "consumption": 180 },
-          "oil": { "production": 0, "consumption": 350 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 28 },
-          "gas": { "production": 0, "consumption": 175 },
-          "oil": { "production": 0, "consumption": 340 }
-        }
-      }
-    },
-    "AUT": {
-      "name": "Austria",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 25 },
-          "gas": { "production": 8, "consumption": 90 },
-          "oil": { "production": 5, "consumption": 150 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 22 },
-          "gas": { "production": 7, "consumption": 85 },
-          "oil": { "production": 5, "consumption": 145 }
-        }
-      }
-    },
-    "CHE": {
-      "name": "Switzerland",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 35 },
-          "oil": { "production": 0, "consumption": 110 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 33 },
-          "oil": { "production": 0, "consumption": 105 }
-        }
-      }
-    },
-    "NZL": {
-      "name": "New Zealand",
-      "years": {
-        "2023": {
-          "coal": { "production": 25, "consumption": 35 },
-          "gas": { "production": 45, "consumption": 50 },
-          "oil": { "production": 10, "consumption": 80 }
-        },
-        "2024": {
-          "coal": { "production": 23, "consumption": 33 },
-          "gas": { "production": 43, "consumption": 48 },
-          "oil": { "production": 9, "consumption": 78 }
-        }
-      }
-    },
-    "IRN": {
-      "name": "Iran",
-      "years": {
-        "2023": {
-          "coal": { "production": 20, "consumption": 25 },
-          "gas": { "production": 2600, "consumption": 2500 },
-          "oil": { "production": 1900, "consumption": 1000 }
-        },
-        "2024": {
-          "coal": { "production": 20, "consumption": 26 },
-          "gas": { "production": 2650, "consumption": 2550 },
-          "oil": { "production": 1950, "consumption": 1050 }
-        }
-      }
-    },
-    "EGY": {
-      "name": "Egypt",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 15 },
-          "gas": { "production": 600, "consumption": 650 },
-          "oil": { "production": 300, "consumption": 400 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 16 },
-          "gas": { "production": 580, "consumption": 660 },
-          "oil": { "production": 290, "consumption": 410 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 667.4,
+            "consumption": 0
+          }
         }
       }
     },
     "ARG": {
       "name": "Argentina",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 10
+          },
+          "gas": {
+            "production": 382.9,
+            "consumption": 439.3
+          },
+          "oil": {
+            "production": 392.3,
+            "consumption": 282.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 14.1
+          },
+          "gas": {
+            "production": 386.1,
+            "consumption": 459.3
+          },
+          "oil": {
+            "production": 437,
+            "consumption": 340.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 14.9
+          },
+          "gas": {
+            "production": 416.5,
+            "consumption": 458.5
+          },
+          "oil": {
+            "production": 527.5,
+            "consumption": 383.5
+          }
+        },
         "2023": {
-          "coal": { "production": 5, "consumption": 15 },
-          "gas": { "production": 450, "consumption": 500 },
-          "oil": { "production": 350, "consumption": 320 }
+          "coal": {
+            "production": 0,
+            "consumption": 13.3
+          },
+          "gas": {
+            "production": 415.9,
+            "consumption": 449.5
+          },
+          "oil": {
+            "production": 595.3,
+            "consumption": 370.8
+          }
         },
         "2024": {
-          "coal": { "production": 5, "consumption": 14 },
-          "gas": { "production": 480, "consumption": 520 },
-          "oil": { "production": 380, "consumption": 330 }
+          "coal": {
+            "production": 0,
+            "consumption": 10
+          },
+          "gas": {
+            "production": 441.1,
+            "consumption": 456.2
+          },
+          "oil": {
+            "production": 682,
+            "consumption": 339
+          }
         }
       }
     },
-    "THA": {
-      "name": "Thailand",
+    "AUS": {
+      "name": "Australia",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 3341.6,
+            "consumption": 468.1
+          },
+          "gas": {
+            "production": 1457.2,
+            "consumption": 423.2
+          },
+          "oil": {
+            "production": 222.3,
+            "consumption": 522.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 3402.8,
+            "consumption": 452.5
+          },
+          "gas": {
+            "production": 1479.3,
+            "consumption": 395.8
+          },
+          "oil": {
+            "production": 214.2,
+            "consumption": 535.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 3246.5,
+            "consumption": 428.4
+          },
+          "gas": {
+            "production": 1542.4,
+            "consumption": 432.3
+          },
+          "oil": {
+            "production": 198.7,
+            "consumption": 569
+          }
+        },
         "2023": {
-          "coal": { "production": 100, "consumption": 250 },
-          "gas": { "production": 350, "consumption": 500 },
-          "oil": { "production": 150, "consumption": 650 }
+          "coal": {
+            "production": 3262.4,
+            "consumption": 418.3
+          },
+          "gas": {
+            "production": 1507.1,
+            "consumption": 386.3
+          },
+          "oil": {
+            "production": 181.6,
+            "consumption": 602.7
+          }
         },
         "2024": {
-          "coal": { "production": 95, "consumption": 255 },
-          "gas": { "production": 340, "consumption": 510 },
-          "oil": { "production": 145, "consumption": 670 }
+          "coal": {
+            "production": 3282.6,
+            "consumption": 423
+          },
+          "gas": {
+            "production": 1501.4,
+            "consumption": 369.9
+          },
+          "oil": {
+            "production": 173.4,
+            "consumption": 620.5
+          }
         }
       }
     },
-    "MYS": {
-      "name": "Malaysia",
+    "AUT": {
+      "name": "Austria",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 29
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 85.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 133
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 30.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 90.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 140.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 28.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 79.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 135
+          }
+        },
         "2023": {
-          "coal": { "production": 20, "consumption": 200 },
-          "gas": { "production": 800, "consumption": 450 },
-          "oil": { "production": 280, "consumption": 400 }
+          "coal": {
+            "production": 0,
+            "consumption": 27.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 68.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 134.1
+          }
         },
         "2024": {
-          "coal": { "production": 18, "consumption": 205 },
-          "gas": { "production": 820, "consumption": 460 },
-          "oil": { "production": 270, "consumption": 410 }
+          "coal": {
+            "production": 0,
+            "consumption": 28
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 68.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 131.9
+          }
         }
       }
     },
-    "VNM": {
-      "name": "Vietnam",
+    "AZE": {
+      "name": "Azerbaijan",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 258.6,
+            "consumption": 123.7
+          },
+          "oil": {
+            "production": 402.8,
+            "consumption": 57.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 318.1,
+            "consumption": 128.2
+          },
+          "oil": {
+            "production": 402.7,
+            "consumption": 65.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 341.3,
+            "consumption": 136.2
+          },
+          "oil": {
+            "production": 380.2,
+            "consumption": 69.3
+          }
+        },
         "2023": {
-          "coal": { "production": 250, "consumption": 500 },
-          "gas": { "production": 100, "consumption": 100 },
-          "oil": { "production": 80, "consumption": 250 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 355.6,
+            "consumption": 140
+          },
+          "oil": {
+            "production": 351.9,
+            "consumption": 72.1
+          }
         },
         "2024": {
-          "coal": { "production": 240, "consumption": 520 },
-          "gas": { "production": 105, "consumption": 105 },
-          "oil": { "production": 75, "consumption": 260 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 377.6,
+            "consumption": 127.7
+          },
+          "oil": {
+            "production": 339.2,
+            "consumption": 71
+          }
         }
       }
     },
-    "PHL": {
-      "name": "Philippines",
+    "BHR": {
+      "name": "Bahrain",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 163.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 166.2,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 157.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
         "2023": {
-          "coal": { "production": 80, "consumption": 350 },
-          "gas": { "production": 30, "consumption": 40 },
-          "oil": { "production": 5, "consumption": 250 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 157.6,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
         },
         "2024": {
-          "coal": { "production": 75, "consumption": 360 },
-          "gas": { "production": 28, "consumption": 42 },
-          "oil": { "production": 5, "consumption": 260 }
-        }
-      }
-    },
-    "PAK": {
-      "name": "Pakistan",
-      "years": {
-        "2023": {
-          "coal": { "production": 40, "consumption": 200 },
-          "gas": { "production": 350, "consumption": 450 },
-          "oil": { "production": 40, "consumption": 280 }
-        },
-        "2024": {
-          "coal": { "production": 42, "consumption": 210 },
-          "gas": { "production": 340, "consumption": 460 },
-          "oil": { "production": 38, "consumption": 290 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 165.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
         }
       }
     },
     "BGD": {
       "name": "Bangladesh",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 52.3
+          },
+          "gas": {
+            "production": 237.3,
+            "consumption": 299.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 102.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 42.3
+          },
+          "gas": {
+            "production": 236.1,
+            "consumption": 306.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 140.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 55.4
+          },
+          "gas": {
+            "production": 225.1,
+            "consumption": 286.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 166.1
+          }
+        },
         "2023": {
-          "coal": { "production": 5, "consumption": 50 },
-          "gas": { "production": 280, "consumption": 300 },
-          "oil": { "production": 5, "consumption": 150 }
+          "coal": {
+            "production": 0,
+            "consumption": 81.8
+          },
+          "gas": {
+            "production": 211,
+            "consumption": 281.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 139.4
+          }
         },
         "2024": {
-          "coal": { "production": 5, "consumption": 55 },
-          "gas": { "production": 270, "consumption": 310 },
-          "oil": { "production": 5, "consumption": 155 }
+          "coal": {
+            "production": 0,
+            "consumption": 89.2
+          },
+          "gas": {
+            "production": 197.2,
+            "consumption": 273.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 160.5
+          }
         }
       }
     },
-    "NGA": {
-      "name": "Nigeria",
+    "BLR": {
+      "name": "Belarus",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 177.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 95.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 187.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 97.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 10.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 184.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 92.7
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 500, "consumption": 200 },
-          "oil": { "production": 900, "consumption": 250 }
+          "coal": {
+            "production": 0,
+            "consumption": 11.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 167.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 91.9
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 520, "consumption": 210 },
-          "oil": { "production": 920, "consumption": 260 }
+          "coal": {
+            "production": 0,
+            "consumption": 11.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 167.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 92.5
+          }
         }
       }
     },
-    "QAT": {
-      "name": "Qatar",
+    "BEL": {
+      "name": "Belgium",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 27.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 170
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 307.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 30.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 169.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 341
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 32.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 145.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 331.9
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 1800, "consumption": 500 },
-          "oil": { "production": 900, "consumption": 180 }
+          "coal": {
+            "production": 0,
+            "consumption": 27.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 137.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 320.7
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 1850, "consumption": 520 },
-          "oil": { "production": 920, "consumption": 185 }
+          "coal": {
+            "production": 0,
+            "consumption": 30.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 132.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 326.7
+          }
         }
       }
     },
-    "KWT": {
-      "name": "Kuwait",
+    "BOL": {
+      "name": "Bolivia",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 146.9,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 151.5,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 136,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 180, "consumption": 250 },
-          "oil": { "production": 1500, "consumption": 220 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 118.1,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 185, "consumption": 260 },
-          "oil": { "production": 1550, "consumption": 230 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 119.1,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
         }
       }
     },
-    "IRQ": {
-      "name": "Iraq",
+    "BRA": {
+      "name": "Brazil",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 27.9,
+            "consumption": 162.3
+          },
+          "gas": {
+            "production": 242.4,
+            "consumption": 314.2
+          },
+          "oil": {
+            "production": 1853.2,
+            "consumption": 1257.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 33.8,
+            "consumption": 197.1
+          },
+          "gas": {
+            "production": 243.3,
+            "consumption": 404.5
+          },
+          "oil": {
+            "production": 1824.9,
+            "consumption": 1337.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 30.3,
+            "consumption": 162.8
+          },
+          "gas": {
+            "production": 230,
+            "consumption": 319.9
+          },
+          "oil": {
+            "production": 1898.2,
+            "consumption": 1390.1
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 150, "consumption": 200 },
-          "oil": { "production": 2400, "consumption": 450 }
+          "coal": {
+            "production": 30.2,
+            "consumption": 159.3
+          },
+          "gas": {
+            "production": 234.2,
+            "consumption": 298.8
+          },
+          "oil": {
+            "production": 2135,
+            "consumption": 1425.2
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 0 },
-          "gas": { "production": 160, "consumption": 210 },
-          "oil": { "production": 2500, "consumption": 470 }
+          "coal": {
+            "production": 29.8,
+            "consumption": 147.8
+          },
+          "gas": {
+            "production": 228.4,
+            "consumption": 313.6
+          },
+          "oil": {
+            "production": 2117.6,
+            "consumption": 1427.7
+          }
         }
       }
     },
-    "UKR": {
-      "name": "Ukraine",
+    "BRN": {
+      "name": "Brunei",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 126.4,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 62.6,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 115.3,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 60.5,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 105.9,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 52,
+            "consumption": 0
+          }
+        },
         "2023": {
-          "coal": { "production": 150, "consumption": 300 },
-          "gas": { "production": 180, "consumption": 250 },
-          "oil": { "production": 20, "consumption": 120 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 99.8,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 50.6,
+            "consumption": 0
+          }
         },
         "2024": {
-          "coal": { "production": 140, "consumption": 280 },
-          "gas": { "production": 170, "consumption": 240 },
-          "oil": { "production": 18, "consumption": 115 }
-        }
-      }
-    },
-    "KAZ": {
-      "name": "Kazakhstan",
-      "years": {
-        "2023": {
-          "coal": { "production": 1200, "consumption": 800 },
-          "gas": { "production": 350, "consumption": 200 },
-          "oil": { "production": 1000, "consumption": 180 }
-        },
-        "2024": {
-          "coal": { "production": 1250, "consumption": 820 },
-          "gas": { "production": 360, "consumption": 210 },
-          "oil": { "production": 1050, "consumption": 190 }
-        }
-      }
-    },
-    "CZE": {
-      "name": "Czechia",
-      "years": {
-        "2023": {
-          "coal": { "production": 300, "consumption": 350 },
-          "gas": { "production": 2, "consumption": 85 },
-          "oil": { "production": 5, "consumption": 100 }
-        },
-        "2024": {
-          "coal": { "production": 280, "consumption": 330 },
-          "gas": { "production": 2, "consumption": 80 },
-          "oil": { "production": 5, "consumption": 98 }
-        }
-      }
-    },
-    "GRC": {
-      "name": "Greece",
-      "years": {
-        "2023": {
-          "coal": { "production": 80, "consumption": 100 },
-          "gas": { "production": 0, "consumption": 60 },
-          "oil": { "production": 5, "consumption": 160 }
-        },
-        "2024": {
-          "coal": { "production": 70, "consumption": 90 },
-          "gas": { "production": 0, "consumption": 58 },
-          "oil": { "production": 5, "consumption": 155 }
-        }
-      }
-    },
-    "PRT": {
-      "name": "Portugal",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 0, "consumption": 60 },
-          "oil": { "production": 0, "consumption": 120 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 3 },
-          "gas": { "production": 0, "consumption": 55 },
-          "oil": { "production": 0, "consumption": 115 }
-        }
-      }
-    },
-    "IRL": {
-      "name": "Ireland",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 10 },
-          "gas": { "production": 25, "consumption": 55 },
-          "oil": { "production": 0, "consumption": 80 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 8 },
-          "gas": { "production": 22, "consumption": 52 },
-          "oil": { "production": 0, "consumption": 78 }
-        }
-      }
-    },
-    "HUN": {
-      "name": "Hungary",
-      "years": {
-        "2023": {
-          "coal": { "production": 50, "consumption": 70 },
-          "gas": { "production": 15, "consumption": 100 },
-          "oil": { "production": 10, "consumption": 85 }
-        },
-        "2024": {
-          "coal": { "production": 48, "consumption": 65 },
-          "gas": { "production": 14, "consumption": 95 },
-          "oil": { "production": 9, "consumption": 82 }
-        }
-      }
-    },
-    "ROU": {
-      "name": "Romania",
-      "years": {
-        "2023": {
-          "coal": { "production": 150, "consumption": 200 },
-          "gas": { "production": 100, "consumption": 120 },
-          "oil": { "production": 35, "consumption": 120 }
-        },
-        "2024": {
-          "coal": { "production": 140, "consumption": 190 },
-          "gas": { "production": 105, "consumption": 125 },
-          "oil": { "production": 33, "consumption": 118 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 103.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 56.4,
+            "consumption": 0
+          }
         }
       }
     },
     "BGR": {
       "name": "Bulgaria",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 44,
+            "consumption": 48.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 29.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 53.4
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 54.9,
+            "consumption": 61
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 33
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 56.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 68.7,
+            "consumption": 72.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 27
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 59.9
+          }
+        },
         "2023": {
-          "coal": { "production": 200, "consumption": 250 },
-          "gas": { "production": 1, "consumption": 30 },
-          "oil": { "production": 5, "consumption": 60 }
+          "coal": {
+            "production": 40.8,
+            "consumption": 42.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 25.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 59.4
+          }
         },
         "2024": {
-          "coal": { "production": 190, "consumption": 240 },
-          "gas": { "production": 1, "consumption": 28 },
-          "oil": { "production": 5, "consumption": 58 }
+          "coal": {
+            "production": 29.2,
+            "consumption": 31.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 27.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 61.2
+          }
         }
       }
     },
-    "SVK": {
-      "name": "Slovakia",
+    "CAN": {
+      "name": "Canada",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 318.5,
+            "consumption": 146.2
+          },
+          "gas": {
+            "production": 1656.1,
+            "consumption": 1152.9
+          },
+          "oil": {
+            "production": 2930.3,
+            "consumption": 1114.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 336,
+            "consumption": 131.2
+          },
+          "gas": {
+            "production": 1723.5,
+            "consumption": 1186.3
+          },
+          "oil": {
+            "production": 3100.8,
+            "consumption": 1143.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 337.7,
+            "consumption": 107
+          },
+          "gas": {
+            "production": 1848.2,
+            "consumption": 1238.1
+          },
+          "oil": {
+            "production": 3185.8,
+            "consumption": 1187.1
+          }
+        },
         "2023": {
-          "coal": { "production": 20, "consumption": 40 },
-          "gas": { "production": 1, "consumption": 50 },
-          "oil": { "production": 2, "consumption": 45 }
+          "coal": {
+            "production": 352.6,
+            "consumption": 103
+          },
+          "gas": {
+            "production": 1898.3,
+            "consumption": 1241.2
+          },
+          "oil": {
+            "production": 3229.7,
+            "consumption": 1194.1
+          }
         },
         "2024": {
-          "coal": { "production": 18, "consumption": 38 },
-          "gas": { "production": 1, "consumption": 48 },
-          "oil": { "production": 2, "consumption": 44 }
+          "coal": {
+            "production": 317.6,
+            "consumption": 81.1
+          },
+          "gas": {
+            "production": 1941.6,
+            "consumption": 1285.4
+          },
+          "oil": {
+            "production": 3372.1,
+            "consumption": 1209.2
+          }
         }
       }
     },
-    "HRV": {
-      "name": "Croatia",
+    "TCD": {
+      "name": "Chad",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 77.3,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 71.1,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 75.6,
+            "consumption": 0
+          }
+        },
         "2023": {
-          "coal": { "production": 0, "consumption": 5 },
-          "gas": { "production": 10, "consumption": 30 },
-          "oil": { "production": 8, "consumption": 45 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 81.8,
+            "consumption": 0
+          }
         },
         "2024": {
-          "coal": { "production": 0, "consumption": 4 },
-          "gas": { "production": 9, "consumption": 28 },
-          "oil": { "production": 7, "consumption": 43 }
-        }
-      }
-    },
-    "SVN": {
-      "name": "Slovenia",
-      "years": {
-        "2023": {
-          "coal": { "production": 25, "consumption": 30 },
-          "gas": { "production": 0, "consumption": 10 },
-          "oil": { "production": 0, "consumption": 30 }
-        },
-        "2024": {
-          "coal": { "production": 22, "consumption": 28 },
-          "gas": { "production": 0, "consumption": 9 },
-          "oil": { "production": 0, "consumption": 29 }
-        }
-      }
-    },
-    "LTU": {
-      "name": "Lithuania",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 25 },
-          "oil": { "production": 5, "consumption": 35 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 23 },
-          "oil": { "production": 5, "consumption": 34 }
-        }
-      }
-    },
-    "LVA": {
-      "name": "Latvia",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 1 },
-          "gas": { "production": 0, "consumption": 15 },
-          "oil": { "production": 0, "consumption": 20 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 1 },
-          "gas": { "production": 0, "consumption": 14 },
-          "oil": { "production": 0, "consumption": 19 }
-        }
-      }
-    },
-    "EST": {
-      "name": "Estonia",
-      "years": {
-        "2023": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 5 },
-          "oil": { "production": 0, "consumption": 15 }
-        },
-        "2024": {
-          "coal": { "production": 0, "consumption": 2 },
-          "gas": { "production": 0, "consumption": 5 },
-          "oil": { "production": 0, "consumption": 14 }
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 78.4,
+            "consumption": 0
+          }
         }
       }
     },
     "CHL": {
       "name": "Chile",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 73.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 62.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 192.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 81.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 68.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 211.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 66.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 72.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 228.2
+          }
+        },
         "2023": {
-          "coal": { "production": 10, "consumption": 80 },
-          "gas": { "production": 10, "consumption": 60 },
-          "oil": { "production": 5, "consumption": 180 }
+          "coal": {
+            "production": 0,
+            "consumption": 39.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 75.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 225.7
+          }
         },
         "2024": {
-          "coal": { "production": 8, "consumption": 75 },
-          "gas": { "production": 10, "consumption": 62 },
-          "oil": { "production": 5, "consumption": 185 }
+          "coal": {
+            "production": 0,
+            "consumption": 36.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 70.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 238.2
+          }
+        }
+      }
+    },
+    "CHN": {
+      "name": "China",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 22364.9,
+            "consumption": 23402.6
+          },
+          "gas": {
+            "production": 1940.1,
+            "consumption": 3366.2
+          },
+          "oil": {
+            "production": 2265.2,
+            "consumption": 7959.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 23178,
+            "consumption": 24315.5
+          },
+          "gas": {
+            "production": 2092.1,
+            "consumption": 3802.7
+          },
+          "oil": {
+            "production": 2313,
+            "consumption": 8174.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 25365.6,
+            "consumption": 24397.8
+          },
+          "gas": {
+            "production": 2218.4,
+            "consumption": 3776.5
+          },
+          "oil": {
+            "production": 2380.9,
+            "consumption": 8198.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 25933.8,
+            "consumption": 25181.2
+          },
+          "gas": {
+            "production": 2342.6,
+            "consumption": 4048.4
+          },
+          "oil": {
+            "production": 2431,
+            "consumption": 9091.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 26245,
+            "consumption": 25599.3
+          },
+          "gas": {
+            "production": 2483.9,
+            "consumption": 4343.9
+          },
+          "oil": {
+            "production": 2475.9,
+            "consumption": 8964.1
+          }
         }
       }
     },
     "COL": {
       "name": "Colombia",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 453.8,
+            "consumption": 47.5
+          },
+          "gas": {
+            "production": 124.6,
+            "consumption": 131.2
+          },
+          "oil": {
+            "production": 479.8,
+            "consumption": 192.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 508.9,
+            "consumption": 37.7
+          },
+          "gas": {
+            "production": 125.7,
+            "consumption": 126.3
+          },
+          "oil": {
+            "production": 451.1,
+            "consumption": 227.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 533.7,
+            "consumption": 49.4
+          },
+          "gas": {
+            "production": 124.3,
+            "consumption": 125.9
+          },
+          "oil": {
+            "production": 462.1,
+            "consumption": 266.9
+          }
+        },
         "2023": {
-          "coal": { "production": 600, "consumption": 80 },
-          "gas": { "production": 120, "consumption": 130 },
-          "oil": { "production": 400, "consumption": 200 }
+          "coal": {
+            "production": 543.2,
+            "consumption": 54.3
+          },
+          "gas": {
+            "production": 120.6,
+            "consumption": 130.5
+          },
+          "oil": {
+            "production": 477.3,
+            "consumption": 254.8
+          }
         },
         "2024": {
-          "coal": { "production": 580, "consumption": 75 },
-          "gas": { "production": 115, "consumption": 128 },
-          "oil": { "production": 390, "consumption": 205 }
+          "coal": {
+            "production": 421.4,
+            "consumption": 61.6
+          },
+          "gas": {
+            "production": 111,
+            "consumption": 134.5
+          },
+          "oil": {
+            "production": 474.6,
+            "consumption": 252.6
+          }
+        }
+      }
+    },
+    "COG": {
+      "name": "Congo",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 183.2,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 162.8,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 159.8,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 165.6,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 159.3,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "HRV": {
+      "name": "Croatia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 4.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 29.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 34
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 4.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 28.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 36
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 4.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 24.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 39.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 25
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 43.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 2.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 23.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 47
+          }
+        }
+      }
+    },
+    "CYP": {
+      "name": "Cyprus",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 26.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 27.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 28.7
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 28.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 29.4
+          }
+        }
+      }
+    },
+    "CZE": {
+      "name": "Czechia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 118.7,
+            "consumption": 145.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 84.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 102.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 122.4,
+            "consumption": 150.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 90.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 113
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 132.7,
+            "consumption": 154.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 73.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 108.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 113.9,
+            "consumption": 125.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 67
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 107.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 95.8,
+            "consumption": 99.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 66.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 112.9
+          }
+        }
+      }
+    },
+    "DNK": {
+      "name": "Denmark",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.3
+          },
+          "gas": {
+            "production": 13.8,
+            "consumption": 23.2
+          },
+          "oil": {
+            "production": 40.9,
+            "consumption": 91
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 12.4
+          },
+          "gas": {
+            "production": 14.7,
+            "consumption": 23.8
+          },
+          "oil": {
+            "production": 37.6,
+            "consumption": 79.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 12.2
+          },
+          "gas": {
+            "production": 14.7,
+            "consumption": 17.1
+          },
+          "oil": {
+            "production": 37,
+            "consumption": 83.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 7.8
+          },
+          "gas": {
+            "production": 13.5,
+            "consumption": 16.2
+          },
+          "oil": {
+            "production": 34,
+            "consumption": 88.9
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 5.3
+          },
+          "gas": {
+            "production": 18.4,
+            "consumption": 16.4
+          },
+          "oil": {
+            "production": 34.4,
+            "consumption": 90.4
+          }
+        }
+      }
+    },
+    "ECU": {
+      "name": "Ecuador",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 5.9
+          },
+          "oil": {
+            "production": 299.6,
+            "consumption": 110.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 6.2
+          },
+          "oil": {
+            "production": 294.8,
+            "consumption": 137.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 5.4
+          },
+          "oil": {
+            "production": 299.8,
+            "consumption": 150.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 4.9
+          },
+          "oil": {
+            "production": 296.3,
+            "consumption": 159.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 6.3
+          },
+          "oil": {
+            "production": 297.1,
+            "consumption": 163.3
+          }
+        }
+      }
+    },
+    "EGY": {
+      "name": "Egypt",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.7
+          },
+          "gas": {
+            "production": 584.7,
+            "consumption": 583.1
+          },
+          "oil": {
+            "production": 361.3,
+            "consumption": 332.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 14.1
+          },
+          "gas": {
+            "production": 678,
+            "consumption": 621.2
+          },
+          "oil": {
+            "production": 344.3,
+            "consumption": 359.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 12.2
+          },
+          "gas": {
+            "production": 644.9,
+            "consumption": 605.9
+          },
+          "oil": {
+            "production": 349.4,
+            "consumption": 425.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 13.6
+          },
+          "gas": {
+            "production": 571,
+            "consumption": 600.4
+          },
+          "oil": {
+            "production": 345.5,
+            "consumption": 414.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 19.1
+          },
+          "gas": {
+            "production": 475.2,
+            "consumption": 597.8
+          },
+          "oil": {
+            "production": 362.2,
+            "consumption": 440.1
+          }
+        }
+      }
+    },
+    "GNQ": {
+      "name": "Equatorial Guinea",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 85.8,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 70.7,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 64.7,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 46.9,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 50.4,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "EST": {
+      "name": "Estonia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 29.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 4.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 16.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 31.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 4.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 15.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 34.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 16.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 29.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 3.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 15.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 26.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 3.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 15.3
+          }
+        }
+      }
+    },
+    "FIN": {
+      "name": "Finland",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 31.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 20.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 98.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 34
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 20.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 91.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 33.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 10.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 98.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 25.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 11.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 89
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 20.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 12.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 86.7
+          }
+        }
+      }
+    },
+    "FRA": {
+      "name": "France",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 56
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 405.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 735.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 75.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 430.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 791
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 64.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 386.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 789.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 49.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 340.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 777.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 49.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 319.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 775.7
+          }
+        }
+      }
+    },
+    "GAB": {
+      "name": "Gabon",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 120.8,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 105.2,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 110.7,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 129.6,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 130.4,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "DEU": {
+      "name": "Germany",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 271.9,
+            "consumption": 514.9
+          },
+          "gas": {
+            "production": 45.3,
+            "consumption": 871.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1223.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 320.3,
+            "consumption": 621.9
+          },
+          "gas": {
+            "production": 45.4,
+            "consumption": 917.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1209.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 331.3,
+            "consumption": 641.8
+          },
+          "gas": {
+            "production": 42.6,
+            "consumption": 755.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1242
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 254.5,
+            "consumption": 487.4
+          },
+          "gas": {
+            "production": 38.1,
+            "consumption": 728
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1165.5
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 228.8,
+            "consumption": 438.2
+          },
+          "gas": {
+            "production": 36.6,
+            "consumption": 785.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1176.5
+          }
+        }
+      }
+    },
+    "GRC": {
+      "name": "Greece",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 19,
+            "consumption": 21.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 63.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 143.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 16.7,
+            "consumption": 19.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 69.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 152
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 19.3,
+            "consumption": 18.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 62
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 172.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 15.3,
+            "consumption": 14.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 53.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 171.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 9.2,
+            "consumption": 10.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 66.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 173.3
+          }
+        }
+      }
+    },
+    "GUY": {
+      "name": "Guyana",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 43.1,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 67.7,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 160.9,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 226.5,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 357.7,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "HKG": {
+      "name": "Hong Kong",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 38.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 49.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 169.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 42.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 48.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 151.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 41.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 45.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 128.3
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 40.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 48.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 159.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 34.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 54.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 180.9
+          }
+        }
+      }
+    },
+    "HUN": {
+      "name": "Hungary",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 10.8,
+            "consumption": 19.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 101.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 89.4
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 9,
+            "consumption": 15.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 108.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 97.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 9.1,
+            "consumption": 14.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 91.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 96.3
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 7.7,
+            "consumption": 10.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 82.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 94.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 7.4,
+            "consumption": 8.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 82.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 95.4
+          }
+        }
+      }
+    },
+    "ISL": {
+      "name": "Iceland",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 7.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 8.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 10.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 10.9
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 11.3
+          }
+        }
+      }
+    },
+    "IND": {
+      "name": "India",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 3497.1,
+            "consumption": 4714.7
+          },
+          "gas": {
+            "production": 237.6,
+            "consumption": 603.6
+          },
+          "oil": {
+            "production": 408.8,
+            "consumption": 2537.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 3716.6,
+            "consumption": 5352.8
+          },
+          "gas": {
+            "production": 285.4,
+            "consumption": 623.7
+          },
+          "oil": {
+            "production": 395.4,
+            "consumption": 2588.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 4180.4,
+            "consumption": 5561.3
+          },
+          "gas": {
+            "production": 298,
+            "consumption": 582.5
+          },
+          "oil": {
+            "production": 384.1,
+            "consumption": 2804.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 4674.4,
+            "consumption": 6137.2
+          },
+          "gas": {
+            "production": 315.9,
+            "consumption": 620.3
+          },
+          "oil": {
+            "production": 378.6,
+            "consumption": 2939.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 5015.1,
+            "consumption": 6379.8
+          },
+          "gas": {
+            "production": 323.5,
+            "consumption": 702.8
+          },
+          "oil": {
+            "production": 382.5,
+            "consumption": 3028.7
+          }
+        }
+      }
+    },
+    "IDN": {
+      "name": "Indonesia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 3271.5,
+            "consumption": 765.4
+          },
+          "gas": {
+            "production": 664.4,
+            "consumption": 376.6
+          },
+          "oil": {
+            "production": 422.6,
+            "consumption": 753.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 3522.3,
+            "consumption": 763.2
+          },
+          "gas": {
+            "production": 665.5,
+            "consumption": 407.8
+          },
+          "oil": {
+            "production": 392.3,
+            "consumption": 786.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 3875.8,
+            "consumption": 1216.5
+          },
+          "gas": {
+            "production": 655,
+            "consumption": 398.3
+          },
+          "oil": {
+            "production": 366,
+            "consumption": 858.1
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 4370.6,
+            "consumption": 1199.9
+          },
+          "gas": {
+            "production": 681.4,
+            "consumption": 434.5
+          },
+          "oil": {
+            "production": 361.6,
+            "consumption": 857.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 4714.2,
+            "consumption": 1311.3
+          },
+          "gas": {
+            "production": 713.9,
+            "consumption": 472.7
+          },
+          "oil": {
+            "production": 348,
+            "consumption": 879
+          }
+        }
+      }
+    },
+    "IRN": {
+      "name": "Iran",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 21.4
+          },
+          "gas": {
+            "production": 2357.8,
+            "consumption": 2367.7
+          },
+          "oil": {
+            "production": 1713.9,
+            "consumption": 950.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 20.3
+          },
+          "gas": {
+            "production": 2428.5,
+            "consumption": 2295.3
+          },
+          "oil": {
+            "production": 1968.4,
+            "consumption": 1010.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 21.5
+          },
+          "gas": {
+            "production": 2477.1,
+            "consumption": 2394
+          },
+          "oil": {
+            "production": 2073.7,
+            "consumption": 1017
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.1
+          },
+          "gas": {
+            "production": 2597.4,
+            "consumption": 2465.8
+          },
+          "oil": {
+            "production": 2455.6,
+            "consumption": 1031.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.5
+          },
+          "gas": {
+            "production": 2629.2,
+            "consumption": 2453.9
+          },
+          "oil": {
+            "production": 2726.7,
+            "consumption": 1044.6
+          }
+        }
+      }
+    },
+    "IRQ": {
+      "name": "Iraq",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 70.1,
+            "consumption": 184.9
+          },
+          "oil": {
+            "production": 2349.7,
+            "consumption": 398
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 91.1,
+            "consumption": 164.2
+          },
+          "oil": {
+            "production": 2335.6,
+            "consumption": 444.5
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 92.9,
+            "consumption": 183.6
+          },
+          "oil": {
+            "production": 2573.8,
+            "consumption": 488.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 104.1,
+            "consumption": 192.3
+          },
+          "oil": {
+            "production": 2477.7,
+            "consumption": 521
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 119.2,
+            "consumption": 197.7
+          },
+          "oil": {
+            "production": 2507.7,
+            "consumption": 534.5
+          }
+        }
+      }
+    },
+    "IRL": {
+      "name": "Ireland",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 10.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 53.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 75
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 13.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 51
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 81.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 11
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 52
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 85.7
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 6.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 48.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 84.5
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 4.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 49.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 85.4
+          }
+        }
+      }
+    },
+    "ISR": {
+      "name": "Israel",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 50.5
+          },
+          "gas": {
+            "production": 146.7,
+            "consumption": 112.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 109.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 45.2
+          },
+          "gas": {
+            "production": 183.3,
+            "consumption": 117.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 114.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 44.4
+          },
+          "gas": {
+            "production": 208.5,
+            "consumption": 121.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 124.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 35.2
+          },
+          "gas": {
+            "production": 198,
+            "consumption": 105
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 120.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 30.8
+          },
+          "gas": {
+            "production": 214.3,
+            "consumption": 103.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 114.6
+          }
+        }
+      }
+    },
+    "ITA": {
+      "name": "Italy",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 58.9
+          },
+          "gas": {
+            "production": 39.1,
+            "consumption": 676.3
+          },
+          "oil": {
+            "production": 63.1,
+            "consumption": 595.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 65.1
+          },
+          "gas": {
+            "production": 31.8,
+            "consumption": 723.7
+          },
+          "oil": {
+            "production": 57.2,
+            "consumption": 665.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 86.4
+          },
+          "gas": {
+            "production": 31.6,
+            "consumption": 652
+          },
+          "oil": {
+            "production": 52.5,
+            "consumption": 729.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 53.6
+          },
+          "gas": {
+            "production": 28.5,
+            "consumption": 585.9
+          },
+          "oil": {
+            "production": 50.2,
+            "consumption": 714.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 27.9
+          },
+          "gas": {
+            "production": 28,
+            "consumption": 589.3
+          },
+          "oil": {
+            "production": 51.8,
+            "consumption": 712.7
+          }
+        }
+      }
+    },
+    "JPN": {
+      "name": "Japan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 5,
+            "consumption": 1270.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 1041.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1877.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 4.5,
+            "consumption": 1369.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 1027.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1911.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 4.7,
+            "consumption": 1365.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 995.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1925.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 4.5,
+            "consumption": 1260.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 916.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1882.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 3.7,
+            "consumption": 1258.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 909.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1782.9
+          }
+        }
+      }
+    },
+    "KAZ": {
+      "name": "Kazakhstan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 515.4,
+            "consumption": 379.3
+          },
+          "gas": {
+            "production": 306.1,
+            "consumption": 176.6
+          },
+          "oil": {
+            "production": 996.2,
+            "consumption": 148.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 533.3,
+            "consumption": 390
+          },
+          "gas": {
+            "production": 267,
+            "consumption": 216.2
+          },
+          "oil": {
+            "production": 998.8,
+            "consumption": 183.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 541,
+            "consumption": 391.7
+          },
+          "gas": {
+            "production": 276,
+            "consumption": 212.8
+          },
+          "oil": {
+            "production": 979.7,
+            "consumption": 180.1
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 558.4,
+            "consumption": 423.5
+          },
+          "gas": {
+            "production": 295.4,
+            "consumption": 199.5
+          },
+          "oil": {
+            "production": 1046.4,
+            "consumption": 185.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 540,
+            "consumption": 415.6
+          },
+          "gas": {
+            "production": 297.3,
+            "consumption": 207.4
+          },
+          "oil": {
+            "production": 1018.3,
+            "consumption": 192.4
+          }
+        }
+      }
+    },
+    "KWT": {
+      "name": "Kuwait",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.6
+          },
+          "gas": {
+            "production": 122.4,
+            "consumption": 179.1
+          },
+          "oil": {
+            "production": 1525.8,
+            "consumption": 239.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 120.9,
+            "consumption": 197.6
+          },
+          "oil": {
+            "production": 1511.8,
+            "consumption": 269.9
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.6
+          },
+          "gas": {
+            "production": 131.9,
+            "consumption": 216.6
+          },
+          "oil": {
+            "production": 1691.9,
+            "consumption": 251
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 147.7,
+            "consumption": 237
+          },
+          "oil": {
+            "production": 1622.5,
+            "consumption": 260.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 149.2,
+            "consumption": 246.5
+          },
+          "oil": {
+            "production": 1520.7,
+            "consumption": 277.1
+          }
+        }
+      }
+    },
+    "LVA": {
+      "name": "Latvia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 10.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 19.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 11.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 20.5
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 19.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 19.5
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 18.5
+          }
+        }
+      }
+    },
+    "LBY": {
+      "name": "Libya",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 127,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 227.9,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 152.6,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 683.3,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 145.6,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 603,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 148.3,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 673.7,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 142.6,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 648.1,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "LTU": {
+      "name": "Lithuania",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 23.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 36.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 2.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 22.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 37
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 2.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 16.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 37.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 15.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 38.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 17
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 37.4
+          }
+        }
+      }
+    },
+    "LUX": {
+      "name": "Luxembourg",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 28.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 30.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 6.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 27.8
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 5.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 26.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 27.6
+          }
+        }
+      }
+    },
+    "MYS": {
+      "name": "Malaysia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 288.1
+          },
+          "gas": {
+            "production": 730.9,
+            "consumption": 436.1
+          },
+          "oil": {
+            "production": 325.7,
+            "consumption": 382.4
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 266.3
+          },
+          "gas": {
+            "production": 789.8,
+            "consumption": 513.5
+          },
+          "oil": {
+            "production": 300.7,
+            "consumption": 371
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 274.9
+          },
+          "gas": {
+            "production": 830,
+            "consumption": 519.5
+          },
+          "oil": {
+            "production": 294.7,
+            "consumption": 450
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 285.3
+          },
+          "gas": {
+            "production": 780.1,
+            "consumption": 438.4
+          },
+          "oil": {
+            "production": 291.3,
+            "consumption": 488.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 300.7
+          },
+          "gas": {
+            "production": 803.7,
+            "consumption": 461.7
+          },
+          "oil": {
+            "production": 279.9,
+            "consumption": 499.9
+          }
+        }
+      }
+    },
+    "MEX": {
+      "name": "Mexico",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 53.4,
+            "consumption": 66.5
+          },
+          "gas": {
+            "production": 361.2,
+            "consumption": 951.1
+          },
+          "oil": {
+            "production": 1105.5,
+            "consumption": 838.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 38.2,
+            "consumption": 55.1
+          },
+          "gas": {
+            "production": 343.4,
+            "consumption": 939
+          },
+          "oil": {
+            "production": 1121.6,
+            "consumption": 956.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 38.2,
+            "consumption": 67.8
+          },
+          "gas": {
+            "production": 361.1,
+            "consumption": 933.2
+          },
+          "oil": {
+            "production": 1135.5,
+            "consumption": 1048.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 35.9,
+            "consumption": 77.3
+          },
+          "gas": {
+            "production": 385.3,
+            "consumption": 1005.2
+          },
+          "oil": {
+            "production": 1192.5,
+            "consumption": 991.9
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 35.9,
+            "consumption": 78.4
+          },
+          "gas": {
+            "production": 357.6,
+            "consumption": 1002.5
+          },
+          "oil": {
+            "production": 1120.8,
+            "consumption": 1000.7
+          }
+        }
+      }
+    },
+    "MNG": {
+      "name": "Mongolia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 228,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 171,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 208.2,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 440.4,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 563.8,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "MAR": {
+      "name": "Morocco",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 79.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 136.4
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 86
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 154.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 86.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 2.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 159.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 81
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 158.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 73.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 168.3
+          }
+        }
+      }
+    },
+    "MMR": {
+      "name": "Myanmar",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 175.1,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 171.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 168.5,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 151.5,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 147.7,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "NLD": {
+      "name": "Netherlands",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 47.8
+          },
+          "gas": {
+            "production": 200.9,
+            "consumption": 361.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 469.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 65.1
+          },
+          "gas": {
+            "production": 180.2,
+            "consumption": 348.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 470.5
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 64.3
+          },
+          "gas": {
+            "production": 149.8,
+            "consumption": 275.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 461
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 43.9
+          },
+          "gas": {
+            "production": 98.5,
+            "consumption": 259.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 463.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 48.2
+          },
+          "gas": {
+            "production": 80.7,
+            "consumption": 261.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 433
+          }
+        }
+      }
+    },
+    "NZL": {
+      "name": "New Zealand",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 19,
+            "consumption": 15.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 45.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 84.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 19.6,
+            "consumption": 18.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 39
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 83.9
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 18.3,
+            "consumption": 12.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 36.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 83
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 18.3,
+            "consumption": 11.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 38.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 88.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 17.6,
+            "consumption": 14.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 30.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 89.7
+          }
+        }
+      }
+    },
+    "NGA": {
+      "name": "Nigeria",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 494.3,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 1063.3,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 524.4,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 938.4,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 471.2,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 805.6,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 443.5,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 859.5,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 468.5,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 917.5,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "MKD": {
+      "name": "North Macedonia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 3.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 11.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 7.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 4.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 12.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 2.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 13.9
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 3.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 13.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 7.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 3.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 14
+          }
+        }
+      }
+    },
+    "NOR": {
+      "name": "Norway",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 9
+          },
+          "gas": {
+            "production": 1103.3,
+            "consumption": 43.6
+          },
+          "oil": {
+            "production": 1077.1,
+            "consumption": 102.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.8
+          },
+          "gas": {
+            "production": 1132.6,
+            "consumption": 41.7
+          },
+          "oil": {
+            "production": 1096.6,
+            "consumption": 105
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 9.4
+          },
+          "gas": {
+            "production": 1229.4,
+            "consumption": 38.8
+          },
+          "oil": {
+            "production": 1037.9,
+            "consumption": 107.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.5
+          },
+          "gas": {
+            "production": 1161.2,
+            "consumption": 37.7
+          },
+          "oil": {
+            "production": 1102.6,
+            "consumption": 108
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.8
+          },
+          "gas": {
+            "production": 1132,
+            "consumption": 33.7
+          },
+          "oil": {
+            "production": 998.8,
+            "consumption": 107.6
+          }
+        }
+      }
+    },
+    "OMN": {
+      "name": "Oman",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 369.3,
+            "consumption": 260
+          },
+          "oil": {
+            "production": 536.3,
+            "consumption": 100
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 402.5,
+            "consumption": 284.5
+          },
+          "oil": {
+            "production": 544.6,
+            "consumption": 110.7
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.4
+          },
+          "gas": {
+            "production": 421.1,
+            "consumption": 291.6
+          },
+          "oil": {
+            "production": 598.3,
+            "consumption": 126.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 431.5,
+            "consumption": 302.2
+          },
+          "oil": {
+            "production": 588.2,
+            "consumption": 126.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.4
+          },
+          "gas": {
+            "production": 453.2,
+            "consumption": 316.7
+          },
+          "oil": {
+            "production": 557.5,
+            "consumption": 123.5
+          }
+        }
+      }
+    },
+    "PAK": {
+      "name": "Pakistan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 49.9,
+            "consumption": 157.9
+          },
+          "gas": {
+            "production": 305.9,
+            "consumption": 411.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 250
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 50.6,
+            "consumption": 176.9
+          },
+          "gas": {
+            "production": 326.6,
+            "consumption": 448.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 289.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 64,
+            "consumption": 151
+          },
+          "gas": {
+            "production": 286.3,
+            "consumption": 381.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 281.9
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 90.5,
+            "consumption": 129.6
+          },
+          "gas": {
+            "production": 277.4,
+            "consumption": 378.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 223.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 99.4,
+            "consumption": 114.7
+          },
+          "gas": {
+            "production": 260.9,
+            "consumption": 370.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 229.7
+          }
         }
       }
     },
     "PER": {
       "name": "Peru",
       "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 5.9
+          },
+          "gas": {
+            "production": 132.1,
+            "consumption": 81.7
+          },
+          "oil": {
+            "production": 63.6,
+            "consumption": 107.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 7.8
+          },
+          "gas": {
+            "production": 124.3,
+            "consumption": 89.4
+          },
+          "oil": {
+            "production": 61.7,
+            "consumption": 132.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.4
+          },
+          "gas": {
+            "production": 149.6,
+            "consumption": 98.3
+          },
+          "oil": {
+            "production": 62.7,
+            "consumption": 139.4
+          }
+        },
         "2023": {
-          "coal": { "production": 5, "consumption": 15 },
-          "gas": { "production": 140, "consumption": 90 },
-          "oil": { "production": 45, "consumption": 130 }
+          "coal": {
+            "production": 0,
+            "consumption": 7.8
+          },
+          "gas": {
+            "production": 154.2,
+            "consumption": 100.5
+          },
+          "oil": {
+            "production": 59.9,
+            "consumption": 143.3
+          }
         },
         "2024": {
-          "coal": { "production": 5, "consumption": 14 },
-          "gas": { "production": 145, "consumption": 92 },
-          "oil": { "production": 43, "consumption": 135 }
+          "coal": {
+            "production": 0,
+            "consumption": 7.1
+          },
+          "gas": {
+            "production": 159.6,
+            "consumption": 113.1
+          },
+          "oil": {
+            "production": 60.7,
+            "consumption": 150.3
+          }
+        }
+      }
+    },
+    "PHL": {
+      "name": "Philippines",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 204.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 38.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 209.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 220
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 32.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 225.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 221.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 30.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 247.8
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 247.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 32
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 254.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 271.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 33.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 267.6
+          }
+        }
+      }
+    },
+    "POL": {
+      "name": "Poland",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 467.8,
+            "consumption": 478.4
+          },
+          "gas": {
+            "production": 39.3,
+            "consumption": 210.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 359.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 488.9,
+            "consumption": 529.2
+          },
+          "gas": {
+            "production": 38.8,
+            "consumption": 223.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 375.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 475.2,
+            "consumption": 495.6
+          },
+          "gas": {
+            "production": 38,
+            "consumption": 186
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 389.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 412.9,
+            "consumption": 411.3
+          },
+          "gas": {
+            "production": 36.7,
+            "consumption": 194.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 388.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 385.9,
+            "consumption": 368.9
+          },
+          "gas": {
+            "production": 35.8,
+            "consumption": 209.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 394
+          }
+        }
+      }
+    },
+    "PRT": {
+      "name": "Portugal",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 6.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 60.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 114.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 2.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 58.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 117.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 55.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 128.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 44.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 125.8
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 36.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 122.7
+          }
+        }
+      }
+    },
+    "QAT": {
+      "name": "Qatar",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 1749.3,
+            "consumption": 386
+          },
+          "oil": {
+            "production": 833,
+            "consumption": 126.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 1769.8,
+            "consumption": 403.3
+          },
+          "oil": {
+            "production": 819.2,
+            "consumption": 139.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 1784.8,
+            "consumption": 400.6
+          },
+          "oil": {
+            "production": 837.2,
+            "consumption": 163.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.1
+          },
+          "gas": {
+            "production": 1809.8,
+            "consumption": 437.9
+          },
+          "oil": {
+            "production": 864.3,
+            "consumption": 176.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.2
+          },
+          "gas": {
+            "production": 1794.5,
+            "consumption": 464.8
+          },
+          "oil": {
+            "production": 877.9,
+            "consumption": 183.4
+          }
+        }
+      }
+    },
+    "ROU": {
+      "name": "Romania",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 30.1,
+            "consumption": 41.7
+          },
+          "gas": {
+            "production": 86,
+            "consumption": 112.6
+          },
+          "oil": {
+            "production": 40.2,
+            "consumption": 116.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 35,
+            "consumption": 47.1
+          },
+          "gas": {
+            "production": 86.4,
+            "consumption": 115.7
+          },
+          "oil": {
+            "production": 38.6,
+            "consumption": 124.9
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 32.3,
+            "consumption": 42
+          },
+          "gas": {
+            "production": 87.5,
+            "consumption": 97.1
+          },
+          "oil": {
+            "production": 36.4,
+            "consumption": 126.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 26.1,
+            "consumption": 30.7
+          },
+          "gas": {
+            "production": 89,
+            "consumption": 91.2
+          },
+          "oil": {
+            "production": 34.7,
+            "consumption": 131
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 22.3,
+            "consumption": 25.3
+          },
+          "gas": {
+            "production": 89.8,
+            "consumption": 94.5
+          },
+          "oil": {
+            "production": 33.3,
+            "consumption": 137.6
+          }
+        }
+      }
+    },
+    "RUS": {
+      "name": "Russia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 2336.5,
+            "consumption": 911
+          },
+          "gas": {
+            "production": 6384.5,
+            "consumption": 4234.8
+          },
+          "oil": {
+            "production": 6098.4,
+            "consumption": 1815.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 2564.4,
+            "consumption": 947.6
+          },
+          "gas": {
+            "production": 7021.2,
+            "consumption": 4315.4
+          },
+          "oil": {
+            "production": 6266.1,
+            "consumption": 1930.5
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 2593,
+            "consumption": 1062.2
+          },
+          "gas": {
+            "production": 6183.7,
+            "consumption": 4484
+          },
+          "oil": {
+            "production": 6379.3,
+            "consumption": 1982.1
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 2554.3,
+            "consumption": 1060.1
+          },
+          "gas": {
+            "production": 5863.8,
+            "consumption": 4533.7
+          },
+          "oil": {
+            "production": 6299.3,
+            "consumption": 2077
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 2533.2,
+            "consumption": 1041.4
+          },
+          "gas": {
+            "production": 6298.6,
+            "consumption": 4770.2
+          },
+          "oil": {
+            "production": 6121.8,
+            "consumption": 2129.1
+          }
+        }
+      }
+    },
+    "SAU": {
+      "name": "Saudi Arabia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 1130.5,
+            "consumption": 1130.5
+          },
+          "oil": {
+            "production": 6042.7,
+            "consumption": 1754.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.3
+          },
+          "gas": {
+            "production": 1144.6,
+            "consumption": 1144.6
+          },
+          "oil": {
+            "production": 5989.7,
+            "consumption": 1833.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.3
+          },
+          "gas": {
+            "production": 1167.5,
+            "consumption": 1167.5
+          },
+          "oil": {
+            "production": 6665.6,
+            "consumption": 1976.1
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.5
+          },
+          "gas": {
+            "production": 1173.5,
+            "consumption": 1173.5
+          },
+          "oil": {
+            "production": 6151.2,
+            "consumption": 2013.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.7
+          },
+          "gas": {
+            "production": 1214.8,
+            "consumption": 1214.8
+          },
+          "oil": {
+            "production": 5933.3,
+            "consumption": 2048.5
+          }
+        }
+      }
+    },
+    "SRB": {
+      "name": "Serbia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 83.8,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 73.1,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 69.5,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 64,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 62.7,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "SGP": {
+      "name": "Singapore",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 126
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 779.4
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 5.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 133.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 769.9
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 4.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 130.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 755.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 3.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 123.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 859
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 3.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 129.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 914.6
+          }
+        }
+      }
+    },
+    "SVK": {
+      "name": "Slovakia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 26.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 47.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 47
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 32.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 52.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 49.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 27.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 44.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 50
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 27.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 42
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 49.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 22.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 43.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 49
+          }
+        }
+      }
+    },
+    "SVN": {
+      "name": "Slovenia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 11.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 25.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 10.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 26.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 28.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 8.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 7.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 26.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 10.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.3
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 25.9
+          }
+        }
+      }
+    },
+    "ZAF": {
+      "name": "South Africa",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 1632.5,
+            "consumption": 1022.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 39.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 274
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 1536.7,
+            "consumption": 996.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 42
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 288.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 1511.8,
+            "consumption": 938.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 42.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 287.8
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 1536,
+            "consumption": 955.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 47.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 290
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 1545.2,
+            "consumption": 976.2
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 47.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 268
+          }
+        }
+      }
+    },
+    "KOR": {
+      "name": "South Korea",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 5.6,
+            "consumption": 882.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 575.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1405.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 4.9,
+            "consumption": 909.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 624.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1499.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 4.5,
+            "consumption": 873.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 623.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1518.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 3.5,
+            "consumption": 845
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 600.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1489.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 3,
+            "consumption": 792.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 636.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 1540.2
+          }
+        }
+      }
+    },
+    "SSD": {
+      "name": "South Sudan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 94.5,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 87.4,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 80.8,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 84.6,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 49.7,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "ESP": {
+      "name": "Spain",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0.5,
+            "consumption": 34.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 324.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 591.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0.5,
+            "consumption": 37.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 343.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 654.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0.4,
+            "consumption": 43.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 329.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 726.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0.2,
+            "consumption": 30.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 294.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 697.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0.2,
+            "consumption": 27.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 283.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 740.8
+          }
+        }
+      }
+    },
+    "LKA": {
+      "name": "Sri Lanka",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 19.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 68.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 19.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 65.3
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 55.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 16.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 61.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 19.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 64.8
+          }
+        }
+      }
+    },
+    "SDN": {
+      "name": "Sudan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 36.4,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 36.7,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 35.5,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 32.9,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 21.6,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "SWE": {
+      "name": "Sweden",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 9.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 134.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 10.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 147.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 132.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.6
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 8.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 129.9
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 18.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 9.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 135.9
+          }
+        }
+      }
+    },
+    "CHE": {
+      "name": "Switzerland",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 34.1
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 102.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 28
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 102.8
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 1.1
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 37
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 105.8
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 34
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 107.3
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 34.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 107.4
+          }
+        }
+      }
+    },
+    "SYR": {
+      "name": "Syria",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 29.2,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 22.8,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 31.1,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 23.1,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 25.4,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 22.7,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 26,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 22.1,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 27.2,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 19.3,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "TWN": {
+      "name": "Taiwan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 433.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 248.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 490.9
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 465.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 272.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 519.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 439.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 280.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 478.7
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 413.9
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 279.5
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 452.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 396.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 296.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 447.9
+          }
+        }
+      }
+    },
+    "THA": {
+      "name": "Thailand",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 38.2,
+            "consumption": 212.2
+          },
+          "gas": {
+            "production": 327,
+            "consumption": 468.5
+          },
+          "oil": {
+            "production": 176,
+            "consumption": 600.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 41,
+            "consumption": 217.3
+          },
+          "gas": {
+            "production": 315.3,
+            "consumption": 470.1
+          },
+          "oil": {
+            "production": 162.2,
+            "consumption": 599.2
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 39.3,
+            "consumption": 197.7
+          },
+          "gas": {
+            "production": 253.4,
+            "consumption": 443.2
+          },
+          "oil": {
+            "production": 133.5,
+            "consumption": 643.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 36.9,
+            "consumption": 168
+          },
+          "gas": {
+            "production": 256.7,
+            "consumption": 471.7
+          },
+          "oil": {
+            "production": 130.3,
+            "consumption": 639.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 36.7,
+            "consumption": 170.6
+          },
+          "gas": {
+            "production": 285.4,
+            "consumption": 482.3
+          },
+          "oil": {
+            "production": 144.1,
+            "consumption": 659.7
+          }
+        }
+      }
+    },
+    "TTO": {
+      "name": "Trinidad and Tobago",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 294.7,
+            "consumption": 151.9
+          },
+          "oil": {
+            "production": 39.9,
+            "consumption": 17.5
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 247.2,
+            "consumption": 156.1
+          },
+          "oil": {
+            "production": 40.6,
+            "consumption": 17.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 259.8,
+            "consumption": 154.7
+          },
+          "oil": {
+            "production": 39.3,
+            "consumption": 18.3
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 249.9,
+            "consumption": 145.2
+          },
+          "oil": {
+            "production": 39.7,
+            "consumption": 18.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 244.1,
+            "consumption": 140.7
+          },
+          "oil": {
+            "production": 39.4,
+            "consumption": 19.1
+          }
+        }
+      }
+    },
+    "TUN": {
+      "name": "Tunisia",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 19.6,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 24.2,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 20.4,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 19.8,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 17.3,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "TUR": {
+      "name": "Turkey",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 182.8,
+            "consumption": 472.4
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 462.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 547.6
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 208.6,
+            "consumption": 482.3
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 572.9
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 581.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 229.3,
+            "consumption": 488.7
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 509.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 606.5
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 178.8,
+            "consumption": 465.5
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 480.8
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 645.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 207.8,
+            "consumption": 499.8
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 509.2
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 658.3
+          }
+        }
+      }
+    },
+    "TKM": {
+      "name": "Turkmenistan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 660.1,
+            "consumption": 342.5
+          },
+          "oil": {
+            "production": 121,
+            "consumption": 101.7
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 792.8,
+            "consumption": 357.9
+          },
+          "oil": {
+            "production": 113.9,
+            "consumption": 86.9
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 782.7,
+            "consumption": 375.4
+          },
+          "oil": {
+            "production": 111.3,
+            "consumption": 96.4
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 763,
+            "consumption": 353
+          },
+          "oil": {
+            "production": 105.6,
+            "consumption": 85.5
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 734.6,
+            "consumption": 285.2
+          },
+          "oil": {
+            "production": 104.8,
+            "consumption": 85.9
+          }
+        }
+      }
+    },
+    "UKR": {
+      "name": "Ukraine",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 148.3,
+            "consumption": 265.7
+          },
+          "gas": {
+            "production": 191.2,
+            "consumption": 293.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 121.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 144.2,
+            "consumption": 264.9
+          },
+          "gas": {
+            "production": 187.4,
+            "consumption": 272.6
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 123.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 123.2,
+            "consumption": 124.6
+          },
+          "gas": {
+            "production": 175.5,
+            "consumption": 182.7
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 107.3
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 119.6,
+            "consumption": 107.6
+          },
+          "gas": {
+            "production": 177,
+            "consumption": 187.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 109.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 105.6,
+            "consumption": 107.1
+          },
+          "gas": {
+            "production": 181,
+            "consumption": 199.4
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 110.5
+          }
+        }
+      }
+    },
+    "ARE": {
+      "name": "United Arab Emirates",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 24.7
+          },
+          "gas": {
+            "production": 536.9,
+            "consumption": 676.8
+          },
+          "oil": {
+            "production": 1941.4,
+            "consumption": 465.2
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 30.2
+          },
+          "gas": {
+            "production": 531.2,
+            "consumption": 653.2
+          },
+          "oil": {
+            "production": 1930.5,
+            "consumption": 514.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 27.9
+          },
+          "gas": {
+            "production": 541.9,
+            "consumption": 664.2
+          },
+          "oil": {
+            "production": 2157.3,
+            "consumption": 590.3
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 28.4
+          },
+          "gas": {
+            "production": 552.7,
+            "consumption": 670.1
+          },
+          "oil": {
+            "production": 2096.1,
+            "consumption": 610.7
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 30.6
+          },
+          "gas": {
+            "production": 614,
+            "consumption": 713.4
+          },
+          "oil": {
+            "production": 2090.5,
+            "consumption": 636.6
+          }
+        }
+      }
+    },
+    "GBR": {
+      "name": "United Kingdom",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 12.8,
+            "consumption": 62.8
+          },
+          "gas": {
+            "production": 395.7,
+            "consumption": 734.6
+          },
+          "oil": {
+            "production": 569.7,
+            "consumption": 667
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 8.1,
+            "consumption": 64.3
+          },
+          "gas": {
+            "production": 327.9,
+            "consumption": 769.5
+          },
+          "oil": {
+            "production": 475.2,
+            "consumption": 681
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 5,
+            "consumption": 59.3
+          },
+          "gas": {
+            "production": 381.2,
+            "consumption": 704.9
+          },
+          "oil": {
+            "production": 439.1,
+            "consumption": 730.2
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 4,
+            "consumption": 51
+          },
+          "gas": {
+            "production": 344.9,
+            "consumption": 636.2
+          },
+          "oil": {
+            "production": 389,
+            "consumption": 741.4
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0.8,
+            "consumption": 47
+          },
+          "gas": {
+            "production": 307.2,
+            "consumption": 618.6
+          },
+          "oil": {
+            "production": 353.5,
+            "consumption": 744.2
+          }
+        }
+      }
+    },
+    "USA": {
+      "name": "United States",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 2980,
+            "consumption": 2556.2
+          },
+          "gas": {
+            "production": 9248.1,
+            "consumption": 8353.2
+          },
+          "oil": {
+            "production": 8298.5,
+            "consumption": 9035.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 3228.6,
+            "consumption": 2936.9
+          },
+          "gas": {
+            "production": 9444.6,
+            "consumption": 8364.2
+          },
+          "oil": {
+            "production": 8349.5,
+            "consumption": 9869
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 3353,
+            "consumption": 2753
+          },
+          "gas": {
+            "production": 9907,
+            "consumption": 8804.1
+          },
+          "oil": {
+            "production": 8910.4,
+            "consumption": 9930.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 3272,
+            "consumption": 2275.2
+          },
+          "gas": {
+            "production": 10330.1,
+            "consumption": 8884.4
+          },
+          "oil": {
+            "production": 9647.6,
+            "consumption": 9967.9
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 2947.8,
+            "consumption": 2195.6
+          },
+          "gas": {
+            "production": 10330,
+            "consumption": 9022
+          },
+          "oil": {
+            "production": 9977.4,
+            "consumption": 9949
+          }
+        }
+      }
+    },
+    "UZB": {
+      "name": "Uzbekistan",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 13.8,
+            "consumption": 28.7
+          },
+          "gas": {
+            "production": 471,
+            "consumption": 436.3
+          },
+          "oil": {
+            "production": 23.6,
+            "consumption": 61.8
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 16.7,
+            "consumption": 25.8
+          },
+          "gas": {
+            "production": 509.2,
+            "consumption": 474.3
+          },
+          "oil": {
+            "production": 24.4,
+            "consumption": 62.6
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 17.6,
+            "consumption": 29.7
+          },
+          "gas": {
+            "production": 489.1,
+            "consumption": 482.2
+          },
+          "oil": {
+            "production": 24.1,
+            "consumption": 65.6
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 21.6,
+            "consumption": 45.2
+          },
+          "gas": {
+            "production": 442.1,
+            "consumption": 469.3
+          },
+          "oil": {
+            "production": 23,
+            "consumption": 66.2
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 24.8,
+            "consumption": 49.3
+          },
+          "gas": {
+            "production": 422.1,
+            "consumption": 546
+          },
+          "oil": {
+            "production": 22.4,
+            "consumption": 66.6
+          }
+        }
+      }
+    },
+    "VEN": {
+      "name": "Venezuela",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 2.4,
+            "consumption": 0.6
+          },
+          "gas": {
+            "production": 215.6,
+            "consumption": 215.6
+          },
+          "oil": {
+            "production": 400.6,
+            "consumption": 135.1
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 1.4,
+            "consumption": 0.6
+          },
+          "gas": {
+            "production": 280.6,
+            "consumption": 280.6
+          },
+          "oil": {
+            "production": 393.7,
+            "consumption": 145.4
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 1.4,
+            "consumption": 1.9
+          },
+          "gas": {
+            "production": 290.6,
+            "consumption": 290.6
+          },
+          "oil": {
+            "production": 431.6,
+            "consumption": 175
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 1.7,
+            "consumption": 2.3
+          },
+          "gas": {
+            "production": 296.8,
+            "consumption": 296.8
+          },
+          "oil": {
+            "production": 503.1,
+            "consumption": 211.6
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 1.8,
+            "consumption": 2.5
+          },
+          "gas": {
+            "production": 317.3,
+            "consumption": 317.3
+          },
+          "oil": {
+            "production": 576,
+            "consumption": 190.1
+          }
+        }
+      }
+    },
+    "VNM": {
+      "name": "Vietnam",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 290.5,
+            "consumption": 609.7
+          },
+          "gas": {
+            "production": 88.4,
+            "consumption": 88.4
+          },
+          "oil": {
+            "production": 116.6,
+            "consumption": 307.3
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 314.7,
+            "consumption": 579.2
+          },
+          "gas": {
+            "production": 72,
+            "consumption": 72
+          },
+          "oil": {
+            "production": 110,
+            "consumption": 288.1
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 324.7,
+            "consumption": 536.3
+          },
+          "gas": {
+            "production": 78,
+            "consumption": 78
+          },
+          "oil": {
+            "production": 108.6,
+            "consumption": 337.1
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 307.8,
+            "consumption": 632.7
+          },
+          "gas": {
+            "production": 72.1,
+            "consumption": 72.1
+          },
+          "oil": {
+            "production": 105.2,
+            "consumption": 362.1
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 285.4,
+            "consumption": 693.4
+          },
+          "gas": {
+            "production": 61,
+            "consumption": 61
+          },
+          "oil": {
+            "production": 98.9,
+            "consumption": 389
+          }
+        }
+      }
+    },
+    "YEM": {
+      "name": "Yemen",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 43.8,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 40.7,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 35.7,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 22.3,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 0,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 20.7,
+            "consumption": 0
+          }
+        }
+      }
+    },
+    "ZWE": {
+      "name": "Zimbabwe",
+      "years": {
+        "2020": {
+          "coal": {
+            "production": 20.3,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2021": {
+          "coal": {
+            "production": 24.3,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2022": {
+          "coal": {
+            "production": 29.6,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2023": {
+          "coal": {
+            "production": 37.4,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
+        },
+        "2024": {
+          "coal": {
+            "production": 43.5,
+            "consumption": 0
+          },
+          "gas": {
+            "production": 0,
+            "consumption": 0
+          },
+          "oil": {
+            "production": 0,
+            "consumption": 0
+          }
         }
       }
     }
