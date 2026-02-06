@@ -5,15 +5,16 @@ import Link from 'next/link';
 import {
   loadCountries,
   loadBlocs,
+  loadFossilFuelData,
   getCountriesInBloc,
   getLatestYear,
   aggregateBloc,
   blocAggToYearData,
 } from '@/lib/data';
 import type { BlocAggregates } from '@/lib/data';
-import type { CountriesData, BlocsData, YearData } from '@/lib/types';
+import type { CountriesData, BlocsData, YearData, FossilFuelData, FossilFuelYearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScore, formatIndependenceScore } from '@/lib/independence';
+import { calculateIndependenceScoreV2, formatIndependenceScore } from '@/lib/independence';
 import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
@@ -171,6 +172,7 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
 export default function ComparePage() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
+  const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
   const [year, setYear] = useState<number>(2025);
 
@@ -180,10 +182,11 @@ export default function ComparePage() {
   const [idB, setIdB] = useState<string>('');
 
   useEffect(() => {
-    Promise.all([loadCountries(), loadBlocs()])
-      .then(([countriesData, blocsData]) => {
+    Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
+      .then(([countriesData, blocsData, fossilData]) => {
         setCountries(countriesData);
         setBlocs(blocsData);
+        setFossilFuelData(fossilData);
         setYear(getLatestYear(countriesData));
         setLoading(false);
       })
@@ -318,8 +321,14 @@ export default function ComparePage() {
               />
               <ComparisonBar
                 label="Energy Independence"
-                valueA={calculateIndependenceScore(resolvedA.yearData)?.score ?? 0}
-                valueB={calculateIndependenceScore(resolvedB.yearData)?.score ?? 0}
+                valueA={calculateIndependenceScoreV2(
+                  resolvedA.yearData,
+                  resolvedA.iso3 ? fossilFuelData?.countries[resolvedA.iso3]?.years[year.toString()] ?? null : null
+                )?.score ?? 0}
+                valueB={calculateIndependenceScoreV2(
+                  resolvedB.yearData,
+                  resolvedB.iso3 ? fossilFuelData?.countries[resolvedB.iso3]?.years[year.toString()] ?? null : null
+                )?.score ?? 0}
                 formatFn={formatIndependenceScore}
               />
               <ComparisonBar

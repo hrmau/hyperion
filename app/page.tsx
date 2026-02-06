@@ -10,16 +10,18 @@ import DarkModeToggle from '@/components/DarkModeToggle';
 import {
   loadCountries,
   loadBlocs,
+  loadFossilFuelData,
   getCountriesInBloc,
   getLatestYear,
   aggregateBloc,
   blocAggToYearData,
 } from '@/lib/data';
-import type { CountriesData, BlocsData, Country } from '@/lib/types';
+import type { CountriesData, BlocsData, Country, FossilFuelData } from '@/lib/types';
 
 export default function Home() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
+  const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
@@ -28,10 +30,11 @@ export default function Home() {
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    Promise.all([loadCountries(), loadBlocs()])
-      .then(([countriesData, blocsData]) => {
+    Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
+      .then(([countriesData, blocsData, fossilData]) => {
         setCountries(countriesData);
         setBlocs(blocsData);
+        setFossilFuelData(fossilData);
         setSelectedYear(getLatestYear(countriesData));
         setLoading(false);
       })
@@ -173,6 +176,7 @@ export default function Home() {
               selectedBloc={selectedBloc}
               blocAgg={blocAgg}
               blocYearData={blocYearData}
+              fossilFuelData={fossilFuelData}
             />
           </div>
         </div>

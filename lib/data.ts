@@ -1,7 +1,8 @@
-import type { CountriesData, BlocsData, Country, YearData, EnergySource } from './types';
+import type { CountriesData, BlocsData, Country, YearData, EnergySource, FossilFuelData } from './types';
 
 let countriesCache: CountriesData | null = null;
 let blocsCache: BlocsData | null = null;
+let fossilFuelCache: FossilFuelData | null = null;
 
 export async function loadCountries(): Promise<CountriesData> {
   if (countriesCache) return countriesCache;
@@ -17,6 +18,14 @@ export async function loadBlocs(): Promise<BlocsData> {
   const res = await fetch('/data/blocs.json');
   blocsCache = await res.json();
   return blocsCache!;
+}
+
+export async function loadFossilFuelData(): Promise<FossilFuelData> {
+  if (fossilFuelCache) return fossilFuelCache;
+
+  const res = await fetch('/data/fossil-fuel-independence.json');
+  fossilFuelCache = await res.json();
+  return fossilFuelCache!;
 }
 
 const emberBlocs = ['EU', 'OECD', 'G20', 'G7', 'ASEAN'];
