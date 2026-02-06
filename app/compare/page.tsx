@@ -14,7 +14,7 @@ import {
 import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData, FossilFuelData, FossilFuelYearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScoreV2, formatIndependenceScore } from '@/lib/independence';
+import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
@@ -323,11 +323,11 @@ export default function ComparePage() {
                 label="Energy Independence"
                 valueA={calculateIndependenceScoreV2(
                   resolvedA.yearData,
-                  resolvedA.iso3 ? fossilFuelData?.countries[resolvedA.iso3]?.years[year.toString()] ?? null : null
+                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data : null
                 )?.score ?? 0}
                 valueB={calculateIndependenceScoreV2(
                   resolvedB.yearData,
-                  resolvedB.iso3 ? fossilFuelData?.countries[resolvedB.iso3]?.years[year.toString()] ?? null : null
+                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data : null
                 )?.score ?? 0}
                 formatFn={formatIndependenceScore}
               />

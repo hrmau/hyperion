@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { loadCountries, loadFossilFuelData, getLatestYear } from '@/lib/data';
 import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
-import { calculateIndependenceScoreV2, formatIndependenceScore } from '@/lib/independence';
+import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
 import DarkModeToggle from '@/components/DarkModeToggle';
 
@@ -145,7 +145,7 @@ export default function RankingsPage() {
       .map((c): RowData | null => {
         const yd = c.years[year.toString()];
         if (!yd) return null;
-        const fossilYear = fossilFuelData?.countries[c.iso3]?.years[year.toString()] || null;
+        const { data: fossilYear } = getFossilDataForYear(fossilFuelData?.countries[c.iso3], year);
         const indep = calculateIndependenceScoreV2(yd, fossilYear);
         return {
           country: c,
