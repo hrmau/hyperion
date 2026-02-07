@@ -97,7 +97,7 @@ export default function WhyEnergyMattersPage() {
               Hyperion
             </Link>
           </div>
-          <Navigation />
+          <Navigation currentPage="why" />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>
