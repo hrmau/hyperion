@@ -52,7 +52,7 @@ export interface IndependenceScore {
   band: 'fortress' | 'strong' | 'moderate' | 'dependent' | 'critical';
   label: string;
   color: string;
-  // V2 detailed breakdown
+  // Detailed breakdown
   breakdown: {
     renewable: { twh: number; pct: number; contribution: number };
     nuclear: { twh: number; pct: number; independence: number; contribution: number };
@@ -111,9 +111,9 @@ export function getFossilDataForYear(
 }
 
 /**
- * Calculate Energy Independence Score v2
+ * Calculate Energy Independence Score
  *
- * This version accounts for fuel import dependency:
+ * Accounts for fuel import dependency:
  * - Renewables are 100% domestic (independent)
  * - Nuclear is weighted by uranium production/consumption ratio
  * - Fossil fuels are weighted by production/consumption ratio

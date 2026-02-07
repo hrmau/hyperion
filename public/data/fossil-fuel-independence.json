@@ -1,5 +1,5 @@
 {
-  "description": "Fossil fuel production and consumption data for calculating energy independence scores (v2). Data from Our World in Data Energy Dataset.",
+  "description": "Fossil fuel production and consumption data for calculating energy independence scores. Data from Our World in Data Energy Dataset.",
   "source": "Our World in Data (owid-energy-data)",
   "license": "CC BY 4.0",
   "lastUpdated": "2024",

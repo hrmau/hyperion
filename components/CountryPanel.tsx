@@ -35,7 +35,7 @@ function StatRow({ label, value }: { label: string; value: string }) {
 }
 
 function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
-  const barWidth = Math.min(score.score, 100); // Max 100% for v2
+  const barWidth = Math.min(score.score, 100); // Max 100%
 
   return (
     <div className="bg-inset rounded-lg p-3 space-y-3">
