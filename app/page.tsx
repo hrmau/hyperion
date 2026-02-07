@@ -105,7 +105,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas flex flex-col">
       <header className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
@@ -153,7 +153,7 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="max-w-[1800px] mx-auto p-4">
+      <main className="flex-1 max-w-[1800px] mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="card flex-1 p-3">
             <div className="aspect-[16/9] lg:aspect-[2/1]">

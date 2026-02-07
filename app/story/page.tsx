@@ -242,7 +242,7 @@ export default function StoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas flex flex-col">
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
@@ -296,7 +296,7 @@ export default function StoryPage() {
         ))}
       </div>
 
-      <main className="pt-16">
+      <main className="flex-1 pt-16">
         {chapters.map((chapter, i) => (
           <section
             key={chapter.id}

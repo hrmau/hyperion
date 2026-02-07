@@ -192,7 +192,7 @@ export default function RankingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas flex flex-col">
       <header className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
@@ -225,7 +225,7 @@ export default function RankingsPage() {
         </div>
       </header>
 
-      <main className="max-w-[1400px] mx-auto px-4 py-6">
+      <main className="flex-1 max-w-[1400px] mx-auto px-4 py-6">
         <div className="card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
