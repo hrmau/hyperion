@@ -43,3 +43,25 @@ export const choroColors = [
   '#1D4ED8', // blue-700
   '#1E3A8A', // blue-900
 ];
+
+// Independence score scale — green gradient (higher = more independent = greener)
+export const independenceColors = [
+  '#FEE2E2', // red-100 — critical dependency
+  '#FED7AA', // orange-200 — dependent
+  '#FEF08A', // yellow-200 — moderate
+  '#BBF7D0', // green-200 — strong
+  '#86EFAC', // green-300 — very strong
+  '#22C55E', // green-500 — fortress
+];
+
+// Clean energy scale — green gradient (higher = cleaner = greener)
+export const cleanEnergyColors = [
+  '#FEE2E2', // red-100 — very dirty
+  '#FED7AA', // orange-200 — dirty
+  '#FEF08A', // yellow-200 — mixed
+  '#BBF7D0', // green-200 — mostly clean
+  '#86EFAC', // green-300 — very clean
+  '#22C55E', // green-500 — ultra clean
+];
+
+export type MapColorMode = 'production' | 'independence' | 'clean';
