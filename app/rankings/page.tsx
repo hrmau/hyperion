@@ -1,14 +1,12 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import Link from 'next/link';
 import { loadCountries, loadFossilFuelData, getLatestYear } from '@/lib/data';
 import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
-import DarkModeToggle from '@/components/DarkModeToggle';
-import Navigation from '@/components/Navigation';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 type SortKey =
@@ -194,24 +192,7 @@ export default function RankingsPage() {
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <header className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
-          <div className="flex-1">
-            <Link href="/">
-              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-                Hyperion
-              </h1>
-            </Link>
-            <p className="text-[11px] text-muted">
-              <span className="text-secondary">Global electricity explorer</span> &middot; {sorted.length} countries &middot; {year}
-            </p>
-          </div>
-          <Navigation currentPage="rankings" />
-          <div className="flex-1 flex justify-end">
-            <DarkModeToggle />
-          </div>
-        </div>
-      </header>
+      <Header currentPage="rankings" />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6">
         <div className="card overflow-hidden">

@@ -1,14 +1,12 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import Link from 'next/link';
 import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
 import MapModeSelector from '@/components/MapModeSelector';
-import DarkModeToggle from '@/components/DarkModeToggle';
-import Navigation from '@/components/Navigation';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import type { MapColorMode } from '@/lib/colors';
 import {
@@ -110,24 +108,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <header className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
-          <div className="flex-1">
-            <Link href="/">
-              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-                Hyperion
-              </h1>
-            </Link>
-            <p className="text-[11px] text-muted">
-              <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; {selectedYear}
-            </p>
-          </div>
-          <Navigation currentPage="explore" />
-          <div className="flex-1 flex justify-end">
-            <DarkModeToggle />
-          </div>
-        </div>
-      </header>
+      <Header currentPage="explore" />
 
       <div className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">

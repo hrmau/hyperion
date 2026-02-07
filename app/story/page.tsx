@@ -6,8 +6,7 @@ import { loadCountries, getLatestYear } from '@/lib/data';
 import type { CountriesData, Country } from '@/lib/types';
 import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
-import DarkModeToggle from '@/components/DarkModeToggle';
-import Navigation from '@/components/Navigation';
+import Header from '@/components/Header';
 import FlagImg from '@/components/FlagImg';
 import Footer from '@/components/Footer';
 
@@ -244,24 +243,7 @@ export default function StoryPage() {
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
-          <div className="flex-1">
-            <Link href="/">
-              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-                Hyperion
-              </h1>
-            </Link>
-            <p className="text-[11px] text-muted">
-              <span className="text-secondary">The Energy Story</span>
-            </p>
-          </div>
-          <Navigation currentPage="story" />
-          <div className="flex-1 flex justify-end">
-            <DarkModeToggle />
-          </div>
-        </div>
-      </header>
+      <Header currentPage="story" fixed />
 
       {/* Progress indicator */}
       <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1">
