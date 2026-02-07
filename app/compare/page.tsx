@@ -246,6 +246,12 @@ export default function ComparePage() {
             >
               Story
             </Link>
+            <Link
+              href="/methodology"
+              className="text-sm text-muted hover:text-primary transition-colors"
+            >
+              Methodology
+            </Link>
           </nav>
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
