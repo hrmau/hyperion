@@ -253,7 +253,7 @@ export default function ComparePage() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-3xl mx-auto px-4 py-6 space-y-6">
+      <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-6 space-y-6">
         <div>
           <div className="text-[11px] text-muted uppercase tracking-wider mb-3">
             Locations to compare
