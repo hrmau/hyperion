@@ -49,11 +49,11 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm">
               <li>
-                <strong className="text-primary">Ember Climate</strong> — Electricity generation data,
+                <strong className="text-primary">Ember Climate</strong> - Electricity generation data,
                 licensed under CC BY 4.0
               </li>
               <li>
-                <strong className="text-primary">Our World in Data</strong> — Fossil fuel production
+                <strong className="text-primary">Our World in Data</strong> - Fossil fuel production
                 and consumption data, licensed under CC BY 4.0
               </li>
             </ul>
