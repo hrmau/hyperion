@@ -1,8 +1,9 @@
-import type { CountriesData, BlocsData, Country, YearData, EnergySource, FossilFuelData } from './types';
+import type { CountriesData, BlocsData, Country, YearData, EnergySource, FossilFuelData, SocioeconomicData, CorrelationDataPoint } from './types';
 
 let countriesCache: CountriesData | null = null;
 let blocsCache: BlocsData | null = null;
 let fossilFuelCache: FossilFuelData | null = null;
+let socioeconomicCache: SocioeconomicData | null = null;
 
 export async function loadCountries(): Promise<CountriesData> {
   if (countriesCache) return countriesCache;
@@ -26,6 +27,56 @@ export async function loadFossilFuelData(): Promise<FossilFuelData> {
   const res = await fetch('/data/fossil-fuel-independence.json');
   fossilFuelCache = await res.json();
   return fossilFuelCache!;
+}
+
+export async function loadSocioeconomicData(): Promise<SocioeconomicData> {
+  if (socioeconomicCache) return socioeconomicCache;
+
+  const res = await fetch('/data/socioeconomic.json');
+  socioeconomicCache = await res.json();
+  return socioeconomicCache!;
+}
+
+/**
+ * Combine electricity and socioeconomic data for correlation analysis.
+ * Returns data points with electricity per capita calculated from total TWh and population.
+ */
+export function getCorrelationData(
+  countries: CountriesData,
+  socioeconomic: SocioeconomicData,
+  year: number
+): CorrelationDataPoint[] {
+  const yearStr = year.toString();
+  const result: CorrelationDataPoint[] = [];
+
+  for (const [iso3, country] of Object.entries(countries)) {
+    const yearData = country.years[yearStr];
+    const socioData = socioeconomic.countries[iso3];
+
+    if (!yearData || !socioData) continue;
+
+    // Calculate electricity per capita in kWh/person/year
+    // total_generation_twh * 1,000,000 (to MWh) * 1,000 (to kWh) / (population_millions * 1,000,000)
+    // Simplifies to: total_generation_twh * 1,000,000 / population_millions
+    const electricity_per_capita_kwh =
+      (yearData.total_generation_twh * 1_000_000) / socioData.population_millions;
+
+    result.push({
+      iso3,
+      name: country.name,
+      region: socioData.region,
+      income_level: socioData.income_level,
+      population_millions: socioData.population_millions,
+      electricity_per_capita_kwh,
+      gdp_per_capita_ppp: socioData.gdp_per_capita_ppp,
+      hdi: socioData.hdi,
+      life_expectancy: socioData.life_expectancy,
+      manufacturing_per_capita: socioData.manufacturing_per_capita,
+      clean_pct: yearData.aggregates.clean_pct,
+    });
+  }
+
+  return result;
 }
 
 const emberBlocs = ['EU', 'OECD', 'G20', 'G7', 'ASEAN'];

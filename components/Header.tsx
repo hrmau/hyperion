@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Navigation from './Navigation';
 import DarkModeToggle from './DarkModeToggle';
 
-type NavItem = 'explore' | 'compare' | 'rankings' | 'story' | 'why' | 'methodology';
+type NavItem = 'explore' | 'compare' | 'rankings' | 'correlations' | 'story' | 'why' | 'methodology';
 
 interface HeaderProps {
   currentPage?: NavItem;

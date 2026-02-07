@@ -86,3 +86,46 @@ export interface FossilFuelData {
   lastUpdated: string;
   countries: Record<string, FossilFuelCountry>;
 }
+
+// Socioeconomic data types for correlation analysis
+export type IncomeLevel = 'low' | 'lower-middle' | 'upper-middle' | 'high';
+export type Region = 'Africa' | 'Americas' | 'Asia' | 'Europe' | 'Oceania';
+
+export interface SocioeconomicCountry {
+  name: string;
+  population_millions: number;
+  gdp_per_capita_ppp: number;
+  hdi: number;
+  life_expectancy: number;
+  manufacturing_per_capita: number;
+  income_level: IncomeLevel;
+  region: Region;
+}
+
+export interface SocioeconomicData {
+  description: string;
+  sources: {
+    population: string;
+    gdp_per_capita: string;
+    hdi: string;
+    life_expectancy: string;
+    manufacturing_per_capita: string;
+  };
+  license: string;
+  countries: Record<string, SocioeconomicCountry>;
+}
+
+// Combined data for scatter plots
+export interface CorrelationDataPoint {
+  iso3: string;
+  name: string;
+  region: Region;
+  income_level: IncomeLevel;
+  population_millions: number;
+  electricity_per_capita_kwh: number;
+  gdp_per_capita_ppp: number;
+  hdi: number;
+  life_expectancy: number;
+  manufacturing_per_capita: number;
+  clean_pct: number;
+}

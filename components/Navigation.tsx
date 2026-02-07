@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-type NavItem = 'explore' | 'compare' | 'rankings' | 'story' | 'why' | 'methodology';
+type NavItem = 'explore' | 'compare' | 'rankings' | 'correlations' | 'story' | 'why' | 'methodology';
 
 interface NavigationProps {
   currentPage?: NavItem;
@@ -12,6 +12,7 @@ const navItems: { key: NavItem; label: string; href: string }[] = [
   { key: 'explore', label: 'Explore', href: '/' },
   { key: 'compare', label: 'Compare', href: '/compare' },
   { key: 'rankings', label: 'Rankings', href: '/rankings' },
+  { key: 'correlations', label: 'Correlations', href: '/correlations' },
   { key: 'story', label: 'Story', href: '/story' },
   { key: 'why', label: 'Why', href: '/why' },
   { key: 'methodology', label: 'Methodology', href: '/methodology' },
