@@ -4,8 +4,9 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import type { Topology, GeometryCollection } from 'topojson-specification';
-import type { CountriesData, Country } from '@/lib/types';
-import { createChoroplethScale } from '@/lib/scales';
+import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
+import type { MapColorMode } from '@/lib/colors';
+import { createScaleForMode, getCountryValueForMode } from '@/lib/scales';
 
 interface WorldMapProps {
   countries: CountriesData;
@@ -15,6 +16,8 @@ interface WorldMapProps {
   onHover: (country: Country | null, event: MouseEvent | null) => void;
   onClick: (country: Country | null) => void;
   selectedCountry: Country | null;
+  mapMode: MapColorMode;
+  fossilFuelData: FossilFuelData | null;
 }
 
 // Complete ISO numeric → ISO3 mapping for all 88 data countries
@@ -58,6 +61,8 @@ export default function WorldMap({
   onHover,
   onClick,
   selectedCountry,
+  mapMode,
+  fossilFuelData,
 }: WorldMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [worldData, setWorldData] = useState<Topology | null>(null);
@@ -113,7 +118,7 @@ export default function WorldMap({
 
     const path = d3.geoPath().projection(projection);
 
-    const colorScale = createChoroplethScale(countries, year);
+    const colorScale = createScaleForMode(countries, year, mapMode);
 
     const geomCollection = worldData.objects.countries as GeometryCollection;
     const features = topojson.feature(worldData, geomCollection).features;
@@ -133,16 +138,16 @@ export default function WorldMap({
       .attr('d', path as never)
       .attr('fill', (d) => {
         const iso3 = getIso3(d.id);
-        const country = iso3 ? countries[iso3] : undefined;
-        const yearData = country?.years[year.toString()];
+        if (!iso3) return noDataColor;
 
-        if (!yearData) return noDataColor;
+        const value = getCountryValueForMode(iso3, countries, year, mapMode, fossilFuelData);
+        if (value === null) return noDataColor;
 
-        if (selectedBloc !== 'ALL' && iso3 && !blocCountryIds.has(iso3)) {
+        if (selectedBloc !== 'ALL' && !blocCountryIds.has(iso3)) {
           return noDataColor;
         }
 
-        return colorScale(yearData.total_generation_twh);
+        return colorScale(value);
       })
       .attr('stroke', 'none')
       .attr('cursor', (d) => {
@@ -188,7 +193,7 @@ export default function WorldMap({
       }
     }
 
-  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark]);
+  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark, mapMode, fossilFuelData]);
 
   return (
     <svg

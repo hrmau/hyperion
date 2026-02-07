@@ -6,8 +6,10 @@ import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
+import MapModeSelector from '@/components/MapModeSelector';
 import DarkModeToggle from '@/components/DarkModeToggle';
 import Footer from '@/components/Footer';
+import type { MapColorMode } from '@/lib/colors';
 import {
   loadCountries,
   loadBlocs,
@@ -26,6 +28,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
+  const [mapMode, setMapMode] = useState<MapColorMode>('production');
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<Country | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
@@ -154,8 +157,9 @@ export default function Home() {
       </header>
 
       <div className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3">
+        <div className="max-w-[1800px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
           <BlocSelector selected={selectedBloc} onChange={handleBlocChange} />
+          <MapModeSelector selected={mapMode} onChange={setMapMode} />
         </div>
       </div>
 
@@ -171,6 +175,8 @@ export default function Home() {
                 onHover={handleHover}
                 onClick={handleClick}
                 selectedCountry={selectedCountry}
+                mapMode={mapMode}
+                fossilFuelData={fossilFuelData}
               />
             </div>
           </div>
