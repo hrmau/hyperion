@@ -147,7 +147,7 @@ export default function RankingsPage() {
         const yd = c.years[year.toString()];
         if (!yd) return null;
         const { data: fossilYear } = getFossilDataForYear(fossilFuelData?.countries[c.iso3], year);
-        const indep = calculateIndependenceScoreV2(yd, fossilYear);
+        const indep = calculateIndependenceScoreV2(yd, fossilYear, c.iso3);
         return {
           country: c,
           total_generation_twh: yd.total_generation_twh,

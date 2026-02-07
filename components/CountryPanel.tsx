@@ -73,8 +73,8 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
             label="Nuclear"
             pct={score.breakdown.nuclear.pct}
             contribution={score.breakdown.nuclear.contribution}
+            independence={score.breakdown.nuclear.independence}
             color="#8B5CF6"
-            isIndependent
           />
           {score.breakdown.coal.pct > 0.5 && (
             <BreakdownRow
@@ -182,7 +182,7 @@ function CountryDetail({ country, yearData, year, fossilFuelData }: {
     fossilFuelData?.countries[country.iso3],
     year
   );
-  const score = calculateIndependenceScoreV2(yearData, fossilYear);
+  const score = calculateIndependenceScoreV2(yearData, fossilYear, country.iso3);
 
   return (
     <div className="space-y-5">
