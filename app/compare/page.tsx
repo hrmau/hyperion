@@ -217,9 +217,11 @@ export default function ComparePage() {
       <header className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
-            <h1 className="text-base font-medium text-primary tracking-tight">
-              Hyperion
-            </h1>
+            <Link href="/">
+              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
+                Hyperion
+              </h1>
+            </Link>
             <p className="text-[11px] text-muted"><span className="text-secondary">Global electricity explorer</span> &middot; {year}</p>
           </div>
           <nav className="flex items-center gap-5">
