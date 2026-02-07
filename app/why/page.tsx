@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 interface CollapsibleSectionProps {
@@ -96,26 +97,7 @@ export default function WhyEnergyMattersPage() {
               Hyperion
             </Link>
           </div>
-          <nav className="flex items-center gap-5">
-            <Link href="/" className="text-sm text-muted hover:text-primary transition-colors">
-              Explore
-            </Link>
-            <Link href="/compare" className="text-sm text-muted hover:text-primary transition-colors">
-              Compare
-            </Link>
-            <Link href="/rankings" className="text-sm text-muted hover:text-primary transition-colors">
-              Rankings
-            </Link>
-            <Link href="/story" className="text-sm text-muted hover:text-primary transition-colors">
-              Story
-            </Link>
-            <span className="text-sm font-medium text-primary">
-              Why Energy Matters
-            </span>
-            <Link href="/methodology" className="text-sm text-muted hover:text-primary transition-colors">
-              Methodology
-            </Link>
-          </nav>
+          <Navigation />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>

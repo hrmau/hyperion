@@ -8,6 +8,7 @@ import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
 import MapModeSelector from '@/components/MapModeSelector';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import type { MapColorMode } from '@/lib/colors';
 import {
@@ -121,35 +122,7 @@ export default function Home() {
               <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; {selectedYear}
             </p>
           </div>
-          <nav className="flex items-center gap-5">
-            <span className="text-sm font-medium text-primary">
-              Explore
-            </span>
-            <Link
-              href="/compare"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Compare
-            </Link>
-            <Link
-              href="/rankings"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Rankings
-            </Link>
-            <Link
-              href="/story"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Story
-            </Link>
-            <Link
-              href="/methodology"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Methodology
-            </Link>
-          </nav>
+          <Navigation currentPage="explore" />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>

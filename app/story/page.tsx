@@ -7,6 +7,7 @@ import type { CountriesData, Country } from '@/lib/types';
 import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Navigation from '@/components/Navigation';
 import FlagImg from '@/components/FlagImg';
 import Footer from '@/components/Footer';
 
@@ -255,23 +256,7 @@ export default function StoryPage() {
               <span className="text-secondary">The Energy Story</span>
             </p>
           </div>
-          <nav className="flex items-center gap-5">
-            <Link href="/" className="text-sm text-muted hover:text-primary transition-colors">
-              Explore
-            </Link>
-            <Link href="/compare" className="text-sm text-muted hover:text-primary transition-colors">
-              Compare
-            </Link>
-            <Link href="/rankings" className="text-sm text-muted hover:text-primary transition-colors">
-              Rankings
-            </Link>
-            <span className="text-sm font-medium text-primary">
-              Story
-            </span>
-            <Link href="/methodology" className="text-sm text-muted hover:text-primary transition-colors">
-              Methodology
-            </Link>
-          </nav>
+          <Navigation currentPage="story" />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>

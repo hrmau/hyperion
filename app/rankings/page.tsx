@@ -8,6 +8,7 @@ import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 type SortKey =
@@ -205,23 +206,7 @@ export default function RankingsPage() {
               <span className="text-secondary">Global electricity explorer</span> &middot; {sorted.length} countries &middot; {year}
             </p>
           </div>
-          <nav className="flex items-center gap-5">
-            <Link href="/" className="text-sm text-muted hover:text-primary transition-colors">
-              Explore
-            </Link>
-            <Link href="/compare" className="text-sm text-muted hover:text-primary transition-colors">
-              Compare
-            </Link>
-            <span className="text-sm font-medium text-primary">
-              Rankings
-            </span>
-            <Link href="/story" className="text-sm text-muted hover:text-primary transition-colors">
-              Story
-            </Link>
-            <Link href="/methodology" className="text-sm text-muted hover:text-primary transition-colors">
-              Methodology
-            </Link>
-          </nav>
+          <Navigation currentPage="rankings" />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>
