@@ -326,11 +326,13 @@ export default function ComparePage() {
                 label="Energy Independence"
                 valueA={calculateIndependenceScoreV2(
                   resolvedA.yearData,
-                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data : null
+                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data : null,
+                  resolvedA.iso3 ?? undefined
                 )?.score ?? 0}
                 valueB={calculateIndependenceScoreV2(
                   resolvedB.yearData,
-                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data : null
+                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data : null,
+                  resolvedB.iso3 ?? undefined
                 )?.score ?? 0}
                 formatFn={formatIndependenceScore}
               />
