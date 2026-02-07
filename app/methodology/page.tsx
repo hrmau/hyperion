@@ -331,7 +331,7 @@ export default function MethodologyPage() {
             <div className="card p-5 mb-4">
               <h4 className="font-semibold text-primary mb-2">Layer 1: Renewable & Nuclear Baseline</h4>
               <p className="text-sm text-secondary mb-3">
-                <strong className="text-primary">Assumption:</strong> Renewable energy sources are 100% domestic by definition.
+                Renewable energy sources are 100% domestic by definition.
               </p>
               <CodeBlock title="Renewable sources (100% independent)">
 {`Solar     → Sunlight falls on domestic land
@@ -349,10 +349,8 @@ Bioenergy → Crops grown on domestic land`}
             <div className="card p-5 mb-4">
               <h4 className="font-semibold text-primary mb-2">Layer 2: Fossil Fuel Import Dependency</h4>
               <p className="text-sm text-secondary mb-3">
-                <strong className="text-primary">Challenge:</strong> A country might generate electricity from coal, but where did the coal come from?
-              </p>
-              <p className="text-sm text-secondary mb-3">
-                <strong className="text-primary">Solution:</strong> Use production/consumption ratios from Our World in Data.
+                A country might generate electricity from coal, but where did the coal come from?
+                We use production/consumption ratios from Our World in Data.
               </p>
               <CodeBlock title="Formula">
 {`fuel_independence = domestic_production / domestic_consumption
@@ -371,10 +369,8 @@ Norway gas:   1200 TWh produced / 50 TWh consumed = 2400% → capped at 100%`}
             <div className="card p-5">
               <h4 className="font-semibold text-primary mb-2">Layer 3: Nuclear Fuel Dependency</h4>
               <p className="text-sm text-secondary mb-3">
-                <strong className="text-primary">Challenge:</strong> Nuclear plants need uranium fuel. Where does it come from?
-              </p>
-              <p className="text-sm text-secondary mb-3">
-                <strong className="text-primary">Key Insight:</strong> Only ~15 countries mine uranium. France, Japan, Germany, South Korea, etc. produce <strong>zero uranium domestically</strong>.
+                Nuclear plants need uranium fuel. Where does it come from?
+                Only ~15 countries mine uranium. France, Japan, Germany, South Korea, etc. produce zero uranium domestically.
               </p>
               <CodeBlock title="Uranium Independence Lookup Table">
 {`Major Producers (100% independent):
@@ -493,6 +489,7 @@ Everyone Else: 0% (imports 100%)
                     <li>Total: 508 TWh</li>
                     <li>Renewables: 255 TWh (50.2%)</li>
                     <li>Nuclear: 0 TWh (shut down April 2023)</li>
+                    <li className="text-muted italic text-[10px] pl-3">Was 6% in 2022, 13.3% in 2021</li>
                     <li>Coal: 185 TWh (36.4%)</li>
                     <li>Gas: 66 TWh (13.0%)</li>
                   </ul>
@@ -500,10 +497,10 @@ Everyone Else: 0% (imports 100%)
                 <div>
                   <h5 className="font-medium text-primary mb-2">Fossil Fuel Independence (OWID)</h5>
                   <ul className="space-y-1 text-secondary">
-                    <li>Coal: 140/280 TWh = <strong className="text-primary">50%</strong></li>
-                    <li>Gas: 20/850 TWh = <strong className="text-primary">2.4%</strong></li>
-                    <li>Oil: 10/1200 TWh = <strong className="text-primary">0.8%</strong></li>
-                    <li>Uranium: <strong className="text-primary">0%</strong> (no production)</li>
+                    <li>Coal: 140/280 TWh = 50%</li>
+                    <li>Gas: 20/850 TWh = 2.4%</li>
+                    <li>Oil: 10/1200 TWh = 0.8%</li>
+                    <li>Uranium: 0% (no production)</li>
                   </ul>
                 </div>
               </div>
@@ -543,7 +540,7 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
               </div>
 
               <InfoCard variant="warning" title="Wait, what?!">
-                This is the most <strong>controversial calculation</strong> in Hyperion, and it&apos;s <strong>intentionally provocative</strong>.
+                This is the most controversial calculation in Hyperion, and it&apos;s intentionally provocative.
               </InfoCard>
 
               <div className="grid sm:grid-cols-2 gap-4 text-xs my-4">
@@ -552,7 +549,7 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
                   <ul className="space-y-1 text-secondary">
                     <li>Total: 445 TWh</li>
                     <li>Renewables: 90 TWh (20.2%)</li>
-                    <li><strong className="text-primary">Nuclear: 320 TWh (71.9%)</strong></li>
+                    <li>Nuclear: 320 TWh (71.9%)</li>
                     <li>Coal: 5 TWh (1.1%)</li>
                     <li>Gas: 28 TWh (6.3%)</li>
                   </ul>
@@ -560,10 +557,10 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
                 <div>
                   <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
                   <ul className="space-y-1 text-secondary">
-                    <li>Coal: <strong className="text-primary">0%</strong> (no domestic coal)</li>
-                    <li>Gas: <strong className="text-primary">0%</strong> (no domestic gas)</li>
-                    <li>Oil: <strong className="text-primary">0.6%</strong></li>
-                    <li><strong className="text-negative">Uranium: 0%</strong> (imports from Niger, Kazakhstan, Canada)</li>
+                    <li>Coal: 0% (no domestic coal)</li>
+                    <li>Gas: 0% (no domestic gas)</li>
+                    <li>Oil: 0.6%</li>
+                    <li className="text-negative">Uranium: 0% (imports from Niger, Kazakhstan, Canada)</li>
                   </ul>
                 </div>
               </div>
@@ -581,16 +578,16 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
               <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
                 <h5 className="font-semibold text-amber-800 dark:text-amber-300 mb-2">Why we score it this way</h5>
                 <ul className="text-xs text-amber-700 dark:text-amber-400 space-y-1">
-                  <li>• <strong>Uranium dependency is real:</strong> France imports 100% of uranium ore</li>
-                  <li>• <strong>Supply chain vulnerability:</strong> Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
-                  <li>• <strong>Educational mission:</strong> We&apos;re measuring <em>independence</em>, not <em>security</em></li>
+                  <li>• Uranium dependency is real: France imports 100% of uranium ore</li>
+                  <li>• Supply chain vulnerability: Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
+                  <li>• Educational mission: We&apos;re measuring <em>independence</em>, not <em>security</em></li>
                 </ul>
 
                 <div className="mt-3 pt-3 border-t border-amber-200 dark:border-amber-700">
                   <h6 className="font-medium text-amber-800 dark:text-amber-300 mb-1">Important Distinction:</h6>
                   <ul className="text-xs text-amber-700 dark:text-amber-400 space-y-1">
-                    <li><strong>Energy Security:</strong> France HAS this (reliable nuclear fleet, diversified uranium suppliers, strategic fuel reserves)</li>
-                    <li><strong>Energy Independence:</strong> France LACKS this (zero uranium mining, zero fossil fuel production)</li>
+                    <li>Energy Security: France HAS this (reliable nuclear fleet, diversified uranium suppliers, strategic fuel reserves)</li>
+                    <li>Energy Independence: France LACKS this (zero uranium mining, zero fossil fuel production)</li>
                   </ul>
                 </div>
               </div>
@@ -613,15 +610,15 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
                   <h5 className="font-medium text-primary mb-2">Electricity Mix (Ember)</h5>
                   <ul className="space-y-1 text-secondary">
                     <li>Total: 155 TWh</li>
-                    <li><strong className="text-primary">Renewables: 148 TWh (95.5%)</strong></li>
+                    <li>Renewables: 148 TWh (95.5%)</li>
                     <li>Gas: 3 TWh (1.9%)</li>
                   </ul>
                 </div>
                 <div>
                   <h5 className="font-medium text-primary mb-2">Fossil Fuel Independence</h5>
                   <ul className="space-y-1 text-secondary">
-                    <li>Gas: 1200/50 TWh = 2400% → <strong className="text-positive">capped at 100%</strong></li>
-                    <li>Oil: 2000/200 TWh = 1000% → <strong className="text-positive">capped at 100%</strong></li>
+                    <li>Gas: 1200/50 TWh = 2400% → capped at 100%</li>
+                    <li>Oil: 2000/200 TWh = 1000% → capped at 100%</li>
                   </ul>
                 </div>
               </div>
@@ -635,7 +632,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </CodeBlock>
 
               <p className="text-sm text-secondary mt-4">
-                <strong className="text-primary">The Irony:</strong> Norway exports huge amounts of oil and gas to Europe,
+                Norway exports huge amounts of oil and gas to Europe,
                 but uses almost none domestically for electricity. They&apos;re energy independent AND energy secure.
               </p>
             </div>
@@ -665,17 +662,17 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </div>
                 <div>
                   <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
-                  <ul className="space-y-1 text-secondary">
-                    <li>Coal: <strong className="text-negative">0%</strong></li>
-                    <li>Gas: <strong className="text-negative">0.5%</strong></li>
-                    <li>Oil: <strong className="text-negative">0.1%</strong></li>
-                    <li>Uranium: <strong className="text-negative">0%</strong></li>
+                  <ul className="space-y-1 text-secondary text-negative">
+                    <li>Coal: 0%</li>
+                    <li>Gas: 0.5%</li>
+                    <li>Oil: 0.1%</li>
+                    <li>Uranium: 0%</li>
                   </ul>
                 </div>
               </div>
 
               <p className="text-sm text-secondary">
-                <strong className="text-primary">The Reality:</strong> Japan is one of the world&apos;s most energy-dependent major economies.
+                Japan is one of the world&apos;s most energy-dependent major economies.
                 This drives their LNG import infrastructure (world&apos;s largest LNG importer), energy efficiency focus,
                 and interest in hydrogen as an alternative.
               </p>
@@ -705,17 +702,17 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </div>
                 <div>
                   <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
-                  <ul className="space-y-1 text-secondary">
-                    <li>Coal: <strong className="text-positive">100%</strong> (net exporter)</li>
-                    <li>Gas: <strong className="text-positive">100%</strong> (net exporter)</li>
-                    <li>Uranium: <strong className="text-positive">100%</strong> (world&apos;s #1 producer!)</li>
+                  <ul className="space-y-1 text-secondary text-positive">
+                    <li>Coal: 100% (net exporter)</li>
+                    <li>Gas: 100% (net exporter)</li>
+                    <li>Uranium: 100% (world&apos;s #1 producer)</li>
                   </ul>
                 </div>
               </div>
 
               <p className="text-sm text-secondary">
-                <strong className="text-primary">The Irony:</strong> Kazakhstan is the world&apos;s largest uranium producer
-                but operates ZERO nuclear power plants domestically. Exports uranium to France, China, USA, etc.
+                Kazakhstan is the world&apos;s largest uranium producer
+                but operates zero nuclear power plants domestically. Exports uranium to France, China, USA, etc.
               </p>
             </div>
           </CollapsibleSection>
@@ -810,10 +807,10 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               <div className="card p-4">
                 <h4 className="font-semibold text-primary text-sm mb-2">2. Sector-Agnostic Fuel Ratios</h4>
                 <p className="text-xs text-secondary mb-2">
-                  <strong>Assumption:</strong> We assume electricity generation uses the same domestic/imported fuel mix as other sectors (heating, transport, industry).
+                  We assume electricity generation uses the same domestic/imported fuel mix as other sectors (heating, transport, industry).
                 </p>
                 <p className="text-xs text-muted">
-                  <strong>Why:</strong> No publicly available data breaks down imports by end-use sector.
+                  No publicly available data breaks down imports by end-use sector.
                 </p>
               </div>
 
@@ -854,10 +851,10 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               <div className="card p-4">
                 <h4 className="font-semibold text-primary text-sm mb-2">7. Renewables Hardware Imports</h4>
                 <p className="text-xs text-secondary mb-2">
-                  <strong>Philosophical question:</strong> If Germany installs Chinese solar panels powered by German sunlight, is it independent?
+                  If Germany installs Chinese solar panels powered by German sunlight, is it independent?
                 </p>
                 <p className="text-xs text-secondary">
-                  <strong>Our answer:</strong> Yes, because the energy SOURCE (sunlight) is domestic, even if the hardware is imported.
+                  We say yes, because the energy source (sunlight) is domestic, even if the hardware is imported.
                   The marginal cost of solar is ~$0/MWh once installed.
                 </p>
               </div>
@@ -962,18 +959,18 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           <CollapsibleSection title="Acknowledgments" id="acknowledgments">
             <h3 className="text-base font-semibold text-primary mb-4">Data Providers</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
-              <li><strong className="text-primary">Ember Climate</strong>: Open electricity generation data</li>
-              <li><strong className="text-primary">Our World in Data</strong>: Cleaned fossil fuel data</li>
-              <li><strong className="text-primary">World Nuclear Association</strong>: Uranium production statistics</li>
-              <li><strong className="text-primary">US Energy Information Administration</strong>: Additional nuclear data</li>
-              <li><strong className="text-primary">Energy Institute</strong>: Historical energy statistics</li>
+              <li>Ember Climate - Open electricity generation data</li>
+              <li>Our World in Data - Cleaned fossil fuel data</li>
+              <li>World Nuclear Association - Uranium production statistics</li>
+              <li>US Energy Information Administration - Additional nuclear data</li>
+              <li>Energy Institute - Historical energy statistics</li>
             </ul>
 
             <h3 className="text-base font-semibold text-primary mb-4">Inspiration</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
-              <li><strong className="text-primary">IEA Energy Security Dashboard</strong>: Highlighted importance of import dependency</li>
-              <li><strong className="text-primary">BP Statistical Review</strong>: Historical reference for energy data</li>
-              <li><strong className="text-primary">Hannah Ritchie & Max Roser (OWID)</strong>: Championing open energy data</li>
+              <li>IEA Energy Security Dashboard - Highlighted importance of import dependency</li>
+              <li>BP Statistical Review - Historical reference for energy data</li>
+              <li>Hannah Ritchie & Max Roser (OWID) - Championing open energy data</li>
             </ul>
 
             <h3 className="text-base font-semibold text-primary mb-4">License</h3>

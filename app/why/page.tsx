@@ -251,13 +251,13 @@ export default function WhyEnergyMattersPage() {
 
             <h3 className="text-lg font-medium text-primary mb-3">Case Study: Germany&apos;s Energiewende (2011-2024)</h3>
             <p className="text-secondary leading-relaxed mb-4">
-              After Fukushima in 2011, Germany decided to shut down all nuclear plants by 2022, replace them with renewables, and achieve climate leadership.
+              After Fukushima in 2011, Germany decided to phase out nuclear power. In 2021, nuclear still provided 13.3% of electricity. In 2022, with only three reactors remaining, it dropped to 6%. The final three reactors shut down in April 2023.
             </p>
             <p className="text-secondary leading-relaxed mb-4">
-              The successes: Renewable electricity grew from 20% to 52%. Massive wind and solar build-out. Proved renewables can scale.
+              The successes: Renewable electricity grew from 20% to 50%. Massive wind and solar build-out. Proved renewables can scale.
             </p>
             <p className="text-secondary leading-relaxed mb-4">
-              The failures: Gas dependency increased from 35% to 55%. Electricity prices became 3x USA prices. When Russia cut gas, an economic crisis ensued. Coal use actually increased to replace nuclear. Climate goals were compromised.
+              The failures: Gas dependency increased to fill the nuclear gap. Electricity prices became 3x USA prices. When Russia cut gas in 2022, an economic crisis ensued. Coal use actually increased to compensate. The 2024 result: 50% renewables but zero nuclear, with heightened gas dependency - exactly the vulnerability exposed by the 2022 crisis.
             </p>
             <p className="text-secondary leading-relaxed mb-6">
               What went wrong? Nuclear was shut down before alternatives were ready. Intermittent renewables required gas backup. Gas dependence created geopolitical vulnerability. High costs hurt industrial competitiveness. The lesson: Good intentions don&apos;t equal good outcomes. Energy policy is complex.
