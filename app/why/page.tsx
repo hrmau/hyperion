@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import DarkModeToggle from '@/components/DarkModeToggle';
-import Navigation from '@/components/Navigation';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 interface CollapsibleSectionProps {
@@ -90,19 +89,7 @@ function ComparisonRow({ left, right, label }: { left: string; right: string; la
 export default function WhyEnergyMattersPage() {
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <header className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
-          <div className="flex-1">
-            <Link href="/" className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-              Hyperion
-            </Link>
-          </div>
-          <Navigation currentPage="why" />
-          <div className="flex-1 flex justify-end">
-            <DarkModeToggle />
-          </div>
-        </div>
-      </header>
+      <Header currentPage="why" />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
         {/* Hero Section */}

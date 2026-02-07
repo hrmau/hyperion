@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import Link from 'next/link';
 import {
   loadCountries,
   loadBlocs,
@@ -18,8 +17,7 @@ import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceS
 import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
-import DarkModeToggle from '@/components/DarkModeToggle';
-import Navigation from '@/components/Navigation';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
@@ -215,22 +213,7 @@ export default function ComparePage() {
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <header className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
-          <div className="flex-1">
-            <Link href="/">
-              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-                Hyperion
-              </h1>
-            </Link>
-            <p className="text-[11px] text-muted"><span className="text-secondary">Global electricity explorer</span> &middot; {year}</p>
-          </div>
-          <Navigation currentPage="compare" />
-          <div className="flex-1 flex justify-end">
-            <DarkModeToggle />
-          </div>
-        </div>
-      </header>
+      <Header currentPage="compare" />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-6 space-y-6">
         <div>
