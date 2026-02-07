@@ -25,7 +25,7 @@ export default function Footer() {
             >
               Our World in Data
             </a>
-            {' '}(fossil fuel trade) — CC BY 4.0
+            {' '}(fossil fuel trade) - CC BY 4.0
           </div>
 
           {/* Links */}
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-4 pt-4 border-t border-border-subtle text-center text-[11px] text-muted">
-          Hyperion — Global electricity explorer
+          Hyperion - Global electricity explorer
         </div>
       </div>
     </footer>

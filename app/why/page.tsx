@@ -62,7 +62,7 @@ function QuoteBlock({ children, attribution }: { children: React.ReactNode; attr
   return (
     <blockquote className="border-l-4 border-primary pl-6 py-2 my-6">
       <p className="text-lg text-secondary italic leading-relaxed">{children}</p>
-      {attribution && <cite className="text-sm text-muted mt-2 block not-italic">— {attribution}</cite>}
+      {attribution && <cite className="text-sm text-muted mt-2 block not-italic">- {attribution}</cite>}
     </blockquote>
   );
 }
@@ -112,7 +112,7 @@ export default function WhyEnergyMattersPage() {
             How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
           </p>
           <QuoteBlock>
-            Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from—until it&apos;s not there.
+            Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from - until it&apos;s not there.
           </QuoteBlock>
           <div className="flex items-center gap-4 text-sm text-muted">
             <span>30-40 min read</span>
@@ -151,12 +151,12 @@ export default function WhyEnergyMattersPage() {
           <CollapsibleSection title="1. Energy IS the Economy" id="economy" defaultOpen={true}>
             <h3 className="text-lg font-semibold text-primary mb-3">The Fundamental Truth</h3>
             <p className="text-secondary leading-relaxed mb-4">
-              Energy isn&apos;t just part of the economy—it <strong className="text-primary">is</strong> the economy. Everything we produce, every service we consume, every comfort we enjoy requires energy.
+              Energy isn&apos;t just part of the economy - it <strong className="text-primary">is</strong> the economy. Everything we produce, every service we consume, every comfort we enjoy requires energy.
             </p>
 
             <h3 className="text-lg font-semibold text-primary mb-3 mt-8">The Connection (Data-Driven)</h3>
             <p className="text-secondary leading-relaxed mb-4">
-              The relationship between energy consumption and prosperity isn&apos;t theoretical—it&apos;s observable in data from every country on Earth:
+              The relationship between energy consumption and prosperity isn&apos;t theoretical - it&apos;s observable in data from every country on Earth:
             </p>
 
             <div className="card p-6 mb-6">
@@ -188,7 +188,7 @@ export default function WhyEnergyMattersPage() {
             </div>
 
             <InfoCard variant="default" title="The Insight">
-              This isn&apos;t correlation without causation—it&apos;s causation. You can&apos;t run factories without electricity. You can&apos;t power hospitals without electricity. You can&apos;t operate data centers without electricity. Prosperity requires abundant, affordable, reliable energy.
+              This isn&apos;t correlation without causation - it&apos;s causation. You can&apos;t run factories without electricity. You can&apos;t power hospitals without electricity. You can&apos;t operate data centers without electricity. Prosperity requires abundant, affordable, reliable energy.
             </InfoCard>
 
             <h3 className="text-lg font-semibold text-primary mb-4 mt-8">What Energy Powers (The Invisible Foundation)</h3>
@@ -289,7 +289,7 @@ export default function WhyEnergyMattersPage() {
               </p>
             </InfoCard>
             <p className="text-secondary leading-relaxed mt-4">
-              <strong className="text-primary">The Lesson:</strong> Energy isn&apos;t just infrastructure—it&apos;s economic survival.
+              <strong className="text-primary">The Lesson:</strong> Energy isn&apos;t just infrastructure - it&apos;s economic survival.
             </p>
           </CollapsibleSection>
 
@@ -297,7 +297,7 @@ export default function WhyEnergyMattersPage() {
           <CollapsibleSection title="2. The Price of Energy IS the Price of Everything" id="price">
             <h3 className="text-lg font-semibold text-primary mb-3">Understanding the Ripple Effect</h3>
             <p className="text-secondary leading-relaxed mb-6">
-              When energy prices rise, everything costs more. This isn&apos;t abstract economics—it&apos;s your grocery bill, your rent, your job security.
+              When energy prices rise, everything costs more. This isn&apos;t abstract economics - it&apos;s your grocery bill, your rent, your job security.
             </p>
 
             <h3 className="text-lg font-semibold text-primary mb-4">The 2022 European Energy Crisis</h3>
@@ -423,7 +423,7 @@ export default function WhyEnergyMattersPage() {
               </div>
             </div>
 
-            <InfoCard variant="warning" title="This is why energy policy isn't just for experts—it affects everyone.">
+            <InfoCard variant="warning" title="This is why energy policy isn't just for experts - it affects everyone.">
               High energy costs don&apos;t just hurt in the moment. They cause <strong>permanent economic scarring</strong>: factories close and don&apos;t come back, investment goes elsewhere, engineers move to countries with better jobs, and competitive disadvantage becomes structural.
             </InfoCard>
 
@@ -446,7 +446,7 @@ export default function WhyEnergyMattersPage() {
           <CollapsibleSection title="3. Energy Security IS National Security" id="security">
             <h3 className="text-lg font-semibold text-primary mb-3">The Geopolitical Reality</h3>
             <p className="text-secondary leading-relaxed mb-6">
-              Energy dependence gives other countries leverage over you. This isn&apos;t paranoid—it&apos;s just how power works.
+              Energy dependence gives other countries leverage over you. This isn&apos;t paranoid - it&apos;s just how power works.
             </p>
 
             <h3 className="text-lg font-semibold text-primary mb-4">Historical Examples</h3>
@@ -509,7 +509,7 @@ export default function WhyEnergyMattersPage() {
                 <span className="text-muted">→</span>
                 <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">A&apos;s sovereignty compromised</span>
               </div>
-              <p className="text-sm text-primary font-medium">This isn&apos;t theory—it&apos;s happened repeatedly throughout history.</p>
+              <p className="text-sm text-primary font-medium">This isn&apos;t theory - it&apos;s happened repeatedly throughout history.</p>
             </div>
 
             <h3 className="text-lg font-semibold text-primary mb-4">Modern Examples of Energy Leverage</h3>
@@ -561,7 +561,7 @@ export default function WhyEnergyMattersPage() {
             <p className="text-secondary leading-relaxed mb-6">
               Most people don&apos;t think about energy policy until their electricity bill spikes. But energy decisions made today will shape your children&apos;s job prospects, your country&apos;s economic competitiveness, your national security posture, and your household budget for decades.
             </p>
-            <p className="text-primary font-medium mb-6">These aren&apos;t &quot;future problems&quot;—they&apos;re happening now.</p>
+            <p className="text-primary font-medium mb-6">These aren&apos;t &quot;future problems&quot; - they&apos;re happening now.</p>
 
             <h3 className="text-lg font-semibold text-primary mb-4">Case Study: Germany&apos;s Energiewende (2011-2024)</h3>
             <div className="card p-5 mb-6">
@@ -628,7 +628,7 @@ export default function WhyEnergyMattersPage() {
               </div>
 
               <p className="text-sm text-primary font-medium">
-                The Lesson: Strategic energy decisions have 50-year consequences. France made a bet in the 1970s that still defines their economy today—mostly positively.
+                The Lesson: Strategic energy decisions have 50-year consequences. France made a bet in the 1970s that still defines their economy today - mostly positively.
               </p>
             </div>
 
@@ -667,7 +667,7 @@ export default function WhyEnergyMattersPage() {
                   <span className="text-secondary">Diversify</span>
                 </div>
               </div>
-              <p className="text-sm text-primary font-medium mt-4">There are no perfect answers—only trade-offs.</p>
+              <p className="text-sm text-primary font-medium mt-4">There are no perfect answers - only trade-offs.</p>
             </div>
           </CollapsibleSection>
 
@@ -785,7 +785,7 @@ export default function WhyEnergyMattersPage() {
                 </div>
               </div>
               <p className="text-sm text-primary font-medium mt-6">
-                These decisions will shape your electricity bills, your country&apos;s industrial base, your children&apos;s job opportunities, and your national security posture—for decades.
+                These decisions will shape your electricity bills, your country&apos;s industrial base, your children&apos;s job opportunities, and your national security posture - for decades.
               </p>
             </div>
           </CollapsibleSection>
@@ -908,7 +908,7 @@ export default function WhyEnergyMattersPage() {
                   <p className="text-sm">Will your country control its own energy destiny? Or be beholden to potentially hostile suppliers?</p>
                 </div>
               </div>
-              <p className="font-medium mt-4">Energy decisions made in the 2020s will shape the 2040s-2060s—your children&apos;s prime working years.</p>
+              <p className="font-medium mt-4">Energy decisions made in the 2020s will shape the 2040s-2060s - your children&apos;s prime working years.</p>
             </InfoCard>
           </CollapsibleSection>
 
@@ -1003,7 +1003,7 @@ export default function WhyEnergyMattersPage() {
               </div>
             </div>
             <p className="text-sm text-primary font-medium mt-4 text-center">
-              It&apos;s hard, but doable—if we&apos;re smart about it.
+              It&apos;s hard, but doable - if we&apos;re smart about it.
             </p>
           </CollapsibleSection>
 
@@ -1087,7 +1087,7 @@ export default function WhyEnergyMattersPage() {
               <div className="card p-5 text-center">
                 <div className="text-3xl mb-2">📤</div>
                 <h5 className="font-semibold text-primary mb-2">3. Share This</h5>
-                <p className="text-sm text-secondary">Send this to someone who cares about the future—parents, teachers, anyone who pays an electricity bill</p>
+                <p className="text-sm text-secondary">Send this to someone who cares about the future - parents, teachers, anyone who pays an electricity bill</p>
               </div>
             </div>
 
