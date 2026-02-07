@@ -19,6 +19,7 @@ import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
 import EnergyMixChart from '@/components/EnergyMixChart';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
@@ -224,35 +225,7 @@ export default function ComparePage() {
             </Link>
             <p className="text-[11px] text-muted"><span className="text-secondary">Global electricity explorer</span> &middot; {year}</p>
           </div>
-          <nav className="flex items-center gap-5">
-            <Link
-              href="/"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Explore
-            </Link>
-            <span className="text-sm font-medium text-primary">
-              Compare
-            </span>
-            <Link
-              href="/rankings"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Rankings
-            </Link>
-            <Link
-              href="/story"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Story
-            </Link>
-            <Link
-              href="/methodology"
-              className="text-sm text-muted hover:text-primary transition-colors"
-            >
-              Methodology
-            </Link>
-          </nav>
+          <Navigation currentPage="compare" />
           <div className="flex-1 flex justify-end">
             <DarkModeToggle />
           </div>
