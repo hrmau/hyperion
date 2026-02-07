@@ -246,9 +246,11 @@ export default function StoryPage() {
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
           <div className="flex-1">
-            <h1 className="text-base font-medium text-primary tracking-tight">
-              Hyperion
-            </h1>
+            <Link href="/">
+              <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
+                Hyperion
+              </h1>
+            </Link>
             <p className="text-[11px] text-muted">
               <span className="text-secondary">The Energy Story</span>
             </p>
