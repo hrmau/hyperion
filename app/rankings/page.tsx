@@ -270,10 +270,10 @@ export default function RankingsPage() {
               <div>
                 <div className="font-medium text-secondary mb-1">Energy Independence (v2)</div>
                 <p className="text-muted leading-relaxed">
-                  Weighted score accounting for fossil fuel import dependency. Renewables and nuclear count as 100% independent.
+                  Weighted score accounting for fuel import dependency. Renewables count as 100% independent.
+                  Nuclear is weighted by domestic uranium production (e.g., France at 0% uranium production means nuclear contributes less to independence).
                   Fossil fuels are weighted by domestic production/consumption ratio (e.g., if a country imports 97% of its gas,
-                  gas-based electricity only contributes 3% to independence). Germany scores ~69% despite high production
-                  because of gas import dependency.
+                  gas-based electricity only contributes 3% to independence).
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>90%+ Fortress</span>
