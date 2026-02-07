@@ -1,0 +1,893 @@
+{
+  "description": "Socioeconomic indicators for correlation analysis",
+  "sources": {
+    "population": "World Bank, 2023",
+    "gdp_per_capita": "World Bank (PPP, current international $), 2023",
+    "hdi": "UNDP Human Development Report, 2023",
+    "life_expectancy": "World Bank, 2023",
+    "manufacturing_per_capita": "World Bank (Manufacturing value added per capita, current USD), 2022"
+  },
+  "license": "Various - primarily World Bank Open Data License and UNDP Data Terms",
+  "countries": {
+    "ARG": {
+      "name": "Argentina",
+      "population_millions": 46.2,
+      "gdp_per_capita_ppp": 26500,
+      "hdi": 0.842,
+      "life_expectancy": 75.9,
+      "manufacturing_per_capita": 1850,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "ARM": {
+      "name": "Armenia",
+      "population_millions": 2.8,
+      "gdp_per_capita_ppp": 17800,
+      "hdi": 0.786,
+      "life_expectancy": 72.0,
+      "manufacturing_per_capita": 680,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "AUS": {
+      "name": "Australia",
+      "population_millions": 26.4,
+      "gdp_per_capita_ppp": 64700,
+      "hdi": 0.946,
+      "life_expectancy": 84.5,
+      "manufacturing_per_capita": 4200,
+      "income_level": "high",
+      "region": "Oceania"
+    },
+    "AUT": {
+      "name": "Austria",
+      "population_millions": 9.1,
+      "gdp_per_capita_ppp": 66900,
+      "hdi": 0.926,
+      "life_expectancy": 82.0,
+      "manufacturing_per_capita": 9100,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "AZE": {
+      "name": "Azerbaijan",
+      "population_millions": 10.2,
+      "gdp_per_capita_ppp": 17400,
+      "hdi": 0.760,
+      "life_expectancy": 69.4,
+      "manufacturing_per_capita": 420,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "BEL": {
+      "name": "Belgium",
+      "population_millions": 11.7,
+      "gdp_per_capita_ppp": 65100,
+      "hdi": 0.942,
+      "life_expectancy": 82.3,
+      "manufacturing_per_capita": 6800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "BGD": {
+      "name": "Bangladesh",
+      "population_millions": 172.9,
+      "gdp_per_capita_ppp": 8100,
+      "hdi": 0.670,
+      "life_expectancy": 72.4,
+      "manufacturing_per_capita": 380,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "BGR": {
+      "name": "Bulgaria",
+      "population_millions": 6.5,
+      "gdp_per_capita_ppp": 31200,
+      "hdi": 0.795,
+      "life_expectancy": 75.1,
+      "manufacturing_per_capita": 2100,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "BIH": {
+      "name": "Bosnia and Herzegovina",
+      "population_millions": 3.2,
+      "gdp_per_capita_ppp": 20800,
+      "hdi": 0.779,
+      "life_expectancy": 75.3,
+      "manufacturing_per_capita": 1200,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "BLR": {
+      "name": "Belarus",
+      "population_millions": 9.2,
+      "gdp_per_capita_ppp": 23600,
+      "hdi": 0.808,
+      "life_expectancy": 73.1,
+      "manufacturing_per_capita": 1650,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "BOL": {
+      "name": "Bolivia",
+      "population_millions": 12.2,
+      "gdp_per_capita_ppp": 9500,
+      "hdi": 0.698,
+      "life_expectancy": 63.6,
+      "manufacturing_per_capita": 320,
+      "income_level": "lower-middle",
+      "region": "Americas"
+    },
+    "BRA": {
+      "name": "Brazil",
+      "population_millions": 215.3,
+      "gdp_per_capita_ppp": 20200,
+      "hdi": 0.760,
+      "life_expectancy": 75.3,
+      "manufacturing_per_capita": 1050,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "CAN": {
+      "name": "Canada",
+      "population_millions": 40.1,
+      "gdp_per_capita_ppp": 60200,
+      "hdi": 0.935,
+      "life_expectancy": 82.7,
+      "manufacturing_per_capita": 4300,
+      "income_level": "high",
+      "region": "Americas"
+    },
+    "CHE": {
+      "name": "Switzerland",
+      "population_millions": 8.8,
+      "gdp_per_capita_ppp": 84000,
+      "hdi": 0.967,
+      "life_expectancy": 84.0,
+      "manufacturing_per_capita": 14200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "CHL": {
+      "name": "Chile",
+      "population_millions": 19.6,
+      "gdp_per_capita_ppp": 29500,
+      "hdi": 0.860,
+      "life_expectancy": 80.2,
+      "manufacturing_per_capita": 1650,
+      "income_level": "high",
+      "region": "Americas"
+    },
+    "CHN": {
+      "name": "China",
+      "population_millions": 1412.0,
+      "gdp_per_capita_ppp": 23400,
+      "hdi": 0.788,
+      "life_expectancy": 78.6,
+      "manufacturing_per_capita": 3850,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "COL": {
+      "name": "Colombia",
+      "population_millions": 52.1,
+      "gdp_per_capita_ppp": 19300,
+      "hdi": 0.758,
+      "life_expectancy": 77.3,
+      "manufacturing_per_capita": 720,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "CRI": {
+      "name": "Costa Rica",
+      "population_millions": 5.2,
+      "gdp_per_capita_ppp": 25600,
+      "hdi": 0.806,
+      "life_expectancy": 80.8,
+      "manufacturing_per_capita": 1850,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "CYP": {
+      "name": "Cyprus",
+      "population_millions": 1.3,
+      "gdp_per_capita_ppp": 50100,
+      "hdi": 0.907,
+      "life_expectancy": 81.2,
+      "manufacturing_per_capita": 1650,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "CZE": {
+      "name": "Czech Republic",
+      "population_millions": 10.5,
+      "gdp_per_capita_ppp": 50800,
+      "hdi": 0.895,
+      "life_expectancy": 79.4,
+      "manufacturing_per_capita": 6200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "DEU": {
+      "name": "Germany",
+      "population_millions": 84.5,
+      "gdp_per_capita_ppp": 66000,
+      "hdi": 0.950,
+      "life_expectancy": 81.7,
+      "manufacturing_per_capita": 8500,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "DNK": {
+      "name": "Denmark",
+      "population_millions": 5.9,
+      "gdp_per_capita_ppp": 73300,
+      "hdi": 0.952,
+      "life_expectancy": 81.4,
+      "manufacturing_per_capita": 7100,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "DOM": {
+      "name": "Dominican Republic",
+      "population_millions": 11.2,
+      "gdp_per_capita_ppp": 24600,
+      "hdi": 0.767,
+      "life_expectancy": 72.6,
+      "manufacturing_per_capita": 1150,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "ECU": {
+      "name": "Ecuador",
+      "population_millions": 18.0,
+      "gdp_per_capita_ppp": 13100,
+      "hdi": 0.765,
+      "life_expectancy": 77.0,
+      "manufacturing_per_capita": 620,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "EGY": {
+      "name": "Egypt",
+      "population_millions": 111.0,
+      "gdp_per_capita_ppp": 15000,
+      "hdi": 0.728,
+      "life_expectancy": 70.2,
+      "manufacturing_per_capita": 420,
+      "income_level": "lower-middle",
+      "region": "Africa"
+    },
+    "ESP": {
+      "name": "Spain",
+      "population_millions": 47.9,
+      "gdp_per_capita_ppp": 49100,
+      "hdi": 0.911,
+      "life_expectancy": 84.0,
+      "manufacturing_per_capita": 3200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "EST": {
+      "name": "Estonia",
+      "population_millions": 1.4,
+      "gdp_per_capita_ppp": 47200,
+      "hdi": 0.899,
+      "life_expectancy": 78.6,
+      "manufacturing_per_capita": 4100,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "FIN": {
+      "name": "Finland",
+      "population_millions": 5.5,
+      "gdp_per_capita_ppp": 58100,
+      "hdi": 0.942,
+      "life_expectancy": 82.0,
+      "manufacturing_per_capita": 6800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "FRA": {
+      "name": "France",
+      "population_millions": 68.0,
+      "gdp_per_capita_ppp": 56500,
+      "hdi": 0.910,
+      "life_expectancy": 82.5,
+      "manufacturing_per_capita": 4100,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "GBR": {
+      "name": "United Kingdom",
+      "population_millions": 67.7,
+      "gdp_per_capita_ppp": 56800,
+      "hdi": 0.940,
+      "life_expectancy": 80.7,
+      "manufacturing_per_capita": 3600,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "GEO": {
+      "name": "Georgia",
+      "population_millions": 3.7,
+      "gdp_per_capita_ppp": 20500,
+      "hdi": 0.814,
+      "life_expectancy": 71.7,
+      "manufacturing_per_capita": 580,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "GRC": {
+      "name": "Greece",
+      "population_millions": 10.4,
+      "gdp_per_capita_ppp": 39200,
+      "hdi": 0.893,
+      "life_expectancy": 81.4,
+      "manufacturing_per_capita": 1850,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "HRV": {
+      "name": "Croatia",
+      "population_millions": 3.9,
+      "gdp_per_capita_ppp": 40100,
+      "hdi": 0.878,
+      "life_expectancy": 78.4,
+      "manufacturing_per_capita": 2400,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "HUN": {
+      "name": "Hungary",
+      "population_millions": 9.6,
+      "gdp_per_capita_ppp": 43400,
+      "hdi": 0.851,
+      "life_expectancy": 76.7,
+      "manufacturing_per_capita": 4200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "IND": {
+      "name": "India",
+      "population_millions": 1428.6,
+      "gdp_per_capita_ppp": 9200,
+      "hdi": 0.644,
+      "life_expectancy": 67.2,
+      "manufacturing_per_capita": 380,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "IRL": {
+      "name": "Ireland",
+      "population_millions": 5.2,
+      "gdp_per_capita_ppp": 137600,
+      "hdi": 0.950,
+      "life_expectancy": 82.0,
+      "manufacturing_per_capita": 28500,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "IRN": {
+      "name": "Iran",
+      "population_millions": 89.2,
+      "gdp_per_capita_ppp": 17800,
+      "hdi": 0.774,
+      "life_expectancy": 73.9,
+      "manufacturing_per_capita": 720,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "ITA": {
+      "name": "Italy",
+      "population_millions": 58.9,
+      "gdp_per_capita_ppp": 53600,
+      "hdi": 0.906,
+      "life_expectancy": 83.8,
+      "manufacturing_per_capita": 5100,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "JPN": {
+      "name": "Japan",
+      "population_millions": 124.5,
+      "gdp_per_capita_ppp": 52100,
+      "hdi": 0.920,
+      "life_expectancy": 84.8,
+      "manufacturing_per_capita": 7200,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "KAZ": {
+      "name": "Kazakhstan",
+      "population_millions": 19.6,
+      "gdp_per_capita_ppp": 32500,
+      "hdi": 0.811,
+      "life_expectancy": 69.4,
+      "manufacturing_per_capita": 1450,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "KEN": {
+      "name": "Kenya",
+      "population_millions": 55.1,
+      "gdp_per_capita_ppp": 5900,
+      "hdi": 0.601,
+      "life_expectancy": 61.4,
+      "manufacturing_per_capita": 110,
+      "income_level": "lower-middle",
+      "region": "Africa"
+    },
+    "KGZ": {
+      "name": "Kyrgyzstan",
+      "population_millions": 7.0,
+      "gdp_per_capita_ppp": 6400,
+      "hdi": 0.701,
+      "life_expectancy": 69.4,
+      "manufacturing_per_capita": 220,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "KOR": {
+      "name": "South Korea",
+      "population_millions": 51.7,
+      "gdp_per_capita_ppp": 56700,
+      "hdi": 0.929,
+      "life_expectancy": 84.1,
+      "manufacturing_per_capita": 9200,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "KWT": {
+      "name": "Kuwait",
+      "population_millions": 4.3,
+      "gdp_per_capita_ppp": 52300,
+      "hdi": 0.831,
+      "life_expectancy": 78.7,
+      "manufacturing_per_capita": 2100,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "LKA": {
+      "name": "Sri Lanka",
+      "population_millions": 22.0,
+      "gdp_per_capita_ppp": 15200,
+      "hdi": 0.782,
+      "life_expectancy": 76.4,
+      "manufacturing_per_capita": 580,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "LTU": {
+      "name": "Lithuania",
+      "population_millions": 2.9,
+      "gdp_per_capita_ppp": 48400,
+      "hdi": 0.879,
+      "life_expectancy": 76.1,
+      "manufacturing_per_capita": 4600,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "LUX": {
+      "name": "Luxembourg",
+      "population_millions": 0.66,
+      "gdp_per_capita_ppp": 142000,
+      "hdi": 0.927,
+      "life_expectancy": 82.7,
+      "manufacturing_per_capita": 6200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "LVA": {
+      "name": "Latvia",
+      "population_millions": 1.8,
+      "gdp_per_capita_ppp": 40300,
+      "hdi": 0.866,
+      "life_expectancy": 75.7,
+      "manufacturing_per_capita": 2600,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "MAR": {
+      "name": "Morocco",
+      "population_millions": 37.8,
+      "gdp_per_capita_ppp": 10000,
+      "hdi": 0.698,
+      "life_expectancy": 74.0,
+      "manufacturing_per_capita": 480,
+      "income_level": "lower-middle",
+      "region": "Africa"
+    },
+    "MDA": {
+      "name": "Moldova",
+      "population_millions": 2.5,
+      "gdp_per_capita_ppp": 17200,
+      "hdi": 0.763,
+      "life_expectancy": 68.8,
+      "manufacturing_per_capita": 520,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "MEX": {
+      "name": "Mexico",
+      "population_millions": 128.9,
+      "gdp_per_capita_ppp": 23300,
+      "hdi": 0.781,
+      "life_expectancy": 75.0,
+      "manufacturing_per_capita": 1950,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "MKD": {
+      "name": "North Macedonia",
+      "population_millions": 2.1,
+      "gdp_per_capita_ppp": 21500,
+      "hdi": 0.770,
+      "life_expectancy": 73.8,
+      "manufacturing_per_capita": 1100,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "MLT": {
+      "name": "Malta",
+      "population_millions": 0.54,
+      "gdp_per_capita_ppp": 55800,
+      "hdi": 0.915,
+      "life_expectancy": 83.0,
+      "manufacturing_per_capita": 3800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "MMR": {
+      "name": "Myanmar",
+      "population_millions": 54.2,
+      "gdp_per_capita_ppp": 4800,
+      "hdi": 0.585,
+      "life_expectancy": 65.7,
+      "manufacturing_per_capita": 280,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "MNE": {
+      "name": "Montenegro",
+      "population_millions": 0.62,
+      "gdp_per_capita_ppp": 27800,
+      "hdi": 0.844,
+      "life_expectancy": 76.3,
+      "manufacturing_per_capita": 620,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "MNG": {
+      "name": "Mongolia",
+      "population_millions": 3.4,
+      "gdp_per_capita_ppp": 16300,
+      "hdi": 0.739,
+      "life_expectancy": 71.5,
+      "manufacturing_per_capita": 380,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "MYS": {
+      "name": "Malaysia",
+      "population_millions": 34.3,
+      "gdp_per_capita_ppp": 36500,
+      "hdi": 0.807,
+      "life_expectancy": 76.1,
+      "manufacturing_per_capita": 3400,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "NGA": {
+      "name": "Nigeria",
+      "population_millions": 223.8,
+      "gdp_per_capita_ppp": 5900,
+      "hdi": 0.548,
+      "life_expectancy": 52.7,
+      "manufacturing_per_capita": 85,
+      "income_level": "lower-middle",
+      "region": "Africa"
+    },
+    "NLD": {
+      "name": "Netherlands",
+      "population_millions": 17.7,
+      "gdp_per_capita_ppp": 72100,
+      "hdi": 0.946,
+      "life_expectancy": 82.1,
+      "manufacturing_per_capita": 5700,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "NOR": {
+      "name": "Norway",
+      "population_millions": 5.5,
+      "gdp_per_capita_ppp": 82500,
+      "hdi": 0.966,
+      "life_expectancy": 83.2,
+      "manufacturing_per_capita": 5200,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "NZL": {
+      "name": "New Zealand",
+      "population_millions": 5.2,
+      "gdp_per_capita_ppp": 52300,
+      "hdi": 0.939,
+      "life_expectancy": 82.5,
+      "manufacturing_per_capita": 3100,
+      "income_level": "high",
+      "region": "Oceania"
+    },
+    "OMN": {
+      "name": "Oman",
+      "population_millions": 4.6,
+      "gdp_per_capita_ppp": 46000,
+      "hdi": 0.816,
+      "life_expectancy": 78.2,
+      "manufacturing_per_capita": 1850,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "PAK": {
+      "name": "Pakistan",
+      "population_millions": 240.5,
+      "gdp_per_capita_ppp": 6500,
+      "hdi": 0.544,
+      "life_expectancy": 66.1,
+      "manufacturing_per_capita": 180,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "PER": {
+      "name": "Peru",
+      "population_millions": 34.0,
+      "gdp_per_capita_ppp": 15400,
+      "hdi": 0.762,
+      "life_expectancy": 76.0,
+      "manufacturing_per_capita": 680,
+      "income_level": "upper-middle",
+      "region": "Americas"
+    },
+    "PHL": {
+      "name": "Philippines",
+      "population_millions": 117.3,
+      "gdp_per_capita_ppp": 10900,
+      "hdi": 0.710,
+      "life_expectancy": 69.3,
+      "manufacturing_per_capita": 580,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "POL": {
+      "name": "Poland",
+      "population_millions": 37.6,
+      "gdp_per_capita_ppp": 45100,
+      "hdi": 0.881,
+      "life_expectancy": 78.8,
+      "manufacturing_per_capita": 4800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "PRI": {
+      "name": "Puerto Rico",
+      "population_millions": 3.2,
+      "gdp_per_capita_ppp": 40200,
+      "hdi": 0.881,
+      "life_expectancy": 80.0,
+      "manufacturing_per_capita": 9800,
+      "income_level": "high",
+      "region": "Americas"
+    },
+    "PRT": {
+      "name": "Portugal",
+      "population_millions": 10.4,
+      "gdp_per_capita_ppp": 43500,
+      "hdi": 0.874,
+      "life_expectancy": 82.2,
+      "manufacturing_per_capita": 2800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "QAT": {
+      "name": "Qatar",
+      "population_millions": 2.7,
+      "gdp_per_capita_ppp": 114200,
+      "hdi": 0.875,
+      "life_expectancy": 79.3,
+      "manufacturing_per_capita": 8200,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "ROU": {
+      "name": "Romania",
+      "population_millions": 19.0,
+      "gdp_per_capita_ppp": 41700,
+      "hdi": 0.827,
+      "life_expectancy": 76.6,
+      "manufacturing_per_capita": 2800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "RUS": {
+      "name": "Russia",
+      "population_millions": 144.2,
+      "gdp_per_capita_ppp": 36500,
+      "hdi": 0.821,
+      "life_expectancy": 69.4,
+      "manufacturing_per_capita": 1650,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "SGP": {
+      "name": "Singapore",
+      "population_millions": 5.9,
+      "gdp_per_capita_ppp": 127600,
+      "hdi": 0.949,
+      "life_expectancy": 84.1,
+      "manufacturing_per_capita": 16200,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "SLV": {
+      "name": "El Salvador",
+      "population_millions": 6.3,
+      "gdp_per_capita_ppp": 11200,
+      "hdi": 0.675,
+      "life_expectancy": 70.7,
+      "manufacturing_per_capita": 620,
+      "income_level": "lower-middle",
+      "region": "Americas"
+    },
+    "SRB": {
+      "name": "Serbia",
+      "population_millions": 6.7,
+      "gdp_per_capita_ppp": 26100,
+      "hdi": 0.805,
+      "life_expectancy": 74.2,
+      "manufacturing_per_capita": 1450,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "SVK": {
+      "name": "Slovakia",
+      "population_millions": 5.4,
+      "gdp_per_capita_ppp": 38800,
+      "hdi": 0.855,
+      "life_expectancy": 77.5,
+      "manufacturing_per_capita": 4800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "SVN": {
+      "name": "Slovenia",
+      "population_millions": 2.1,
+      "gdp_per_capita_ppp": 51500,
+      "hdi": 0.926,
+      "life_expectancy": 81.3,
+      "manufacturing_per_capita": 6400,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "SWE": {
+      "name": "Sweden",
+      "population_millions": 10.6,
+      "gdp_per_capita_ppp": 64100,
+      "hdi": 0.952,
+      "life_expectancy": 83.1,
+      "manufacturing_per_capita": 7800,
+      "income_level": "high",
+      "region": "Europe"
+    },
+    "THA": {
+      "name": "Thailand",
+      "population_millions": 71.8,
+      "gdp_per_capita_ppp": 22100,
+      "hdi": 0.800,
+      "life_expectancy": 78.7,
+      "manufacturing_per_capita": 2200,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "TJK": {
+      "name": "Tajikistan",
+      "population_millions": 10.1,
+      "gdp_per_capita_ppp": 4700,
+      "hdi": 0.679,
+      "life_expectancy": 69.5,
+      "manufacturing_per_capita": 110,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "TUN": {
+      "name": "Tunisia",
+      "population_millions": 12.4,
+      "gdp_per_capita_ppp": 13500,
+      "hdi": 0.732,
+      "life_expectancy": 76.7,
+      "manufacturing_per_capita": 520,
+      "income_level": "lower-middle",
+      "region": "Africa"
+    },
+    "TUR": {
+      "name": "Turkey",
+      "population_millions": 85.3,
+      "gdp_per_capita_ppp": 41900,
+      "hdi": 0.855,
+      "life_expectancy": 76.0,
+      "manufacturing_per_capita": 2650,
+      "income_level": "upper-middle",
+      "region": "Asia"
+    },
+    "TWN": {
+      "name": "Taiwan",
+      "population_millions": 23.9,
+      "gdp_per_capita_ppp": 72500,
+      "hdi": 0.926,
+      "life_expectancy": 80.9,
+      "manufacturing_per_capita": 11200,
+      "income_level": "high",
+      "region": "Asia"
+    },
+    "UKR": {
+      "name": "Ukraine",
+      "population_millions": 37.0,
+      "gdp_per_capita_ppp": 14600,
+      "hdi": 0.773,
+      "life_expectancy": 69.5,
+      "manufacturing_per_capita": 420,
+      "income_level": "lower-middle",
+      "region": "Europe"
+    },
+    "URY": {
+      "name": "Uruguay",
+      "population_millions": 3.4,
+      "gdp_per_capita_ppp": 28500,
+      "hdi": 0.830,
+      "life_expectancy": 78.4,
+      "manufacturing_per_capita": 1250,
+      "income_level": "high",
+      "region": "Americas"
+    },
+    "USA": {
+      "name": "United States",
+      "population_millions": 334.9,
+      "gdp_per_capita_ppp": 80400,
+      "hdi": 0.927,
+      "life_expectancy": 77.5,
+      "manufacturing_per_capita": 7100,
+      "income_level": "high",
+      "region": "Americas"
+    },
+    "VNM": {
+      "name": "Vietnam",
+      "population_millions": 100.0,
+      "gdp_per_capita_ppp": 14800,
+      "hdi": 0.726,
+      "life_expectancy": 74.0,
+      "manufacturing_per_capita": 1250,
+      "income_level": "lower-middle",
+      "region": "Asia"
+    },
+    "XKX": {
+      "name": "Kosovo",
+      "population_millions": 1.8,
+      "gdp_per_capita_ppp": 15600,
+      "hdi": 0.750,
+      "life_expectancy": 72.5,
+      "manufacturing_per_capita": 450,
+      "income_level": "upper-middle",
+      "region": "Europe"
+    },
+    "ZAF": {
+      "name": "South Africa",
+      "population_millions": 60.4,
+      "gdp_per_capita_ppp": 16100,
+      "hdi": 0.717,
+      "life_expectancy": 62.3,
+      "manufacturing_per_capita": 680,
+      "income_level": "upper-middle",
+      "region": "Africa"
+    }
+  }
+}
