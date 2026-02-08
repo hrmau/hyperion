@@ -47,7 +47,7 @@ export default function WhyEnergyMattersPage() {
         <div className="prose">
           {/* Hero Section */}
           <div className="mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">Why Energy Matters</h1>
+            <h1 className="text-[15px] md:text-[17px] font-bold">Why Energy Matters</h1>
             <p className="text-[var(--text-article-lg)] text-secondary leading-relaxed">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>
