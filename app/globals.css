@@ -490,3 +490,18 @@ body {
 .dark .action-card:hover {
   box-shadow: 0 8px 24px rgba(77, 159, 255, 0.15);
 }
+
+/* ========================================
+   CONTENT CONTAINER
+   ======================================== */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    padding: 0 var(--space-4);
+  }
+}

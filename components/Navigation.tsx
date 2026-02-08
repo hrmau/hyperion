@@ -25,7 +25,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
         item.key === currentPage ? (
           <span
             key={item.key}
-            className="text-[15px] font-medium text-primary"
+            className="text-[14px] font-medium text-primary"
           >
             {item.label}
           </span>
@@ -33,7 +33,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
           <Link
             key={item.key}
             href={item.href}
-            className="text-[15px] text-muted hover:text-primary transition-colors"
+            className="text-[14px] text-muted hover:text-primary transition-colors"
           >
             {item.label}
           </Link>
