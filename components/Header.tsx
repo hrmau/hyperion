@@ -22,7 +22,7 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
         <div className="flex-1">
           <Link href="/">
             <h1 className="text-base font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-              Hyperion
+              Grid Gorilla
             </h1>
           </Link>
           <p className="text-[11px] text-muted">

@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-4 pt-4 border-t border-border-subtle text-center text-[11px] text-muted">
-          Hyperion - Global electricity explorer
+          Grid Gorilla - Global electricity explorer
         </div>
       </div>
     </footer>

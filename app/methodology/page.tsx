@@ -86,7 +86,7 @@ export default function MethodologyPage() {
       <main className="flex-1 max-w-4xl mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="mb-8">
-          <h1 className="text-xl font-semibold text-primary mb-2">How Hyperion Works</h1>
+          <h1 className="text-xl font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
           <p className="text-sm text-secondary leading-relaxed">
             Understanding our data, calculations, and energy independence methodology
           </p>
@@ -120,12 +120,12 @@ export default function MethodologyPage() {
           {/* Section 1: Our Mission */}
           <CollapsibleSection title="Our Mission" id="mission" defaultOpen={true}>
             <p className="text-sm text-secondary leading-relaxed">
-              Hyperion exists to provide honest, data-driven insights into global energy systems. We believe that{' '}
+              Grid Gorilla exists to provide honest, data-driven insights into global energy systems. We believe that{' '}
               <strong className="text-primary">energy abundance is the foundation of economic prosperity</strong>{' '}
               and that understanding energy independence is critical to evaluating national security and economic resilience.
             </p>
             <p className="text-sm text-secondary leading-relaxed">
-              Unlike many energy dashboards that show only production or consumption, Hyperion reveals the{' '}
+              Unlike many energy dashboards that show only production or consumption, Grid Gorilla reveals the{' '}
               <strong className="text-primary">reality behind the numbers</strong>: where energy actually comes from,
               who controls it, and what that means for geopolitical stability.
             </p>
@@ -173,7 +173,7 @@ export default function MethodologyPage() {
           {/* Section 2: Data Sources */}
           <CollapsibleSection title="Data Sources" id="data-sources">
             <p className="text-sm text-secondary leading-relaxed mb-6">
-              Hyperion combines data from multiple authoritative sources to provide a complete picture of global energy systems.
+              Grid Gorilla combines data from multiple authoritative sources to provide a complete picture of global energy systems.
               All data is freely available and regularly updated.
             </p>
 
@@ -590,7 +590,7 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
               </div>
 
               <InfoCard variant="warning" title="Wait, what?!">
-                This is the most controversial calculation in Hyperion, and it&apos;s intentionally provocative.
+                This is the most controversial calculation in Grid Gorilla, and it&apos;s intentionally provocative.
               </InfoCard>
 
               <div className="grid sm:grid-cols-2 gap-4 text-xs my-4">
