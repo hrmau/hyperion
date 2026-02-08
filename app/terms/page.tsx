@@ -15,7 +15,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Acceptance of Terms</h2>
             <p>
-              By accessing and using Hyperion, you accept and agree to be bound by these Terms of Use.
+              By accessing and using Grid Gorilla, you accept and agree to be bound by these Terms of Use.
               If you do not agree to these terms, please do not use this site.
             </p>
           </section>
@@ -23,7 +23,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Purpose</h2>
             <p>
-              Hyperion is an educational data visualization tool that displays publicly available
+              Grid Gorilla is an educational data visualization tool that displays publicly available
               electricity generation and energy data. It is provided for informational purposes only.
             </p>
           </section>
@@ -31,7 +31,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Data Sources and Accuracy</h2>
             <p>
-              The data displayed on Hyperion comes from third-party sources:
+              The data displayed on Grid Gorilla comes from third-party sources:
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm">
               <li>
@@ -62,7 +62,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-medium text-primary">Intellectual Property</h2>
             <p>
               The underlying data is provided by third parties under Creative Commons licenses.
-              The visualization design and code of Hyperion are provided as-is. You may use screenshots
+              The visualization design and code of Grid Gorilla are provided as-is. You may use screenshots
               and data for non-commercial, educational purposes with appropriate attribution.
             </p>
           </section>
@@ -70,7 +70,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Limitation of Liability</h2>
             <p>
-              Hyperion is provided "as is" without warranties of any kind. In no event shall the creators
+              Grid Gorilla is provided "as is" without warranties of any kind. In no event shall the creators
               be liable for any damages arising from the use or inability to use this site.
             </p>
           </section>

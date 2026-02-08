@@ -510,7 +510,7 @@ export default function WhyEnergyMattersPage() {
               When energy works, economies grow and futures look bright. When it fails, economies contract and countries become vulnerable. It really is that fundamental.
             </p>
 
-            <h3 className="text-sm font-medium text-primary mb-2">Why Hyperion Exists</h3>
+            <h3 className="text-sm font-medium text-primary mb-2">Why Grid Gorilla Exists</h3>
             <p className="text-sm text-secondary leading-relaxed mb-4">
               Energy policy deserves serious, honest, data-driven analysis. Transparency beats propaganda, data beats ideology, long-term thinking beats short-term politics, and informed citizens make better democracies.
             </p>

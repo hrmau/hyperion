@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hyperion - Global Electricity Production",
+  title: "Grid Gorilla - Global Electricity Production",
   description: "Interactive visualization of global electricity production by country and geopolitical bloc",
 };
 

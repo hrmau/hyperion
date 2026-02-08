@@ -15,7 +15,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Overview</h2>
             <p>
-              Hyperion is a data visualization tool for exploring global electricity production data.
+              Grid Gorilla is a data visualization tool for exploring global electricity production data.
               We are committed to protecting your privacy and being transparent about our practices.
             </p>
           </section>
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Data We Collect</h2>
             <p>
-              <strong className="text-primary">We do not collect personal data.</strong> Hyperion operates
+              <strong className="text-primary">We do not collect personal data.</strong> Grid Gorilla operates
               entirely in your browser without user accounts, cookies, or tracking.
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm">
