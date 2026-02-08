@@ -22,12 +22,21 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
       <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
         <div className="flex-1">
           <Link href="/" className="flex items-center gap-2 group">
+            {/* Light mode logo */}
             <Image
-              src="/logo.png"
+              src="/gridgorilla_logo.svg"
               alt="Grid Gorilla"
               width={32}
               height={32}
-              className="dark:invert"
+              className="dark:hidden"
+            />
+            {/* Dark mode logo */}
+            <Image
+              src="/gridgorilla_logo_dark.svg"
+              alt="Grid Gorilla"
+              width={32}
+              height={32}
+              className="hidden dark:block"
             />
             <div>
               <h1 className="text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
