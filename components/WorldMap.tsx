@@ -20,6 +20,25 @@ interface WorldMapProps {
   fossilFuelData: FossilFuelData | null;
 }
 
+// Zoom control button component
+function ZoomButton({ onClick, disabled, children, title }: {
+  onClick: () => void;
+  disabled?: boolean;
+  children: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      title={title}
+      className="w-8 h-8 flex items-center justify-center bg-card border border-border rounded-md text-primary hover:bg-inset disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+    >
+      {children}
+    </button>
+  );
+}
+
 // Complete ISO numeric → ISO3 mapping for all 88 data countries
 const numericToIso3: Record<string, string> = {
   '004': 'AFG', '008': 'ALB', '012': 'DZA', '024': 'AGO', '031': 'AZE',
@@ -53,6 +72,9 @@ function getIso3(featureId: string | number | undefined): string | undefined {
 const MAP_WIDTH = 960;
 const MAP_HEIGHT = 500;
 
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 8;
+
 export default function WorldMap({
   countries,
   year,
@@ -65,8 +87,11 @@ export default function WorldMap({
   fossilFuelData,
 }: WorldMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const gRef = useRef<d3.Selection<SVGGElement, unknown, null, undefined> | null>(null);
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const [worldData, setWorldData] = useState<Topology | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   // Watch for theme changes so the map re-renders with correct colors
   useEffect(() => {
@@ -130,6 +155,21 @@ export default function WorldMap({
     const selectionColor = styles.getPropertyValue('--text-primary').trim() || '#1A1A1A';
 
     const g = svg.append('g');
+    gRef.current = g;
+
+    // Setup zoom behavior
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([MIN_ZOOM, MAX_ZOOM])
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform);
+        setZoomLevel(event.transform.k);
+      });
+
+    zoomRef.current = zoom;
+    svg.call(zoom);
+
+    // Prevent zoom on double-click (we use click for country selection)
+    svg.on('dblclick.zoom', null);
 
     // Layer 1: Country fills
     g.selectAll('path')
@@ -195,12 +235,54 @@ export default function WorldMap({
 
   }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark, mapMode, fossilFuelData]);
 
+  // Zoom control functions
+  const handleZoomIn = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) return;
+    const svg = d3.select(svgRef.current);
+    zoomRef.current.scaleBy(svg.transition().duration(300), 1.5);
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) return;
+    const svg = d3.select(svgRef.current);
+    zoomRef.current.scaleBy(svg.transition().duration(300), 1 / 1.5);
+  }, []);
+
+  const handleZoomReset = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) return;
+    const svg = d3.select(svgRef.current);
+    svg.transition().duration(300).call(
+      zoomRef.current.transform,
+      d3.zoomIdentity
+    );
+  }, []);
+
   return (
-    <svg
-      ref={svgRef}
-      viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-      preserveAspectRatio="xMidYMid meet"
-      className="w-full h-full"
-    />
+    <div className="relative w-full h-full">
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+        preserveAspectRatio="xMidYMid meet"
+        className="w-full h-full"
+      />
+      {/* Zoom controls */}
+      <div className="absolute bottom-3 right-3 flex flex-col gap-1">
+        <ZoomButton onClick={handleZoomIn} disabled={zoomLevel >= MAX_ZOOM} title="Zoom in">
+          +
+        </ZoomButton>
+        <ZoomButton onClick={handleZoomOut} disabled={zoomLevel <= MIN_ZOOM} title="Zoom out">
+          −
+        </ZoomButton>
+        <ZoomButton onClick={handleZoomReset} disabled={zoomLevel === 1} title="Reset zoom">
+          ⟲
+        </ZoomButton>
+      </div>
+      {/* Zoom level indicator */}
+      {zoomLevel > 1 && (
+        <div className="absolute bottom-3 left-3 px-2 py-1 bg-card/90 border border-border rounded text-xs text-muted">
+          {zoomLevel.toFixed(1)}x
+        </div>
+      )}
+    </div>
   );
 }
