@@ -15,7 +15,7 @@ import {
 } from '@/lib/data';
 import type { CountriesData, SocioeconomicData, CorrelationDataPoint, Region, IncomeLevel } from '@/lib/types';
 
-type ChartTab = 'gdp' | 'hdi' | 'life' | 'manufacturing' | 'purchasing';
+type ChartTab = 'gdp' | 'hdi' | 'life' | 'manufacturing';
 
 const chartConfigs: Record<ChartTab, { yMetric: AxisMetric; title: string; description: string }> = {
   gdp: {
@@ -37,11 +37,6 @@ const chartConfigs: Record<ChartTab, { yMetric: AxisMetric; title: string; descr
     yMetric: 'manufacturing_per_capita',
     title: 'Electricity & Industry',
     description: 'Manufacturing economies are energy-intensive',
-  },
-  purchasing: {
-    yMetric: 'gdp_per_capita_ppp',
-    title: 'Electricity & Purchasing Power',
-    description: 'Cost-of-living adjusted economic capacity per person',
   },
 };
 
