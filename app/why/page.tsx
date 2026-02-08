@@ -47,7 +47,7 @@ export default function WhyEnergyMattersPage() {
         <div className="prose">
           {/* Hero Section */}
           <div className="mb-10">
-            <h1>Why Energy Matters</h1>
+            <h1 className="text-2xl md:text-3xl">Why Energy Matters</h1>
             <p className="text-[var(--text-article-lg)] text-secondary leading-relaxed">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>
@@ -78,7 +78,7 @@ export default function WhyEnergyMattersPage() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="px-3 py-1.5 text-[var(--text-sm)] font-medium bg-inset text-secondary hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
+                  className="px-2.5 py-1 text-xs font-medium bg-inset text-secondary hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
                 >
                   {label}
                 </a>
