@@ -63,7 +63,7 @@ export default function WhyEnergyMattersPage() {
 
           {/* Quick Navigation */}
           <nav className="card px-4 py-3 mb-6">
-            <h4 className="text-xs font-medium text-primary mb-1.5 uppercase tracking-wider">Quick Navigation</h4>
+            <h4 className="text-xs font-medium text-primary mt-0 mb-1.5 uppercase tracking-wider">Quick Navigation</h4>
             <div className="flex flex-wrap gap-1.5">
               {[
                 { id: 'economy', label: 'Energy IS the Economy' },
