@@ -15,7 +15,7 @@ import {
 } from '@/lib/data';
 import type { CountriesData, SocioeconomicData, CorrelationDataPoint, Region, IncomeLevel } from '@/lib/types';
 
-type ChartTab = 'gdp' | 'hdi' | 'life' | 'manufacturing';
+type ChartTab = 'gdp' | 'hdi' | 'life' | 'manufacturing' | 'purchasing';
 
 const chartConfigs: Record<ChartTab, { yMetric: AxisMetric; title: string; description: string }> = {
   gdp: {
@@ -37,6 +37,11 @@ const chartConfigs: Record<ChartTab, { yMetric: AxisMetric; title: string; descr
     yMetric: 'manufacturing_per_capita',
     title: 'Electricity & Industry',
     description: 'Manufacturing economies are energy-intensive',
+  },
+  purchasing: {
+    yMetric: 'gdp_per_capita_ppp',
+    title: 'Electricity & Purchasing Power',
+    description: 'Cost-of-living adjusted economic capacity per person',
   },
 };
 
@@ -160,12 +165,9 @@ export default function CorrelationsPage() {
 
       {/* Hero Section */}
       <div className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-6">
-          <h1 className="text-xl font-semibold text-primary mb-1">Energy & Prosperity</h1>
-          <p className="text-sm text-secondary max-w-2xl">
-            Is there a connection between electricity consumption and human development?
-            Explore the data across 88 countries and discover what patterns emerge.
-          </p>
+        <div className="max-w-[1800px] mx-auto px-4 py-5">
+          <h1 className="text-lg font-semibold text-primary mb-1">Energy & Prosperity</h1>
+          <p className="text-sm text-secondary">Is there a connection between electricity consumption and human development? Explore the data across 88 countries and discover what patterns emerge.</p>
         </div>
       </div>
 
@@ -285,11 +287,6 @@ export default function CorrelationsPage() {
               </div>
             </div>
 
-            {/* Attribution */}
-            <div className="mt-4 text-xs text-muted text-center">
-              Electricity data: <a href="https://ember-energy.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-secondary">Ember</a> (CC BY 4.0) ·
-              Socioeconomic data: <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-secondary">World Bank</a>, <a href="https://hdr.undp.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-secondary">UNDP</a>
-            </div>
           </div>
         </div>
       </main>

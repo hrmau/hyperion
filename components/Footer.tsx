@@ -25,7 +25,25 @@ export default function Footer() {
             >
               Our World in Data
             </a>
-            {' '}(fossil fuel trade) - CC BY 4.0
+            {' '}(fossil fuel trade),{' '}
+            <a
+              href="https://data.worldbank.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-primary underline"
+            >
+              World Bank
+            </a>
+            {' / '}
+            <a
+              href="https://hdr.undp.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-primary underline"
+            >
+              UNDP
+            </a>
+            {' '}(socioeconomic) - CC BY 4.0
           </div>
 
           {/* Links */}
