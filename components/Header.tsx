@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Navigation from './Navigation';
 import DarkModeToggle from './DarkModeToggle';
 
@@ -20,14 +21,23 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
     <header className={headerClass}>
       <div className="max-w-[1800px] mx-auto px-4 py-3 flex items-center">
         <div className="flex-1">
-          <Link href="/">
-            <h1 className="text-lg font-medium text-primary tracking-tight hover:text-secondary transition-colors">
-              Grid Gorilla
-            </h1>
+          <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src="/logo.png"
+              alt="Grid Gorilla"
+              width={32}
+              height={32}
+              className="dark:invert"
+            />
+            <div>
+              <h1 className="text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
+                Grid Gorilla
+              </h1>
+              <p className="text-[11px] text-muted">
+                <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; 2025
+              </p>
+            </div>
           </Link>
-          <p className="text-[11px] text-muted">
-            <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; 2025
-          </p>
         </div>
         <Navigation currentPage={currentPage} />
         <div className="flex-1 flex justify-end">

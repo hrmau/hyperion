@@ -49,17 +49,24 @@ export default function Footer() {
           {/* Links */}
           <div className="flex items-center gap-4 text-xs">
             <Link
+              href="/credits"
+              className="text-muted hover:text-primary transition-colors"
+            >
+              Credits
+            </Link>
+            <span className="text-border">|</span>
+            <Link
               href="/privacy"
               className="text-muted hover:text-primary transition-colors"
             >
-              Privacy Policy
+              Privacy
             </Link>
             <span className="text-border">|</span>
             <Link
               href="/terms"
               className="text-muted hover:text-primary transition-colors"
             >
-              Terms of Use
+              Terms
             </Link>
           </div>
         </div>
