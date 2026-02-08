@@ -47,7 +47,7 @@ export default function WhyEnergyMattersPage() {
         <div className="prose">
           {/* Hero Section */}
           <div className="mb-6">
-            <h1 className="text-[17px] md:text-[19px] font-bold">Why Energy Matters</h1>
+            <h1 className="text-[15px] md:text-[17px] font-bold">Why Energy Matters</h1>
             <p className="text-[var(--text-article-lg)] text-secondary leading-relaxed">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>
@@ -62,9 +62,9 @@ export default function WhyEnergyMattersPage() {
           </div>
 
           {/* Quick Navigation */}
-          <nav className="card p-4 mb-10">
-            <h4 className="text-[var(--text-sm)] font-medium text-primary mb-3 uppercase tracking-wider">Quick Navigation</h4>
-            <div className="flex flex-wrap gap-2">
+          <nav className="card px-3 py-2.5 mb-10">
+            <h4 className="text-[var(--text-sm)] font-medium text-primary mb-2 uppercase tracking-wider">Quick Navigation</h4>
+            <div className="flex flex-wrap gap-1.5">
               {[
                 { id: 'economy', label: 'Energy IS the Economy' },
                 { id: 'price', label: 'Price of Everything' },
