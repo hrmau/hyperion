@@ -307,13 +307,13 @@ export function calculateIndependenceScore(yearData: YearData): IndependenceScor
 }
 
 function getScoreBand(score: number): { band: IndependenceScore['band']; label: string; color: string } {
-  if (score >= 90) {
+  if (score >= 95) {
     return { band: 'fortress', label: 'Energy Fortress', color: '#059669' }; // emerald-600
-  } else if (score >= 70) {
+  } else if (score >= 80) {
     return { band: 'strong', label: 'Strong Position', color: '#22C55E' }; // green-500
-  } else if (score >= 50) {
+  } else if (score >= 60) {
     return { band: 'moderate', label: 'Moderate', color: '#EAB308' }; // yellow-500
-  } else if (score >= 30) {
+  } else if (score >= 40) {
     return { band: 'dependent', label: 'Dependent', color: '#F97316' }; // orange-500
   } else {
     return { band: 'critical', label: 'Critical Dependency', color: '#EF4444' }; // red-500
