@@ -46,8 +46,8 @@ export default function WhyEnergyMattersPage() {
       <main className="flex-1 py-8">
         <div className="prose">
           {/* Hero Section */}
-          <div className="mb-10">
-            <h1 className="text-2xl md:text-3xl">Why Energy Matters</h1>
+          <div className="mb-6">
+            <h1 className="text-[17px] md:text-[19px] font-bold">Why Energy Matters</h1>
             <p className="text-[var(--text-article-lg)] text-secondary leading-relaxed">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>

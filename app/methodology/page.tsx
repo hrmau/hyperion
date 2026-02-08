@@ -965,11 +965,29 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
               <div className="card p-4">
                 <h4 className="font-semibold text-primary text-sm mb-2">Can I download your data?</h4>
-                <p className="text-xs text-secondary">
-                  Yes! All our source data is open:
-                  <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Ember</a>,
-                  <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">OWID</a>
+                <p className="text-xs text-secondary mb-2">
+                  Yes! All our source data is open. Here are all the sources we use:
                 </p>
+                <ul className="text-xs text-secondary space-y-1">
+                  <li>
+                    <strong>Electricity generation:</strong>
+                    <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Ember Climate</a>
+                  </li>
+                  <li>
+                    <strong>Fossil fuel production:</strong>
+                    <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Our World in Data</a>
+                  </li>
+                  <li>
+                    <strong>Uranium production:</strong>
+                    <a href="https://world-nuclear.org/information-library/nuclear-fuel-cycle/mining-of-uranium/world-uranium-mining-production" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">World Nuclear Association</a>,
+                    <a href="https://www.eia.gov/uranium/marketing/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">US EIA</a>
+                  </li>
+                  <li>
+                    <strong>Socioeconomic data:</strong>
+                    <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">World Bank</a>,
+                    <a href="https://hdr.undp.org/data-center" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">UNDP Human Development</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </CollapsibleSection>
