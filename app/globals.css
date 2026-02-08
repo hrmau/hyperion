@@ -207,10 +207,16 @@ body {
 }
 
 .prose h1 {
-  font-size: var(--text-article-3xl);
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .prose h1 {
+    font-size: 17px;
+  }
 }
 
 .prose h2 {
