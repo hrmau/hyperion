@@ -260,7 +260,7 @@ export default function MethodologyPage() {
             </div>
 
             {/* Uranium Data */}
-            <div className="card p-5">
+            <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4 className="font-semibold text-primary">World Nuclear Association & EIA</h4>
                 <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
@@ -289,6 +289,56 @@ export default function MethodologyPage() {
                   className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   US EIA Uranium Reports →
+                </a>
+              </div>
+            </div>
+
+            {/* Socioeconomic Data */}
+            <div className="card p-5">
+              <div className="flex items-start justify-between mb-3">
+                <h4 className="font-semibold text-primary">World Bank & UNDP</h4>
+                <span className="text-xs bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
+                  Socioeconomic Data
+                </span>
+              </div>
+              <p className="text-sm text-secondary mb-3">
+                GDP, Human Development Index (HDI), life expectancy, and manufacturing output for our Energy & Prosperity correlations
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span className="text-muted">Metrics:</span>
+                  <ul className="mt-1 space-y-1 text-secondary">
+                    <li>• GDP per capita (PPP adjusted)</li>
+                    <li>• Human Development Index (HDI)</li>
+                    <li>• Life expectancy at birth</li>
+                    <li>• Manufacturing value per capita</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="text-muted">Why we chose it:</span>
+                  <ul className="mt-1 space-y-1 text-secondary">
+                    <li>• Authoritative global coverage</li>
+                    <li>• Standardized methodology</li>
+                    <li>• Annual updates</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-4 pt-3 border-t border-border flex flex-wrap gap-4">
+                <a
+                  href="https://data.worldbank.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  World Bank Open Data →
+                </a>
+                <a
+                  href="https://hdr.undp.org/data-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  UNDP Human Development Data →
                 </a>
               </div>
             </div>
@@ -945,10 +995,15 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                     <td className="py-3">Annually (Q3)</td>
                     <td className="py-3">~1 year</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-border-subtle">
                     <td className="py-3 font-medium text-primary">Uranium Production</td>
                     <td className="py-3">Annually</td>
                     <td className="py-3">~1 year</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 font-medium text-primary">World Bank / UNDP</td>
+                    <td className="py-3">Annually</td>
+                    <td className="py-3">~1-2 years</td>
                   </tr>
                 </tbody>
               </table>
@@ -963,6 +1018,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               <li>Our World in Data - Cleaned fossil fuel data</li>
               <li>World Nuclear Association - Uranium production statistics</li>
               <li>US Energy Information Administration - Additional nuclear data</li>
+              <li>World Bank - GDP, population, and economic indicators</li>
+              <li>United Nations Development Programme (UNDP) - Human Development Index</li>
               <li>Energy Institute - Historical energy statistics</li>
             </ul>
 
