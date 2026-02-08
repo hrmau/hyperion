@@ -18,12 +18,12 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
     <section id={id} className="border-b border-border last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-4 flex items-center justify-between text-left hover:bg-inset transition-colors rounded-lg px-2 -mx-2"
+        className="w-full py-3 flex items-center justify-between text-left hover:bg-inset transition-colors rounded-lg px-2 -mx-2"
         aria-expanded={isOpen}
       >
-        <h2 className="text-lg font-medium text-primary">{title}</h2>
+        <h2 className="text-sm font-medium text-primary">{title}</h2>
         <svg
-          className={`w-5 h-5 text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -32,7 +32,7 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
         </svg>
       </button>
       {isOpen && (
-        <div className="pb-6 space-y-4">
+        <div className="pb-4 space-y-3">
           {children}
         </div>
       )}
@@ -48,9 +48,9 @@ function InfoCard({ title, children, variant = 'default' }: { title?: string; ch
   };
 
   return (
-    <div className={`card p-4 border-l-4 ${borderColors[variant]}`}>
-      {title && <h4 className="text-sm font-semibold text-primary mb-2">{title}</h4>}
-      <div className="text-sm text-secondary">{children}</div>
+    <div className={`card p-3 border-l-4 ${borderColors[variant]}`}>
+      {title && <h4 className="text-xs font-semibold text-primary mb-1.5">{title}</h4>}
+      <div className="text-xs text-secondary">{children}</div>
     </div>
   );
 }
@@ -59,11 +59,11 @@ function CodeBlock({ children, title }: { children: string; title?: string }) {
   return (
     <div className="bg-inset rounded-lg overflow-hidden">
       {title && (
-        <div className="px-4 py-2 text-xs font-medium text-muted border-b border-border">
+        <div className="px-3 py-1.5 text-[10px] font-medium text-muted border-b border-border">
           {title}
         </div>
       )}
-      <pre className="p-4 text-xs font-mono text-secondary overflow-x-auto">
+      <pre className="p-3 text-[11px] font-mono text-secondary overflow-x-auto">
         {children}
       </pre>
     </div>
@@ -72,7 +72,7 @@ function CodeBlock({ children, title }: { children: string; title?: string }) {
 
 function FormulaBox({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-inset border border-border rounded-lg p-4 font-mono text-sm text-primary">
+    <div className="bg-inset border border-border rounded-lg p-3 font-mono text-xs text-primary">
       {children}
     </div>
   );
@@ -83,18 +83,18 @@ export default function MethodologyPage() {
     <div className="min-h-screen bg-canvas flex flex-col">
       <Header currentPage="methodology" />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
+      <main className="flex-1 max-w-4xl mx-auto px-4 py-8">
         {/* Hero Section */}
-        <div className="mb-12">
-          <h1 className="text-3xl font-semibold text-primary mb-4">How Hyperion Works</h1>
-          <p className="text-lg text-secondary leading-relaxed">
+        <div className="mb-8">
+          <h1 className="text-xl font-semibold text-primary mb-2">How Hyperion Works</h1>
+          <p className="text-sm text-secondary leading-relaxed">
             Understanding our data, calculations, and energy independence methodology
           </p>
         </div>
 
         {/* Quick Navigation */}
-        <nav className="card p-4 mb-8">
-          <h3 className="text-sm font-semibold text-primary mb-3">Quick Navigation</h3>
+        <nav className="card p-3 mb-6">
+          <h3 className="text-xs font-semibold text-primary mb-2">Quick Navigation</h3>
           <div className="flex flex-wrap gap-2">
             {[
               { id: 'mission', label: 'Our Mission' },
@@ -119,12 +119,12 @@ export default function MethodologyPage() {
         <div className="space-y-0">
           {/* Section 1: Our Mission */}
           <CollapsibleSection title="Our Mission" id="mission" defaultOpen={true}>
-            <p className="text-secondary leading-relaxed">
+            <p className="text-sm text-secondary leading-relaxed">
               Hyperion exists to provide honest, data-driven insights into global energy systems. We believe that{' '}
               <strong className="text-primary">energy abundance is the foundation of economic prosperity</strong>{' '}
               and that understanding energy independence is critical to evaluating national security and economic resilience.
             </p>
-            <p className="text-secondary leading-relaxed">
+            <p className="text-sm text-secondary leading-relaxed">
               Unlike many energy dashboards that show only production or consumption, Hyperion reveals the{' '}
               <strong className="text-primary">reality behind the numbers</strong>: where energy actually comes from,
               who controls it, and what that means for geopolitical stability.
@@ -172,7 +172,7 @@ export default function MethodologyPage() {
 
           {/* Section 2: Data Sources */}
           <CollapsibleSection title="Data Sources" id="data-sources">
-            <p className="text-secondary leading-relaxed mb-6">
+            <p className="text-sm text-secondary leading-relaxed mb-6">
               Hyperion combines data from multiple authoritative sources to provide a complete picture of global energy systems.
               All data is freely available and regularly updated.
             </p>
@@ -260,7 +260,7 @@ export default function MethodologyPage() {
             </div>
 
             {/* Uranium Data */}
-            <div className="card p-5">
+            <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4 className="font-semibold text-primary">World Nuclear Association & EIA</h4>
                 <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
@@ -292,12 +292,62 @@ export default function MethodologyPage() {
                 </a>
               </div>
             </div>
+
+            {/* Socioeconomic Data */}
+            <div className="card p-5">
+              <div className="flex items-start justify-between mb-3">
+                <h4 className="font-semibold text-primary">World Bank & UNDP</h4>
+                <span className="text-xs bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
+                  Socioeconomic Data
+                </span>
+              </div>
+              <p className="text-sm text-secondary mb-3">
+                GDP, Human Development Index (HDI), life expectancy, and manufacturing output for our Energy & Prosperity correlations
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span className="text-muted">Metrics:</span>
+                  <ul className="mt-1 space-y-1 text-secondary">
+                    <li>• GDP per capita (PPP adjusted)</li>
+                    <li>• Human Development Index (HDI)</li>
+                    <li>• Life expectancy at birth</li>
+                    <li>• Manufacturing value per capita</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="text-muted">Why we chose it:</span>
+                  <ul className="mt-1 space-y-1 text-secondary">
+                    <li>• Authoritative global coverage</li>
+                    <li>• Standardized methodology</li>
+                    <li>• Annual updates</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-4 pt-3 border-t border-border flex flex-wrap gap-4">
+                <a
+                  href="https://data.worldbank.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  World Bank Open Data →
+                </a>
+                <a
+                  href="https://hdr.undp.org/data-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  UNDP Human Development Data →
+                </a>
+              </div>
+            </div>
           </CollapsibleSection>
 
           {/* Section 3: Energy Independence Score */}
           <CollapsibleSection title="Energy Independence Score - Detailed Methodology" id="methodology">
-            <h3 className="text-base font-semibold text-primary mb-3">What is Energy Independence?</h3>
-            <p className="text-secondary leading-relaxed mb-4">
+            <h3 className="text-sm font-semibold text-primary mb-2">What is Energy Independence?</h3>
+            <p className="text-sm text-secondary leading-relaxed mb-4">
               <strong className="text-primary">Energy Independence</strong> measures how much of a country's electricity
               generation comes from domestic sources versus imported fuels.
             </p>
@@ -307,8 +357,8 @@ export default function MethodologyPage() {
               even though it &quot;produces&quot; lots of electricity.
             </InfoCard>
 
-            <h3 className="text-base font-semibold text-primary mt-8 mb-3">Why Energy Independence Matters</h3>
-            <p className="text-secondary leading-relaxed mb-4">
+            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">Why Energy Independence Matters</h3>
+            <p className="text-sm text-secondary leading-relaxed mb-4">
               The 2022 European energy crisis demonstrated the vulnerability of energy dependence:
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-4">
@@ -322,8 +372,8 @@ export default function MethodologyPage() {
               <strong className="text-primary">Energy independence ≠ Energy security</strong>, but it&apos;s a critical component.
             </InfoCard>
 
-            <h3 className="text-base font-semibold text-primary mt-8 mb-3">The Three Calculation Layers</h3>
-            <p className="text-secondary leading-relaxed mb-4">
+            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">The Three Calculation Layers</h3>
+            <p className="text-sm text-secondary leading-relaxed mb-4">
               Our Energy Independence Score has three progressive layers of sophistication:
             </p>
 
@@ -395,7 +445,7 @@ Everyone Else: 0% (imports 100%)
 
           {/* Section 4: The Complete Calculation */}
           <CollapsibleSection title="The Complete Calculation" id="calculation">
-            <h3 className="text-base font-semibold text-primary mb-4">Step-by-Step Formula</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">Step-by-Step Formula</h3>
 
             <div className="space-y-4">
               <div className="card p-5">
@@ -719,7 +769,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 6: What This Score Does NOT Measure */}
           <CollapsibleSection title="What This Score Does NOT Measure" id="not-measuring">
-            <p className="text-secondary leading-relaxed mb-6">
+            <p className="text-sm text-secondary leading-relaxed mb-6">
               It&apos;s critical to understand what the Energy Independence Score is <strong className="text-primary">not</strong>:
             </p>
 
@@ -793,7 +843,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 7: Limitations & Assumptions */}
           <CollapsibleSection title="Limitations & Assumptions" id="limitations">
-            <h3 className="text-base font-semibold text-primary mb-4">Known Limitations</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">Known Limitations</h3>
 
             <div className="space-y-4">
               <div className="card p-4">
@@ -945,10 +995,15 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                     <td className="py-3">Annually (Q3)</td>
                     <td className="py-3">~1 year</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-border-subtle">
                     <td className="py-3 font-medium text-primary">Uranium Production</td>
                     <td className="py-3">Annually</td>
                     <td className="py-3">~1 year</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 font-medium text-primary">World Bank / UNDP</td>
+                    <td className="py-3">Annually</td>
+                    <td className="py-3">~1-2 years</td>
                   </tr>
                 </tbody>
               </table>
@@ -957,23 +1012,25 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 10: Acknowledgments */}
           <CollapsibleSection title="Acknowledgments" id="acknowledgments">
-            <h3 className="text-base font-semibold text-primary mb-4">Data Providers</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">Data Providers</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
               <li>Ember Climate - Open electricity generation data</li>
               <li>Our World in Data - Cleaned fossil fuel data</li>
               <li>World Nuclear Association - Uranium production statistics</li>
               <li>US Energy Information Administration - Additional nuclear data</li>
+              <li>World Bank - GDP, population, and economic indicators</li>
+              <li>United Nations Development Programme (UNDP) - Human Development Index</li>
               <li>Energy Institute - Historical energy statistics</li>
             </ul>
 
-            <h3 className="text-base font-semibold text-primary mb-4">Inspiration</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">Inspiration</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
               <li>IEA Energy Security Dashboard - Highlighted importance of import dependency</li>
               <li>BP Statistical Review - Historical reference for energy data</li>
               <li>Hannah Ritchie & Max Roser (OWID) - Championing open energy data</li>
             </ul>
 
-            <h3 className="text-base font-semibold text-primary mb-4">License</h3>
+            <h3 className="text-sm font-semibold text-primary mb-2">License</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary">
               <li>Source data: CC BY 4.0 (Ember, OWID)</li>
               <li>Uranium data: Publicly available from WNA/EIA</li>

@@ -61,16 +61,16 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
       </div>
 
       {/* Collapsible Breakdown section */}
-      <div className="border-t border-border-subtle pt-2">
+      <div className="border-t border-border-subtle">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center justify-between w-full text-left group"
+          className="flex items-center justify-between w-full text-left py-2.5 -mx-1 px-1 rounded hover:bg-card/50 transition-colors group"
         >
           <span className="text-[10px] text-muted uppercase tracking-wider group-hover:text-secondary transition-colors">
             Score Breakdown
           </span>
           <svg
-            className={`w-3 h-3 text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            className={`w-3 h-3 text-muted group-hover:text-secondary transition-transform ${isExpanded ? 'rotate-180' : ''}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
