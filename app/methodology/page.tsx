@@ -495,23 +495,23 @@ Everyone Else: 0% (imports 100%)
                 <h4 className="font-semibold text-primary mb-2">Step 5: Assign Score Band</h4>
                 <div className="grid sm:grid-cols-5 gap-2 mt-4">
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#059669' }}>
-                    <div className="text-white font-bold text-lg">≥90</div>
+                    <div className="text-white font-bold text-lg">≥95</div>
                     <div className="text-white/90 text-xs">Energy Fortress</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#22C55E' }}>
-                    <div className="text-white font-bold text-lg">70-89</div>
+                    <div className="text-white font-bold text-lg">80-94</div>
                     <div className="text-white/90 text-xs">Strong Position</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#EAB308' }}>
-                    <div className="text-white font-bold text-lg">50-69</div>
+                    <div className="text-white font-bold text-lg">60-79</div>
                     <div className="text-white/90 text-xs">Moderate</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#F97316' }}>
-                    <div className="text-white font-bold text-lg">30-49</div>
+                    <div className="text-white font-bold text-lg">40-59</div>
                     <div className="text-white/90 text-xs">Dependent</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#EF4444' }}>
-                    <div className="text-white font-bold text-lg">{'<'}30</div>
+                    <div className="text-white font-bold text-lg">{'<'}40</div>
                     <div className="text-white/90 text-xs">Critical</div>
                   </div>
                 </div>
