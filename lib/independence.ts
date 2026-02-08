@@ -252,7 +252,9 @@ export function calculateIndependenceScoreV2(
     vulnerabilities.push(`${Math.round(yearData.aggregates.fossil_pct)}% fossil fuel dependency (${Math.round((1 - weightedFossilIndep) * 100)}% imported)`);
   }
 
-  if (nuclearPct === 0 && renewablePct < 40 && yearData.aggregates.fossil_pct > 50) {
+  // Only flag lack of nuclear as vulnerability if country has import dependency
+  // Self-sufficient countries (like Kazakhstan) don't need nuclear for energy security
+  if (nuclearPct === 0 && renewablePct < 40 && yearData.aggregates.fossil_pct > 50 && weightedFossilIndep < 0.7) {
     vulnerabilities.push('No nuclear baseload capacity');
   }
 
