@@ -276,11 +276,11 @@ export default function RankingsPage() {
                   gas-based electricity only contributes 3% to independence).
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>90%+ Fortress</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#22C55E10', color: '#22C55E' }}>70-90% Strong</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EAB30810', color: '#EAB308' }}>50-70% Moderate</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#F9731610', color: '#F97316' }}>30-50% Dependent</span>
-                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EF444410', color: '#EF4444' }}>&lt;30% Critical</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#05966910', color: '#059669' }}>95%+ Fortress</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#22C55E10', color: '#22C55E' }}>80-94% Strong</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EAB30810', color: '#EAB308' }}>60-79% Moderate</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#F9731610', color: '#F97316' }}>40-59% Dependent</span>
+                  <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EF444410', color: '#EF4444' }}>&lt;40% Critical</span>
                 </div>
               </div>
               <div>
