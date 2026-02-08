@@ -244,6 +244,11 @@ body {
   margin-bottom: var(--space-2);
 }
 
+/* Quick nav h4 shouldn't have top margin inside card */
+.prose nav h4 {
+  margin-top: 0;
+}
+
 .prose p {
   margin-bottom: var(--space-4);
 }
