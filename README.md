@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grid Gorilla
+
+An interactive web application visualizing global electricity production, energy independence, and geopolitical energy dynamics.
+
+## About
+
+Grid Gorilla provides honest, data-driven insights into global energy systems. We believe that **energy abundance is the foundation of economic prosperity** and that understanding energy independence is critical to evaluating national security and economic resilience.
+
+### Features
+
+- **Interactive World Map** - D3 choropleth visualization colored by generation, clean energy %, or independence score
+- **Country Profiles** - Detailed energy mix breakdowns for 88 countries
+- **Bloc Comparisons** - Compare EU, NATO, BRICS+, G7, G20, OECD, ASEAN, and more
+- **Energy Independence Score** - Weighted metric accounting for fuel import dependencies
+- **Historical Data** - Track changes from 1998-2025
+- **Rankings** - Sort and filter countries by various energy metrics
+
+### Energy Independence Score
+
+Unlike simple production metrics, our independence score accounts for where fuel actually comes from:
+
+- **Renewables** - 100% independent (domestic sun, wind, water)
+- **Nuclear** - Weighted by domestic uranium production
+- **Fossil fuels** - Weighted by production/consumption ratio
+
+| Score | Band |
+|-------|------|
+| 95%+ | Energy Fortress |
+| 80-94% | Strong Position |
+| 60-79% | Moderate |
+| 40-59% | Dependent |
+| <40% | Critical Dependency |
+
+## Tech Stack
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **Tailwind CSS 4**
+- **D3.js** for visualizations
+- **TopoJSON** for world map geometry
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Data Sources
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Source | Data |
+|--------|------|
+| [Ember](https://ember-energy.org) | Electricity generation by source, demand, emissions |
+| [Our World in Data](https://ourworldindata.org) | Fossil fuel production/consumption ratios |
+| [World Nuclear Association](https://world-nuclear.org) | Uranium production by country |
 
-## Learn More
+## Attribution
 
-To learn more about Next.js, take a look at the following resources:
+Data provided by [Ember](https://ember-energy.org) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
