@@ -84,7 +84,7 @@ export default function MethodologyPage() {
       <Header currentPage="methodology" />
 
       <main className="flex-1 py-8">
-        <div className="content-container">
+        <div className="prose">
         {/* Hero Section */}
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
