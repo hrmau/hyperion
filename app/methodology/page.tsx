@@ -83,7 +83,8 @@ export default function MethodologyPage() {
     <div className="min-h-screen bg-canvas flex flex-col">
       <Header currentPage="methodology" />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-8">
+      <main className="flex-1 py-8">
+        <div className="prose">
         {/* Hero Section */}
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
@@ -1105,6 +1106,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           >
             ↑ Back to top
           </a>
+        </div>
         </div>
       </main>
 
