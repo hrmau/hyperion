@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { Country, YearData, FossilFuelData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
@@ -35,6 +36,7 @@ function StatRow({ label, value }: { label: string; value: string }) {
 }
 
 function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const barWidth = Math.min(score.score, 100); // Max 100%
 
   return (
@@ -58,85 +60,104 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
         <div className="text-[10px] text-muted mt-1">{getIndependenceDescription(score)}</div>
       </div>
 
-      {/* Breakdown section */}
+      {/* Collapsible Breakdown section */}
       <div className="border-t border-border-subtle pt-2">
-        <div className="text-[10px] text-muted uppercase tracking-wider mb-2">Score Breakdown</div>
-        <div className="space-y-1.5">
-          <BreakdownRow
-            label="Renewables"
-            pct={score.breakdown.renewable.pct}
-            contribution={score.breakdown.renewable.contribution}
-            color="#22C55E"
-            isIndependent
-          />
-          <BreakdownRow
-            label="Nuclear"
-            pct={score.breakdown.nuclear.pct}
-            contribution={score.breakdown.nuclear.contribution}
-            independence={score.breakdown.nuclear.independence}
-            color="#8B5CF6"
-          />
-          {score.breakdown.coal.pct > 0.5 && (
-            <BreakdownRow
-              label="Coal"
-              pct={score.breakdown.coal.pct}
-              contribution={score.breakdown.coal.contribution}
-              independence={score.breakdown.coal.independence}
-              color="#374151"
-            />
-          )}
-          {score.breakdown.gas.pct > 0.5 && (
-            <BreakdownRow
-              label="Gas"
-              pct={score.breakdown.gas.pct}
-              contribution={score.breakdown.gas.contribution}
-              independence={score.breakdown.gas.independence}
-              color="#F59E0B"
-            />
-          )}
-          {score.breakdown.oil.pct > 0.5 && (
-            <BreakdownRow
-              label="Other Fossil"
-              pct={score.breakdown.oil.pct}
-              contribution={score.breakdown.oil.contribution}
-              independence={score.breakdown.oil.independence}
-              color="#D97706"
-            />
-          )}
-        </div>
-      </div>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center justify-between w-full text-left group"
+        >
+          <span className="text-[10px] text-muted uppercase tracking-wider group-hover:text-secondary transition-colors">
+            Score Breakdown
+          </span>
+          <svg
+            className={`w-3 h-3 text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
 
-      {/* Strengths and Vulnerabilities */}
-      {(score.strengths.length > 0 || score.vulnerabilities.length > 0) && (
-        <div className="border-t border-border-subtle pt-2 space-y-2">
-          {score.strengths.length > 0 && (
-            <div>
-              <div className="text-[10px] text-positive font-medium mb-1">Strengths</div>
-              <ul className="text-[10px] text-muted space-y-0.5">
-                {score.strengths.map((s, i) => (
-                  <li key={i} className="flex items-start gap-1">
-                    <span className="text-positive">+</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {score.vulnerabilities.length > 0 && (
-            <div>
-              <div className="text-[10px] text-negative font-medium mb-1">Vulnerabilities</div>
-              <ul className="text-[10px] text-muted space-y-0.5">
-                {score.vulnerabilities.map((v, i) => (
-                  <li key={i} className="flex items-start gap-1">
-                    <span className="text-negative">!</span>
-                    <span>{v}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
+        {isExpanded && (
+          <div className="mt-2 space-y-1.5">
+            <BreakdownRow
+              label="Renewables"
+              pct={score.breakdown.renewable.pct}
+              contribution={score.breakdown.renewable.contribution}
+              color="#22C55E"
+              isIndependent
+            />
+            <BreakdownRow
+              label="Nuclear"
+              pct={score.breakdown.nuclear.pct}
+              contribution={score.breakdown.nuclear.contribution}
+              independence={score.breakdown.nuclear.independence}
+              color="#8B5CF6"
+            />
+            {score.breakdown.coal.pct > 0.5 && (
+              <BreakdownRow
+                label="Coal"
+                pct={score.breakdown.coal.pct}
+                contribution={score.breakdown.coal.contribution}
+                independence={score.breakdown.coal.independence}
+                color="#374151"
+              />
+            )}
+            {score.breakdown.gas.pct > 0.5 && (
+              <BreakdownRow
+                label="Gas"
+                pct={score.breakdown.gas.pct}
+                contribution={score.breakdown.gas.contribution}
+                independence={score.breakdown.gas.independence}
+                color="#F59E0B"
+              />
+            )}
+            {score.breakdown.oil.pct > 0.5 && (
+              <BreakdownRow
+                label="Other Fossil"
+                pct={score.breakdown.oil.pct}
+                contribution={score.breakdown.oil.contribution}
+                independence={score.breakdown.oil.independence}
+                color="#D97706"
+              />
+            )}
+
+            {/* Strengths and Vulnerabilities - inside expanded section */}
+            {(score.strengths.length > 0 || score.vulnerabilities.length > 0) && (
+              <div className="border-t border-border-subtle pt-2 mt-2 space-y-2">
+                {score.strengths.length > 0 && (
+                  <div>
+                    <div className="text-[10px] text-positive font-medium mb-1">Strengths</div>
+                    <ul className="text-[10px] text-muted space-y-0.5">
+                      {score.strengths.map((s, i) => (
+                        <li key={i} className="flex items-start gap-1">
+                          <span className="text-positive">+</span>
+                          <span>{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {score.vulnerabilities.length > 0 && (
+                  <div>
+                    <div className="text-[10px] text-negative font-medium mb-1">Vulnerabilities</div>
+                    <ul className="text-[10px] text-muted space-y-0.5">
+                      {score.vulnerabilities.map((v, i) => (
+                        <li key={i} className="flex items-start gap-1">
+                          <span className="text-negative">!</span>
+                          <span>{v}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
