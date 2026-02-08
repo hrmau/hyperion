@@ -4,15 +4,15 @@
   /* ========================================
      TYPOGRAPHY - Data Interface (default)
      ======================================== */
-  --text-xs: 10px;
-  --text-sm: 11px;
-  --text-base: 12px;
-  --text-md: 13px;
-  --text-lg: 14px;
-  --text-xl: 16px;
-  --text-2xl: 18px;
-  --text-3xl: 20px;
-  --text-4xl: 28px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 15px;
+  --text-xl: 17px;
+  --text-2xl: 19px;
+  --text-3xl: 21px;
+  --text-4xl: 29px;
 
   /* Typography - Article Context */
   --text-article-base: 14px;
