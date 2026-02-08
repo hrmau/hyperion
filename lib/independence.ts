@@ -240,8 +240,16 @@ export function calculateIndependenceScoreV2(
     vulnerabilities.push(`${Math.round((1 - coalIndep) * 100)}% of coal is imported`);
   }
 
-  if (yearData.aggregates.fossil_pct > 60) {
-    vulnerabilities.push(`${Math.round(yearData.aggregates.fossil_pct)}% fossil fuel dependency`);
+  // Only flag fossil dependency if they also import a significant portion
+  // Calculate weighted fossil fuel independence based on each fuel's share
+  const fossilTotal = coalPct + gasPct + oilPct;
+  const weightedFossilIndep = fossilTotal > 0
+    ? (coalPct * coalIndep + gasPct * gasIndep + oilPct * oilIndep) / fossilTotal
+    : 1.0;
+
+  if (yearData.aggregates.fossil_pct > 60 && weightedFossilIndep < 0.7) {
+    // They have high fossil use AND import a significant portion
+    vulnerabilities.push(`${Math.round(yearData.aggregates.fossil_pct)}% fossil fuel dependency (${Math.round((1 - weightedFossilIndep) * 100)}% imported)`);
   }
 
   if (nuclearPct === 0 && renewablePct < 40 && yearData.aggregates.fossil_pct > 50) {
