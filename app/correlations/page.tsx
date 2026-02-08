@@ -159,11 +159,9 @@ export default function CorrelationsPage() {
       <Header currentPage="correlations" />
 
       {/* Hero Section */}
-      <div className="border-b border-border bg-card">
-        <div className="max-w-[1800px] mx-auto px-4 py-5">
-          <h1 className="text-lg font-semibold text-primary mb-1">Energy & Prosperity</h1>
-          <p className="text-sm text-secondary">Is there a connection between electricity consumption and human development? Explore the data across 88 countries and discover what patterns emerge.</p>
-        </div>
+      <div className="max-w-[1800px] mx-auto px-4 pt-5 pb-3">
+        <h1 className="text-sm font-medium text-primary mb-0.5">Energy & Prosperity</h1>
+        <p className="text-xs text-secondary">Is there a connection between electricity consumption and human development? Explore the data across 88 countries and discover what patterns emerge.</p>
       </div>
 
       {/* Insight Cards */}
