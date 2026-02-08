@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "Grid Gorilla - Global Electricity Production",
@@ -23,7 +25,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
