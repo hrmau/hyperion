@@ -84,19 +84,19 @@ export default function MethodologyPage() {
       <Header currentPage="methodology" />
 
       <main className="flex-1 py-8">
-        <div className="prose">
+        <div className="content-container">
         {/* Hero Section */}
         <div className="mb-8">
-          <h1 className="text-xl font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
+          <h1 className="text-[18px] font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
           <p className="text-sm text-secondary leading-relaxed">
             Understanding our data, calculations, and energy independence methodology
           </p>
         </div>
 
         {/* Quick Navigation */}
-        <nav className="card p-3 mb-6">
+        <nav className="card px-3 py-2.5 mb-6">
           <h3 className="text-xs font-semibold text-primary mb-2">Quick Navigation</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {[
               { id: 'mission', label: 'Our Mission' },
               { id: 'data-sources', label: 'Data Sources' },
