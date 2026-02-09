@@ -11,25 +11,37 @@ interface FlagImgProps {
 /**
  * Renders a country flag as an <img> from flagcdn.com.
  * Works cross-platform (Windows doesn't render flag emoji).
- * Uses a fixed height with auto width to preserve aspect ratios.
- * Most flags are 3:2 or 2:1, so width will typically be 1.5x-2x the height.
+ * Uses a fixed container with 4:3 aspect ratio to ensure consistent sizing
+ * across all flags regardless of their natural aspect ratio.
  */
 export default function FlagImg({ iso3, size = 20, className = '' }: FlagImgProps) {
   const url = getFlagUrl(iso3, size <= 20 ? 20 : 40);
   if (!url) return null;
+
+  // Use 4:3 aspect ratio for consistent container width (most flags fit well)
+  const containerWidth = Math.round(size * 1.33);
+
   return (
-    <img
-      src={url}
-      alt=""
-      height={size}
+    <span
+      className={`inline-flex items-center justify-center shrink-0 ${className}`}
       style={{
+        width: containerWidth,
         height: size,
-        width: 'auto',
-        maxHeight: size,
-        objectFit: 'contain'
       }}
-      className={`inline-block shrink-0 rounded-sm ${className}`}
-      loading="lazy"
-    />
+    >
+      <img
+        src={url}
+        alt=""
+        style={{
+          maxHeight: size,
+          maxWidth: containerWidth,
+          width: 'auto',
+          height: 'auto',
+          objectFit: 'contain',
+        }}
+        className="rounded-sm"
+        loading="lazy"
+      />
+    </span>
   );
 }
