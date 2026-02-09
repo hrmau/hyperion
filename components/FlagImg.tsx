@@ -11,6 +11,7 @@ interface FlagImgProps {
 /**
  * Renders a country flag as an <img> from flagcdn.com.
  * Works cross-platform (Windows doesn't render flag emoji).
+ * Uses a fixed height with auto width to preserve aspect ratios.
  */
 export default function FlagImg({ iso3, size = 20, className = '' }: FlagImgProps) {
   const url = getFlagUrl(iso3, size <= 20 ? 20 : 40);
@@ -19,9 +20,8 @@ export default function FlagImg({ iso3, size = 20, className = '' }: FlagImgProp
     <img
       src={url}
       alt=""
-      width={size}
-      height={Math.round(size * 0.75)}
-      className={`inline-block object-cover rounded-sm ${className}`}
+      style={{ height: size, width: 'auto' }}
+      className={`inline-block rounded-sm ${className}`}
       loading="lazy"
     />
   );
