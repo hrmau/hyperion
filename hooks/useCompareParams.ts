@@ -26,7 +26,7 @@ interface UseCompareParamsReturn {
 
 /**
  * Parse a URL param value into a selection
- * Format: "DEU" for country, "bloc:EU" for bloc
+ * Format: "DEU" for country, "bloc:EU" for bloc, "bloc:" for bloc mode with no selection
  */
 function parseSelection(value: string | null): CompareSelection {
   if (!value) return { type: 'country', id: '' };
@@ -39,12 +39,14 @@ function parseSelection(value: string | null): CompareSelection {
 
 /**
  * Encode a selection for URL
+ * Returns empty string only if type is country AND id is empty
  */
 function encodeSelection(selection: CompareSelection): string {
-  if (!selection.id) return '';
   if (selection.type === 'bloc') {
+    // Always encode bloc type, even with empty id (e.g., "bloc:" means bloc mode, no selection)
     return `bloc:${selection.id}`;
   }
+  // For country type, only encode if there's an id
   return selection.id;
 }
 
