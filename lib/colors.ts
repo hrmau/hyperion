@@ -44,14 +44,14 @@ export const choroColors = [
   '#1E3A8A', // blue-900
 ];
 
-// Independence score scale — green gradient (higher = more independent = greener)
+// Independence score scale — muted gradient (higher = more independent = greener)
 export const independenceColors = [
-  '#FEE2E2', // red-100 — critical dependency
-  '#FED7AA', // orange-200 — dependent
-  '#FEF08A', // yellow-200 — moderate
-  '#BBF7D0', // green-200 — strong
-  '#86EFAC', // green-300 — very strong
-  '#22C55E', // green-500 — fortress
+  '#E5D4D4', // muted dusty rose — critical dependency
+  '#E6D5C3', // muted sand — dependent
+  '#E2DEC4', // muted wheat — moderate
+  '#C5D4BE', // muted sage — strong
+  '#9CC495', // dusty green — very strong
+  '#6A9E6A', // forest green — fortress
 ];
 
 // Clean energy scale — green gradient (higher = cleaner = greener)
