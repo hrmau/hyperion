@@ -78,11 +78,13 @@ function resolveSelection(
   }
 }
 
-function ComparisonBar({ label, valueA, valueB, formatFn }: {
+function ComparisonBar({ label, valueA, valueB, formatFn, suffixA, suffixB }: {
   label: string;
   valueA: number;
   valueB: number;
   formatFn: (v: number) => string;
+  suffixA?: string;
+  suffixB?: string;
 }) {
   const total = valueA + valueB;
   const pctA = total > 0 ? (valueA / total) * 100 : 50;
@@ -92,7 +94,7 @@ function ComparisonBar({ label, valueA, valueB, formatFn }: {
       <div className="text-xs text-secondary font-medium">{label}</div>
       <div className="flex items-center gap-2">
         <div className="w-20 text-right">
-          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueA)}</span>
+          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueA)}{suffixA}</span>
         </div>
         <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-inset">
           <div
@@ -105,7 +107,7 @@ function ComparisonBar({ label, valueA, valueB, formatFn }: {
           />
         </div>
         <div className="w-20">
-          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueB)}</span>
+          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueB)}{suffixB}</span>
         </div>
       </div>
     </div>
@@ -321,20 +323,28 @@ function ComparePageContent() {
                 valueB={resolvedB.yearData.total_generation_twh}
                 formatFn={formatTWh}
               />
-              <ComparisonBar
-                label="Energy Independence"
-                valueA={calculateIndependenceScoreV2(
+              {(() => {
+                const scoreA = calculateIndependenceScoreV2(
                   resolvedA.yearData,
                   resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data : null,
                   resolvedA.iso3 ?? undefined
-                )?.score ?? 0}
-                valueB={calculateIndependenceScoreV2(
+                );
+                const scoreB = calculateIndependenceScoreV2(
                   resolvedB.yearData,
                   resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data : null,
                   resolvedB.iso3 ?? undefined
-                )?.score ?? 0}
-                formatFn={formatIndependenceScore}
-              />
+                );
+                return (
+                  <ComparisonBar
+                    label="Energy Independence"
+                    valueA={scoreA?.score ?? 0}
+                    valueB={scoreB?.score ?? 0}
+                    formatFn={formatIndependenceScore}
+                    suffixA={scoreA?.missingFossilData ? '*' : undefined}
+                    suffixB={scoreB?.missingFossilData ? '*' : undefined}
+                  />
+                );
+              })()}
               <ComparisonBar
                 label="Clean Energy %"
                 valueA={resolvedA.yearData.aggregates.clean_pct}
@@ -365,6 +375,26 @@ function ComparePageContent() {
                 valueB={resolvedB.yearData.emissions.total_mtco2}
                 formatFn={formatEmissions}
               />
+              {(() => {
+                const scoreA = resolvedA.iso3 ? calculateIndependenceScoreV2(
+                  resolvedA.yearData,
+                  getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data,
+                  resolvedA.iso3
+                ) : null;
+                const scoreB = resolvedB.iso3 ? calculateIndependenceScoreV2(
+                  resolvedB.yearData,
+                  getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data,
+                  resolvedB.iso3
+                ) : null;
+                if (scoreA?.missingFossilData || scoreB?.missingFossilData) {
+                  return (
+                    <div className="text-[10px] text-muted pt-2 border-t border-border-subtle">
+                      <span className="text-secondary">*</span> No fossil fuel import data available. Fossil fuels assumed 100% imported.
+                    </div>
+                  );
+                }
+                return null;
+              })()}
             </div>
 
             <div className="card p-5 space-y-6">
@@ -560,8 +590,8 @@ function ComparisonSummary({ a, b, fossilFuelData, year }: {
       {moreIndependent.score && lessIndependent.score && (
         <p>
           <span className="font-medium">{moreIndependent.selection.label}</span> has a higher energy independence score (
-          <span className="font-medium">{formatIndependenceScore(moreIndependent.score.score)}</span> vs{' '}
-          <span className="font-medium">{formatIndependenceScore(lessIndependent.score.score)}</span>
+          <span className="font-medium">{formatIndependenceScore(moreIndependent.score.score)}{moreIndependent.score.missingFossilData ? '*' : ''}</span> vs{' '}
+          <span className="font-medium">{formatIndependenceScore(lessIndependent.score.score)}{lessIndependent.score.missingFossilData ? '*' : ''}</span>
           {indepDiff >= 1 && <>, {indepDiff.toFixed(0)} points higher</>}).
           {getIndependenceDriver(moreIndependent.score) && (
             <> This is driven by {getIndependenceDriver(moreIndependent.score)}.</>
