@@ -178,77 +178,37 @@ export default function MethodologyPage() {
               All data is freely available and regularly updated.
             </p>
 
-            {/* Ember Climate */}
+            {/* Our World in Data - Primary Source */}
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-primary">Ember Climate</h4>
+                <h4 className="font-semibold text-primary">Our World in Data Energy Dataset</h4>
                 <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
-                  Electricity Generation
+                  Primary Data Source
                 </span>
               </div>
               <p className="text-sm text-secondary mb-3">
-                Electricity generation by source (coal, gas, nuclear, solar, wind, etc.)
+                Comprehensive electricity generation, demand, emissions, and fossil fuel data compiled from multiple authoritative sources.
               </p>
               <div className="grid sm:grid-cols-2 gap-4 text-xs">
                 <div>
                   <span className="text-muted">Coverage:</span>
                   <ul className="mt-1 space-y-1 text-secondary">
-                    <li>• 200+ countries and territories</li>
+                    <li>• 220+ countries and territories</li>
                     <li>• Annual data from 2000-present</li>
-                    <li>• Updated twice monthly</li>
+                    <li>• Electricity by source (coal, gas, nuclear, hydro, wind, solar, etc.)</li>
+                    <li>• Demand, imports, and emissions data</li>
                   </ul>
                 </div>
                 <div>
-                  <span className="text-muted">Why we chose it:</span>
+                  <span className="text-muted">Underlying sources:</span>
                   <ul className="mt-1 space-y-1 text-secondary">
-                    <li>• Open data (CC BY 4.0 license)</li>
-                    <li>• Excellent country coverage</li>
-                    <li>• Cleaned and standardized</li>
+                    <li>• <strong>Ember</strong> - Electricity generation data</li>
+                    <li>• <strong>Energy Institute</strong> - Fossil fuel production/consumption</li>
+                    <li>• <strong>US EIA</strong> - Additional energy statistics</li>
                   </ul>
                 </div>
               </div>
-              <div className="mt-4 pt-3 border-t border-border">
-                <a
-                  href="https://ember-climate.org/data/yearly-electricity-data/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  ember-climate.org/data/yearly-electricity-data →
-                </a>
-              </div>
-            </div>
-
-            {/* Our World in Data */}
-            <div className="card p-5 mb-4">
-              <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-primary">Our World in Data</h4>
-                <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-2 py-1 rounded-full">
-                  Fossil Fuel Production
-                </span>
-              </div>
-              <p className="text-sm text-secondary mb-3">
-                Primary energy production and consumption by fuel type (coal, natural gas, oil)
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4 text-xs">
-                <div>
-                  <span className="text-muted">Coverage:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
-                    <li>• 200+ countries</li>
-                    <li>• Annual data from 1965-present</li>
-                    <li>• Covers coal, natural gas, and oil</li>
-                  </ul>
-                </div>
-                <div>
-                  <span className="text-muted">Why we chose it:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
-                    <li>• Open data (CC BY 4.0 license)</li>
-                    <li>• Pre-cleaned and standardized</li>
-                    <li>• Well-documented methodology</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-4 pt-3 border-t border-border">
+              <div className="mt-4 pt-3 border-t border-border flex flex-wrap gap-4">
                 <a
                   href="https://github.com/owid/energy-data"
                   target="_blank"
@@ -257,6 +217,19 @@ export default function MethodologyPage() {
                 >
                   github.com/owid/energy-data →
                 </a>
+                <a
+                  href="https://ember-climate.org/data/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  ember-climate.org (underlying data) →
+                </a>
+              </div>
+              <div className="mt-3 p-3 bg-inset rounded-lg">
+                <p className="text-xs text-muted">
+                  <strong>License:</strong> CC BY 4.0 — Our World in Data layer, with underlying Ember data also CC BY 4.0
+                </p>
               </div>
             </div>
 
@@ -970,12 +943,12 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </p>
                 <ul className="text-xs text-secondary space-y-1">
                   <li>
-                    <strong>Electricity generation:</strong>
-                    <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Ember Climate</a>
+                    <strong>Energy data (primary):</strong>
+                    <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Our World in Data Energy Dataset</a>
                   </li>
                   <li>
-                    <strong>Fossil fuel production:</strong>
-                    <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Our World in Data</a>
+                    <strong>Electricity generation (underlying):</strong>
+                    <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Ember Climate</a>
                   </li>
                   <li>
                     <strong>Uranium production:</strong>
@@ -1033,13 +1006,13 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           <CollapsibleSection title="Acknowledgments" id="acknowledgments">
             <h3 className="text-sm font-semibold text-primary mb-2">Data Providers</h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
-              <li>Ember Climate - Open electricity generation data</li>
-              <li>Our World in Data - Cleaned fossil fuel data</li>
-              <li>World Nuclear Association - Uranium production statistics</li>
-              <li>US Energy Information Administration - Additional nuclear data</li>
-              <li>World Bank - GDP, population, and economic indicators</li>
-              <li>United Nations Development Programme (UNDP) - Human Development Index</li>
-              <li>Energy Institute - Historical energy statistics</li>
+              <li><strong>Our World in Data</strong> - Primary energy dataset combining Ember, Energy Institute, and EIA data</li>
+              <li><strong>Ember Climate</strong> - Underlying electricity generation data</li>
+              <li><strong>Energy Institute</strong> - Historical energy statistics and fossil fuel data</li>
+              <li><strong>US Energy Information Administration (EIA)</strong> - Additional energy statistics</li>
+              <li><strong>World Nuclear Association</strong> - Uranium production statistics</li>
+              <li><strong>World Bank</strong> - GDP, population, and economic indicators</li>
+              <li><strong>United Nations Development Programme (UNDP)</strong> - Human Development Index</li>
             </ul>
 
             <h3 className="text-sm font-semibold text-primary mb-2">Inspiration</h3>

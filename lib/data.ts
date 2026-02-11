@@ -79,8 +79,6 @@ export function getCorrelationData(
   return result;
 }
 
-const emberBlocs = ['EU', 'OECD', 'G20', 'G7', 'ASEAN'];
-
 export function getCountriesInBloc(
   bloc: string,
   countries: CountriesData,
@@ -92,15 +90,20 @@ export function getCountriesInBloc(
     return countryList;
   }
 
-  if (emberBlocs.includes(bloc)) {
-    return countryList.filter(c => c.blocs.includes(bloc));
+  // First check ember blocs (now with explicit member lists)
+  const emberBlocDef = blocs.ember?.blocs[bloc];
+  if (emberBlocDef?.members) {
+    return countryList.filter(c => emberBlocDef.members!.includes(c.iso3));
   }
 
-  // Custom bloc - look up members
-  const blocDef = blocs.custom.blocs[bloc];
-  if (!blocDef?.members) return [];
+  // Then check custom blocs
+  const customBlocDef = blocs.custom?.blocs[bloc];
+  if (customBlocDef?.members) {
+    return countryList.filter(c => customBlocDef.members!.includes(c.iso3));
+  }
 
-  return countryList.filter(c => blocDef.members!.includes(c.iso3));
+  // Fallback: check country's blocs array (for backwards compatibility)
+  return countryList.filter(c => c.blocs?.includes(bloc));
 }
 
 export function getAvailableYears(countries: CountriesData): number[] {
