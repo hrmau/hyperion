@@ -14,8 +14,8 @@ import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData, FossilFuelData, FossilFuelYearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
-import { getIso2 } from '@/lib/flags';
 import FlagImg from '@/components/FlagImg';
+import CountrySelect from '@/components/CountrySelect';
 import EnergyMixChart from '@/components/EnergyMixChart';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -144,27 +144,25 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
           Bloc
         </button>
       </div>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 bg-inset border border-border rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-border"
-      >
-        <option value="">Select {type === 'country' ? 'a country' : 'a bloc'}...</option>
-        {type === 'country' ? (
-          sortedCountries.map(c => {
-            const iso2 = getIso2(c.iso3);
-            return (
-              <option key={c.iso3} value={c.iso3}>
-                {iso2 ? `${iso2} ` : ''}{c.name}
-              </option>
-            );
-          })
-        ) : (
-          BLOC_OPTIONS.map(b => (
+      {type === 'country' ? (
+        <CountrySelect
+          countries={sortedCountries}
+          value={value}
+          onChange={onChange}
+          placeholder="Select a country..."
+        />
+      ) : (
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full px-3 py-2 bg-inset border border-border rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-border"
+        >
+          <option value="">Select a bloc...</option>
+          {BLOC_OPTIONS.map(b => (
             <option key={b.id} value={b.id}>{b.label}</option>
-          ))
-        )}
-      </select>
+          ))}
+        </select>
+      )}
     </div>
   );
 }
