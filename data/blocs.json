@@ -1,31 +1,48 @@
 {
   "ember": {
-    "description": "Blocs from Ember dataset (membership flags in source data)",
+    "description": "Standard international blocs (membership defined explicitly since OWID doesn't include bloc flags)",
     "blocs": {
       "EU": {
         "name": "European Union",
         "description": "27 member states of the EU",
-        "source": "ember"
+        "source": "owid/ember",
+        "members": [
+          "AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
+          "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD",
+          "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE"
+        ]
       },
       "OECD": {
         "name": "OECD",
-        "description": "Organisation for Economic Co-operation and Development",
-        "source": "ember"
+        "description": "Organisation for Economic Co-operation and Development (38 members)",
+        "source": "owid/ember",
+        "members": [
+          "AUS", "AUT", "BEL", "CAN", "CHL", "COL", "CRI", "CZE", "DNK", "EST",
+          "FIN", "FRA", "DEU", "GRC", "HUN", "ISL", "IRL", "ISR", "ITA", "JPN",
+          "KOR", "LVA", "LTU", "LUX", "MEX", "NLD", "NZL", "NOR", "POL", "PRT",
+          "SVK", "SVN", "ESP", "SWE", "CHE", "TUR", "GBR", "USA"
+        ]
       },
       "G20": {
         "name": "G20",
-        "description": "Group of Twenty major economies",
-        "source": "ember"
+        "description": "Group of Twenty major economies (19 countries + EU)",
+        "source": "owid/ember",
+        "members": [
+          "ARG", "AUS", "BRA", "CAN", "CHN", "FRA", "DEU", "IND", "IDN", "ITA",
+          "JPN", "KOR", "MEX", "RUS", "SAU", "ZAF", "TUR", "GBR", "USA"
+        ]
       },
       "G7": {
         "name": "G7",
         "description": "Group of Seven advanced economies",
-        "source": "ember"
+        "source": "owid/ember",
+        "members": ["CAN", "FRA", "DEU", "ITA", "JPN", "GBR", "USA"]
       },
       "ASEAN": {
         "name": "ASEAN",
-        "description": "Association of Southeast Asian Nations",
-        "source": "ember"
+        "description": "Association of Southeast Asian Nations (10 members)",
+        "source": "owid/ember",
+        "members": ["BRN", "KHM", "IDN", "LAO", "MYS", "MMR", "PHL", "SGP", "THA", "VNM"]
       }
     }
   },
