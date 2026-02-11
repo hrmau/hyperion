@@ -34,14 +34,14 @@ export const energyOrder: EnergySource[] = [
   'solar',
 ];
 
-// Choropleth scale — lightest bin must be clearly distinct from no-data (#F3F4F6)
+// Choropleth scale — muted slate blues, lightest bin distinct from no-data (#F3F4F6)
 export const choroColors = [
-  '#BFDBFE', // blue-200 — lightest data color, clearly blue
-  '#93C5FD', // blue-300
-  '#60A5FA', // blue-400
-  '#3B82F6', // blue-500
-  '#1D4ED8', // blue-700
-  '#1E3A8A', // blue-900
+  '#D6DEE8', // pale greyish blue — lightest data color
+  '#B4C4D6', // light muted blue
+  '#8EA6BE', // soft slate blue
+  '#6889A5', // medium slate blue
+  '#486D8C', // deeper slate
+  '#2E4F6E', // deep muted navy
 ];
 
 // Independence score scale — muted versions of the band colors from independence.ts
