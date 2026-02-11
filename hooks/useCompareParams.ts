@@ -1,0 +1,134 @@
+'use client';
+
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useCallback, useEffect, useRef } from 'react';
+
+type SelectionType = 'country' | 'bloc';
+
+interface CompareSelection {
+  type: SelectionType;
+  id: string;
+}
+
+interface CompareParams {
+  a: CompareSelection;
+  b: CompareSelection;
+  year: number;
+}
+
+interface UseCompareParamsReturn {
+  params: CompareParams;
+  setSelectionA: (type: SelectionType, id: string) => void;
+  setSelectionB: (type: SelectionType, id: string) => void;
+  setYear: (year: number) => void;
+  isFromUrl: boolean;
+}
+
+/**
+ * Parse a URL param value into a selection
+ * Format: "DEU" for country, "bloc:EU" for bloc
+ */
+function parseSelection(value: string | null): CompareSelection {
+  if (!value) return { type: 'country', id: '' };
+
+  if (value.startsWith('bloc:')) {
+    return { type: 'bloc', id: value.slice(5) };
+  }
+  return { type: 'country', id: value };
+}
+
+/**
+ * Encode a selection for URL
+ */
+function encodeSelection(selection: CompareSelection): string {
+  if (!selection.id) return '';
+  if (selection.type === 'bloc') {
+    return `bloc:${selection.id}`;
+  }
+  return selection.id;
+}
+
+export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isInitializedRef = useRef(false);
+
+  // Parse current URL params
+  const aParam = searchParams.get('a');
+  const bParam = searchParams.get('b');
+  const yearParam = searchParams.get('year');
+
+  const a = parseSelection(aParam);
+  const b = parseSelection(bParam);
+  const year = yearParam ? parseInt(yearParam, 10) : defaultYear;
+
+  // Check if we loaded from URL (has any params)
+  const isFromUrl = !!(aParam || bParam || yearParam);
+
+  // Debounced URL update
+  const updateUrl = useCallback((newParams: Partial<CompareParams>) => {
+    if (updateTimeoutRef.current) {
+      clearTimeout(updateTimeoutRef.current);
+    }
+
+    updateTimeoutRef.current = setTimeout(() => {
+      const current = new URLSearchParams(searchParams.toString());
+
+      if ('a' in newParams) {
+        const encoded = encodeSelection(newParams.a!);
+        if (encoded) {
+          current.set('a', encoded);
+        } else {
+          current.delete('a');
+        }
+      }
+
+      if ('b' in newParams) {
+        const encoded = encodeSelection(newParams.b!);
+        if (encoded) {
+          current.set('b', encoded);
+        } else {
+          current.delete('b');
+        }
+      }
+
+      if ('year' in newParams) {
+        current.set('year', newParams.year!.toString());
+      }
+
+      const newUrl = current.toString() ? `${pathname}?${current.toString()}` : pathname;
+      router.replace(newUrl, { scroll: false });
+    }, 300);
+  }, [searchParams, pathname, router]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const setSelectionA = useCallback((type: SelectionType, id: string) => {
+    updateUrl({ a: { type, id } });
+  }, [updateUrl]);
+
+  const setSelectionB = useCallback((type: SelectionType, id: string) => {
+    updateUrl({ b: { type, id } });
+  }, [updateUrl]);
+
+  const setYear = useCallback((newYear: number) => {
+    updateUrl({ year: newYear });
+  }, [updateUrl]);
+
+  return {
+    params: { a, b, year: isNaN(year) ? defaultYear : year },
+    setSelectionA,
+    setSelectionB,
+    setYear,
+    isFromUrl,
+  };
+}
