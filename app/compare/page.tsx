@@ -281,7 +281,7 @@ function ComparePageContent() {
               <div className="text-[11px] text-secondary font-medium mb-2 uppercase tracking-wider">
                 Comparison Summary
               </div>
-              <ComparisonSummary a={resolvedA} b={resolvedB} />
+              <ComparisonSummary a={resolvedA} b={resolvedB} fossilFuelData={fossilFuelData} year={year} />
             </div>
 
             <div className="card p-5 space-y-5">
@@ -475,7 +475,12 @@ export default function ComparePage() {
   );
 }
 
-function ComparisonSummary({ a, b }: { a: ResolvedSelection; b: ResolvedSelection }) {
+function ComparisonSummary({ a, b, fossilFuelData, year }: {
+  a: ResolvedSelection;
+  b: ResolvedSelection;
+  fossilFuelData: FossilFuelData | null;
+  year: number;
+}) {
   const cleanDiff = Math.abs(a.yearData.aggregates.clean_pct - b.yearData.aggregates.clean_pct);
   const cleaner = a.yearData.aggregates.clean_pct > b.yearData.aggregates.clean_pct ? a : b;
   const genA = a.yearData.total_generation_twh;
@@ -484,6 +489,51 @@ function ComparisonSummary({ a, b }: { a: ResolvedSelection; b: ResolvedSelectio
   const genRatio = genA > 0 && genB > 0
     ? (Math.max(genA, genB) / Math.min(genA, genB)).toFixed(1)
     : null;
+
+  // Calculate independence scores
+  const scoreA = calculateIndependenceScoreV2(
+    a.yearData,
+    a.iso3 ? getFossilDataForYear(fossilFuelData?.countries[a.iso3], year).data : null,
+    a.iso3 ?? undefined
+  );
+  const scoreB = calculateIndependenceScoreV2(
+    b.yearData,
+    b.iso3 ? getFossilDataForYear(fossilFuelData?.countries[b.iso3], year).data : null,
+    b.iso3 ?? undefined
+  );
+
+  const moreIndependent = (scoreA?.score ?? 0) >= (scoreB?.score ?? 0) ? { selection: a, score: scoreA } : { selection: b, score: scoreB };
+  const lessIndependent = moreIndependent.selection === a ? { selection: b, score: scoreB } : { selection: a, score: scoreA };
+  const indepDiff = Math.abs((scoreA?.score ?? 0) - (scoreB?.score ?? 0));
+
+  // Get primary driver for each country's independence score
+  const getIndependenceDriver = (score: typeof scoreA): string => {
+    if (!score) return '';
+    const { breakdown } = score;
+
+    // Find the largest contributor
+    const contributors = [
+      { name: 'renewables', value: breakdown.renewable.contribution, pct: breakdown.renewable.pct },
+      { name: 'nuclear', value: breakdown.nuclear.contribution, pct: breakdown.nuclear.pct },
+      { name: 'coal', value: breakdown.coal.contribution, pct: breakdown.coal.pct },
+      { name: 'gas', value: breakdown.gas.contribution, pct: breakdown.gas.pct },
+    ].filter(c => c.value > 0).sort((x, y) => y.value - x.value);
+
+    if (contributors.length === 0) return '';
+
+    const top = contributors[0];
+    const topTwoContribute = contributors.length >= 2
+      ? contributors[0].value + contributors[1].value
+      : contributors[0].value;
+    const totalContribution = contributors.reduce((sum, c) => sum + c.value, 0);
+
+    // If top two sources dominate (>70% of score)
+    if (contributors.length >= 2 && topTwoContribute / totalContribution > 0.7) {
+      return `${Math.round(contributors[0].pct)}% ${contributors[0].name} and ${Math.round(contributors[1].pct)}% ${contributors[1].name}`;
+    }
+
+    return `${Math.round(top.pct)}% ${top.name}`;
+  };
 
   return (
     <div className="space-y-1.5 text-xs text-primary">
@@ -505,6 +555,22 @@ function ComparisonSummary({ a, b }: { a: ResolvedSelection; b: ResolvedSelectio
           <span className="font-medium">{bigger.label}</span> generates{' '}
           <span className="font-medium">{genRatio}x</span> more electricity overall (
           {formatTWh(bigger.yearData.total_generation_twh)}).
+        </p>
+      )}
+      {moreIndependent.score && lessIndependent.score && (
+        <p>
+          <span className="font-medium">{moreIndependent.selection.label}</span> has a higher energy independence score (
+          <span className="font-medium">{formatIndependenceScore(moreIndependent.score.score)}</span> vs{' '}
+          <span className="font-medium">{formatIndependenceScore(lessIndependent.score.score)}</span>
+          {indepDiff >= 1 && <>, {indepDiff.toFixed(0)} points higher</>}).
+          {getIndependenceDriver(moreIndependent.score) && (
+            <> This is driven by {getIndependenceDriver(moreIndependent.score)}.</>
+          )}
+        </p>
+      )}
+      {lessIndependent.score && getIndependenceDriver(lessIndependent.score) && (
+        <p>
+          <span className="font-medium">{lessIndependent.selection.label}</span>&apos;s independence score is driven by {getIndependenceDriver(lessIndependent.score)}.
         </p>
       )}
     </div>
