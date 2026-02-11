@@ -10,8 +10,7 @@ import InsightCard from '@/components/InsightCard';
 import {
   loadCountries,
   loadSocioeconomicData,
-  getCorrelationData,
-  getLatestYear,
+  getCorrelationDataLatest,
 } from '@/lib/data';
 import type { CountriesData, SocioeconomicData, CorrelationDataPoint, Region, IncomeLevel } from '@/lib/types';
 
@@ -70,7 +69,6 @@ export default function CorrelationsPage() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [socioeconomic, setSocioeconomic] = useState<SocioeconomicData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [year, setYear] = useState(2023);
 
   // Chart state
   const [activeTab, setActiveTab] = useState<ChartTab>('gdp');
@@ -92,7 +90,6 @@ export default function CorrelationsPage() {
       .then(([countriesData, socioData]) => {
         setCountries(countriesData);
         setSocioeconomic(socioData);
-        setYear(getLatestYear(countriesData));
         setLoading(false);
       })
       .catch(console.error);
@@ -100,8 +97,8 @@ export default function CorrelationsPage() {
 
   const correlationData = useMemo(() => {
     if (!countries || !socioeconomic) return [];
-    return getCorrelationData(countries, socioeconomic, year);
-  }, [countries, socioeconomic, year]);
+    return getCorrelationDataLatest(countries, socioeconomic);
+  }, [countries, socioeconomic]);
 
   const filteredData = useMemo(() => {
     return correlationData.filter(d => {
@@ -251,7 +248,7 @@ export default function CorrelationsPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-muted">
-                      {filteredData.length} countries · {year}
+                      {filteredData.length} countries · Latest data
                     </div>
                   </div>
                 </div>

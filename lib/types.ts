@@ -128,4 +128,5 @@ export interface CorrelationDataPoint {
   life_expectancy: number;
   manufacturing_per_capita: number;
   clean_pct: number;
+  year?: number; // The year of the electricity data
 }

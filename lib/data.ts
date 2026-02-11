@@ -73,6 +73,48 @@ export function getCorrelationData(
       life_expectancy: socioData.life_expectancy,
       manufacturing_per_capita: socioData.manufacturing_per_capita,
       clean_pct: yearData.aggregates.clean_pct,
+      year,
+    });
+  }
+
+  return result;
+}
+
+/**
+ * Combine electricity and socioeconomic data for correlation analysis,
+ * using each country's latest available data.
+ */
+export function getCorrelationDataLatest(
+  countries: CountriesData,
+  socioeconomic: SocioeconomicData
+): CorrelationDataPoint[] {
+  const result: CorrelationDataPoint[] = [];
+
+  for (const [iso3, country] of Object.entries(countries)) {
+    const latest = getLatestYearData(country);
+    const socioData = socioeconomic.countries[iso3];
+
+    if (!latest || !socioData) continue;
+
+    const { year, data: yearData } = latest;
+
+    // Calculate electricity per capita in kWh/person/year
+    const electricity_per_capita_kwh =
+      (yearData.total_generation_twh * 1_000_000) / socioData.population_millions;
+
+    result.push({
+      iso3,
+      name: country.name,
+      region: socioData.region,
+      income_level: socioData.income_level,
+      population_millions: socioData.population_millions,
+      electricity_per_capita_kwh,
+      gdp_per_capita_ppp: socioData.gdp_per_capita_ppp,
+      hdi: socioData.hdi,
+      life_expectancy: socioData.life_expectancy,
+      manufacturing_per_capita: socioData.manufacturing_per_capita,
+      clean_pct: yearData.aggregates.clean_pct,
+      year,
     });
   }
 
