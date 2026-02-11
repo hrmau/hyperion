@@ -23,23 +23,54 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Data We Collect</h2>
             <p>
-              <strong className="text-primary">We do not collect personal data.</strong> Grid Gorilla operates
-              entirely in your browser without user accounts, cookies, or tracking.
+              Grid Gorilla does not collect personal data directly. We do not require user accounts
+              or authentication. However, we use Google Analytics to understand how visitors use our site.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-medium text-primary">Google Analytics</h2>
+            <p>
+              We use Google Analytics to collect anonymized usage data, including:
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm">
-              <li>No cookies or local storage for tracking</li>
-              <li>No user accounts or authentication</li>
-              <li>No analytics or third-party trackers</li>
-              <li>No data sent to external servers</li>
+              <li>Pages visited and time spent on site</li>
+              <li>Approximate geographic location (country/city level)</li>
+              <li>Device type, browser, and operating system</li>
+              <li>Referral sources (how you found our site)</li>
             </ul>
+            <p className="mt-3">
+              This data helps us improve the site and understand which features are most useful.
+              Google Analytics uses cookies to distinguish unique visitors. You can opt out of
+              Google Analytics by installing the{' '}
+              <a
+                href="https://tools.google.com/dlpage/gaoptout"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                Google Analytics Opt-out Browser Add-on
+              </a>.
+            </p>
+            <p className="mt-2 text-sm">
+              For more information, see{' '}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                Google&apos;s Privacy Policy
+              </a>.
+            </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-medium text-primary">Third-Party Services</h2>
             <p>
-              This site may be hosted on platforms like Vercel or similar services, which may collect
+              In addition to Google Analytics, this site is hosted on Vercel, which may collect
               basic server logs (IP addresses, request timestamps) as part of standard web hosting.
-              We do not access or process this data.
+              We do not directly access or process this hosting data.
             </p>
           </section>
 
