@@ -22,6 +22,13 @@ export default function Footer() {
             </Link>
             <span className="text-border">|</span>
             <Link
+              href="/updates"
+              className="text-muted hover:text-primary transition-colors"
+            >
+              Updates
+            </Link>
+            <span className="text-border">|</span>
+            <Link
               href="/privacy"
               className="text-muted hover:text-primary transition-colors"
             >

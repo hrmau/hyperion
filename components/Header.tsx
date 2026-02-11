@@ -27,6 +27,7 @@ const coreNavItems: { key: NavItem; label: string; href: string }[] = [
 const secondaryLinks: { key: string; label: string; href: string }[] = [
   { key: 'methodology', label: 'Methodology', href: '/methodology' },
   { key: 'credits', label: 'Credits', href: '/credits' },
+  { key: 'updates', label: 'Updates', href: '/updates' },
   { key: 'privacy', label: 'Privacy', href: '/privacy' },
   { key: 'terms', label: 'Terms', href: '/terms' },
 ];
