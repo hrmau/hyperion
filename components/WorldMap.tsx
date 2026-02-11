@@ -89,6 +89,7 @@ export default function WorldMap({
   const svgRef = useRef<SVGSVGElement>(null);
   const gRef = useRef<d3.Selection<SVGGElement, unknown, null, undefined> | null>(null);
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
   const [worldData, setWorldData] = useState<Topology | null>(null);
   const [isDark, setIsDark] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -162,11 +163,18 @@ export default function WorldMap({
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on('zoom', (event) => {
         g.attr('transform', event.transform);
+        transformRef.current = event.transform;
         setZoomLevel(event.transform.k);
       });
 
     zoomRef.current = zoom;
     svg.call(zoom);
+
+    // Restore previous zoom transform (prevents reset when selectedCountry changes)
+    if (transformRef.current !== d3.zoomIdentity) {
+      g.attr('transform', transformRef.current.toString());
+      svg.call(zoom.transform, transformRef.current);
+    }
 
     // Prevent zoom on double-click (we use click for country selection)
     svg.on('dblclick.zoom', null);
