@@ -54,14 +54,14 @@ export const independenceColors = [
   '#6A9E6A', // forest green — fortress
 ];
 
-// Clean energy scale — green gradient (higher = cleaner = greener)
+// Clean energy scale — teal monotone (higher = cleaner = deeper teal)
 export const cleanEnergyColors = [
-  '#FEE2E2', // red-100 — very dirty
-  '#FED7AA', // orange-200 — dirty
-  '#FEF08A', // yellow-200 — mixed
-  '#BBF7D0', // green-200 — mostly clean
-  '#86EFAC', // green-300 — very clean
-  '#22C55E', // green-500 — ultra clean
+  '#E8EEEC', // pale seafoam — very dirty
+  '#B8D4CF', // light teal — dirty
+  '#7FBDB4', // soft teal — mixed
+  '#4BA89C', // medium teal — mostly clean
+  '#2D8A7E', // teal — very clean
+  '#1A6B61', // deep teal — ultra clean
 ];
 
 export type MapColorMode = 'production' | 'independence' | 'clean';
