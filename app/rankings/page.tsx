@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import { loadCountries, loadFossilFuelData, getLatestYear } from '@/lib/data';
+import { loadCountries, loadFossilFuelData, getLatestYearData } from '@/lib/data';
 import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
@@ -123,7 +123,6 @@ export default function RankingsPage() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [year, setYear] = useState<number>(2025);
   const [sortKey, setSortKey] = useState<SortKey>('total_generation_twh');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
 
@@ -132,7 +131,6 @@ export default function RankingsPage() {
       .then(([data, fossilData]) => {
         setCountries(data);
         setFossilFuelData(fossilData);
-        setYear(getLatestYear(data));
         setLoading(false);
       })
       .catch(console.error);
@@ -143,8 +141,9 @@ export default function RankingsPage() {
 
     return Object.values(countries)
       .map((c): RowData | null => {
-        const yd = c.years[year.toString()];
-        if (!yd) return null;
+        const latest = getLatestYearData(c);
+        if (!latest) return null;
+        const { year, data: yd } = latest;
         const { data: fossilYear } = getFossilDataForYear(fossilFuelData?.countries[c.iso3], year);
         const indep = calculateIndependenceScoreV2(yd, fossilYear, c.iso3);
         return {
@@ -161,7 +160,7 @@ export default function RankingsPage() {
         };
       })
       .filter((r): r is RowData => r !== null);
-  }, [countries, year, fossilFuelData]);
+  }, [countries, fossilFuelData]);
 
   const sorted = useMemo(() => {
     const mult = sortDir === 'asc' ? 1 : -1;
