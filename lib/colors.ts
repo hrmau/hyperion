@@ -44,24 +44,24 @@ export const choroColors = [
   '#1E3A8A', // blue-900
 ];
 
-// Independence score scale — muted gradient (higher = more independent = greener)
+// Independence score scale — muted versions of the band colors from independence.ts
 export const independenceColors = [
-  '#E5D4D4', // muted dusty rose — critical dependency
-  '#E6D5C3', // muted sand — dependent
-  '#E2DEC4', // muted wheat — moderate
-  '#C5D4BE', // muted sage — strong
-  '#9CC495', // dusty green — very strong
-  '#6A9E6A', // forest green — fortress
+  '#EBBCBC', // muted red — critical (<30)
+  '#EBC9A8', // muted orange — dependent (30-50)
+  '#E8D8A0', // muted yellow — moderate (50-70)
+  '#B8DCAC', // muted green — strong (70-85)
+  '#8CD4A0', // muted green — very strong (85-95)
+  '#5CB890', // muted emerald — fortress (95+)
 ];
 
-// Clean energy scale — green gradient (higher = cleaner = greener)
+// Clean energy scale — teal monotone (higher = cleaner = deeper teal)
 export const cleanEnergyColors = [
-  '#FEE2E2', // red-100 — very dirty
-  '#FED7AA', // orange-200 — dirty
-  '#FEF08A', // yellow-200 — mixed
-  '#BBF7D0', // green-200 — mostly clean
-  '#86EFAC', // green-300 — very clean
-  '#22C55E', // green-500 — ultra clean
+  '#E8EEEC', // pale seafoam — very dirty
+  '#B8D4CF', // light teal — dirty
+  '#7FBDB4', // soft teal — mixed
+  '#4BA89C', // medium teal — mostly clean
+  '#2D8A7E', // teal — very clean
+  '#1A6B61', // deep teal — ultra clean
 ];
 
 export type MapColorMode = 'production' | 'independence' | 'clean';
