@@ -1,22 +1,29 @@
 'use client';
 
-import type { Country } from '@/lib/types';
+import type { Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent } from '@/lib/scales';
 import { getLatestYearData } from '@/lib/data';
+import { calculateIndependenceScoreV2, getFossilDataForYear } from '@/lib/independence';
 import FlagImg from './FlagImg';
 
 interface CountryTooltipProps {
   country: Country | null;
   position: { x: number; y: number } | null;
+  fossilFuelData: FossilFuelData | null;
 }
 
-export default function CountryTooltip({ country, position }: CountryTooltipProps) {
+export default function CountryTooltip({ country, position, fossilFuelData }: CountryTooltipProps) {
   if (!country || !position) return null;
 
   const latest = getLatestYearData(country);
   if (!latest) return null;
 
   const { year, data: yearData } = latest;
+
+  // Calculate independence score
+  const countryFossil = fossilFuelData?.countries?.[country.iso3];
+  const { data: fossilData } = getFossilDataForYear(countryFossil, year);
+  const independence = calculateIndependenceScoreV2(yearData, fossilData, country.iso3);
 
   return (
     <div
@@ -45,6 +52,12 @@ export default function CountryTooltip({ country, position }: CountryTooltipProp
           <span className="text-muted">Fossil fuels</span>
           <span className="text-primary tabular-nums">{formatPercent(yearData.aggregates.fossil_pct)}</span>
         </div>
+        {independence && (
+          <div className="flex justify-between gap-4">
+            <span className="text-muted">Independence</span>
+            <span className="text-primary tabular-nums">{independence.score.toFixed(0)}</span>
+          </div>
+        )}
       </div>
     </div>
   );

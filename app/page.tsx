@@ -156,6 +156,7 @@ export default function Home() {
       <CountryTooltip
         country={hoveredCountry}
         position={tooltipPos}
+        fossilFuelData={fossilFuelData}
       />
     </div>
   );
