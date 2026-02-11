@@ -65,6 +65,8 @@ export interface IndependenceScore {
   vulnerabilities: string[];
   // Data year used (may differ from requested year)
   fossilDataYear?: number;
+  // Flag to indicate fossil fuel data is missing (score assumes 100% imports)
+  missingFossilData?: boolean;
 }
 
 /**
@@ -155,11 +157,15 @@ export function calculateIndependenceScoreV2(
   const oilPct = (oilTwh / total) * 100;
 
   // Calculate fossil fuel independence ratios
-  let coalIndep = 1.0; // Default to 100% if no data
-  let gasIndep = 1.0;
-  let oilIndep = 1.0;
+  // Default to 0% (import-dependent) when no data - this is more honest than
+  // assuming self-sufficiency. Countries with no data are likely small importers.
+  let coalIndep = 0.0;
+  let gasIndep = 0.0;
+  let oilIndep = 0.0;
+  let hasFossilData = false;
 
   if (fossilData) {
+    hasFossilData = true;
     // Production / Consumption ratio, capped at 1.0 (100%)
     // If consumption is 0, they don't use that fuel = 100% independent of it
     coalIndep = fossilData.coal.consumption > 0
@@ -258,6 +264,11 @@ export function calculateIndependenceScoreV2(
     vulnerabilities.push('No nuclear baseload capacity');
   }
 
+  // Flag missing fossil data as a vulnerability if country uses significant fossil fuels
+  if (!hasFossilData && yearData.aggregates.fossil_pct > 10) {
+    vulnerabilities.push(`No fossil fuel import data (${Math.round(yearData.aggregates.fossil_pct)}% fossil assumed imported)`);
+  }
+
   return {
     score: Math.round(score * 10) / 10,
     band,
@@ -272,6 +283,7 @@ export function calculateIndependenceScoreV2(
     },
     strengths,
     vulnerabilities,
+    missingFossilData: !hasFossilData,
   };
 }
 
