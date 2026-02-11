@@ -8,6 +8,7 @@ interface NavigationProps {
   currentPage?: NavItem;
 }
 
+// Core nav items for desktop - Methodology moved to footer
 const navItems: { key: NavItem; label: string; href: string }[] = [
   { key: 'explore', label: 'Explore', href: '/' },
   { key: 'compare', label: 'Compare', href: '/compare' },
@@ -15,7 +16,6 @@ const navItems: { key: NavItem; label: string; href: string }[] = [
   { key: 'correlations', label: 'Correlations', href: '/correlations' },
   { key: 'story', label: 'Story', href: '/story' },
   { key: 'why', label: 'Why', href: '/why' },
-  { key: 'methodology', label: 'Methodology', href: '/methodology' },
 ];
 
 export default function Navigation({ currentPage }: NavigationProps) {

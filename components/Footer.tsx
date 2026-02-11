@@ -8,6 +8,13 @@ export default function Footer() {
           {/* Links */}
           <div className="flex items-center gap-4 text-xs">
             <Link
+              href="/methodology"
+              className="text-muted hover:text-primary transition-colors"
+            >
+              Methodology
+            </Link>
+            <span className="text-border">|</span>
+            <Link
               href="/credits"
               className="text-muted hover:text-primary transition-colors"
             >
