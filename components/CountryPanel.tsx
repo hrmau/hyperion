@@ -53,11 +53,16 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
               style={{ width: `${barWidth}%`, backgroundColor: score.color }}
             />
           </div>
-          <span className="text-sm font-semibold text-primary tabular-nums w-12 text-right">
-            {formatIndependenceScore(score.score)}
+          <span className="text-sm font-semibold text-primary tabular-nums w-14 text-right">
+            {formatIndependenceScore(score.score)}{score.missingFossilData && '*'}
           </span>
         </div>
         <div className="text-[10px] text-muted mt-1">{getIndependenceDescription(score)}</div>
+        {score.missingFossilData && (
+          <div className="text-[10px] text-muted mt-1.5 pt-1.5 border-t border-border-subtle">
+            <span className="text-secondary">*</span> No fossil fuel import data available. Fossil fuels assumed 100% imported.
+          </div>
+        )}
       </div>
 
       {/* Collapsible Breakdown section */}

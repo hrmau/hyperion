@@ -857,7 +857,22 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">5. No Bilateral Trade Data</h4>
+                <h4 className="font-semibold text-primary text-sm mb-2">5. Missing Fossil Fuel Data for Some Countries</h4>
+                <p className="text-xs text-secondary mb-2">
+                  Our World in Data does not have fossil fuel production/consumption data for all countries. For countries without this data,
+                  we assume 100% of fossil fuels are imported, which may underestimate independence for countries that produce their own fossil fuels.
+                </p>
+                <p className="text-xs text-secondary mb-2">
+                  <strong className="text-primary">How to identify:</strong> Independence scores marked with an asterisk (*) indicate
+                  missing fossil fuel data. This is common for smaller countries and newer territories.
+                </p>
+                <p className="text-xs text-muted">
+                  This conservative assumption ensures we don&apos;t overstate energy independence when data is unavailable.
+                </p>
+              </div>
+
+              <div className="card p-4">
+                <h4 className="font-semibold text-primary text-sm mb-2">6. No Bilateral Trade Data</h4>
                 <p className="text-xs text-secondary">
                   We know Germany imports gas, but not specifically from Russia vs Norway vs USA.
                   Future enhancement could add Herfindahl Index for import concentration.
@@ -865,7 +880,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">6. Nuclear Scoring Is Controversial</h4>
+                <h4 className="font-semibold text-primary text-sm mb-2">7. Nuclear Scoring Is Controversial</h4>
                 <p className="text-xs text-secondary">
                   Scoring France at 20/100 despite 70% nuclear is provocative. Some will argue enrichment/fabrication capacity should count.
                   We intentionally score conservatively to spark debate.
@@ -873,7 +888,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">7. Renewables Hardware Imports</h4>
+                <h4 className="font-semibold text-primary text-sm mb-2">8. Renewables Hardware Imports</h4>
                 <p className="text-xs text-secondary mb-2">
                   If Germany installs Chinese solar panels powered by German sunlight, is it independent?
                 </p>
@@ -894,6 +909,16 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                   Energy independence is hard! Most countries import significant amounts of fuel.
                   A low score reveals vulnerability but doesn&apos;t mean the country is &quot;failing&quot; -
                   it means they&apos;re exposed to supply disruptions.
+                </p>
+              </div>
+
+              <div className="card p-4">
+                <h4 className="font-semibold text-primary text-sm mb-2">What does the asterisk (*) next to a score mean?</h4>
+                <p className="text-xs text-secondary">
+                  An asterisk indicates that fossil fuel import data is not available for that country.
+                  In these cases, we assume 100% of fossil fuels are imported, which may underestimate
+                  independence for countries that actually produce their own coal, gas, or oil.
+                  This conservative approach ensures we don&apos;t overstate energy independence when data is missing.
                 </p>
               </div>
 

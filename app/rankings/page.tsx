@@ -36,6 +36,7 @@ interface RowData {
   total_generation_twh: number;
   independence_score: number;
   independence_color: string | undefined;
+  independence_missing_data: boolean;
   clean_pct: number;
   fossil_pct: number;
   renewables_pct: number;
@@ -64,7 +65,7 @@ const columns: ColumnDef[] = [
     label: 'Independence',
     shortLabel: 'Indep.',
     align: 'right',
-    format: (r) => formatIndependenceScore(r.independence_score),
+    format: (r) => formatIndependenceScore(r.independence_score) + (r.independence_missing_data ? '*' : ''),
     colorFn: (r) => r.independence_color,
   },
   {
@@ -151,6 +152,7 @@ export default function RankingsPage() {
           total_generation_twh: yd.total_generation_twh,
           independence_score: indep?.score ?? 0,
           independence_color: indep?.color,
+          independence_missing_data: indep?.missingFossilData ?? false,
           clean_pct: yd.aggregates.clean_pct,
           fossil_pct: yd.aggregates.fossil_pct,
           renewables_pct: yd.aggregates.renewables_pct,
@@ -281,6 +283,10 @@ export default function RankingsPage() {
                   <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#F9731610', color: '#F97316' }}>40-59% Dependent</span>
                   <span className="px-2 py-0.5 rounded text-[10px]" style={{ backgroundColor: '#EF444410', color: '#EF4444' }}>&lt;40% Critical</span>
                 </div>
+                <p className="text-muted leading-relaxed mt-2">
+                  <span className="text-secondary font-medium">*</span> Score marked with an asterisk indicates no fossil fuel import data is available for that country.
+                  In these cases, fossil fuel generation is assumed to be 100% imported, which may underestimate independence for countries with domestic fossil fuel production.
+                </p>
               </div>
               <div>
                 <div className="font-medium text-secondary mb-1">Clean Energy %</div>
