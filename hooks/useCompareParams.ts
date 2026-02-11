@@ -53,7 +53,7 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
   const router = useRouter();
   const pathname = usePathname();
   const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isInitializedRef = useRef(false);
+  const pendingUpdatesRef = useRef<Partial<CompareParams>>({});
 
   // Parse current URL params
   const aParam = searchParams.get('a');
@@ -67,17 +67,23 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
   // Check if we loaded from URL (has any params)
   const isFromUrl = !!(aParam || bParam || yearParam);
 
-  // Debounced URL update
+  // Debounced URL update that accumulates changes
   const updateUrl = useCallback((newParams: Partial<CompareParams>) => {
+    // Accumulate changes
+    pendingUpdatesRef.current = { ...pendingUpdatesRef.current, ...newParams };
+
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current);
     }
 
     updateTimeoutRef.current = setTimeout(() => {
+      const updates = pendingUpdatesRef.current;
+      pendingUpdatesRef.current = {};
+
       const current = new URLSearchParams(searchParams.toString());
 
-      if ('a' in newParams) {
-        const encoded = encodeSelection(newParams.a!);
+      if ('a' in updates) {
+        const encoded = encodeSelection(updates.a!);
         if (encoded) {
           current.set('a', encoded);
         } else {
@@ -85,8 +91,8 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
         }
       }
 
-      if ('b' in newParams) {
-        const encoded = encodeSelection(newParams.b!);
+      if ('b' in updates) {
+        const encoded = encodeSelection(updates.b!);
         if (encoded) {
           current.set('b', encoded);
         } else {
@@ -94,13 +100,13 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
         }
       }
 
-      if ('year' in newParams) {
-        current.set('year', newParams.year!.toString());
+      if ('year' in updates) {
+        current.set('year', updates.year!.toString());
       }
 
       const newUrl = current.toString() ? `${pathname}?${current.toString()}` : pathname;
       router.replace(newUrl, { scroll: false });
-    }, 300);
+    }, 100); // Reduced debounce time
   }, [searchParams, pathname, router]);
 
   // Cleanup timeout on unmount
