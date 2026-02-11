@@ -86,7 +86,7 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
                   Grid Gorilla
                 </h1>
                 <p className="text-[11px] text-muted hidden sm:block">
-                  <span className="text-secondary">Global electricity explorer</span> &middot; 88 countries &middot; 2025
+                  <span className="text-secondary">Global electricity explorer</span> &middot; 214 countries
                 </p>
               </div>
             </Link>

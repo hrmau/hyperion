@@ -14,8 +14,8 @@ import {
   loadBlocs,
   loadFossilFuelData,
   getCountriesInBloc,
-  getLatestYear,
-  aggregateBloc,
+  getLatestYearData,
+  aggregateBlocLatest,
   blocAggToYearData,
 } from '@/lib/data';
 import type { CountriesData, BlocsData, Country, FossilFuelData } from '@/lib/types';
@@ -25,7 +25,6 @@ export default function Home() {
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
   const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [selectedBloc, setSelectedBloc] = useState<string>('ALL');
   const [mapMode, setMapMode] = useState<MapColorMode>('production');
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -38,7 +37,6 @@ export default function Home() {
         setCountries(countriesData);
         setBlocs(blocsData);
         setFossilFuelData(fossilData);
-        setSelectedYear(getLatestYear(countriesData));
         setLoading(false);
       })
       .catch(console.error);
@@ -52,22 +50,26 @@ export default function Home() {
 
   const topCountries = useMemo(() => {
     if (!countries) return [];
-    const yearStr = selectedYear.toString();
     const list = Object.values(countries)
-      .filter(c => c.years[yearStr])
-      .filter(c => selectedBloc === 'ALL' || blocCountryIds.has(c.iso3))
+      .map(c => {
+        const latest = getLatestYearData(c);
+        return { country: c, latest };
+      })
+      .filter(({ latest }) => latest !== null)
+      .filter(({ country }) => selectedBloc === 'ALL' || blocCountryIds.has(country.iso3))
       .sort((a, b) =>
-        (b.years[yearStr]?.total_generation_twh || 0) -
-        (a.years[yearStr]?.total_generation_twh || 0)
-      );
+        (b.latest?.data.total_generation_twh || 0) -
+        (a.latest?.data.total_generation_twh || 0)
+      )
+      .map(({ country }) => country);
     return list.slice(0, 10);
-  }, [countries, selectedYear, selectedBloc, blocCountryIds]);
+  }, [countries, selectedBloc, blocCountryIds]);
 
   const blocAgg = useMemo(() => {
     if (!countries || !blocs || selectedBloc === 'ALL') return null;
     const members = getCountriesInBloc(selectedBloc, countries, blocs);
-    return aggregateBloc(members, selectedYear);
-  }, [countries, blocs, selectedBloc, selectedYear]);
+    return aggregateBlocLatest(members);
+  }, [countries, blocs, selectedBloc]);
 
   const blocYearData = useMemo(() => {
     if (!blocAgg) return null;
@@ -123,7 +125,6 @@ export default function Home() {
             <div className="aspect-[16/9] lg:aspect-[2/1]">
               <WorldMap
                 countries={countries}
-                year={selectedYear}
                 selectedBloc={selectedBloc}
                 blocCountryIds={blocCountryIds}
                 onHover={handleHover}
@@ -138,7 +139,6 @@ export default function Home() {
           <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md">
             <CountryPanel
               country={selectedCountry}
-              year={selectedYear}
               topCountries={topCountries}
               onClose={() => setSelectedCountry(null)}
               onSelectCountry={setSelectedCountry}
@@ -155,7 +155,6 @@ export default function Home() {
 
       <CountryTooltip
         country={hoveredCountry}
-        year={selectedYear}
         position={tooltipPos}
       />
     </div>

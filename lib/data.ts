@@ -123,6 +123,43 @@ export function getLatestYear(countries: CountriesData): number {
   return years[years.length - 1];
 }
 
+/**
+ * Get the latest available year for a specific country
+ */
+export function getLatestYearForCountry(country: Country): number {
+  const years = Object.keys(country.years).map(Number).sort((a, b) => b - a);
+  return years[0] || 0;
+}
+
+/**
+ * Get the latest year data for a country along with which year it's from
+ */
+export function getLatestYearData(country: Country): { year: number; data: YearData } | null {
+  const latestYear = getLatestYearForCountry(country);
+  if (!latestYear) return null;
+
+  const data = country.years[latestYear.toString()];
+  if (!data) return null;
+
+  return { year: latestYear, data };
+}
+
+/**
+ * Get the latest year data for a country by ISO3 code
+ */
+export function getLatestYearDataByIso3(
+  iso3: string,
+  countries: CountriesData
+): { year: number; data: YearData; country: Country } | null {
+  const country = countries[iso3];
+  if (!country) return null;
+
+  const result = getLatestYearData(country);
+  if (!result) return null;
+
+  return { ...result, country };
+}
+
 export interface BlocAggregates {
   total_generation_twh: number;
   total_demand_twh: number;
@@ -212,5 +249,65 @@ export function blocAggToYearData(agg: BlocAggregates): YearData {
       wind_solar_pct: agg.wind_solar_pct,
     },
     emissions: { total_mtco2: agg.total_emissions_mtco2 },
+  };
+}
+
+/**
+ * Aggregate bloc data using each country's latest available data
+ */
+export function aggregateBlocLatest(members: Country[]): BlocAggregates | null {
+  let totalGen = 0;
+  let totalDemand = 0;
+  let totalEmissions = 0;
+  let fossilTwh = 0;
+  let renewablesTwh = 0;
+  let windSolarTwh = 0;
+  let count = 0;
+
+  const genBySource: Record<string, number> = {};
+  for (const s of ENERGY_SOURCES) genBySource[s] = 0;
+
+  for (const c of members) {
+    const latest = getLatestYearData(c);
+    if (!latest) continue;
+
+    const yd = latest.data;
+    count++;
+    totalGen += yd.total_generation_twh;
+    totalDemand += yd.demand_twh;
+    totalEmissions += yd.emissions.total_mtco2;
+
+    const gen = yd.generation;
+    for (const s of ENERGY_SOURCES) {
+      genBySource[s] += gen[s]?.twh || 0;
+    }
+
+    fossilTwh += (gen.coal?.twh || 0) + (gen.gas?.twh || 0) + (gen.other_fossil?.twh || 0);
+    renewablesTwh += (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) + (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0);
+    windSolarTwh += (gen.wind?.twh || 0) + (gen.solar?.twh || 0);
+  }
+
+  if (count === 0) return null;
+
+  const cleanTwh = totalGen - fossilTwh;
+
+  const generation = {} as Record<EnergySource, { twh: number; pct: number }>;
+  for (const s of ENERGY_SOURCES) {
+    generation[s] = {
+      twh: genBySource[s],
+      pct: totalGen > 0 ? (genBySource[s] / totalGen) * 100 : 0,
+    };
+  }
+
+  return {
+    total_generation_twh: totalGen,
+    total_demand_twh: totalDemand,
+    total_emissions_mtco2: totalEmissions,
+    clean_pct: totalGen > 0 ? (cleanTwh / totalGen) * 100 : 0,
+    fossil_pct: totalGen > 0 ? (fossilTwh / totalGen) * 100 : 0,
+    renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
+    wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
+    country_count: count,
+    generation,
   };
 }

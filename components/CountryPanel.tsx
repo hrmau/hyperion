@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Country, YearData, FossilFuelData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
+import { getLatestYearData } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import FlagImg from './FlagImg';
@@ -16,7 +17,6 @@ const BLOC_LABELS: Record<string, string> = {
 
 interface CountryPanelProps {
   country: Country | null;
-  year: number;
   topCountries: Country[];
   onClose: () => void;
   onSelectCountry: (country: Country) => void;
@@ -255,11 +255,12 @@ function CloseButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function CountryListItem({ country, index, year, onClick }: {
-  country: Country; index: number; year: number; onClick: () => void;
+function CountryListItem({ country, index, onClick }: {
+  country: Country; index: number; onClick: () => void;
 }) {
-  const yd = country.years[year.toString()];
-  if (!yd) return null;
+  const latest = getLatestYearData(country);
+  if (!latest) return null;
+  const { year, data: yd } = latest;
   return (
     <button
       onClick={onClick}
@@ -268,7 +269,10 @@ function CountryListItem({ country, index, year, onClick }: {
       <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
       <FlagImg iso3={country.iso3} size={18} />
       <div className="flex-1 min-w-0">
-        <div className="text-xs font-medium text-primary truncate">{country.name}</div>
+        <div className="text-xs font-medium text-primary truncate">
+          {country.name}
+          <span className="text-muted font-normal ml-1">({year})</span>
+        </div>
         <div className="text-[10px] text-muted">{formatPercent(yd.aggregates.clean_pct)} clean</div>
       </div>
       <span className="text-xs text-secondary tabular-nums">{formatTWh(yd.total_generation_twh)}</span>
@@ -277,13 +281,13 @@ function CountryListItem({ country, index, year, onClick }: {
 }
 
 export default function CountryPanel({
-  country, year, topCountries, onClose, onSelectCountry,
+  country, topCountries, onClose, onSelectCountry,
   selectedBloc, blocAgg, blocYearData, fossilFuelData,
 }: CountryPanelProps) {
 
-  // Single country detail
+  // Single country detail - use latest available data
   if (country) {
-    const yearData = country.years[year.toString()];
+    const latest = getLatestYearData(country);
     return (
       <div className="card h-full overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 flex items-center justify-between z-10">
@@ -291,16 +295,16 @@ export default function CountryPanel({
             <FlagImg iso3={country.iso3} size={24} />
             <div>
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
-              <p className="text-[11px] text-muted">{country.emberRegion}</p>
+              <p className="text-[11px] text-muted">{country.emberRegion}{latest ? ` · ${latest.year}` : ''}</p>
             </div>
           </div>
           <CloseButton onClick={onClose} />
         </div>
-        {!yearData ? (
-          <div className="p-4 text-xs text-muted">No data for {year}</div>
+        {!latest ? (
+          <div className="p-4 text-xs text-muted">No data available</div>
         ) : (
           <div className="p-4">
-            <CountryDetail country={country} yearData={yearData} year={year} fossilFuelData={fossilFuelData} />
+            <CountryDetail country={country} yearData={latest.data} year={latest.year} fossilFuelData={fossilFuelData} />
           </div>
         )}
       </div>
@@ -316,7 +320,7 @@ export default function CountryPanel({
             {BLOC_LABELS[selectedBloc] || selectedBloc} Overview
           </h2>
           <p className="text-[11px] text-muted">
-            {blocAgg.country_count} countries &middot; {year}
+            {blocAgg.country_count} countries
           </p>
         </div>
         <div className="p-4 space-y-5">
@@ -340,7 +344,7 @@ export default function CountryPanel({
           </div>
 
           <div>
-            <h3 className="text-xs font-medium text-secondary mb-2">Energy Mix ({year})</h3>
+            <h3 className="text-xs font-medium text-secondary mb-2">Energy Mix</h3>
             <EnergyMixChart yearData={blocYearData} />
           </div>
 
@@ -359,7 +363,6 @@ export default function CountryPanel({
                   key={c.iso3}
                   country={c}
                   index={i}
-                  year={year}
                   onClick={() => onSelectCountry(c)}
                 />
               ))}
@@ -375,7 +378,7 @@ export default function CountryPanel({
     <div className="card h-full overflow-y-auto">
       <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
         <h2 className="text-sm font-medium text-primary">Top Producers</h2>
-        <p className="text-[11px] text-muted">By total generation, {year}</p>
+        <p className="text-[11px] text-muted">By total generation (latest data)</p>
       </div>
       <div className="p-4">
         <div className="space-y-0">
@@ -384,7 +387,6 @@ export default function CountryPanel({
               key={c.iso3}
               country={c}
               index={i}
-              year={year}
               onClick={() => onSelectCountry(c)}
             />
           ))}

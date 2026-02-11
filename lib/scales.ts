@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { choroColors, independenceColors, cleanEnergyColors, type MapColorMode } from './colors';
 import type { CountriesData, FossilFuelData } from './types';
 import { calculateIndependenceScoreV2, getFossilDataForYear } from './independence';
+import { getLatestYearData, getLatestYearForCountry } from './data';
 
 export function createChoroplethScale(
   countries: CountriesData,
@@ -127,4 +128,88 @@ export function formatEmissions(value: number): string {
     return `${(value / 1000).toFixed(1)} Gt CO₂`;
   }
   return `${value.toFixed(1)} Mt CO₂`;
+}
+
+/**
+ * Create a choropleth scale using each country's latest available data
+ */
+export function createChoroplethScaleLatest(
+  countries: CountriesData
+): (value: number) => string {
+  const values: number[] = [];
+
+  for (const country of Object.values(countries)) {
+    const latest = getLatestYearData(country);
+    if (latest && latest.data.total_generation_twh > 0) {
+      values.push(latest.data.total_generation_twh);
+    }
+  }
+
+  if (values.length === 0) {
+    return () => choroColors[0];
+  }
+
+  const scale = d3.scaleQuantile<string>()
+    .domain(values.sort((a, b) => a - b))
+    .range(choroColors);
+
+  return (value: number) => scale(value);
+}
+
+/**
+ * Get the value for a country using its latest available data
+ * Returns both the value and the year it's from
+ */
+export function getCountryValueForModeLatest(
+  iso3: string,
+  countries: CountriesData,
+  mode: MapColorMode,
+  fossilFuelData: FossilFuelData | null
+): { value: number; year: number } | null {
+  const country = countries[iso3];
+  if (!country) return null;
+
+  const latest = getLatestYearData(country);
+  if (!latest) return null;
+
+  const { year, data: yearData } = latest;
+
+  switch (mode) {
+    case 'production':
+      return { value: yearData.total_generation_twh, year };
+
+    case 'clean':
+      return yearData.aggregates?.clean_pct != null
+        ? { value: yearData.aggregates.clean_pct, year }
+        : null;
+
+    case 'independence': {
+      const countryFossil = fossilFuelData?.countries?.[iso3];
+      const { data: fossilData } = getFossilDataForYear(countryFossil, year);
+      const score = calculateIndependenceScoreV2(yearData, fossilData, iso3);
+      return score?.score != null ? { value: score.score, year } : null;
+    }
+
+    default:
+      return null;
+  }
+}
+
+/**
+ * Create a color scale based on the map mode using latest data per country
+ */
+export function createScaleForModeLatest(
+  countries: CountriesData,
+  mode: MapColorMode
+): (value: number) => string {
+  switch (mode) {
+    case 'production':
+      return createChoroplethScaleLatest(countries);
+    case 'clean':
+      return createCleanEnergyScale();
+    case 'independence':
+      return createIndependenceScale();
+    default:
+      return createChoroplethScaleLatest(countries);
+  }
 }
