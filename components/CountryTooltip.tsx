@@ -2,19 +2,21 @@
 
 import type { Country } from '@/lib/types';
 import { formatTWh, formatPercent } from '@/lib/scales';
+import { getLatestYearData } from '@/lib/data';
 import FlagImg from './FlagImg';
 
 interface CountryTooltipProps {
   country: Country | null;
-  year: number;
   position: { x: number; y: number } | null;
 }
 
-export default function CountryTooltip({ country, year, position }: CountryTooltipProps) {
+export default function CountryTooltip({ country, position }: CountryTooltipProps) {
   if (!country || !position) return null;
 
-  const yearData = country.years[year.toString()];
-  if (!yearData) return null;
+  const latest = getLatestYearData(country);
+  if (!latest) return null;
+
+  const { year, data: yearData } = latest;
 
   return (
     <div
@@ -28,6 +30,7 @@ export default function CountryTooltip({ country, year, position }: CountryToolt
       <div className="text-xs font-medium text-primary mb-1.5 flex items-center gap-1.5">
         <FlagImg iso3={country.iso3} size={16} />
         <span>{country.name}</span>
+        <span className="text-muted font-normal">({year})</span>
       </div>
       <div className="space-y-0.5 text-[11px]">
         <div className="flex justify-between gap-4">

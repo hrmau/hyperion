@@ -6,11 +6,10 @@ import * as topojson from 'topojson-client';
 import type { Topology, GeometryCollection } from 'topojson-specification';
 import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
 import type { MapColorMode } from '@/lib/colors';
-import { createScaleForMode, getCountryValueForMode } from '@/lib/scales';
+import { createScaleForModeLatest, getCountryValueForModeLatest } from '@/lib/scales';
 
 interface WorldMapProps {
   countries: CountriesData;
-  year: number;
   selectedBloc: string;
   blocCountryIds: Set<string>;
   onHover: (country: Country | null, event: MouseEvent | null) => void;
@@ -77,7 +76,6 @@ const MAX_ZOOM = 8;
 
 export default function WorldMap({
   countries,
-  year,
   selectedBloc,
   blocCountryIds,
   onHover,
@@ -144,7 +142,7 @@ export default function WorldMap({
 
     const path = d3.geoPath().projection(projection);
 
-    const colorScale = createScaleForMode(countries, year, mapMode);
+    const colorScale = createScaleForModeLatest(countries, mapMode);
 
     const geomCollection = worldData.objects.countries as GeometryCollection;
     const features = topojson.feature(worldData, geomCollection).features;
@@ -188,14 +186,14 @@ export default function WorldMap({
         const iso3 = getIso3(d.id);
         if (!iso3) return noDataColor;
 
-        const value = getCountryValueForMode(iso3, countries, year, mapMode, fossilFuelData);
-        if (value === null) return noDataColor;
+        const result = getCountryValueForModeLatest(iso3, countries, mapMode, fossilFuelData);
+        if (result === null) return noDataColor;
 
         if (selectedBloc !== 'ALL' && !blocCountryIds.has(iso3)) {
           return noDataColor;
         }
 
-        return colorScale(value);
+        return colorScale(result.value);
       })
       .attr('stroke', 'none')
       .attr('cursor', (d) => {
@@ -241,7 +239,7 @@ export default function WorldMap({
       }
     }
 
-  }, [worldData, countries, year, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark, mapMode, fossilFuelData]);
+  }, [worldData, countries, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark, mapMode, fossilFuelData]);
 
   // Zoom control functions
   const handleZoomIn = useCallback(() => {
