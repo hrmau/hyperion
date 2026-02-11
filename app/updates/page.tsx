@@ -17,13 +17,13 @@ interface Update {
 
 const updates: Update[] = [
   {
-    date: 'Feb 2025',
+    date: 'Feb 2026',
     title: 'Shareable Compare URLs',
     description: 'Compare page state is now saved to the URL. Share specific country comparisons with others by copying the link.',
     tag: 'feature',
   },
   {
-    date: 'Jan 2025',
+    date: 'Feb 2026',
     title: 'Correlation Dashboard',
     description: 'New interactive scatter plots exploring the relationship between energy consumption and prosperity indicators.',
     highlights: [
@@ -35,7 +35,7 @@ const updates: Update[] = [
     tag: 'feature',
   },
   {
-    date: 'Jan 2025',
+    date: 'Feb 2026',
     title: 'Map Color Modes',
     description: 'Switch between three different map visualizations to explore different aspects of global electricity.',
     highlights: [
@@ -46,19 +46,19 @@ const updates: Update[] = [
     tag: 'feature',
   },
   {
-    date: 'Dec 2024',
+    date: 'Jan 2026',
     title: 'Why Energy Matters',
     description: 'Comprehensive educational page explaining the connection between energy abundance and economic prosperity.',
     tag: 'feature',
   },
   {
-    date: 'Dec 2024',
+    date: 'Jan 2026',
     title: 'Energy Story Timeline',
     description: 'Visual narrative exploring how global electricity generation has evolved from 1998 to 2025, highlighting key transitions and country stories.',
     tag: 'feature',
   },
   {
-    date: 'Nov 2024',
+    date: 'Jan 2026',
     title: 'Energy Independence Score v2',
     description: 'Major methodology update incorporating fossil fuel import dependency and uranium production data.',
     highlights: [
@@ -70,13 +70,13 @@ const updates: Update[] = [
     tag: 'data',
   },
   {
-    date: 'Nov 2024',
+    date: 'Jan 2026',
     title: 'Rankings Page',
     description: 'Sortable table showing all 88 countries ranked by various metrics including generation, independence score, clean energy percentage, and more.',
     tag: 'feature',
   },
   {
-    date: 'Oct 2024',
+    date: 'Jan 2026',
     title: 'Country Comparison',
     description: 'Side-by-side comparison of up to 4 countries with split bars showing energy mix breakdown.',
     highlights: [
@@ -87,25 +87,25 @@ const updates: Update[] = [
     tag: 'feature',
   },
   {
-    date: 'Oct 2024',
+    date: 'Dec 2025',
     title: 'Energy Independence Score MVP',
     description: 'First version of the independence scoring system, measuring how much electricity comes from domestic vs imported sources.',
     tag: 'feature',
   },
   {
-    date: 'Oct 2024',
+    date: 'Dec 2025',
     title: 'Dark Mode',
     description: 'Full dark theme support across all pages. Toggle in the header to switch between light and dark modes.',
     tag: 'feature',
   },
   {
-    date: 'Sep 2024',
+    date: 'Dec 2025',
     title: 'Map Zoom & Pan',
     description: 'Interactive map controls allowing zoom and pan for detailed regional exploration.',
     tag: 'feature',
   },
   {
-    date: 'Sep 2024',
+    date: 'Dec 2025',
     title: 'Initial Launch',
     description: 'Grid Gorilla launches with core features for exploring global electricity data.',
     highlights: [
