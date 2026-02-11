@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { Suspense, useEffect, useState, useMemo, useCallback } from 'react';
 import {
   loadCountries,
   loadBlocs,
@@ -11,7 +11,7 @@ import {
   blocAggToYearData,
 } from '@/lib/data';
 import type { BlocAggregates } from '@/lib/data';
-import type { CountriesData, BlocsData, YearData, FossilFuelData, FossilFuelYearData } from '@/lib/types';
+import type { CountriesData, BlocsData, YearData, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import FlagImg from '@/components/FlagImg';
@@ -19,6 +19,9 @@ import CountrySelect from '@/components/CountrySelect';
 import EnergyMixChart from '@/components/EnergyMixChart';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ShareButton from '@/components/ShareButton';
+import { ToastProvider } from '@/components/Toast';
+import { useCompareParams } from '@/hooks/useCompareParams';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'EU', label: 'EU' },
@@ -167,17 +170,15 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
   );
 }
 
-export default function ComparePage() {
+function ComparePageContent() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
   const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [year, setYear] = useState<number>(2025);
+  const [defaultYear, setDefaultYear] = useState(2025);
 
-  const [typeA, setTypeA] = useState<SelectionType>('country');
-  const [typeB, setTypeB] = useState<SelectionType>('country');
-  const [idA, setIdA] = useState<string>('');
-  const [idB, setIdB] = useState<string>('');
+  // URL-driven state
+  const { params, setSelectionA, setSelectionB } = useCompareParams(defaultYear);
 
   useEffect(() => {
     Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
@@ -185,11 +186,35 @@ export default function ComparePage() {
         setCountries(countriesData);
         setBlocs(blocsData);
         setFossilFuelData(fossilData);
-        setYear(getLatestYear(countriesData));
+        setDefaultYear(getLatestYear(countriesData));
         setLoading(false);
       })
       .catch(console.error);
   }, []);
+
+  // Extract state from URL params
+  const typeA = params.a.type;
+  const typeB = params.b.type;
+  const idA = params.a.id;
+  const idB = params.b.id;
+  const year = params.year || defaultYear;
+
+  // Handlers that update URL
+  const handleSetIdA = useCallback((id: string) => {
+    setSelectionA(typeA, id);
+  }, [setSelectionA, typeA]);
+
+  const handleSetIdB = useCallback((id: string) => {
+    setSelectionB(typeB, id);
+  }, [setSelectionB, typeB]);
+
+  const handleSetTypeA = useCallback((t: SelectionType) => {
+    setSelectionA(t, '');
+  }, [setSelectionA]);
+
+  const handleSetTypeB = useCallback((t: SelectionType) => {
+    setSelectionB(t, '');
+  }, [setSelectionB]);
 
   const resolvedA = useMemo(() => {
     if (!countries || !blocs || !idA) return null;
@@ -201,6 +226,15 @@ export default function ComparePage() {
     return resolveSelection(typeB, idB, countries, blocs, year);
   }, [countries, blocs, typeB, idB, year]);
 
+  // Dynamic page title
+  useEffect(() => {
+    if (resolvedA && resolvedB) {
+      document.title = `${resolvedA.label} vs ${resolvedB.label} — Grid Gorilla`;
+    } else {
+      document.title = 'Compare — Grid Gorilla';
+    }
+  }, [resolvedA, resolvedB]);
+
   if (loading || !countries || !blocs) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-canvas">
@@ -209,34 +243,39 @@ export default function ComparePage() {
     );
   }
 
+  const hasComparison = resolvedA && resolvedB;
+
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
       <Header currentPage="compare" />
 
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 space-y-6">
         <div>
-          <div className="text-[11px] text-muted uppercase tracking-wider mb-3">
-            Locations to compare
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-[11px] text-muted uppercase tracking-wider">
+              Locations to compare
+            </div>
+            <ShareButton disabled={!hasComparison} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <SelectionDropdown
               value={idA}
-              onChange={setIdA}
+              onChange={handleSetIdA}
               countries={countries}
               type={typeA}
-              onTypeChange={(t) => { setTypeA(t); setIdA(''); }}
+              onTypeChange={handleSetTypeA}
             />
             <SelectionDropdown
               value={idB}
-              onChange={setIdB}
+              onChange={handleSetIdB}
               countries={countries}
               type={typeB}
-              onTypeChange={(t) => { setTypeB(t); setIdB(''); }}
+              onTypeChange={handleSetTypeB}
             />
           </div>
         </div>
 
-        {resolvedA && resolvedB && (
+        {hasComparison && (
           <>
             <div className="card p-5 border-border bg-inset">
               <div className="text-[11px] text-secondary font-medium mb-2 uppercase tracking-wider">
@@ -359,11 +398,9 @@ export default function ComparePage() {
                       key={iso3}
                       onClick={() => {
                         if (!idA || (typeA === 'country' && idA === iso3)) {
-                          setTypeA('country');
-                          setIdA(iso3);
+                          setSelectionA('country', iso3);
                         } else {
-                          setTypeB('country');
-                          setIdB(iso3);
+                          setSelectionB('country', iso3);
                         }
                       }}
                       className="px-2 py-0.5 rounded text-[11px] text-muted hover:text-secondary hover:bg-inset transition-colors inline-flex items-center gap-1"
@@ -377,7 +414,7 @@ export default function ComparePage() {
           </>
         )}
 
-        {(!resolvedA || !resolvedB) && (
+        {!hasComparison && (
           <div className="card p-8 text-center">
             <div className="text-sm text-secondary mb-2">
               Select two countries or blocs to compare
@@ -396,8 +433,8 @@ export default function ComparePage() {
                   <button
                     key={label}
                     onClick={() => {
-                      setTypeA('country'); setIdA(a);
-                      setTypeB('country'); setIdB(b);
+                      setSelectionA('country', a);
+                      setSelectionB('country', b);
                     }}
                     className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors inline-flex items-center gap-1"
                   >
@@ -406,8 +443,8 @@ export default function ComparePage() {
                 ))}
                 <button
                   onClick={() => {
-                    setTypeA('bloc'); setIdA('EU');
-                    setTypeB('bloc'); setIdB('BRICS');
+                    setSelectionA('bloc', 'EU');
+                    setSelectionB('bloc', 'BRICS');
                   }}
                   className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors"
                 >
@@ -421,6 +458,20 @@ export default function ComparePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ComparePage() {
+  return (
+    <ToastProvider>
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center bg-canvas">
+          <div className="text-secondary text-sm">Loading...</div>
+        </div>
+      }>
+        <ComparePageContent />
+      </Suspense>
+    </ToastProvider>
   );
 }
 
