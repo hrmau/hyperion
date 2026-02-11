@@ -233,11 +233,6 @@ function CountryDetail({ country, yearData, year, fossilFuelData }: {
         </h3>
         <EnergyMixChart yearData={yearData} />
       </div>
-      <div className="space-y-0.5">
-        <StatRow label="Renewables" value={formatPercent(yearData.aggregates.renewables_pct)} />
-        <StatRow label="Wind + Solar" value={formatPercent(yearData.aggregates.wind_solar_pct)} />
-        <StatRow label="Fossil Fuels" value={formatPercent(yearData.aggregates.fossil_pct)} />
-      </div>
       {country.blocs.length > 0 && (
         <div>
           <h3 className="text-xs font-medium text-secondary mb-1.5">Member of</h3>
