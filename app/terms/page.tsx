@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Terms of Use | Grid Gorilla',
+  description: 'Terms of use for Grid Gorilla, an educational data visualization tool for global electricity generation and energy data.',
+  alternates: {
+    canonical: '/terms',
+  },
+};
 
 export default function TermsPage() {
   return (
