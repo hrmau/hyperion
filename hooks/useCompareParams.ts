@@ -22,6 +22,7 @@ interface UseCompareParamsReturn {
   setSelectionB: (type: SelectionType, id: string) => void;
   setYear: (year: number) => void;
   isFromUrl: boolean;
+  yearIsExplicit: boolean;
 }
 
 /**
@@ -68,6 +69,9 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
 
   // Check if we loaded from URL (has any params)
   const isFromUrl = !!(aParam || bParam || yearParam);
+
+  // Check if year was explicitly set in URL (not just defaulted)
+  const yearIsExplicit = yearParam !== null;
 
   // Debounced URL update that accumulates changes
   const updateUrl = useCallback((newParams: Partial<CompareParams>) => {
@@ -138,5 +142,6 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
     setSelectionB,
     setYear,
     isFromUrl,
+    yearIsExplicit,
   };
 }

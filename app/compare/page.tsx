@@ -277,7 +277,7 @@ function ComparePageContent() {
   const [defaultYear, setDefaultYear] = useState(2025);
 
   // URL-driven state
-  const { params, setSelectionA, setSelectionB } = useCompareParams(defaultYear);
+  const { params, setSelectionA, setSelectionB, yearIsExplicit } = useCompareParams(defaultYear);
 
   useEffect(() => {
     Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
@@ -298,12 +298,12 @@ function ComparePageContent() {
   const idB = params.b.id;
   const urlYear = params.year;
 
-  // Calculate effective year: use URL year if set, otherwise find common year for both selections
+  // Calculate effective year: use URL year if explicitly set, otherwise find common year for both selections
   const effectiveYear = useMemo(() => {
-    if (urlYear) return urlYear;
+    if (yearIsExplicit && urlYear) return urlYear;
     if (!countries || !blocs || !idA || !idB) return defaultYear;
     return getCommonLatestYear(typeA, idA, typeB, idB, countries, blocs, defaultYear);
-  }, [urlYear, countries, blocs, typeA, idA, typeB, idB, defaultYear]);
+  }, [yearIsExplicit, urlYear, countries, blocs, typeA, idA, typeB, idB, defaultYear]);
 
   const year = effectiveYear;
 
