@@ -45,6 +45,63 @@ interface ResolvedSelection {
   blocAgg?: BlocAggregates;
 }
 
+/**
+ * Get available years for a selection (country or bloc)
+ */
+function getAvailableYearsForSelection(
+  type: SelectionType,
+  id: string,
+  countries: CountriesData,
+  blocs: BlocsData
+): number[] {
+  if (type === 'country') {
+    const c = countries[id];
+    if (!c) return [];
+    return Object.keys(c.years).map(Number).sort((a, b) => a - b);
+  } else {
+    // For blocs, find years where at least some members have data
+    const members = getCountriesInBloc(id, countries, blocs);
+    const yearsSet = new Set<number>();
+    for (const m of members) {
+      for (const y of Object.keys(m.years)) {
+        yearsSet.add(parseInt(y));
+      }
+    }
+    return Array.from(yearsSet).sort((a, b) => a - b);
+  }
+}
+
+/**
+ * Find the latest common year available for both selections
+ */
+function getCommonLatestYear(
+  typeA: SelectionType,
+  idA: string,
+  typeB: SelectionType,
+  idB: string,
+  countries: CountriesData,
+  blocs: BlocsData,
+  defaultYear: number
+): number {
+  if (!idA || !idB) return defaultYear;
+
+  const yearsA = getAvailableYearsForSelection(typeA, idA, countries, blocs);
+  const yearsB = getAvailableYearsForSelection(typeB, idB, countries, blocs);
+
+  if (yearsA.length === 0 || yearsB.length === 0) return defaultYear;
+
+  // Find common years
+  const setB = new Set(yearsB);
+  const commonYears = yearsA.filter(y => setB.has(y));
+
+  if (commonYears.length === 0) {
+    // No common years - fall back to the minimum of their latest years
+    return Math.min(yearsA[yearsA.length - 1], yearsB[yearsB.length - 1]);
+  }
+
+  return commonYears[commonYears.length - 1]; // Latest common year
+}
+
 function resolveSelection(
   type: SelectionType,
   id: string,
@@ -199,7 +256,16 @@ function ComparePageContent() {
   const typeB = params.b.type;
   const idA = params.a.id;
   const idB = params.b.id;
-  const year = params.year || defaultYear;
+  const urlYear = params.year;
+
+  // Calculate effective year: use URL year if set, otherwise find common year for both selections
+  const effectiveYear = useMemo(() => {
+    if (urlYear) return urlYear;
+    if (!countries || !blocs || !idA || !idB) return defaultYear;
+    return getCommonLatestYear(typeA, idA, typeB, idB, countries, blocs, defaultYear);
+  }, [urlYear, countries, blocs, typeA, idA, typeB, idB, defaultYear]);
+
+  const year = effectiveYear;
 
   // Handlers that update URL
   const handleSetIdA = useCallback((id: string) => {
@@ -280,8 +346,13 @@ function ComparePageContent() {
         {hasComparison && (
           <>
             <div className="card p-5 border-border bg-inset">
-              <div className="text-[11px] text-secondary font-medium mb-2 uppercase tracking-wider">
-                Comparison Summary
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-[11px] text-secondary font-medium uppercase tracking-wider">
+                  Comparison Summary
+                </div>
+                <div className="text-[11px] text-muted">
+                  Data from <span className="font-medium text-secondary">{year}</span>
+                </div>
               </div>
               <ComparisonSummary a={resolvedA} b={resolvedB} fossilFuelData={fossilFuelData} year={year} />
             </div>

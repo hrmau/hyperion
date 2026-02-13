@@ -98,6 +98,28 @@
           "EGY", "NGA", "ZAF", "KEN", "ETH", "MAR", "DZA",
           "TUR", "SAU", "ARE", "IRN", "IRQ", "PAK", "BGD"
         ]
+      },
+      "ELECTROSTATES": {
+        "name": "Electrostates",
+        "description": "Countries leading the electricity-based energy revolution",
+        "source": "manual",
+        "members": ["CHN", "IND", "VNM", "IDN", "THA", "KOR", "BRA", "CHL", "ZAF", "AUS"]
+      },
+      "PETROSTATES": {
+        "name": "Petrostates",
+        "description": "OPEC core members + Russia — the fossil fuel powers",
+        "source": "manual",
+        "members": ["SAU", "IRN", "IRQ", "KWT", "VEN", "ARE", "DZA", "NGA", "RUS"]
+      },
+      "NUCLEAR_CLUB": {
+        "name": "Nuclear Club",
+        "description": "Countries with significant operational nuclear power generation",
+        "source": "manual",
+        "members": [
+          "FRA", "USA", "CHN", "RUS", "KOR", "CAN", "UKR", "JPN", "IND", "ESP",
+          "BEL", "SWE", "CZE", "FIN", "GBR", "CHE", "HUN", "BGR", "PAK", "ROU",
+          "ZAF", "ARG", "BRA", "ARE", "SVK"
+        ]
       }
     }
   }

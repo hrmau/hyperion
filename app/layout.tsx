@@ -6,8 +6,12 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.gridgorilla.app'),
   title: "Grid Gorilla - Global Electricity Production",
   description: "Interactive visualization of global electricity production by country and geopolitical bloc",
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: [
       { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png", media: "(prefers-color-scheme: light)" },
