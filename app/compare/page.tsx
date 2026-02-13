@@ -33,6 +33,9 @@ const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'ASEAN', label: 'ASEAN' },
   { id: 'THE_WEST', label: 'The West' },
   { id: 'GLOBAL_SOUTH', label: 'Global South' },
+  { id: 'ELECTROSTATES', label: 'Electrostates' },
+  { id: 'PETROSTATES', label: 'Petrostates' },
+  { id: 'NUCLEAR_CLUB', label: 'Nuclear Club' },
 ];
 
 type SelectionType = 'country' | 'bloc';
@@ -43,6 +46,7 @@ interface ResolvedSelection {
   yearData: YearData;
   subtitle: string;
   blocAgg?: BlocAggregates;
+  actualYear: number;
 }
 
 /**
@@ -102,6 +106,31 @@ function getCommonLatestYear(
   return commonYears[commonYears.length - 1]; // Latest common year
 }
 
+/**
+ * Find the nearest available year to the target year for a country
+ */
+function getNearestAvailableYear(country: { years: Record<string, YearData> }, targetYear: number): number | null {
+  const availableYears = Object.keys(country.years).map(Number).sort((a, b) => a - b);
+  if (availableYears.length === 0) return null;
+
+  // First try exact match
+  if (availableYears.includes(targetYear)) return targetYear;
+
+  // Find nearest year
+  let nearest = availableYears[0];
+  let minDiff = Math.abs(targetYear - nearest);
+
+  for (const y of availableYears) {
+    const diff = Math.abs(targetYear - y);
+    if (diff < minDiff) {
+      minDiff = diff;
+      nearest = y;
+    }
+  }
+
+  return nearest;
+}
+
 function resolveSelection(
   type: SelectionType,
   id: string,
@@ -112,13 +141,23 @@ function resolveSelection(
   if (type === 'country') {
     const c = countries[id];
     if (!c) return null;
-    const yd = c.years[year.toString()];
-    if (!yd) return null;
+
+    // Try requested year first, fall back to nearest available
+    let actualYear = year;
+    let yd = c.years[year.toString()];
+    if (!yd) {
+      const nearestYear = getNearestAvailableYear(c, year);
+      if (!nearestYear) return null;
+      actualYear = nearestYear;
+      yd = c.years[nearestYear.toString()];
+    }
+
     return {
       label: c.name,
       iso3: c.iso3,
       yearData: yd,
       subtitle: c.emberRegion,
+      actualYear,
     };
   } else {
     const members = getCountriesInBloc(id, countries, blocs);
@@ -131,6 +170,7 @@ function resolveSelection(
       yearData: blocAggToYearData(agg),
       subtitle: `${agg.country_count} countries`,
       blocAgg: agg,
+      actualYear: year,
     };
   }
 }
@@ -351,10 +391,14 @@ function ComparePageContent() {
                   Comparison Summary
                 </div>
                 <div className="text-[11px] text-muted">
-                  Data from <span className="font-medium text-secondary">{year}</span>
+                  {resolvedA.actualYear === resolvedB.actualYear ? (
+                    <>Data from <span className="font-medium text-secondary">{resolvedA.actualYear}</span></>
+                  ) : (
+                    <>Data from <span className="font-medium text-secondary">{resolvedA.actualYear}</span> / <span className="font-medium text-secondary">{resolvedB.actualYear}</span></>
+                  )}
                 </div>
               </div>
-              <ComparisonSummary a={resolvedA} b={resolvedB} fossilFuelData={fossilFuelData} year={year} />
+              <ComparisonSummary a={resolvedA} b={resolvedB} fossilFuelData={fossilFuelData} />
             </div>
 
             <div className="card p-5 space-y-5">
@@ -397,12 +441,12 @@ function ComparePageContent() {
               {(() => {
                 const scoreA = calculateIndependenceScoreV2(
                   resolvedA.yearData,
-                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data : null,
+                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], resolvedA.actualYear).data : null,
                   resolvedA.iso3 ?? undefined
                 );
                 const scoreB = calculateIndependenceScoreV2(
                   resolvedB.yearData,
-                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data : null,
+                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], resolvedB.actualYear).data : null,
                   resolvedB.iso3 ?? undefined
                 );
                 return (
@@ -449,12 +493,12 @@ function ComparePageContent() {
               {(() => {
                 const scoreA = resolvedA.iso3 ? calculateIndependenceScoreV2(
                   resolvedA.yearData,
-                  getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], year).data,
+                  getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], resolvedA.actualYear).data,
                   resolvedA.iso3
                 ) : null;
                 const scoreB = resolvedB.iso3 ? calculateIndependenceScoreV2(
                   resolvedB.yearData,
-                  getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], year).data,
+                  getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], resolvedB.actualYear).data,
                   resolvedB.iso3
                 ) : null;
                 if (scoreA?.missingFossilData || scoreB?.missingFossilData) {
@@ -476,6 +520,7 @@ function ComparePageContent() {
                 <div className="flex items-center gap-2 mb-2">
                   {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={18} />}
                   <span className="text-xs font-medium text-primary">{resolvedA.label}</span>
+                  <span className="text-[10px] text-muted">({resolvedA.actualYear})</span>
                 </div>
                 <EnergyMixChart yearData={resolvedA.yearData} />
               </div>
@@ -483,6 +528,7 @@ function ComparePageContent() {
                 <div className="flex items-center gap-2 mb-2">
                   {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={18} />}
                   <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
+                  <span className="text-[10px] text-muted">({resolvedB.actualYear})</span>
                 </div>
                 <EnergyMixChart yearData={resolvedB.yearData} />
               </div>
@@ -576,11 +622,10 @@ export default function ComparePage() {
   );
 }
 
-function ComparisonSummary({ a, b, fossilFuelData, year }: {
+function ComparisonSummary({ a, b, fossilFuelData }: {
   a: ResolvedSelection;
   b: ResolvedSelection;
   fossilFuelData: FossilFuelData | null;
-  year: number;
 }) {
   const cleanDiff = Math.abs(a.yearData.aggregates.clean_pct - b.yearData.aggregates.clean_pct);
   const cleaner = a.yearData.aggregates.clean_pct > b.yearData.aggregates.clean_pct ? a : b;
@@ -591,15 +636,15 @@ function ComparisonSummary({ a, b, fossilFuelData, year }: {
     ? (Math.max(genA, genB) / Math.min(genA, genB)).toFixed(1)
     : null;
 
-  // Calculate independence scores
+  // Calculate independence scores using each selection's actual year
   const scoreA = calculateIndependenceScoreV2(
     a.yearData,
-    a.iso3 ? getFossilDataForYear(fossilFuelData?.countries[a.iso3], year).data : null,
+    a.iso3 ? getFossilDataForYear(fossilFuelData?.countries[a.iso3], a.actualYear).data : null,
     a.iso3 ?? undefined
   );
   const scoreB = calculateIndependenceScoreV2(
     b.yearData,
-    b.iso3 ? getFossilDataForYear(fossilFuelData?.countries[b.iso3], year).data : null,
+    b.iso3 ? getFossilDataForYear(fossilFuelData?.countries[b.iso3], b.actualYear).data : null,
     b.iso3 ?? undefined
   );
 

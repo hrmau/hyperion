@@ -13,6 +13,7 @@ const BLOC_LABELS: Record<string, string> = {
   ALL: 'All', EU: 'EU', NATO: 'NATO', BRICS: 'BRICS+', G7: 'G7',
   G20: 'G20', OECD: 'OECD', ASEAN: 'ASEAN', THE_WEST: 'The West',
   GLOBAL_SOUTH: 'Global South', OPEC_PLUS: 'OPEC+',
+  ELECTROSTATES: 'Electrostates', PETROSTATES: 'Petrostates', NUCLEAR_CLUB: 'Nuclear Club',
 };
 
 interface CountryPanelProps {

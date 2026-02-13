@@ -16,6 +16,9 @@ const blocOptions: BlocOption[] = [
   { id: 'ASEAN', label: 'ASEAN' },
   { id: 'THE_WEST', label: 'The West' },
   { id: 'GLOBAL_SOUTH', label: 'Global South' },
+  { id: 'ELECTROSTATES', label: 'Electrostates' },
+  { id: 'PETROSTATES', label: 'Petrostates' },
+  { id: 'NUCLEAR_CLUB', label: 'Nuclear Club' },
 ];
 
 interface BlocSelectorProps {
