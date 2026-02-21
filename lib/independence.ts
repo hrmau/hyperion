@@ -48,7 +48,7 @@ export function getUraniumIndependence(iso3: string): number {
 }
 
 export interface IndependenceScore {
-  score: number; // 0-100 (final weighted score)
+  score: number; // 0-100 (final weighted score, capped at 100 for net exporters)
   band: 'fortress' | 'strong' | 'moderate' | 'dependent' | 'critical';
   label: string;
   color: string;
@@ -202,9 +202,12 @@ export function calculateIndependenceScoreV2(
   const gasContribution = gasPct * gasIndep;
   const oilContribution = oilPct * oilIndep;
 
-  // Final score
-  const score = renewableContribution + nuclearContribution +
-                coalContribution + gasContribution + oilContribution;
+  // Final score - capped at 100%
+  // Net exporters (generation > demand) can exceed 100% in raw calculation,
+  // but we cap at 100 since "fully independent" is the maximum meaningful state
+  const rawScore = renewableContribution + nuclearContribution +
+                   coalContribution + gasContribution + oilContribution;
+  const score = Math.min(rawScore, 100);
 
   // Determine band and styling
   const { band, label, color } = getScoreBand(score);
@@ -212,6 +215,12 @@ export function calculateIndependenceScoreV2(
   // Generate insights
   const strengths: string[] = [];
   const vulnerabilities: string[] = [];
+
+  // Net exporter bonus - they generate more than they consume
+  if (rawScore > 100) {
+    const exportRatio = Math.round((generation / demand - 1) * 100);
+    strengths.push(`Net electricity exporter (+${exportRatio}% of demand)`);
+  }
 
   if (renewablePct >= 50) {
     strengths.push(`${Math.round(renewablePct)}% renewable electricity is fully independent`);
