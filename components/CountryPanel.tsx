@@ -6,7 +6,6 @@ import type { BlocAggregates } from '@/lib/data';
 import { getLatestYearData } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
-import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
 import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
@@ -271,149 +270,28 @@ function CloseButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function MiniEnergyBar({ yearData }: { yearData: YearData }) {
-  const { generation } = yearData;
-  const data = energyOrder.map(source => ({
-    source,
-    color: energyColors[source],
-    pct: generation[source]?.pct || 0,
-  })).filter(d => d.pct > 0);
-
-  return (
-    <div className="h-2 rounded-full overflow-hidden flex bg-inset">
-      {data.map((d) => (
-        <div
-          key={d.source}
-          style={{ width: `${d.pct}%`, backgroundColor: d.color }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ExpandableCountryRow({ country, index, onViewDetails, fossilFuelData, expandedIso, setExpandedIso }: {
-  country: Country;
-  index: number;
-  onViewDetails: () => void;
-  fossilFuelData: FossilFuelData | null;
-  expandedIso: string | null;
-  setExpandedIso: (iso: string | null) => void;
+function CountryListItem({ country, index, onClick }: {
+  country: Country; index: number; onClick: () => void;
 }) {
   const latest = getLatestYearData(country);
   if (!latest) return null;
   const { year, data: yd } = latest;
-  const isExpanded = expandedIso === country.iso3;
-
-  const { data: fossilYear } = getFossilDataForYear(
-    fossilFuelData?.countries[country.iso3],
-    year
-  );
-  const score = calculateIndependenceScoreV2(yd, fossilYear, country.iso3);
-
-  const toggleExpand = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setExpandedIso(isExpanded ? null : country.iso3);
-  };
-
   return (
-    <div className={`rounded-lg transition-colors ${isExpanded ? 'bg-inset' : ''}`}>
-      <button
-        onClick={toggleExpand}
-        className={`w-full flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-inset transition-colors text-left ${isExpanded ? 'hover:bg-inset/50' : ''}`}
-      >
-        <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
-        <FlagImg iso3={country.iso3} size={18} />
-        <div className="flex-1 min-w-0">
-          <div className="text-xs font-medium text-primary truncate">
-            {country.name}
-            <span className="text-muted font-normal ml-1">({year})</span>
-          </div>
-          <div className="text-[10px] text-muted">{formatPercent(yd.aggregates.clean_pct)} clean</div>
+    <button
+      onClick={onClick}
+      className="w-full flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg hover:bg-inset transition-colors text-left"
+    >
+      <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
+      <FlagImg iso3={country.iso3} size={18} />
+      <div className="flex-1 min-w-0">
+        <div className="text-xs font-medium text-primary truncate">
+          {country.name}
+          <span className="text-muted font-normal ml-1">({year})</span>
         </div>
-        <span className="text-xs text-secondary tabular-nums">{formatTWh(yd.total_generation_twh)}</span>
-        <svg
-          className={`w-3.5 h-3.5 text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {isExpanded && (
-        <div className="px-3 pb-3 pt-1 space-y-3">
-          {/* Mini energy bar */}
-          <div>
-            <div className="text-[10px] text-muted mb-1">Energy Mix</div>
-            <MiniEnergyBar yearData={yd} />
-            <div className="flex justify-between mt-1.5 text-[10px]">
-              <span className="text-muted">
-                <span className="inline-block w-2 h-2 rounded-sm mr-1" style={{ backgroundColor: '#22C55E' }} />
-                Renewables {formatPercent(yd.aggregates.renewables_pct)}
-              </span>
-              <span className="text-muted">
-                <span className="inline-block w-2 h-2 rounded-sm mr-1" style={{ backgroundColor: '#8B5CF6' }} />
-                Nuclear {formatPercent(yd.generation.nuclear?.pct || 0)}
-              </span>
-              <span className="text-muted">
-                <span className="inline-block w-2 h-2 rounded-sm mr-1" style={{ backgroundColor: '#374151' }} />
-                Fossil {formatPercent(yd.aggregates.fossil_pct)}
-              </span>
-            </div>
-          </div>
-
-          {/* Key stats grid */}
-          <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="bg-card rounded-md py-1.5 px-2">
-              <div className="text-[9px] text-muted uppercase tracking-wider">Generation</div>
-              <div className="text-[11px] font-medium text-primary">{formatTWh(yd.total_generation_twh)}</div>
-            </div>
-            <div className="bg-card rounded-md py-1.5 px-2">
-              <div className="text-[9px] text-muted uppercase tracking-wider">Demand</div>
-              <div className="text-[11px] font-medium text-primary">{formatTWh(yd.demand_twh)}</div>
-            </div>
-            <div className="bg-card rounded-md py-1.5 px-2">
-              <div className="text-[9px] text-muted uppercase tracking-wider">Emissions</div>
-              <div className="text-[11px] font-medium text-primary">{formatEmissions(yd.emissions.total_mtco2)}</div>
-            </div>
-          </div>
-
-          {/* Independence score mini display */}
-          {score && (
-            <div className="flex items-center gap-2 bg-card rounded-md py-2 px-2.5">
-              <div className="flex-1">
-                <div className="text-[9px] text-muted uppercase tracking-wider mb-1">Energy Independence</div>
-                <div className="h-1.5 bg-inset rounded-full overflow-hidden">
-                  <div
-                    className="h-full rounded-full"
-                    style={{ width: `${Math.min(score.score, 100)}%`, backgroundColor: score.color }}
-                  />
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-xs font-semibold text-primary tabular-nums">
-                  {formatIndependenceScore(score.score)}{score.missingFossilData && '*'}
-                </div>
-                <div className="text-[9px]" style={{ color: score.color }}>{score.label}</div>
-              </div>
-            </div>
-          )}
-
-          {/* View full details button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onViewDetails();
-            }}
-            className="w-full py-1.5 text-[11px] text-secondary hover:text-primary border border-border rounded-md hover:bg-card transition-colors"
-          >
-            View full details →
-          </button>
-        </div>
-      )}
-    </div>
+        <div className="text-[10px] text-muted">{formatPercent(yd.aggregates.clean_pct)} clean</div>
+      </div>
+      <span className="text-xs text-secondary tabular-nums">{formatTWh(yd.total_generation_twh)}</span>
+    </button>
   );
 }
 
@@ -421,7 +299,6 @@ export default function CountryPanel({
   country, topCountries, onClose, onSelectCountry,
   selectedBloc, blocAgg, blocYearData, fossilFuelData,
 }: CountryPanelProps) {
-  const [expandedIso, setExpandedIso] = useState<string | null>(null);
 
   // Single country detail - use latest available data
   if (country) {
@@ -495,16 +372,13 @@ export default function CountryPanel({
             <h3 className="text-xs font-medium text-secondary mb-2">
               Top Producers
             </h3>
-            <div className="space-y-0.5">
+            <div className="space-y-0">
               {topCountries.slice(0, 5).map((c, i) => (
-                <ExpandableCountryRow
+                <CountryListItem
                   key={c.iso3}
                   country={c}
                   index={i}
-                  onViewDetails={() => onSelectCountry(c)}
-                  fossilFuelData={fossilFuelData}
-                  expandedIso={expandedIso}
-                  setExpandedIso={setExpandedIso}
+                  onClick={() => onSelectCountry(c)}
                 />
               ))}
             </div>
@@ -522,16 +396,13 @@ export default function CountryPanel({
         <p className="text-[11px] text-muted">By total generation (latest data)</p>
       </div>
       <div className="p-4">
-        <div className="space-y-0.5">
+        <div className="space-y-0">
           {topCountries.map((c, i) => (
-            <ExpandableCountryRow
+            <CountryListItem
               key={c.iso3}
               country={c}
               index={i}
-              onViewDetails={() => onSelectCountry(c)}
-              fossilFuelData={fossilFuelData}
-              expandedIso={expandedIso}
-              setExpandedIso={setExpandedIso}
+              onClick={() => onSelectCountry(c)}
             />
           ))}
         </div>
