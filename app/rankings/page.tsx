@@ -364,13 +364,6 @@ export default function RankingsPage() {
                                   </h4>
                                   <div className="space-y-2">
                                     <Link
-                                      href={`/explore?country=${row.country.iso3}`}
-                                      className="block text-xs text-blue-600 hover:text-blue-700 hover:underline"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      View historical trends →
-                                    </Link>
-                                    <Link
                                       href={`/compare?countries=${row.country.iso3}`}
                                       className="block text-xs text-blue-600 hover:text-blue-700 hover:underline"
                                       onClick={(e) => e.stopPropagation()}
