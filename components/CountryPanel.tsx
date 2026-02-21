@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import type { Country, YearData, FossilFuelData } from '@/lib/types';
+import type { Country, YearData, FossilFuelData, BlocsData } from '@/lib/types';
 import type { BlocAggregates } from '@/lib/data';
-import { getLatestYearData } from '@/lib/data';
+import { getLatestYearData, getBlocsForCountry } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import FlagImg from './FlagImg';
@@ -25,6 +25,7 @@ interface CountryPanelProps {
   blocAgg: BlocAggregates | null;
   blocYearData: YearData | null;
   fossilFuelData: FossilFuelData | null;
+  blocsData: BlocsData | null;
 }
 
 function StatRow({ label, value }: { label: string; value: string }) {
@@ -210,8 +211,8 @@ function BreakdownRow({
   );
 }
 
-function CountryDetail({ country, yearData, year, fossilFuelData }: {
-  country: Country; yearData: YearData; year: number; fossilFuelData: FossilFuelData | null;
+function CountryDetail({ country, yearData, year, fossilFuelData, blocsData }: {
+  country: Country; yearData: YearData; year: number; fossilFuelData: FossilFuelData | null; blocsData: BlocsData | null;
 }) {
   // Get fossil fuel data for this country, falling back to nearest available year
   const { data: fossilYear, actualYear } = getFossilDataForYear(
@@ -219,6 +220,9 @@ function CountryDetail({ country, yearData, year, fossilFuelData }: {
     year
   );
   const score = calculateIndependenceScoreV2(yearData, fossilYear, country.iso3);
+
+  // Compute bloc membership from the authoritative blocs.json source
+  const memberBlocs = blocsData ? getBlocsForCountry(country.iso3, blocsData) : country.blocs;
 
   return (
     <div className="space-y-5">
@@ -248,12 +252,12 @@ function CountryDetail({ country, yearData, year, fossilFuelData }: {
         </h3>
         <EnergyMixChart yearData={yearData} />
       </div>
-      {country.blocs.length > 0 && (
+      {memberBlocs.length > 0 && (
         <div>
           <h3 className="text-xs font-medium text-secondary mb-1.5">Member of</h3>
           <div className="flex flex-wrap gap-1.5">
-            {country.blocs.map(bloc => (
-              <span key={bloc} className="px-2 py-0.5 bg-inset rounded text-[11px] text-muted">{bloc}</span>
+            {memberBlocs.map(bloc => (
+              <span key={bloc} className="px-2 py-0.5 bg-inset rounded text-[11px] text-muted">{BLOC_LABELS[bloc] || bloc}</span>
             ))}
           </div>
         </div>
@@ -297,7 +301,7 @@ function CountryListItem({ country, index, onClick }: {
 
 export default function CountryPanel({
   country, topCountries, onClose, onSelectCountry,
-  selectedBloc, blocAgg, blocYearData, fossilFuelData,
+  selectedBloc, blocAgg, blocYearData, fossilFuelData, blocsData,
 }: CountryPanelProps) {
 
   // Single country detail - use latest available data
@@ -319,7 +323,7 @@ export default function CountryPanel({
           <div className="p-4 text-xs text-muted">No data available</div>
         ) : (
           <div className="p-4">
-            <CountryDetail country={country} yearData={latest.data} year={latest.year} fossilFuelData={fossilFuelData} />
+            <CountryDetail country={country} yearData={latest.data} year={latest.year} fossilFuelData={fossilFuelData} blocsData={blocsData} />
           </div>
         )}
       </div>

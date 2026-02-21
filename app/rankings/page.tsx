@@ -1,8 +1,8 @@
 'use client';
 
 import { Fragment, useEffect, useState, useMemo } from 'react';
-import { loadCountries, loadFossilFuelData, getLatestYearData } from '@/lib/data';
-import type { CountriesData, Country, FossilFuelData, YearData } from '@/lib/types';
+import { loadCountries, loadFossilFuelData, loadBlocs, getLatestYearData, getBlocsForCountry } from '@/lib/data';
+import type { CountriesData, Country, FossilFuelData, YearData, BlocsData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
@@ -124,19 +124,27 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
   );
 }
 
+const BLOC_LABELS: Record<string, string> = {
+  EU: 'EU', NATO: 'NATO', BRICS: 'BRICS+', G7: 'G7',
+  G20: 'G20', OECD: 'OECD', ASEAN: 'ASEAN', THE_WEST: 'The West',
+  GLOBAL_SOUTH: 'Global South', OPEC_PLUS: 'OPEC+',
+};
+
 export default function RankingsPage() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
+  const [blocsData, setBlocsData] = useState<BlocsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>('total_generation_twh');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    Promise.all([loadCountries(), loadFossilFuelData()])
-      .then(([data, fossilData]) => {
+    Promise.all([loadCountries(), loadFossilFuelData(), loadBlocs()])
+      .then(([data, fossilData, blocs]) => {
         setCountries(data);
         setFossilFuelData(fossilData);
+        setBlocsData(blocs);
         setLoading(false);
       })
       .catch(console.error);
@@ -370,15 +378,21 @@ export default function RankingsPage() {
                                     >
                                       Compare with other countries →
                                     </Link>
-                                    {row.country.blocs.length > 0 && (
-                                      <div className="pt-2">
-                                        <span className="text-[10px] text-muted">Member of: </span>
-                                        <span className="text-[10px] text-secondary">
-                                          {row.country.blocs.slice(0, 5).join(', ')}
-                                          {row.country.blocs.length > 5 && ` +${row.country.blocs.length - 5} more`}
-                                        </span>
-                                      </div>
-                                    )}
+                                    {(() => {
+                                      const memberBlocs = blocsData
+                                        ? getBlocsForCountry(row.country.iso3, blocsData)
+                                        : row.country.blocs;
+                                      if (memberBlocs.length === 0) return null;
+                                      return (
+                                        <div className="pt-2">
+                                          <span className="text-[10px] text-muted">Member of: </span>
+                                          <span className="text-[10px] text-secondary">
+                                            {memberBlocs.slice(0, 5).map(b => BLOC_LABELS[b] || b).join(', ')}
+                                            {memberBlocs.length > 5 && ` +${memberBlocs.length - 5} more`}
+                                          </span>
+                                        </div>
+                                      );
+                                    })()}
                                   </div>
                                 </div>
                               </div>
