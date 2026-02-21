@@ -18,6 +18,30 @@ interface Update {
 const updates: Update[] = [
   {
     date: 'Feb 2026',
+    title: 'Rankings Page Enhancements',
+    description: 'Click any country row in the rankings table to expand detailed information inline, without navigating away.',
+    highlights: [
+      'Visual energy mix breakdown with color-coded bars',
+      'Key statistics including demand, emissions, and independence',
+      'Quick link to compare with other countries',
+      'Bloc membership at a glance',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Feb 2026',
+    title: 'Independence Score v3: Electricity Imports',
+    description: 'Independence score now accounts for electricity imports via interconnectors, not just fuel imports.',
+    highlights: [
+      'Score calculated against demand, not generation',
+      'Net electricity importers (demand > generation) penalized',
+      'Countries like Luxembourg now show true import dependency',
+      'Asterisk (*) indicates missing fossil fuel data',
+    ],
+    tag: 'data',
+  },
+  {
+    date: 'Feb 2026',
     title: 'Shareable Compare URLs',
     description: 'Compare page state is now saved to the URL. Share specific country comparisons with others by copying the link.',
     tag: 'feature',
