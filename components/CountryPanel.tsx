@@ -129,6 +129,15 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
                 color="#D97706"
               />
             )}
+            {score.breakdown.electricityImports && score.breakdown.electricityImports.pct > 0.5 && (
+              <div className="flex items-center gap-2 text-[10px]">
+                <div className="w-2 h-2 rounded-full bg-gray-400" />
+                <span className="text-secondary w-16">Imports</span>
+                <span className="text-muted w-10 text-right">{formatPercent(score.breakdown.electricityImports.pct)}</span>
+                <span className="text-muted w-16 text-right">(via grid)</span>
+                <span className="text-negative font-medium ml-auto">+0.0</span>
+              </div>
+            )}
 
             {/* Strengths and Vulnerabilities - inside expanded section */}
             {(score.strengths.length > 0 || score.vulnerabilities.length > 0) && (
