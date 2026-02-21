@@ -5,36 +5,36 @@ let blocsCache: BlocsData | null = null;
 let fossilFuelCache: FossilFuelData | null = null;
 let socioeconomicCache: SocioeconomicData | null = null;
 
+async function fetchJSON<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
+  }
+  return res.json();
+}
+
 export async function loadCountries(): Promise<CountriesData> {
   if (countriesCache) return countriesCache;
-
-  const res = await fetch('/data/countries-yearly.json');
-  countriesCache = await res.json();
-  return countriesCache!;
+  countriesCache = await fetchJSON<CountriesData>('/data/countries-yearly.json');
+  return countriesCache;
 }
 
 export async function loadBlocs(): Promise<BlocsData> {
   if (blocsCache) return blocsCache;
-
-  const res = await fetch('/data/blocs.json');
-  blocsCache = await res.json();
-  return blocsCache!;
+  blocsCache = await fetchJSON<BlocsData>('/data/blocs.json');
+  return blocsCache;
 }
 
 export async function loadFossilFuelData(): Promise<FossilFuelData> {
   if (fossilFuelCache) return fossilFuelCache;
-
-  const res = await fetch('/data/fossil-fuel-independence.json');
-  fossilFuelCache = await res.json();
-  return fossilFuelCache!;
+  fossilFuelCache = await fetchJSON<FossilFuelData>('/data/fossil-fuel-independence.json');
+  return fossilFuelCache;
 }
 
 export async function loadSocioeconomicData(): Promise<SocioeconomicData> {
   if (socioeconomicCache) return socioeconomicCache;
-
-  const res = await fetch('/data/socioeconomic.json');
-  socioeconomicCache = await res.json();
-  return socioeconomicCache!;
+  socioeconomicCache = await fetchJSON<SocioeconomicData>('/data/socioeconomic.json');
+  return socioeconomicCache;
 }
 
 /**
