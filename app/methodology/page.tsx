@@ -323,12 +323,13 @@ export default function MethodologyPage() {
             <h3 className="text-sm font-semibold text-primary mb-2">What is Energy Independence?</h3>
             <p className="text-sm text-secondary leading-relaxed mb-4">
               <strong className="text-primary">Energy Independence</strong> measures how much of a country's electricity
-              generation comes from domestic sources versus imported fuels.
+              demand is met by domestic sources versus imported fuels or imported electricity.
             </p>
 
             <InfoCard variant="warning" title="Key Principle">
               A country generating 1000 TWh of electricity from imported natural gas is NOT energy independent,
-              even though it &quot;produces&quot; lots of electricity.
+              even though it &quot;produces&quot; lots of electricity. Similarly, a country importing 20% of its electricity
+              via interconnectors is 20% dependent on foreign grids — that imported portion contributes zero to independence.
             </InfoCard>
 
             <h3 className="text-sm font-semibold text-primary mt-6 mb-2">Why Energy Independence Matters</h3>
@@ -346,10 +347,36 @@ export default function MethodologyPage() {
               <strong className="text-primary">Energy independence ≠ Energy security</strong>, but it&apos;s a critical component.
             </InfoCard>
 
-            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">The Three Calculation Layers</h3>
+            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">The Four Calculation Layers</h3>
             <p className="text-sm text-secondary leading-relaxed mb-4">
-              Our Energy Independence Score has three progressive layers of sophistication:
+              Our Energy Independence Score has four progressive layers of sophistication:
             </p>
+
+            {/* Layer 0 - Demand-Based Calculation */}
+            <div className="card p-5 mb-4 border-l-4 border-l-blue-500">
+              <h4 className="font-semibold text-primary mb-2">Layer 0: Demand-Based Calculation (Foundation)</h4>
+              <p className="text-sm text-secondary mb-3">
+                All percentages are calculated against <strong className="text-primary">electricity demand</strong>, not generation.
+                This is a critical design choice that captures electricity imports.
+              </p>
+              <CodeBlock title="Why demand, not generation?">
+{`If a country has:
+  - Demand: 100 TWh (what the grid needs)
+  - Generation: 80 TWh (what power plants produce)
+  - Imports: 20 TWh (from neighboring grids)
+
+Using generation as denominator:
+  → 80 TWh / 80 TWh = 100% "independent" ❌ WRONG
+
+Using demand as denominator:
+  → 80 TWh / 100 TWh = 80% max independence ✓ CORRECT
+  → The 20% import gap contributes ZERO to score`}
+              </CodeBlock>
+              <p className="text-xs text-muted mt-3">
+                <strong>Key insight:</strong> Electricity imported via interconnectors is the most direct form of energy dependence —
+                it&apos;s not even fuel-for-generation, but finished electricity controlled by a neighboring grid.
+              </p>
+            </div>
 
             {/* Layer 1 */}
             <div className="card p-5 mb-4">
@@ -424,41 +451,48 @@ Everyone Else: 0% (imports 100%)
             <div className="space-y-4">
               <div className="card p-5">
                 <h4 className="font-semibold text-primary mb-2">Step 1: Calculate Renewable Contribution</h4>
-                <p className="text-sm text-muted mb-3">(100% independent)</p>
+                <p className="text-sm text-muted mb-3">(100% independent, relative to demand)</p>
                 <FormulaBox>
                   <div>renewable_electricity = solar + wind + hydro + bioenergy + other_renewables</div>
-                  <div className="mt-2">renewable_contribution = (renewable_electricity / total_electricity) × 100</div>
+                  <div className="mt-2 text-muted text-xs">// Note: denominator is DEMAND, not generation</div>
+                  <div>renewable_contribution = (renewable_electricity / demand) × 100</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
                 <h4 className="font-semibold text-primary mb-2">Step 2: Calculate Fossil Fuel Contributions</h4>
-                <p className="text-sm text-muted mb-3">(weighted by import dependency)</p>
+                <p className="text-sm text-muted mb-3">(weighted by import dependency, relative to demand)</p>
                 <FormulaBox>
                   <div className="text-muted text-xs mb-2">// For each fossil fuel (coal, gas, oil):</div>
                   <div>fuel_independence_ratio = fuel_production / fuel_consumption</div>
                   <div className="mt-2 text-muted text-xs">// Cap at 100% for net exporters</div>
                   <div>if (fuel_independence_ratio {'>'} 1.0) fuel_independence_ratio = 1.0</div>
-                  <div className="mt-3">coal_contribution = (coal_elec / total_elec) × coal_independence × 100</div>
-                  <div>gas_contribution = (gas_elec / total_elec) × gas_independence × 100</div>
-                  <div>oil_contribution = (oil_elec / total_elec) × oil_independence × 100</div>
+                  <div className="mt-3 text-muted text-xs">// All percentages relative to DEMAND</div>
+                  <div>coal_contribution = (coal_elec / demand) × coal_independence × 100</div>
+                  <div>gas_contribution = (gas_elec / demand) × gas_independence × 100</div>
+                  <div>oil_contribution = (oil_elec / demand) × oil_independence × 100</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
                 <h4 className="font-semibold text-primary mb-2">Step 3: Calculate Nuclear Contribution</h4>
-                <p className="text-sm text-muted mb-3">(weighted by uranium independence)</p>
+                <p className="text-sm text-muted mb-3">(weighted by uranium independence, relative to demand)</p>
                 <FormulaBox>
                   <div>uranium_independence = URANIUM_LOOKUP_TABLE[country_code] || 0</div>
-                  <div className="mt-2">nuclear_contribution = (nuclear_elec / total_elec) × (uranium_independence / 100) × 100</div>
+                  <div className="mt-2 text-muted text-xs">// Nuclear percentage relative to DEMAND</div>
+                  <div>nuclear_contribution = (nuclear_elec / demand) × (uranium_independence / 100) × 100</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
                 <h4 className="font-semibold text-primary mb-2">Step 4: Sum All Contributions</h4>
                 <FormulaBox>
+                  <div className="text-muted text-xs mb-2">// Imported electricity contributes 0 automatically</div>
+                  <div className="text-muted text-xs mb-2">// because generation {'<'} demand creates a gap that isn&apos;t counted</div>
                   <div>total_score = renewable_contribution + nuclear_contribution +</div>
                   <div className="ml-12">coal_contribution + gas_contribution + oil_contribution</div>
+                  <div className="mt-2 text-muted text-xs">// Max score limited by (generation / demand) ratio</div>
+                  <div className="text-muted text-xs">// If demand = 100 TWh and generation = 80 TWh, max score is 80</div>
                   <div className="mt-2 text-muted text-xs">// Round to 1 decimal place</div>
                   <div>final_score = Math.round(total_score × 10) / 10</div>
                 </FormulaBox>
@@ -811,6 +845,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 <li>✅ Exposure to foreign fuel price shocks</li>
                 <li>✅ Dependence on international trade routes</li>
                 <li>✅ Leverage other countries have over energy supply</li>
+                <li>✅ Electricity import dependency (grid interconnections)</li>
               </ul>
             </div>
           </CollapsibleSection>
@@ -909,6 +944,18 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                   Energy independence is hard! Most countries import significant amounts of fuel.
                   A low score reveals vulnerability but doesn&apos;t mean the country is &quot;failing&quot; -
                   it means they&apos;re exposed to supply disruptions.
+                </p>
+              </div>
+
+              <div className="card p-4">
+                <h4 className="font-semibold text-primary text-sm mb-2">How do you handle electricity imports?</h4>
+                <p className="text-xs text-secondary mb-2">
+                  Electricity imports are factored in automatically. The score is calculated against <strong>demand</strong>, not generation.
+                  If a country generates 80 TWh but demands 100 TWh, the 20 TWh imported via interconnectors contributes zero to the score.
+                </p>
+                <p className="text-xs text-secondary">
+                  This is arguably the most direct form of energy dependence — it&apos;s not even fuel-for-generation,
+                  but finished electricity controlled by a neighboring grid.
                 </p>
               </div>
 

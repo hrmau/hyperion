@@ -59,6 +59,8 @@ export interface IndependenceScore {
     coal: { twh: number; pct: number; independence: number; contribution: number };
     gas: { twh: number; pct: number; independence: number; contribution: number };
     oil: { twh: number; pct: number; independence: number; contribution: number };
+    // Electricity imports (gap between demand and generation)
+    electricityImports?: { twh: number; pct: number };
   };
   // Strengths and vulnerabilities
   strengths: string[];
@@ -115,35 +117,49 @@ export function getFossilDataForYear(
 /**
  * Calculate Energy Independence Score
  *
- * Accounts for fuel import dependency:
+ * Accounts for fuel import dependency AND electricity imports:
+ * - Score is based on demand_twh, not generation_twh
+ * - Imported electricity (demand - generation) contributes 0 to independence
  * - Renewables are 100% domestic (independent)
  * - Nuclear is weighted by uranium production/consumption ratio
  * - Fossil fuels are weighted by production/consumption ratio
  *
  * Score = (renewables × 100%) + (nuclear × uranium_indep%) +
  *         (coal × coal_indep%) + (gas × gas_indep%) + (oil × oil_indep%)
+ * All percentages are relative to DEMAND, not generation.
  */
 export function calculateIndependenceScoreV2(
   yearData: YearData,
   fossilData: FossilFuelYearData | null,
   iso3?: string
 ): IndependenceScore | null {
-  const total = yearData.total_generation_twh;
-  if (total <= 0) return null;
+  const generation = yearData.total_generation_twh;
+  const demand = yearData.demand_twh;
+
+  // Use demand as the denominator - this is the key change
+  // If demand is not available or zero, fall back to generation
+  const denominator = demand > 0 ? demand : generation;
+  if (denominator <= 0) return null;
 
   const gen = yearData.generation;
 
+  // Calculate electricity imports (gap between demand and generation)
+  // Positive value means net imports, negative means net exports
+  const electricityImportsTwh = demand > 0 ? Math.max(0, demand - generation) : 0;
+  const electricityImportsPct = demand > 0 ? (electricityImportsTwh / demand) * 100 : 0;
+
   // Calculate renewable electricity (100% independent)
+  // Percentages are now relative to demand, not generation
   const renewableTwh =
     (gen.hydro?.twh || 0) +
     (gen.wind?.twh || 0) +
     (gen.solar?.twh || 0) +
     (gen.bioenergy?.twh || 0);
-  const renewablePct = (renewableTwh / total) * 100;
+  const renewablePct = (renewableTwh / denominator) * 100;
 
   // Nuclear - weighted by uranium import independence
   const nuclearTwh = gen.nuclear?.twh || 0;
-  const nuclearPct = (nuclearTwh / total) * 100;
+  const nuclearPct = (nuclearTwh / denominator) * 100;
   const uraniumIndep = iso3 ? getUraniumIndependence(iso3) / 100 : 1.0;
 
   // Fossil fuel electricity
@@ -152,9 +168,9 @@ export function calculateIndependenceScoreV2(
   // other_fossil often includes oil-based generation
   const oilTwh = gen.other_fossil?.twh || 0;
 
-  const coalPct = (coalTwh / total) * 100;
-  const gasPct = (gasTwh / total) * 100;
-  const oilPct = (oilTwh / total) * 100;
+  const coalPct = (coalTwh / denominator) * 100;
+  const gasPct = (gasTwh / denominator) * 100;
+  const oilPct = (oilTwh / denominator) * 100;
 
   // Calculate fossil fuel independence ratios
   // Default to 0% (import-dependent) when no data - this is more honest than
@@ -269,6 +285,12 @@ export function calculateIndependenceScoreV2(
     vulnerabilities.push(`No fossil fuel import data (${Math.round(yearData.aggregates.fossil_pct)}% fossil assumed imported)`);
   }
 
+  // Flag electricity imports as a vulnerability
+  // This is the gap between demand and generation - electricity imported via interconnectors
+  if (electricityImportsPct >= 5) {
+    vulnerabilities.push(`${Math.round(electricityImportsPct)}% of electricity is imported via interconnectors`);
+  }
+
   return {
     score: Math.round(score * 10) / 10,
     band,
@@ -280,6 +302,8 @@ export function calculateIndependenceScoreV2(
       coal: { twh: coalTwh, pct: coalPct, independence: coalIndep, contribution: coalContribution },
       gas: { twh: gasTwh, pct: gasPct, independence: gasIndep, contribution: gasContribution },
       oil: { twh: oilTwh, pct: oilPct, independence: oilIndep, contribution: oilContribution },
+      // Track electricity imports for display
+      electricityImports: electricityImportsTwh > 0 ? { twh: electricityImportsTwh, pct: electricityImportsPct } : undefined,
     },
     strengths,
     vulnerabilities,
