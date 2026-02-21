@@ -146,6 +146,7 @@ export default function Home() {
               blocAgg={blocAgg}
               blocYearData={blocYearData}
               fossilFuelData={fossilFuelData}
+              blocsData={blocs}
             />
           </div>
         </div>

@@ -121,6 +121,37 @@ export function getCorrelationDataLatest(
   return result;
 }
 
+/**
+ * Get all blocs that a country is a member of.
+ * This is the authoritative source - computed from blocs.json, not country.blocs.
+ */
+export function getBlocsForCountry(
+  iso3: string,
+  blocs: BlocsData
+): string[] {
+  const memberBlocs: string[] = [];
+
+  // Check ember blocs
+  if (blocs.ember?.blocs) {
+    for (const [blocId, blocDef] of Object.entries(blocs.ember.blocs)) {
+      if (blocDef.members?.includes(iso3)) {
+        memberBlocs.push(blocId);
+      }
+    }
+  }
+
+  // Check custom blocs
+  if (blocs.custom?.blocs) {
+    for (const [blocId, blocDef] of Object.entries(blocs.custom.blocs)) {
+      if (blocDef.members?.includes(iso3)) {
+        memberBlocs.push(blocId);
+      }
+    }
+  }
+
+  return memberBlocs;
+}
+
 export function getCountriesInBloc(
   bloc: string,
   countries: CountriesData,
