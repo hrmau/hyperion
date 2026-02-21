@@ -18,29 +18,6 @@ interface Update {
 const updates: Update[] = [
   {
     date: 'Feb 2026',
-    title: 'Expandable Country Details',
-    description: 'Click any country in the Top Producers list to expand inline details without leaving the explore view.',
-    highlights: [
-      'Energy mix breakdown with visual bar',
-      'Key stats: generation, demand, emissions',
-      'Independence score at a glance',
-      'Quick access to full country details',
-    ],
-    tag: 'feature',
-  },
-  {
-    date: 'Feb 2026',
-    title: 'Independence Score v3: Demand-Based',
-    description: 'Independence score now factors in electricity imports. Score is calculated against demand, not just generation.',
-    highlights: [
-      'Imported electricity via grid interconnectors contributes 0 to score',
-      'Countries importing >5% of demand flagged for electricity import vulnerability',
-      'More accurate picture of true energy independence',
-    ],
-    tag: 'data',
-  },
-  {
-    date: 'Feb 2026',
     title: 'Shareable Compare URLs',
     description: 'Compare page state is now saved to the URL. Share specific country comparisons with others by copying the link.',
     tag: 'feature',

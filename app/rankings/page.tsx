@@ -1,13 +1,15 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { Fragment, useEffect, useState, useMemo } from 'react';
 import { loadCountries, loadFossilFuelData, getLatestYearData } from '@/lib/data';
-import type { CountriesData, Country, FossilFuelData } from '@/lib/types';
+import type { CountriesData, Country, FossilFuelData, YearData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
+import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
 import FlagImg from '@/components/FlagImg';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 type SortKey =
   | 'name'
@@ -33,6 +35,8 @@ interface ColumnDef {
 
 interface RowData {
   country: Country;
+  year: number;
+  yearData: YearData;
   total_generation_twh: number;
   independence_score: number;
   independence_color: string | undefined;
@@ -126,6 +130,7 @@ export default function RankingsPage() {
   const [loading, setLoading] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>('total_generation_twh');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     Promise.all([loadCountries(), loadFossilFuelData()])
@@ -149,6 +154,8 @@ export default function RankingsPage() {
         const indep = calculateIndependenceScoreV2(yd, fossilYear, c.iso3);
         return {
           country: c,
+          year,
+          yearData: yd,
           total_generation_twh: yd.total_generation_twh,
           independence_score: indep?.score ?? 0,
           independence_color: indep?.color,
@@ -181,6 +188,18 @@ export default function RankingsPage() {
       setSortKey(key);
       setSortDir(key === 'name' ? 'asc' : 'desc');
     }
+  };
+
+  const toggleRow = (iso3: string) => {
+    setExpandedRows(prev => {
+      const next = new Set(prev);
+      if (next.has(iso3)) {
+        next.delete(iso3);
+      } else {
+        next.add(iso3);
+      }
+      return next;
+    });
   };
 
   if (loading || !countries) {
@@ -220,37 +239,163 @@ export default function RankingsPage() {
                 </tr>
               </thead>
               <tbody>
-                {sorted.map((row, i) => (
-                  <tr
-                    key={row.country.iso3}
-                    className="border-b border-border-subtle hover:bg-inset transition-colors"
-                  >
-                    <td className="py-2 px-3 text-[11px] text-muted tabular-nums">
-                      {i + 1}
-                    </td>
-                    <td className="py-2 px-3">
-                      <div className="flex items-center gap-2">
-                        <FlagImg iso3={row.country.iso3} size={18} />
-                        <div className="min-w-0">
-                          <div className="text-xs font-medium text-primary truncate">{row.country.name}</div>
-                          <div className="text-[10px] text-muted">{row.country.emberRegion}</div>
-                        </div>
-                      </div>
-                    </td>
-                    {columns.slice(1).map((col) => {
-                      const cellColor = col.colorFn?.(row);
-                      return (
-                        <td
-                          key={col.key}
-                          className={`py-2 px-3 text-right text-xs tabular-nums whitespace-nowrap ${cellColor ? 'font-medium' : 'text-primary'}`}
-                          style={cellColor ? { color: cellColor } : undefined}
-                        >
-                          {col.format(row)}
+                {sorted.map((row, i) => {
+                  const isExpanded = expandedRows.has(row.country.iso3);
+                  const colCount = columns.length + 1; // +1 for rank column
+
+                  return (
+                    <Fragment key={row.country.iso3}>
+                      <tr
+                        onClick={() => toggleRow(row.country.iso3)}
+                        className={`border-b border-border-subtle hover:bg-inset transition-colors cursor-pointer ${isExpanded ? 'bg-inset/50' : ''}`}
+                      >
+                        <td className="py-2 px-3 text-[11px] text-muted tabular-nums">
+                          {i + 1}
                         </td>
-                      );
-                    })}
-                  </tr>
-                ))}
+                        <td className="py-2 px-3">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[10px] text-muted transition-transform ${isExpanded ? 'rotate-90' : ''}`}>
+                              ▶
+                            </span>
+                            <FlagImg iso3={row.country.iso3} size={18} />
+                            <div className="min-w-0">
+                              <div className="text-xs font-medium text-primary truncate">{row.country.name}</div>
+                              <div className="text-[10px] text-muted">{row.country.emberRegion}</div>
+                            </div>
+                          </div>
+                        </td>
+                        {columns.slice(1).map((col) => {
+                          const cellColor = col.colorFn?.(row);
+                          return (
+                            <td
+                              key={col.key}
+                              className={`py-2 px-3 text-right text-xs tabular-nums whitespace-nowrap ${cellColor ? 'font-medium' : 'text-primary'}`}
+                              style={cellColor ? { color: cellColor } : undefined}
+                            >
+                              {col.format(row)}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                      {isExpanded && (
+                        <tr key={`${row.country.iso3}-details`} className="border-b border-border-subtle bg-inset/30">
+                          <td colSpan={colCount} className="p-0">
+                            <div className="px-4 py-4 sm:px-6">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {/* Energy Mix */}
+                                <div>
+                                  <h4 className="text-[11px] font-semibold text-secondary uppercase tracking-wider mb-3">
+                                    Energy Mix ({row.year})
+                                  </h4>
+                                  <div className="space-y-2">
+                                    <div className="h-4 rounded overflow-hidden flex">
+                                      {energyOrder.map(source => {
+                                        const pct = row.yearData.generation[source]?.pct || 0;
+                                        if (pct === 0) return null;
+                                        return (
+                                          <div
+                                            key={source}
+                                            style={{
+                                              width: `${pct}%`,
+                                              backgroundColor: energyColors[source],
+                                            }}
+                                            title={`${energyLabels[source]}: ${formatPercent(pct)}`}
+                                          />
+                                        );
+                                      })}
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                                      {energyOrder.map(source => {
+                                        const pct = row.yearData.generation[source]?.pct || 0;
+                                        const twh = row.yearData.generation[source]?.twh || 0;
+                                        if (twh === 0) return null;
+                                        return (
+                                          <div key={source} className="flex items-center gap-1.5">
+                                            <div
+                                              className="w-2 h-2 rounded-sm shrink-0"
+                                              style={{ backgroundColor: energyColors[source] }}
+                                            />
+                                            <span className="text-[10px] text-muted truncate">{energyLabels[source]}</span>
+                                            <span className="text-[10px] text-primary ml-auto tabular-nums">
+                                              {formatPercent(pct)}
+                                            </span>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Key Stats */}
+                                <div>
+                                  <h4 className="text-[11px] font-semibold text-secondary uppercase tracking-wider mb-3">
+                                    Key Statistics
+                                  </h4>
+                                  <div className="space-y-2 text-xs">
+                                    <div className="flex justify-between">
+                                      <span className="text-muted">Total Generation</span>
+                                      <span className="text-primary font-medium tabular-nums">{formatTWh(row.total_generation_twh)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-muted">Demand</span>
+                                      <span className="text-primary font-medium tabular-nums">{formatTWh(row.yearData.demand_twh)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-muted">CO₂ Emissions</span>
+                                      <span className="text-primary font-medium tabular-nums">{formatEmissions(row.emissions)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-muted">Clean Energy</span>
+                                      <span className="text-primary font-medium tabular-nums">{formatPercent(row.clean_pct)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-muted">Independence</span>
+                                      <span className="font-medium tabular-nums" style={{ color: row.independence_color }}>
+                                        {formatIndependenceScore(row.independence_score)}{row.independence_missing_data ? '*' : ''}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div>
+                                  <h4 className="text-[11px] font-semibold text-secondary uppercase tracking-wider mb-3">
+                                    Explore More
+                                  </h4>
+                                  <div className="space-y-2">
+                                    <Link
+                                      href={`/explore?country=${row.country.iso3}`}
+                                      className="block text-xs text-blue-600 hover:text-blue-700 hover:underline"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      View historical trends →
+                                    </Link>
+                                    <Link
+                                      href={`/compare?countries=${row.country.iso3}`}
+                                      className="block text-xs text-blue-600 hover:text-blue-700 hover:underline"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      Compare with other countries →
+                                    </Link>
+                                    {row.country.blocs.length > 0 && (
+                                      <div className="pt-2">
+                                        <span className="text-[10px] text-muted">Member of: </span>
+                                        <span className="text-[10px] text-secondary">
+                                          {row.country.blocs.slice(0, 5).join(', ')}
+                                          {row.country.blocs.length > 5 && ` +${row.country.blocs.length - 5} more`}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>
