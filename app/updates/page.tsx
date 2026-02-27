@@ -5,6 +5,9 @@ import Link from 'next/link';
 export const metadata = {
   title: "What's New | Grid Gorilla",
   description: 'Latest updates and feature releases for Grid Gorilla.',
+  alternates: {
+    canonical: '/updates',
+  },
 };
 
 interface Update {
