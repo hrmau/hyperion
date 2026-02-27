@@ -5,6 +5,9 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Credits & Attributions | Grid Gorilla',
   description: 'Data sources, attributions, and acknowledgements for Grid Gorilla.',
+  alternates: {
+    canonical: '/credits',
+  },
 };
 
 function AttributionCard({
