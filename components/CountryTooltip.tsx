@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useLayoutEffect, useState } from 'react';
 import type { Country, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent } from '@/lib/scales';
 import { getLatestYearData } from '@/lib/data';
@@ -10,9 +11,53 @@ interface CountryTooltipProps {
   country: Country | null;
   position: { x: number; y: number } | null;
   fossilFuelData: FossilFuelData | null;
+  onDismiss?: () => void;
 }
 
-export default function CountryTooltip({ country, position, fossilFuelData }: CountryTooltipProps) {
+const TOOLTIP_WIDTH = 240;
+const TOOLTIP_OFFSET = 12;
+const EDGE_PADDING = 8;
+
+export default function CountryTooltip({ country, position, fossilFuelData, onDismiss }: CountryTooltipProps) {
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [adjustedPos, setAdjustedPos] = useState<{ left: number; top: number } | null>(null);
+
+  useLayoutEffect(() => {
+    if (!position) {
+      setAdjustedPos(null);
+      return;
+    }
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Estimate tooltip height (will be refined after render)
+    const tooltipHeight = tooltipRef.current?.offsetHeight || 100;
+
+    let left = position.x + TOOLTIP_OFFSET;
+    let top = position.y + TOOLTIP_OFFSET;
+
+    // Check right edge overflow - flip to left of cursor if needed
+    if (left + TOOLTIP_WIDTH + EDGE_PADDING > viewportWidth) {
+      left = position.x - TOOLTIP_WIDTH - TOOLTIP_OFFSET;
+      // If still overflows left, clamp to edge
+      if (left < EDGE_PADDING) {
+        left = EDGE_PADDING;
+      }
+    }
+
+    // Check bottom edge overflow - flip above cursor if needed
+    if (top + tooltipHeight + EDGE_PADDING > viewportHeight) {
+      top = position.y - tooltipHeight - TOOLTIP_OFFSET;
+      // If still overflows top, clamp to edge
+      if (top < EDGE_PADDING) {
+        top = EDGE_PADDING;
+      }
+    }
+
+    setAdjustedPos({ left, top });
+  }, [position]);
+
   if (!country || !position) return null;
 
   const latest = getLatestYearData(country);
@@ -27,12 +72,14 @@ export default function CountryTooltip({ country, position, fossilFuelData }: Co
 
   return (
     <div
-      className="card fixed z-50 px-3 py-2.5 pointer-events-none"
+      ref={tooltipRef}
+      className={`card fixed z-50 px-3 py-2.5 ${onDismiss ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none'}`}
       style={{
-        left: position.x + 12,
-        top: position.y + 12,
-        maxWidth: '240px',
+        left: adjustedPos?.left ?? position.x + TOOLTIP_OFFSET,
+        top: adjustedPos?.top ?? position.y + TOOLTIP_OFFSET,
+        maxWidth: `${TOOLTIP_WIDTH}px`,
       }}
+      onClick={onDismiss}
     >
       <div className="text-xs font-medium text-primary mb-1.5 flex items-center gap-1.5">
         <FlagImg iso3={country.iso3} size={16} />
