@@ -90,9 +90,21 @@ export default function Home() {
 
   const handleClick = useCallback((country: Country | null) => {
     if (!country) return;
-    setSelectedCountry(prev =>
-      prev?.iso3 === country.iso3 ? null : country
-    );
+    setSelectedCountry(prev => {
+      const isDeselecting = prev?.iso3 === country.iso3;
+      if (isDeselecting) {
+        // Clear hover state when deselecting (important for mobile)
+        setHoveredCountry(null);
+        setTooltipPos(null);
+        return null;
+      }
+      return country;
+    });
+  }, []);
+
+  const handleTooltipDismiss = useCallback(() => {
+    setHoveredCountry(null);
+    setTooltipPos(null);
   }, []);
 
   const handleBlocChange = useCallback((bloc: string) => {
@@ -158,6 +170,7 @@ export default function Home() {
         country={hoveredCountry}
         position={tooltipPos}
         fossilFuelData={fossilFuelData}
+        onDismiss={handleTooltipDismiss}
       />
     </div>
   );
