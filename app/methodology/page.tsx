@@ -31,11 +31,9 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen && (
-        <div className="pb-4 space-y-3">
-          {children}
-        </div>
-      )}
+      <div hidden={!isOpen} className="pb-4 space-y-3">
+        {children}
+      </div>
     </section>
   );
 }
