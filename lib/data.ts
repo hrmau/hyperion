@@ -250,6 +250,13 @@ export interface BlocAggregates {
   renewables_pct: number;
   wind_solar_pct: number;
   country_count: number;
+  /**
+   * Span of data years actually summed. Equal when every member contributed the
+   * same year; different when members' latest available years diverge, which
+   * callers must surface rather than presenting a blended total as one period.
+   */
+  year_min: number;
+  year_max: number;
   /** Aggregated generation by source — compatible with EnergyMixChart via synthetic YearData */
   generation: Record<EnergySource, { twh: number; pct: number }>;
 }
@@ -313,6 +320,8 @@ export function aggregateBloc(
     renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
     wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
     country_count: count,
+    year_min: year,
+    year_max: year,
     generation,
   };
 }
@@ -344,6 +353,8 @@ export function aggregateBlocLatest(members: Country[]): BlocAggregates | null {
   let renewablesTwh = 0;
   let windSolarTwh = 0;
   let count = 0;
+  let yearMin = Infinity;
+  let yearMax = -Infinity;
 
   const genBySource: Record<string, number> = {};
   for (const s of ENERGY_SOURCES) genBySource[s] = 0;
@@ -354,6 +365,8 @@ export function aggregateBlocLatest(members: Country[]): BlocAggregates | null {
 
     const yd = latest.data;
     count++;
+    if (latest.year < yearMin) yearMin = latest.year;
+    if (latest.year > yearMax) yearMax = latest.year;
     totalGen += yd.total_generation_twh;
     totalDemand += yd.demand_twh;
     totalEmissions += yd.emissions.total_mtco2;
@@ -389,6 +402,8 @@ export function aggregateBlocLatest(members: Country[]): BlocAggregates | null {
     renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
     wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
     country_count: count,
+    year_min: yearMin,
+    year_max: yearMax,
     generation,
   };
 }

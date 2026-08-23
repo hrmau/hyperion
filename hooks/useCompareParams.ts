@@ -65,13 +65,20 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
 
   const a = parseSelection(aParam);
   const b = parseSelection(bParam);
-  const year = yearParam ? parseInt(yearParam, 10) : defaultYear;
+
+  // A year param that doesn't parse must not count as "explicit": the compare
+  // page skips its common-year resolution when the year is explicit, so treating
+  // ?year=abc as a deliberate choice would silently let the two selections fall
+  // back to their own nearest years — the mismatch that logic exists to prevent.
+  const parsedYear = yearParam !== null ? parseInt(yearParam, 10) : NaN;
+  const yearIsValid = Number.isFinite(parsedYear);
+  const year = yearIsValid ? parsedYear : defaultYear;
 
   // Check if we loaded from URL (has any params)
   const isFromUrl = !!(aParam || bParam || yearParam);
 
   // Check if year was explicitly set in URL (not just defaulted)
-  const yearIsExplicit = yearParam !== null;
+  const yearIsExplicit = yearIsValid;
 
   // Debounced URL update that accumulates changes
   const updateUrl = useCallback((newParams: Partial<CompareParams>) => {
@@ -137,7 +144,7 @@ export function useCompareParams(defaultYear: number): UseCompareParamsReturn {
   }, [updateUrl]);
 
   return {
-    params: { a, b, year: isNaN(year) ? defaultYear : year },
+    params: { a, b, year },
     setSelectionA,
     setSelectionB,
     setYear,
