@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import WorldMap from '@/components/WorldMap';
 import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
@@ -148,7 +149,34 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md">
+          <div className="lg:w-[30%] lg:min-w-[320px] lg:max-w-md space-y-4">
+            {/* Entry point for cold visitors: 88 coloured countries is a poor
+                "what do I do now" prompt. Deliberately modest — the map leads. */}
+            <Link
+              href="/play"
+              className="card card-hover block p-4 group"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="text-[13px] font-medium text-primary">
+                    Not sure where to start?
+                  </div>
+                  <div className="text-[11px] text-muted mt-0.5">
+                    Play a round of Higher or Lower.
+                  </div>
+                </div>
+                <span
+                  className="text-muted group-hover:text-primary transition-colors shrink-0"
+                  aria-hidden="true"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
+
             <CountryPanel
               country={selectedCountry}
               topCountries={topCountries}

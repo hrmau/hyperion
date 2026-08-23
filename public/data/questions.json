@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "clean_pct-AUT-CHE-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "AUT",
+      "name": "Austria",
+      "value": 84.1
+    },
+    "b": {
+      "iso3": "CHE",
+      "name": "Switzerland",
+      "value": 98.3
+    },
+    "insight": "Switzerland runs on Alpine hydro plus nuclear and is effectively fossil-free. Austria has the same mountains but no reactors, so gas fills its winter gaps.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-BEL-SVK-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "BEL",
+      "name": "Belgium",
+      "value": 72
+    },
+    "b": {
+      "iso3": "SVK",
+      "name": "Slovakia",
+      "value": 85.2
+    },
+    "insight": "Both lean on nuclear, but Slovakia leans harder and adds Danube hydro on top. Belgium's long-running phase-out politics keep pulling its share down.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-CAN-KEN-2024",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "CAN",
+      "name": "Canada",
+      "value": 77.7
+    },
+    "b": {
+      "iso3": "KEN",
+      "name": "Kenya",
+      "value": 91.9
+    },
+    "insight": "Kenya runs on Rift Valley geothermal plus hydro and wind, giving it one of the cleanest grids on earth. Clean electricity is not a rich-country privilege.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-ESP-GBR-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 74.7
+    },
+    "b": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 64.5
+    },
+    "insight": "Britain's coal-to-wind switch is one of the fastest grid decarbonisations ever recorded. Spain got further still, using solar and hydro Britain simply doesn't have.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-GRC-USA-2024",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "GRC",
+      "name": "Greece",
+      "value": 49.1
+    },
+    "b": {
+      "iso3": "USA",
+      "name": "United States",
+      "value": 41.9
+    },
+    "insight": "Greece went from lignite-dominated to majority-clean in about fifteen years. The US has more clean generation than any country except China, and still a dirtier average.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-AUS-DEU-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "AUS",
+      "name": "Australia",
+      "value": 45.2
+    },
+    "b": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 21.6
+    },
+    "insight": "Germany takes the criticism for coal; Australia quietly runs on twice as much of it, and exports more of it than almost any country on earth.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-AUS-POL-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "AUS",
+      "name": "Australia",
+      "value": 45.2
+    },
+    "b": {
+      "iso3": "POL",
+      "name": "Poland",
+      "value": 54.7
+    },
+    "insight": "Poland's grid was built on domestic hard coal and lignite, and mining employment has made retiring it politically expensive. Australia is on a similar path, a few years further along.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-CHN-IND-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "CHN",
+      "name": "China",
+      "value": 57.8
+    },
+    "b": {
+      "iso3": "IND",
+      "name": "India",
+      "value": 74.8
+    },
+    "insight": "China burns far more coal than India in absolute terms, yet has also built more wind, solar and hydro than anyone. India's grid is the more coal-dependent of the two.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-DEU-RUS-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 21.6
+    },
+    "b": {
+      "iso3": "RUS",
+      "name": "Russia",
+      "value": 17.8
+    },
+    "insight": "Russia is a fossil fuel superpower that burns gas rather than coal at home - it has more gas than it can profitably sell. Germany still leans on lignite it can dig up domestically.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-KOR-TWN-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "KOR",
+      "name": "South Korea",
+      "value": 30.5
+    },
+    "b": {
+      "iso3": "TWN",
+      "name": "Taiwan",
+      "value": 40.1
+    },
+    "insight": "Taiwan has been phasing out nuclear while electricity demand from chip fabrication climbs. Coal and gas filled the gap. South Korea kept its reactors.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-AUS-CAN-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "AUS",
+      "name": "Australia",
+      "value": 156
+    },
+    "b": {
+      "iso3": "CAN",
+      "name": "Canada",
+      "value": 118
+    },
+    "insight": "Australia and Canada have similar populations and similar wealth. Canada's grid is hydro and nuclear, Australia's is still substantially coal - same conditions, opposite outcome.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-BRA-POL-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "value": 79
+    },
+    "b": {
+      "iso3": "POL",
+      "name": "Poland",
+      "value": 105
+    },
+    "insight": "Poland has roughly a fifth of Brazil's population and higher power sector emissions. Brazil's hydro-heavy grid is the entire difference.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-FRA-SGP-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "FRA",
+      "name": "France",
+      "value": 23
+    },
+    "b": {
+      "iso3": "SGP",
+      "name": "Singapore",
+      "value": 30
+    },
+    "insight": "France's whole grid, serving 68 million people, emits less carbon than Singapore's, serving under 6 million. Nuclear and hydro are the reason.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-VNM-ZAF-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "VNM",
+      "name": "Vietnam",
+      "value": 147
+    },
+    "b": {
+      "iso3": "ZAF",
+      "name": "South Africa",
+      "value": 178
+    },
+    "insight": "South Africa's grid is almost entirely coal, run by a single struggling utility. Vietnam is growing fast but has added serious solar alongside its coal.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-CAN-USA-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "CAN",
+      "name": "Canada",
+      "value": 15880
+    },
+    "b": {
+      "iso3": "USA",
+      "name": "United States",
+      "value": 13111
+    },
+    "insight": "Canada generates more electricity per person than the US: cold winters, heavy industry, and hydro cheap enough to make electric heating the rational choice.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-CHE-KWT-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "CHE",
+      "name": "Switzerland",
+      "value": 8609
+    },
+    "b": {
+      "iso3": "KWT",
+      "name": "Kuwait",
+      "value": 20386
+    },
+    "insight": "Kuwait's air conditioning and seawater desalination run on heavily subsidised domestic gas. Cheap energy always gets used, whatever the climate demands.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-CHN-ESP-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "CHN",
+      "name": "China",
+      "value": 7144
+    },
+    "b": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 5880
+    },
+    "insight": "China now generates more electricity per person than Spain. No single number captures how far its industrialisation has run more clearly than this one.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-DEU-SWE-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 5887
+    },
+    "b": {
+      "iso3": "SWE",
+      "name": "Sweden",
+      "value": 16102
+    },
+    "insight": "Sweden generates nearly three times Germany's electricity per person. Abundant hydro and nuclear made power cheap enough to electrify heating and heavy industry.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-JPN-NLD-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 8164
+    },
+    "b": {
+      "iso3": "NLD",
+      "name": "Netherlands",
+      "value": 6921
+    },
+    "insight": "Japan out-generates the Netherlands per person despite a decade of hard-won post-Fukushima efficiency gains. Industrial structure sets the floor.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-KOR-SGP-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "KOR",
+      "name": "South Korea",
+      "value": 12096
+    },
+    "b": {
+      "iso3": "SGP",
+      "name": "Singapore",
+      "value": 10103
+    },
+    "insight": "Both are dense, rich and urban. South Korea's steel, shipbuilding and semiconductor plants push it above Singapore's services-and-trade economy.",
+    "surprising": true
+  },
+  {
+    "id": "independence-AUT-IND-2024",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2024,
+    "unit": "",
+    "a": {
+      "iso3": "AUT",
+      "name": "Austria",
+      "value": 94.4
+    },
+    "b": {
+      "iso3": "IND",
+      "name": "India",
+      "value": 80.6
+    },
+    "insight": "Austrian Alpine hydro needs no fuel at all. India burns a great deal of coal but digs most of it up itself, which is why it scores better here than its emissions would suggest.",
+    "surprising": true
+  },
+  {
+    "id": "independence-DEU-DNK-2025",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2025,
+    "unit": "",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 67.7
+    },
+    "b": {
+      "iso3": "DNK",
+      "name": "Denmark",
+      "value": 77.9
+    },
+    "insight": "Denmark's wind fleet needs no fuel deliveries, which is exactly what this score rewards. Germany still buys gas and hard coal from abroad.",
+    "surprising": true
+  },
+  {
+    "id": "independence-DEU-FRA-2025",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2025,
+    "unit": "",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 67.7
+    },
+    "b": {
+      "iso3": "FRA",
+      "name": "France",
+      "value": 30.9
+    },
+    "insight": "France's reactors sit on French soil, but France mines no uranium at all - every fuel rod is imported. Independence is about where the fuel comes from, not where the plant stands.",
+    "surprising": true
+  },
+  {
+    "id": "independence-ITA-JPN-2024",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2024,
+    "unit": "",
+    "a": {
+      "iso3": "ITA",
+      "name": "Italy",
+      "value": 44.1
+    },
+    "b": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 23
+    },
+    "insight": "Japan imports almost all its fossil fuel and shut most of its reactors after Fukushima, leaving it among the most import-exposed developed economies.",
+    "surprising": true
+  },
+  {
+    "id": "independence-NGA-POL-2024",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2024,
+    "unit": "",
+    "a": {
+      "iso3": "NGA",
+      "name": "Nigeria",
+      "value": 100
+    },
+    "b": {
+      "iso3": "POL",
+      "name": "Poland",
+      "value": 86.4
+    },
+    "insight": "Nigeria runs its grid on its own gas and hydro, so on paper it imports nothing. This score measures import exposure, not reliability - Nigerian supply still fails constantly.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-BEL-SVK-2025",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "BEL",
+      "name": "Belgium",
+      "value": 33.1
+    },
+    "b": {
+      "iso3": "SVK",
+      "name": "Slovakia",
+      "value": 66.4
+    },
+    "insight": "Slovakia draws two thirds of its electricity from nuclear, among the highest shares in the world. Belgium has been legislating a nuclear phase-out since 2003 and postponing it ever since.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-CZE-SWE-2025",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "CZE",
+      "name": "Czechia",
+      "value": 42.3
+    },
+    "b": {
+      "iso3": "SWE",
+      "name": "Sweden",
+      "value": 27.6
+    },
+    "insight": "Sweden closed four reactors in the 2010s and has since reversed course politically. Czechia never wavered, and now leans on nuclear harder than Sweden does.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-ESP-GBR-2025",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 18.7
+    },
+    "b": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 12.4
+    },
+    "insight": "Britain opened the world's first commercial nuclear plant in 1956, and most of that fleet has since retired. Spain's newer reactors now carry the bigger share.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-FIN-KOR-2024",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "FIN",
+      "name": "Finland",
+      "value": 39.7
+    },
+    "b": {
+      "iso3": "KOR",
+      "name": "South Korea",
+      "value": 30.2
+    },
+    "insight": "Finland's Olkiluoto 3 took some seventeen years to build, but a single reactor was enough to visibly shift a small country's entire electricity mix.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-KOR-USA-2024",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "KOR",
+      "name": "South Korea",
+      "value": 30.2
+    },
+    "b": {
+      "iso3": "USA",
+      "name": "United States",
+      "value": 17.8
+    },
+    "insight": "The US operates far more reactors than South Korea, but its grid is so much bigger that nuclear's share comes out smaller. Absolute size and share routinely tell opposite stories.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-SWE-UKR-2022",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2022,
+    "unit": "%",
+    "a": {
+      "iso3": "SWE",
+      "name": "Sweden",
+      "value": 30
+    },
+    "b": {
+      "iso3": "UKR",
+      "name": "Ukraine",
+      "value": 55.8
+    },
+    "insight": "Even through a full-scale invasion, Ukraine ran most of its grid on nuclear. Reactors are hard to build, and equally hard to replace once you depend on them.",
+    "surprising": true
+  },
+  {
+    "id": "solar-CHL-GBR-2024",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "CHL",
+      "name": "Chile",
+      "value": 19.9
+    },
+    "b": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 14.8
+    },
+    "insight": "Chile's Atacama desert is the sunniest place on earth and most of its solar fleet sits there. Britain gets a comparable total from a country with a fraction of the sunlight.",
+    "surprising": true
+  },
+  {
+    "id": "solar-DEU-FRA-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 89.6
+    },
+    "b": {
+      "iso3": "FRA",
+      "name": "France",
+      "value": 31.8
+    },
+    "insight": "Cloudy Germany out-solars sunny France by almost 3x. Sunlight was never the constraint; installed panels are.",
+    "surprising": true
+  },
+  {
+    "id": "solar-GBR-ITA-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 19.3
+    },
+    "b": {
+      "iso3": "ITA",
+      "name": "Italy",
+      "value": 44.6
+    },
+    "insight": "Italy produces well over twice Britain's solar power. Rooftop subsidies in the 2010s, not latitude, opened the gap.",
+    "surprising": true
+  },
+  {
+    "id": "solar-NLD-PAK-2024",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "NLD",
+      "name": "Netherlands",
+      "value": 21.8
+    },
+    "b": {
+      "iso3": "PAK",
+      "name": "Pakistan",
+      "value": 18.2
+    },
+    "insight": "The Netherlands generates more solar power than Pakistan, a country with ten times the population and far more sun. Access to capital, not climate, sets the pace.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-GBR-TUR-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 293
+    },
+    "b": {
+      "iso3": "TUR",
+      "name": "Turkey",
+      "value": 354
+    },
+    "insight": "Turkey overtook Britain and keeps pulling away. British electricity demand has been flat or falling since 2005 as industry shrank and efficiency improved.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-JPN-RUS-2024",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 1016
+    },
+    "b": {
+      "iso3": "RUS",
+      "name": "Russia",
+      "value": 1209
+    },
+    "insight": "Russia out-generates Japan. Cheap domestic gas and an energy-intensive heavy industry base make electricity worth using in ways it simply isn't in Japan.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-MYS-POL-2024",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "MYS",
+      "name": "Malaysia",
+      "value": 198
+    },
+    "b": {
+      "iso3": "POL",
+      "name": "Poland",
+      "value": 171
+    },
+    "insight": "Malaysia out-generates Poland from a similar population. Southeast Asian electricity demand is growing at rates Europe last saw in the 1960s.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-POL-THA-2024",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "POL",
+      "name": "Poland",
+      "value": 171
+    },
+    "b": {
+      "iso3": "THA",
+      "name": "Thailand",
+      "value": 200
+    },
+    "insight": "Thailand out-generates Poland. The centre of gravity in global electricity has moved decisively to Asia, and it is still moving.",
+    "surprising": true
+  },
+  {
+    "id": "wind-AUS-SWE-2024",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "AUS",
+      "name": "Australia",
+      "value": 32.7
+    },
+    "b": {
+      "iso3": "SWE",
+      "name": "Sweden",
+      "value": 40.3
+    },
+    "insight": "Sweden generates more wind power than Australia with about a third of the population. Australia's renewable build leaned into rooftop solar instead, where it leads the world.",
+    "surprising": true
+  },
+  {
+    "id": "wind-BRA-DEU-2024",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "value": 108.5
+    },
+    "b": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 138.6
+    },
+    "insight": "Germany still leads on total output, but Brazil's northeastern trade winds are among the steadiest on earth, so each Brazilian turbine earns far more than a German one.",
+    "surprising": true
+  },
+  {
+    "id": "wind-BRA-IND-2024",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "value": 108.5
+    },
+    "b": {
+      "iso3": "IND",
+      "name": "India",
+      "value": 81.5
+    },
+    "insight": "Brazil out-produces India on wind with a fifth of the population. Its northeastern coast has unusually constant trade winds, which lifts output per turbine dramatically.",
+    "surprising": true
+  },
+  {
+    "id": "wind-CAN-ESP-2024",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "CAN",
+      "name": "Canada",
+      "value": 46.8
+    },
+    "b": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 62.9
+    },
+    "insight": "Spain has been a wind pioneer since the 1990s. Canada has far more windy land and far fewer people on it - geography alone doesn't build turbines.",
+    "surprising": true
+  },
+  {
+    "id": "wind-FRA-GBR-2025",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "FRA",
+      "name": "France",
+      "value": 44.1
+    },
+    "b": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 86.3
+    },
+    "insight": "Britain built the world's largest offshore wind fleet while France bet on nuclear. Both are low-carbon strategies; they just look nothing alike.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-BRA-CAN-2024",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "value": 89.5
+    },
+    "b": {
+      "iso3": "CAN",
+      "name": "Canada",
+      "value": 77.7
+    },
+    "insight": "Both grids were built on big hydro. Brazil added wind and solar on top; Canada's remaining fossil generation is concentrated in Alberta and Saskatchewan.",
+    "surprising": false
+  },
+  {
+    "id": "coal_pct-IND-KAZ-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "IND",
+      "name": "India",
+      "value": 74.8
+    },
+    "b": {
+      "iso3": "KAZ",
+      "name": "Kazakhstan",
+      "value": 54
+    },
+    "insight": "Both grids run on domestic coal. India's is the more dependent, and it is also the fastest-growing large electricity market in the world.",
+    "surprising": false
+  },
+  {
+    "id": "emissions-DEU-JPN-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 167
+    },
+    "b": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 491
+    },
+    "insight": "Japan's power sector emits roughly triple Germany's, largely because the reactors idled after Fukushima were backfilled with coal and gas.",
+    "surprising": false
+  },
+  {
+    "id": "generation_per_capita-NOR-USA-2024",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2024,
+    "unit": " kWh",
+    "a": {
+      "iso3": "NOR",
+      "name": "Norway",
+      "value": 28385
+    },
+    "b": {
+      "iso3": "USA",
+      "name": "United States",
+      "value": 13111
+    },
+    "insight": "Norway generates more than twice as much electricity per person as the US. Near-free hydro attracted aluminium smelters and made electrifying everything else the default.",
+    "surprising": false
+  },
+  {
+    "id": "solar-DEU-ESP-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 89.6
+    },
+    "b": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 62.9
+    },
+    "insight": "Germany still out-produces Spain on solar with roughly half the sunshine. It started twenty years earlier and never stopped installing.",
+    "surprising": false
+  },
+  {
+    "id": "solar-ESP-NLD-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 62.9
+    },
+    "b": {
+      "iso3": "NLD",
+      "name": "Netherlands",
+      "value": 28.5
+    },
+    "insight": "Spain wins on raw output, but the Netherlands is one of Europe's cloudiest countries and lands in the same league. Panel count beats sunshine hours.",
+    "surprising": false
+  },
+  {
+    "id": "solar-IND-JPN-2024",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "IND",
+      "name": "India",
+      "value": 136.8
+    },
+    "b": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 96.7
+    },
+    "insight": "India passed Japan on solar roughly a decade after starting seriously. Solar is now the cheapest new power in most of the world, so it scales fastest where demand is still growing.",
+    "surprising": false
+  },
+  {
+    "id": "total_generation-BRA-JPN-2024",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "value": 746
+    },
+    "b": {
+      "iso3": "JPN",
+      "name": "Japan",
+      "value": 1016
+    },
+    "insight": "Japan generates more electricity from 125 million people than Brazil does from 215 million. Wealth and industry drive electricity use far harder than headcount.",
+    "surprising": false
+  },
+  {
+    "id": "total_generation-FRA-IRN-2024",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2024,
+    "unit": " TWh",
+    "a": {
+      "iso3": "FRA",
+      "name": "France",
+      "value": 560
+    },
+    "b": {
+      "iso3": "IRN",
+      "name": "Iran",
+      "value": 396
+    },
+    "insight": "France's nuclear fleet gives it one of Europe's largest grids and makes it a net exporter to its neighbours in most years.",
+    "surprising": false
+  },
+  {
+    "id": "wind-DNK-TUR-2025",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "DNK",
+      "name": "Denmark",
+      "value": 19.3
+    },
+    "b": {
+      "iso3": "TUR",
+      "name": "Turkey",
+      "value": 39.4
+    },
+    "insight": "Denmark invented the modern wind industry and gets a larger share of its power from wind than any country on earth. It is also small, so its total output is easily beaten.",
+    "surprising": false
+  }
+]

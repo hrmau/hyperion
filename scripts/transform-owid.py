@@ -2,7 +2,7 @@
 """
 Transform OWID energy data CSV to GridGorilla JSON format.
 
-Input:  owid-energy-data.csv
+Input:  data/owid-energy-data.csv
 Output: public/data/countries-yearly.json (compatible with existing frontend)
         public/data/owid-aggregates.json (bloc validation data)
 
@@ -243,7 +243,7 @@ def get_region(country_name: str) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description='Transform OWID energy data to GridGorilla format')
-    parser.add_argument('--input', default='owid-energy-data.csv', help='Input CSV file')
+    parser.add_argument('--input', default='data/owid-energy-data.csv', help='Input CSV file')
     parser.add_argument('--output', default='public/data/countries-yearly.json', help='Output JSON file')
     parser.add_argument('--start-year', type=int, default=2000, help='Start year (default: 2000)')
     parser.add_argument('--end-year', type=int, default=2025, help='End year (default: 2025)')

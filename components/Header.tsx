@@ -5,32 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from './Navigation';
 import DarkModeToggle from './DarkModeToggle';
-
-type NavItem = 'explore' | 'compare' | 'rankings' | 'correlations' | 'story' | 'why' | 'methodology';
+import type { NavItem } from './navItems';
+import { primaryNavItems, secondaryNavItems } from './navItems';
 
 interface HeaderProps {
   currentPage?: NavItem;
   fixed?: boolean;
 }
-
-// Core navigation items
-const coreNavItems: { key: NavItem; label: string; href: string }[] = [
-  { key: 'explore', label: 'Explore', href: '/' },
-  { key: 'compare', label: 'Compare', href: '/compare' },
-  { key: 'rankings', label: 'Rankings', href: '/rankings' },
-  { key: 'correlations', label: 'Correlations', href: '/correlations' },
-  { key: 'story', label: 'Story', href: '/story' },
-  { key: 'why', label: 'Why', href: '/why' },
-];
-
-// Secondary links (shown in mobile menu after separator)
-const secondaryLinks: { key: string; label: string; href: string }[] = [
-  { key: 'methodology', label: 'Methodology', href: '/methodology' },
-  { key: 'credits', label: 'Credits', href: '/credits' },
-  { key: 'updates', label: 'Updates', href: '/updates' },
-  { key: 'privacy', label: 'Privacy', href: '/privacy' },
-  { key: 'terms', label: 'Terms', href: '/terms' },
-];
 
 export default function Header({ currentPage, fixed }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -155,11 +136,12 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
             </div>
             <div className="p-4">
               {/* Core navigation */}
-              {coreNavItems.map((item) => (
+              {primaryNavItems.map((item) => (
                 <Link
                   key={item.key}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-current={item.key === currentPage ? 'page' : undefined}
                   className={`block py-3 px-3 rounded-lg text-[14px] transition-colors ${
                     item.key === currentPage
                       ? 'bg-inset text-primary font-medium'
@@ -178,11 +160,12 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
                 <span className="block px-3 pb-2 text-[11px] uppercase tracking-wider text-muted/70">
                   More
                 </span>
-                {secondaryLinks.map((item) => (
+                {secondaryNavItems.map((item) => (
                   <Link
                     key={item.key}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
+                    aria-current={item.key === currentPage ? 'page' : undefined}
                     className={`block py-2.5 px-3 rounded-lg text-[13px] transition-colors ${
                       item.key === currentPage
                         ? 'bg-inset text-primary font-medium'

@@ -41,3 +41,6 @@ next-env.d.ts
 
 # Archives
 *.zip
+
+# Regenerable curation worklist (see scripts/generate-questions.js)
+scripts/question-candidates.json
