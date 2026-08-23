@@ -2,31 +2,31 @@
   "metadata": {
     "source": "Our World in Data (owid-energy-data)",
     "description": "Pre-computed bloc aggregates for validation",
-    "last_updated": "2026-02-11"
+    "last_updated": "2026-08-23"
   },
   "aggregates": {
     "ASEAN (Ember)": {
       "name": "ASEAN (Ember)",
       "years": {
         "2000": {
-          "demand_twh": 378.61,
-          "total_generation_twh": 378.61,
+          "demand_twh": 378.76,
+          "total_generation_twh": 378.76,
           "generation": {
             "coal": {
               "twh": 76.03,
-              "pct": 20.08
+              "pct": 20.07
             },
             "gas": {
               "twh": 164.26,
-              "pct": 43.39
+              "pct": 43.37
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 50.45,
-              "pct": 13.33
+              "twh": 50.43,
+              "pct": 13.31
             },
             "wind": {
               "twh": 0.0,
@@ -41,31 +41,31 @@
               "pct": 6.02
             },
             "other_fossil": {
-              "twh": 65.07,
-              "pct": 17.19
+              "twh": 65.24,
+              "pct": 17.22
             }
           },
           "aggregates": {
-            "clean_pct": 19.35,
-            "fossil_pct": 80.65,
-            "renewables_pct": 19.35,
+            "clean_pct": 19.33,
+            "fossil_pct": 80.67,
+            "renewables_pct": 19.33,
             "wind_solar_pct": 0
           },
           "emissions": {
-            "total_mtco2": 216.76
+            "total_mtco2": 216.87
           }
         },
         "2001": {
-          "demand_twh": 404.85,
-          "total_generation_twh": 404.85,
+          "demand_twh": 405.09,
+          "total_generation_twh": 405.09,
           "generation": {
             "coal": {
               "twh": 86.26,
-              "pct": 21.31
+              "pct": 21.29
             },
             "gas": {
               "twh": 190.41,
-              "pct": 47.03
+              "pct": 47.0
             },
             "nuclear": {
               "twh": 0.0,
@@ -73,7 +73,7 @@
             },
             "hydro": {
               "twh": 54.33,
-              "pct": 13.42
+              "pct": 13.41
             },
             "wind": {
               "twh": 0.0,
@@ -85,21 +85,21 @@
             },
             "bioenergy": {
               "twh": 22.86,
-              "pct": 5.65
+              "pct": 5.64
             },
             "other_fossil": {
-              "twh": 50.99,
-              "pct": 12.59
+              "twh": 51.23,
+              "pct": 12.65
             }
           },
           "aggregates": {
-            "clean_pct": 19.07,
-            "fossil_pct": 80.93,
-            "renewables_pct": 19.07,
+            "clean_pct": 19.06,
+            "fossil_pct": 80.94,
+            "renewables_pct": 19.06,
             "wind_solar_pct": 0
           },
           "emissions": {
-            "total_mtco2": 230.86
+            "total_mtco2": 231.01
           }
         },
         "2002": {
@@ -119,7 +119,7 @@
               "pct": 0.0
             },
             "hydro": {
-              "twh": 53.29,
+              "twh": 53.3,
               "pct": 12.3
             },
             "wind": {
@@ -135,14 +135,14 @@
               "pct": 5.36
             },
             "other_fossil": {
-              "twh": 54.32,
+              "twh": 54.31,
               "pct": 12.54
             }
           },
           "aggregates": {
-            "clean_pct": 17.66,
-            "fossil_pct": 82.34,
-            "renewables_pct": 17.66,
+            "clean_pct": 17.67,
+            "fossil_pct": 82.33,
+            "renewables_pct": 17.67,
             "wind_solar_pct": 0
           },
           "emissions": {
@@ -178,11 +178,11 @@
               "pct": 0.0
             },
             "bioenergy": {
-              "twh": 23.19,
-              "pct": 5.06
+              "twh": 23.18,
+              "pct": 5.05
             },
             "other_fossil": {
-              "twh": 53.38,
+              "twh": 53.39,
               "pct": 11.65
             }
           },
@@ -197,8 +197,8 @@
           }
         },
         "2004": {
-          "demand_twh": 496.63,
-          "total_generation_twh": 496.63,
+          "demand_twh": 496.61,
+          "total_generation_twh": 496.61,
           "generation": {
             "coal": {
               "twh": 115.01,
@@ -206,7 +206,7 @@
             },
             "gas": {
               "twh": 244.16,
-              "pct": 49.16
+              "pct": 49.17
             },
             "nuclear": {
               "twh": 0.0,
@@ -225,11 +225,11 @@
               "pct": 0.0
             },
             "bioenergy": {
-              "twh": 24.97,
+              "twh": 24.96,
               "pct": 5.03
             },
             "other_fossil": {
-              "twh": 59.5,
+              "twh": 59.49,
               "pct": 11.98
             }
           },
@@ -244,12 +244,12 @@
           }
         },
         "2005": {
-          "demand_twh": 522.75,
-          "total_generation_twh": 522.75,
+          "demand_twh": 522.68,
+          "total_generation_twh": 522.68,
           "generation": {
             "coal": {
               "twh": 124.53,
-              "pct": 23.82
+              "pct": 23.83
             },
             "gas": {
               "twh": 253.3,
@@ -272,12 +272,12 @@
               "pct": 0.0
             },
             "bioenergy": {
-              "twh": 25.3,
+              "twh": 25.29,
               "pct": 4.84
             },
             "other_fossil": {
-              "twh": 65.72,
-              "pct": 12.57
+              "twh": 65.66,
+              "pct": 12.56
             }
           },
           "aggregates": {
@@ -287,20 +287,20 @@
             "wind_solar_pct": 0
           },
           "emissions": {
-            "total_mtco2": 305.94
+            "total_mtco2": 305.9
           }
         },
         "2006": {
-          "demand_twh": 547.26,
-          "total_generation_twh": 547.26,
+          "demand_twh": 547.17,
+          "total_generation_twh": 547.17,
           "generation": {
             "coal": {
               "twh": 138.08,
-              "pct": 25.23
+              "pct": 25.24
             },
             "gas": {
               "twh": 262.67,
-              "pct": 48.0
+              "pct": 48.01
             },
             "nuclear": {
               "twh": 0.0,
@@ -319,12 +319,12 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 25.66,
+              "twh": 25.65,
               "pct": 4.69
             },
             "other_fossil": {
-              "twh": 60.24,
-              "pct": 11.01
+              "twh": 60.16,
+              "pct": 10.99
             }
           },
           "aggregates": {
@@ -334,12 +334,12 @@
             "wind_solar_pct": 0.02
           },
           "emissions": {
-            "total_mtco2": 319.87
+            "total_mtco2": 319.81
           }
         },
         "2007": {
-          "demand_twh": 579.13,
-          "total_generation_twh": 579.13,
+          "demand_twh": 578.98,
+          "total_generation_twh": 578.98,
           "generation": {
             "coal": {
               "twh": 155.7,
@@ -347,7 +347,7 @@
             },
             "gas": {
               "twh": 274.02,
-              "pct": 47.32
+              "pct": 47.33
             },
             "nuclear": {
               "twh": 0.0,
@@ -366,12 +366,12 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 27.49,
+              "twh": 27.47,
               "pct": 4.75
             },
             "other_fossil": {
-              "twh": 58.57,
-              "pct": 10.11
+              "twh": 58.44,
+              "pct": 10.09
             }
           },
           "aggregates": {
@@ -381,7 +381,7 @@
             "wind_solar_pct": 0.02
           },
           "emissions": {
-            "total_mtco2": 340.65
+            "total_mtco2": 340.56
           }
         },
         "2008": {
@@ -389,7 +389,7 @@
           "total_generation_twh": 603.96,
           "generation": {
             "coal": {
-              "twh": 152.01,
+              "twh": 152.03,
               "pct": 25.17
             },
             "gas": {
@@ -401,7 +401,7 @@
               "pct": 0.0
             },
             "hydro": {
-              "twh": 69.94,
+              "twh": 69.95,
               "pct": 11.58
             },
             "wind": {
@@ -413,11 +413,11 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 29.58,
-              "pct": 4.9
+              "twh": 29.56,
+              "pct": 4.89
             },
             "other_fossil": {
-              "twh": 59.24,
+              "twh": 59.23,
               "pct": 9.81
             }
           },
@@ -428,12 +428,12 @@
             "wind_solar_pct": 0.02
           },
           "emissions": {
-            "total_mtco2": 349.39
+            "total_mtco2": 349.38
           }
         },
         "2009": {
-          "demand_twh": 624.59,
-          "total_generation_twh": 624.59,
+          "demand_twh": 624.57,
+          "total_generation_twh": 624.57,
           "generation": {
             "coal": {
               "twh": 162.79,
@@ -441,14 +441,14 @@
             },
             "gas": {
               "twh": 308.82,
-              "pct": 49.44
+              "pct": 49.45
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 73.68,
+              "twh": 73.69,
               "pct": 11.8
             },
             "wind": {
@@ -460,12 +460,12 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 30.5,
+              "twh": 30.49,
               "pct": 4.88
             },
             "other_fossil": {
-              "twh": 48.69,
-              "pct": 7.8
+              "twh": 48.67,
+              "pct": 7.79
             }
           },
           "aggregates": {
@@ -475,12 +475,12 @@
             "wind_solar_pct": 0.02
           },
           "emissions": {
-            "total_mtco2": 362.01
+            "total_mtco2": 361.99
           }
         },
         "2010": {
-          "demand_twh": 686.9,
-          "total_generation_twh": 686.9,
+          "demand_twh": 686.86,
+          "total_generation_twh": 686.86,
           "generation": {
             "coal": {
               "twh": 187.49,
@@ -507,11 +507,11 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 32.99,
+              "twh": 32.98,
               "pct": 4.8
             },
             "other_fossil": {
-              "twh": 58.95,
+              "twh": 58.92,
               "pct": 8.58
             }
           },
@@ -522,12 +522,12 @@
             "wind_solar_pct": 0.02
           },
           "emissions": {
-            "total_mtco2": 401.37
+            "total_mtco2": 401.35
           }
         },
         "2011": {
-          "demand_twh": 717.11,
-          "total_generation_twh": 717.11,
+          "demand_twh": 717.07,
+          "total_generation_twh": 717.07,
           "generation": {
             "coal": {
               "twh": 211.18,
@@ -535,7 +535,7 @@
             },
             "gas": {
               "twh": 305.08,
-              "pct": 42.54
+              "pct": 42.55
             },
             "nuclear": {
               "twh": 0.0,
@@ -554,11 +554,11 @@
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 34.87,
+              "twh": 34.86,
               "pct": 4.87
             },
             "other_fossil": {
-              "twh": 66.15,
+              "twh": 66.12,
               "pct": 9.22
             }
           },
@@ -569,12 +569,12 @@
             "wind_solar_pct": 0.03
           },
           "emissions": {
-            "total_mtco2": 414.41
+            "total_mtco2": 414.38
           }
         },
         "2012": {
-          "demand_twh": 776.6,
-          "total_generation_twh": 776.6,
+          "demand_twh": 776.57,
+          "total_generation_twh": 776.57,
           "generation": {
             "coal": {
               "twh": 242.69,
@@ -582,14 +582,14 @@
             },
             "gas": {
               "twh": 335.14,
-              "pct": 43.15
+              "pct": 43.16
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 115.25,
+              "twh": 115.26,
               "pct": 14.84
             },
             "wind": {
@@ -597,15 +597,15 @@
               "pct": 0.02
             },
             "solar": {
-              "twh": 0.53,
+              "twh": 0.52,
               "pct": 0.07
             },
             "bioenergy": {
-              "twh": 36.46,
+              "twh": 36.45,
               "pct": 4.7
             },
             "other_fossil": {
-              "twh": 46.39,
+              "twh": 46.37,
               "pct": 5.97
             }
           },
@@ -616,15 +616,15 @@
             "wind_solar_pct": 0.09
           },
           "emissions": {
-            "total_mtco2": 447.77
+            "total_mtco2": 447.75
           }
         },
         "2013": {
-          "demand_twh": 816.77,
-          "total_generation_twh": 816.77,
+          "demand_twh": 816.74,
+          "total_generation_twh": 816.74,
           "generation": {
             "coal": {
-              "twh": 257.11,
+              "twh": 257.1,
               "pct": 31.48
             },
             "gas": {
@@ -636,7 +636,7 @@
               "pct": 0.0
             },
             "hydro": {
-              "twh": 127.15,
+              "twh": 127.16,
               "pct": 15.57
             },
             "wind": {
@@ -644,7 +644,7 @@
               "pct": 0.06
             },
             "solar": {
-              "twh": 1.44,
+              "twh": 1.43,
               "pct": 0.18
             },
             "bioenergy": {
@@ -652,7 +652,7 @@
               "pct": 4.54
             },
             "other_fossil": {
-              "twh": 33.36,
+              "twh": 33.34,
               "pct": 4.08
             }
           },
@@ -663,16 +663,16 @@
             "wind_solar_pct": 0.24
           },
           "emissions": {
-            "total_mtco2": 467.99
+            "total_mtco2": 467.96
           }
         },
         "2014": {
-          "demand_twh": 864.02,
-          "total_generation_twh": 864.02,
+          "demand_twh": 863.97,
+          "total_generation_twh": 863.97,
           "generation": {
             "coal": {
-              "twh": 282.59,
-              "pct": 32.71
+              "twh": 282.54,
+              "pct": 32.7
             },
             "gas": {
               "twh": 373.23,
@@ -683,7 +683,7 @@
               "pct": 0.0
             },
             "hydro": {
-              "twh": 130.79,
+              "twh": 130.81,
               "pct": 15.14
             },
             "wind": {
@@ -691,7 +691,7 @@
               "pct": 0.07
             },
             "solar": {
-              "twh": 2.22,
+              "twh": 2.21,
               "pct": 0.26
             },
             "bioenergy": {
@@ -699,7 +699,7 @@
               "pct": 4.49
             },
             "other_fossil": {
-              "twh": 35.77,
+              "twh": 35.76,
               "pct": 4.14
             }
           },
@@ -710,74 +710,74 @@
             "wind_solar_pct": 0.33
           },
           "emissions": {
-            "total_mtco2": 500.53
+            "total_mtco2": 500.48
           }
         },
         "2015": {
-          "demand_twh": 907.32,
-          "total_generation_twh": 907.32,
+          "demand_twh": 907.23,
+          "total_generation_twh": 907.23,
           "generation": {
             "coal": {
-              "twh": 321.33,
-              "pct": 35.42
+              "twh": 321.14,
+              "pct": 35.4
             },
             "gas": {
               "twh": 377.93,
-              "pct": 41.65
+              "pct": 41.66
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 121.48,
-              "pct": 13.39
+              "twh": 121.66,
+              "pct": 13.41
             },
             "wind": {
               "twh": 1.2,
               "pct": 0.13
             },
             "solar": {
-              "twh": 2.86,
-              "pct": 0.32
+              "twh": 2.84,
+              "pct": 0.31
             },
             "bioenergy": {
               "twh": 41.07,
               "pct": 4.53
             },
             "other_fossil": {
-              "twh": 41.45,
-              "pct": 4.57
+              "twh": 41.39,
+              "pct": 4.56
             }
           },
           "aggregates": {
-            "clean_pct": 18.36,
-            "fossil_pct": 81.64,
-            "renewables_pct": 18.36,
-            "wind_solar_pct": 0.45
+            "clean_pct": 18.38,
+            "fossil_pct": 81.62,
+            "renewables_pct": 18.38,
+            "wind_solar_pct": 0.44
           },
           "emissions": {
-            "total_mtco2": 539.83
+            "total_mtco2": 539.62
           }
         },
         "2016": {
-          "demand_twh": 969.59,
-          "total_generation_twh": 969.59,
+          "demand_twh": 969.34,
+          "total_generation_twh": 969.34,
           "generation": {
             "coal": {
-              "twh": 364.56,
-              "pct": 37.6
+              "twh": 364.27,
+              "pct": 37.58
             },
             "gas": {
               "twh": 379.77,
-              "pct": 39.17
+              "pct": 39.18
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 144.15,
+              "twh": 144.13,
               "pct": 14.87
             },
             "wind": {
@@ -785,7 +785,7 @@
               "pct": 0.16
             },
             "solar": {
-              "twh": 5.16,
+              "twh": 5.13,
               "pct": 0.53
             },
             "bioenergy": {
@@ -793,8 +793,8 @@
               "pct": 4.52
             },
             "other_fossil": {
-              "twh": 30.58,
-              "pct": 3.15
+              "twh": 30.67,
+              "pct": 3.16
             }
           },
           "aggregates": {
@@ -804,16 +804,16 @@
             "wind_solar_pct": 0.69
           },
           "emissions": {
-            "total_mtco2": 573.36
+            "total_mtco2": 573.15
           }
         },
         "2017": {
-          "demand_twh": 1008.11,
-          "total_generation_twh": 1008.11,
+          "demand_twh": 1007.89,
+          "total_generation_twh": 1007.89,
           "generation": {
             "coal": {
-              "twh": 383.89,
-              "pct": 38.08
+              "twh": 383.71,
+              "pct": 38.07
             },
             "gas": {
               "twh": 362.07,
@@ -825,22 +825,22 @@
             },
             "hydro": {
               "twh": 179.46,
-              "pct": 17.8
+              "pct": 17.81
             },
             "wind": {
               "twh": 2.55,
               "pct": 0.25
             },
             "solar": {
-              "twh": 6.33,
+              "twh": 6.3,
               "pct": 0.63
             },
             "bioenergy": {
-              "twh": 47.76,
+              "twh": 47.77,
               "pct": 4.73
             },
             "other_fossil": {
-              "twh": 26.05,
+              "twh": 26.03,
               "pct": 2.58
             }
           },
@@ -851,121 +851,121 @@
             "wind_solar_pct": 0.88
           },
           "emissions": {
-            "total_mtco2": 576.58
+            "total_mtco2": 576.41
           }
         },
         "2018": {
-          "demand_twh": 1071.39,
-          "total_generation_twh": 1071.39,
+          "demand_twh": 1071.01,
+          "total_generation_twh": 1071.01,
           "generation": {
             "coal": {
-              "twh": 434.14,
+              "twh": 433.99,
               "pct": 40.52
             },
             "gas": {
               "twh": 361.94,
-              "pct": 33.78
+              "pct": 33.79
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 187.6,
-              "pct": 17.51
+              "twh": 187.37,
+              "pct": 17.49
             },
             "wind": {
               "twh": 3.47,
               "pct": 0.32
             },
             "solar": {
-              "twh": 6.8,
+              "twh": 6.78,
               "pct": 0.63
             },
             "bioenergy": {
-              "twh": 53.29,
+              "twh": 53.28,
               "pct": 4.97
             },
             "other_fossil": {
-              "twh": 24.15,
-              "pct": 2.25
+              "twh": 24.18,
+              "pct": 2.26
             }
           },
           "aggregates": {
-            "clean_pct": 23.44,
-            "fossil_pct": 76.56,
-            "renewables_pct": 23.44,
+            "clean_pct": 23.43,
+            "fossil_pct": 76.57,
+            "renewables_pct": 23.43,
             "wind_solar_pct": 0.95
           },
           "emissions": {
-            "total_mtco2": 619.0
+            "total_mtco2": 618.88
           }
         },
         "2019": {
-          "demand_twh": 1122.56,
-          "total_generation_twh": 1122.56,
+          "demand_twh": 1122.19,
+          "total_generation_twh": 1122.19,
           "generation": {
             "coal": {
-              "twh": 483.51,
+              "twh": 483.31,
               "pct": 43.07
             },
             "gas": {
               "twh": 383.54,
-              "pct": 34.17
+              "pct": 34.18
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 162.32,
-              "pct": 14.46
+              "twh": 162.11,
+              "pct": 14.45
             },
             "wind": {
               "twh": 5.91,
               "pct": 0.53
             },
             "solar": {
-              "twh": 13.24,
+              "twh": 13.21,
               "pct": 1.18
             },
             "bioenergy": {
-              "twh": 53.81,
+              "twh": 53.8,
               "pct": 4.79
             },
             "other_fossil": {
-              "twh": 20.23,
-              "pct": 1.8
+              "twh": 20.31,
+              "pct": 1.81
             }
           },
           "aggregates": {
-            "clean_pct": 20.96,
-            "fossil_pct": 79.04,
-            "renewables_pct": 20.96,
+            "clean_pct": 20.94,
+            "fossil_pct": 79.06,
+            "renewables_pct": 20.94,
             "wind_solar_pct": 1.71
           },
           "emissions": {
-            "total_mtco2": 670.82
+            "total_mtco2": 670.69
           }
         },
         "2020": {
-          "demand_twh": 1115.07,
-          "total_generation_twh": 1115.07,
+          "demand_twh": 1113.63,
+          "total_generation_twh": 1113.63,
           "generation": {
             "coal": {
-              "twh": 506.98,
-              "pct": 45.47
+              "twh": 505.77,
+              "pct": 45.42
             },
             "gas": {
               "twh": 335.29,
-              "pct": 30.07
+              "pct": 30.11
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 177.59,
+              "twh": 177.4,
               "pct": 15.93
             },
             "wind": {
@@ -973,15 +973,15 @@
               "pct": 0.51
             },
             "solar": {
-              "twh": 20.12,
+              "twh": 20.1,
               "pct": 1.8
             },
             "bioenergy": {
-              "twh": 55.37,
+              "twh": 55.3,
               "pct": 4.96
             },
             "other_fossil": {
-              "twh": 14.02,
+              "twh": 14.07,
               "pct": 1.26
             }
           },
@@ -992,35 +992,35 @@
             "wind_solar_pct": 2.31
           },
           "emissions": {
-            "total_mtco2": 657.18
+            "total_mtco2": 656.18
           }
         },
         "2021": {
-          "demand_twh": 1157.25,
-          "total_generation_twh": 1157.25,
+          "demand_twh": 1156.89,
+          "total_generation_twh": 1156.89,
           "generation": {
             "coal": {
-              "twh": 505.04,
+              "twh": 504.85,
               "pct": 43.64
             },
             "gas": {
               "twh": 340.83,
-              "pct": 29.45
+              "pct": 29.46
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 194.96,
-              "pct": 16.85
+              "twh": 194.75,
+              "pct": 16.83
             },
             "wind": {
-              "twh": 8.58,
+              "twh": 8.59,
               "pct": 0.74
             },
             "solar": {
-              "twh": 36.29,
+              "twh": 36.27,
               "pct": 3.14
             },
             "bioenergy": {
@@ -1028,46 +1028,46 @@
               "pct": 5.09
             },
             "other_fossil": {
-              "twh": 12.67,
-              "pct": 1.09
+              "twh": 12.72,
+              "pct": 1.1
             }
           },
           "aggregates": {
-            "clean_pct": 25.81,
-            "fossil_pct": 74.19,
-            "renewables_pct": 25.81,
+            "clean_pct": 25.8,
+            "fossil_pct": 74.2,
+            "renewables_pct": 25.8,
             "wind_solar_pct": 3.88
           },
           "emissions": {
-            "total_mtco2": 661.2
+            "total_mtco2": 661.06
           }
         },
         "2022": {
-          "demand_twh": 1222.14,
-          "total_generation_twh": 1222.14,
+          "demand_twh": 1221.62,
+          "total_generation_twh": 1221.62,
           "generation": {
             "coal": {
-              "twh": 508.65,
-              "pct": 41.62
+              "twh": 508.35,
+              "pct": 41.61
             },
             "gas": {
               "twh": 355.25,
-              "pct": 29.07
+              "pct": 29.08
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 225.65,
-              "pct": 18.46
+              "twh": 225.39,
+              "pct": 18.45
             },
             "wind": {
-              "twh": 13.47,
-              "pct": 1.1
+              "twh": 13.5,
+              "pct": 1.11
             },
             "solar": {
-              "twh": 37.43,
+              "twh": 37.4,
               "pct": 3.06
             },
             "bioenergy": {
@@ -1075,112 +1075,159 @@
               "pct": 5.44
             },
             "other_fossil": {
-              "twh": 15.18,
-              "pct": 1.24
+              "twh": 15.22,
+              "pct": 1.25
             }
           },
           "aggregates": {
-            "clean_pct": 28.07,
-            "fossil_pct": 71.93,
-            "renewables_pct": 28.07,
-            "wind_solar_pct": 4.16
+            "clean_pct": 28.06,
+            "fossil_pct": 71.94,
+            "renewables_pct": 28.06,
+            "wind_solar_pct": 4.17
           },
           "emissions": {
-            "total_mtco2": 677.23
+            "total_mtco2": 677.01
           }
         },
         "2023": {
-          "demand_twh": 1277.41,
-          "total_generation_twh": 1277.41,
+          "demand_twh": 1272.63,
+          "total_generation_twh": 1272.63,
           "generation": {
             "coal": {
-              "twh": 555.0,
-              "pct": 43.45
+              "twh": 554.95,
+              "pct": 43.61
             },
             "gas": {
-              "twh": 374.11,
-              "pct": 29.29
+              "twh": 371.22,
+              "pct": 29.17
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 208.15,
-              "pct": 16.29
+              "twh": 207.67,
+              "pct": 16.32
             },
             "wind": {
-              "twh": 17.08,
-              "pct": 1.34
+              "twh": 17.16,
+              "pct": 1.35
             },
             "solar": {
-              "twh": 39.18,
-              "pct": 3.07
+              "twh": 38.55,
+              "pct": 3.03
             },
             "bioenergy": {
-              "twh": 69.58,
-              "pct": 5.45
+              "twh": 69.6,
+              "pct": 5.47
             },
             "other_fossil": {
-              "twh": 14.31,
-              "pct": 1.12
+              "twh": 13.48,
+              "pct": 1.06
             }
           },
           "aggregates": {
-            "clean_pct": 26.15,
-            "fossil_pct": 73.85,
-            "renewables_pct": 26.15,
-            "wind_solar_pct": 4.41
+            "clean_pct": 26.16,
+            "fossil_pct": 73.84,
+            "renewables_pct": 26.16,
+            "wind_solar_pct": 4.38
           },
           "emissions": {
-            "total_mtco2": 727.44
+            "total_mtco2": 723.78
           }
         },
         "2024": {
-          "demand_twh": 1355.64,
-          "total_generation_twh": 1355.64,
+          "demand_twh": 1352.11,
+          "total_generation_twh": 1352.11,
           "generation": {
             "coal": {
-              "twh": 602.66,
-              "pct": 44.46
+              "twh": 603.6,
+              "pct": 44.64
             },
             "gas": {
-              "twh": 389.06,
-              "pct": 28.7
+              "twh": 385.68,
+              "pct": 28.52
             },
             "nuclear": {
               "twh": 0.0,
               "pct": 0.0
             },
             "hydro": {
-              "twh": 220.9,
-              "pct": 16.29
+              "twh": 221.4,
+              "pct": 16.37
             },
             "wind": {
-              "twh": 17.83,
-              "pct": 1.32
+              "twh": 18.1,
+              "pct": 1.34
             },
             "solar": {
-              "twh": 43.0,
-              "pct": 3.17
+              "twh": 41.41,
+              "pct": 3.06
             },
             "bioenergy": {
-              "twh": 68.56,
-              "pct": 5.06
+              "twh": 69.03,
+              "pct": 5.1
             },
             "other_fossil": {
-              "twh": 13.63,
-              "pct": 1.01
+              "twh": 12.89,
+              "pct": 0.95
             }
           },
           "aggregates": {
-            "clean_pct": 25.84,
-            "fossil_pct": 74.16,
-            "renewables_pct": 25.84,
-            "wind_solar_pct": 4.49
+            "clean_pct": 25.88,
+            "fossil_pct": 74.12,
+            "renewables_pct": 25.88,
+            "wind_solar_pct": 4.4
           },
           "emissions": {
-            "total_mtco2": 775.6
+            "total_mtco2": 773.03
+          }
+        },
+        "2025": {
+          "demand_twh": 1369.85,
+          "total_generation_twh": 1369.85,
+          "generation": {
+            "coal": {
+              "twh": 610.43,
+              "pct": 44.56
+            },
+            "gas": {
+              "twh": 375.12,
+              "pct": 27.38
+            },
+            "nuclear": {
+              "twh": 0.0,
+              "pct": 0.0
+            },
+            "hydro": {
+              "twh": 238.88,
+              "pct": 17.44
+            },
+            "wind": {
+              "twh": 19.73,
+              "pct": 1.44
+            },
+            "solar": {
+              "twh": 46.33,
+              "pct": 3.38
+            },
+            "bioenergy": {
+              "twh": 64.18,
+              "pct": 4.69
+            },
+            "other_fossil": {
+              "twh": 15.18,
+              "pct": 1.11
+            }
+          },
+          "aggregates": {
+            "clean_pct": 26.95,
+            "fossil_pct": 73.05,
+            "renewables_pct": 26.95,
+            "wind_solar_pct": 4.82
+          },
+          "emissions": {
+            "total_mtco2": 773.98
           }
         }
       }
@@ -1189,8 +1236,8 @@
       "name": "EU (Ember)",
       "years": {
         "2000": {
-          "demand_twh": 2631.01,
-          "total_generation_twh": 2622.17,
+          "demand_twh": 2631.02,
+          "total_generation_twh": 2622.18,
           "generation": {
             "coal": {
               "twh": 800.33,
@@ -1209,7 +1256,7 @@
               "pct": 13.35
             },
             "wind": {
-              "twh": 21.27,
+              "twh": 21.28,
               "pct": 0.81
             },
             "solar": {
@@ -1236,8 +1283,8 @@
           }
         },
         "2001": {
-          "demand_twh": 2695.56,
-          "total_generation_twh": 2698.91,
+          "demand_twh": 2695.57,
+          "total_generation_twh": 2698.92,
           "generation": {
             "coal": {
               "twh": 792.92,
@@ -1256,7 +1303,7 @@
               "pct": 13.84
             },
             "wind": {
-              "twh": 25.74,
+              "twh": 25.75,
               "pct": 0.95
             },
             "solar": {
@@ -1330,8 +1377,8 @@
           }
         },
         "2003": {
-          "demand_twh": 2797.83,
-          "total_generation_twh": 2799.92,
+          "demand_twh": 2797.84,
+          "total_generation_twh": 2799.93,
           "generation": {
             "coal": {
               "twh": 849.04,
@@ -1350,7 +1397,7 @@
               "pct": 10.88
             },
             "wind": {
-              "twh": 43.3,
+              "twh": 43.31,
               "pct": 1.55
             },
             "solar": {
@@ -1377,8 +1424,8 @@
           }
         },
         "2004": {
-          "demand_twh": 2855.72,
-          "total_generation_twh": 2867.53,
+          "demand_twh": 2855.74,
+          "total_generation_twh": 2867.55,
           "generation": {
             "coal": {
               "twh": 835.42,
@@ -1397,7 +1444,7 @@
               "pct": 11.27
             },
             "wind": {
-              "twh": 57.52,
+              "twh": 57.54,
               "pct": 2.01
             },
             "solar": {
@@ -1424,8 +1471,8 @@
           }
         },
         "2005": {
-          "demand_twh": 2891.7,
-          "total_generation_twh": 2884.37,
+          "demand_twh": 2891.72,
+          "total_generation_twh": 2884.39,
           "generation": {
             "coal": {
               "twh": 808.89,
@@ -1444,7 +1491,7 @@
               "pct": 10.64
             },
             "wind": {
-              "twh": 68.08,
+              "twh": 68.1,
               "pct": 2.36
             },
             "solar": {
@@ -1471,12 +1518,12 @@
           }
         },
         "2006": {
-          "demand_twh": 2932.74,
-          "total_generation_twh": 2932.28,
+          "demand_twh": 2932.77,
+          "total_generation_twh": 2932.31,
           "generation": {
             "coal": {
               "twh": 816.5,
-              "pct": 27.85
+              "pct": 27.84
             },
             "gas": {
               "twh": 540.05,
@@ -1484,15 +1531,15 @@
             },
             "nuclear": {
               "twh": 914.44,
-              "pct": 31.19
+              "pct": 31.18
             },
             "hydro": {
               "twh": 309.98,
               "pct": 10.57
             },
             "wind": {
-              "twh": 78.72,
-              "pct": 2.68
+              "twh": 78.75,
+              "pct": 2.69
             },
             "solar": {
               "twh": 2.52,
@@ -1511,15 +1558,15 @@
             "clean_pct": 47.12,
             "fossil_pct": 52.88,
             "renewables_pct": 15.93,
-            "wind_solar_pct": 2.77
+            "wind_solar_pct": 2.78
           },
           "emissions": {
             "total_mtco2": 1198.36
           }
         },
         "2007": {
-          "demand_twh": 2958.32,
-          "total_generation_twh": 2947.68,
+          "demand_twh": 2958.35,
+          "total_generation_twh": 2947.71,
           "generation": {
             "coal": {
               "twh": 828.74,
@@ -1538,7 +1585,7 @@
               "pct": 10.44
             },
             "wind": {
-              "twh": 99.92,
+              "twh": 99.95,
               "pct": 3.39
             },
             "solar": {
@@ -1565,8 +1612,8 @@
           }
         },
         "2008": {
-          "demand_twh": 2971.77,
-          "total_generation_twh": 2959.74,
+          "demand_twh": 2971.81,
+          "total_generation_twh": 2959.78,
           "generation": {
             "coal": {
               "twh": 757.01,
@@ -1585,7 +1632,7 @@
               "pct": 11.0
             },
             "wind": {
-              "twh": 113.22,
+              "twh": 113.26,
               "pct": 3.83
             },
             "solar": {
@@ -1612,8 +1659,8 @@
           }
         },
         "2009": {
-          "demand_twh": 2825.59,
-          "total_generation_twh": 2808.3,
+          "demand_twh": 2825.63,
+          "total_generation_twh": 2808.34,
           "generation": {
             "coal": {
               "twh": 703.55,
@@ -1632,7 +1679,7 @@
               "pct": 11.72
             },
             "wind": {
-              "twh": 124.57,
+              "twh": 124.61,
               "pct": 4.44
             },
             "solar": {
@@ -1659,8 +1706,8 @@
           }
         },
         "2010": {
-          "demand_twh": 2950.4,
-          "total_generation_twh": 2945.48,
+          "demand_twh": 2950.46,
+          "total_generation_twh": 2945.54,
           "generation": {
             "coal": {
               "twh": 701.2,
@@ -1679,7 +1726,7 @@
               "pct": 12.62
             },
             "wind": {
-              "twh": 139.82,
+              "twh": 139.88,
               "pct": 4.75
             },
             "solar": {
@@ -1702,12 +1749,12 @@
             "wind_solar_pct": 5.55
           },
           "emissions": {
-            "total_mtco2": 1087.92
+            "total_mtco2": 1087.93
           }
         },
         "2011": {
-          "demand_twh": 2909.56,
-          "total_generation_twh": 2908.6,
+          "demand_twh": 2909.64,
+          "total_generation_twh": 2908.68,
           "generation": {
             "coal": {
               "twh": 724.81,
@@ -1726,8 +1773,8 @@
               "pct": 10.57
             },
             "wind": {
-              "twh": 165.33,
-              "pct": 5.68
+              "twh": 165.41,
+              "pct": 5.69
             },
             "solar": {
               "twh": 47.71,
@@ -1746,15 +1793,15 @@
             "clean_pct": 51.01,
             "fossil_pct": 48.99,
             "renewables_pct": 22.21,
-            "wind_solar_pct": 7.32
+            "wind_solar_pct": 7.33
           },
           "emissions": {
             "total_mtco2": 1095.57
           }
         },
         "2012": {
-          "demand_twh": 2910.15,
-          "total_generation_twh": 2903.39,
+          "demand_twh": 2910.22,
+          "total_generation_twh": 2903.46,
           "generation": {
             "coal": {
               "twh": 742.68,
@@ -1762,18 +1809,18 @@
             },
             "gas": {
               "twh": 482.7,
-              "pct": 16.63
+              "pct": 16.62
             },
             "nuclear": {
               "twh": 811.95,
-              "pct": 27.97
+              "pct": 27.96
             },
             "hydro": {
               "twh": 331.67,
               "pct": 11.42
             },
             "wind": {
-              "twh": 187.48,
+              "twh": 187.55,
               "pct": 6.46
             },
             "solar": {
@@ -1800,8 +1847,8 @@
           }
         },
         "2013": {
-          "demand_twh": 2881.8,
-          "total_generation_twh": 2883.61,
+          "demand_twh": 2881.88,
+          "total_generation_twh": 2883.69,
           "generation": {
             "coal": {
               "twh": 728.9,
@@ -1820,8 +1867,8 @@
               "pct": 12.76
             },
             "wind": {
-              "twh": 209.47,
-              "pct": 7.26
+              "twh": 209.55,
+              "pct": 7.27
             },
             "solar": {
               "twh": 83.76,
@@ -1840,15 +1887,15 @@
             "clean_pct": 55.94,
             "fossil_pct": 44.06,
             "renewables_pct": 27.98,
-            "wind_solar_pct": 10.16
+            "wind_solar_pct": 10.17
           },
           "emissions": {
             "total_mtco2": 1029.8
           }
         },
         "2014": {
-          "demand_twh": 2818.8,
-          "total_generation_twh": 2823.83,
+          "demand_twh": 2818.88,
+          "total_generation_twh": 2823.91,
           "generation": {
             "coal": {
               "twh": 692.78,
@@ -1860,14 +1907,14 @@
             },
             "nuclear": {
               "twh": 812.57,
-              "pct": 28.78
+              "pct": 28.77
             },
             "hydro": {
               "twh": 370.06,
               "pct": 13.1
             },
             "wind": {
-              "twh": 222.38,
+              "twh": 222.46,
               "pct": 7.88
             },
             "solar": {
@@ -1886,7 +1933,7 @@
           "aggregates": {
             "clean_pct": 58.42,
             "fossil_pct": 41.58,
-            "renewables_pct": 29.64,
+            "renewables_pct": 29.65,
             "wind_solar_pct": 11.19
           },
           "emissions": {
@@ -1894,8 +1941,8 @@
           }
         },
         "2015": {
-          "demand_twh": 2863.61,
-          "total_generation_twh": 2870.26,
+          "demand_twh": 2863.72,
+          "total_generation_twh": 2870.37,
           "generation": {
             "coal": {
               "twh": 705.03,
@@ -1914,7 +1961,7 @@
               "pct": 11.71
             },
             "wind": {
-              "twh": 263.17,
+              "twh": 263.28,
               "pct": 9.17
             },
             "solar": {
@@ -1941,8 +1988,8 @@
           }
         },
         "2016": {
-          "demand_twh": 2891.95,
-          "total_generation_twh": 2891.3,
+          "demand_twh": 2892.05,
+          "total_generation_twh": 2891.4,
           "generation": {
             "coal": {
               "twh": 659.16,
@@ -1950,7 +1997,7 @@
             },
             "gas": {
               "twh": 464.78,
-              "pct": 16.08
+              "pct": 16.07
             },
             "nuclear": {
               "twh": 767.95,
@@ -1961,7 +2008,7 @@
               "pct": 11.95
             },
             "wind": {
-              "twh": 266.81,
+              "twh": 266.91,
               "pct": 9.23
             },
             "solar": {
@@ -1988,8 +2035,8 @@
           }
         },
         "2017": {
-          "demand_twh": 2918.3,
-          "total_generation_twh": 2922.85,
+          "demand_twh": 2918.43,
+          "total_generation_twh": 2922.98,
           "generation": {
             "coal": {
               "twh": 638.86,
@@ -2008,8 +2055,8 @@
               "pct": 10.07
             },
             "wind": {
-              "twh": 312.3,
-              "pct": 10.68
+              "twh": 312.43,
+              "pct": 10.69
             },
             "solar": {
               "twh": 106.58,
@@ -2028,15 +2075,15 @@
             "clean_pct": 55.89,
             "fossil_pct": 44.11,
             "renewables_pct": 29.91,
-            "wind_solar_pct": 14.33
+            "wind_solar_pct": 14.34
           },
           "emissions": {
             "total_mtco2": 995.02
           }
         },
         "2018": {
-          "demand_twh": 2917.32,
-          "total_generation_twh": 2908.48,
+          "demand_twh": 2917.46,
+          "total_generation_twh": 2908.62,
           "generation": {
             "coal": {
               "twh": 595.54,
@@ -2055,8 +2102,8 @@
               "pct": 11.82
             },
             "wind": {
-              "twh": 320.62,
-              "pct": 11.02
+              "twh": 320.76,
+              "pct": 11.03
             },
             "solar": {
               "twh": 114.13,
@@ -2064,7 +2111,7 @@
             },
             "bioenergy": {
               "twh": 162.6,
-              "pct": 5.6
+              "pct": 5.59
             },
             "other_fossil": {
               "twh": 120.86,
@@ -2075,15 +2122,15 @@
             "clean_pct": 58.56,
             "fossil_pct": 41.44,
             "renewables_pct": 32.36,
-            "wind_solar_pct": 14.94
+            "wind_solar_pct": 14.95
           },
           "emissions": {
             "total_mtco2": 934.42
           }
         },
         "2019": {
-          "demand_twh": 2877.27,
-          "total_generation_twh": 2874.34,
+          "demand_twh": 2877.43,
+          "total_generation_twh": 2874.5,
           "generation": {
             "coal": {
               "twh": 450.79,
@@ -2102,8 +2149,8 @@
               "pct": 11.14
             },
             "wind": {
-              "twh": 367.13,
-              "pct": 12.77
+              "twh": 367.29,
+              "pct": 12.78
             },
             "solar": {
               "twh": 124.38,
@@ -2122,15 +2169,15 @@
             "clean_pct": 60.68,
             "fossil_pct": 39.32,
             "renewables_pct": 34.05,
-            "wind_solar_pct": 17.1
+            "wind_solar_pct": 17.11
           },
           "emissions": {
-            "total_mtco2": 825.97
+            "total_mtco2": 825.98
           }
         },
         "2020": {
-          "demand_twh": 2766.88,
-          "total_generation_twh": 2752.91,
+          "demand_twh": 2767.06,
+          "total_generation_twh": 2753.09,
           "generation": {
             "coal": {
               "twh": 352.33,
@@ -2149,7 +2196,7 @@
               "pct": 12.61
             },
             "wind": {
-              "twh": 397.97,
+              "twh": 398.16,
               "pct": 14.46
             },
             "solar": {
@@ -2161,7 +2208,7 @@
               "pct": 6.17
             },
             "other_fossil": {
-              "twh": 97.77,
+              "twh": 97.76,
               "pct": 3.55
             }
           },
@@ -2172,16 +2219,16 @@
             "wind_solar_pct": 19.72
           },
           "emissions": {
-            "total_mtco2": 719.07
+            "total_mtco2": 719.06
           }
         },
         "2021": {
-          "demand_twh": 2882.03,
-          "total_generation_twh": 2874.75,
+          "demand_twh": 2882.27,
+          "total_generation_twh": 2874.99,
           "generation": {
             "coal": {
               "twh": 419.0,
-              "pct": 14.58
+              "pct": 14.57
             },
             "gas": {
               "twh": 547.04,
@@ -2196,8 +2243,8 @@
               "pct": 12.11
             },
             "wind": {
-              "twh": 386.69,
-              "pct": 13.45
+              "twh": 386.94,
+              "pct": 13.46
             },
             "solar": {
               "twh": 163.05,
@@ -2208,23 +2255,23 @@
               "pct": 6.21
             },
             "other_fossil": {
-              "twh": 100.42,
+              "twh": 100.41,
               "pct": 3.49
             }
           },
           "aggregates": {
-            "clean_pct": 62.9,
-            "fossil_pct": 37.1,
-            "renewables_pct": 37.45,
-            "wind_solar_pct": 19.12
+            "clean_pct": 62.91,
+            "fossil_pct": 37.09,
+            "renewables_pct": 37.46,
+            "wind_solar_pct": 19.13
           },
           "emissions": {
-            "total_mtco2": 783.51
+            "total_mtco2": 783.5
           }
         },
         "2022": {
-          "demand_twh": 2789.91,
-          "total_generation_twh": 2776.97,
+          "demand_twh": 2790.43,
+          "total_generation_twh": 2777.49,
           "generation": {
             "coal": {
               "twh": 448.43,
@@ -2232,7 +2279,7 @@
             },
             "gas": {
               "twh": 533.96,
-              "pct": 19.23
+              "pct": 19.22
             },
             "nuclear": {
               "twh": 609.26,
@@ -2240,11 +2287,11 @@
             },
             "hydro": {
               "twh": 276.19,
-              "pct": 9.95
+              "pct": 9.94
             },
             "wind": {
-              "twh": 421.3,
-              "pct": 15.17
+              "twh": 421.83,
+              "pct": 15.19
             },
             "solar": {
               "twh": 209.76,
@@ -2255,159 +2302,159 @@
               "pct": 6.2
             },
             "other_fossil": {
-              "twh": 105.87,
+              "twh": 105.86,
               "pct": 3.81
             }
           },
           "aggregates": {
-            "clean_pct": 60.81,
-            "fossil_pct": 39.19,
-            "renewables_pct": 38.87,
-            "wind_solar_pct": 22.72
+            "clean_pct": 60.82,
+            "fossil_pct": 39.18,
+            "renewables_pct": 38.88,
+            "wind_solar_pct": 22.74
           },
           "emissions": {
-            "total_mtco2": 809.79
+            "total_mtco2": 809.78
           }
         },
         "2023": {
-          "demand_twh": 2703.99,
-          "total_generation_twh": 2704.46,
+          "demand_twh": 2709.73,
+          "total_generation_twh": 2710.2,
           "generation": {
             "coal": {
               "twh": 318.59,
-              "pct": 11.78
+              "pct": 11.76
             },
             "gas": {
               "twh": 454.83,
-              "pct": 16.82
+              "pct": 16.78
             },
             "nuclear": {
               "twh": 619.6,
-              "pct": 22.91
+              "pct": 22.86
             },
             "hydro": {
               "twh": 330.44,
-              "pct": 12.22
+              "pct": 12.19
             },
             "wind": {
-              "twh": 471.78,
-              "pct": 17.44
+              "twh": 478.06,
+              "pct": 17.64
             },
             "solar": {
               "twh": 254.04,
-              "pct": 9.39
+              "pct": 9.37
             },
             "bioenergy": {
-              "twh": 164.1,
-              "pct": 6.07
+              "twh": 163.56,
+              "pct": 6.04
             },
             "other_fossil": {
               "twh": 91.08,
-              "pct": 3.37
+              "pct": 3.36
             }
           },
           "aggregates": {
-            "clean_pct": 68.03,
-            "fossil_pct": 31.97,
-            "renewables_pct": 45.12,
-            "wind_solar_pct": 26.83
+            "clean_pct": 68.1,
+            "fossil_pct": 31.9,
+            "renewables_pct": 45.24,
+            "wind_solar_pct": 27.01
           },
           "emissions": {
-            "total_mtco2": 639.2
+            "total_mtco2": 639.18
           }
         },
         "2024": {
-          "demand_twh": 2755.22,
-          "total_generation_twh": 2767.56,
+          "demand_twh": 2760.9,
+          "total_generation_twh": 2773.21,
           "generation": {
             "coal": {
               "twh": 270.95,
-              "pct": 9.79
+              "pct": 9.77
             },
             "gas": {
-              "twh": 432.25,
-              "pct": 15.62
+              "twh": 432.11,
+              "pct": 15.58
             },
             "nuclear": {
-              "twh": 649.53,
-              "pct": 23.47
+              "twh": 649.55,
+              "pct": 23.42
             },
             "hydro": {
               "twh": 369.68,
-              "pct": 13.36
+              "pct": 13.33
             },
             "wind": {
-              "twh": 484.97,
-              "pct": 17.52
+              "twh": 491.21,
+              "pct": 17.71
             },
             "solar": {
-              "twh": 306.86,
-              "pct": 11.09
+              "twh": 307.07,
+              "pct": 11.07
             },
             "bioenergy": {
-              "twh": 164.33,
-              "pct": 5.94
+              "twh": 163.53,
+              "pct": 5.9
             },
             "other_fossil": {
-              "twh": 88.99,
-              "pct": 3.22
+              "twh": 89.11,
+              "pct": 3.21
             }
           },
           "aggregates": {
-            "clean_pct": 71.38,
-            "fossil_pct": 28.62,
-            "renewables_pct": 47.91,
-            "wind_solar_pct": 28.61
+            "clean_pct": 71.43,
+            "fossil_pct": 28.57,
+            "renewables_pct": 48.01,
+            "wind_solar_pct": 28.78
           },
           "emissions": {
-            "total_mtco2": 585.75
+            "total_mtco2": 585.71
           }
         },
         "2025": {
-          "demand_twh": 2769.63,
-          "total_generation_twh": 2792.12,
+          "demand_twh": 2774.64,
+          "total_generation_twh": 2797.09,
           "generation": {
             "coal": {
               "twh": 256.79,
-              "pct": 9.2
+              "pct": 9.18
             },
             "gas": {
-              "twh": 466.27,
-              "pct": 16.7
+              "twh": 466.46,
+              "pct": 16.68
             },
             "nuclear": {
-              "twh": 652.39,
-              "pct": 23.37
+              "twh": 652.41,
+              "pct": 23.32
             },
             "hydro": {
-              "twh": 326.95,
-              "pct": 11.71
+              "twh": 326.37,
+              "pct": 11.67
             },
             "wind": {
-              "twh": 472.86,
-              "pct": 16.94
+              "twh": 478.8,
+              "pct": 17.12
             },
             "solar": {
-              "twh": 367.9,
-              "pct": 13.18
+              "twh": 367.36,
+              "pct": 13.13
             },
             "bioenergy": {
-              "twh": 162.74,
-              "pct": 5.83
+              "twh": 162.45,
+              "pct": 5.8
             },
             "other_fossil": {
-              "twh": 86.22,
+              "twh": 86.45,
               "pct": 3.09
             }
           },
           "aggregates": {
-            "clean_pct": 71.02,
-            "fossil_pct": 28.98,
-            "renewables_pct": 47.65,
-            "wind_solar_pct": 30.12
+            "clean_pct": 71.05,
+            "fossil_pct": 28.95,
+            "renewables_pct": 47.73,
+            "wind_solar_pct": 30.25
           },
           "emissions": {
-            "total_mtco2": 0.0
+            "total_mtco2": 587.1
           }
         }
       }
@@ -2416,8 +2463,8 @@
       "name": "European Union (27)",
       "years": {
         "2000": {
-          "demand_twh": 2631.01,
-          "total_generation_twh": 2622.17,
+          "demand_twh": 2631.02,
+          "total_generation_twh": 2622.18,
           "generation": {
             "coal": {
               "twh": 800.33,
@@ -2463,8 +2510,8 @@
           }
         },
         "2001": {
-          "demand_twh": 2695.56,
-          "total_generation_twh": 2698.91,
+          "demand_twh": 2695.57,
+          "total_generation_twh": 2698.92,
           "generation": {
             "coal": {
               "twh": 792.92,
@@ -2557,8 +2604,8 @@
           }
         },
         "2003": {
-          "demand_twh": 2797.83,
-          "total_generation_twh": 2799.92,
+          "demand_twh": 2797.84,
+          "total_generation_twh": 2799.93,
           "generation": {
             "coal": {
               "twh": 849.04,
@@ -2604,8 +2651,8 @@
           }
         },
         "2004": {
-          "demand_twh": 2855.72,
-          "total_generation_twh": 2867.53,
+          "demand_twh": 2855.74,
+          "total_generation_twh": 2867.55,
           "generation": {
             "coal": {
               "twh": 835.42,
@@ -2624,7 +2671,7 @@
               "pct": 11.27
             },
             "wind": {
-              "twh": 57.52,
+              "twh": 57.54,
               "pct": 2.01
             },
             "solar": {
@@ -2651,8 +2698,8 @@
           }
         },
         "2005": {
-          "demand_twh": 2891.7,
-          "total_generation_twh": 2884.37,
+          "demand_twh": 2891.72,
+          "total_generation_twh": 2884.39,
           "generation": {
             "coal": {
               "twh": 808.89,
@@ -2671,7 +2718,7 @@
               "pct": 10.64
             },
             "wind": {
-              "twh": 68.08,
+              "twh": 68.1,
               "pct": 2.36
             },
             "solar": {
@@ -2698,12 +2745,12 @@
           }
         },
         "2006": {
-          "demand_twh": 2932.74,
-          "total_generation_twh": 2932.28,
+          "demand_twh": 2932.77,
+          "total_generation_twh": 2932.31,
           "generation": {
             "coal": {
               "twh": 816.5,
-              "pct": 27.85
+              "pct": 27.84
             },
             "gas": {
               "twh": 540.05,
@@ -2711,15 +2758,15 @@
             },
             "nuclear": {
               "twh": 914.44,
-              "pct": 31.19
+              "pct": 31.18
             },
             "hydro": {
               "twh": 309.98,
               "pct": 10.57
             },
             "wind": {
-              "twh": 78.72,
-              "pct": 2.68
+              "twh": 78.75,
+              "pct": 2.69
             },
             "solar": {
               "twh": 2.52,
@@ -2738,15 +2785,15 @@
             "clean_pct": 47.12,
             "fossil_pct": 52.88,
             "renewables_pct": 15.93,
-            "wind_solar_pct": 2.77
+            "wind_solar_pct": 2.78
           },
           "emissions": {
             "total_mtco2": 1198.36
           }
         },
         "2007": {
-          "demand_twh": 2958.32,
-          "total_generation_twh": 2947.68,
+          "demand_twh": 2958.35,
+          "total_generation_twh": 2947.71,
           "generation": {
             "coal": {
               "twh": 828.74,
@@ -2765,7 +2812,7 @@
               "pct": 10.44
             },
             "wind": {
-              "twh": 99.92,
+              "twh": 99.95,
               "pct": 3.39
             },
             "solar": {
@@ -2792,8 +2839,8 @@
           }
         },
         "2008": {
-          "demand_twh": 2971.77,
-          "total_generation_twh": 2959.74,
+          "demand_twh": 2971.81,
+          "total_generation_twh": 2959.78,
           "generation": {
             "coal": {
               "twh": 757.01,
@@ -2812,7 +2859,7 @@
               "pct": 11.0
             },
             "wind": {
-              "twh": 113.22,
+              "twh": 113.26,
               "pct": 3.83
             },
             "solar": {
@@ -2839,8 +2886,8 @@
           }
         },
         "2009": {
-          "demand_twh": 2825.59,
-          "total_generation_twh": 2808.3,
+          "demand_twh": 2825.63,
+          "total_generation_twh": 2808.34,
           "generation": {
             "coal": {
               "twh": 703.55,
@@ -2859,7 +2906,7 @@
               "pct": 11.72
             },
             "wind": {
-              "twh": 124.57,
+              "twh": 124.61,
               "pct": 4.44
             },
             "solar": {
@@ -2886,8 +2933,8 @@
           }
         },
         "2010": {
-          "demand_twh": 2950.4,
-          "total_generation_twh": 2945.48,
+          "demand_twh": 2950.46,
+          "total_generation_twh": 2945.54,
           "generation": {
             "coal": {
               "twh": 701.2,
@@ -2906,7 +2953,7 @@
               "pct": 12.62
             },
             "wind": {
-              "twh": 139.82,
+              "twh": 139.88,
               "pct": 4.75
             },
             "solar": {
@@ -2929,12 +2976,12 @@
             "wind_solar_pct": 5.55
           },
           "emissions": {
-            "total_mtco2": 1087.92
+            "total_mtco2": 1087.93
           }
         },
         "2011": {
-          "demand_twh": 2909.56,
-          "total_generation_twh": 2908.6,
+          "demand_twh": 2909.64,
+          "total_generation_twh": 2908.68,
           "generation": {
             "coal": {
               "twh": 724.81,
@@ -2953,8 +3000,8 @@
               "pct": 10.57
             },
             "wind": {
-              "twh": 165.33,
-              "pct": 5.68
+              "twh": 165.41,
+              "pct": 5.69
             },
             "solar": {
               "twh": 47.71,
@@ -2973,15 +3020,15 @@
             "clean_pct": 51.01,
             "fossil_pct": 48.99,
             "renewables_pct": 22.21,
-            "wind_solar_pct": 7.32
+            "wind_solar_pct": 7.33
           },
           "emissions": {
             "total_mtco2": 1095.57
           }
         },
         "2012": {
-          "demand_twh": 2910.15,
-          "total_generation_twh": 2903.39,
+          "demand_twh": 2910.22,
+          "total_generation_twh": 2903.46,
           "generation": {
             "coal": {
               "twh": 742.68,
@@ -2989,18 +3036,18 @@
             },
             "gas": {
               "twh": 482.7,
-              "pct": 16.63
+              "pct": 16.62
             },
             "nuclear": {
               "twh": 811.95,
-              "pct": 27.97
+              "pct": 27.96
             },
             "hydro": {
               "twh": 331.67,
               "pct": 11.42
             },
             "wind": {
-              "twh": 187.48,
+              "twh": 187.55,
               "pct": 6.46
             },
             "solar": {
@@ -3027,8 +3074,8 @@
           }
         },
         "2013": {
-          "demand_twh": 2881.8,
-          "total_generation_twh": 2883.61,
+          "demand_twh": 2881.88,
+          "total_generation_twh": 2883.69,
           "generation": {
             "coal": {
               "twh": 728.9,
@@ -3047,8 +3094,8 @@
               "pct": 12.76
             },
             "wind": {
-              "twh": 209.47,
-              "pct": 7.26
+              "twh": 209.55,
+              "pct": 7.27
             },
             "solar": {
               "twh": 83.76,
@@ -3067,15 +3114,15 @@
             "clean_pct": 55.94,
             "fossil_pct": 44.06,
             "renewables_pct": 27.98,
-            "wind_solar_pct": 10.16
+            "wind_solar_pct": 10.17
           },
           "emissions": {
             "total_mtco2": 1029.8
           }
         },
         "2014": {
-          "demand_twh": 2818.8,
-          "total_generation_twh": 2823.83,
+          "demand_twh": 2818.88,
+          "total_generation_twh": 2823.91,
           "generation": {
             "coal": {
               "twh": 692.78,
@@ -3087,14 +3134,14 @@
             },
             "nuclear": {
               "twh": 812.57,
-              "pct": 28.78
+              "pct": 28.77
             },
             "hydro": {
               "twh": 370.06,
               "pct": 13.1
             },
             "wind": {
-              "twh": 222.38,
+              "twh": 222.46,
               "pct": 7.88
             },
             "solar": {
@@ -3113,7 +3160,7 @@
           "aggregates": {
             "clean_pct": 58.42,
             "fossil_pct": 41.58,
-            "renewables_pct": 29.64,
+            "renewables_pct": 29.65,
             "wind_solar_pct": 11.19
           },
           "emissions": {
@@ -3121,8 +3168,8 @@
           }
         },
         "2015": {
-          "demand_twh": 2863.61,
-          "total_generation_twh": 2870.26,
+          "demand_twh": 2863.72,
+          "total_generation_twh": 2870.37,
           "generation": {
             "coal": {
               "twh": 705.03,
@@ -3141,7 +3188,7 @@
               "pct": 11.71
             },
             "wind": {
-              "twh": 263.17,
+              "twh": 263.28,
               "pct": 9.17
             },
             "solar": {
@@ -3168,8 +3215,8 @@
           }
         },
         "2016": {
-          "demand_twh": 2891.95,
-          "total_generation_twh": 2891.3,
+          "demand_twh": 2892.05,
+          "total_generation_twh": 2891.4,
           "generation": {
             "coal": {
               "twh": 659.16,
@@ -3177,7 +3224,7 @@
             },
             "gas": {
               "twh": 464.78,
-              "pct": 16.08
+              "pct": 16.07
             },
             "nuclear": {
               "twh": 767.95,
@@ -3188,7 +3235,7 @@
               "pct": 11.95
             },
             "wind": {
-              "twh": 266.81,
+              "twh": 266.91,
               "pct": 9.23
             },
             "solar": {
@@ -3215,8 +3262,8 @@
           }
         },
         "2017": {
-          "demand_twh": 2918.3,
-          "total_generation_twh": 2922.85,
+          "demand_twh": 2918.43,
+          "total_generation_twh": 2922.98,
           "generation": {
             "coal": {
               "twh": 638.86,
@@ -3235,8 +3282,8 @@
               "pct": 10.07
             },
             "wind": {
-              "twh": 312.3,
-              "pct": 10.68
+              "twh": 312.43,
+              "pct": 10.69
             },
             "solar": {
               "twh": 106.58,
@@ -3255,15 +3302,15 @@
             "clean_pct": 55.89,
             "fossil_pct": 44.11,
             "renewables_pct": 29.91,
-            "wind_solar_pct": 14.33
+            "wind_solar_pct": 14.34
           },
           "emissions": {
             "total_mtco2": 995.02
           }
         },
         "2018": {
-          "demand_twh": 2917.32,
-          "total_generation_twh": 2908.48,
+          "demand_twh": 2917.46,
+          "total_generation_twh": 2908.62,
           "generation": {
             "coal": {
               "twh": 595.54,
@@ -3282,8 +3329,8 @@
               "pct": 11.82
             },
             "wind": {
-              "twh": 320.62,
-              "pct": 11.02
+              "twh": 320.76,
+              "pct": 11.03
             },
             "solar": {
               "twh": 114.13,
@@ -3291,7 +3338,7 @@
             },
             "bioenergy": {
               "twh": 162.6,
-              "pct": 5.6
+              "pct": 5.59
             },
             "other_fossil": {
               "twh": 120.86,
@@ -3302,15 +3349,15 @@
             "clean_pct": 58.56,
             "fossil_pct": 41.44,
             "renewables_pct": 32.36,
-            "wind_solar_pct": 14.94
+            "wind_solar_pct": 14.95
           },
           "emissions": {
             "total_mtco2": 934.42
           }
         },
         "2019": {
-          "demand_twh": 2877.27,
-          "total_generation_twh": 2874.34,
+          "demand_twh": 2877.43,
+          "total_generation_twh": 2874.5,
           "generation": {
             "coal": {
               "twh": 450.79,
@@ -3329,8 +3376,8 @@
               "pct": 11.14
             },
             "wind": {
-              "twh": 367.13,
-              "pct": 12.77
+              "twh": 367.29,
+              "pct": 12.78
             },
             "solar": {
               "twh": 124.38,
@@ -3349,15 +3396,15 @@
             "clean_pct": 60.68,
             "fossil_pct": 39.32,
             "renewables_pct": 34.05,
-            "wind_solar_pct": 17.1
+            "wind_solar_pct": 17.11
           },
           "emissions": {
-            "total_mtco2": 825.97
+            "total_mtco2": 825.98
           }
         },
         "2020": {
-          "demand_twh": 2766.88,
-          "total_generation_twh": 2752.91,
+          "demand_twh": 2767.06,
+          "total_generation_twh": 2753.09,
           "generation": {
             "coal": {
               "twh": 352.33,
@@ -3376,7 +3423,7 @@
               "pct": 12.61
             },
             "wind": {
-              "twh": 397.97,
+              "twh": 398.16,
               "pct": 14.46
             },
             "solar": {
@@ -3388,7 +3435,7 @@
               "pct": 6.17
             },
             "other_fossil": {
-              "twh": 97.77,
+              "twh": 97.76,
               "pct": 3.55
             }
           },
@@ -3399,16 +3446,16 @@
             "wind_solar_pct": 19.72
           },
           "emissions": {
-            "total_mtco2": 719.07
+            "total_mtco2": 719.06
           }
         },
         "2021": {
-          "demand_twh": 2882.03,
-          "total_generation_twh": 2874.75,
+          "demand_twh": 2882.27,
+          "total_generation_twh": 2874.99,
           "generation": {
             "coal": {
               "twh": 419.0,
-              "pct": 14.58
+              "pct": 14.57
             },
             "gas": {
               "twh": 547.04,
@@ -3423,8 +3470,8 @@
               "pct": 12.11
             },
             "wind": {
-              "twh": 386.69,
-              "pct": 13.45
+              "twh": 386.94,
+              "pct": 13.46
             },
             "solar": {
               "twh": 163.05,
@@ -3435,23 +3482,23 @@
               "pct": 6.21
             },
             "other_fossil": {
-              "twh": 100.42,
+              "twh": 100.41,
               "pct": 3.49
             }
           },
           "aggregates": {
-            "clean_pct": 62.9,
-            "fossil_pct": 37.1,
-            "renewables_pct": 37.45,
-            "wind_solar_pct": 19.12
+            "clean_pct": 62.91,
+            "fossil_pct": 37.09,
+            "renewables_pct": 37.46,
+            "wind_solar_pct": 19.13
           },
           "emissions": {
-            "total_mtco2": 783.51
+            "total_mtco2": 783.5
           }
         },
         "2022": {
-          "demand_twh": 2789.91,
-          "total_generation_twh": 2776.97,
+          "demand_twh": 2790.43,
+          "total_generation_twh": 2777.49,
           "generation": {
             "coal": {
               "twh": 448.43,
@@ -3459,7 +3506,7 @@
             },
             "gas": {
               "twh": 533.96,
-              "pct": 19.23
+              "pct": 19.22
             },
             "nuclear": {
               "twh": 609.26,
@@ -3467,11 +3514,11 @@
             },
             "hydro": {
               "twh": 276.19,
-              "pct": 9.95
+              "pct": 9.94
             },
             "wind": {
-              "twh": 421.3,
-              "pct": 15.17
+              "twh": 421.83,
+              "pct": 15.19
             },
             "solar": {
               "twh": 209.76,
@@ -3482,112 +3529,159 @@
               "pct": 6.2
             },
             "other_fossil": {
-              "twh": 105.87,
+              "twh": 105.86,
               "pct": 3.81
             }
           },
           "aggregates": {
-            "clean_pct": 60.81,
-            "fossil_pct": 39.19,
-            "renewables_pct": 38.87,
-            "wind_solar_pct": 22.72
+            "clean_pct": 60.82,
+            "fossil_pct": 39.18,
+            "renewables_pct": 38.88,
+            "wind_solar_pct": 22.74
           },
           "emissions": {
-            "total_mtco2": 809.79
+            "total_mtco2": 809.78
           }
         },
         "2023": {
-          "demand_twh": 2703.99,
-          "total_generation_twh": 2704.46,
+          "demand_twh": 2709.73,
+          "total_generation_twh": 2710.2,
           "generation": {
             "coal": {
               "twh": 318.59,
-              "pct": 11.78
+              "pct": 11.76
             },
             "gas": {
               "twh": 454.83,
-              "pct": 16.82
+              "pct": 16.78
             },
             "nuclear": {
               "twh": 619.6,
-              "pct": 22.91
+              "pct": 22.86
             },
             "hydro": {
               "twh": 330.44,
-              "pct": 12.22
+              "pct": 12.19
             },
             "wind": {
-              "twh": 471.78,
-              "pct": 17.44
+              "twh": 478.06,
+              "pct": 17.64
             },
             "solar": {
               "twh": 254.04,
-              "pct": 9.39
+              "pct": 9.37
             },
             "bioenergy": {
-              "twh": 164.1,
-              "pct": 6.07
+              "twh": 163.56,
+              "pct": 6.04
             },
             "other_fossil": {
               "twh": 91.08,
-              "pct": 3.37
+              "pct": 3.36
             }
           },
           "aggregates": {
-            "clean_pct": 68.03,
-            "fossil_pct": 31.97,
-            "renewables_pct": 45.12,
-            "wind_solar_pct": 26.83
+            "clean_pct": 68.1,
+            "fossil_pct": 31.9,
+            "renewables_pct": 45.24,
+            "wind_solar_pct": 27.01
           },
           "emissions": {
-            "total_mtco2": 639.2
+            "total_mtco2": 639.18
           }
         },
         "2024": {
-          "demand_twh": 2755.22,
-          "total_generation_twh": 2767.56,
+          "demand_twh": 2760.9,
+          "total_generation_twh": 2773.21,
           "generation": {
             "coal": {
               "twh": 270.95,
-              "pct": 9.79
+              "pct": 9.77
             },
             "gas": {
-              "twh": 432.25,
-              "pct": 15.62
+              "twh": 432.11,
+              "pct": 15.58
             },
             "nuclear": {
-              "twh": 649.53,
-              "pct": 23.47
+              "twh": 649.55,
+              "pct": 23.42
             },
             "hydro": {
               "twh": 369.68,
-              "pct": 13.36
+              "pct": 13.33
             },
             "wind": {
-              "twh": 484.97,
-              "pct": 17.52
+              "twh": 491.21,
+              "pct": 17.71
             },
             "solar": {
-              "twh": 306.86,
-              "pct": 11.09
+              "twh": 307.07,
+              "pct": 11.07
             },
             "bioenergy": {
-              "twh": 164.33,
-              "pct": 5.94
+              "twh": 163.53,
+              "pct": 5.9
             },
             "other_fossil": {
-              "twh": 88.99,
-              "pct": 3.22
+              "twh": 89.11,
+              "pct": 3.21
             }
           },
           "aggregates": {
-            "clean_pct": 71.38,
-            "fossil_pct": 28.62,
-            "renewables_pct": 47.91,
-            "wind_solar_pct": 28.61
+            "clean_pct": 71.43,
+            "fossil_pct": 28.57,
+            "renewables_pct": 48.01,
+            "wind_solar_pct": 28.78
           },
           "emissions": {
-            "total_mtco2": 585.75
+            "total_mtco2": 585.71
+          }
+        },
+        "2025": {
+          "demand_twh": 2774.64,
+          "total_generation_twh": 2797.09,
+          "generation": {
+            "coal": {
+              "twh": 256.79,
+              "pct": 9.18
+            },
+            "gas": {
+              "twh": 466.46,
+              "pct": 16.68
+            },
+            "nuclear": {
+              "twh": 652.41,
+              "pct": 23.32
+            },
+            "hydro": {
+              "twh": 326.37,
+              "pct": 11.67
+            },
+            "wind": {
+              "twh": 478.8,
+              "pct": 17.12
+            },
+            "solar": {
+              "twh": 367.36,
+              "pct": 13.13
+            },
+            "bioenergy": {
+              "twh": 162.45,
+              "pct": 5.8
+            },
+            "other_fossil": {
+              "twh": 86.45,
+              "pct": 3.09
+            }
+          },
+          "aggregates": {
+            "clean_pct": 71.05,
+            "fossil_pct": 28.95,
+            "renewables_pct": 47.73,
+            "wind_solar_pct": 30.25
+          },
+          "emissions": {
+            "total_mtco2": 587.1
           }
         }
       }
@@ -3616,11 +3710,11 @@
               "pct": 15.03
             },
             "wind": {
-              "twh": 30.57,
+              "twh": 30.58,
               "pct": 0.23
             },
             "solar": {
-              "twh": 1.01,
+              "twh": 1.0,
               "pct": 0.01
             },
             "bioenergy": {
@@ -3663,11 +3757,11 @@
               "pct": 14.49
             },
             "wind": {
-              "twh": 37.29,
+              "twh": 37.3,
               "pct": 0.28
             },
             "solar": {
-              "twh": 1.35,
+              "twh": 1.34,
               "pct": 0.01
             },
             "bioenergy": {
@@ -3690,8 +3784,8 @@
           }
         },
         "2002": {
-          "demand_twh": 13629.9,
-          "total_generation_twh": 13629.9,
+          "demand_twh": 13629.91,
+          "total_generation_twh": 13629.91,
           "generation": {
             "coal": {
               "twh": 5752.99,
@@ -3714,7 +3808,7 @@
               "pct": 0.38
             },
             "solar": {
-              "twh": 1.69,
+              "twh": 1.7,
               "pct": 0.01
             },
             "bioenergy": {
@@ -3737,8 +3831,8 @@
           }
         },
         "2003": {
-          "demand_twh": 14125.75,
-          "total_generation_twh": 14125.75,
+          "demand_twh": 14125.77,
+          "total_generation_twh": 14125.77,
           "generation": {
             "coal": {
               "twh": 6149.15,
@@ -3757,11 +3851,11 @@
               "pct": 13.72
             },
             "wind": {
-              "twh": 61.86,
+              "twh": 61.87,
               "pct": 0.44
             },
             "solar": {
-              "twh": 2.07,
+              "twh": 2.08,
               "pct": 0.01
             },
             "bioenergy": {
@@ -3784,8 +3878,8 @@
           }
         },
         "2004": {
-          "demand_twh": 14779.57,
-          "total_generation_twh": 14779.57,
+          "demand_twh": 14779.59,
+          "total_generation_twh": 14779.59,
           "generation": {
             "coal": {
               "twh": 6357.84,
@@ -3804,7 +3898,7 @@
               "pct": 14.22
             },
             "wind": {
-              "twh": 83.57,
+              "twh": 83.59,
               "pct": 0.57
             },
             "solar": {
@@ -3831,8 +3925,8 @@
           }
         },
         "2005": {
-          "demand_twh": 15357.67,
-          "total_generation_twh": 15357.67,
+          "demand_twh": 15357.69,
+          "total_generation_twh": 15357.69,
           "generation": {
             "coal": {
               "twh": 6708.63,
@@ -3851,7 +3945,7 @@
               "pct": 14.02
             },
             "wind": {
-              "twh": 101.9,
+              "twh": 101.92,
               "pct": 0.66
             },
             "solar": {
@@ -3878,8 +3972,8 @@
           }
         },
         "2006": {
-          "demand_twh": 15946.02,
-          "total_generation_twh": 15946.02,
+          "demand_twh": 15946.05,
+          "total_generation_twh": 15946.05,
           "generation": {
             "coal": {
               "twh": 7078.46,
@@ -3898,7 +3992,7 @@
               "pct": 14.13
             },
             "wind": {
-              "twh": 130.09,
+              "twh": 130.12,
               "pct": 0.82
             },
             "solar": {
@@ -3925,8 +4019,8 @@
           }
         },
         "2007": {
-          "demand_twh": 16696.23,
-          "total_generation_twh": 16696.23,
+          "demand_twh": 16696.26,
+          "total_generation_twh": 16696.26,
           "generation": {
             "coal": {
               "twh": 7530.89,
@@ -3945,7 +4039,7 @@
               "pct": 13.65
             },
             "wind": {
-              "twh": 167.13,
+              "twh": 167.16,
               "pct": 1.0
             },
             "solar": {
@@ -3972,8 +4066,8 @@
           }
         },
         "2008": {
-          "demand_twh": 16998.34,
-          "total_generation_twh": 16998.34,
+          "demand_twh": 16998.38,
+          "total_generation_twh": 16998.38,
           "generation": {
             "coal": {
               "twh": 7553.3,
@@ -3992,7 +4086,7 @@
               "pct": 14.41
             },
             "wind": {
-              "twh": 216.17,
+              "twh": 216.21,
               "pct": 1.27
             },
             "solar": {
@@ -4019,8 +4113,8 @@
           }
         },
         "2009": {
-          "demand_twh": 16822.29,
-          "total_generation_twh": 16822.29,
+          "demand_twh": 16822.33,
+          "total_generation_twh": 16822.33,
           "generation": {
             "coal": {
               "twh": 7435.18,
@@ -4039,7 +4133,7 @@
               "pct": 14.59
             },
             "wind": {
-              "twh": 270.23,
+              "twh": 270.27,
               "pct": 1.61
             },
             "solar": {
@@ -4066,8 +4160,8 @@
           }
         },
         "2010": {
-          "demand_twh": 17946.6,
-          "total_generation_twh": 17946.6,
+          "demand_twh": 17946.65,
+          "total_generation_twh": 17946.65,
           "generation": {
             "coal": {
               "twh": 7910.15,
@@ -4086,11 +4180,11 @@
               "pct": 14.59
             },
             "wind": {
-              "twh": 338.48,
+              "twh": 338.54,
               "pct": 1.89
             },
             "solar": {
-              "twh": 31.6,
+              "twh": 31.59,
               "pct": 0.18
             },
             "bioenergy": {
@@ -4113,8 +4207,8 @@
           }
         },
         "2011": {
-          "demand_twh": 18578.91,
-          "total_generation_twh": 18578.91,
+          "demand_twh": 18578.93,
+          "total_generation_twh": 18578.93,
           "generation": {
             "coal": {
               "twh": 8326.88,
@@ -4133,11 +4227,11 @@
               "pct": 14.29
             },
             "wind": {
-              "twh": 430.61,
+              "twh": 430.69,
               "pct": 2.32
             },
             "solar": {
-              "twh": 62.31,
+              "twh": 62.25,
               "pct": 0.34
             },
             "bioenergy": {
@@ -4160,8 +4254,8 @@
           }
         },
         "2012": {
-          "demand_twh": 18951.37,
-          "total_generation_twh": 18951.37,
+          "demand_twh": 18951.38,
+          "total_generation_twh": 18951.38,
           "generation": {
             "coal": {
               "twh": 8357.65,
@@ -4180,12 +4274,12 @@
               "pct": 14.65
             },
             "wind": {
-              "twh": 518.31,
-              "pct": 2.73
+              "twh": 518.38,
+              "pct": 2.74
             },
             "solar": {
-              "twh": 93.86,
-              "pct": 0.5
+              "twh": 93.8,
+              "pct": 0.49
             },
             "bioenergy": {
               "twh": 380.11,
@@ -4207,8 +4301,8 @@
           }
         },
         "2013": {
-          "demand_twh": 19483.2,
-          "total_generation_twh": 19483.2,
+          "demand_twh": 19483.09,
+          "total_generation_twh": 19483.09,
           "generation": {
             "coal": {
               "twh": 8804.38,
@@ -4227,11 +4321,11 @@
               "pct": 14.8
             },
             "wind": {
-              "twh": 619.48,
+              "twh": 619.56,
               "pct": 3.18
             },
             "solar": {
-              "twh": 126.97,
+              "twh": 126.78,
               "pct": 0.65
             },
             "bioenergy": {
@@ -4250,12 +4344,12 @@
             "wind_solar_pct": 3.83
           },
           "emissions": {
-            "total_mtco2": 10821.29
+            "total_mtco2": 10821.28
           }
         },
         "2014": {
-          "demand_twh": 19983.84,
-          "total_generation_twh": 19983.84,
+          "demand_twh": 19983.93,
+          "total_generation_twh": 19983.93,
           "generation": {
             "coal": {
               "twh": 8981.48,
@@ -4274,11 +4368,11 @@
               "pct": 14.94
             },
             "wind": {
-              "twh": 686.9,
+              "twh": 686.98,
               "pct": 3.44
             },
             "solar": {
-              "twh": 189.87,
+              "twh": 189.88,
               "pct": 0.95
             },
             "bioenergy": {
@@ -4293,7 +4387,7 @@
           "aggregates": {
             "clean_pct": 33.22,
             "fossil_pct": 66.78,
-            "renewables_pct": 21.56,
+            "renewables_pct": 21.57,
             "wind_solar_pct": 4.39
           },
           "emissions": {
@@ -4301,12 +4395,12 @@
           }
         },
         "2015": {
-          "demand_twh": 20121.89,
-          "total_generation_twh": 20121.89,
+          "demand_twh": 20121.65,
+          "total_generation_twh": 20121.65,
           "generation": {
             "coal": {
               "twh": 8645.31,
-              "pct": 42.96
+              "pct": 42.97
             },
             "gas": {
               "twh": 3909.78,
@@ -4321,12 +4415,12 @@
               "pct": 14.86
             },
             "wind": {
-              "twh": 803.69,
+              "twh": 803.8,
               "pct": 3.99
             },
             "solar": {
-              "twh": 244.8,
-              "pct": 1.22
+              "twh": 244.45,
+              "pct": 1.21
             },
             "bioenergy": {
               "twh": 475.58,
@@ -4341,15 +4435,15 @@
             "clean_pct": 34.24,
             "fossil_pct": 65.76,
             "renewables_pct": 22.44,
-            "wind_solar_pct": 5.21
+            "wind_solar_pct": 5.2
           },
           "emissions": {
-            "total_mtco2": 10787.42
+            "total_mtco2": 10787.41
           }
         },
         "2016": {
-          "demand_twh": 20676.24,
-          "total_generation_twh": 20676.24,
+          "demand_twh": 20676.08,
+          "total_generation_twh": 20676.08,
           "generation": {
             "coal": {
               "twh": 8648.54,
@@ -4368,11 +4462,11 @@
               "pct": 14.95
             },
             "wind": {
-              "twh": 930.57,
+              "twh": 930.67,
               "pct": 4.5
             },
             "solar": {
-              "twh": 309.0,
+              "twh": 308.74,
               "pct": 1.49
             },
             "bioenergy": {
@@ -4391,12 +4485,12 @@
             "wind_solar_pct": 5.99
           },
           "emissions": {
-            "total_mtco2": 10877.59
+            "total_mtco2": 10877.58
           }
         },
         "2017": {
-          "demand_twh": 21330.54,
-          "total_generation_twh": 21330.54,
+          "demand_twh": 21330.37,
+          "total_generation_twh": 21330.37,
           "generation": {
             "coal": {
               "twh": 8962.61,
@@ -4415,12 +4509,12 @@
               "pct": 14.45
             },
             "wind": {
-              "twh": 1105.25,
+              "twh": 1105.38,
               "pct": 5.18
             },
             "solar": {
-              "twh": 419.3,
-              "pct": 1.97
+              "twh": 419.0,
+              "pct": 1.96
             },
             "bioenergy": {
               "twh": 513.38,
@@ -4435,15 +4529,15 @@
             "clean_pct": 35.48,
             "fossil_pct": 64.52,
             "renewables_pct": 24.0,
-            "wind_solar_pct": 7.15
+            "wind_solar_pct": 7.14
           },
           "emissions": {
             "total_mtco2": 11159.73
           }
         },
         "2018": {
-          "demand_twh": 22202.94,
-          "total_generation_twh": 22202.94,
+          "demand_twh": 22203.05,
+          "total_generation_twh": 22203.05,
           "generation": {
             "coal": {
               "twh": 9283.77,
@@ -4462,11 +4556,11 @@
               "pct": 14.36
             },
             "wind": {
-              "twh": 1224.9,
+              "twh": 1225.04,
               "pct": 5.52
             },
             "solar": {
-              "twh": 541.74,
+              "twh": 541.71,
               "pct": 2.44
             },
             "bioenergy": {
@@ -4489,16 +4583,16 @@
           }
         },
         "2019": {
-          "demand_twh": 22492.65,
-          "total_generation_twh": 22492.65,
+          "demand_twh": 22483.11,
+          "total_generation_twh": 22483.11,
           "generation": {
             "coal": {
               "twh": 9028.03,
-              "pct": 40.14
+              "pct": 40.15
             },
             "gas": {
               "twh": 4511.73,
-              "pct": 20.06
+              "pct": 20.07
             },
             "nuclear": {
               "twh": 2594.83,
@@ -4509,12 +4603,12 @@
               "pct": 14.54
             },
             "wind": {
-              "twh": 1364.73,
+              "twh": 1364.89,
               "pct": 6.07
             },
             "solar": {
-              "twh": 652.21,
-              "pct": 2.9
+              "twh": 642.51,
+              "pct": 2.86
             },
             "bioenergy": {
               "twh": 568.82,
@@ -4526,26 +4620,26 @@
             }
           },
           "aggregates": {
-            "clean_pct": 37.57,
-            "fossil_pct": 62.43,
-            "renewables_pct": 26.03,
-            "wind_solar_pct": 8.97
+            "clean_pct": 37.54,
+            "fossil_pct": 62.46,
+            "renewables_pct": 26.0,
+            "wind_solar_pct": 8.93
           },
           "emissions": {
-            "total_mtco2": 11311.98
+            "total_mtco2": 11311.52
           }
         },
         "2020": {
-          "demand_twh": 22364.34,
-          "total_generation_twh": 22364.34,
+          "demand_twh": 22358.26,
+          "total_generation_twh": 22358.26,
           "generation": {
             "coal": {
               "twh": 8638.14,
-              "pct": 38.62
+              "pct": 38.64
             },
             "gas": {
               "twh": 4497.93,
-              "pct": 20.11
+              "pct": 20.12
             },
             "nuclear": {
               "twh": 2496.18,
@@ -4556,39 +4650,39 @@
               "pct": 15.05
             },
             "wind": {
-              "twh": 1527.19,
+              "twh": 1527.38,
               "pct": 6.83
             },
             "solar": {
-              "twh": 780.48,
-              "pct": 3.49
+              "twh": 774.22,
+              "pct": 3.46
             },
             "bioenergy": {
               "twh": 605.74,
               "pct": 2.7
             },
             "other_fossil": {
-              "twh": 452.96,
+              "twh": 452.95,
               "pct": 2.03
             }
           },
           "aggregates": {
-            "clean_pct": 39.24,
-            "fossil_pct": 60.76,
-            "renewables_pct": 28.08,
-            "wind_solar_pct": 10.32
+            "clean_pct": 39.22,
+            "fossil_pct": 60.78,
+            "renewables_pct": 28.06,
+            "wind_solar_pct": 10.29
           },
           "emissions": {
-            "total_mtco2": 10907.03
+            "total_mtco2": 10906.73
           }
         },
         "2021": {
-          "demand_twh": 23685.93,
-          "total_generation_twh": 23685.93,
+          "demand_twh": 23682.63,
+          "total_generation_twh": 23682.63,
           "generation": {
             "coal": {
               "twh": 9373.1,
-              "pct": 39.57
+              "pct": 39.58
             },
             "gas": {
               "twh": 4586.8,
@@ -4603,35 +4697,35 @@
               "pct": 13.75
             },
             "wind": {
-              "twh": 1779.53,
-              "pct": 7.51
+              "twh": 1779.78,
+              "pct": 7.52
             },
             "solar": {
-              "twh": 944.68,
-              "pct": 3.99
+              "twh": 941.14,
+              "pct": 3.97
             },
             "bioenergy": {
               "twh": 656.85,
               "pct": 2.78
             },
             "other_fossil": {
-              "twh": 497.64,
+              "twh": 497.63,
               "pct": 2.1
             }
           },
           "aggregates": {
-            "clean_pct": 38.96,
-            "fossil_pct": 61.04,
-            "renewables_pct": 28.02,
-            "wind_solar_pct": 11.5
+            "clean_pct": 38.95,
+            "fossil_pct": 61.05,
+            "renewables_pct": 28.01,
+            "wind_solar_pct": 11.49
           },
           "emissions": {
-            "total_mtco2": 11671.22
+            "total_mtco2": 11671.05
           }
         },
         "2022": {
-          "demand_twh": 24276.09,
-          "total_generation_twh": 24276.09,
+          "demand_twh": 24275.41,
+          "total_generation_twh": 24275.41,
           "generation": {
             "coal": {
               "twh": 9500.71,
@@ -4650,19 +4744,19 @@
               "pct": 13.5
             },
             "wind": {
-              "twh": 2016.91,
+              "twh": 2017.44,
               "pct": 8.31
             },
             "solar": {
-              "twh": 1200.73,
-              "pct": 4.95
+              "twh": 1199.53,
+              "pct": 4.94
             },
             "bioenergy": {
               "twh": 672.81,
               "pct": 2.77
             },
             "other_fossil": {
-              "twh": 542.24,
+              "twh": 542.23,
               "pct": 2.23
             }
           },
@@ -4670,19 +4764,19 @@
             "clean_pct": 39.71,
             "fossil_pct": 60.29,
             "renewables_pct": 29.52,
-            "wind_solar_pct": 13.26
+            "wind_solar_pct": 13.25
           },
           "emissions": {
-            "total_mtco2": 11832.7
+            "total_mtco2": 11832.64
           }
         },
         "2023": {
-          "demand_twh": 24885.02,
-          "total_generation_twh": 24885.02,
+          "demand_twh": 24889.29,
+          "total_generation_twh": 24889.29,
           "generation": {
             "coal": {
               "twh": 9633.11,
-              "pct": 38.71
+              "pct": 38.7
             },
             "gas": {
               "twh": 4638.81,
@@ -4697,15 +4791,15 @@
               "pct": 12.75
             },
             "wind": {
-              "twh": 2212.06,
-              "pct": 8.89
+              "twh": 2218.34,
+              "pct": 8.91
             },
             "solar": {
-              "twh": 1507.82,
-              "pct": 6.06
+              "twh": 1506.35,
+              "pct": 6.05
             },
             "bioenergy": {
-              "twh": 684.59,
+              "twh": 684.05,
               "pct": 2.75
             },
             "other_fossil": {
@@ -4714,60 +4808,107 @@
             }
           },
           "aggregates": {
-            "clean_pct": 40.6,
-            "fossil_pct": 59.4,
-            "renewables_pct": 30.45,
-            "wind_solar_pct": 14.95
+            "clean_pct": 40.61,
+            "fossil_pct": 59.39,
+            "renewables_pct": 30.46,
+            "wind_solar_pct": 14.96
           },
           "emissions": {
-            "total_mtco2": 11961.25
+            "total_mtco2": 11961.14
           }
         },
         "2024": {
-          "demand_twh": 25999.22,
-          "total_generation_twh": 25999.22,
+          "demand_twh": 26009.64,
+          "total_generation_twh": 26009.64,
           "generation": {
             "coal": {
               "twh": 9742.53,
-              "pct": 37.47
+              "pct": 37.46
             },
             "gas": {
-              "twh": 4767.1,
-              "pct": 18.34
+              "twh": 4766.96,
+              "pct": 18.33
             },
             "nuclear": {
-              "twh": 2598.71,
-              "pct": 10.0
+              "twh": 2598.73,
+              "pct": 9.99
             },
             "hydro": {
               "twh": 3342.98,
-              "pct": 12.86
+              "pct": 12.85
             },
             "wind": {
-              "twh": 2391.87,
-              "pct": 9.2
+              "twh": 2398.11,
+              "pct": 9.22
             },
             "solar": {
-              "twh": 1949.27,
-              "pct": 7.5
+              "twh": 1954.25,
+              "pct": 7.51
             },
             "bioenergy": {
-              "twh": 702.83,
-              "pct": 2.71
+              "twh": 702.03,
+              "pct": 2.7
             },
             "other_fossil": {
-              "twh": 503.93,
+              "twh": 504.05,
               "pct": 1.94
             }
           },
           "aggregates": {
-            "clean_pct": 42.25,
-            "fossil_pct": 57.75,
-            "renewables_pct": 32.26,
-            "wind_solar_pct": 16.7
+            "clean_pct": 42.28,
+            "fossil_pct": 57.72,
+            "renewables_pct": 32.29,
+            "wind_solar_pct": 16.73
           },
           "emissions": {
-            "total_mtco2": 12144.03
+            "total_mtco2": 12144.19
+          }
+        },
+        "2025": {
+          "demand_twh": 26769.54,
+          "total_generation_twh": 26769.54,
+          "generation": {
+            "coal": {
+              "twh": 9703.64,
+              "pct": 36.25
+            },
+            "gas": {
+              "twh": 4766.7,
+              "pct": 17.81
+            },
+            "nuclear": {
+              "twh": 2644.74,
+              "pct": 9.88
+            },
+            "hydro": {
+              "twh": 3311.71,
+              "pct": 12.37
+            },
+            "wind": {
+              "twh": 2589.72,
+              "pct": 9.67
+            },
+            "solar": {
+              "twh": 2546.58,
+              "pct": 9.51
+            },
+            "bioenergy": {
+              "twh": 713.79,
+              "pct": 2.66
+            },
+            "other_fossil": {
+              "twh": 492.66,
+              "pct": 1.84
+            }
+          },
+          "aggregates": {
+            "clean_pct": 44.1,
+            "fossil_pct": 55.9,
+            "renewables_pct": 34.22,
+            "wind_solar_pct": 19.18
+          },
+          "emissions": {
+            "total_mtco2": 12134.31
           }
         }
       }
@@ -5810,8 +5951,8 @@
           }
         },
         "2022": {
-          "demand_twh": 7631.42,
-          "total_generation_twh": 7631.42,
+          "demand_twh": 7631.62,
+          "total_generation_twh": 7631.62,
           "generation": {
             "coal": {
               "twh": 1421.63,
@@ -5830,8 +5971,8 @@
               "pct": 10.73
             },
             "wind": {
-              "twh": 746.71,
-              "pct": 9.78
+              "twh": 746.91,
+              "pct": 9.79
             },
             "solar": {
               "twh": 422.98,
@@ -5847,46 +5988,46 @@
             }
           },
           "aggregates": {
-            "clean_pct": 46.0,
-            "fossil_pct": 54.0,
+            "clean_pct": 46.01,
+            "fossil_pct": 53.99,
             "renewables_pct": 29.14,
-            "wind_solar_pct": 15.32
+            "wind_solar_pct": 15.33
           },
           "emissions": {
             "total_mtco2": 2869.97
           }
         },
         "2023": {
-          "demand_twh": 7476.61,
-          "total_generation_twh": 7476.61,
+          "demand_twh": 7481.58,
+          "total_generation_twh": 7481.58,
           "generation": {
             "coal": {
               "twh": 1169.17,
-              "pct": 15.64
+              "pct": 15.63
             },
             "gas": {
               "twh": 2583.28,
-              "pct": 34.55
+              "pct": 34.53
             },
             "nuclear": {
               "twh": 1326.78,
-              "pct": 17.75
+              "pct": 17.73
             },
             "hydro": {
               "twh": 797.48,
-              "pct": 10.67
+              "pct": 10.66
             },
             "wind": {
-              "twh": 762.86,
-              "pct": 10.2
+              "twh": 768.37,
+              "pct": 10.27
             },
             "solar": {
               "twh": 474.75,
               "pct": 6.35
             },
             "bioenergy": {
-              "twh": 235.77,
-              "pct": 3.15
+              "twh": 235.23,
+              "pct": 3.14
             },
             "other_fossil": {
               "twh": 126.52,
@@ -5894,46 +6035,46 @@
             }
           },
           "aggregates": {
-            "clean_pct": 48.12,
-            "fossil_pct": 51.88,
-            "renewables_pct": 30.37,
-            "wind_solar_pct": 16.55
+            "clean_pct": 48.15,
+            "fossil_pct": 51.85,
+            "renewables_pct": 30.42,
+            "wind_solar_pct": 16.62
           },
           "emissions": {
-            "total_mtco2": 2643.93
+            "total_mtco2": 2643.88
           }
         },
         "2024": {
-          "demand_twh": 7648.94,
-          "total_generation_twh": 7648.94,
+          "demand_twh": 7653.69,
+          "total_generation_twh": 7653.69,
           "generation": {
             "coal": {
               "twh": 1117.63,
-              "pct": 14.61
+              "pct": 14.6
             },
             "gas": {
               "twh": 2627.14,
-              "pct": 34.35
+              "pct": 34.33
             },
             "nuclear": {
               "twh": 1373.28,
-              "pct": 17.95
+              "pct": 17.94
             },
             "hydro": {
               "twh": 813.53,
-              "pct": 10.64
+              "pct": 10.63
             },
             "wind": {
-              "twh": 797.29,
-              "pct": 10.42
+              "twh": 802.8,
+              "pct": 10.49
             },
             "solar": {
               "twh": 559.65,
-              "pct": 7.32
+              "pct": 7.31
             },
             "bioenergy": {
-              "twh": 245.49,
-              "pct": 3.21
+              "twh": 244.73,
+              "pct": 3.19
             },
             "other_fossil": {
               "twh": 114.93,
@@ -5941,13 +6082,60 @@
             }
           },
           "aggregates": {
-            "clean_pct": 49.54,
-            "fossil_pct": 50.46,
-            "renewables_pct": 31.59,
-            "wind_solar_pct": 17.74
+            "clean_pct": 49.57,
+            "fossil_pct": 50.43,
+            "renewables_pct": 31.63,
+            "wind_solar_pct": 17.8
           },
           "emissions": {
-            "total_mtco2": 2621.04
+            "total_mtco2": 2620.95
+          }
+        },
+        "2025": {
+          "demand_twh": 7829.55,
+          "total_generation_twh": 7829.55,
+          "generation": {
+            "coal": {
+              "twh": 1202.86,
+              "pct": 15.36
+            },
+            "gas": {
+              "twh": 2576.69,
+              "pct": 32.91
+            },
+            "nuclear": {
+              "twh": 1392.64,
+              "pct": 17.79
+            },
+            "hydro": {
+              "twh": 786.56,
+              "pct": 10.05
+            },
+            "wind": {
+              "twh": 818.56,
+              "pct": 10.45
+            },
+            "solar": {
+              "twh": 685.44,
+              "pct": 8.75
+            },
+            "bioenergy": {
+              "twh": 253.21,
+              "pct": 3.24
+            },
+            "other_fossil": {
+              "twh": 113.59,
+              "pct": 1.45
+            }
+          },
+          "aggregates": {
+            "clean_pct": 50.28,
+            "fossil_pct": 49.72,
+            "renewables_pct": 32.49,
+            "wind_solar_pct": 19.2
+          },
+          "emissions": {
+            "total_mtco2": 2680.96
           }
         }
       }
@@ -5956,8 +6144,8 @@
       "name": "OECD (Ember)",
       "years": {
         "2000": {
-          "demand_twh": 9620.06,
-          "total_generation_twh": 9620.06,
+          "demand_twh": 9620.07,
+          "total_generation_twh": 9620.07,
           "generation": {
             "coal": {
               "twh": 3596.8,
@@ -5976,7 +6164,7 @@
               "pct": 14.48
             },
             "wind": {
-              "twh": 28.7,
+              "twh": 28.71,
               "pct": 0.3
             },
             "solar": {
@@ -6003,8 +6191,8 @@
           }
         },
         "2001": {
-          "demand_twh": 9609.44,
-          "total_generation_twh": 9609.44,
+          "demand_twh": 9609.45,
+          "total_generation_twh": 9609.45,
           "generation": {
             "coal": {
               "twh": 3563.5,
@@ -6023,7 +6211,7 @@
               "pct": 13.46
             },
             "wind": {
-              "twh": 34.78,
+              "twh": 34.79,
               "pct": 0.36
             },
             "solar": {
@@ -6097,8 +6285,8 @@
           }
         },
         "2003": {
-          "demand_twh": 9937.51,
-          "total_generation_twh": 9937.51,
+          "demand_twh": 9937.52,
+          "total_generation_twh": 9937.52,
           "generation": {
             "coal": {
               "twh": 3740.88,
@@ -6117,7 +6305,7 @@
               "pct": 13.0
             },
             "wind": {
-              "twh": 58.8,
+              "twh": 58.81,
               "pct": 0.59
             },
             "solar": {
@@ -6144,8 +6332,8 @@
           }
         },
         "2004": {
-          "demand_twh": 10177.73,
-          "total_generation_twh": 10177.73,
+          "demand_twh": 10177.75,
+          "total_generation_twh": 10177.75,
           "generation": {
             "coal": {
               "twh": 3729.14,
@@ -6164,7 +6352,7 @@
               "pct": 13.03
             },
             "wind": {
-              "twh": 77.86,
+              "twh": 77.88,
               "pct": 0.77
             },
             "solar": {
@@ -6191,8 +6379,8 @@
           }
         },
         "2005": {
-          "demand_twh": 10403.3,
-          "total_generation_twh": 10403.3,
+          "demand_twh": 10403.32,
+          "total_generation_twh": 10403.32,
           "generation": {
             "coal": {
               "twh": 3796.1,
@@ -6211,7 +6399,7 @@
               "pct": 12.87
             },
             "wind": {
-              "twh": 95.16,
+              "twh": 95.18,
               "pct": 0.91
             },
             "solar": {
@@ -6238,8 +6426,8 @@
           }
         },
         "2006": {
-          "demand_twh": 10498.73,
-          "total_generation_twh": 10498.73,
+          "demand_twh": 10498.76,
+          "total_generation_twh": 10498.76,
           "generation": {
             "coal": {
               "twh": 3788.85,
@@ -6258,7 +6446,7 @@
               "pct": 12.97
             },
             "wind": {
-              "twh": 118.29,
+              "twh": 118.32,
               "pct": 1.13
             },
             "solar": {
@@ -6285,8 +6473,8 @@
           }
         },
         "2007": {
-          "demand_twh": 10734.3,
-          "total_generation_twh": 10734.3,
+          "demand_twh": 10734.33,
+          "total_generation_twh": 10734.33,
           "generation": {
             "coal": {
               "twh": 3852.93,
@@ -6305,7 +6493,7 @@
               "pct": 12.35
             },
             "wind": {
-              "twh": 151.29,
+              "twh": 151.32,
               "pct": 1.41
             },
             "solar": {
@@ -6332,8 +6520,8 @@
           }
         },
         "2008": {
-          "demand_twh": 10750.27,
-          "total_generation_twh": 10750.27,
+          "demand_twh": 10750.31,
+          "total_generation_twh": 10750.31,
           "generation": {
             "coal": {
               "twh": 3761.11,
@@ -6352,7 +6540,7 @@
               "pct": 12.84
             },
             "wind": {
-              "twh": 189.56,
+              "twh": 189.6,
               "pct": 1.76
             },
             "solar": {
@@ -6379,8 +6567,8 @@
           }
         },
         "2009": {
-          "demand_twh": 10335.45,
-          "total_generation_twh": 10335.45,
+          "demand_twh": 10335.49,
+          "total_generation_twh": 10335.49,
           "generation": {
             "coal": {
               "twh": 3447.49,
@@ -6399,7 +6587,7 @@
               "pct": 13.2
             },
             "wind": {
-              "twh": 227.67,
+              "twh": 227.71,
               "pct": 2.2
             },
             "solar": {
@@ -6426,8 +6614,8 @@
           }
         },
         "2010": {
-          "demand_twh": 10747.5,
-          "total_generation_twh": 10747.5,
+          "demand_twh": 10747.56,
+          "total_generation_twh": 10747.56,
           "generation": {
             "coal": {
               "twh": 3552.19,
@@ -6446,7 +6634,7 @@
               "pct": 13.04
             },
             "wind": {
-              "twh": 269.49,
+              "twh": 269.55,
               "pct": 2.51
             },
             "solar": {
@@ -6473,8 +6661,8 @@
           }
         },
         "2011": {
-          "demand_twh": 10720.03,
-          "total_generation_twh": 10720.03,
+          "demand_twh": 10720.11,
+          "total_generation_twh": 10720.11,
           "generation": {
             "coal": {
               "twh": 3432.49,
@@ -6493,7 +6681,7 @@
               "pct": 13.44
             },
             "wind": {
-              "twh": 331.32,
+              "twh": 331.4,
               "pct": 3.09
             },
             "solar": {
@@ -6520,8 +6708,8 @@
           }
         },
         "2012": {
-          "demand_twh": 10727.61,
-          "total_generation_twh": 10727.61,
+          "demand_twh": 10727.68,
+          "total_generation_twh": 10727.68,
           "generation": {
             "coal": {
               "twh": 3316.6,
@@ -6540,7 +6728,7 @@
               "pct": 13.48
             },
             "wind": {
-              "twh": 382.67,
+              "twh": 382.74,
               "pct": 3.57
             },
             "solar": {
@@ -6567,8 +6755,8 @@
           }
         },
         "2013": {
-          "demand_twh": 10723.62,
-          "total_generation_twh": 10723.62,
+          "demand_twh": 10723.7,
+          "total_generation_twh": 10723.7,
           "generation": {
             "coal": {
               "twh": 3379.48,
@@ -6587,7 +6775,7 @@
               "pct": 13.7
             },
             "wind": {
-              "twh": 442.58,
+              "twh": 442.66,
               "pct": 4.13
             },
             "solar": {
@@ -6610,12 +6798,12 @@
             "wind_solar_pct": 5.19
           },
           "emissions": {
-            "total_mtco2": 4953.09
+            "total_mtco2": 4953.1
           }
         },
         "2014": {
-          "demand_twh": 10668.4,
-          "total_generation_twh": 10668.4,
+          "demand_twh": 10668.48,
+          "total_generation_twh": 10668.48,
           "generation": {
             "coal": {
               "twh": 3312.56,
@@ -6634,7 +6822,7 @@
               "pct": 13.54
             },
             "wind": {
-              "twh": 478.03,
+              "twh": 478.11,
               "pct": 4.48
             },
             "solar": {
@@ -6653,7 +6841,7 @@
           "aggregates": {
             "clean_pct": 40.89,
             "fossil_pct": 59.11,
-            "renewables_pct": 22.64,
+            "renewables_pct": 22.65,
             "wind_solar_pct": 5.97
           },
           "emissions": {
@@ -6661,8 +6849,8 @@
           }
         },
         "2015": {
-          "demand_twh": 10725.86,
-          "total_generation_twh": 10725.86,
+          "demand_twh": 10725.97,
+          "total_generation_twh": 10725.97,
           "generation": {
             "coal": {
               "twh": 3075.26,
@@ -6681,7 +6869,7 @@
               "pct": 13.36
             },
             "wind": {
-              "twh": 558.64,
+              "twh": 558.75,
               "pct": 5.21
             },
             "solar": {
@@ -6708,8 +6896,8 @@
           }
         },
         "2016": {
-          "demand_twh": 10839.05,
-          "total_generation_twh": 10839.05,
+          "demand_twh": 10839.15,
+          "total_generation_twh": 10839.15,
           "generation": {
             "coal": {
               "twh": 2877.81,
@@ -6728,7 +6916,7 @@
               "pct": 13.48
             },
             "wind": {
-              "twh": 606.85,
+              "twh": 606.95,
               "pct": 5.6
             },
             "solar": {
@@ -6741,7 +6929,7 @@
             },
             "other_fossil": {
               "twh": 344.14,
-              "pct": 3.18
+              "pct": 3.17
             }
           },
           "aggregates": {
@@ -6755,8 +6943,8 @@
           }
         },
         "2017": {
-          "demand_twh": 10901.82,
-          "total_generation_twh": 10901.82,
+          "demand_twh": 10901.95,
+          "total_generation_twh": 10901.95,
           "generation": {
             "coal": {
               "twh": 2857.84,
@@ -6775,7 +6963,7 @@
               "pct": 13.36
             },
             "wind": {
-              "twh": 697.61,
+              "twh": 697.74,
               "pct": 6.4
             },
             "solar": {
@@ -6798,12 +6986,12 @@
             "wind_solar_pct": 8.94
           },
           "emissions": {
-            "total_mtco2": 4585.73
+            "total_mtco2": 4585.74
           }
         },
         "2018": {
-          "demand_twh": 11077.85,
-          "total_generation_twh": 11077.85,
+          "demand_twh": 11077.99,
+          "total_generation_twh": 11077.99,
           "generation": {
             "coal": {
               "twh": 2750.87,
@@ -6818,11 +7006,11 @@
               "pct": 17.41
             },
             "hydro": {
-              "twh": 1487.96,
+              "twh": 1487.95,
               "pct": 13.43
             },
             "wind": {
-              "twh": 744.5,
+              "twh": 744.64,
               "pct": 6.72
             },
             "solar": {
@@ -6830,7 +7018,7 @@
               "pct": 2.92
             },
             "bioenergy": {
-              "twh": 368.91,
+              "twh": 368.92,
               "pct": 3.33
             },
             "other_fossil": {
@@ -6849,15 +7037,15 @@
           }
         },
         "2019": {
-          "demand_twh": 10951.76,
-          "total_generation_twh": 10951.76,
+          "demand_twh": 10952.67,
+          "total_generation_twh": 10952.67,
           "generation": {
             "coal": {
-              "twh": 2391.33,
-              "pct": 21.84
+              "twh": 2391.34,
+              "pct": 21.83
             },
             "gas": {
-              "twh": 3319.45,
+              "twh": 3319.48,
               "pct": 30.31
             },
             "nuclear": {
@@ -6869,19 +7057,19 @@
               "pct": 13.28
             },
             "wind": {
-              "twh": 832.75,
+              "twh": 832.91,
               "pct": 7.6
             },
             "solar": {
-              "twh": 374.62,
-              "pct": 3.42
+              "twh": 375.22,
+              "pct": 3.43
             },
             "bioenergy": {
               "twh": 375.52,
               "pct": 3.42
             },
             "other_fossil": {
-              "twh": 251.38,
+              "twh": 251.49,
               "pct": 2.3
             }
           },
@@ -6889,23 +7077,23 @@
             "clean_pct": 45.56,
             "fossil_pct": 54.44,
             "renewables_pct": 27.73,
-            "wind_solar_pct": 11.02
+            "wind_solar_pct": 11.03
           },
           "emissions": {
-            "total_mtco2": 4275.07
+            "total_mtco2": 4275.22
           }
         },
         "2020": {
-          "demand_twh": 10657.6,
-          "total_generation_twh": 10657.6,
+          "demand_twh": 10658.75,
+          "total_generation_twh": 10658.75,
           "generation": {
             "coal": {
-              "twh": 2014.97,
-              "pct": 18.91
+              "twh": 2015.01,
+              "pct": 18.9
             },
             "gas": {
-              "twh": 3343.83,
-              "pct": 31.38
+              "twh": 3344.13,
+              "pct": 31.37
             },
             "nuclear": {
               "twh": 1831.42,
@@ -6916,11 +7104,11 @@
               "pct": 14.01
             },
             "wind": {
-              "twh": 934.94,
+              "twh": 935.14,
               "pct": 8.77
             },
             "solar": {
-              "twh": 448.52,
+              "twh": 449.09,
               "pct": 4.21
             },
             "bioenergy": {
@@ -6928,7 +7116,7 @@
               "pct": 3.59
             },
             "other_fossil": {
-              "twh": 207.58,
+              "twh": 207.62,
               "pct": 1.95
             }
           },
@@ -6939,20 +7127,20 @@
             "wind_solar_pct": 12.98
           },
           "emissions": {
-            "total_mtco2": 3915.11
+            "total_mtco2": 3915.36
           }
         },
         "2021": {
-          "demand_twh": 10967.32,
-          "total_generation_twh": 10967.32,
+          "demand_twh": 10969.5,
+          "total_generation_twh": 10969.5,
           "generation": {
             "coal": {
-              "twh": 2188.99,
+              "twh": 2189.91,
               "pct": 19.96
             },
             "gas": {
-              "twh": 3318.49,
-              "pct": 30.26
+              "twh": 3318.53,
+              "pct": 30.25
             },
             "nuclear": {
               "twh": 1872.18,
@@ -6960,45 +7148,45 @@
             },
             "hydro": {
               "twh": 1449.53,
-              "pct": 13.22
+              "pct": 13.21
             },
             "wind": {
-              "twh": 972.37,
+              "twh": 972.62,
               "pct": 8.87
             },
             "solar": {
-              "twh": 532.92,
-              "pct": 4.86
+              "twh": 533.87,
+              "pct": 4.87
             },
             "bioenergy": {
               "twh": 401.71,
               "pct": 3.66
             },
             "other_fossil": {
-              "twh": 231.13,
+              "twh": 231.15,
               "pct": 2.11
             }
           },
           "aggregates": {
             "clean_pct": 47.68,
             "fossil_pct": 52.32,
-            "renewables_pct": 30.6,
-            "wind_solar_pct": 13.73
+            "renewables_pct": 30.61,
+            "wind_solar_pct": 13.74
           },
           "emissions": {
-            "total_mtco2": 4089.38
+            "total_mtco2": 4090.31
           }
         },
         "2022": {
-          "demand_twh": 11054.15,
-          "total_generation_twh": 11054.15,
+          "demand_twh": 11056.62,
+          "total_generation_twh": 11056.62,
           "generation": {
             "coal": {
-              "twh": 2136.63,
-              "pct": 19.33
+              "twh": 2136.06,
+              "pct": 19.32
             },
             "gas": {
-              "twh": 3385.85,
+              "twh": 3386.84,
               "pct": 30.63
             },
             "nuclear": {
@@ -7007,127 +7195,174 @@
             },
             "hydro": {
               "twh": 1389.21,
-              "pct": 12.57
+              "pct": 12.56
             },
             "wind": {
-              "twh": 1090.98,
+              "twh": 1091.48,
               "pct": 9.87
             },
             "solar": {
-              "twh": 649.71,
-              "pct": 5.88
+              "twh": 651.41,
+              "pct": 5.89
             },
             "bioenergy": {
               "twh": 392.57,
               "pct": 3.55
             },
             "other_fossil": {
-              "twh": 259.1,
+              "twh": 258.95,
               "pct": 2.34
             }
           },
           "aggregates": {
-            "clean_pct": 47.7,
-            "fossil_pct": 52.3,
-            "renewables_pct": 31.87,
-            "wind_solar_pct": 15.75
+            "clean_pct": 47.71,
+            "fossil_pct": 52.29,
+            "renewables_pct": 31.88,
+            "wind_solar_pct": 15.76
           },
           "emissions": {
-            "total_mtco2": 4103.61
+            "total_mtco2": 4103.66
           }
         },
         "2023": {
-          "demand_twh": 10888.34,
-          "total_generation_twh": 10888.34,
+          "demand_twh": 10896.06,
+          "total_generation_twh": 10896.06,
           "generation": {
             "coal": {
-              "twh": 1826.57,
-              "pct": 16.78
+              "twh": 1822.9,
+              "pct": 16.73
             },
             "gas": {
-              "twh": 3385.15,
-              "pct": 31.09
+              "twh": 3390.26,
+              "pct": 31.11
             },
             "nuclear": {
-              "twh": 1790.85,
-              "pct": 16.45
+              "twh": 1790.87,
+              "pct": 16.44
             },
             "hydro": {
-              "twh": 1386.2,
-              "pct": 12.73
+              "twh": 1384.44,
+              "pct": 12.71
             },
             "wind": {
-              "twh": 1132.95,
-              "pct": 10.41
+              "twh": 1139.01,
+              "pct": 10.45
             },
             "solar": {
-              "twh": 755.97,
-              "pct": 6.94
+              "twh": 757.58,
+              "pct": 6.95
             },
             "bioenergy": {
-              "twh": 383.3,
+              "twh": 384.47,
               "pct": 3.52
             },
             "other_fossil": {
-              "twh": 227.35,
-              "pct": 2.09
+              "twh": 226.53,
+              "pct": 2.08
             }
           },
           "aggregates": {
-            "clean_pct": 50.05,
-            "fossil_pct": 49.95,
-            "renewables_pct": 33.6,
-            "wind_solar_pct": 17.35
+            "clean_pct": 50.08,
+            "fossil_pct": 49.92,
+            "renewables_pct": 33.64,
+            "wind_solar_pct": 17.4
           },
           "emissions": {
-            "total_mtco2": 3803.09
+            "total_mtco2": 3802.44
           }
         },
         "2024": {
-          "demand_twh": 11145.76,
-          "total_generation_twh": 11145.76,
+          "demand_twh": 11158.41,
+          "total_generation_twh": 11158.41,
           "generation": {
             "coal": {
-              "twh": 1751.03,
-              "pct": 15.71
+              "twh": 1749.93,
+              "pct": 15.68
             },
             "gas": {
-              "twh": 3426.41,
-              "pct": 30.74
+              "twh": 3435.3,
+              "pct": 30.79
             },
             "nuclear": {
-              "twh": 1840.73,
-              "pct": 16.52
+              "twh": 1840.77,
+              "pct": 16.5
             },
             "hydro": {
-              "twh": 1433.39,
-              "pct": 12.86
+              "twh": 1430.97,
+              "pct": 12.82
             },
             "wind": {
-              "twh": 1191.99,
-              "pct": 10.69
+              "twh": 1197.73,
+              "pct": 10.73
             },
             "solar": {
-              "twh": 892.95,
-              "pct": 8.01
+              "twh": 895.68,
+              "pct": 8.03
             },
             "bioenergy": {
-              "twh": 393.93,
+              "twh": 394.78,
               "pct": 3.54
             },
             "other_fossil": {
-              "twh": 215.33,
-              "pct": 1.93
+              "twh": 213.25,
+              "pct": 1.91
             }
           },
           "aggregates": {
             "clean_pct": 51.62,
             "fossil_pct": 48.38,
-            "renewables_pct": 35.1,
-            "wind_solar_pct": 18.7
+            "renewables_pct": 35.12,
+            "wind_solar_pct": 18.76
           },
           "emissions": {
-            "total_mtco2": 3761.9
+            "total_mtco2": 3765.09
+          }
+        },
+        "2025": {
+          "demand_twh": 11365.01,
+          "total_generation_twh": 11365.01,
+          "generation": {
+            "coal": {
+              "twh": 1808.77,
+              "pct": 15.92
+            },
+            "gas": {
+              "twh": 3418.72,
+              "pct": 30.08
+            },
+            "nuclear": {
+              "twh": 1842.18,
+              "pct": 16.21
+            },
+            "hydro": {
+              "twh": 1381.98,
+              "pct": 12.16
+            },
+            "wind": {
+              "twh": 1218.05,
+              "pct": 10.72
+            },
+            "solar": {
+              "twh": 1078.4,
+              "pct": 9.49
+            },
+            "bioenergy": {
+              "twh": 404.88,
+              "pct": 3.57
+            },
+            "other_fossil": {
+              "twh": 212.03,
+              "pct": 1.87
+            }
+          },
+          "aggregates": {
+            "clean_pct": 52.14,
+            "fossil_pct": 47.86,
+            "renewables_pct": 35.93,
+            "wind_solar_pct": 20.21
+          },
+          "emissions": {
+            "total_mtco2": 3817.82
           }
         }
       }
@@ -7136,8 +7371,8 @@
       "name": "World",
       "years": {
         "2000": {
-          "demand_twh": 15278.69,
-          "total_generation_twh": 15278.69,
+          "demand_twh": 15278.78,
+          "total_generation_twh": 15278.78,
           "generation": {
             "coal": {
               "twh": 5808.81,
@@ -7152,39 +7387,39 @@
               "pct": 16.63
             },
             "hydro": {
-              "twh": 2629.63,
+              "twh": 2629.67,
               "pct": 17.21
             },
             "wind": {
-              "twh": 31.14,
+              "twh": 31.15,
               "pct": 0.2
             },
             "solar": {
-              "twh": 1.03,
+              "twh": 1.02,
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 198.09,
+              "twh": 197.78,
               "pct": 1.3
             },
             "other_fossil": {
-              "twh": 1323.96,
+              "twh": 1324.32,
               "pct": 8.67
             }
           },
           "aggregates": {
-            "clean_pct": 35.35,
-            "fossil_pct": 64.65,
+            "clean_pct": 35.34,
+            "fossil_pct": 64.66,
             "renewables_pct": 18.72,
             "wind_solar_pct": 0.21
           },
           "emissions": {
-            "total_mtco2": 8055.74
+            "total_mtco2": 8055.91
           }
         },
         "2001": {
-          "demand_twh": 15500.42,
-          "total_generation_twh": 15500.42,
+          "demand_twh": 15500.83,
+          "total_generation_twh": 15500.83,
           "generation": {
             "coal": {
               "twh": 5890.67,
@@ -7199,39 +7434,39 @@
               "pct": 16.86
             },
             "hydro": {
-              "twh": 2563.66,
+              "twh": 2563.72,
               "pct": 16.54
             },
             "wind": {
-              "twh": 38.18,
+              "twh": 38.19,
               "pct": 0.25
             },
             "solar": {
-              "twh": 1.37,
+              "twh": 1.36,
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 193.87,
-              "pct": 1.25
+              "twh": 193.7,
+              "pct": 1.24
             },
             "other_fossil": {
-              "twh": 1284.72,
+              "twh": 1285.24,
               "pct": 8.29
             }
           },
           "aggregates": {
             "clean_pct": 34.9,
             "fossil_pct": 65.1,
-            "renewables_pct": 18.05,
+            "renewables_pct": 18.04,
             "wind_solar_pct": 0.26
           },
           "emissions": {
-            "total_mtco2": 8203.52
+            "total_mtco2": 8203.81
           }
         },
         "2002": {
-          "demand_twh": 16049.61,
-          "total_generation_twh": 16049.61,
+          "demand_twh": 16049.89,
+          "total_generation_twh": 16049.89,
           "generation": {
             "coal": {
               "twh": 6144.3,
@@ -7239,14 +7474,14 @@
             },
             "gas": {
               "twh": 3104.81,
-              "pct": 19.35
+              "pct": 19.34
             },
             "nuclear": {
               "twh": 2654.78,
               "pct": 16.54
             },
             "hydro": {
-              "twh": 2611.51,
+              "twh": 2611.58,
               "pct": 16.27
             },
             "wind": {
@@ -7254,15 +7489,15 @@
               "pct": 0.33
             },
             "solar": {
-              "twh": 1.71,
+              "twh": 1.72,
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 208.79,
-              "pct": 1.31
+              "twh": 208.64,
+              "pct": 1.3
             },
             "other_fossil": {
-              "twh": 1271.49,
+              "twh": 1271.84,
               "pct": 7.92
             }
           },
@@ -7273,12 +7508,12 @@
             "wind_solar_pct": 0.34
           },
           "emissions": {
-            "total_mtco2": 8543.1
+            "total_mtco2": 8543.29
           }
         },
         "2003": {
-          "demand_twh": 16627.73,
-          "total_generation_twh": 16627.73,
+          "demand_twh": 16628.01,
+          "total_generation_twh": 16628.01,
           "generation": {
             "coal": {
               "twh": 6574.95,
@@ -7293,39 +7528,39 @@
               "pct": 15.64
             },
             "hydro": {
-              "twh": 2611.9,
+              "twh": 2611.97,
               "pct": 15.71
             },
             "wind": {
-              "twh": 63.19,
+              "twh": 63.2,
               "pct": 0.38
             },
             "solar": {
-              "twh": 2.1,
+              "twh": 2.11,
               "pct": 0.01
             },
             "bioenergy": {
-              "twh": 223.12,
+              "twh": 222.98,
               "pct": 1.34
             },
             "other_fossil": {
-              "twh": 1295.92,
-              "pct": 7.79
+              "twh": 1296.25,
+              "pct": 7.8
             }
           },
           "aggregates": {
-            "clean_pct": 33.09,
-            "fossil_pct": 66.91,
+            "clean_pct": 33.08,
+            "fossil_pct": 66.92,
             "renewables_pct": 17.44,
             "wind_solar_pct": 0.39
           },
           "emissions": {
-            "total_mtco2": 9054.54
+            "total_mtco2": 9054.74
           }
         },
         "2004": {
-          "demand_twh": 17414.66,
-          "total_generation_twh": 17414.66,
+          "demand_twh": 17414.99,
+          "total_generation_twh": 17414.99,
           "generation": {
             "coal": {
               "twh": 6797.3,
@@ -7340,11 +7575,11 @@
               "pct": 15.62
             },
             "hydro": {
-              "twh": 2802.55,
+              "twh": 2802.61,
               "pct": 16.09
             },
             "wind": {
-              "twh": 85.46,
+              "twh": 85.48,
               "pct": 0.49
             },
             "solar": {
@@ -7352,12 +7587,12 @@
               "pct": 0.02
             },
             "bioenergy": {
-              "twh": 240.8,
-              "pct": 1.39
+              "twh": 240.67,
+              "pct": 1.38
             },
             "other_fossil": {
-              "twh": 1263.28,
-              "pct": 7.25
+              "twh": 1263.66,
+              "pct": 7.26
             }
           },
           "aggregates": {
@@ -7367,12 +7602,12 @@
             "wind_solar_pct": 0.51
           },
           "emissions": {
-            "total_mtco2": 9393.97
+            "total_mtco2": 9394.19
           }
         },
         "2005": {
-          "demand_twh": 18133.84,
-          "total_generation_twh": 18133.84,
+          "demand_twh": 18134.08,
+          "total_generation_twh": 18134.08,
           "generation": {
             "coal": {
               "twh": 7167.21,
@@ -7387,23 +7622,23 @@
               "pct": 15.04
             },
             "hydro": {
-              "twh": 2911.71,
+              "twh": 2911.77,
               "pct": 16.06
             },
             "wind": {
-              "twh": 104.38,
+              "twh": 104.4,
               "pct": 0.58
             },
             "solar": {
-              "twh": 3.94,
+              "twh": 3.95,
               "pct": 0.02
             },
             "bioenergy": {
-              "twh": 261.45,
+              "twh": 261.35,
               "pct": 1.44
             },
             "other_fossil": {
-              "twh": 1277.64,
+              "twh": 1277.89,
               "pct": 7.05
             }
           },
@@ -7414,12 +7649,12 @@
             "wind_solar_pct": 0.6
           },
           "emissions": {
-            "total_mtco2": 9853.56
+            "total_mtco2": 9853.71
           }
         },
         "2006": {
-          "demand_twh": 18839.01,
-          "total_generation_twh": 18839.01,
+          "demand_twh": 18838.99,
+          "total_generation_twh": 18838.99,
           "generation": {
             "coal": {
               "twh": 7566.97,
@@ -7434,23 +7669,23 @@
               "pct": 14.66
             },
             "hydro": {
-              "twh": 3018.02,
+              "twh": 3018.07,
               "pct": 16.02
             },
             "wind": {
-              "twh": 133.17,
+              "twh": 133.2,
               "pct": 0.71
             },
             "solar": {
-              "twh": 5.41,
+              "twh": 5.42,
               "pct": 0.03
             },
             "bioenergy": {
-              "twh": 277.46,
+              "twh": 277.37,
               "pct": 1.47
             },
             "other_fossil": {
-              "twh": 1175.8,
+              "twh": 1175.78,
               "pct": 6.24
             }
           },
@@ -7461,12 +7696,12 @@
             "wind_solar_pct": 0.74
           },
           "emissions": {
-            "total_mtco2": 10293.74
+            "total_mtco2": 10293.71
           }
         },
         "2007": {
-          "demand_twh": 19713.95,
-          "total_generation_twh": 19713.95,
+          "demand_twh": 19713.96,
+          "total_generation_twh": 19713.96,
           "generation": {
             "coal": {
               "twh": 8051.83,
@@ -7481,23 +7716,23 @@
               "pct": 13.71
             },
             "hydro": {
-              "twh": 3062.72,
+              "twh": 3062.78,
               "pct": 15.54
             },
             "wind": {
-              "twh": 171.12,
+              "twh": 171.15,
               "pct": 0.87
             },
             "solar": {
-              "twh": 7.28,
+              "twh": 7.29,
               "pct": 0.04
             },
             "bioenergy": {
-              "twh": 302.07,
+              "twh": 302.1,
               "pct": 1.53
             },
             "other_fossil": {
-              "twh": 1196.17,
+              "twh": 1196.05,
               "pct": 6.07
             }
           },
@@ -7508,16 +7743,16 @@
             "wind_solar_pct": 0.91
           },
           "emissions": {
-            "total_mtco2": 10934.59
+            "total_mtco2": 10934.52
           }
         },
         "2008": {
-          "demand_twh": 20102.47,
-          "total_generation_twh": 20102.47,
+          "demand_twh": 20102.64,
+          "total_generation_twh": 20102.64,
           "generation": {
             "coal": {
-              "twh": 8074.17,
-              "pct": 40.17
+              "twh": 8074.19,
+              "pct": 40.16
             },
             "gas": {
               "twh": 4360.99,
@@ -7528,23 +7763,23 @@
               "pct": 13.4
             },
             "hydro": {
-              "twh": 3245.28,
+              "twh": 3245.35,
               "pct": 16.14
             },
             "wind": {
-              "twh": 220.81,
+              "twh": 220.85,
               "pct": 1.1
             },
             "solar": {
-              "twh": 11.84,
+              "twh": 11.85,
               "pct": 0.06
             },
             "bioenergy": {
-              "twh": 322.92,
-              "pct": 1.6
+              "twh": 322.97,
+              "pct": 1.61
             },
             "other_fossil": {
-              "twh": 1171.74,
+              "twh": 1171.72,
               "pct": 5.83
             }
           },
@@ -7555,12 +7790,12 @@
             "wind_solar_pct": 1.16
           },
           "emissions": {
-            "total_mtco2": 11010.19
+            "total_mtco2": 11010.21
           }
         },
         "2009": {
-          "demand_twh": 19943.44,
-          "total_generation_twh": 19943.44,
+          "demand_twh": 19943.51,
+          "total_generation_twh": 19943.51,
           "generation": {
             "coal": {
               "twh": 7950.77,
@@ -7575,23 +7810,23 @@
               "pct": 13.32
             },
             "hydro": {
-              "twh": 3241.2,
+              "twh": 3241.27,
               "pct": 16.25
             },
             "wind": {
-              "twh": 276.22,
+              "twh": 276.26,
               "pct": 1.39
             },
             "solar": {
-              "twh": 19.81,
+              "twh": 19.82,
               "pct": 0.1
             },
             "bioenergy": {
-              "twh": 345.13,
+              "twh": 345.12,
               "pct": 1.73
             },
             "other_fossil": {
-              "twh": 1071.2,
+              "twh": 1071.16,
               "pct": 5.37
             }
           },
@@ -7602,12 +7837,12 @@
             "wind_solar_pct": 1.49
           },
           "emissions": {
-            "total_mtco2": 10839.09
+            "total_mtco2": 10839.06
           }
         },
         "2010": {
-          "demand_twh": 21263.61,
-          "total_generation_twh": 21263.61,
+          "demand_twh": 21263.75,
+          "total_generation_twh": 21263.75,
           "generation": {
             "coal": {
               "twh": 8458.0,
@@ -7622,11 +7857,11 @@
               "pct": 12.82
             },
             "hydro": {
-              "twh": 3428.15,
+              "twh": 3428.21,
               "pct": 16.12
             },
             "wind": {
-              "twh": 345.93,
+              "twh": 345.99,
               "pct": 1.63
             },
             "solar": {
@@ -7634,11 +7869,11 @@
               "pct": 0.15
             },
             "bioenergy": {
-              "twh": 386.85,
+              "twh": 386.91,
               "pct": 1.82
             },
             "other_fossil": {
-              "twh": 1078.7,
+              "twh": 1078.66,
               "pct": 5.07
             }
           },
@@ -7649,12 +7884,12 @@
             "wind_solar_pct": 1.78
           },
           "emissions": {
-            "total_mtco2": 11564.29
+            "total_mtco2": 11564.27
           }
         },
         "2011": {
-          "demand_twh": 21971.91,
-          "total_generation_twh": 21971.91,
+          "demand_twh": 21972.03,
+          "total_generation_twh": 21972.03,
           "generation": {
             "coal": {
               "twh": 8911.04,
@@ -7669,23 +7904,23 @@
               "pct": 11.88
             },
             "hydro": {
-              "twh": 3488.0,
-              "pct": 15.87
+              "twh": 3488.07,
+              "pct": 15.88
             },
             "wind": {
-              "twh": 439.9,
+              "twh": 439.98,
               "pct": 2.0
             },
             "solar": {
-              "twh": 63.61,
+              "twh": 63.56,
               "pct": 0.29
             },
             "bioenergy": {
-              "twh": 406.27,
+              "twh": 406.35,
               "pct": 1.85
             },
             "other_fossil": {
-              "twh": 1186.82,
+              "twh": 1186.76,
               "pct": 5.4
             }
           },
@@ -7696,12 +7931,12 @@
             "wind_solar_pct": 2.29
           },
           "emissions": {
-            "total_mtco2": 12089.34
+            "total_mtco2": 12089.32
           }
         },
         "2012": {
-          "demand_twh": 22515.71,
-          "total_generation_twh": 22515.71,
+          "demand_twh": 22515.66,
+          "total_generation_twh": 22515.66,
           "generation": {
             "coal": {
               "twh": 8960.28,
@@ -7716,23 +7951,23 @@
               "pct": 10.8
             },
             "hydro": {
-              "twh": 3660.09,
+              "twh": 3660.17,
               "pct": 16.26
             },
             "wind": {
-              "twh": 529.19,
+              "twh": 529.26,
               "pct": 2.35
             },
             "solar": {
-              "twh": 96.98,
+              "twh": 96.92,
               "pct": 0.43
             },
             "bioenergy": {
-              "twh": 436.97,
+              "twh": 436.86,
               "pct": 1.94
             },
             "other_fossil": {
-              "twh": 1238.63,
+              "twh": 1238.6,
               "pct": 5.5
             }
           },
@@ -7743,15 +7978,15 @@
             "wind_solar_pct": 2.78
           },
           "emissions": {
-            "total_mtco2": 12341.73
+            "total_mtco2": 12341.69
           }
         },
         "2013": {
-          "demand_twh": 23155.24,
-          "total_generation_twh": 23155.24,
+          "demand_twh": 23155.03,
+          "total_generation_twh": 23155.03,
           "generation": {
             "coal": {
-              "twh": 9423.86,
+              "twh": 9423.85,
               "pct": 40.7
             },
             "gas": {
@@ -7763,23 +7998,23 @@
               "pct": 10.57
             },
             "hydro": {
-              "twh": 3790.72,
+              "twh": 3790.79,
               "pct": 16.37
             },
             "wind": {
-              "twh": 634.06,
+              "twh": 634.14,
               "pct": 2.74
             },
             "solar": {
-              "twh": 131.95,
+              "twh": 131.75,
               "pct": 0.57
             },
             "bioenergy": {
-              "twh": 470.91,
+              "twh": 470.79,
               "pct": 2.04
             },
             "other_fossil": {
-              "twh": 1196.86,
+              "twh": 1196.83,
               "pct": 5.17
             }
           },
@@ -7790,15 +8025,15 @@
             "wind_solar_pct": 3.31
           },
           "emissions": {
-            "total_mtco2": 12697.37
+            "total_mtco2": 12697.32
           }
         },
         "2014": {
-          "demand_twh": 23747.12,
-          "total_generation_twh": 23747.12,
+          "demand_twh": 23747.07,
+          "total_generation_twh": 23747.07,
           "generation": {
             "coal": {
-              "twh": 9603.89,
+              "twh": 9603.84,
               "pct": 40.44
             },
             "gas": {
@@ -7810,23 +8045,23 @@
               "pct": 10.52
             },
             "hydro": {
-              "twh": 3870.65,
+              "twh": 3870.67,
               "pct": 16.3
             },
             "wind": {
-              "twh": 706.02,
+              "twh": 706.1,
               "pct": 2.97
             },
             "solar": {
-              "twh": 197.75,
+              "twh": 197.74,
               "pct": 0.83
             },
             "bioenergy": {
-              "twh": 512.31,
+              "twh": 512.21,
               "pct": 2.15
             },
             "other_fossil": {
-              "twh": 1143.65,
+              "twh": 1143.66,
               "pct": 4.82
             }
           },
@@ -7837,15 +8072,15 @@
             "wind_solar_pct": 3.8
           },
           "emissions": {
-            "total_mtco2": 12935.75
+            "total_mtco2": 12935.69
           }
         },
         "2015": {
-          "demand_twh": 24003.19,
-          "total_generation_twh": 24003.19,
+          "demand_twh": 24002.35,
+          "total_generation_twh": 24002.35,
           "generation": {
             "coal": {
-              "twh": 9283.8,
+              "twh": 9283.61,
               "pct": 38.68
             },
             "gas": {
@@ -7857,23 +8092,23 @@
               "pct": 10.55
             },
             "hydro": {
-              "twh": 3881.96,
+              "twh": 3882.13,
               "pct": 16.17
             },
             "wind": {
-              "twh": 829.52,
+              "twh": 829.63,
               "pct": 3.46
             },
             "solar": {
-              "twh": 256.39,
+              "twh": 256.01,
               "pct": 1.07
             },
             "bioenergy": {
-              "twh": 545.35,
+              "twh": 544.87,
               "pct": 2.27
             },
             "other_fossil": {
-              "twh": 1133.36,
+              "twh": 1133.29,
               "pct": 4.72
             }
           },
@@ -7884,15 +8119,15 @@
             "wind_solar_pct": 4.53
           },
           "emissions": {
-            "total_mtco2": 12802.65
+            "total_mtco2": 12802.33
           }
         },
         "2016": {
-          "demand_twh": 24695.32,
-          "total_generation_twh": 24695.32,
+          "demand_twh": 24694.51,
+          "total_generation_twh": 24694.51,
           "generation": {
             "coal": {
-              "twh": 9328.25,
+              "twh": 9327.96,
               "pct": 37.77
             },
             "gas": {
@@ -7904,23 +8139,23 @@
               "pct": 10.41
             },
             "hydro": {
-              "twh": 4014.77,
+              "twh": 4014.75,
               "pct": 16.26
             },
             "wind": {
-              "twh": 960.2,
+              "twh": 960.3,
               "pct": 3.89
             },
             "solar": {
-              "twh": 327.76,
+              "twh": 327.47,
               "pct": 1.33
             },
             "bioenergy": {
-              "twh": 558.32,
+              "twh": 557.95,
               "pct": 2.26
             },
             "other_fossil": {
-              "twh": 1085.05,
+              "twh": 1085.11,
               "pct": 4.39
             }
           },
@@ -7931,15 +8166,15 @@
             "wind_solar_pct": 5.22
           },
           "emissions": {
-            "total_mtco2": 12972.36
+            "total_mtco2": 12972.07
           }
         },
         "2017": {
-          "demand_twh": 25441.97,
-          "total_generation_twh": 25441.97,
+          "demand_twh": 25441.04,
+          "total_generation_twh": 25441.04,
           "generation": {
             "coal": {
-              "twh": 9655.23,
+              "twh": 9655.05,
               "pct": 37.95
             },
             "gas": {
@@ -7951,23 +8186,23 @@
               "pct": 10.2
             },
             "hydro": {
-              "twh": 4054.04,
-              "pct": 15.93
+              "twh": 4054.03,
+              "pct": 15.94
             },
             "wind": {
-              "twh": 1139.31,
+              "twh": 1139.44,
               "pct": 4.48
             },
             "solar": {
-              "twh": 445.0,
+              "twh": 444.65,
               "pct": 1.75
             },
             "bioenergy": {
-              "twh": 586.7,
-              "pct": 2.31
+              "twh": 586.21,
+              "pct": 2.3
             },
             "other_fossil": {
-              "twh": 993.86,
+              "twh": 993.83,
               "pct": 3.91
             }
           },
@@ -7978,15 +8213,15 @@
             "wind_solar_pct": 6.23
           },
           "emissions": {
-            "total_mtco2": 13281.54
+            "total_mtco2": 13281.24
           }
         },
         "2018": {
-          "demand_twh": 26465.29,
-          "total_generation_twh": 26465.29,
+          "demand_twh": 26464.49,
+          "total_generation_twh": 26464.49,
           "generation": {
             "coal": {
-              "twh": 10033.18,
+              "twh": 10033.03,
               "pct": 37.91
             },
             "gas": {
@@ -7998,23 +8233,23 @@
               "pct": 10.05
             },
             "hydro": {
-              "twh": 4177.08,
+              "twh": 4176.84,
               "pct": 15.78
             },
             "wind": {
-              "twh": 1268.0,
+              "twh": 1268.14,
               "pct": 4.79
             },
             "solar": {
-              "twh": 575.18,
+              "twh": 575.16,
               "pct": 2.17
             },
             "bioenergy": {
-              "twh": 620.01,
+              "twh": 619.46,
               "pct": 2.34
             },
             "other_fossil": {
-              "twh": 908.58,
+              "twh": 908.6,
               "pct": 3.43
             }
           },
@@ -8025,113 +8260,113 @@
             "wind_solar_pct": 6.96
           },
           "emissions": {
-            "total_mtco2": 13722.26
+            "total_mtco2": 13722.02
           }
         },
         "2019": {
-          "demand_twh": 26840.51,
-          "total_generation_twh": 26840.51,
+          "demand_twh": 26832.42,
+          "total_generation_twh": 26832.42,
           "generation": {
             "coal": {
-              "twh": 9826.58,
-              "pct": 36.61
+              "twh": 9826.39,
+              "pct": 36.62
             },
             "gas": {
-              "twh": 6401.28,
-              "pct": 23.85
+              "twh": 6401.31,
+              "pct": 23.86
             },
             "nuclear": {
               "twh": 2754.08,
               "pct": 10.26
             },
             "hydro": {
-              "twh": 4227.97,
-              "pct": 15.75
+              "twh": 4227.76,
+              "pct": 15.76
             },
             "wind": {
-              "twh": 1420.8,
-              "pct": 5.29
+              "twh": 1420.96,
+              "pct": 5.3
             },
             "solar": {
-              "twh": 705.3,
-              "pct": 2.63
+              "twh": 697.94,
+              "pct": 2.6
             },
             "bioenergy": {
-              "twh": 649.65,
+              "twh": 648.95,
               "pct": 2.42
             },
             "other_fossil": {
-              "twh": 854.85,
-              "pct": 3.18
+              "twh": 855.03,
+              "pct": 3.19
             }
           },
           "aggregates": {
-            "clean_pct": 36.35,
-            "fossil_pct": 63.65,
-            "renewables_pct": 26.09,
-            "wind_solar_pct": 7.92
+            "clean_pct": 36.34,
+            "fossil_pct": 63.66,
+            "renewables_pct": 26.07,
+            "wind_solar_pct": 7.9
           },
           "emissions": {
-            "total_mtco2": 13571.12
+            "total_mtco2": 13570.59
           }
         },
         "2020": {
-          "demand_twh": 26729.11,
-          "total_generation_twh": 26729.11,
+          "demand_twh": 26723.37,
+          "total_generation_twh": 26723.37,
           "generation": {
             "coal": {
-              "twh": 9438.22,
+              "twh": 9437.05,
               "pct": 35.31
             },
             "gas": {
-              "twh": 6382.39,
-              "pct": 23.88
+              "twh": 6382.94,
+              "pct": 23.89
             },
             "nuclear": {
               "twh": 2648.33,
               "pct": 9.91
             },
             "hydro": {
-              "twh": 4347.22,
-              "pct": 16.26
+              "twh": 4347.02,
+              "pct": 16.27
             },
             "wind": {
-              "twh": 1591.37,
-              "pct": 5.95
+              "twh": 1591.47,
+              "pct": 5.96
             },
             "solar": {
-              "twh": 857.41,
-              "pct": 3.21
+              "twh": 853.39,
+              "pct": 3.19
             },
             "bioenergy": {
-              "twh": 687.88,
+              "twh": 687.29,
               "pct": 2.57
             },
             "other_fossil": {
-              "twh": 776.29,
+              "twh": 775.88,
               "pct": 2.9
             }
           },
           "aggregates": {
-            "clean_pct": 37.91,
-            "fossil_pct": 62.09,
-            "renewables_pct": 28.0,
-            "wind_solar_pct": 9.16
+            "clean_pct": 37.9,
+            "fossil_pct": 62.1,
+            "renewables_pct": 27.99,
+            "wind_solar_pct": 9.15
           },
           "emissions": {
-            "total_mtco2": 13152.0
+            "total_mtco2": 13150.74
           }
         },
         "2021": {
-          "demand_twh": 28259.73,
-          "total_generation_twh": 28259.73,
+          "demand_twh": 28259.07,
+          "total_generation_twh": 28259.07,
           "generation": {
             "coal": {
-              "twh": 10155.76,
+              "twh": 10156.49,
               "pct": 35.94
             },
             "gas": {
-              "twh": 6557.35,
+              "twh": 6556.63,
               "pct": 23.2
             },
             "nuclear": {
@@ -8139,23 +8374,23 @@
               "pct": 9.78
             },
             "hydro": {
-              "twh": 4288.92,
+              "twh": 4288.7,
               "pct": 15.18
             },
             "wind": {
-              "twh": 1856.7,
+              "twh": 1856.94,
               "pct": 6.57
             },
             "solar": {
-              "twh": 1054.39,
+              "twh": 1053.99,
               "pct": 3.73
             },
             "bioenergy": {
-              "twh": 742.01,
+              "twh": 741.63,
               "pct": 2.63
             },
             "other_fossil": {
-              "twh": 842.16,
+              "twh": 842.25,
               "pct": 2.98
             }
           },
@@ -8166,148 +8401,195 @@
             "wind_solar_pct": 10.3
           },
           "emissions": {
-            "total_mtco2": 13982.63
+            "total_mtco2": 13982.89
           }
         },
         "2022": {
-          "demand_twh": 28918.24,
-          "total_generation_twh": 28918.24,
+          "demand_twh": 28917.76,
+          "total_generation_twh": 28917.76,
           "generation": {
             "coal": {
-              "twh": 10242.99,
-              "pct": 35.42
+              "twh": 10240.44,
+              "pct": 35.41
             },
             "gas": {
-              "twh": 6629.74,
-              "pct": 22.93
+              "twh": 6628.27,
+              "pct": 22.92
             },
             "nuclear": {
               "twh": 2639.64,
               "pct": 9.13
             },
             "hydro": {
-              "twh": 4322.7,
+              "twh": 4324.07,
               "pct": 14.95
             },
             "wind": {
-              "twh": 2107.18,
+              "twh": 2107.66,
               "pct": 7.29
             },
             "solar": {
-              "twh": 1330.01,
-              "pct": 4.6
+              "twh": 1333.12,
+              "pct": 4.61
             },
             "bioenergy": {
-              "twh": 757.7,
-              "pct": 2.62
+              "twh": 757.14,
+              "pct": 2.61
             },
             "other_fossil": {
-              "twh": 888.28,
+              "twh": 887.42,
               "pct": 3.07
             }
           },
           "aggregates": {
-            "clean_pct": 38.58,
-            "fossil_pct": 61.42,
-            "renewables_pct": 29.45,
-            "wind_solar_pct": 11.89
+            "clean_pct": 38.6,
+            "fossil_pct": 61.4,
+            "renewables_pct": 29.47,
+            "wind_solar_pct": 11.9
           },
           "emissions": {
-            "total_mtco2": 14159.33
+            "total_mtco2": 14155.8
           }
         },
         "2023": {
-          "demand_twh": 29665.26,
-          "total_generation_twh": 29665.26,
+          "demand_twh": 29665.34,
+          "total_generation_twh": 29665.34,
           "generation": {
             "coal": {
-              "twh": 10400.65,
-              "pct": 35.06
+              "twh": 10395.94,
+              "pct": 35.04
             },
             "gas": {
-              "twh": 6715.88,
-              "pct": 22.64
+              "twh": 6699.42,
+              "pct": 22.58
             },
             "nuclear": {
-              "twh": 2699.34,
-              "pct": 9.1
+              "twh": 2697.74,
+              "pct": 9.09
             },
             "hydro": {
-              "twh": 4232.49,
-              "pct": 14.27
-            },
-            "wind": {
-              "twh": 2313.01,
-              "pct": 7.8
-            },
-            "solar": {
-              "twh": 1661.36,
-              "pct": 5.6
-            },
-            "bioenergy": {
-              "twh": 770.45,
-              "pct": 2.6
-            },
-            "other_fossil": {
-              "twh": 872.08,
-              "pct": 2.94
-            }
-          },
-          "aggregates": {
-            "clean_pct": 39.36,
-            "fossil_pct": 60.64,
-            "renewables_pct": 30.26,
-            "wind_solar_pct": 13.4
-          },
-          "emissions": {
-            "total_mtco2": 14348.57
-          }
-        },
-        "2024": {
-          "demand_twh": 30938.18,
-          "total_generation_twh": 30938.18,
-          "generation": {
-            "coal": {
-              "twh": 10543.84,
-              "pct": 34.08
-            },
-            "gas": {
-              "twh": 6900.36,
-              "pct": 22.3
-            },
-            "nuclear": {
-              "twh": 2778.76,
-              "pct": 8.98
-            },
-            "hydro": {
-              "twh": 4419.95,
+              "twh": 4240.11,
               "pct": 14.29
             },
             "wind": {
-              "twh": 2505.35,
-              "pct": 8.1
+              "twh": 2319.18,
+              "pct": 7.82
             },
             "solar": {
-              "twh": 2128.37,
-              "pct": 6.88
+              "twh": 1664.14,
+              "pct": 5.61
             },
             "bioenergy": {
-              "twh": 791.79,
-              "pct": 2.56
+              "twh": 772.02,
+              "pct": 2.6
             },
             "other_fossil": {
-              "twh": 869.76,
-              "pct": 2.81
+              "twh": 876.79,
+              "pct": 2.96
             }
           },
           "aggregates": {
-            "clean_pct": 40.8,
-            "fossil_pct": 59.2,
-            "renewables_pct": 31.82,
-            "wind_solar_pct": 14.98
+            "clean_pct": 39.42,
+            "fossil_pct": 60.58,
+            "renewables_pct": 30.32,
+            "wind_solar_pct": 13.43
           },
           "emissions": {
-            "total_mtco2": 14597.91
+            "total_mtco2": 14333.67
+          }
+        },
+        "2024": {
+          "demand_twh": 30930.23,
+          "total_generation_twh": 30930.23,
+          "generation": {
+            "coal": {
+              "twh": 10538.94,
+              "pct": 34.07
+            },
+            "gas": {
+              "twh": 6882.73,
+              "pct": 22.25
+            },
+            "nuclear": {
+              "twh": 2777.11,
+              "pct": 8.98
+            },
+            "hydro": {
+              "twh": 4433.65,
+              "pct": 14.33
+            },
+            "wind": {
+              "twh": 2509.5,
+              "pct": 8.11
+            },
+            "solar": {
+              "twh": 2142.65,
+              "pct": 6.93
+            },
+            "bioenergy": {
+              "twh": 791.81,
+              "pct": 2.56
+            },
+            "other_fossil": {
+              "twh": 853.84,
+              "pct": 2.76
+            }
+          },
+          "aggregates": {
+            "clean_pct": 40.91,
+            "fossil_pct": 59.09,
+            "renewables_pct": 31.94,
+            "wind_solar_pct": 15.04
+          },
+          "emissions": {
+            "total_mtco2": 14570.48
+          }
+        },
+        "2025": {
+          "demand_twh": 31772.35,
+          "total_generation_twh": 31772.35,
+          "generation": {
+            "coal": {
+              "twh": 10471.53,
+              "pct": 32.96
+            },
+            "gas": {
+              "twh": 6921.14,
+              "pct": 21.78
+            },
+            "nuclear": {
+              "twh": 2811.57,
+              "pct": 8.85
+            },
+            "hydro": {
+              "twh": 4434.97,
+              "pct": 13.96
+            },
+            "wind": {
+              "twh": 2713.14,
+              "pct": 8.54
+            },
+            "solar": {
+              "twh": 2778.64,
+              "pct": 8.75
+            },
+            "bioenergy": {
+              "twh": 799.74,
+              "pct": 2.52
+            },
+            "other_fossil": {
+              "twh": 841.62,
+              "pct": 2.65
+            }
+          },
+          "aggregates": {
+            "clean_pct": 42.61,
+            "fossil_pct": 57.39,
+            "renewables_pct": 33.76,
+            "wind_solar_pct": 17.29
+          },
+          "emissions": {
+            "total_mtco2": 14560.86
           }
         }
       }

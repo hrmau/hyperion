@@ -409,6 +409,30 @@ def main():
         }, f, indent=indent, separators=separators, ensure_ascii=False)
     print(f"Fossil fuel countries: {len(fossil)}")
 
+    # Small metadata file so the site can state its own data currency without
+    # anyone remembering to update a page. Kept tiny and separate from
+    # countries-yearly.json so a server component can read it cheaply.
+    latest_counts: dict[str, int] = {}
+    for c in countries.values():
+        if not c['years']:
+            continue
+        newest = max(int(y) for y in c['years'])
+        latest_counts[str(newest)] = latest_counts.get(str(newest), 0) + 1
+
+    meta_path = output_path.parent / 'data-meta.json'
+    print(f"Writing {meta_path}...")
+    with open(meta_path, 'w', encoding='utf-8') as f:
+        json.dump({
+            'source': 'Our World in Data (owid-energy-data)',
+            'license': 'CC BY 4.0',
+            'refreshedOn': date.today().isoformat(),
+            'countryCount': len(countries),
+            'earliestYear': year_range[0],
+            'latestYear': year_range[1],
+            'countriesByLatestYear': dict(sorted(latest_counts.items())),
+        }, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+
     # Print summary stats
     print("\n--- Summary ---")
     print(f"Countries: {len(countries)}")

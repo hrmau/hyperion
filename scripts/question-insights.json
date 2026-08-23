@@ -29,8 +29,8 @@
     "insight": "Chile's Atacama desert is the sunniest place on earth and most of its solar fleet sits there. Britain gets a comparable total from a country with a fraction of the sunlight."
   },
   "solar-NLD-PAK": {
-    "winner": "NLD",
-    "insight": "The Netherlands generates more solar power than Pakistan, a country with ten times the population and far more sun. Access to capital, not climate, sets the pace."
+    "winner": "PAK",
+    "insight": "Pakistan's solar output has grown roughly nine-fold in five years and now passes the Netherlands. Cheap imported panels plus an unreliable grid pushed households and factories to generate their own power."
   },
   "solar-IND-JPN": {
     "winner": "IND",
@@ -235,5 +235,49 @@
   "emissions-FRA-SGP": {
     "winner": "SGP",
     "insight": "France's whole grid, serving 68 million people, emits less carbon than Singapore's, serving under 6 million. Nuclear and hydro are the reason."
+  },
+  "wind-ESP-FRA": {
+    "winner": "ESP",
+    "insight": "Spain built wind farms through the 1990s while France was finishing its nuclear fleet. A country that already has cheap low-carbon power has less reason to add more."
+  },
+  "wind-DEU-IND": {
+    "winner": "DEU",
+    "insight": "Germany still out-produces India on wind despite roughly a seventeenth of the population. India's build-out is faster, but it started from almost nothing two decades later."
+  },
+  "coal_pct-DEU-USA": {
+    "winner": "DEU",
+    "insight": "American coal was displaced by its own shale gas rather than by climate policy - cheaper fuel simply won. Germany kept burning domestic lignite it can dig up itself."
+  },
+  "coal_pct-AUS-KAZ": {
+    "winner": "KAZ",
+    "insight": "Kazakhstan sits on enormous coal reserves and burns them at home while exporting its oil and uranium. Selling the valuable fuel and burning the cheap one is a common pattern."
+  },
+  "independence-FRA-IRL": {
+    "winner": "IRL",
+    "insight": "Ireland imports nearly all its gas, but the wind it runs on needs no supplier at all. France's reactors are domestic and every gram of their uranium is not."
+  },
+  "independence-GRC-ROU": {
+    "winner": "ROU",
+    "insight": "Romania is the rare EU country with meaningful domestic gas and oil, plus Carpathian hydro and a reactor. Greece buys almost all of its fuel from abroad."
+  },
+  "generation_per_capita-CHN-DEU": {
+    "winner": "CHN",
+    "insight": "China now generates more electricity per person than Germany. The country that was the world's cheap factory has quietly passed the economy it was making things for."
+  },
+  "total_generation-DEU-KOR": {
+    "winner": "KOR",
+    "insight": "South Korea out-generates Germany from a population barely half the size. Semiconductors, steel and shipbuilding are extraordinarily electricity-hungry industries."
+  },
+  "total_generation-EGY-VNM": {
+    "winner": "VNM",
+    "insight": "Vietnam's grid has roughly tripled this century as manufacturing moved in from China. Electricity demand is the clearest early signal of an industrialising economy."
+  },
+  "emissions-CAN-DEU": {
+    "winner": "DEU",
+    "insight": "Germany's power sector still out-emits Canada's despite a far larger renewable fleet, because what renewables replaced was nuclear rather than lignite."
+  },
+  "emissions-CZE-FRA": {
+    "winner": "CZE",
+    "insight": "Czechia has around a seventh of France's population and a dirtier grid in absolute terms. Coal at a small scale beats nuclear at a large one, for emissions."
   }
 }
