@@ -1,0 +1,15 @@
+{
+  "source": "Our World in Data (owid-energy-data)",
+  "license": "CC BY 4.0",
+  "refreshedOn": "2026-08-23",
+  "countryCount": 214,
+  "earliestYear": 2000,
+  "latestYear": 2025,
+  "countriesByLatestYear": {
+    "2009": 1,
+    "2022": 1,
+    "2023": 16,
+    "2024": 106,
+    "2025": 90
+  }
+}

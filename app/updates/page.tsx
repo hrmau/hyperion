@@ -1,6 +1,33 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+
+interface DataMeta {
+  refreshedOn: string;
+  countryCount: number;
+  earliestYear: number;
+  latestYear: number;
+  countriesByLatestYear: Record<string, number>;
+}
+
+/**
+ * Read the data's own metadata at build time.
+ *
+ * This page used to describe the dataset in prose that nobody remembered to
+ * update, so it drifted. The refresh workflow regenerates data-meta.json on
+ * every run, which means this block cannot go stale without the data itself
+ * going stale.
+ */
+function readDataMeta(): DataMeta | null {
+  try {
+    const file = path.join(process.cwd(), 'public', 'data', 'data-meta.json');
+    return JSON.parse(fs.readFileSync(file, 'utf8')) as DataMeta;
+  } catch {
+    return null;
+  }
+}
 
 export const metadata = {
   title: "What's New | Grid Gorilla",
@@ -19,6 +46,58 @@ interface Update {
 }
 
 const updates: Update[] = [
+  {
+    date: 'Aug 2026',
+    title: 'Automatic Data Refresh',
+    description: 'Energy data now refreshes from Our World in Data on a weekly schedule instead of by hand, so country figures stop drifting months behind the source.',
+    highlights: [
+      'Fossil fuel import data is now generated rather than hand-maintained',
+      'Refreshes are validated before publishing - a bad upstream release is rejected',
+      'Quiz insights that the new data contradicts are flagged for rewriting, not published',
+    ],
+    tag: 'data',
+  },
+  {
+    date: 'Aug 2026',
+    title: 'Correlation Figures Corrected',
+    description: 'The correlation strength (r-squared) shown on the Energy & Prosperity page was being calculated with a straight-line model while the charts were drawn on logarithmic axes. The two now match, and the relationship is considerably stronger than previously published.',
+    highlights: [
+      'Electricity vs GDP: 0.35 to 0.65',
+      'Electricity vs Human Development Index: 0.35 to 0.69',
+      'Electricity vs life expectancy: 0.26 to 0.53',
+      'Electricity vs manufacturing: 0.17 to 0.60',
+    ],
+    tag: 'data',
+  },
+  {
+    date: 'Aug 2026',
+    title: 'Map Coverage Fixed',
+    description: 'The world map could only colour 99 countries while the dataset held 214. Countries including Ghana, Bahrain and DR Congo had full generation records but rendered as blank grey and could not be clicked.',
+    highlights: [
+      '173 countries now shaded and interactive, up from 99',
+      '99.7% of world generation now represented on the map, up from 97.6%',
+      'Per-capita electricity figures corrected - they were 1,000x too high',
+    ],
+    tag: 'data',
+  },
+  {
+    date: 'Aug 2026',
+    title: 'Higher or Lower',
+    description: 'A guessing game at /play. Two countries, one energy metric, pick which is higher and build a streak. Every round ends with the story behind the number.',
+    highlights: [
+      'Questions are hand-curated, not randomly generated',
+      'Both countries are always compared in the same year',
+      'A wrong answer resets the streak but never ends the run',
+      'Best streak is remembered between visits',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Aug 2026',
+    title: 'Simpler Navigation',
+    description: 'The top navigation is now Explore, Play, Compare and Rankings. Correlations, Story and Why moved to the footer - all three pages are unchanged and still live at the same addresses.',
+    tag: 'feature',
+  },
   {
     date: 'Feb 2026',
     title: 'Rankings Page Enhancements',
@@ -209,6 +288,9 @@ function TimelineItem({ update, isLast }: { update: Update; isLast: boolean }) {
 }
 
 export default function UpdatesPage() {
+  const meta = readDataMeta();
+  const currentYearCount = meta ? meta.countriesByLatestYear[String(meta.latestYear)] ?? 0 : 0;
+
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
       <Header />
@@ -222,6 +304,36 @@ export default function UpdatesPage() {
               Major updates and feature releases for Grid Gorilla
             </p>
           </div>
+
+          {/* Data currency — generated, never hand-edited. See readDataMeta above. */}
+          {meta && (
+            <div className="card p-4 mb-8">
+              <div className="flex items-baseline justify-between gap-3 mb-2">
+                <h2 className="text-[13px] font-medium text-primary">Data currency</h2>
+                <span className="text-[11px] text-muted">
+                  refreshed {meta.refreshedOn}
+                </span>
+              </div>
+              <p className="text-xs text-secondary leading-relaxed">
+                {meta.countryCount} countries, {meta.earliestYear}&ndash;{meta.latestYear}.{' '}
+                {currentYearCount} of them already report {meta.latestYear} figures; the rest
+                run to whichever year their national statistics office has published.
+                That is why country labels across the site show different years.
+              </p>
+              <p className="text-[11px] text-muted mt-2">
+                Refreshed automatically from{' '}
+                <a
+                  href="https://ourworldindata.org/energy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-dotted underline-offset-2"
+                >
+                  Our World in Data
+                </a>
+                , CC BY 4.0.
+              </p>
+            </div>
+          )}
 
           {/* Timeline */}
           <div className="relative">
