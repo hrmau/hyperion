@@ -115,6 +115,44 @@ export interface SocioeconomicData {
   countries: Record<string, SocioeconomicCountry>;
 }
 
+// Higher/Lower game — question bank types.
+// Values are frozen at build time by scripts/generate-questions.js; a question
+// and its insight line are a curated unit and must never be recomputed at runtime.
+export type MetricKey =
+  | 'total_generation'
+  | 'generation_per_capita'
+  | 'solar'
+  | 'wind'
+  | 'emissions'
+  | 'nuclear_pct'
+  | 'coal_pct'
+  | 'clean_pct'
+  | 'independence';
+
+export interface QuestionSide {
+  iso3: string;
+  name: string;
+  value: number;
+}
+
+export interface Question {
+  /** Stable id, e.g. "solar-DEU-FRA-2025" */
+  id: string;
+  metric: MetricKey;
+  metricLabel: string;
+  /** The question shown to the player, e.g. "Which generates more solar power?" */
+  prompt: string;
+  /** The common year both values are drawn from. */
+  year: number;
+  unit: string;
+  a: QuestionSide;
+  b: QuestionSide;
+  /** Required. Teaches something the numbers alone don't. */
+  insight: string;
+  /** True when the winner is not the country intuition points at. */
+  surprising: boolean;
+}
+
 // Combined data for scatter plots
 export interface CorrelationDataPoint {
   iso3: string;

@@ -1,0 +1,239 @@
+{
+  "_comment": [
+    "Hand-written editorial layer for the Higher/Lower game. Keys are",
+    "`<metric>-<iso3>-<iso3>` with the two country codes sorted alphabetically, so",
+    "a key survives a data refresh even when the underlying year changes.",
+    "",
+    "`winner` is a guard, not data: generate-questions.js refuses to ship a",
+    "question whose winner no longer matches, because the insight line was written",
+    "about a specific direction and would otherwise silently become false.",
+    "",
+    "Insight rule of thumb: if the sentence would still be true and interesting to",
+    "someone who never sees the numbers, it works. Restating the values does not."
+  ],
+
+  "solar-DEU-FRA": {
+    "winner": "DEU",
+    "insight": "Cloudy Germany out-solars sunny France by almost 3x. Sunlight was never the constraint; installed panels are."
+  },
+  "solar-GBR-ITA": {
+    "winner": "ITA",
+    "insight": "Italy produces well over twice Britain's solar power. Rooftop subsidies in the 2010s, not latitude, opened the gap."
+  },
+  "solar-ESP-NLD": {
+    "winner": "ESP",
+    "insight": "Spain wins on raw output, but the Netherlands is one of Europe's cloudiest countries and lands in the same league. Panel count beats sunshine hours."
+  },
+  "solar-CHL-GBR": {
+    "winner": "CHL",
+    "insight": "Chile's Atacama desert is the sunniest place on earth and most of its solar fleet sits there. Britain gets a comparable total from a country with a fraction of the sunlight."
+  },
+  "solar-NLD-PAK": {
+    "winner": "NLD",
+    "insight": "The Netherlands generates more solar power than Pakistan, a country with ten times the population and far more sun. Access to capital, not climate, sets the pace."
+  },
+  "solar-IND-JPN": {
+    "winner": "IND",
+    "insight": "India passed Japan on solar roughly a decade after starting seriously. Solar is now the cheapest new power in most of the world, so it scales fastest where demand is still growing."
+  },
+  "solar-DEU-ESP": {
+    "winner": "DEU",
+    "insight": "Germany still out-produces Spain on solar with roughly half the sunshine. It started twenty years earlier and never stopped installing."
+  },
+
+  "wind-FRA-GBR": {
+    "winner": "GBR",
+    "insight": "Britain built the world's largest offshore wind fleet while France bet on nuclear. Both are low-carbon strategies; they just look nothing alike."
+  },
+  "wind-BRA-DEU": {
+    "winner": "DEU",
+    "insight": "Germany still leads on total output, but Brazil's northeastern trade winds are among the steadiest on earth, so each Brazilian turbine earns far more than a German one."
+  },
+  "wind-BRA-IND": {
+    "winner": "BRA",
+    "insight": "Brazil out-produces India on wind with a fifth of the population. Its northeastern coast has unusually constant trade winds, which lifts output per turbine dramatically."
+  },
+  "wind-CAN-ESP": {
+    "winner": "ESP",
+    "insight": "Spain has been a wind pioneer since the 1990s. Canada has far more windy land and far fewer people on it - geography alone doesn't build turbines."
+  },
+  "wind-AUS-SWE": {
+    "winner": "SWE",
+    "insight": "Sweden generates more wind power than Australia with about a third of the population. Australia's renewable build leaned into rooftop solar instead, where it leads the world."
+  },
+  "wind-DNK-TUR": {
+    "winner": "TUR",
+    "insight": "Denmark invented the modern wind industry and gets a larger share of its power from wind than any country on earth. It is also small, so its total output is easily beaten."
+  },
+
+  "nuclear_pct-BEL-SVK": {
+    "winner": "SVK",
+    "insight": "Slovakia draws two thirds of its electricity from nuclear, among the highest shares in the world. Belgium has been legislating a nuclear phase-out since 2003 and postponing it ever since."
+  },
+  "nuclear_pct-SWE-UKR": {
+    "winner": "UKR",
+    "insight": "Even through a full-scale invasion, Ukraine ran most of its grid on nuclear. Reactors are hard to build, and equally hard to replace once you depend on them."
+  },
+  "nuclear_pct-KOR-USA": {
+    "winner": "KOR",
+    "insight": "The US operates far more reactors than South Korea, but its grid is so much bigger that nuclear's share comes out smaller. Absolute size and share routinely tell opposite stories."
+  },
+  "nuclear_pct-ESP-GBR": {
+    "winner": "ESP",
+    "insight": "Britain opened the world's first commercial nuclear plant in 1956, and most of that fleet has since retired. Spain's newer reactors now carry the bigger share."
+  },
+  "nuclear_pct-CZE-SWE": {
+    "winner": "CZE",
+    "insight": "Sweden closed four reactors in the 2010s and has since reversed course politically. Czechia never wavered, and now leans on nuclear harder than Sweden does."
+  },
+  "nuclear_pct-FIN-KOR": {
+    "winner": "FIN",
+    "insight": "Finland's Olkiluoto 3 took some seventeen years to build, but a single reactor was enough to visibly shift a small country's entire electricity mix."
+  },
+
+  "coal_pct-CHN-IND": {
+    "winner": "IND",
+    "insight": "China burns far more coal than India in absolute terms, yet has also built more wind, solar and hydro than anyone. India's grid is the more coal-dependent of the two."
+  },
+  "coal_pct-AUS-DEU": {
+    "winner": "AUS",
+    "insight": "Germany takes the criticism for coal; Australia quietly runs on twice as much of it, and exports more of it than almost any country on earth."
+  },
+  "coal_pct-AUS-POL": {
+    "winner": "POL",
+    "insight": "Poland's grid was built on domestic hard coal and lignite, and mining employment has made retiring it politically expensive. Australia is on a similar path, a few years further along."
+  },
+  "coal_pct-KOR-TWN": {
+    "winner": "TWN",
+    "insight": "Taiwan has been phasing out nuclear while electricity demand from chip fabrication climbs. Coal and gas filled the gap. South Korea kept its reactors."
+  },
+  "coal_pct-DEU-RUS": {
+    "winner": "DEU",
+    "insight": "Russia is a fossil fuel superpower that burns gas rather than coal at home - it has more gas than it can profitably sell. Germany still leans on lignite it can dig up domestically."
+  },
+  "coal_pct-IND-KAZ": {
+    "winner": "IND",
+    "insight": "Both grids run on domestic coal. India's is the more dependent, and it is also the fastest-growing large electricity market in the world."
+  },
+
+  "clean_pct-ESP-GBR": {
+    "winner": "ESP",
+    "insight": "Britain's coal-to-wind switch is one of the fastest grid decarbonisations ever recorded. Spain got further still, using solar and hydro Britain simply doesn't have."
+  },
+  "clean_pct-AUT-CHE": {
+    "winner": "CHE",
+    "insight": "Switzerland runs on Alpine hydro plus nuclear and is effectively fossil-free. Austria has the same mountains but no reactors, so gas fills its winter gaps."
+  },
+  "clean_pct-CAN-KEN": {
+    "winner": "KEN",
+    "insight": "Kenya runs on Rift Valley geothermal plus hydro and wind, giving it one of the cleanest grids on earth. Clean electricity is not a rich-country privilege."
+  },
+  "clean_pct-BEL-SVK": {
+    "winner": "SVK",
+    "insight": "Both lean on nuclear, but Slovakia leans harder and adds Danube hydro on top. Belgium's long-running phase-out politics keep pulling its share down."
+  },
+  "clean_pct-GRC-USA": {
+    "winner": "GRC",
+    "insight": "Greece went from lignite-dominated to majority-clean in about fifteen years. The US has more clean generation than any country except China, and still a dirtier average."
+  },
+  "clean_pct-BRA-CAN": {
+    "winner": "BRA",
+    "insight": "Both grids were built on big hydro. Brazil added wind and solar on top; Canada's remaining fossil generation is concentrated in Alberta and Saskatchewan."
+  },
+
+  "independence-DEU-FRA": {
+    "winner": "DEU",
+    "insight": "France's reactors sit on French soil, but France mines no uranium at all - every fuel rod is imported. Independence is about where the fuel comes from, not where the plant stands."
+  },
+  "independence-ITA-JPN": {
+    "winner": "ITA",
+    "insight": "Japan imports almost all its fossil fuel and shut most of its reactors after Fukushima, leaving it among the most import-exposed developed economies."
+  },
+  "independence-NGA-POL": {
+    "winner": "NGA",
+    "insight": "Nigeria runs its grid on its own gas and hydro, so on paper it imports nothing. This score measures import exposure, not reliability - Nigerian supply still fails constantly."
+  },
+  "independence-DEU-DNK": {
+    "winner": "DNK",
+    "insight": "Denmark's wind fleet needs no fuel deliveries, which is exactly what this score rewards. Germany still buys gas and hard coal from abroad."
+  },
+  "independence-AUT-IND": {
+    "winner": "AUT",
+    "insight": "Austrian Alpine hydro needs no fuel at all. India burns a great deal of coal but digs most of it up itself, which is why it scores better here than its emissions would suggest."
+  },
+
+  "generation_per_capita-CAN-USA": {
+    "winner": "CAN",
+    "insight": "Canada generates more electricity per person than the US: cold winters, heavy industry, and hydro cheap enough to make electric heating the rational choice."
+  },
+  "generation_per_capita-DEU-SWE": {
+    "winner": "SWE",
+    "insight": "Sweden generates nearly three times Germany's electricity per person. Abundant hydro and nuclear made power cheap enough to electrify heating and heavy industry."
+  },
+  "generation_per_capita-CHE-KWT": {
+    "winner": "KWT",
+    "insight": "Kuwait's air conditioning and seawater desalination run on heavily subsidised domestic gas. Cheap energy always gets used, whatever the climate demands."
+  },
+  "generation_per_capita-NOR-USA": {
+    "winner": "NOR",
+    "insight": "Norway generates more than twice as much electricity per person as the US. Near-free hydro attracted aluminium smelters and made electrifying everything else the default."
+  },
+  "generation_per_capita-CHN-ESP": {
+    "winner": "CHN",
+    "insight": "China now generates more electricity per person than Spain. No single number captures how far its industrialisation has run more clearly than this one."
+  },
+  "generation_per_capita-KOR-SGP": {
+    "winner": "KOR",
+    "insight": "Both are dense, rich and urban. South Korea's steel, shipbuilding and semiconductor plants push it above Singapore's services-and-trade economy."
+  },
+  "generation_per_capita-JPN-NLD": {
+    "winner": "JPN",
+    "insight": "Japan out-generates the Netherlands per person despite a decade of hard-won post-Fukushima efficiency gains. Industrial structure sets the floor."
+  },
+
+  "total_generation-JPN-RUS": {
+    "winner": "RUS",
+    "insight": "Russia out-generates Japan. Cheap domestic gas and an energy-intensive heavy industry base make electricity worth using in ways it simply isn't in Japan."
+  },
+  "total_generation-GBR-TUR": {
+    "winner": "TUR",
+    "insight": "Turkey overtook Britain and keeps pulling away. British electricity demand has been flat or falling since 2005 as industry shrank and efficiency improved."
+  },
+  "total_generation-FRA-IRN": {
+    "winner": "FRA",
+    "insight": "France's nuclear fleet gives it one of Europe's largest grids and makes it a net exporter to its neighbours in most years."
+  },
+  "total_generation-BRA-JPN": {
+    "winner": "JPN",
+    "insight": "Japan generates more electricity from 125 million people than Brazil does from 215 million. Wealth and industry drive electricity use far harder than headcount."
+  },
+  "total_generation-MYS-POL": {
+    "winner": "MYS",
+    "insight": "Malaysia out-generates Poland from a similar population. Southeast Asian electricity demand is growing at rates Europe last saw in the 1960s."
+  },
+  "total_generation-POL-THA": {
+    "winner": "THA",
+    "insight": "Thailand out-generates Poland. The centre of gravity in global electricity has moved decisively to Asia, and it is still moving."
+  },
+
+  "emissions-DEU-JPN": {
+    "winner": "JPN",
+    "insight": "Japan's power sector emits roughly triple Germany's, largely because the reactors idled after Fukushima were backfilled with coal and gas."
+  },
+  "emissions-AUS-CAN": {
+    "winner": "AUS",
+    "insight": "Australia and Canada have similar populations and similar wealth. Canada's grid is hydro and nuclear, Australia's is still substantially coal - same conditions, opposite outcome."
+  },
+  "emissions-VNM-ZAF": {
+    "winner": "ZAF",
+    "insight": "South Africa's grid is almost entirely coal, run by a single struggling utility. Vietnam is growing fast but has added serious solar alongside its coal."
+  },
+  "emissions-BRA-POL": {
+    "winner": "POL",
+    "insight": "Poland has roughly a fifth of Brazil's population and higher power sector emissions. Brazil's hydro-heavy grid is the entire difference."
+  },
+  "emissions-FRA-SGP": {
+    "winner": "SGP",
+    "insight": "France's whole grid, serving 68 million people, emits less carbon than Singapore's, serving under 6 million. Nuclear and hydro are the reason."
+  }
+}

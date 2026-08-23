@@ -9,7 +9,8 @@ Grid Gorilla provides honest, data-driven insights into global energy systems. W
 ### Features
 
 - **Interactive World Map** - D3 choropleth visualization colored by generation, clean energy %, or independence score
-- **Country Profiles** - Detailed energy mix breakdowns for 88 countries
+- **Higher or Lower** - A guessing game at `/play`: two countries, one energy metric, build a streak. Every round ends with the story behind the number
+- **Country Profiles** - Detailed energy mix breakdowns for 214 countries
 - **Bloc Comparisons** - Compare EU, NATO, BRICS+, G7, G20, OECD, ASEAN, and more
 - **Energy Independence Score** - Weighted metric accounting for fuel import dependencies
 - **Historical Data** - Track changes from 1998-2025
@@ -50,6 +51,9 @@ npm run dev
 
 # Build for production
 npm run build
+
+# Rebuild the Higher/Lower question bank
+npm run generate-questions
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.

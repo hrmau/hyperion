@@ -519,3 +519,48 @@ body {
     padding: 0 var(--space-4);
   }
 }
+
+/* ========================================
+   HIGHER / LOWER GAME
+   ======================================== */
+/* Deliberately NOT built on .card: that class sets background and border as
+   unlayered CSS, which outranks every Tailwind utility regardless of source
+   order, so the reveal tints would never apply. This reproduces the .card
+   radius and shadow and leaves colour to the utilities. */
+.gg-play-card {
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px var(--border-subtle),
+    0 4px 12px var(--border-subtle),
+    0 8px 24px var(--border-subtle);
+  transition: border-color 0.2s, background-color 0.2s, opacity 0.2s;
+}
+
+.gg-play-card:not(:disabled):hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.gg-play-reveal {
+  animation: gg-fade-in 0.28s ease-out both;
+}
+
+@keyframes gg-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gg-play-card {
+    transition: none;
+  }
+
+  .gg-play-reveal {
+    animation: none;
+  }
+}
