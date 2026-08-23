@@ -143,6 +143,14 @@ every Tailwind utility regardless of source order. Combining `.card` with
 `bg-*`/`border-*` utilities silently does nothing. `.gg-play-card` exists precisely
 because of this — it reproduces the card look without setting colours.
 
+## Known issues
+
+`docs/backlog.md` tracks deferred decisions and known defects, with the reasoning
+for why each was left alone. Two of them are visible on the site and are marked
+as blocking on the redesign. Read it before "fixing" something that looks broken
+— several entries are deliberate, and one (the independence score's treatment of
+missing fuel data) has a guard in CI that should not be dismissed without it.
+
 ## Conventions
 
 - Client pages are `'use client'` with a sibling `layout.tsx` that exports metadata.
