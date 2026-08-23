@@ -54,7 +54,14 @@ npm run build
 
 # Rebuild the Higher/Lower question bank
 npm run generate-questions
+
+# Pull the latest OWID data and regenerate everything derived from it
+npm run refresh-data
 ```
+
+Data refreshes run weekly in CI and open a pull request rather than deploying
+straight to production — see `.github/workflows/refresh-data.yml`. The ~16MB OWID
+source CSV is not committed; `npm run fetch-data` retrieves it.
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 

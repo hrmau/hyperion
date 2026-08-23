@@ -115,6 +115,43 @@ def get_blocs_for_country(iso_code: str) -> list[str]:
     return blocs
 
 
+def extract_fossil_row(row: dict) -> dict | None:
+    """Pull coal/gas/oil production and consumption for the independence score.
+
+    All six columns are already TWh-equivalent in the OWID dataset, so they map
+    straight across. Returns None when the row carries no fossil figures at all —
+    lib/independence.ts treats a missing country as 100% import-dependent, which
+    is deliberately different from a country genuinely producing zero.
+    """
+    fuels = {}
+    has_signal = False
+    for fuel, prod_col, cons_col in (
+        ('coal', 'coal_production', 'coal_consumption'),
+        ('gas', 'gas_production', 'gas_consumption'),
+        ('oil', 'oil_production', 'oil_consumption'),
+    ):
+        prod = parse_float(row.get(prod_col), decimals=1)
+        cons = parse_float(row.get(cons_col), decimals=1)
+        if prod or cons:
+            has_signal = True
+        fuels[fuel] = {'production': prod or 0.0, 'consumption': cons or 0.0}
+
+    # Emit only rows carrying at least one non-zero figure.
+    #
+    # A row of six zeroes is not a measurement. OWID writes a literal 0 rather
+    # than a blank for territories it does not track, and lib/independence.ts
+    # reads "consumption == 0" as "doesn't use this fuel, therefore 100%
+    # independent of it" — so passing those rows through would score places
+    # running entirely on imported diesel (American Samoa, Nauru, Comoros) as
+    # energy fortresses. Excluding them leaves them import-dependent, which is
+    # both the honest default and the existing behaviour.
+    #
+    # Production alone is enough to qualify: OWID tracks output but not domestic
+    # consumption for many producer states (Nigeria, Angola, Libya, Brunei), and
+    # those are legitimately self-sufficient in the fuel they export.
+    return fuels if has_signal else None
+
+
 def transform_row(row: dict) -> dict | None:
     """Transform a single CSV row into our year data structure.
 
@@ -244,6 +281,16 @@ def get_region(country_name: str) -> str:
 def main():
     parser = argparse.ArgumentParser(description='Transform OWID energy data to GridGorilla format')
     parser.add_argument('--input', default='data/owid-energy-data.csv', help='Input CSV file')
+    parser.add_argument(
+        '--fossil-start-year', type=int, default=2020,
+        help=(
+            'First year of fossil production/consumption data to emit. This also '
+            'determines which countries appear in fossil-fuel-independence.json, '
+            'and therefore which ones get a real independence score rather than '
+            'being treated as fully import-dependent. Changing it moves published '
+            'scores, so it is pinned rather than rolling.'
+        ),
+    )
     parser.add_argument('--output', default='public/data/countries-yearly.json', help='Output JSON file')
     parser.add_argument('--start-year', type=int, default=2000, help='Start year (default: 2000)')
     parser.add_argument('--end-year', type=int, default=2025, help='End year (default: 2025)')
@@ -258,6 +305,7 @@ def main():
 
     countries: dict[str, Any] = {}
     aggregates: dict[str, Any] = {}
+    fossil: dict[str, Any] = {}
     year_range = [9999, 0]
 
     print(f"Reading {input_path}...")
@@ -288,6 +336,15 @@ def main():
                     if year_data:
                         aggregates[country_name]['years'][str(year)] = year_data
                 continue
+
+            # Fossil production/consumption is captured before the electricity
+            # guard below: a country can report fuel output without reporting
+            # electricity generation for that year.
+            fossil_data = extract_fossil_row(row) if year >= args.fossil_start_year else None
+            if fossil_data is not None:
+                if iso_code not in fossil:
+                    fossil[iso_code] = {'name': country_name, 'years': {}}
+                fossil[iso_code]['years'][str(year)] = fossil_data
 
             # Transform country data
             year_data = transform_row(row)
@@ -337,6 +394,20 @@ def main():
             },
             'aggregates': aggregates,
         }, f, indent=indent, separators=separators, ensure_ascii=False)
+
+    # Write fossil fuel production/consumption for the independence score
+    fossil = dict(sorted(fossil.items()))
+    fossil_path = output_path.parent / 'fossil-fuel-independence.json'
+    print(f"Writing {fossil_path}...")
+    with open(fossil_path, 'w', encoding='utf-8') as f:
+        json.dump({
+            'description': 'Fossil fuel production and consumption data for calculating energy independence scores. Data from Our World in Data Energy Dataset.',
+            'source': 'Our World in Data (owid-energy-data)',
+            'license': 'CC BY 4.0',
+            'lastUpdated': date.today().isoformat(),
+            'countries': fossil,
+        }, f, indent=indent, separators=separators, ensure_ascii=False)
+    print(f"Fossil fuel countries: {len(fossil)}")
 
     # Print summary stats
     print("\n--- Summary ---")

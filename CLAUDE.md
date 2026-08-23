@@ -48,8 +48,46 @@ the country. Anything that compares two countries must pin them to a **common
 year** — see `scripts/generate-questions.js`. Rankings and the map use
 latest-per-country, which is fine there and wrong for direct comparisons.
 
-Pipeline: `scripts/transform-owid.py` turns `data/owid-energy-data.csv` into
-`public/data/countries-yearly.json`. `scripts/validate-data.js` checks the output.
+### Refreshing the data
+
+`.github/workflows/refresh-data.yml` runs weekly, and opens a PR when OWID has
+published something new. It never pushes to main: a refresh moves figures that
+are published on the site and can invalidate hand-written insight lines, so the
+last step is a person clicking merge. Vercel deploys from main.
+
+Run the same thing locally with `npm run refresh-data`, which is:
+
+| Step | Script | Produces |
+|---|---|---|
+| fetch | `scripts/fetch-owid.js` | `data/owid-energy-data.csv` (untracked) |
+| transform | `scripts/transform-owid.py` | `countries-yearly.json`, `owid-aggregates.json`, `fossil-fuel-independence.json` |
+| generate | `scripts/generate-questions.js` | `questions.json` |
+| check | `scripts/check-data.js` | pass/fail + a diff summary for the PR body |
+
+**The source CSV is not committed.** It is ~16MB and fully regenerable; committing
+it would add 16MB of churn per refresh. `npm run fetch-data` gets it.
+
+`scripts/check-data.js` is a gate, not a report — it exits non-zero if countries
+disappear, a country's latest year goes *backwards*, source figures stop summing
+to reported totals, or the question bank falls below its floor. It is the only
+thing between a bad upstream release and the live site.
+
+Two things it deliberately only *warns* about, because they need judgement:
+- **The fossil-fuel country set changing.** A country absent from
+  `fossil-fuel-independence.json` is scored as fully import-dependent, so adding
+  or removing one silently moves published independence scores.
+- **Insight lines going stale.** See below.
+
+`--fossil-start-year` (default 2020) decides which countries appear in
+`fossil-fuel-independence.json` at all. It is pinned rather than rolling because
+widening it admits countries whose fuel *consumption* OWID does not track, and
+`lib/independence.ts` reads "consumption == 0" as "doesn't use this fuel,
+therefore 100% independent of it" — which would score places running on imported
+diesel as energy fortresses. Leave it alone unless you are also fixing that.
+
+Not automated, on purpose: `socioeconomic.json` (World Bank + UNDP, annual, and
+HDI has no clean API), `blocs.json` (who counts as BRICS is editorial), and
+`world-110m.json` (geometry does not change).
 
 ### Required attribution
 
@@ -86,6 +124,13 @@ true and interesting to someone who never sees the numbers, it works.
 To add questions: run `npm run generate-questions`, read
 `scripts/question-candidates.json`, write insight lines into
 `scripts/question-insights.json`, re-run. Ship no fewer than 40.
+
+A data refresh can invalidate a line — the first live test of this dropped
+`solar-NLD-PAK`, because Pakistan overtook the Netherlands on solar and the line
+said the opposite. That is why the refresh opens a PR: the generator quotes any
+newly-false line in the PR body so it gets rewritten rather than silently shipped.
+Dropped pairs stay in `question-insights.json` and return on their own if a later
+refresh brings them back into range.
 
 ## Design system
 

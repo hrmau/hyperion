@@ -44,3 +44,8 @@ next-env.d.ts
 
 # Regenerable curation worklist (see scripts/generate-questions.js)
 scripts/question-candidates.json
+
+# OWID source data — fetched by `npm run fetch-data`, never committed.
+# It is ~16MB and fully regenerable; everything the site serves is derived from
+# it into public/data. Committing it would add 16MB of churn per refresh.
+data/owid-energy-data.csv

@@ -365,18 +365,22 @@ function main() {
 
   const questions = [];
   const problems = [];
+  const flipped = [];
+  const dropped = [];
 
   for (const [key, entry] of Object.entries(insights)) {
     if (key.startsWith('_')) continue; // documentation keys
     const c = byKey.get(key);
     if (!c) {
       problems.push(`DROPPED  ${key} — no longer passes the filters (data refresh?)`);
+      dropped.push(key);
       continue;
     }
     if (entry.winner !== c.winner) {
       problems.push(
         `FLIPPED  ${key} — insight assumes ${entry.winner} wins, data now says ${c.winner}. Rewrite the insight.`
       );
+      flipped.push({ key, was: entry.winner, now: c.winner, insight: entry.insight });
       continue;
     }
     questions.push({
@@ -425,6 +429,32 @@ function main() {
   if (problems.length) {
     console.log('\nEditorial problems:');
     for (const p of problems) console.log(`  ${p}`);
+  }
+
+  const reportIdx = argv.indexOf('--report');
+  if (reportIdx !== -1 && argv[reportIdx + 1]) {
+    const md = [];
+    if (flipped.length) {
+      md.push('### \u274c Insight lines now contradict the data\n');
+      md.push('These questions were dropped rather than shipped. The data moved and the');
+      md.push('hand-written line is now false — it needs rewriting, not just re-approving.\n');
+      for (const f of flipped) {
+        md.push(`- **\`${f.key}\`** — line assumes **${f.was}** wins, data now says **${f.now}**`);
+        md.push(`  > ${f.insight}`);
+      }
+      md.push('');
+    }
+    if (dropped.length) {
+      md.push('### Questions dropped by the filters\n');
+      md.push(`${dropped.length} curated pair(s) no longer pass the ratio/floor/common-year filters.`);
+      md.push('Their insight lines are still in `scripts/question-insights.json` and will come');
+      md.push('back automatically if a future refresh brings the pair back into range.\n');
+      for (const k of dropped) md.push(`- \`${k}\``);
+      md.push('');
+    }
+    md.push(`### Bank size\n`);
+    md.push(`**${questions.length}** curated questions shipped (${surprisingCount} surprising). Spec floor is 40.\n`);
+    fs.appendFileSync(argv[reportIdx + 1], md.join('\n'));
   }
 
   if (questions.length < 40) {
