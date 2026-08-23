@@ -153,13 +153,20 @@ export default function PlayPage() {
     }
   }, [round, endedStreak]);
 
+  // A tie has no winner. Values are pre-rounded at build time and the generator
+  // rejects equal pairs, so this is unreachable by design — but if one ever slips
+  // through, both cards read as correct rather than the player being told they
+  // were wrong while their streak goes up.
+  const isTie = round ? round.question.a.value === round.question.b.value : false;
+
   const winner = useMemo(() => {
     if (!round) return null;
     const { a, b } = round.question;
-    return a.value >= b.value ? a.iso3 : b.iso3;
+    if (a.value === b.value) return null;
+    return a.value > b.value ? a.iso3 : b.iso3;
   }, [round]);
 
-  const wasCorrect = phase === 'reveal' && picked === winner;
+  const wasCorrect = phase === 'reveal' && (isTie || picked === winner);
   const canShare = phase === 'reveal' && !wasCorrect && endedStreak >= SHARE_THRESHOLD;
 
   if (error) {
@@ -243,7 +250,7 @@ export default function PlayPage() {
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {[left, right].map((side) => {
-            const isWinner = side.iso3 === winner;
+            const isWinner = isTie || side.iso3 === winner;
             const isPicked = side.iso3 === picked;
             const revealed = phase === 'reveal';
 
@@ -289,7 +296,7 @@ export default function PlayPage() {
                     className="mt-1 text-[11px] font-medium uppercase tracking-wider"
                     style={{ color: isWinner ? 'var(--positive)' : 'var(--text-muted)' }}
                   >
-                    {isWinner ? 'Higher' : 'Lower'}
+                    {isTie ? 'Tied' : isWinner ? 'Higher' : 'Lower'}
                   </div>
                 )}
               </button>

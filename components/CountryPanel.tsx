@@ -339,7 +339,16 @@ export default function CountryPanel({
             {BLOC_LABELS[selectedBloc] || selectedBloc} Overview
           </h2>
           <p className="text-[11px] text-muted">
-            {blocAgg.country_count} countries
+            {blocAgg.country_count} countries &middot;{' '}
+            {blocAgg.year_min === blocAgg.year_max ? (
+              blocAgg.year_max
+            ) : (
+              // Members' latest available years differ, so this total blends
+              // periods. Say so rather than implying a single snapshot.
+              <span title="Members' latest available data years differ, so this total blends years.">
+                {blocAgg.year_min}&ndash;{blocAgg.year_max}
+              </span>
+            )}
           </p>
         </div>
         <div className="p-4 space-y-5">

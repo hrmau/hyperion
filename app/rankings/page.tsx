@@ -39,6 +39,8 @@ interface RowData {
   yearData: YearData;
   total_generation_twh: number;
   independence_score: number;
+  /** False when the score could not be computed at all (no demand and no generation). */
+  independence_available: boolean;
   independence_color: string | undefined;
   independence_missing_data: boolean;
   clean_pct: number;
@@ -69,8 +71,11 @@ const columns: ColumnDef[] = [
     label: 'Independence',
     shortLabel: 'Indep.',
     align: 'right',
-    format: (r) => formatIndependenceScore(r.independence_score) + (r.independence_missing_data ? '*' : ''),
-    colorFn: (r) => r.independence_color,
+    format: (r) =>
+      r.independence_available
+        ? formatIndependenceScore(r.independence_score) + (r.independence_missing_data ? '*' : '')
+        : '—',
+    colorFn: (r) => (r.independence_available ? r.independence_color : undefined),
   },
   {
     key: 'clean_pct',
@@ -167,6 +172,7 @@ export default function RankingsPage() {
           yearData: yd,
           total_generation_twh: yd.total_generation_twh,
           independence_score: indep?.score ?? 0,
+          independence_available: indep !== null,
           independence_color: indep?.color,
           independence_missing_data: indep?.missingFossilData ?? false,
           clean_pct: yd.aggregates.clean_pct,
@@ -185,6 +191,11 @@ export default function RankingsPage() {
     return [...rows].sort((a, b) => {
       if (sortKey === 'name') {
         return mult * a.country.name.localeCompare(b.country.name);
+      }
+      // Rows with no computable independence score sink to the bottom in both
+      // directions, rather than masquerading as the most dependent grids on earth.
+      if (sortKey === 'independence_score' && a.independence_available !== b.independence_available) {
+        return a.independence_available ? -1 : 1;
       }
       return mult * ((a[sortKey] as number) - (b[sortKey] as number));
     });

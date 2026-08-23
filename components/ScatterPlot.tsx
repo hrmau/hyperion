@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as d3 from 'd3';
 import type { CorrelationDataPoint, Region, IncomeLevel } from '@/lib/types';
+import { fitRegression, type RegressionFit } from '@/lib/regression';
 
 export type AxisMetric =
   | 'electricity_per_capita_kwh'
@@ -50,37 +51,16 @@ const incomeColors: Record<IncomeLevel, string> = {
 
 const MARGIN = { top: 20, right: 30, bottom: 50, left: 70 };
 
-function calculateRegression(data: CorrelationDataPoint[], xMetric: AxisMetric, yMetric: AxisMetric): {
-  slope: number;
-  intercept: number;
-  rSquared: number;
-} | null {
-  if (data.length < 2) return null;
-
-  const points = data.map(d => ({
-    x: d[xMetric] as number,
-    y: d[yMetric] as number,
-  })).filter(p => p.x > 0 && p.y > 0 && isFinite(p.x) && isFinite(p.y));
-
-  if (points.length < 2) return null;
-
-  const n = points.length;
-  const sumX = d3.sum(points, p => p.x);
-  const sumY = d3.sum(points, p => p.y);
-  const sumXY = d3.sum(points, p => p.x * p.y);
-  const sumXX = d3.sum(points, p => p.x * p.x);
-  const sumYY = d3.sum(points, p => p.y * p.y);
-
-  const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-  const intercept = (sumY - slope * sumX) / n;
-
-  // Calculate R²
-  const meanY = sumY / n;
-  const ssTotal = d3.sum(points, p => Math.pow(p.y - meanY, 2));
-  const ssResidual = d3.sum(points, p => Math.pow(p.y - (slope * p.x + intercept), 2));
-  const rSquared = 1 - ssResidual / ssTotal;
-
-  return { slope, intercept, rSquared };
+function calculateRegression(
+  data: CorrelationDataPoint[],
+  xMetric: AxisMetric,
+  yMetric: AxisMetric,
+  useLogScale: boolean
+): RegressionFit | null {
+  return fitRegression(
+    data.map(d => ({ x: d[xMetric] as number, y: d[yMetric] as number })),
+    useLogScale
+  );
 }
 
 export default function ScatterPlot({
@@ -132,8 +112,8 @@ export default function ScatterPlot({
 
   const regression = useMemo(() => {
     if (!showRegression) return null;
-    return calculateRegression(filteredData, xMetric, yMetric);
-  }, [filteredData, xMetric, yMetric, showRegression]);
+    return calculateRegression(filteredData, xMetric, yMetric, useLogScale);
+  }, [filteredData, xMetric, yMetric, showRegression, useLogScale]);
 
   const handleMouseMove = useCallback(
     (event: MouseEvent, point: CorrelationDataPoint) => {
@@ -265,22 +245,39 @@ export default function ScatterPlot({
       .attr('font-weight', '500')
       .text(metricLabels[yMetric]);
 
-    // Regression line
+    // Regression line.
+    // Sampled across the x domain rather than drawn as a single segment between
+    // two endpoints: under a log scale the fitted model is not a straight line in
+    // screen space, so two points would only be correct where they touch. Points
+    // outside the y domain are dropped, not clamped — clamping y while leaving x
+    // at the domain edge silently changes the slope of the line being shown.
     if (regression && showRegression) {
-      const xMin = xScale.domain()[0];
-      const xMax = xScale.domain()[1];
-      const yMin = regression.slope * xMin + regression.intercept;
-      const yMax = regression.slope * xMax + regression.intercept;
+      const [xMin, xMax] = xScale.domain() as [number, number];
+      const [yLo, yHi] = yScale.domain() as [number, number];
 
-      g.append('line')
-        .attr('x1', xScale(xMin))
-        .attr('y1', yScale(Math.max(yScale.domain()[0], yMin)))
-        .attr('x2', xScale(xMax))
-        .attr('y2', yScale(Math.min(yScale.domain()[1], yMax)))
-        .attr('stroke', '#6366F1')
-        .attr('stroke-width', 2)
-        .attr('stroke-dasharray', '6,4')
-        .attr('opacity', 0.7);
+      const SAMPLES = 96;
+      const sampleX = (t: number) =>
+        useLogScale
+          ? 10 ** (Math.log10(xMin) + (Math.log10(xMax) - Math.log10(xMin)) * t)
+          : xMin + (xMax - xMin) * t;
+
+      const points: [number, number][] = [];
+      for (let i = 0; i <= SAMPLES; i++) {
+        const x = sampleX(i / SAMPLES);
+        const y = regression.predict(x);
+        if (!Number.isFinite(y) || y < yLo || y > yHi) continue;
+        points.push([xScale(x), yScale(y)]);
+      }
+
+      if (points.length >= 2) {
+        g.append('path')
+          .attr('d', d3.line()(points))
+          .attr('fill', 'none')
+          .attr('stroke', '#6366F1')
+          .attr('stroke-width', 2)
+          .attr('stroke-dasharray', '6,4')
+          .attr('opacity', 0.7);
+      }
 
       // R² label
       g.append('text')

@@ -7,6 +7,7 @@ import ScatterPlot, { ScatterPlotLegend, type AxisMetric, type ColorMode } from 
 import CorrelationFilters from '@/components/CorrelationFilters';
 import CorrelationTooltip from '@/components/CorrelationTooltip';
 import InsightCard from '@/components/InsightCard';
+import { fitRegression } from '@/lib/regression';
 import {
   loadCountries,
   loadSocioeconomicData,
@@ -39,30 +40,19 @@ const chartConfigs: Record<ChartTab, { yMetric: AxisMetric; title: string; descr
   },
 };
 
-function calculateRSquared(data: CorrelationDataPoint[], yMetric: AxisMetric): number | null {
-  if (data.length < 2) return null;
-
-  const points = data.map(d => ({
-    x: d.electricity_per_capita_kwh,
-    y: d[yMetric] as number,
-  })).filter(p => p.x > 0 && p.y > 0 && isFinite(p.x) && isFinite(p.y));
-
-  if (points.length < 2) return null;
-
-  const n = points.length;
-  const sumX = points.reduce((s, p) => s + p.x, 0);
-  const sumY = points.reduce((s, p) => s + p.y, 0);
-  const sumXY = points.reduce((s, p) => s + p.x * p.y, 0);
-  const sumXX = points.reduce((s, p) => s + p.x * p.x, 0);
-
-  const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-  const intercept = (sumY - slope * sumX) / n;
-
-  const meanY = sumY / n;
-  const ssTotal = points.reduce((s, p) => s + Math.pow(p.y - meanY, 2), 0);
-  const ssResidual = points.reduce((s, p) => s + Math.pow(p.y - (slope * p.x + intercept), 2), 0);
-
-  return 1 - ssResidual / ssTotal;
+function calculateRSquared(
+  data: CorrelationDataPoint[],
+  yMetric: AxisMetric,
+  useLogScale: boolean
+): number | null {
+  // Shares one implementation with the chart's own trend line, and is passed the
+  // same log-scale setting, so the headline number always describes the model the
+  // reader is looking at.
+  const fit = fitRegression(
+    data.map(d => ({ x: d.electricity_per_capita_kwh, y: d[yMetric] as number })),
+    useLogScale
+  );
+  return fit ? fit.rSquared : null;
 }
 
 export default function CorrelationsPage() {
@@ -110,8 +100,8 @@ export default function CorrelationsPage() {
 
   const rSquared = useMemo(() => {
     const config = chartConfigs[activeTab];
-    return calculateRSquared(filteredData, config.yMetric);
-  }, [filteredData, activeTab]);
+    return calculateRSquared(filteredData, config.yMetric, useLogScale);
+  }, [filteredData, activeTab, useLogScale]);
 
   const handleHover = useCallback(
     (point: CorrelationDataPoint | null, event: MouseEvent | null) => {
