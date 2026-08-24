@@ -49,3 +49,6 @@ scripts/question-candidates.json
 # It is ~16MB and fully regenerable; everything the site serves is derived from
 # it into public/data. Committing it would add 16MB of churn per refresh.
 data/owid-energy-data.csv
+
+# Upstream vintage sidecar, written by fetch-owid.js alongside the CSV.
+data/owid-source.json

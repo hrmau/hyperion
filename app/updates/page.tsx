@@ -5,7 +5,8 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 interface DataMeta {
-  refreshedOn: string;
+  /** When OWID last published, not when we last ran the refresh. */
+  sourceUpdatedOn: string;
   countryCount: number;
   earliestYear: number;
   latestYear: number;
@@ -311,7 +312,7 @@ export default function UpdatesPage() {
               <div className="flex items-baseline justify-between gap-3 mb-2">
                 <h2 className="text-[13px] font-medium text-primary">Data currency</h2>
                 <span className="text-[11px] text-muted">
-                  refreshed {meta.refreshedOn}
+                  source published {meta.sourceUpdatedOn}
                 </span>
               </div>
               <p className="text-xs text-secondary leading-relaxed">
@@ -321,7 +322,7 @@ export default function UpdatesPage() {
                 That is why country labels across the site show different years.
               </p>
               <p className="text-[11px] text-muted mt-2">
-                Refreshed automatically from{' '}
+                Checked weekly against{' '}
                 <a
                   href="https://ourworldindata.org/energy"
                   target="_blank"

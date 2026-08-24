@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Our World in Data (owid-energy-data)",
     "description": "Pre-computed bloc aggregates for validation",
-    "last_updated": "2026-08-23"
+    "last_updated": "2026-04-27"
   },
   "aggregates": {
     "ASEAN (Ember)": {
