@@ -10,6 +10,12 @@
  * fetches it on every run, and committing it would add 16MB of binary churn to
  * the repo each time upstream publishes. Everything the site serves is derived
  * from it by scripts/transform-owid.js and checked into public/data instead.
+ *
+ * Alongside the CSV this writes data/owid-source.json, recording when OWID last
+ * published. transform-owid.py stamps the generated files with that date rather
+ * than with today's, so a run against unchanged upstream data produces no diff
+ * at all. Stamping "today" made every scheduled run look like a data change and
+ * would have opened a pull request every week forever.
  */
 
 const fs = require('fs');
@@ -70,6 +76,26 @@ async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, body);
   console.log(`Wrote ${outPath} (${(body.length / 1_000_000).toFixed(1)} MB, ${columns.size} columns)`);
+
+  // Record the upstream vintage next to the CSV. Only the date is used, so the
+  // stamp moves when OWID publishes and stays put when it doesn't.
+  const sourceMetaPath = path.join(path.dirname(outPath), 'owid-source.json');
+  fs.writeFileSync(
+    sourceMetaPath,
+    JSON.stringify(
+      {
+        url: SOURCE_URL,
+        lastModified: lastModified || null,
+        lastModifiedDate: lastModified
+          ? new Date(lastModified).toISOString().slice(0, 10)
+          : null,
+        bytes: body.length,
+      },
+      null,
+      2
+    ) + '\n'
+  );
+  console.log(`Wrote ${sourceMetaPath}`);
 
   if (process.env.GITHUB_OUTPUT && lastModified) {
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `last_modified=${lastModified}\n`);

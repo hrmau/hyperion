@@ -115,6 +115,26 @@ def get_blocs_for_country(iso_code: str) -> list[str]:
     return blocs
 
 
+def get_source_date(input_path: Path) -> str:
+    """Date the upstream dataset was last published, not the date we ran.
+
+    Written by scripts/fetch-owid.js next to the CSV. Stamping generated files
+    with today's date made every scheduled refresh look like a data change, so
+    the workflow would have opened a pull request every week regardless of
+    whether OWID had published anything. Falls back to today only when the
+    sidecar is absent (a transform run against a hand-placed CSV).
+    """
+    sidecar = input_path.parent / 'owid-source.json'
+    try:
+        with open(sidecar, 'r', encoding='utf-8') as f:
+            value = json.load(f).get('lastModifiedDate')
+            if value:
+                return str(value)
+    except (OSError, ValueError):
+        pass
+    return date.today().isoformat()
+
+
 def extract_fossil_row(row: dict) -> dict | None:
     """Pull coal/gas/oil production and consumption for the independence score.
 
@@ -303,6 +323,9 @@ def main():
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    source_date = get_source_date(input_path)
+    print(f"Source published: {source_date}")
+
     countries: dict[str, Any] = {}
     aggregates: dict[str, Any] = {}
     fossil: dict[str, Any] = {}
@@ -390,7 +413,7 @@ def main():
             'metadata': {
                 'source': 'Our World in Data (owid-energy-data)',
                 'description': 'Pre-computed bloc aggregates for validation',
-                'last_updated': date.today().isoformat(),
+                'last_updated': source_date,
             },
             'aggregates': aggregates,
         }, f, indent=indent, separators=separators, ensure_ascii=False)
@@ -404,7 +427,7 @@ def main():
             'description': 'Fossil fuel production and consumption data for calculating energy independence scores. Data from Our World in Data Energy Dataset.',
             'source': 'Our World in Data (owid-energy-data)',
             'license': 'CC BY 4.0',
-            'lastUpdated': date.today().isoformat(),
+            'lastUpdated': source_date,
             'countries': fossil,
         }, f, indent=indent, separators=separators, ensure_ascii=False)
     print(f"Fossil fuel countries: {len(fossil)}")
@@ -425,7 +448,7 @@ def main():
         json.dump({
             'source': 'Our World in Data (owid-energy-data)',
             'license': 'CC BY 4.0',
-            'refreshedOn': date.today().isoformat(),
+            'sourceUpdatedOn': source_date,
             'countryCount': len(countries),
             'earliestYear': year_range[0],
             'latestYear': year_range[1],
