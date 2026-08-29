@@ -6,9 +6,9 @@ import { loadCountries, getLatestYear } from '@/lib/data';
 import type { CountriesData, Country } from '@/lib/types';
 import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
-import Header from '@/components/Header';
+import TopNav from '@/components/ds/nav/TopNav';
 import FlagImg from '@/components/FlagImg';
-import Footer from '@/components/Footer';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 
 interface Chapter {
   id: string;
@@ -242,8 +242,8 @@ export default function StoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="story" fixed />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="story" />
 
       {/* Progress indicator */}
       <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1">
@@ -319,7 +319,7 @@ export default function StoryPage() {
         ))}
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

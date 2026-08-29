@@ -9,8 +9,8 @@ import {
   useSyncExternalStore,
 } from 'react';
 import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import FlagImg from '@/components/FlagImg';
 import { showToast, ToastProvider } from '@/components/Toast';
 import { loadQuestions } from '@/lib/data';
@@ -171,8 +171,8 @@ export default function PlayPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-canvas flex flex-col">
-        <Header currentPage="play" />
+      <div className="gg-page min-h-screen flex flex-col">
+        <TopNav active="play" />
         <main className="flex-1 flex items-center justify-center px-4">
           <div className="card p-6 text-center max-w-sm">
             <p className="text-sm text-primary mb-2">Couldn&apos;t load the question bank.</p>
@@ -185,14 +185,14 @@ export default function PlayPage() {
             </p>
           </div>
         </main>
-        <Footer />
+        <SiteFooter />
       </div>
     );
   }
 
   if (!round || !bank) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="gg-page min-h-screen flex items-center justify-center">
         <div className="text-secondary text-sm">Loading questions...</div>
       </div>
     );
@@ -202,8 +202,8 @@ export default function PlayPage() {
 
   return (
     <ToastProvider>
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="play" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="play" />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-6 sm:py-10">
         {/* Streak header */}
@@ -364,7 +364,7 @@ export default function PlayPage() {
         </p>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
     </ToastProvider>
   );

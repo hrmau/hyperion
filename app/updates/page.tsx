@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import Link from 'next/link';
 
 interface DataMeta {
@@ -293,8 +293,8 @@ export default function UpdatesPage() {
   const currentYearCount = meta ? meta.countriesByLatestYear[String(meta.latestYear)] ?? 0 : 0;
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav />
 
       <main className="flex-1 py-8">
         <div className="max-w-2xl mx-auto px-4">
@@ -372,7 +372,7 @@ export default function UpdatesPage() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

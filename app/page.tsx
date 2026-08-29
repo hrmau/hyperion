@@ -7,8 +7,8 @@ import CountryTooltip from '@/components/CountryTooltip';
 import CountryPanel from '@/components/CountryPanel';
 import BlocSelector from '@/components/BlocSelector';
 import MapModeSelector from '@/components/MapModeSelector';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import type { MapColorMode } from '@/lib/colors';
 import {
   loadCountries,
@@ -115,15 +115,15 @@ export default function Home() {
 
   if (loading || !countries || !blocs) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="gg-page min-h-screen flex items-center justify-center">
         <div className="text-secondary text-sm">Loading energy data...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="explore" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="explore" />
 
       <div className="border-b border-border bg-card">
         <div className="max-w-[1800px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
@@ -192,7 +192,7 @@ export default function Home() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
 
       <CountryTooltip
         country={hoveredCountry}
