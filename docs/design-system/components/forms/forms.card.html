@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" viewport="700x720" name="Forms & search" subtitle="Field, Input, Select, Checkbox, Radio, Switch, RangeSlider, CountrySearch" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:20px}</style>
+</head><body><div id="root"></div>
+<script type="text/gg-babel">
+const { Field, Input, Textarea, Select, Checkbox, Radio, Switch, RangeSlider, Fieldset, CountrySearch } = window.GridGorilla;
+const COUNTRIES=[{code:'IE',name:'Ireland',fuel:'Gas',color:'var(--fuel-gas)'},{code:'IS',name:'Iceland',fuel:'Hydro',color:'var(--fuel-hydro)'},{code:'IN',name:'India',fuel:'Coal',color:'var(--fuel-coal)'},{code:'IL',name:'Israel',fuel:'Gas',color:'var(--fuel-gas)'},{code:'IT',name:'Italy',fuel:'Gas',color:'var(--fuel-gas)'}];
+function Demo(){
+  const [year,setYear]=React.useState(2015);
+  const [on,setOn]=React.useState(true);
+  const [pick,setPick]=React.useState('Share');
+  return (
+  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:26}}>
+    <div style={{display:'flex',flexDirection:'column',gap:18}}>
+      <Field label="Country" hint="Matches name or ISO code"><CountrySearch countries={COUNTRIES} /></Field>
+      <Field label="Measure"><Select options={['Clean %','Per person','Total output','Wind share']} /></Field>
+      <Field label="Email" error="That address doesn't look right."><Input defaultValue="not-an-email" invalid /></Field>
+      <Field label="Disabled"><Input placeholder="Unavailable" disabled /></Field>
+    </div>
+    <div style={{display:'flex',flexDirection:'column',gap:18}}>
+      <Fieldset legend="Include sources">
+        <Checkbox checked label="Renewables" hint="Wind, solar, hydro, bioenergy" />
+        <Checkbox label="Nuclear" />
+        <Checkbox label="Fossil fuels" />
+      </Fieldset>
+      <Fieldset legend="Normalise by">
+        <Radio checked={pick==='Share'} onChange={()=>setPick('Share')} label="Share of generation" />
+        <Radio checked={pick==='Person'} onChange={()=>setPick('Person')} label="Per person" />
+      </Fieldset>
+      <Switch checked={on} onChange={setOn} label="Show world average" />
+      <Field label="Year"><RangeSlider min={1985} max={2026} value={year} onChange={setYear} showValue /></Field>
+      <Field label="Notes"><Textarea rows={2} placeholder="Anything we got wrong?" /></Field>
+    </div>
+  </div>);
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

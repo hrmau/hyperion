@@ -1,0 +1,165 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   PROSE
+
+   Long-form content: Story chapters, Why, methodology, glossary, about.
+   Scoped to .gg-prose so it never leaks into UI. Element selectors are
+   deliberate here — an author writing markdown must get correct styling
+   without adding a single class.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.gg-prose {
+  --prose-measure: 68ch;
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.68;
+  color: var(--paper-a76);
+  max-width: var(--prose-measure);
+  text-wrap: pretty;
+}
+
+/* Paragraphs: space between, never indents. */
+.gg-prose > p { margin: 0 0 1.35em }
+.gg-prose > p:last-child { margin-bottom: 0 }
+
+/* The opening paragraph carries more weight — set it as the lede. */
+.gg-prose > p.lede {
+  font-size: 1.24em;
+  line-height: 1.5;
+  color: var(--paper);
+  margin-bottom: 1.6em;
+}
+
+/* Headings. Sentence case, tight tracking, generous space above and little
+   below — a heading belongs to what follows it. */
+.gg-prose h2 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.028em;
+  line-height: 1.15;
+  color: var(--paper);
+  margin: 2.4em 0 0.7em;
+  max-width: 30ch;
+}
+.gg-prose h3 {
+  font-size: clamp(19px, 1.7vw, 21px);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--paper);
+  margin: 1.9em 0 0.55em;
+}
+.gg-prose h4 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin: 1.9em 0 0.7em;
+}
+.gg-prose > *:first-child { margin-top: 0 }
+
+/* Links in prose are underlined — colour alone is not an affordance. */
+.gg-prose a {
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0, 199, 88, 0.4);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.gg-prose a:hover { text-decoration-color: var(--green) }
+
+.gg-prose strong { color: var(--paper); font-weight: var(--fw-semibold) }
+.gg-prose em { font-style: italic }
+
+/* Every number in prose is mono — consistent with the rest of the system. */
+.gg-prose .num,
+.gg-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+}
+.gg-prose code {
+  background: var(--ink-700);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+/* Lists. Custom markers — mono, quiet, aligned to the text column. */
+.gg-prose ul,
+.gg-prose ol { margin: 0 0 1.35em; padding: 0; list-style: none }
+.gg-prose li { position: relative; padding-left: 1.6em; margin-bottom: 0.5em }
+.gg-prose ul > li::before {
+  content: "—";
+  position: absolute; left: 0;
+  font-family: var(--font-mono);
+  color: var(--paper-a32);
+}
+.gg-prose ol { counter-reset: gg-ol }
+.gg-prose ol > li { counter-increment: gg-ol }
+.gg-prose ol > li::before {
+  content: counter(gg-ol, decimal-leading-zero);
+  position: absolute; left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--paper-a32);
+  top: 0.25em;
+}
+
+/* Rules divide sections; hairline, never a full-strength line. */
+.gg-prose hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.6em 0;
+}
+
+/* Blockquote: a hairline on the left, no quotation marks, no italics. */
+.gg-prose blockquote {
+  margin: 1.9em 0;
+  padding-left: 1.4em;
+  border-left: 1px solid var(--line-strong);
+  color: var(--paper-a66);
+}
+.gg-prose blockquote cite {
+  display: block;
+  margin-top: 0.7em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xs);
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: var(--text-quiet);
+}
+
+/* Full-measure escape: figures and charts break out of the text column. */
+.gg-prose .bleed {
+  max-width: none;
+  width: 100%;
+  margin: 2.2em 0;
+}
+
+/* Tables inside prose follow the DataTable rules: hairlines, mono numerals. */
+.gg-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.9em 0;
+  font-size: var(--fs-body-sm);
+}
+.gg-prose th {
+  text-align: left;
+  padding: 0 var(--space-5) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xxs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-label);
+  border-bottom: 1px solid var(--border-emphasis);
+}
+.gg-prose td {
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--border-default);
+  color: var(--paper);
+}
+.gg-prose td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right }

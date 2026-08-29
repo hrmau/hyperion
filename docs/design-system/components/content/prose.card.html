@@ -1,0 +1,40 @@
+<!-- @dsCard group="Components" viewport="820x2060" name="Prose & editorial" subtitle="ArticleHeader, Prose, KeyTakeaways, Figure, Callout, PullQuote, DataNote" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:26px}</style>
+</head><body><div id="root"></div>
+<script type="text/gg-babel">
+const { ArticleHeader, Prose, KeyTakeaways, Figure, Callout, PullQuote, DataNote, StackedAreaChart } = window.GridGorilla;
+const DE={wind:[1,6,18,26],solar:[0,0,3,12],gas:[8,9,14,16],coal:[58,52,43,24],nuclear:[28,29,22,0],other:[5,4,0,22]};
+ReactDOM.createRoot(document.getElementById('root')).render(<>
+  <ArticleHeader chapter="Chapter 03" kicker="The energy story" readingTime="8 min read" updated="August 2026" byline="Grid Gorilla"
+    title="Germany spent €500bn and still burns coal"
+    standfirst="The Energiewende is the most expensive energy experiment ever run. Here is what it actually bought." />
+  <div style={{marginTop:34}}>
+  <Prose>
+    <KeyTakeaways items={[
+      "Renewables went from 6% to 38% of German generation in twenty-five years.",
+      "Nuclear closed faster than coal, so emissions fell slower than capacity grew.",
+      "France still has a cleaner grid at roughly a tenth of the cost."]} />
+    <p className="lede">In 2000 Germany passed a law that would go on to reshape the entire European power market — and, indirectly, the price of solar panels everywhere.</p>
+    <p>Wind and solar now supply <span className="num">38%</span> of German power, up from almost nothing. That is a genuine achievement. It is also, as <a href="#">the French comparison</a> shows, not the same thing as a clean grid.</p>
+    <h2>What the money actually bought</h2>
+    <p>The honest summary is that Germany bought a global industry rather than a national outcome. Panel costs fell <span className="num">89%</span> over the period, largely paid for by German households.</p>
+    <Figure source="Ember · IEA, 2026" caption="German generation mix, 1990–2026. The purple band vanishing in 2023 is the nuclear phase-out.">
+      <StackedAreaChart series={DE} years={[1990,2000,2010,2026]} height={200} />
+    </Figure>
+    <Callout label="How we calculated this">Costs are cumulative EEG surcharges expressed in 2026 euros, excluding grid expansion.</Callout>
+    <PullQuote attribution="Chapter 3 of 8">Nuclear closed faster than coal, and the atmosphere noticed.</PullQuote>
+    <h3>Where it goes next</h3>
+    <ul><li>Coal exit is legislated for 2038, with pressure to move it to 2030.</li><li>Grid expansion, not generation, is now the binding constraint.</li></ul>
+    <DataNote sources={["Ember","IEA","Destatis"]} method="Generation shares are calendar-year, not rolling twelve months."
+      caveat="Imported electricity is attributed to the exporting grid, which flatters import-heavy years." updated="June 2026" />
+  </Prose>
+  </div>
+</>);
+</script></body></html>

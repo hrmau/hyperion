@@ -1,0 +1,32 @@
+.gg-page {
+  /* Display / UI — Space Grotesk. Tight tracking, tighter the bigger it gets. */
+  /* Display sizes are fluid: the clamp IS the responsive step, so no screen
+     ever overrides them. Upper bounds are the reference-design values. */
+  --fs-hero: clamp(34px, 5.4vw, 60px);   --ls-hero: -0.038em;   --lh-hero: 1.02;
+  --fs-h1: clamp(32px, 4.6vw, 52px);     --ls-h1: -0.035em;     --lh-h1: 1.04;
+  --fs-h2: clamp(26px, 3.2vw, 34px);     --ls-h2: -0.03em;      --lh-h2: 1.1;
+  --fs-h3: clamp(21px, 2.1vw, 25px);     --ls-h3: -0.022em;     --lh-h3: 1.15;
+  --fs-h4: 19px;                          --ls-h4: -0.02em;      --lh-h4: 1.2;
+  --fs-stat: clamp(28px, 2.9vw, 34px);   --ls-stat: -0.03em;    --lh-stat: 1;
+  --fs-stat-sm: clamp(26px, 2.6vw, 31px);
+  --fs-lead: clamp(16px, 1.5vw, 18px);   --lh-lead: 1.58;
+  --fs-body: 15px;      --lh-body: 1.55;
+  --fs-body-sm: 14.5px; --lh-body-sm: 1.5;
+  --fs-ui: 13.5px;                            /* nav items, buttons */
+  --fs-caption: 13px;   --lh-caption: 1.4;
+
+  /* Data / labels — IBM Plex Mono, uppercase, wide tracking. Every number
+     that should be read as data lives in the mono stack. */
+  --fs-mono: 12px;
+  --fs-mono-sm: 11.5px;
+  --fs-mono-xs: 11px;
+  --fs-mono-xxs: 10.5px;
+  --ls-eyebrow: 0.2em;      /* section eyebrows: "◉ YOUR GRID, RIGHT NOW" */
+  --ls-eyebrow-wide: 0.22em;
+  --ls-label: 0.18em;       /* stat labels: "WIND SHARE" */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}

@@ -1,0 +1,87 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   CONTROLS
+
+   The one place in this system that needs a stylesheet rather than inline
+   styles: range inputs are painted through vendor pseudo-elements
+   (::-webkit-slider-thumb, ::-moz-range-thumb) which a React style object
+   cannot reach. Everything else stays inline.
+
+   Two rules are load-bearing here:
+
+   1. **The box is 44px, the track is 3px.** The system's 44px control floor
+      applies to sliders too — and a slider is a drag target, the hardest kind
+      to acquire. The visible track stays a 3px hairline because the input's
+      background is painted with `background-position: center`, so growing the
+      box does not thicken the line.
+
+   2. **The thumb is explicitly drawn.** Once `appearance: none` is set, WebKit
+      stops painting its default thumb; relying on the UA default is one
+      browser version away from an invisible handle on the hero chart.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.gg-range {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 44px;          /* the hit target */
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;   /* keeps the 3px track centred in the 44px box */
+  background-size: 100% 3px;
+  cursor: pointer;
+}
+
+.gg-range:focus { outline: none }
+.gg-range:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset) }
+
+/* ── Track ─────────────────────────────────────────────────────────────
+   Transparent: the fill/track split is painted as the input's own
+   background-image, because the split point is a live value. */
+.gg-range::-webkit-slider-runnable-track {
+  height: 3px;
+  background: transparent;
+  border: none;
+}
+.gg-range::-moz-range-track {
+  height: 3px;
+  background: transparent;
+  border: none;
+}
+.gg-range::-moz-range-progress { height: 3px; background: transparent }
+
+/* ── Thumb ─────────────────────────────────────────────────────────────
+   18px disc in the foreground near-white — the same treatment as the
+   scrubber handle on the hero chart, so the two read as one device.
+   WebKit needs the negative margin to centre the thumb on the track. */
+.gg-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: none;
+  margin-top: -7.5px;
+  transition: transform var(--dur-instant) var(--ease-out);
+}
+.gg-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: none;
+  transition: transform var(--dur-instant) var(--ease-out);
+}
+
+.gg-range:active::-webkit-slider-thumb { transform: scale(1.12) }
+.gg-range:active::-moz-range-thumb { transform: scale(1.12) }
+
+.gg-range:disabled { cursor: not-allowed; opacity: 0.45 }
+
+/* Accent variant — for a slider whose value IS the clean-energy measure.
+   Default is the neutral near-white handle; do not make every slider green. */
+.gg-range--accent::-webkit-slider-thumb { background: var(--green) }
+.gg-range--accent::-moz-range-thumb { background: var(--green) }

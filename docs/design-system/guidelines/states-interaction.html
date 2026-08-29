@@ -1,0 +1,22 @@
+<!-- @dsCard group="Spacing" viewport="700x220" subtitle="Hover, focus, selected, disabled — no transforms, no shadows" name="Interaction states" -->
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:20px;font-family:var(--font-sans)}.mono{font-family:var(--font-mono)}</style>
+</head><body>
+<div style="display:flex;flex-direction:column;gap:16px;font-size:13px">
+<div style="display:flex;align-items:center;gap:16px"><span class="mono" style="width:90px;font-size:10.5px;letter-spacing:.14em;color:var(--text-label)">DEFAULT</span>
+<span style="padding:11px 20px;border-radius:10px;border:1px solid var(--line-strong);font-weight:600">Compare two</span>
+<span style="color:var(--text-tertiary)">hairline at 22%</span></div>
+<div style="display:flex;align-items:center;gap:16px"><span class="mono" style="width:90px;font-size:10.5px;letter-spacing:.14em;color:var(--text-label)">HOVER</span>
+<span style="padding:11px 20px;border-radius:10px;border:1px solid var(--line-strong);background:var(--ink-700);font-weight:600">Compare two</span>
+<span style="color:var(--text-tertiary)">one step up the ink ramp — never a colour change, never a scale</span></div>
+<div style="display:flex;align-items:center;gap:16px"><span class="mono" style="width:90px;font-size:10.5px;letter-spacing:.14em;color:var(--text-label)">FOCUS</span>
+<span style="padding:11px 20px;border-radius:10px;border:1px solid var(--line-strong);outline:2px solid var(--green);outline-offset:2px;font-weight:600">Compare two</span>
+<span style="color:var(--text-tertiary)">2px green ring, 2px offset — never removed</span></div>
+<div style="display:flex;align-items:center;gap:16px"><span class="mono" style="width:90px;font-size:10.5px;letter-spacing:.14em;color:var(--text-label)">SELECTED</span>
+<span style="padding:11px 20px;border-radius:10px;background:var(--paper);color:var(--ink-900);font-weight:600">Compare two</span>
+<span style="color:var(--text-tertiary)">inverse fill</span></div>
+<div style="display:flex;align-items:center;gap:16px"><span class="mono" style="width:90px;font-size:10.5px;letter-spacing:.14em;color:var(--text-label)">DISABLED</span>
+<span style="padding:11px 20px;border-radius:10px;border:1px solid var(--line-strong);opacity:.45;font-weight:600">Compare two</span>
+<span style="color:var(--text-tertiary)">0.45 opacity, pointer-events none</span></div>
+</div></body></html>

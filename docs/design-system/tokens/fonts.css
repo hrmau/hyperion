@@ -1,0 +1,10 @@
+/* Grid Gorilla webfonts. Both families are Google Fonts, loaded from the
+   Google CDN. If you self-host, replace these @import lines with @font-face
+   rules pointing at your own woff2 files and keep the family names identical. */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}

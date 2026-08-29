@@ -1,0 +1,17 @@
+:root {
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+  --dur-instant: 90ms;    /* hover/press feedback */
+  --dur-fast: 160ms;      /* pill and tab state changes */
+  --dur-base: 240ms;      /* card and panel transitions */
+  --dur-chart: 520ms;     /* chart redraw when the country changes */
+  --dur-blink: 2s;        /* live status dot */
+}
+
+@keyframes gg-blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+@keyframes gg-spin { to { transform: rotate(360deg) } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-instant: 0ms; --dur-fast: 0ms; --dur-base: 0ms; --dur-chart: 0ms }
+}

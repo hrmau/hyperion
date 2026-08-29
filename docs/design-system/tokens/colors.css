@@ -1,0 +1,38 @@
+:root {
+  /* ── Ground: four steps of one cold slate. Darkest is the page. ─────── */
+  --ink-900: #0f1416;   /* page background */
+  --ink-800: #121a1c;   /* raised panel (chart wells, right rail) */
+  --ink-700: #1b2528;   /* card */
+  --ink-600: #2e3639;   /* strong card / dark chip / coal */
+  --ink-500: #3a4447;   /* hairline-heavy divider, oil */
+
+  /* ── Foreground: one near-white, stepped down by alpha, never by hue ── */
+  --paper: #eef2f2;
+  --paper-a76: rgba(238, 242, 242, 0.76);
+  --paper-a66: rgba(238, 242, 242, 0.66);
+  --paper-a55: rgba(238, 242, 242, 0.55);
+  --paper-a48: rgba(238, 242, 242, 0.48);
+  --paper-a42: rgba(238, 242, 242, 0.42);
+  --paper-a32: rgba(238, 242, 242, 0.32);
+
+  /* ── Lines. There are no shadows in this system, only hairlines. ────── */
+  --line-strong: rgba(238, 242, 242, 0.22);
+  --line: rgba(238, 242, 242, 0.11);
+  --line-soft: rgba(238, 242, 242, 0.07);
+
+  /* ── The single accent. Guard it: green means clean energy, a live
+        signal, or the one thing on screen you want clicked. ──────────── */
+  --green: #00c758;
+  --green-dim: #009a44;
+  --green-ink: #04250f;   /* text on a green field */
+  --green-wash: rgba(0, 199, 88, 0.10);
+
+  /* ── Sage: the light end of the fuel ramp. Doubles as a quiet accent
+        when green would be too loud (solar, secondary series). ───────── */
+  --sage: #9fd8b4;
+  --sage-deep: #7d9d9a;
+
+  /* ── Muted clay. The ONLY warm colour in the system. Reserved for a
+        metric moving the wrong way. Never decorative. ────────────────── */
+  --clay: #bf8b6f;
+}

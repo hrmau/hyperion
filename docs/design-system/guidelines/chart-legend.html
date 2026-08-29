@@ -1,0 +1,19 @@
+<!-- @dsCard group="Charts" viewport="700x140" subtitle="Swatch = exact band fill · label = neutral grey" name="Legend rule" -->
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:20px;font-family:var(--font-sans)}.sw{display:flex;gap:0;flex-wrap:wrap}.c{flex:1;min-width:0;padding:10px 8px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.04em;display:flex;flex-direction:column;justify-content:flex-end;height:74px}.mono{font-family:var(--font-mono)}</style>
+</head><body>
+<div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:11px">
+  <div style="flex:1">
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary)"><span style="width:10px;height:10px;background:var(--fuel-wind)"></span>WIND 34</span><span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary)"><span style="width:10px;height:10px;background:var(--fuel-solar)"></span>SOLAR 4</span><span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary)"><span style="width:10px;height:10px;background:var(--fuel-gas)"></span>GAS 42</span><span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary)"><span style="width:10px;height:10px;background:var(--fuel-coal);outline:1px solid var(--line-strong)"></span>COAL 6</span><span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary)"><span style="width:10px;height:10px;background:var(--fuel-other)"></span>OTHER 14</span>
+    </div>
+    <div style="font-size:9.5px;color:var(--green);margin-top:10px;letter-spacing:.06em">CORRECT — CHIP CARRIES THE FILL</div>
+  </div>
+  <div style="flex:1">
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <span style="color:var(--fuel-wind)">■ WIND 34</span><span style="color:var(--fuel-solar)">■ SOLAR 4</span><span style="color:#8fb0b0">■ GAS 42</span><span style="color:#93a0a3">■ COAL 6</span><span style="color:#8ba3a3">■ OTHER 14</span>
+    </div>
+    <div style="font-size:9.5px;color:var(--clay);margin-top:10px;letter-spacing:.06em">WRONG — LIGHTENED LABELS COLLAPSE INTO ONE GREY</div>
+  </div>
+</div></body></html>

@@ -1,0 +1,95 @@
+:root {
+  /* ── FUEL RAMP ────────────────────────────────────────────────────────
+     One continuous ramp, cold+dark (fossil) → sage+light (renewable),
+     with brand green at the top. Adjacent fuels are separable by value,
+     so the chart reads as a single tonal gradient rather than a pie of
+     competing hues. ORDER MATTERS: always stack in this sequence, top of
+     the chart to bottom, so the shape of the transition is legible.
+
+     Every value here is also chosen so that its --on-fuel-* ink clears
+     4.5:1 — see the note there. The dark half is spaced to stay clear of
+     the "dead zone" (luminance 0.14–0.28) where neither the near-white nor
+     the dark ink passes; that is why gas and nuclear sit lower than a purely
+     visual ramp would put them. Do not lighten either without re-checking
+     both inks.  */
+  --fuel-coal:      #2e3639;
+  --fuel-oil:       #3a4447;
+  --fuel-gas:       #3a595b;
+  --fuel-nuclear:   #506b67;
+  --fuel-hydro:     #7d9d9a;
+  --fuel-other:     #8ba3a3;   /* bioenergy, waste, unspecified */
+  --fuel-solar:     #9fd8b4;
+  --fuel-wind:      #00c758;
+
+  /* Grouped rollups, for mix bars that only show two or three categories. */
+  --group-fossil:   #3a4447;
+  --group-nuclear:  #63817e;
+  --group-renew:    #00c758;
+
+  /* ── SEQUENTIAL SCALE ────────────────────────────────────────────────
+     For choropleths and tile grids keyed to a continuous measure
+     (clean %, per-capita kWh). Same ramp, 7 stops, low → high. */
+  --scale-1: #2e3639;
+  --scale-2: #3f4b4c;
+  --scale-3: #3a595b;
+  --scale-4: #506b67;
+  --scale-5: #7d9d9a;
+  --scale-6: #9fd8b4;
+  --scale-7: #00c758;
+
+  /* ── ON-FILL INK ──────────────────────────────────────────────────────
+     Text sitting ON a fuel or scale fill (tile codes, chips, labels inside a
+     band). Distinct from the *-ink tokens below: those are coloured text on
+     the DARK PAGE, these are text on a COLOURED FILL. The ramp crosses from
+     dark to light, so half of it needs dark ink — never assume --paper.
+
+     All eight pairings clear WCAG AA (4.5:1) at 12px/600, the smallest text
+     this system ever puts on a fill (TileGrid country codes). Measured:
+     coal 10.9 · oil 8.9 · gas 6.8 · nuclear 5.1 · hydro 5.7 · other 6.2 ·
+     solar 10.3 · wind 7.4. If you change a fill, re-measure BOTH inks: the
+     luminance band 0.14–0.28 fails against each of them and must be avoided. */
+  --on-fuel-coal:      var(--paper);
+  --on-fuel-oil:       var(--paper);
+  --on-fuel-gas:       var(--paper);
+  --on-fuel-nuclear:   var(--paper);
+  --on-fuel-hydro:     #16201f;
+  --on-fuel-other:     #16201f;
+  --on-fuel-solar:     #17301f;
+  --on-fuel-wind:      var(--green-ink);
+
+  --on-scale-1: var(--paper);
+  --on-scale-2: var(--paper);
+  --on-scale-3: var(--paper);
+  --on-scale-4: var(--paper);
+  --on-scale-5: #16201f;
+  --on-scale-6: #17301f;
+  --on-scale-7: var(--green-ink);
+
+  /* ── TEXT TINTS ──────────────────────────────────────────────────────
+     The fill values above are tuned for large areas on the dark page; used
+     as TEXT they fail contrast. When a sentence names a fuel ("burns gas for
+     42%"), tint the figure with the *-ink value instead — same hue family,
+     lifted to ≥4.5:1 on --ink-900. Never use an -ink value as a chart fill,
+     and never use a fill value as text. */
+  --fuel-coal-ink:    #93a0a3;
+  --fuel-oil-ink:     #9aa5a7;
+  --fuel-gas-ink:     #8fb0b0;
+  --fuel-nuclear-ink: #8fbdb7;
+  --fuel-hydro-ink:   #a3c1be;
+  --fuel-other-ink:   #a8bcbc;
+  --fuel-solar-ink:   #9fd8b4;
+  --fuel-wind-ink:    #00c758;
+
+  /* ── CHART FURNITURE ─────────────────────────────────────────────── */
+  --chart-well: var(--ink-800);
+  --chart-grid: rgba(238, 242, 242, 0.07);
+  --chart-axis-text: var(--paper-a32);
+  --chart-scrub: var(--paper);            /* the year handle line */
+  --chart-track: var(--ink-600);          /* empty half of a bar */
+  --chart-sep: var(--ink-800);            /* band separator = well colour */
+
+  /* Direction of travel. Green for the transition going the right way,
+     clay when it is not. Nothing else gets a direction colour. */
+  --data-up: var(--green);
+  --data-down: var(--clay);
+}
