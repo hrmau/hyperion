@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
-import FlagImg from '@/components/FlagImg';
+import { getIso2 } from '@/lib/flags';
 import { showToast, ToastProvider } from '@/components/Toast';
 import { loadQuestions } from '@/lib/data';
 import {
@@ -24,6 +24,11 @@ import {
   writeBestStreak,
 } from '@/lib/questions';
 import { trackEvent } from '@/lib/analytics';
+import { Eyebrow } from '@/components/ds/core/Eyebrow';
+import { Badge } from '@/components/ds/core/Badge';
+import { Button } from '@/components/ds/core/Button';
+import { GorillaNote } from '@/components/ds/core/GorillaNote';
+import { RankedBarList } from '@/components/ds/data/RankedBarList';
 import type { Question, QuestionSide } from '@/lib/types';
 
 type Phase = 'question' | 'reveal';
@@ -127,8 +132,12 @@ export default function PlayPage() {
 
   // Move focus to Next on reveal so keyboard players aren't stranded on a card
   // that has just gone inert.
+  //
+  // preventScroll matters: the reveal is now tall enough that scrolling the
+  // button into view jumps the page past the answer, which is the one thing the
+  // player is waiting to see. Focus moves, the viewport does not.
   useEffect(() => {
-    if (phase === 'reveal') nextButton.current?.focus();
+    if (phase === 'reveal') nextButton.current?.focus({ preventScroll: true });
   }, [phase]);
 
   const handleShare = useCallback(async () => {
@@ -171,17 +180,15 @@ export default function PlayPage() {
 
   if (error) {
     return (
-      <div className="gg-page min-h-screen flex flex-col">
+      <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <TopNav active="play" />
-        <main className="flex-1 flex items-center justify-center px-4">
-          <div className="card p-6 text-center max-w-sm">
-            <p className="text-sm text-primary mb-2">Couldn&apos;t load the question bank.</p>
-            <p className="text-xs text-muted">
-              Try reloading, or{' '}
-              <Link href="/" className="underline hover:text-primary">
-                explore the map
-              </Link>{' '}
-              instead.
+        <main style={{ flex: 1, display: 'grid', placeItems: 'center', padding: 'var(--gutter)' }}>
+          <div style={{ maxWidth: '46ch', textAlign: 'center' }}>
+            <p style={{ margin: 0, fontSize: 'var(--fs-lead)', color: 'var(--text-primary)' }}>
+              Couldn&apos;t load the question bank.
+            </p>
+            <p style={{ marginTop: 'var(--space-5)', color: 'var(--text-tertiary)' }}>
+              Try reloading, or <Link href="/">explore the map</Link> instead.
             </p>
           </div>
         </main>
@@ -192,180 +199,269 @@ export default function PlayPage() {
 
   if (!round || !bank) {
     return (
-      <div className="gg-page min-h-screen flex items-center justify-center">
-        <div className="text-secondary text-sm">Loading questions...</div>
+      <div className="gg-page" style={{ minHeight: '100vh', display: 'grid', placeItems: 'center' }}>
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--fs-mono)',
+            color: 'var(--text-quiet)',
+          }}
+        >
+          Loading questions…
+        </span>
       </div>
     );
   }
 
   const { question, left, right } = round;
 
+  const revealItems = [left, right].map((side) => ({
+    label: side.name,
+    value: side.value,
+    display: formatValue(side.value, question.unit),
+    tone: (side.iso3 === winner ? 'accent' : 'default') as 'accent' | 'default',
+  }));
+
   return (
     <ToastProvider>
-    <div className="gg-page min-h-screen flex flex-col">
-      <TopNav active="play" />
+      <div
+        className="gg-page"
+        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+      >
+        <TopNav active="play" />
 
-      <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-6 sm:py-10">
-        {/* Streak header */}
-        <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8">
-          <div>
-            <div className="text-[11px] uppercase tracking-wider text-muted">Higher or lower</div>
-            <div className="text-[11px] text-muted mt-0.5">
-              {bank.length} questions &middot; no game over
-            </div>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="text-right">
-              <div className="text-xl font-semibold text-primary tabular-nums" aria-hidden="true">
-                {streak}
-              </div>
-              <div className="text-[10px] uppercase tracking-wider text-muted" aria-hidden="true">
-                Streak
-              </div>
+        <main
+          style={{
+            flex: 1,
+            width: '100%',
+            maxWidth: 760,
+            margin: '0 auto',
+            padding: 'var(--band-y) var(--gutter) var(--space-10)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-5)',
+              flexWrap: 'wrap',
+              marginBottom: 'var(--space-9)',
+            }}
+          >
+            <Eyebrow>Higher or lower</Eyebrow>
+            <Badge tone={streak > 0 ? 'accent' : 'neutral'}>
+              <span aria-hidden="true">Streak {streak}</span>
               <span className="sr-only">Current streak: {streak}</span>
-            </div>
-            <div className="w-px h-8 bg-border" aria-hidden="true" />
-            <div className="text-right">
-              <div className="text-xl font-semibold text-secondary tabular-nums" aria-hidden="true">
-                {bestStreak}
-              </div>
-              <div className="text-[10px] uppercase tracking-wider text-muted" aria-hidden="true">
-                Best
-              </div>
+            </Badge>
+            <Badge tone="outline">
+              <span aria-hidden="true">Best {bestStreak}</span>
               <span className="sr-only">Best streak: {bestStreak}</span>
-            </div>
+            </Badge>
+            <span
+              style={{
+                marginLeft: 'auto',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--fs-mono-xs)',
+                color: 'var(--text-quiet)',
+              }}
+            >
+              {bank.length} questions · no game over
+            </span>
           </div>
-        </div>
 
-        {/* Question */}
-        <div className="text-center mb-5 sm:mb-7">
-          <h1 className="text-[17px] sm:text-[19px] font-medium text-primary">
+          <h1
+            style={{
+              margin: 0,
+              fontSize: 'var(--fs-h3)',
+              fontWeight: 'var(--fw-bold)',
+              letterSpacing: 'var(--ls-h3)',
+              lineHeight: 'var(--lh-h3)',
+              textWrap: 'pretty',
+            }}
+          >
             {question.prompt}
           </h1>
-          <p className="text-[11px] text-muted mt-1.5">
-            {question.metricLabel} &middot; {question.year}
-          </p>
-        </div>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xs)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              color: 'var(--text-quiet)',
+              marginTop: 'var(--space-4)',
+            }}
+          >
+            {question.metricLabel} · {question.year}
+          </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {[left, right].map((side) => {
-            const isWinner = isTie || side.iso3 === winner;
-            const isPicked = side.iso3 === picked;
-            const revealed = phase === 'reveal';
+          <div
+            className="gg-card-row"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 'var(--space-6)',
+              marginTop: 'var(--space-9)',
+            }}
+          >
+            {[left, right].map((side) => {
+              const revealed = phase === 'reveal';
+              const isWinner = isTie || side.iso3 === winner;
+              const isPicked = side.iso3 === picked;
 
-            let tone = 'border-border bg-card';
-            if (revealed && isWinner) {
-              tone = 'border-[var(--positive)] bg-[var(--color-success-bg)]';
-            } else if (revealed && isPicked) {
-              tone = 'border-[var(--negative)] bg-[var(--color-danger-bg)]';
-            } else if (revealed) {
-              tone = 'border-border bg-card opacity-60';
-            }
+              let border = 'var(--border-default)';
+              let background = 'var(--bg-card)';
+              if (revealed && isWinner) {
+                border = 'var(--green)';
+                background = 'var(--green-wash)';
+              } else if (revealed && isPicked) {
+                border = 'var(--clay)';
+                background = 'transparent';
+              }
 
-            return (
-              <button
-                key={side.iso3}
-                type="button"
-                onClick={() => handlePick(side.iso3)}
-                disabled={revealed}
-                aria-label={`Choose ${side.name}`}
-                className={`gg-play-card p-5 sm:p-6 text-center border ${tone} ${
-                  revealed ? 'cursor-default' : 'cursor-pointer hover:border-primary/30'
-                } focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary-brand)]`}
-              >
-                <div className="flex justify-center mb-3">
-                  <FlagImg iso3={side.iso3} size={32} />
+              return (
+                <button
+                  key={side.iso3}
+                  type="button"
+                  onClick={() => handlePick(side.iso3)}
+                  disabled={revealed}
+                  aria-label={`Choose ${side.name}`}
+                  className="gg-play-card"
+                  style={{
+                    padding: 'var(--space-9) var(--space-7)',
+                    borderRadius: 'var(--r-card)',
+                    border: `1px solid ${border}`,
+                    background,
+                    textAlign: 'center',
+                    cursor: revealed ? 'default' : 'pointer',
+                    color: 'var(--text-primary)',
+                    font: 'inherit',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--fs-mono-xs)',
+                      letterSpacing: '0.06em',
+                      color: 'var(--text-quiet)',
+                      marginBottom: 'var(--space-4)',
+                    }}
+                  >
+                    {getIso2(side.iso3) ?? '--'}
+                  </div>
+                  <div style={{ fontSize: 'var(--fs-h4)', fontWeight: 'var(--fw-semibold)' }}>
+                    {side.name}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: 'var(--space-6)',
+                      minHeight: 34,
+                      fontSize: 'var(--fs-stat-sm)',
+                      fontWeight: 'var(--fw-bold)',
+                      letterSpacing: 'var(--ls-stat)',
+                      fontVariantNumeric: 'tabular-nums',
+                      color: revealed ? 'var(--text-primary)' : 'var(--paper-a32)',
+                    }}
+                  >
+                    {revealed ? (
+                      <span className="gg-play-reveal">
+                        {formatValue(side.value, question.unit)}
+                      </span>
+                    ) : (
+                      <span aria-hidden="true">?</span>
+                    )}
+                  </div>
+                  {revealed && (
+                    <div
+                      style={{
+                        marginTop: 'var(--space-3)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 'var(--fs-mono-xxs)',
+                        letterSpacing: 'var(--ls-label)',
+                        textTransform: 'uppercase',
+                        color: isWinner ? 'var(--green)' : 'var(--text-quiet)',
+                      }}
+                    >
+                      {isTie ? 'Tied' : isWinner ? 'Higher' : 'Lower'}
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Colour is never the only signal — the verdict is text. */}
+          <div aria-live="polite" style={{ marginTop: 'var(--space-9)' }}>
+            {phase === 'reveal' && (
+              <div className="gg-play-reveal">
+                <div
+                  style={{
+                    fontSize: 'var(--fs-h3)',
+                    fontWeight: 'var(--fw-bold)',
+                    letterSpacing: 'var(--ls-h3)',
+                    color: wasCorrect ? 'var(--green)' : 'var(--clay)',
+                    marginBottom: 'var(--space-8)',
+                  }}
+                >
+                  {wasCorrect ? 'Correct.' : `Not quite — it's ${
+                    [left, right].find((s) => s.iso3 === winner)?.name
+                  }.`}
                 </div>
-                <div className="text-[15px] font-medium text-primary">{side.name}</div>
 
-                <div className="mt-3 h-8 flex items-center justify-center">
-                  {revealed ? (
-                    <span className="gg-play-reveal text-[21px] font-semibold text-primary tabular-nums">
-                      {formatValue(side.value, question.unit)}
-                    </span>
-                  ) : (
-                    <span className="text-[21px] font-semibold text-muted/40" aria-hidden="true">
-                      ?
-                    </span>
+                <RankedBarList items={revealItems} labelWidth={132} barHeight={12} />
+
+                <GorillaNote lead={`${question.metricLabel}, ${question.year}.`}>
+                  {question.insight}
+                </GorillaNote>
+
+                {!wasCorrect && endedStreak > 0 && (
+                  <p
+                    style={{
+                      marginTop: 'var(--space-6)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--fs-mono-xs)',
+                      color: 'var(--text-quiet)',
+                    }}
+                  >
+                    Streak reset to zero. The run keeps going.
+                  </p>
+                )}
+
+                <div
+                  className="gg-action-row"
+                  style={{
+                    display: 'flex',
+                    gap: 'var(--space-4)',
+                    flexWrap: 'wrap',
+                    marginTop: 'var(--space-9)',
+                  }}
+                >
+                  <Button ref={nextButton} variant="primary" size="lg" onClick={handleNext}>
+                    Next question
+                  </Button>
+                  {canShare && (
+                    <Button variant="secondary" size="lg" onClick={handleShare}>
+                      Share your streak of {endedStreak}
+                    </Button>
                   )}
                 </div>
-
-                {revealed && (
-                  <div
-                    className="mt-1 text-[11px] font-medium uppercase tracking-wider"
-                    style={{ color: isWinner ? 'var(--positive)' : 'var(--text-muted)' }}
-                  >
-                    {isTie ? 'Tied' : isWinner ? 'Higher' : 'Lower'}
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Result + insight. Colour is never the only signal — the verdict is text. */}
-        <div aria-live="polite" className="mt-5 sm:mt-6">
-          {phase === 'reveal' && (
-            <div className="gg-play-reveal card p-5">
-              <div
-                className="text-[13px] font-semibold mb-2"
-                style={{ color: wasCorrect ? 'var(--positive)' : 'var(--negative)' }}
-              >
-                {wasCorrect ? 'Correct' : 'Not quite'}
-                <span className="text-muted font-normal">
-                  {' '}
-                  &mdash;{' '}
-                  {left.name}{' '}
-                  {formatValue(left.value, question.unit)} vs {right.name}{' '}
-                  {formatValue(right.value, question.unit)} in {question.year}.
-                </span>
               </div>
-              <p className="text-[14px] leading-relaxed text-primary">{question.insight}</p>
-
-              {!wasCorrect && streak === 0 && endedStreak > 0 && (
-                <p className="text-[11px] text-muted mt-3">
-                  Streak reset to zero. The run keeps going.
-                </p>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Controls */}
-        {phase === 'reveal' && (
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-            <button
-              ref={nextButton}
-              type="button"
-              onClick={handleNext}
-              className="px-5 py-2.5 rounded-lg bg-primary text-canvas text-[13px] font-medium hover:opacity-90 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary-brand)]"
-            >
-              Next round
-            </button>
-            {canShare && (
-              <button
-                type="button"
-                onClick={handleShare}
-                className="px-4 py-2.5 rounded-lg border border-border bg-card text-secondary text-[13px] hover:text-primary hover:border-primary/30 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary-brand)]"
-              >
-                Share your streak of {endedStreak}
-              </button>
             )}
           </div>
-        )}
 
-        <p className="mt-8 text-center text-[11px] text-muted">
-          Every round compares both countries in the same year.{' '}
-          <Link href="/" className="underline hover:text-primary transition-colors">
-            See the whole map
-          </Link>
-          .
-        </p>
-      </main>
+          <p
+            style={{
+              marginTop: 'var(--space-11)',
+              fontSize: 'var(--fs-caption)',
+              color: 'var(--text-quiet)',
+            }}
+          >
+            Every round compares both countries in the same year.{' '}
+            <Link href="/">See the whole map</Link>.
+          </p>
+        </main>
 
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
     </ToastProvider>
   );
 }
