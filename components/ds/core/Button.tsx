@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, CSSProperties, ElementType, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, ElementType, ReactNode, Ref } from 'react';
 
 const base: CSSProperties = {
   display: 'inline-flex',
@@ -53,6 +53,13 @@ export interface ButtonProps
   as?: ElementType;
   href?: string;
   style?: CSSProperties;
+  /**
+   * React 19 passes ref as a plain prop to function components, so no
+   * forwardRef is needed. Focus management depends on this — /play moves focus
+   * to Next on reveal so keyboard players are not stranded on a card that has
+   * just gone inert.
+   */
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({
