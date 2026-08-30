@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { ArticleShell } from '@/components/ds/content/Prose';
 import Link from 'next/link';
 
 interface DataMeta {
@@ -296,12 +297,16 @@ export default function UpdatesPage() {
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav />
 
-      <main className="flex-1 py-8">
+      <ArticleShell
+        kicker="Changelog"
+        title="What's new"
+        standfirst="Feature releases and data corrections, newest first."
+      >
         <div className="max-w-2xl mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-[18px] font-semibold text-primary mb-2">What&apos;s New</h1>
-            <p className="text-sm text-secondary leading-relaxed">
+            
+            <p>
               Major updates and feature releases for Grid Gorilla
             </p>
           </div>
@@ -310,24 +315,24 @@ export default function UpdatesPage() {
           {meta && (
             <div className="card p-4 mb-8">
               <div className="flex items-baseline justify-between gap-3 mb-2">
-                <h2 className="text-[13px] font-medium text-primary">Data currency</h2>
-                <span className="text-[11px] text-muted">
+                <h2 className="text-[13px]">Data currency</h2>
+                <span className="text-[11px]">
                   source published {meta.sourceUpdatedOn}
                 </span>
               </div>
-              <p className="text-xs text-secondary leading-relaxed">
+              <p>
                 {meta.countryCount} countries, {meta.earliestYear}&ndash;{meta.latestYear}.{' '}
                 {currentYearCount} of them already report {meta.latestYear} figures; the rest
                 run to whichever year their national statistics office has published.
                 That is why country labels across the site show different years.
               </p>
-              <p className="text-[11px] text-muted mt-2">
+              <p className="text-[11px] mt-2">
                 Checked weekly against{' '}
                 <a
                   href="https://ourworldindata.org/energy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary underline decoration-dotted underline-offset-2"
+                  className="hover: underline decoration-dotted underline-offset-2"
                 >
                   Our World in Data
                 </a>
@@ -349,11 +354,11 @@ export default function UpdatesPage() {
 
           {/* Footer note */}
           <div className="mt-8 pt-6 border-t border-border">
-            <p className="text-xs text-muted text-center">
+            <p className="text-center">
               Have a feature request?{' '}
               <a
                 href="mailto:contact@gridgorilla.app"
-                className="text-secondary hover:text-primary underline"
+                className="hover: underline"
               >
                 Let us know
               </a>
@@ -364,13 +369,13 @@ export default function UpdatesPage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="text-sm text-muted hover:text-primary transition-colors"
+              className="hover: transition-colors"
             >
               ← Back to explorer
             </Link>
           </div>
         </div>
-      </main>
+      </ArticleShell>
 
       <SiteFooter />
     </div>

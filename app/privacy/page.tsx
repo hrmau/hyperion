@@ -1,19 +1,24 @@
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { ArticleShell } from '@/components/ds/content/Prose';
 
 export default function PrivacyPage() {
   return (
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav />
 
-      <main className="flex-1 max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-2xl font-semibold text-primary mb-8">Privacy Policy</h1>
+      <ArticleShell
+        kicker="Legal"
+        title="Privacy"
+        standfirst="What this site collects, what it does not, and who it tells."
+        updated="February 2025"
+      >
+        
 
-        <div className="prose prose-sm text-secondary space-y-6">
-          <p className="text-muted text-sm">Last updated: February 2025</p>
+        <div className="space-y-6">
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Overview</h2>
+            <h2>Overview</h2>
             <p>
               Grid Gorilla is a data visualization tool for exploring global electricity production data.
               We are committed to protecting your privacy and being transparent about our practices.
@@ -21,7 +26,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Data We Collect</h2>
+            <h2>Data We Collect</h2>
             <p>
               Grid Gorilla does not collect personal data directly. We do not require user accounts
               or authentication. However, we use Google Analytics to understand how visitors use our site.
@@ -29,11 +34,11 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Google Analytics</h2>
+            <h2>Google Analytics</h2>
             <p>
               We use Google Analytics to collect anonymized usage data, including:
             </p>
-            <ul className="list-disc list-inside space-y-1 text-sm">
+            <ul className="space-y-1">
               <li>Pages visited and time spent on site</li>
               <li>Approximate geographic location (country/city level)</li>
               <li>Device type, browser, and operating system</li>
@@ -52,7 +57,7 @@ export default function PrivacyPage() {
                 Google Analytics Opt-out Browser Add-on
               </a>.
             </p>
-            <p className="mt-2 text-sm">
+            <p className="mt-2">
               For more information, see{' '}
               <a
                 href="https://policies.google.com/privacy"
@@ -66,7 +71,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Third-Party Services</h2>
+            <h2>Third-Party Services</h2>
             <p>
               In addition to Google Analytics, this site is hosted on Vercel, which may collect
               basic server logs (IP addresses, request timestamps) as part of standard web hosting.
@@ -75,7 +80,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">External Links</h2>
+            <h2>External Links</h2>
             <p>
               This site contains links to external data sources (Ember Climate, Our World in Data).
               These sites have their own privacy policies which we encourage you to review.
@@ -83,7 +88,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Changes to This Policy</h2>
+            <h2>Changes to This Policy</h2>
             <p>
               We may update this privacy policy from time to time. Any changes will be reflected
               on this page with an updated revision date.
@@ -91,13 +96,13 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-medium text-primary">Contact</h2>
+            <h2>Contact</h2>
             <p>
               If you have questions about this privacy policy, please open an issue on our GitHub repository.
             </p>
           </section>
         </div>
-      </main>
+      </ArticleShell>
 
       <SiteFooter />
     </div>

@@ -10,6 +10,14 @@ import TopNav from '@/components/ds/nav/TopNav';
 import FlagImg from '@/components/FlagImg';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 
+/**
+ * Chapter accents are design-system tokens, not hues.
+ *
+ * The original eight were amber, red, purple, grey, orange, green, crimson and
+ * blue — eight competing hues, which is what the one-hue rule exists to
+ * prevent. They are now steps along the single ramp, with clay reserved for the
+ * two crisis chapters and green for the one about the transition.
+ */
 interface Chapter {
   id: string;
   era: string;
@@ -33,7 +41,7 @@ const chapters: Chapter[] = [
       'For the first time, the correlation between energy consumption and prosperity became unmistakably clear.',
       'Oil cost just $3 per barrel. Economies grew at 4-6% annually. The future seemed limitless.',
     ],
-    color: '#F59E0B',
+    color: 'var(--scale-5)',
   },
   {
     id: 'oil-crisis',
@@ -45,7 +53,7 @@ const chapters: Chapter[] = [
       'Economies that seemed invincible suddenly looked vulnerable. Gas lines stretched for miles.',
       'The world learned a harsh lesson: dependence on foreign energy is a strategic weakness.',
     ],
-    color: '#EF4444',
+    color: 'var(--clay)',
   },
   {
     id: 'nuclear-bet',
@@ -60,7 +68,7 @@ const chapters: Chapter[] = [
     highlight: 'FRA',
     showCountries: ['FRA', 'DEU'],
     dataYear: 2024,
-    color: '#8B5CF6',
+    color: 'var(--scale-4)',
   },
   {
     id: 'chernobyl',
@@ -72,7 +80,7 @@ const chapters: Chapter[] = [
       'Some countries doubled down on nuclear. Others began planning their exit.',
       'Germany\'s eventual decision to phase out nuclear power traces back to this moment.',
     ],
-    color: '#6B7280',
+    color: 'var(--scale-2)',
   },
   {
     id: 'fracking',
@@ -87,7 +95,7 @@ const chapters: Chapter[] = [
     highlight: 'USA',
     showCountries: ['USA', 'RUS', 'SAU'],
     dataYear: 2019,
-    color: '#F97316',
+    color: 'var(--scale-3)',
   },
   {
     id: 'energiewende',
@@ -102,7 +110,7 @@ const chapters: Chapter[] = [
     highlight: 'DEU',
     showCountries: ['DEU', 'FRA'],
     dataYear: 2023,
-    color: '#22C55E',
+    color: 'var(--green)',
   },
   {
     id: 'crisis-2022',
@@ -116,7 +124,7 @@ const chapters: Chapter[] = [
     ],
     showCountries: ['DEU', 'POL', 'FRA', 'GBR'],
     dataYear: 2022,
-    color: '#DC2626',
+    color: 'var(--clay)',
   },
   {
     id: 'present',
@@ -129,7 +137,7 @@ const chapters: Chapter[] = [
       'The data tells the story. Now it\'s your turn to explore it.',
     ],
     dataYear: 2024,
-    color: '#3B82F6',
+    color: 'var(--scale-6)',
   },
 ];
 

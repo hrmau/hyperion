@@ -569,3 +569,31 @@ body {
     animation: none;
   }
 }
+
+/* ========================================
+   IN-PROSE NAVIGATION
+   ======================================== */
+/* The design system styles `.gg-prose a` as a green underlined prose link,
+   which is right for a reference inside a sentence and wrong for a table of
+   contents. Why and Methodology both open with a quick-nav block of ten-odd
+   anchors; as prose links they render as a wall of accent, and green in this
+   system is supposed to appear three or four times a screen.
+
+   Navigation inside prose is navigation, not prose. This lives in the app
+   rather than in app/ds/tokens/ because it is our content's shape, not the
+   design system's rule. */
+.gg-prose nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  font-size: var(--fs-ui);
+  transition: color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.gg-prose nav a:hover {
+  color: var(--text-primary);
+  border-color: var(--paper-a55);
+}

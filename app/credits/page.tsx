@@ -1,5 +1,6 @@
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { ArticleShell } from '@/components/ds/content/Prose';
 import Link from 'next/link';
 
 export const metadata = {
@@ -55,10 +56,14 @@ export default function CreditsPage() {
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav />
 
-      <main className="flex-1 py-8">
+      <ArticleShell
+        kicker="Sources"
+        title="Credits and attributions"
+        standfirst="Everyone whose data and work this site is built on."
+      >
         <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-2xl font-bold text-primary mb-2">Credits & Attributions</h1>
-          <p className="text-secondary mb-8">
+          
+          <p className="mb-8">
             Grid Gorilla is built on open data and open source software. We gratefully acknowledge the following sources.
           </p>
 
@@ -160,14 +165,14 @@ export default function CreditsPage() {
 
           {/* License Notice */}
           <div className="mt-8 p-4 bg-inset rounded-lg">
-            <h3 className="text-sm font-medium text-primary mb-2">License Compliance</h3>
-            <p className="text-xs text-muted leading-relaxed">
+            <h3 className="mb-2">License Compliance</h3>
+            <p>
               We comply with all license requirements for the data and assets used. Creative Commons
               licensed content is attributed as required. If you believe we have missed an attribution
               or made an error, please{' '}
               <a
                 href="mailto:contact@gridgorilla.app"
-                className="text-secondary hover:text-primary underline"
+                className="hover: underline"
               >
                 contact us
               </a>.
@@ -177,13 +182,13 @@ export default function CreditsPage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="text-sm text-muted hover:text-primary transition-colors"
+              className="hover: transition-colors"
             >
               ← Back to explorer
             </Link>
           </div>
         </div>
-      </main>
+      </ArticleShell>
 
       <SiteFooter />
     </div>
