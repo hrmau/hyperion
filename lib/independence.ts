@@ -1,4 +1,4 @@
-import type { YearData, FossilFuelYearData, FossilFuelCountry } from './types';
+import type { YearData, FossilFuelYearData, FossilFuelValue, FossilFuelCountry } from './types';
 
 /**
  * Uranium Independence Lookup Table
@@ -175,25 +175,57 @@ export function calculateIndependenceScoreV2(
   // Calculate fossil fuel independence ratios
   // Default to 0% (import-dependent) when no data - this is more honest than
   // assuming self-sufficiency. Countries with no data are likely small importers.
-  let coalIndep = 0.0;
-  let gasIndep = 0.0;
-  let oilIndep = 0.0;
-  let hasFossilData = false;
+  // Independence per fuel, and whether we actually know it.
+  //
+  // The old rule was "consumption == 0 means they don't use this fuel, so they
+  // are 100% independent of it". That is true when the zero is measured and
+  // false when it is missing, and OWID uses a blank for "not tracked" — which
+  // this pipeline used to collapse to 0. The result was that a country whose
+  // fuel consumption nobody tracks scored as self-sufficient in it. Applied
+  // widely that put American Samoa, Nauru and Comoros — grids running on
+  // imported diesel — at 100, and Cuba, Moldova and Jordan close behind.
+  //
+  // Unknown is now unknown: it contributes nothing and is disclosed, which is
+  // the same treatment a country absent from the file already gets.
+  const fuelIndependence = (fuel: FossilFuelValue | undefined) => {
+    if (!fuel) return { ratio: 0, known: false };
+    const { production, consumption } = fuel;
+    if (consumption == null) return { ratio: 0, known: false };
+    // A measured zero: they burn none of it, so they cannot be dependent on it.
+    // The contribution is multiplied by this fuel's share of demand, which is
+    // also zero, so the ratio is academic — but it should still read as known.
+    if (consumption === 0) return { ratio: 1, known: true };
+    return { ratio: Math.min((production ?? 0) / consumption, 1.0), known: true };
+  };
 
-  if (fossilData) {
-    hasFossilData = true;
-    // Production / Consumption ratio, capped at 1.0 (100%)
-    // If consumption is 0, they don't use that fuel = 100% independent of it
-    coalIndep = fossilData.coal.consumption > 0
-      ? Math.min(fossilData.coal.production / fossilData.coal.consumption, 1.0)
-      : 1.0;
-    gasIndep = fossilData.gas.consumption > 0
-      ? Math.min(fossilData.gas.production / fossilData.gas.consumption, 1.0)
-      : 1.0;
-    oilIndep = fossilData.oil.consumption > 0
-      ? Math.min(fossilData.oil.production / fossilData.oil.consumption, 1.0)
-      : 1.0;
-  }
+  const coal = fuelIndependence(fossilData?.coal);
+  const gas = fuelIndependence(fossilData?.gas);
+  const oil = fuelIndependence(fossilData?.oil);
+
+  const coalIndep = coal.ratio;
+  const gasIndep = gas.ratio;
+  const oilIndep = oil.ratio;
+
+  // "Incomplete" means a fuel the country actually burns whose consumption is
+  // untracked. A country that burns no coal is not missing its coal data in any
+  // sense that matters.
+  const unknownBurnedFuels: string[] = [];
+  let unknownShare = 0;
+  if (!coal.known && coalPct > 0.5) { unknownBurnedFuels.push('coal'); unknownShare += coalPct; }
+  if (!gas.known && gasPct > 0.5) { unknownBurnedFuels.push('gas'); unknownShare += gasPct; }
+  if (!oil.known && oilPct > 0.5) { unknownBurnedFuels.push('oil'); unknownShare += oilPct; }
+  const hasFossilData = fossilData != null && unknownBurnedFuels.length === 0;
+
+  // Unknown fuel is treated as imported, and said so. That is deliberately
+  // conservative and makes the score a LOWER BOUND — "at least this
+  // independent" — rather than a measurement.
+  //
+  // Refusing to score these countries was tried and was worse: it removed 110
+  // of 214 from the ranking, including every country with no fossil file entry
+  // at all, whose lower bound was honest and useful. And of the two ways to be
+  // wrong, understating independence is the safer one for a metric whose whole
+  // purpose is flagging import exposure. Overstating it — which is what the old
+  // rule did — makes a dependent grid look secure.
 
   // Calculate weighted contributions
   const renewableContribution = renewablePct;
@@ -289,9 +321,16 @@ export function calculateIndependenceScoreV2(
     vulnerabilities.push('No nuclear baseload capacity');
   }
 
-  // Flag missing fossil data as a vulnerability if country uses significant fossil fuels
-  if (!hasFossilData && yearData.aggregates.fossil_pct > 10) {
-    vulnerabilities.push(`No fossil fuel import data (${Math.round(yearData.aggregates.fossil_pct)}% fossil assumed imported)`);
+  // Name the fuels whose import position is unknown, rather than a bare
+  // "no data" — which of them is missing changes how much the score is worth.
+  if (unknownBurnedFuels.length > 0) {
+    vulnerabilities.push(
+      `Import data missing for ${unknownBurnedFuels.join(', ')} — assumed imported`
+    );
+  } else if (!fossilData && yearData.aggregates.fossil_pct > 10) {
+    vulnerabilities.push(
+      `No fossil fuel import data (${Math.round(yearData.aggregates.fossil_pct)}% fossil assumed imported)`
+    );
   }
 
   // Flag electricity imports as a vulnerability

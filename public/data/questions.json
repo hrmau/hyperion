@@ -540,26 +540,6 @@
     "surprising": true
   },
   {
-    "id": "independence-NGA-POL-2025",
-    "metric": "independence",
-    "metricLabel": "Energy independence score",
-    "prompt": "Which is more energy independent?",
-    "year": 2025,
-    "unit": "",
-    "a": {
-      "iso3": "NGA",
-      "name": "Nigeria",
-      "value": 100
-    },
-    "b": {
-      "iso3": "POL",
-      "name": "Poland",
-      "value": 83.8
-    },
-    "insight": "Nigeria runs its grid on its own gas and hydro, so on paper it imports nothing. This score measures import exposure, not reliability - Nigerian supply still fails constantly.",
-    "surprising": true
-  },
-  {
     "id": "nuclear_pct-BEL-SVK-2025",
     "metric": "nuclear_pct",
     "metricLabel": "Nuclear share of electricity",

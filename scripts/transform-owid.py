@@ -154,21 +154,13 @@ def extract_fossil_row(row: dict) -> dict | None:
         cons = parse_float(row.get(cons_col), decimals=1)
         if prod or cons:
             has_signal = True
-        fuels[fuel] = {'production': prod or 0.0, 'consumption': cons or 0.0}
+        # None is preserved rather than collapsed to 0. A blank in OWID means
+        # "not tracked"; a literal 0 means "measured, and it is zero". Across the
+        # shipped countries there are 300 of the former and 30 of the latter, and
+        # lib/independence.ts needs to tell them apart: an unknown consumption
+        # cannot be evidence of self-sufficiency.
+        fuels[fuel] = {'production': prod, 'consumption': cons}
 
-    # Emit only rows carrying at least one non-zero figure.
-    #
-    # A row of six zeroes is not a measurement. OWID writes a literal 0 rather
-    # than a blank for territories it does not track, and lib/independence.ts
-    # reads "consumption == 0" as "doesn't use this fuel, therefore 100%
-    # independent of it" — so passing those rows through would score places
-    # running entirely on imported diesel (American Samoa, Nauru, Comoros) as
-    # energy fortresses. Excluding them leaves them import-dependent, which is
-    # both the honest default and the existing behaviour.
-    #
-    # Production alone is enough to qualify: OWID tracks output but not domestic
-    # consumption for many producer states (Nigeria, Angola, Libya, Brunei), and
-    # those are legitimately self-sufficient in the fuel they export.
     return fuels if has_signal else None
 
 
