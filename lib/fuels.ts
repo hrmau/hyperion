@@ -147,3 +147,56 @@ export function dominantFuel(yearData: YearData): Fuel | null {
   }
   return best;
 }
+
+/**
+ * Seven-stop sequential scale for choropleths and tile grids keyed to a
+ * continuous measure (clean %, per-capita kWh, independence score).
+ *
+ * Same ramp as the fuels, low to high. Using one ramp for both is the point:
+ * the map and the mix chart stay in the same visual language, and the page
+ * never becomes a fruit salad of competing hues.
+ */
+export const SCALE: readonly string[] = [
+  'var(--scale-1)',
+  'var(--scale-2)',
+  'var(--scale-3)',
+  'var(--scale-4)',
+  'var(--scale-5)',
+  'var(--scale-6)',
+  'var(--scale-7)',
+] as const;
+
+/**
+ * The ramp with its top stop removed.
+ *
+ * --scale-7 is the brand green, and green in this system means one of exactly
+ * three things: clean energy, a live signal, or the one thing on screen you
+ * want clicked. A choropleth of "total output" or "independence" topped by
+ * green would say "big" or "self-sufficient" in the colour reserved for
+ * "clean", to roughly thirty countries at once. Measures that are not about
+ * cleanliness use this ramp instead.
+ */
+export const SCALE_NEUTRAL: readonly string[] = SCALE.slice(0, 6);
+
+/** Colour for a value on a sequential ramp, clamped to [min, max]. */
+export function scaleColor(
+  value: number,
+  min = 0,
+  max = 100,
+  stops: readonly string[] = SCALE
+): string {
+  if (!Number.isFinite(value) || max === min) return stops[0];
+  const t = Math.max(0, Math.min(1, (value - min) / (max - min)));
+  return stops[Math.min(stops.length - 1, Math.floor(t * stops.length))];
+}
+
+/** Ink that clears 4.5:1 on a given scale stop. */
+export const SCALE_ON_FILL: readonly string[] = [
+  'var(--on-scale-1)',
+  'var(--on-scale-2)',
+  'var(--on-scale-3)',
+  'var(--on-scale-4)',
+  'var(--on-scale-5)',
+  'var(--on-scale-6)',
+  'var(--on-scale-7)',
+] as const;

@@ -1,33 +1,34 @@
-import * as d3 from 'd3';
-import { choroColors, independenceColors, cleanEnergyColors, type MapColorMode } from './colors';
+import type { MapColorMode } from './colors';
+import { SCALE, SCALE_NEUTRAL, scaleColor } from './fuels';
 import type { CountriesData, FossilFuelData } from './types';
 import { calculateIndependenceScoreV2, getFossilDataForYear } from './independence';
-import { getLatestYearData, getLatestYearForCountry } from './data';
+import { getLatestYearData } from './data';
 
-export function createChoroplethScale(
-  countries: CountriesData,
-  year: number
-): (value: number) => string {
-  const values: number[] = [];
+/**
+ * Generation output ramp.
+ *
+ * Logarithmic, not quantile. A quantile ramp distributes countries evenly
+ * across the stops by rank, which sounds fair and reads as a lie: it paints a
+ * sixth of the world in the brightest stop regardless of how much electricity
+ * that sixth actually makes, and on this ramp the bright end is the loudest
+ * thing on a dark page. Output spans four orders of magnitude — China makes
+ * roughly a thousand times what Malta does — so log is the encoding that says
+ * something true, and it leaves the top stop to the handful of grids that
+ * have genuinely earned it.
+ *
+ * Domain is clamped to 0.1–10,000 TWh: below the floor is a rounding error,
+ * above the ceiling is China alone.
+ */
+const OUTPUT_LOG_MIN = Math.log10(0.1);
+const OUTPUT_LOG_MAX = Math.log10(10_000);
 
-  for (const country of Object.values(countries)) {
-    const yearData = country.years[year.toString()];
-    if (yearData && yearData.total_generation_twh > 0) {
-      values.push(yearData.total_generation_twh);
-    }
-  }
+function outputColor(value: number): string {
+  if (!(value > 0)) return SCALE_NEUTRAL[0];
+  return scaleColor(Math.log10(value), OUTPUT_LOG_MIN, OUTPUT_LOG_MAX, SCALE_NEUTRAL);
+}
 
-  if (values.length === 0) {
-    return () => choroColors[0];
-  }
-
-  // Use quantile scale: distributes data evenly across color bins
-  // This handles the huge skew (China 10k TWh vs median 50 TWh)
-  const scale = d3.scaleQuantile<string>()
-    .domain(values.sort((a, b) => a - b))
-    .range(choroColors);
-
-  return (value: number) => scale(value);
+export function createChoroplethScale(): (value: number) => string {
+  return outputColor;
 }
 
 /**
@@ -35,12 +36,11 @@ export function createChoroplethScale(
  * Maps 0-100% clean energy to a red-to-green gradient
  */
 export function createCleanEnergyScale(): (value: number) => string {
-  // Fixed thresholds for clean energy percentage
-  const scale = d3.scaleThreshold<number, string>()
-    .domain([20, 40, 60, 80, 90])
-    .range(cleanEnergyColors);
-
-  return (value: number) => scale(value);
+  // The one measure that earns the full ramp. Clean share is a 0-100
+  // percentage and the top stop is brand green, whose first meaning in this
+  // system is literally "clean energy" — so a green country here is the accent
+  // being used for exactly what it is reserved for.
+  return (value: number) => scaleColor(value, 0, 100, SCALE);
 }
 
 /**
@@ -48,13 +48,11 @@ export function createCleanEnergyScale(): (value: number) => string {
  * Maps 0-100 independence score to a red-to-green gradient
  */
 export function createIndependenceScale(): (value: number) => string {
-  // Fixed thresholds matching the independence bands
-  // critical (<30), dependent (30-50), moderate (50-70), strong (70-90), fortress (90+)
-  const scale = d3.scaleThreshold<number, string>()
-    .domain([30, 50, 70, 85, 95])
-    .range(independenceColors);
-
-  return (value: number) => scale(value);
+  // Independence is 0-100 but it is not cleanliness — Norway and Qatar can
+  // both score high for opposite reasons — so it uses the ramp without the
+  // green top stop. The band labels (fortress / strong / moderate / dependent
+  // / critical) still exist in lib/independence.ts and still name the number.
+  return (value: number) => scaleColor(value, 0, 100, SCALE_NEUTRAL);
 }
 
 /**
@@ -102,13 +100,13 @@ export function createScaleForMode(
 ): (value: number) => string {
   switch (mode) {
     case 'production':
-      return createChoroplethScale(countries, year);
+      return createChoroplethScale();
     case 'clean':
       return createCleanEnergyScale();
     case 'independence':
       return createIndependenceScale();
     default:
-      return createChoroplethScale(countries, year);
+      return createChoroplethScale();
   }
 }
 
@@ -130,30 +128,9 @@ export function formatEmissions(value: number): string {
   return `${value.toFixed(1)} Mt CO₂`;
 }
 
-/**
- * Create a choropleth scale using each country's latest available data
- */
-export function createChoroplethScaleLatest(
-  countries: CountriesData
-): (value: number) => string {
-  const values: number[] = [];
-
-  for (const country of Object.values(countries)) {
-    const latest = getLatestYearData(country);
-    if (latest && latest.data.total_generation_twh > 0) {
-      values.push(latest.data.total_generation_twh);
-    }
-  }
-
-  if (values.length === 0) {
-    return () => choroColors[0];
-  }
-
-  const scale = d3.scaleQuantile<string>()
-    .domain(values.sort((a, b) => a - b))
-    .range(choroColors);
-
-  return (value: number) => scale(value);
+/** Same ramp, for the latest-per-country view. */
+export function createChoroplethScaleLatest(): (value: number) => string {
+  return outputColor;
 }
 
 /**
@@ -204,12 +181,12 @@ export function createScaleForModeLatest(
 ): (value: number) => string {
   switch (mode) {
     case 'production':
-      return createChoroplethScaleLatest(countries);
+      return createChoroplethScaleLatest();
     case 'clean':
       return createCleanEnergyScale();
     case 'independence':
       return createIndependenceScale();
     default:
-      return createChoroplethScaleLatest(countries);
+      return createChoroplethScaleLatest();
   }
 }
