@@ -135,6 +135,31 @@ export function fuelShares(yearData: YearData): FuelShare[] {
   return FUEL_ORDER.map((fuel) => ({ fuel, ...byFuel.get(fuel)! }));
 }
 
+/**
+ * Fuel shares across a run of years, shaped for StackedAreaChart.
+ *
+ * Returns every fuel in canonical order — including ones the country never
+ * uses — so a chart and its legend stay aligned when two countries are shown
+ * side by side.
+ */
+export function fuelSeries(
+  years: number[],
+  yearDataFor: (year: number) => YearData | undefined
+): { years: number[]; series: Record<Fuel, number[]> } {
+  const present = years.filter((y) => yearDataFor(y) != null);
+  const series = Object.fromEntries(FUEL_ORDER.map((f) => [f, [] as number[]])) as Record<
+    Fuel,
+    number[]
+  >;
+
+  for (const year of present) {
+    const yd = yearDataFor(year)!;
+    for (const { fuel, pct } of fuelShares(yd)) series[fuel].push(pct);
+  }
+
+  return { years: present, series };
+}
+
 /** The fuel a country generates most of, or null when nothing is generated. */
 export function dominantFuel(yearData: YearData): Fuel | null {
   let best: Fuel | null = null;
