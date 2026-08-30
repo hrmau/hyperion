@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from './FlagImg';
 import type { Country } from '@/lib/types';
 
 interface CountrySelectProps {
@@ -9,27 +9,6 @@ interface CountrySelectProps {
   value: string;
   onChange: (iso3: string) => void;
   placeholder?: string;
-}
-
-/**
- * Country identity is an ISO 3166 two-letter code in mono, never a flag.
- * Flags are politically loaded, illegible at this size, and 214 of them is a
- * payload — see the iconography rules in docs/design-system/readme.md.
- */
-function CountryCode({ iso3 }: { iso3: string }) {
-  return (
-    <span
-      style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: 'var(--fs-mono-xs)',
-        letterSpacing: '0.06em',
-        color: 'var(--text-quiet)',
-        flex: 'none',
-      }}
-    >
-      {getIso2(iso3) ?? '--'}
-    </span>
-  );
 }
 
 export default function CountrySelect({
@@ -79,7 +58,7 @@ export default function CountrySelect({
         <span className="flex items-center gap-2 min-w-0">
           {selectedCountry ? (
             <>
-              <CountryCode iso3={selectedCountry.iso3} />
+              <FlagImg iso3={selectedCountry.iso3} size={18} />
               <span className="text-primary truncate">{selectedCountry.name}</span>
             </>
           ) : (
@@ -125,7 +104,7 @@ export default function CountrySelect({
                     value === country.iso3 ? 'bg-inset' : ''
                   }`}
                 >
-                  <CountryCode iso3={country.iso3} />
+                  <FlagImg iso3={country.iso3} size={18} />
                   <span className="text-primary">{country.name}</span>
                 </button>
               ))

@@ -28,7 +28,7 @@ import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { DonutStat } from '@/components/ds/data/DonutStat';
 import { MixBar } from '@/components/ds/data/MixBar';
 import { fuelShares, fuelSeries } from '@/lib/fuels';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'EU', label: 'EU' },
@@ -370,17 +370,7 @@ function Side({
             }}
           >
             {sel.iso3 && (
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 'var(--fs-mono-xs)',
-                  letterSpacing: '0.06em',
-                  color: 'var(--text-quiet)',
-                  marginRight: 'var(--space-4)',
-                }}
-              >
-                {getIso2(sel.iso3)}
-              </span>
+              <FlagImg iso3={sel.iso3} size={20} className="mr-2 align-middle" />
             )}
             {sel.label}
           </h2>
