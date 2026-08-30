@@ -14,14 +14,21 @@ import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData, FossilFuelData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
-import FlagImg from '@/components/FlagImg';
 import CountrySelect from '@/components/CountrySelect';
-import EnergyMixChart from '@/components/EnergyMixChart';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import ShareButton from '@/components/ShareButton';
 import { ToastProvider } from '@/components/Toast';
 import { useCompareParams } from '@/hooks/useCompareParams';
+import { Eyebrow } from '@/components/ds/core/Eyebrow';
+import { Stat } from '@/components/ds/core/Stat';
+import { GorillaNote } from '@/components/ds/core/GorillaNote';
+import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
+import { FuelLegend } from '@/components/ds/data/FuelLegend';
+import { DonutStat } from '@/components/ds/data/DonutStat';
+import { MixBar } from '@/components/ds/data/MixBar';
+import { fuelShares, fuelSeries } from '@/lib/fuels';
+import { getIso2 } from '@/lib/flags';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
   { id: 'EU', label: 'EU' },
@@ -269,6 +276,157 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
   );
 }
 
+/**
+ * Fuel-share history for one side of the comparison, ending at the year the
+ * comparison is pinned to.
+ *
+ * Blocs are aggregated per year rather than reusing the latest-per-country
+ * rollup: a chart of a bloc's transition has to be built from the same year on
+ * every point or the shape is meaningless.
+ */
+function seriesFor(
+  sel: ResolvedSelection,
+  type: SelectionType,
+  id: string,
+  countries: CountriesData,
+  blocs: BlocsData
+): { years: number[]; series: ReturnType<typeof fuelSeries>['series'] } {
+  if (type === 'country' && countries[id]) {
+    const c = countries[id];
+    const years = Object.keys(c.years)
+      .map(Number)
+      .sort((x, y) => x - y)
+      .filter((y) => y <= sel.actualYear)
+      .slice(-24);
+    return fuelSeries(years, (y) => c.years[String(y)]);
+  }
+  if (type === 'bloc') {
+    const members = getCountriesInBloc(id, countries, blocs);
+    const years = Array.from({ length: 24 }, (_, i) => sel.actualYear - 23 + i);
+    return fuelSeries(years, (y) => {
+      const agg = aggregateBloc(members, y);
+      return agg ? blocAggToYearData(agg) : undefined;
+    });
+  }
+  return { years: [], series: fuelSeries([], () => undefined).series };
+}
+
+function scoreFor(sel: ResolvedSelection, fossilFuelData: FossilFuelData | null) {
+  return calculateIndependenceScoreV2(
+    sel.yearData,
+    sel.iso3
+      ? getFossilDataForYear(fossilFuelData?.countries[sel.iso3], sel.actualYear).data
+      : null,
+    sel.iso3 ?? undefined
+  );
+}
+
+function Side({
+  sel,
+  type,
+  id,
+  border,
+  countries,
+  blocs,
+  fossilFuelData,
+}: {
+  sel: ResolvedSelection;
+  type: SelectionType;
+  id: string;
+  border?: boolean;
+  countries: CountriesData;
+  blocs: BlocsData;
+  fossilFuelData: FossilFuelData | null;
+}) {
+  const { years, series } = seriesFor(sel, type, id, countries, blocs);
+  const shares = fuelShares(sel.yearData);
+  const score = scoreFor(sel, fossilFuelData);
+  const yd = sel.yearData;
+
+  return (
+    <div
+      style={{
+        padding: '30px var(--gutter)',
+        borderRight: border ? '1px solid var(--border-default)' : undefined,
+        minWidth: 0,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          gap: 'var(--space-6)',
+          marginBottom: 'var(--space-7)',
+        }}
+      >
+        <div style={{ minWidth: 0 }}>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 'var(--fs-h3)',
+              fontWeight: 'var(--fw-bold)',
+              letterSpacing: 'var(--ls-h3)',
+            }}
+          >
+            {sel.iso3 && (
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--fs-mono-xs)',
+                  letterSpacing: '0.06em',
+                  color: 'var(--text-quiet)',
+                  marginRight: 'var(--space-4)',
+                }}
+              >
+                {getIso2(sel.iso3)}
+              </span>
+            )}
+            {sel.label}
+          </h2>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xs)',
+              color: 'var(--text-quiet)',
+              marginTop: 'var(--space-3)',
+            }}
+          >
+            {sel.subtitle} · {sel.actualYear}
+          </div>
+        </div>
+        <DonutStat value={yd.aggregates.clean_pct} label="Clean" size={78} thickness={11} />
+      </div>
+
+      <StackedAreaChart series={series} years={years} height={180} />
+      <FuelLegend
+        shares={shares.filter((s) => s.pct >= 1).map((s) => ({ fuel: s.fuel, value: formatPercent(s.pct) }))}
+        style={{ marginTop: 'var(--space-5)' }}
+      />
+
+      <div
+        className="gg-stat-row"
+        style={{
+          display: 'flex',
+          gap: 'var(--space-9)',
+          flexWrap: 'wrap',
+          marginTop: 'var(--space-8)',
+          paddingTop: 'var(--space-7)',
+          borderTop: '1px solid var(--border-default)',
+        }}
+      >
+        <Stat label="Generation" value={formatTWh(yd.total_generation_twh)} />
+        <Stat
+          label="Independence"
+          value={score ? formatIndependenceScore(score.score) : '—'}
+          note={score?.missingFossilData ? 'Incomplete fuel data' : undefined}
+        />
+        <Stat label="Emissions" value={formatEmissions(yd.emissions.total_mtco2)} />
+      </div>
+    </div>
+  );
+};
+
 function ComparePageContent() {
   const [countries, setCountries] = useState<CountriesData | null>(null);
   const [blocs, setBlocs] = useState<BlocsData | null>(null);
@@ -354,259 +512,163 @@ function ComparePageContent() {
   const hasComparison = resolvedA && resolvedB;
 
   return (
-    <div className="gg-page min-h-screen flex flex-col">
+    <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <TopNav active="compare" />
 
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 space-y-6">
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <div className="text-[11px] text-muted uppercase tracking-wider">
-              Locations to compare
-            </div>
-            <ShareButton disabled={!hasComparison} />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <SelectionDropdown
-              value={idA}
-              onChange={handleSetIdA}
-              countries={countries}
-              type={typeA}
-              onTypeChange={handleSetTypeA}
-            />
-            <SelectionDropdown
-              value={idB}
-              onChange={handleSetIdB}
-              countries={countries}
-              type={typeB}
-              onTypeChange={handleSetTypeB}
-            />
-          </div>
+      <div style={{ padding: 'var(--band-y) var(--gutter) 0' }}>
+        <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Compare · two grids</Eyebrow>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: 'var(--fs-h2)',
+            fontWeight: 'var(--fw-bold)',
+            letterSpacing: 'var(--ls-h2)',
+            lineHeight: 'var(--lh-h2)',
+            maxWidth: '26ch',
+            textWrap: 'pretty',
+          }}
+        >
+          {hasComparison
+            ? `${resolvedA.label} and ${resolvedB.label}, side by side.`
+            : 'Pick two grids and see what separates them.'}
+        </h1>
+
+        <div
+          className="gg-card-row"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr auto',
+            gap: 'var(--space-6)',
+            alignItems: 'end',
+            margin: 'var(--space-9) 0 var(--space-8)',
+          }}
+        >
+          <SelectionDropdown
+            value={idA}
+            onChange={handleSetIdA}
+            countries={countries}
+            type={typeA}
+            onTypeChange={handleSetTypeA}
+          />
+          <SelectionDropdown
+            value={idB}
+            onChange={handleSetIdB}
+            countries={countries}
+            type={typeB}
+            onTypeChange={handleSetTypeB}
+          />
+          <ShareButton disabled={!hasComparison} />
         </div>
+      </div>
 
-        {hasComparison && (
-          <>
-            <div className="card p-5 border-border bg-inset">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-[11px] text-secondary font-medium uppercase tracking-wider">
-                  Comparison Summary
-                </div>
-                <div className="text-[11px] text-muted">
-                  {resolvedA.actualYear === resolvedB.actualYear ? (
-                    <>Data from <span className="font-medium text-secondary">{resolvedA.actualYear}</span></>
-                  ) : (
-                    <>Data from <span className="font-medium text-secondary">{resolvedA.actualYear}</span> / <span className="font-medium text-secondary">{resolvedB.actualYear}</span></>
-                  )}
-                </div>
-              </div>
-              <ComparisonSummary a={resolvedA} b={resolvedB} fossilFuelData={fossilFuelData} />
-            </div>
+      {hasComparison ? (
+        <>
+          <div
+            className="gg-compare-split"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              borderTop: '1px solid var(--border-default)',
+            }}
+          >
+            <Side sel={resolvedA} type={typeA} id={idA} border countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} />
+            <Side sel={resolvedB} type={typeB} id={idB} countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} />
+          </div>
 
-            <div className="card p-5 space-y-5">
-              <div className="flex items-center pb-3 border-b border-border">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 justify-start">
-                    {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={20} />}
-                    <div className="min-w-0">
-                      <div className="text-xs font-medium text-primary flex items-center gap-1.5">
-                        <span className="truncate">{resolvedA.label}</span>
-                        <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
-                      </div>
-                      <div className="text-[10px] text-muted truncate">{resolvedA.subtitle}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="px-3 shrink-0">
-                  <span className="text-[10px] text-muted">vs</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 justify-end">
-                    <div className="min-w-0 text-right">
-                      <div className="text-xs font-medium text-primary flex items-center gap-1.5 justify-end">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
-                        <span className="truncate">{resolvedB.label}</span>
-                      </div>
-                      <div className="text-[10px] text-muted truncate">{resolvedB.subtitle}</div>
-                    </div>
-                    {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={20} />}
-                  </div>
-                </div>
-              </div>
-
+          <div
+            style={{
+              padding: 'var(--space-8) var(--gutter) var(--space-10)',
+              borderTop: '1px solid var(--border-default)',
+            }}
+          >
+            <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Head to head</Eyebrow>
+            <div style={{ display: 'grid', gap: 'var(--space-7)', maxWidth: 900 }}>
               <ComparisonBar
-                label="Total Generation"
+                label="Total generation"
                 valueA={resolvedA.yearData.total_generation_twh}
                 valueB={resolvedB.yearData.total_generation_twh}
                 formatFn={formatTWh}
               />
-              {(() => {
-                const scoreA = calculateIndependenceScoreV2(
-                  resolvedA.yearData,
-                  resolvedA.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], resolvedA.actualYear).data : null,
-                  resolvedA.iso3 ?? undefined
-                );
-                const scoreB = calculateIndependenceScoreV2(
-                  resolvedB.yearData,
-                  resolvedB.iso3 ? getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], resolvedB.actualYear).data : null,
-                  resolvedB.iso3 ?? undefined
-                );
-                return (
-                  <ComparisonBar
-                    label="Energy Independence"
-                    valueA={scoreA?.score ?? 0}
-                    valueB={scoreB?.score ?? 0}
-                    formatFn={formatIndependenceScore}
-                    suffixA={scoreA?.missingFossilData ? '*' : undefined}
-                    suffixB={scoreB?.missingFossilData ? '*' : undefined}
-                  />
-                );
-              })()}
               <ComparisonBar
-                label="Clean Energy %"
+                label="Clean share"
                 valueA={resolvedA.yearData.aggregates.clean_pct}
                 valueB={resolvedB.yearData.aggregates.clean_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
-                label="Renewables %"
+                label="Renewables"
                 valueA={resolvedA.yearData.aggregates.renewables_pct}
                 valueB={resolvedB.yearData.aggregates.renewables_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
-                label="Wind + Solar %"
+                label="Wind + solar"
                 valueA={resolvedA.yearData.aggregates.wind_solar_pct}
                 valueB={resolvedB.yearData.aggregates.wind_solar_pct}
                 formatFn={formatPercent}
               />
               <ComparisonBar
-                label="Fossil Fuels %"
-                valueA={resolvedA.yearData.aggregates.fossil_pct}
-                valueB={resolvedB.yearData.aggregates.fossil_pct}
-                formatFn={formatPercent}
-              />
-              <ComparisonBar
-                label="CO2 Emissions"
+                label="Emissions"
                 valueA={resolvedA.yearData.emissions.total_mtco2}
                 valueB={resolvedB.yearData.emissions.total_mtco2}
                 formatFn={formatEmissions}
               />
               {(() => {
-                const scoreA = resolvedA.iso3 ? calculateIndependenceScoreV2(
-                  resolvedA.yearData,
-                  getFossilDataForYear(fossilFuelData?.countries[resolvedA.iso3], resolvedA.actualYear).data,
-                  resolvedA.iso3
-                ) : null;
-                const scoreB = resolvedB.iso3 ? calculateIndependenceScoreV2(
-                  resolvedB.yearData,
-                  getFossilDataForYear(fossilFuelData?.countries[resolvedB.iso3], resolvedB.actualYear).data,
-                  resolvedB.iso3
-                ) : null;
-                if (scoreA?.missingFossilData || scoreB?.missingFossilData) {
-                  return (
-                    <div className="text-[10px] text-muted pt-2 border-t border-border-subtle">
-                      <span className="text-secondary">*</span> No fossil fuel import data available. Fossil fuels assumed 100% imported.
-                    </div>
-                  );
-                }
-                return null;
+                const a = scoreFor(resolvedA, fossilFuelData);
+                const b = scoreFor(resolvedB, fossilFuelData);
+                return (
+                  <ComparisonBar
+                    label="Energy independence"
+                    valueA={a?.score ?? 0}
+                    valueB={b?.score ?? 0}
+                    formatFn={formatIndependenceScore}
+                    suffixA={a?.missingFossilData ? '*' : undefined}
+                    suffixB={b?.missingFossilData ? '*' : undefined}
+                  />
+                );
               })()}
             </div>
 
-            <div className="card p-5 space-y-6">
-              <div className="text-[11px] text-secondary font-medium uppercase tracking-wider">
-                Energy Breakdown
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  {resolvedA.iso3 && <FlagImg iso3={resolvedA.iso3} size={18} />}
-                  <span className="text-xs font-medium text-primary">{resolvedA.label}</span>
-                  <span className="text-[10px] text-muted">({resolvedA.actualYear})</span>
-                </div>
-                <EnergyMixChart yearData={resolvedA.yearData} />
-              </div>
-              <div className="border-t border-border pt-5">
-                <div className="flex items-center gap-2 mb-2">
-                  {resolvedB.iso3 && <FlagImg iso3={resolvedB.iso3} size={18} />}
-                  <span className="text-xs font-medium text-primary">{resolvedB.label}</span>
-                  <span className="text-[10px] text-muted">({resolvedB.actualYear})</span>
-                </div>
-                <EnergyMixChart yearData={resolvedB.yearData} />
+            <div style={{ marginTop: 'var(--space-8)' }}>
+              <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Mix, this year</Eyebrow>
+              <div style={{ display: 'grid', gap: 'var(--space-5)', maxWidth: 900 }}>
+                <MixBar shares={fuelShares(resolvedA.yearData)} height={14} />
+                <MixBar shares={fuelShares(resolvedB.yearData)} height={14} />
               </div>
             </div>
 
-            <div className="text-center py-4">
-              <div className="text-[11px] text-muted mb-2">Try other countries:</div>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['USA', 'CHN', 'DEU', 'FRA', 'IND', 'BRA', 'JPN', 'GBR'].map(iso3 => {
-                  const c = countries[iso3];
-                  if (!c) return null;
-                  return (
-                    <button
-                      key={iso3}
-                      onClick={() => {
-                        if (!idA || (typeA === 'country' && idA === iso3)) {
-                          setSelectionA('country', iso3);
-                        } else {
-                          setSelectionB('country', iso3);
-                        }
-                      }}
-                      className="px-2 py-0.5 rounded text-[11px] text-muted hover:text-secondary hover:bg-inset transition-colors inline-flex items-center gap-1"
-                    >
-                      <FlagImg iso3={iso3} size={14} /> {c.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </>
-        )}
-
-        {!hasComparison && (
-          <div className="card p-8 text-center">
-            <div className="text-sm text-secondary mb-2">
-              Select two countries or blocs to compare
-            </div>
-            <div className="text-xs text-muted">
-              Choose countries or geopolitical blocs from the dropdowns above to see a side-by-side comparison of their electricity production data.
-            </div>
-            <div className="mt-6">
-              <div className="text-[11px] text-muted mb-2">Quick start:</div>
-              <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  { a: 'USA', b: 'CHN', label: 'USA vs China' },
-                  { a: 'DEU', b: 'FRA', label: 'Germany vs France' },
-                  { a: 'IND', b: 'BRA', label: 'India vs Brazil' },
-                ].map(({ a, b, label }) => (
-                  <button
-                    key={label}
-                    onClick={() => {
-                      setSelectionA('country', a);
-                      setSelectionB('country', b);
-                    }}
-                    className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors inline-flex items-center gap-1"
-                  >
-                    <FlagImg iso3={a} size={14} /> <FlagImg iso3={b} size={14} /> {label}
-                  </button>
-                ))}
-                <button
-                  onClick={() => {
-                    setSelectionA('bloc', 'EU');
-                    setSelectionB('bloc', 'BRICS');
-                  }}
-                  className="px-3 py-1.5 rounded-full text-xs bg-inset text-secondary hover:text-primary transition-colors"
-                >
-                  EU vs BRICS+
-                </button>
-              </div>
-            </div>
+            <GorillaNote lead="Check the year before you quote this.">
+              {resolvedA.actualYear === resolvedB.actualYear ? (
+                <>
+                  Both grids are shown for {resolvedA.actualYear}, the most recent year they
+                  both report.
+                </>
+              ) : (
+                <>
+                  These two are not the same year — {resolvedA.label} is {resolvedA.actualYear} and{' '}
+                  {resolvedB.label} is {resolvedB.actualYear}. National statistics offices publish
+                  at different speeds, and a comparison across years is worth less than one within
+                  a year.
+                </>
+              )}{' '}
+              An asterisk means the independence score is built on incomplete fuel data.
+            </GorillaNote>
           </div>
-        )}
-      </main>
+        </>
+      ) : (
+        <div style={{ padding: 'var(--space-11) var(--gutter)', borderTop: '1px solid var(--border-default)' }}>
+          <p style={{ margin: 0, color: 'var(--text-tertiary)', fontSize: 'var(--fs-lead)', maxWidth: '46ch' }}>
+            Choose a country or bloc on each side. Every comparison is pinned to the most recent
+            year both of them report.
+          </p>
+        </div>
+      )}
 
       <SiteFooter />
     </div>
   );
 }
+
 
 export default function ComparePage() {
   return (
@@ -622,103 +684,3 @@ export default function ComparePage() {
   );
 }
 
-function ComparisonSummary({ a, b, fossilFuelData }: {
-  a: ResolvedSelection;
-  b: ResolvedSelection;
-  fossilFuelData: FossilFuelData | null;
-}) {
-  const cleanDiff = Math.abs(a.yearData.aggregates.clean_pct - b.yearData.aggregates.clean_pct);
-  const cleaner = a.yearData.aggregates.clean_pct > b.yearData.aggregates.clean_pct ? a : b;
-  const genA = a.yearData.total_generation_twh;
-  const genB = b.yearData.total_generation_twh;
-  const bigger = genA > genB ? a : b;
-  const genRatio = genA > 0 && genB > 0
-    ? (Math.max(genA, genB) / Math.min(genA, genB)).toFixed(1)
-    : null;
-
-  // Calculate independence scores using each selection's actual year
-  const scoreA = calculateIndependenceScoreV2(
-    a.yearData,
-    a.iso3 ? getFossilDataForYear(fossilFuelData?.countries[a.iso3], a.actualYear).data : null,
-    a.iso3 ?? undefined
-  );
-  const scoreB = calculateIndependenceScoreV2(
-    b.yearData,
-    b.iso3 ? getFossilDataForYear(fossilFuelData?.countries[b.iso3], b.actualYear).data : null,
-    b.iso3 ?? undefined
-  );
-
-  const moreIndependent = (scoreA?.score ?? 0) >= (scoreB?.score ?? 0) ? { selection: a, score: scoreA } : { selection: b, score: scoreB };
-  const lessIndependent = moreIndependent.selection === a ? { selection: b, score: scoreB } : { selection: a, score: scoreA };
-  const indepDiff = Math.abs((scoreA?.score ?? 0) - (scoreB?.score ?? 0));
-
-  // Get primary driver for each country's independence score
-  const getIndependenceDriver = (score: typeof scoreA): string => {
-    if (!score) return '';
-    const { breakdown } = score;
-
-    // Find the largest contributor
-    const contributors = [
-      { name: 'renewables', value: breakdown.renewable.contribution, pct: breakdown.renewable.pct },
-      { name: 'nuclear', value: breakdown.nuclear.contribution, pct: breakdown.nuclear.pct },
-      { name: 'coal', value: breakdown.coal.contribution, pct: breakdown.coal.pct },
-      { name: 'gas', value: breakdown.gas.contribution, pct: breakdown.gas.pct },
-    ].filter(c => c.value > 0).sort((x, y) => y.value - x.value);
-
-    if (contributors.length === 0) return '';
-
-    const top = contributors[0];
-    const topTwoContribute = contributors.length >= 2
-      ? contributors[0].value + contributors[1].value
-      : contributors[0].value;
-    const totalContribution = contributors.reduce((sum, c) => sum + c.value, 0);
-
-    // If top two sources dominate (>70% of score)
-    if (contributors.length >= 2 && topTwoContribute / totalContribution > 0.7) {
-      return `${Math.round(contributors[0].pct)}% ${contributors[0].name} and ${Math.round(contributors[1].pct)}% ${contributors[1].name}`;
-    }
-
-    return `${Math.round(top.pct)}% ${top.name}`;
-  };
-
-  return (
-    <div className="space-y-1.5 text-xs text-primary">
-      <p>
-        <span className="font-medium">{cleaner.label}</span> has a cleaner electricity grid, with{' '}
-        <span className="font-medium">{formatPercent(cleaner.yearData.aggregates.clean_pct)}</span>{' '}
-        clean energy vs{' '}
-        <span className="font-medium">
-          {formatPercent(
-            cleaner === a
-              ? b.yearData.aggregates.clean_pct
-              : a.yearData.aggregates.clean_pct
-          )}
-        </span>{' '}
-        ({cleanDiff.toFixed(1)} percentage points difference).
-      </p>
-      {genRatio && (
-        <p>
-          <span className="font-medium">{bigger.label}</span> generates{' '}
-          <span className="font-medium">{genRatio}x</span> more electricity overall (
-          {formatTWh(bigger.yearData.total_generation_twh)}).
-        </p>
-      )}
-      {moreIndependent.score && lessIndependent.score && (
-        <p>
-          <span className="font-medium">{moreIndependent.selection.label}</span> has a higher energy independence score (
-          <span className="font-medium">{formatIndependenceScore(moreIndependent.score.score)}{moreIndependent.score.missingFossilData ? '*' : ''}</span> vs{' '}
-          <span className="font-medium">{formatIndependenceScore(lessIndependent.score.score)}{lessIndependent.score.missingFossilData ? '*' : ''}</span>
-          {indepDiff >= 1 && <>, {indepDiff.toFixed(0)} points higher</>}).
-          {getIndependenceDriver(moreIndependent.score) && (
-            <> This is driven by {getIndependenceDriver(moreIndependent.score)}.</>
-          )}
-        </p>
-      )}
-      {lessIndependent.score && getIndependenceDriver(lessIndependent.score) && (
-        <p>
-          <span className="font-medium">{lessIndependent.selection.label}</span>&apos;s independence score is driven by {getIndependenceDriver(lessIndependent.score)}.
-        </p>
-      )}
-    </div>
-  );
-}
