@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   --r-chip: 6px;      /* mono year badge */
   --r-well: 8px;      /* chart wells, active nav item */
   --r-button: 10px;   /* all buttons, quiz answers */
