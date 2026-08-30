@@ -17,8 +17,8 @@ import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceS
 import FlagImg from '@/components/FlagImg';
 import CountrySelect from '@/components/CountrySelect';
 import EnergyMixChart from '@/components/EnergyMixChart';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import ShareButton from '@/components/ShareButton';
 import { ToastProvider } from '@/components/Toast';
 import { useCompareParams } from '@/hooks/useCompareParams';
@@ -345,7 +345,7 @@ function ComparePageContent() {
 
   if (loading || !countries || !blocs) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="gg-page min-h-screen flex items-center justify-center">
         <div className="text-secondary text-sm">Loading energy data...</div>
       </div>
     );
@@ -354,8 +354,8 @@ function ComparePageContent() {
   const hasComparison = resolvedA && resolvedB;
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="compare" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="compare" />
 
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 space-y-6">
         <div>
@@ -603,7 +603,7 @@ function ComparePageContent() {
         )}
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
@@ -612,7 +612,7 @@ export default function ComparePage() {
   return (
     <ToastProvider>
       <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center bg-canvas">
+        <div className="gg-page min-h-screen flex items-center justify-center">
           <div className="text-secondary text-sm">Loading...</div>
         </div>
       }>

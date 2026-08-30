@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 
 function QuoteBlock({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
@@ -40,8 +40,8 @@ function StatCard({ icon, value, label }: { icon: string; value: string; label: 
 
 export default function WhyEnergyMattersPage() {
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="why" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="why" />
 
       <main className="flex-1 py-8">
         <div className="prose">
@@ -660,7 +660,7 @@ export default function WhyEnergyMattersPage() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

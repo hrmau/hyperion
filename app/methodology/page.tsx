@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 
 interface CollapsibleSectionProps {
   title: string;
@@ -78,8 +78,8 @@ function FormulaBox({ children }: { children: React.ReactNode }) {
 
 export default function MethodologyPage() {
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="methodology" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="methodology" />
 
       <main className="flex-1 py-8">
         <div className="content-container">
@@ -1171,7 +1171,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import ScatterPlot, { ScatterPlotLegend, type AxisMetric, type ColorMode } from '@/components/ScatterPlot';
 import CorrelationFilters from '@/components/CorrelationFilters';
 import CorrelationTooltip from '@/components/CorrelationTooltip';
@@ -133,7 +133,7 @@ export default function CorrelationsPage() {
 
   if (loading || !countries || !socioeconomic) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="gg-page min-h-screen flex items-center justify-center">
         <div className="text-secondary text-sm">Loading correlation data...</div>
       </div>
     );
@@ -142,8 +142,8 @@ export default function CorrelationsPage() {
   const config = chartConfigs[activeTab];
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="correlations" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="correlations" />
 
       {/* Hero Section */}
       <div className="max-w-[1800px] mx-auto px-4 pt-5 pb-3">
@@ -271,7 +271,7 @@ export default function CorrelationsPage() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
 
       <CorrelationTooltip point={hoveredPoint} position={tooltipPos} />
     </div>

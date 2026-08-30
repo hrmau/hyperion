@@ -7,8 +7,8 @@ import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore } from '@/lib/independence';
 import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
 import FlagImg from '@/components/FlagImg';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 import Link from 'next/link';
 
 type SortKey =
@@ -224,15 +224,15 @@ export default function RankingsPage() {
 
   if (loading || !countries) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="gg-page min-h-screen flex items-center justify-center">
         <div className="text-secondary text-sm">Loading energy data...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header currentPage="rankings" />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav active="rankings" />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6">
         <div className="card overflow-hidden">
@@ -501,7 +501,7 @@ export default function RankingsPage() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

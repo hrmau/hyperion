@@ -1,10 +1,10 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import TopNav from '@/components/ds/nav/TopNav';
+import SiteFooter from '@/components/ds/nav/SiteFooter';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-canvas flex flex-col">
-      <Header />
+    <div className="gg-page min-h-screen flex flex-col">
+      <TopNav />
 
       <main className="flex-1 max-w-3xl mx-auto px-4 py-12">
         <h1 className="text-2xl font-semibold text-primary mb-8">Privacy Policy</h1>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
