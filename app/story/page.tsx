@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import { loadCountries, getLatestYear } from '@/lib/data';
+import { loadCountries } from '@/lib/data';
 import FlagImg from '@/components/FlagImg';
 import type { CountriesData, Country } from '@/lib/types';
 import { formatPercent } from '@/lib/scales';

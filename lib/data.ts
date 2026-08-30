@@ -343,67 +343,36 @@ export function blocAggToYearData(agg: BlocAggregates): YearData {
 }
 
 /**
- * Aggregate bloc data using each country's latest available data
+ * Most recent year every member reports.
+ *
+ * A bloc total has to be built from one year. Summing each member's own latest
+ * adds 2022 Ukraine to 2025 Germany and calls the result a bloc total, which it
+ * is not. Measured cost of pinning instead: every bloc but one loses a single
+ * year, and Nuclear Club loses three because Ukraine's series ends in 2022.
  */
-export function aggregateBlocLatest(members: Country[]): BlocAggregates | null {
-  let totalGen = 0;
-  let totalDemand = 0;
-  let totalEmissions = 0;
-  let fossilTwh = 0;
-  let renewablesTwh = 0;
-  let windSolarTwh = 0;
-  let count = 0;
-  let yearMin = Infinity;
-  let yearMax = -Infinity;
+export function commonLatestYear(members: Country[]): number | null {
+  const withData = members.filter((c) => Object.keys(c.years).length > 0);
+  if (!withData.length) return null;
 
-  const genBySource: Record<string, number> = {};
-  for (const s of ENERGY_SOURCES) genBySource[s] = 0;
-
-  for (const c of members) {
-    const latest = getLatestYearData(c);
-    if (!latest) continue;
-
-    const yd = latest.data;
-    count++;
-    if (latest.year < yearMin) yearMin = latest.year;
-    if (latest.year > yearMax) yearMax = latest.year;
-    totalGen += yd.total_generation_twh;
-    totalDemand += yd.demand_twh;
-    totalEmissions += yd.emissions.total_mtco2;
-
-    const gen = yd.generation;
-    for (const s of ENERGY_SOURCES) {
-      genBySource[s] += gen[s]?.twh || 0;
-    }
-
-    fossilTwh += (gen.coal?.twh || 0) + (gen.gas?.twh || 0) + (gen.other_fossil?.twh || 0);
-    renewablesTwh += (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) + (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0);
-    windSolarTwh += (gen.wind?.twh || 0) + (gen.solar?.twh || 0);
+  const newest = Math.max(...withData.map((c) => getLatestYearForCountry(c)));
+  for (let year = newest; year >= 1980; year--) {
+    if (withData.every((c) => c.years[String(year)])) return year;
   }
-
-  if (count === 0) return null;
-
-  const cleanTwh = totalGen - fossilTwh;
-
-  const generation = {} as Record<EnergySource, { twh: number; pct: number }>;
-  for (const s of ENERGY_SOURCES) {
-    generation[s] = {
-      twh: genBySource[s],
-      pct: totalGen > 0 ? (genBySource[s] / totalGen) * 100 : 0,
-    };
-  }
-
-  return {
-    total_generation_twh: totalGen,
-    total_demand_twh: totalDemand,
-    total_emissions_mtco2: totalEmissions,
-    clean_pct: totalGen > 0 ? (cleanTwh / totalGen) * 100 : 0,
-    fossil_pct: totalGen > 0 ? (fossilTwh / totalGen) * 100 : 0,
-    renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
-    wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
-    country_count: count,
-    year_min: yearMin,
-    year_max: yearMax,
-    generation,
-  };
+  return null;
 }
+
+/**
+ * Bloc totals for the most recent year all members share.
+ *
+ * Replaces an earlier aggregateBlocLatest, which summed each member's own
+ * latest year. That produced a figure no year actually had.
+ */
+export function aggregateBlocCommonYear(
+  members: Country[]
+): { agg: BlocAggregates; year: number } | null {
+  const year = commonLatestYear(members);
+  if (year == null) return null;
+  const agg = aggregateBloc(members, year);
+  return agg ? { agg, year } : null;
+}
+

@@ -210,10 +210,9 @@ export function calculateIndependenceScoreV2(
   // untracked. A country that burns no coal is not missing its coal data in any
   // sense that matters.
   const unknownBurnedFuels: string[] = [];
-  let unknownShare = 0;
-  if (!coal.known && coalPct > 0.5) { unknownBurnedFuels.push('coal'); unknownShare += coalPct; }
-  if (!gas.known && gasPct > 0.5) { unknownBurnedFuels.push('gas'); unknownShare += gasPct; }
-  if (!oil.known && oilPct > 0.5) { unknownBurnedFuels.push('oil'); unknownShare += oilPct; }
+  if (!coal.known && coalPct > 0.5) unknownBurnedFuels.push('coal');
+  if (!gas.known && gasPct > 0.5) unknownBurnedFuels.push('gas');
+  if (!oil.known && oilPct > 0.5) unknownBurnedFuels.push('oil');
   const hasFossilData = fossilData != null && unknownBurnedFuels.length === 0;
 
   // Unknown fuel is treated as imported, and said so. That is deliberately

@@ -1,6 +1,6 @@
 'use client';
 
-import type { YearData, EnergySource } from '@/lib/types';
+import type { YearData } from '@/lib/types';
 import { energyColors, energyLabels, energyOrder } from '@/lib/colors';
 import { formatPercent } from '@/lib/scales';
 

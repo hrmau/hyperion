@@ -84,7 +84,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2>Limitation of Liability</h2>
             <p>
-              Grid Gorilla is provided"as is" without warranties of any kind. In no event shall the creators
+              Grid Gorilla is provided&quot;as is&quot; without warranties of any kind. In no event shall the creators
               be liable for any damages arising from the use or inability to use this site.
             </p>
           </section>

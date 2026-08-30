@@ -19,7 +19,7 @@ import {
   loadFossilFuelData,
   getCountriesInBloc,
   getLatestYearData,
-  aggregateBlocLatest,
+  aggregateBlocCommonYear,
   blocAggToYearData,
 } from '@/lib/data';
 import type { CountriesData, BlocsData, Country, FossilFuelData } from '@/lib/types';
@@ -108,7 +108,7 @@ export default function Explore() {
 
   const blocAgg = useMemo(() => {
     if (!countries || !blocs || selectedBloc === 'ALL') return null;
-    return aggregateBlocLatest(getCountriesInBloc(selectedBloc, countries, blocs));
+    return aggregateBlocCommonYear(getCountriesInBloc(selectedBloc, countries, blocs))?.agg ?? null;
   }, [countries, blocs, selectedBloc]);
 
   const blocYearData = useMemo(() => (blocAgg ? blocAggToYearData(blocAgg) : null), [blocAgg]);

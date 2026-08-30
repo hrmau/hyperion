@@ -90,17 +90,6 @@ export default function ScatterPlot({
 }: ScatterPlotProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
-  const [isDark, setIsDark] = useState(false);
-
-  // Watch for theme changes
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, []);
 
   // Resize observer
   useEffect(() => {
@@ -305,7 +294,7 @@ export default function ScatterPlot({
     }
 
     // Bubbles
-    const bubbles = g.selectAll('circle')
+    g.selectAll('circle')
       .data(filteredData)
       .join('circle')
       .attr('cx', d => xScale(d[xMetric] as number))
@@ -363,7 +352,7 @@ export default function ScatterPlot({
       .attr('pointer-events', 'none')
       .text(d => d.iso3);
 
-  }, [filteredData, dimensions, xMetric, yMetric, colorMode, useLogScale, showRegression, regression, highlightedCountries, handleMouseMove, handleMouseLeave, handleClick, isDark]);
+  }, [filteredData, dimensions, xMetric, yMetric, colorMode, useLogScale, showRegression, regression, highlightedCountries, handleMouseMove, handleMouseLeave, handleClick]);
 
   return (
     <svg
