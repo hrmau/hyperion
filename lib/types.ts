@@ -68,10 +68,22 @@ export type EnergySource =
   | 'other_fossil';
 
 // Fossil fuel independence data types
+/**
+ * Fossil production and consumption, in TWh-equivalent.
+ *
+ * `null` means OWID does not track the figure; `0` means it tracks it and the
+ * value is zero. The distinction is load-bearing — see calculateIndependenceScoreV2,
+ * where an unknown consumption cannot count as evidence of self-sufficiency.
+ */
+export interface FossilFuelValue {
+  production: number | null;
+  consumption: number | null;
+}
+
 export interface FossilFuelYearData {
-  coal: { production: number; consumption: number };
-  gas: { production: number; consumption: number };
-  oil: { production: number; consumption: number };
+  coal: FossilFuelValue;
+  gas: FossilFuelValue;
+  oil: FossilFuelValue;
 }
 
 export interface FossilFuelCountry {

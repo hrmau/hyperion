@@ -78,23 +78,37 @@ function independenceScore(yearData, fossilData, iso3) {
 
   const uraniumIndep = (URANIUM_INDEPENDENCE[iso3] ?? 0) / 100;
 
-  // No fossil data means we assume 100% imports, exactly as the app does.
-  const ratio = (fuel) =>
-    fuel.consumption > 0 ? Math.min(fuel.production / fuel.consumption, 1.0) : 1.0;
-  const coalIndep = fossilData ? ratio(fossilData.coal) : 0;
-  const gasIndep = fossilData ? ratio(fossilData.gas) : 0;
-  const oilIndep = fossilData ? ratio(fossilData.oil) : 0;
+  // Mirrors lib/independence.ts. A null consumption means OWID does not track
+  // the figure, and unknown cannot count as evidence of self-sufficiency; a
+  // measured zero means they burn none of it, which genuinely is independence
+  // of that fuel (and multiplies against a zero share anyway).
+  const fuelIndependence = (fuel) => {
+    if (!fuel) return { ratio: 0, known: false };
+    const { production, consumption } = fuel;
+    if (consumption == null) return { ratio: 0, known: false };
+    if (consumption === 0) return { ratio: 1, known: true };
+    return { ratio: Math.min((production ?? 0) / consumption, 1.0), known: true };
+  };
+
+  const coal = fuelIndependence(fossilData?.coal);
+  const gas = fuelIndependence(fossilData?.gas);
+  const oil = fuelIndependence(fossilData?.oil);
+
+  let unknownShare = 0;
+  if (!coal.known && coalPct > 0.5) unknownShare += coalPct;
+  if (!gas.known && gasPct > 0.5) unknownShare += gasPct;
+  if (!oil.known && oilPct > 0.5) unknownShare += oilPct;
 
   const raw =
     renewablePct +
     nuclearPct * uraniumIndep +
-    coalPct * coalIndep +
-    gasPct * gasIndep +
-    oilPct * oilIndep;
+    coalPct * coal.ratio +
+    gasPct * gas.ratio +
+    oilPct * oil.ratio;
 
   return {
     score: Math.min(raw, 100),
-    missingFossilData: !fossilData,
+    missingFossilData: !fossilData || unknownShare > 0,
   };
 }
 

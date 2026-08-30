@@ -79,11 +79,18 @@ Two things it deliberately only *warns* about, because they need judgement:
 - **Insight lines going stale.** See below.
 
 `--fossil-start-year` (default 2020) decides which countries appear in
-`fossil-fuel-independence.json` at all. It is pinned rather than rolling because
-widening it admits countries whose fuel *consumption* OWID does not track, and
-`lib/independence.ts` reads "consumption == 0" as "doesn't use this fuel,
-therefore 100% independent of it" — which would score places running on imported
-diesel as energy fortresses. Leave it alone unless you are also fixing that.
+`fossil-fuel-independence.json` at all, and is pinned rather than rolling so a
+refresh cannot quietly move published scores by admitting new countries.
+
+**`null` and `0` mean different things in that file.** `null` is "OWID does not
+track this"; `0` is "tracked, and it is zero". `lib/independence.ts` treats an
+unknown consumption as imported and flags the score with an asterisk — it used
+to treat it as 100% independent, which scored grids running on imported diesel
+as energy fortresses. Never collapse `null` to `0` in the transform.
+
+`scripts/generate-questions.js` carries a **port** of that scoring model. If you
+change `lib/independence.ts`, mirror it there and re-run — the file says so, and
+that comment has already caught one drift.
 
 Not automated, on purpose: `socioeconomic.json` (World Bank + UNDP, annual, and
 HDI has no clean API), `blocs.json` (who counts as BRICS is editorial), and
