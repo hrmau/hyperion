@@ -137,7 +137,6 @@ export default function MethodologyPage() {
             <div className="grid sm:grid-cols-2 gap-4 mt-6">
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span>🎯</span>
                   <h4>Honest</h4>
                 </div>
                 <p>
@@ -146,7 +145,6 @@ export default function MethodologyPage() {
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span>📊</span>
                   <h4>Data-driven</h4>
                 </div>
                 <p>
@@ -155,7 +153,6 @@ export default function MethodologyPage() {
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span>🌍</span>
                   <h4>Educational</h4>
                 </div>
                 <p>
@@ -164,7 +161,6 @@ export default function MethodologyPage() {
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span>🔓</span>
                   <h4>Open</h4>
                 </div>
                 <p>
@@ -369,10 +365,10 @@ export default function MethodologyPage() {
   - Imports: 20 TWh (from neighboring grids)
 
 Using generation as denominator:
-  → 80 TWh / 80 TWh = 100% "independent" ❌ WRONG
+  → 80 TWh / 80 TWh = 100% "independent" WRONG
 
 Using demand as denominator:
-  → 80 TWh / 100 TWh = 80% max independence ✓ CORRECT
+  → 80 TWh / 100 TWh = 80% max independence CORRECT
   → The 20% import gap contributes ZERO to score`}
               </CodeBlock>
               <p className="mt-3">
@@ -786,7 +782,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
             <div className="space-y-4">
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="mb-2">❌ NOT a measure of &quot;good&quot; vs &quot;bad&quot; energy policy</h4>
+                <h4 className="mb-2">NOT a measure of &quot;good&quot; vs &quot;bad&quot; energy policy</h4>
                 <p>
                   A country with 100% coal from domestic mines scores higher than a country with 100% imported renewables.
                   This doesn&apos;t mean coal is &quot;better&quot; - it means the coal country is more independent.
@@ -794,7 +790,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="mb-2">❌ NOT a measure of energy security</h4>
+                <h4 className="mb-2">NOT a measure of energy security</h4>
                 <div className="overflow-x-auto mt-3">
                   <table className="w-full">
                     <thead>
@@ -826,7 +822,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="mb-2">❌ NOT a measure of sustainability</h4>
+                <h4 className="mb-2">NOT a measure of sustainability</h4>
                 <p>
                   Fossil fuel independence counts the same as renewable independence.
                   A country running on domestic coal gets the same score as one running on domestic solar.
@@ -834,7 +830,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="mb-2">❌ NOT a measure of electricity prices or grid reliability</h4>
+                <h4 className="mb-2">NOT a measure of electricity prices or grid reliability</h4>
                 <p>
                   Norway is independent AND has low prices. South Africa has domestic coal but frequent load-shedding.
                 </p>
@@ -844,11 +840,11 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
               <h4 className="text-green-800 dark:text-green-300 mb-2">What it IS measuring</h4>
               <ul className="text-green-700 dark:text-green-400 space-y-1">
-                <li>✅ Geopolitical vulnerability to supply disruptions</li>
-                <li>✅ Exposure to foreign fuel price shocks</li>
-                <li>✅ Dependence on international trade routes</li>
-                <li>✅ Leverage other countries have over energy supply</li>
-                <li>✅ Electricity import dependency (grid interconnections)</li>
+                <li>Geopolitical vulnerability to supply disruptions</li>
+                <li>Exposure to foreign fuel price shocks</li>
+                <li>Dependence on international trade routes</li>
+                <li>Leverage other countries have over energy supply</li>
+                <li>Electricity import dependency (grid interconnections)</li>
               </ul>
             </div>
           </CollapsibleSection>
