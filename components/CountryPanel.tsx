@@ -215,7 +215,7 @@ function CountryDetail({ country, yearData, year, fossilFuelData, blocsData }: {
   country: Country; yearData: YearData; year: number; fossilFuelData: FossilFuelData | null; blocsData: BlocsData | null;
 }) {
   // Get fossil fuel data for this country, falling back to nearest available year
-  const { data: fossilYear, actualYear } = getFossilDataForYear(
+  const { data: fossilYear } = getFossilDataForYear(
     fossilFuelData?.countries[country.iso3],
     year
   );
@@ -339,16 +339,7 @@ export default function CountryPanel({
             {BLOC_LABELS[selectedBloc] || selectedBloc} Overview
           </h2>
           <p className="text-[11px] text-muted">
-            {blocAgg.country_count} countries &middot;{' '}
-            {blocAgg.year_min === blocAgg.year_max ? (
-              blocAgg.year_max
-            ) : (
-              // Members' latest available years differ, so this total blends
-              // periods. Say so rather than implying a single snapshot.
-              <span title="Members' latest available data years differ, so this total blends years.">
-                {blocAgg.year_min}&ndash;{blocAgg.year_max}
-              </span>
-            )}
+            {blocAgg.country_count} countries &middot; {blocAgg.year_max}
           </p>
         </div>
         <div className="p-4 space-y-5">

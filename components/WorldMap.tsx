@@ -117,18 +117,7 @@ export default function WorldMap({
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
   const [worldData, setWorldData] = useState<Topology | null>(null);
-  const [isDark, setIsDark] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
-
-  // Watch for theme changes so the map re-renders with correct colors
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, []);
 
   // Geometry loads in two passes.
   //
@@ -296,7 +285,7 @@ export default function WorldMap({
       }
     }
 
-  }, [worldData, countries, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, isDark, mapMode, fossilFuelData]);
+  }, [worldData, countries, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, mapMode, fossilFuelData]);
 
   // Zoom control functions
   const handleZoomIn = useCallback(() => {

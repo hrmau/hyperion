@@ -1,54 +1,63 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import {
-  hasConsented,
-  getPreferences,
   saveConsent,
   acceptAll,
   rejectOptional,
+  subscribeConsent,
+  getConsentSnapshot,
+  getServerConsentSnapshot,
+  getDecidedSnapshot,
+  getServerDecidedSnapshot,
   type CookiePreferences,
 } from '@/lib/cookies';
 
 export default function CookieConsent() {
-  const [showBanner, setShowBanner] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    necessary: true,
-    analytics: false,
-  });
 
-  useEffect(() => {
-    // Check if user has already consented
-    if (!hasConsented()) {
-      setShowBanner(true);
-    } else {
-      setPreferences(getPreferences());
-    }
-  }, []);
+  // Consent is read through an external store rather than an effect. The server
+  // snapshot says "already decided" so the banner cannot flash on a page that
+  // was never going to show it.
+  const stored = useSyncExternalStore(
+    subscribeConsent,
+    getConsentSnapshot,
+    getServerConsentSnapshot
+  );
+  const decided = useSyncExternalStore(
+    subscribeConsent,
+    getDecidedSnapshot,
+    getServerDecidedSnapshot
+  );
 
+  const [draft, setDraft] = useState<CookiePreferences | null>(null);
+  const preferences = draft ?? stored;
+  const setPreferences = setDraft;
+  const showBanner = !decided && !dismissed;
+
+  // No reload any more: GoogleAnalytics subscribes to the same store, so the
+  // tag mounts the moment consent is granted. Reloading the page to start
+  // analytics was a jarring way to answer a cookie banner.
   const handleAcceptAll = () => {
-    const prefs = acceptAll();
-    setPreferences(prefs);
-    setShowBanner(false);
+    setPreferences(acceptAll());
+    setDismissed(true);
     setShowSettings(false);
-    // Reload to initialize GA
-    window.location.reload();
   };
 
   const handleRejectOptional = () => {
-    const prefs = rejectOptional();
-    setPreferences(prefs);
-    setShowBanner(false);
+    setPreferences(rejectOptional());
+    setDismissed(true);
     setShowSettings(false);
   };
 
   const handleSavePreferences = () => {
     saveConsent(preferences);
-    setShowBanner(false);
+    setDismissed(true);
     setShowSettings(false);
-    // Reload to apply changes
-    window.location.reload();
+    // Turning analytics OFF still reloads: the tag cannot be unloaded once the
+    // page has it, so the only honest way to stop it is a fresh document.
+    if (!preferences.analytics) window.location.reload();
   };
 
   if (!showBanner) return null;

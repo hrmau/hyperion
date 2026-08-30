@@ -1,23 +1,25 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
-import { hasConsented, getPreferences } from '@/lib/cookies';
+import { useSyncExternalStore } from 'react';
+import {
+  subscribeConsent,
+  getConsentSnapshot,
+  getServerConsentSnapshot,
+} from '@/lib/cookies';
 
 const GA_MEASUREMENT_ID = 'G-H89L3VC5L3';
 
 export default function GoogleAnalytics() {
-  const [enabled, setEnabled] = useState(false);
+  // Read through an external store rather than an effect, so consent is never
+  // assumed during hydration and the tag mounts the moment it is granted.
+  const prefs = useSyncExternalStore(
+    subscribeConsent,
+    getConsentSnapshot,
+    getServerConsentSnapshot
+  );
 
-  useEffect(() => {
-    // Check if user has consented to analytics
-    if (hasConsented()) {
-      const prefs = getPreferences();
-      setEnabled(prefs.analytics);
-    }
-  }, []);
-
-  if (!enabled) return null;
+  if (!prefs.analytics) return null;
 
   return (
     <>

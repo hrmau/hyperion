@@ -140,7 +140,7 @@ export default function MethodologyPage() {
                   <h4>Honest</h4>
                 </div>
                 <p>
-                  We don't hide import dependencies or overstate &quot;green&quot; credentials
+                  We don&rsquo;t hide import dependencies or overstate &quot;green&quot; credentials
                 </p>
               </div>
               <div className="card p-4">
@@ -321,7 +321,7 @@ export default function MethodologyPage() {
           <CollapsibleSection title="Energy Independence Score - Detailed Methodology" id="methodology">
             <h3 className="mb-2">What is Energy Independence?</h3>
             <p className="mb-4">
-              <strong>Energy Independence</strong> measures how much of a country's electricity
+              <strong>Energy Independence</strong> measures how much of a country&rsquo;s electricity
               demand is met by domestic sources versus imported fuels or imported electricity.
             </p>
 
@@ -453,7 +453,7 @@ Everyone Else: 0% (imports 100%)
                 <p className="mb-3">(100% independent, relative to demand)</p>
                 <FormulaBox>
                   <div>renewable_electricity = solar + wind + hydro + bioenergy + other_renewables</div>
-                  <div className="mt-2">// Note: denominator is DEMAND, not generation</div>
+                  <div className="mt-2">{'// Note: denominator is DEMAND, not generation'}</div>
                   <div>renewable_contribution = (renewable_electricity / demand) × 100</div>
                 </FormulaBox>
               </div>
@@ -462,11 +462,11 @@ Everyone Else: 0% (imports 100%)
                 <h4 className="mb-2">Step 2: Calculate Fossil Fuel Contributions</h4>
                 <p className="mb-3">(weighted by import dependency, relative to demand)</p>
                 <FormulaBox>
-                  <div className="mb-2">// For each fossil fuel (coal, gas, oil):</div>
+                  <div className="mb-2">{'// For each fossil fuel (coal, gas, oil):'}</div>
                   <div>fuel_independence_ratio = fuel_production / fuel_consumption</div>
-                  <div className="mt-2">// Cap at 100% for net exporters</div>
+                  <div className="mt-2">{'// Cap at 100% for net exporters'}</div>
                   <div>if (fuel_independence_ratio {'>'} 1.0) fuel_independence_ratio = 1.0</div>
-                  <div className="mt-3">// All percentages relative to DEMAND</div>
+                  <div className="mt-3">{'// All percentages relative to DEMAND'}</div>
                   <div>coal_contribution = (coal_elec / demand) × coal_independence × 100</div>
                   <div>gas_contribution = (gas_elec / demand) × gas_independence × 100</div>
                   <div>oil_contribution = (oil_elec / demand) × oil_independence × 100</div>
@@ -478,7 +478,7 @@ Everyone Else: 0% (imports 100%)
                 <p className="mb-3">(weighted by uranium independence, relative to demand)</p>
                 <FormulaBox>
                   <div>uranium_independence = URANIUM_LOOKUP_TABLE[country_code] || 0</div>
-                  <div className="mt-2">// Nuclear percentage relative to DEMAND</div>
+                  <div className="mt-2">{'// Nuclear percentage relative to DEMAND'}</div>
                   <div>nuclear_contribution = (nuclear_elec / demand) × (uranium_independence / 100) × 100</div>
                 </FormulaBox>
               </div>
@@ -486,13 +486,13 @@ Everyone Else: 0% (imports 100%)
               <div className="card p-5">
                 <h4 className="mb-2">Step 4: Sum All Contributions</h4>
                 <FormulaBox>
-                  <div className="mb-2">// Imported electricity contributes 0 automatically</div>
-                  <div className="mb-2">// because generation {'<'} demand creates a gap that isn&apos;t counted</div>
+                  <div className="mb-2">{'// Imported electricity contributes 0 automatically'}</div>
+                  <div className="mb-2">{'// because generation < demand creates a gap that is not counted'}</div>
                   <div>total_score = renewable_contribution + nuclear_contribution +</div>
                   <div className="ml-12">coal_contribution + gas_contribution + oil_contribution</div>
-                  <div className="mt-2">// Max score limited by (generation / demand) ratio</div>
-                  <div>// If demand = 100 TWh and generation = 80 TWh, max score is 80</div>
-                  <div className="mt-2">// Round to 1 decimal place</div>
+                  <div className="mt-2">{'// Max score limited by (generation / demand) ratio'}</div>
+                  <div>{'// If demand = 100 TWh and generation = 80 TWh, max score is 80'}</div>
+                  <div className="mt-2">{'// Round to 1 decimal place'}</div>
                   <div>final_score = Math.round(total_score × 10) / 10</div>
                 </FormulaBox>
               </div>
