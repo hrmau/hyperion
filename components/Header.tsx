@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from './Navigation';
-import DarkModeToggle from './DarkModeToggle';
 import type { NavItem } from './navItems';
 import { primaryNavItems, secondaryNavItems } from './navItems';
 
@@ -80,7 +79,6 @@ export default function Header({ currentPage, fixed }: HeaderProps) {
 
           {/* Right side: Dark mode toggle + Mobile menu button */}
           <div className="flex-1 flex items-center justify-end gap-2">
-            <DarkModeToggle />
 
             {/* Mobile menu button - visible on mobile only */}
             <button

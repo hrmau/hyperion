@@ -1,0 +1,19 @@
+:root {
+  --r-chip: 6px;      /* mono year badge */
+  --r-well: 8px;      /* chart wells, active nav item */
+  --r-button: 10px;   /* all buttons, quiz answers */
+  --r-card: 16px;     /* hook cards */
+  --r-pill: 99px;     /* filter pills, location pill, status dots */
+
+  --border-hair: 1px solid var(--line);
+  --border-hair-strong: 1px solid var(--line-strong);
+
+  /* Chart band separators are drawn in the PAGE colour, not a grey — they
+     read as a gap rather than a stroke. */
+  --chart-sep-width: 1.4px;
+
+  /* This system has no drop shadows. Elevation is expressed as a step up
+     the ink ramp plus a hairline. If you think you need a shadow, you
+     need --ink-700 and a --line. */
+  --shadow-none: none;
+}

@@ -1,0 +1,15 @@
+<!-- @dsCard group="Spacing" viewport="700x190" subtitle="Four breakpoints — implemented in tokens/responsive.css" name="Responsive rules" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:20px;font-family:var(--font-mono);font-size:11px}
+th,td{text-align:left;padding:6px 12px 6px 0;border-bottom:1px solid var(--line);vertical-align:top;letter-spacing:.04em}
+th{color:var(--text-label);font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:.16em}
+td:first-child{color:var(--green);white-space:nowrap}</style></head><body>
+<table style="width:100%;border-collapse:collapse">
+<tr><th>Breakpoint</th><th>Hook</th><th>What changes</th></tr>
+<tr><td>≥1280 xl</td><td>—</td><td>Reference layout: 1.12fr/1fr hero, 3-up cards, 6-col table, 58px tiles</td></tr>
+<tr><td>1024–1279</td><td>.gg-hero-split .gg-nav-meta</td><td>Hero → 1fr/1fr · nav meta hidden</td></tr>
+<tr><td>768–1023</td><td>.gg-hero-split .gg-explore-split .gg-card-row .gg-tiles</td><td>Hero and explore stack (border flips to top) · cards 3-up → 2-up · tiles 48px</td></tr>
+<tr><td>&lt;768</td><td>.gg-card-row .gg-compare-split .gg-stat-row .gg-action-row .gg-col-optional .gg-nav-items .gg-tiles</td><td>All one column · stats 2-up grid · buttons stack full-width · optional table columns drop · nav → fixed bottom bar, 44px targets (viewport-only) · tiles 44px</td></tr>
+</table>
+<div style="color:var(--text-quiet);margin-top:12px;letter-spacing:.06em;font-size:10px">EVERY RULE IS WRITTEN TWICE — AGAINST THE VIEWPORT AND THE .gg-page CONTAINER — SO EMBEDDED PAGES REFLOW TOO.<br>ONE EXCEPTION: THE BOTTOM BAR IS VIEWPORT-ONLY, SINCE position:fixed IS A DEVICE CONCERN.<br>TYPE AND GUTTERS ARE NOT LISTED — THEY ARE clamp() TOKENS AND SCALE CONTINUOUSLY. HERO 34→60PX, H2 26→34PX, GUTTER 18→34PX.</div>
+</body></html>

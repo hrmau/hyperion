@@ -1,0 +1,43 @@
+:root {
+  /* Aliases. Prefer these in product code — they survive a re-theme. */
+  --bg-page: var(--ink-900);
+  --bg-raised: var(--ink-800);
+  --bg-card: var(--ink-700);
+  --bg-card-strong: var(--ink-600);
+  --bg-accent: var(--green);
+  --bg-inverse: var(--paper);
+
+  --text-primary: var(--paper);
+  --text-secondary: var(--paper-a66);
+  --text-tertiary: var(--paper-a48);
+  --text-quiet: var(--paper-a42);
+  --text-label: var(--paper-a42);
+  --text-accent: var(--green);
+  --text-on-accent: var(--green-ink);
+  --text-on-inverse: var(--ink-900);
+
+  --border-default: var(--line);
+  --border-emphasis: var(--line-strong);
+
+  --link: var(--green);
+  --link-hover: var(--sage);
+
+  --focus-ring: 2px solid var(--green);
+  --focus-offset: 2px;
+}
+
+/* Global reset + the two link colours every consumer needs. */
+html { -webkit-text-size-adjust: 100% }
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--link); text-decoration: none }
+a:hover { color: var(--link-hover) }
+:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset) }
+svg { display: block }

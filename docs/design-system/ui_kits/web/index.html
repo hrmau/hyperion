@@ -1,0 +1,99 @@
+<!-- @dsCard group="Website" viewport="1280x780" subtitle="Click-through: geolocated home, explore, rankings, compare, play" name="Grid Gorilla website" -->
+<!-- @startingPoint section="Website" subtitle="Geolocated homepage" viewport="1280x780" -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid Gorilla — website UI kit</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- Map geometry. Pinned + hash-verified; do not change versions, URLs or hashes. -->
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+  #boot { padding: 34px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--text-quiet) }
+</style>
+</head><body>
+<div id="root"><div id="boot">Loading Grid Gorilla UI kit…</div></div>
+
+<script>
+/* Preview loader (this file only — production code imports the modules
+   normally). Babel-standalone cannot resolve ESM imports of .jsx files, so we
+   fetch the sources, strip their import/export keywords, concatenate them in
+   dependency order and transform the result as one script. */
+const FILES = [
+  "../../components/data/fuels.js",
+  "../../components/core/Eyebrow.jsx",
+  "../../components/core/Button.jsx",
+  "../../components/core/Pill.jsx",
+  "../../components/core/Card.jsx",
+  "../../components/core/Stat.jsx",
+  "../../components/core/Badge.jsx",
+  "../../components/core/GorillaNote.jsx",
+  "../../components/nav/LocationPill.jsx",
+  "../../components/nav/TopNav.jsx",
+  "../../components/nav/Footer.jsx",
+  "../../components/data/FuelLegend.jsx",
+  "../../components/data/StackedAreaChart.jsx",
+  "../../components/data/MixBar.jsx",
+  "../../components/data/RankedBarList.jsx",
+  "../../components/data/DonutStat.jsx",
+  "../../components/data/TileGrid.jsx",
+  "../../components/data/DataTable.jsx",
+  "../../components/data/YearScrubber.jsx",
+  "../../components/data/Sparkline.jsx",
+  "../../components/data/Charts.jsx",
+  "../../components/data/WorldMap.jsx",
+  "../../components/forms/Forms.jsx",
+  "../../components/forms/CountrySearch.jsx",
+  "../../components/feedback/Feedback.jsx",
+  "../../components/overlay/Overlay.jsx",
+  "../../components/nav/Navigation.jsx",
+  "../../components/nav/SiteFooter.jsx",
+  "../../components/content/HookHeadline.jsx",
+  "../../components/content/HookCard.jsx",
+  "../../components/content/QuizCard.jsx",
+  "../../components/content/CountryHeader.jsx",
+  "../../components/content/ChapterCard.jsx",
+  "../../components/content/Prose.jsx",
+  "./data.js",
+  "./Home.jsx",
+  "./Explore.jsx",
+  "./Country.jsx",
+  "./Story.jsx",
+  "./Rankings.jsx",
+  "./Compare.jsx",
+  "./Play.jsx",
+];
+
+const strip = (src) => src
+  .replace(/^\s*import[\s\S]*?;\s*$/gm, "")
+  .replace(/^\s*export\s+/gm, "");
+
+(async () => {
+  const parts = await Promise.all(
+    FILES.map((path) => fetch(path).then((res) => res.text()).then(strip))
+  );
+  parts.push(`
+    const SCREENS = { Explore, Play, Compare, Rankings, Story, Country };
+    function App() {
+      const [screen, setScreen] = React.useState("Home");
+      const go = (name) => setScreen(name === screen ? "Home" : name);
+      if (screen === "Home") return React.createElement(Home, { onNavigate: go });
+      const S = SCREENS[screen] || Home;
+      return React.createElement(S, { onNavigate: go });
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+  `);
+  const code = Babel.transform(parts.join("\n"), {
+    presets: [["react", { runtime: "classic" }]],
+  }).code;
+  new Function("React", "ReactDOM", code)(window.React, window.ReactDOM);
+})().catch((err) => {
+  document.getElementById("boot").textContent = "Load failed: " + err.message;
+  console.error(err);
+});
+</script>
+</body></html>

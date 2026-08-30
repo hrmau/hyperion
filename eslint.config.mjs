@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored design-system reference: upstream .jsx sources, specimen cards
+    // and the documentation bundle. Not app code, not built, not shipped —
+    // components/ds/ holds the ported TSX that actually runs.
+    "docs/design-system/**",
   ]),
   // Build-time Node scripts are CommonJS and never bundled into the app.
   {

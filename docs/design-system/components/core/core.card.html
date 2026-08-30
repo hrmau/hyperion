@@ -1,0 +1,44 @@
+<!-- @dsCard group="Components" viewport="700x620" name="Core" subtitle="Button, Pill, Eyebrow, Card, Stat, Badge, GorillaNote" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:20px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}</style>
+</head><body><div id="root"></div>
+<script type="text/gg-babel">
+const { Button, Pill, Eyebrow, Card, Stat, Badge, GorillaNote } = window.GridGorilla;
+ReactDOM.createRoot(document.getElementById('root')).render(<>
+  <div className="row">
+    <Button variant="primary">Choose a country</Button>
+    <Button variant="secondary">Compare two</Button>
+    <Button variant="accent">Play</Button>
+    <Button variant="ghost">Methodology</Button>
+    <Button variant="primary" size="sm">Small</Button>
+    <Button variant="primary" disabled>Disabled</Button>
+  </div>
+  <div className="row">
+    <Pill selected>World</Pill><Pill>European Union</Pill><Pill>China</Pill><Pill dashed>+ any of 214</Pill>
+    <Badge tone="inverse">2026</Badge><Badge tone="accent">▲ 2.1 pp</Badge><Badge tone="outline">Ember</Badge>
+  </div>
+  <div className="row" style={{gap:26}}>
+    <Eyebrow tone="accent" dot>Your grid, right now</Eyebrow>
+    <Eyebrow>World generation mix · 100% stacked</Eyebrow>
+  </div>
+  <div className="row" style={{gap:26,borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',padding:'16px 0'}}>
+    <Stat label="Wind share" value="34%" note="2nd of 214" tone="accent" size="lg" />
+    <Stat label="Clean share" value="41%" note="exactly the world average" size="lg" />
+    <Stat label="Total output" value="30,856" unit="TWh" note="3.2× larger than 1985" size="lg" />
+  </div>
+  <div className="row" style={{alignItems:'stretch'}}>
+    <Card tone="accent" style={{flex:1}}><Eyebrow style={{color:'rgba(4,37,15,.62)'}}>Higher or lower</Eyebrow><div style={{fontSize:19,fontWeight:700,marginTop:8,letterSpacing:'-.02em'}}>Ireland or Spain for wind?</div></Card>
+    <Card tone="card" style={{flex:1}}><Eyebrow>Your neighbours</Eyebrow><div style={{fontSize:19,fontWeight:700,marginTop:8,letterSpacing:'-.02em'}}>The UK cut coal to zero.</div></Card>
+    <Card tone="strong" style={{flex:1}}><Eyebrow>The world</Eyebrow><div style={{fontSize:19,fontWeight:700,marginTop:8,letterSpacing:'-.02em'}}>A third still runs on coal.</div></Card>
+  </div>
+  <GorillaNote lead="Watch the green band." mark="../../assets/gorilla-dark.svg">
+    In 1990 it didn't exist. Ireland went from zero to second in the world inside one working career.
+  </GorillaNote>
+</>);
+</script></body></html>

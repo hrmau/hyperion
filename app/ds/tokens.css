@@ -1,0 +1,25 @@
+/* Grid Gorilla design system token layer.
+   Source of truth: docs/design-system/tokens/ — these are copies, kept in the
+   app so Next can process them. Fonts are omitted on purpose: upstream
+   fonts.css @imports Google Fonts over the network, and app/layout.tsx loads
+   the same two families through next/font instead (self-hosted, no
+   third-party request, no layout shift). The family names are identical.
+
+   Every :root in the upstream token files is scoped to `.gg-page` here. The
+   pre-redesign token set in globals.css declares 11 of the same names with
+   different values (--space-3 is 12px there and 8px here, --text-primary is a
+   colour in both), and it loads later, so at :root it would silently win and
+   break the spacing of every design-system component. Scoping means a surface
+   gets the new tokens by opting in — by being wrapped in .gg-page — and pages
+   not yet rebuilt keep the old ones. Stage 8 deletes the old set and this can
+   go back to :root. */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/shape.css";
+@import "./tokens/motion.css";
+@import "./tokens/charts.css";
+@import "./tokens/semantic.css";
+@import "./tokens/responsive.css";
+@import "./tokens/controls.css";
+@import "./tokens/prose.css";

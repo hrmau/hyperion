@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Design system token layer. Loaded after Tailwind so its values win where the
+   two overlap. The old :root block below is the pre-redesign token set and is
+   still in use by surfaces not yet rebuilt — stage 8 removes it. */
+@import "./ds/tokens.css";
+
 /* Configure Tailwind v4 to use class-based dark mode */
 @variant dark (&:where(.dark, .dark *));
 
@@ -165,14 +170,14 @@
   --color-negative: var(--negative);
   --color-border: var(--border);
   --color-border-subtle: var(--border-subtle);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans-family);
+  --font-mono: var(--font-mono-family);
 }
 
 body {
   background: var(--canvas);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans-family), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ========================================

@@ -1,0 +1,44 @@
+<!-- @dsCard group="Components" viewport="700x470" name="Data & charts" subtitle="StackedArea, MixBar, FuelLegend, RankedBarList, DonutStat, TileGrid, Sparkline" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:20px}</style>
+</head><body><div id="root"></div>
+<script type="text/gg-babel">
+const { StackedAreaChart, MixBar, FuelLegend, RankedBarList, DonutStat, TileGrid, Sparkline } = window.GridGorilla;
+const IE = { wind:[0,2,12,34], solar:[0,0,1,4], gas:[8,22,38,42], coal:[62,44,22,6], other:[30,32,27,14] };
+ReactDOM.createRoot(document.getElementById('root')).render(
+<div style={{display:'grid',gridTemplateColumns:'1.3fr 1fr',gap:24}}>
+  <div>
+    <StackedAreaChart series={IE} years={[1990,2000,2010,2026]} scrubYear={2026} height={170} />
+    <FuelLegend style={{marginTop:12}} shares={[{fuel:'wind',value:34},{fuel:'solar',value:4},{fuel:'gas',value:42},{fuel:'coal',value:6},{fuel:'other',value:14}]} />
+    <div style={{marginTop:18}}><MixBar series={{wind:34,solar:4,gas:42,coal:6,other:14}} height={12} /></div>
+    <div style={{marginTop:18}}>
+      <TileGrid tileSize={44} groups={[{label:'Europe',tiles:[
+        {code:'NO',color:'var(--fuel-hydro)'},{code:'FR',color:'var(--fuel-nuclear)'},{code:'IE',color:'var(--fuel-wind)'},
+        {code:'DE',color:'var(--fuel-wind)'},{code:'PL',color:'var(--fuel-coal)'},{code:'IT',color:'var(--fuel-gas)'},
+        {code:'ES',color:'var(--fuel-wind)'},{code:'SE',color:'var(--fuel-nuclear)'}]}]} />
+    </div>
+  </div>
+  <div>
+    <div style={{display:'flex',gap:16,marginBottom:20}}>
+      <DonutStat value={40.9} label="Clean" size={96} />
+      <DonutStat value={56.4} label="Fossil" size={96} color="var(--fuel-gas)" />
+    </div>
+    <RankedBarList showRank items={[
+      {label:'Iceland',value:52300,display:'52,300',tone:'accent'},
+      {label:'Norway',value:23000,display:'23,000'},
+      {label:'USA',value:12700,display:'12,700'},
+      {label:'India',value:1300,display:'1,300'},
+      {label:'Nigeria',value:160,display:'160',tone:'down'}]} />
+    <div style={{marginTop:18,display:'flex',alignItems:'center',gap:12}}>
+      <Sparkline values={[2,5,9,14,22,34]} color="var(--green)" />
+      <span style={{fontFamily:'var(--font-mono)',fontSize:11.5,color:'var(--text-tertiary)'}}>WIND, 1990→2026</span>
+    </div>
+  </div>
+</div>);
+</script></body></html>

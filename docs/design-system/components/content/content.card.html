@@ -1,0 +1,27 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Content & hooks" subtitle="HookHeadline, HookCard, QuizCard, CountryHeader, ChapterCard" -->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:20px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const { HookHeadline, HookCard, QuizCard, ChapterCard } = window.GridGorilla;
+ReactDOM.createRoot(document.getElementById('root')).render(<>
+  <HookHeadline style={{fontSize:38,maxWidth:'22ch'}}
+    lead="Ireland burns gas for" highlight="42%" highlightTone="var(--fuel-gas)"
+    tail="of its power — and is second in the world for wind." />
+  <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginTop:26}}>
+    <QuizCard question="Ireland or Spain for wind?" options={['Ireland','Spain']} footnote="58% get this wrong." />
+    <HookCard tone="card" eyebrow="Your neighbours" title="The UK cut coal to zero. Ireland still has 6%.">Moneypoint is the last one standing.</HookCard>
+    <HookCard tone="strong" eyebrow="The world" title="A third of the planet still runs on coal.">Zoom out to all 214 grids.</HookCard>
+  </div>
+  <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:16,marginTop:16}}>
+    <ChapterCard number={1} year="1973" title="The embargo that built the modern grid">Why every energy policy since starts in a petrol queue.</ChapterCard>
+    <ChapterCard number={2} year="1986" title="Chernobyl, and the fleet that never got built">Europe's nuclear share peaked at 17% and has fallen ever since.</ChapterCard>
+  </div>
+</>);
+</script></body></html>

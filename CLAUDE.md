@@ -134,14 +134,37 @@ refresh brings them back into range.
 
 ## Design system
 
-All tokens live in `app/globals.css`; there is no `tailwind.config.js`. Dark mode
-is class-based (`.dark` on `<html>`) with a pre-hydration script in the root layout
-and `localStorage` persistence.
+Mid-migration. Two token sets coexist on purpose — see `docs/redesign-plan.md`
+for the stage list.
+
+**New (`app/ds/tokens.css`).** The Grid Gorilla design system, copied from
+`docs/design-system/tokens/`. One cold-slate hue stepped by value plus one accent
+(`--green`, three to four appearances per screen). No shadows — elevation is a
+step up the ink ramp plus a hairline. Space Grotesk for reading, IBM Plex Mono
+for measuring, both via `next/font`.
+
+**Its tokens are scoped to `.gg-page`, not `:root`.** The old set declares 11 of
+the same names with different values (`--space-3` is 12px there, 8px here), so at
+`:root` the later block would silently win and break every DS component's spacing.
+A surface opts in by being wrapped in `.gg-page`. Stage 8 deletes the old set and
+this goes back to `:root`.
+
+**Old (`app/globals.css` `:root`).** Pre-redesign tokens, still driving every
+surface not yet rebuilt.
+
+The site is **dark only**. The design system declines to specify a light theme —
+its fuel ramp does not invert cleanly. `dark` is on `<html>` unconditionally;
+there is no toggle, no probe and no `localStorage` key.
+
+Components live in `components/ds/`, ported from `docs/design-system/components/`
+with types from the supplied `.d.ts` files. Read the matching `.prompt.md` before
+using one — the constraints are the design. `lib/fuels.ts` owns the canonical fuel
+order and the mapping from our data sources; never re-sort it per country.
 
 **Watch out:** `.card`, `.stat-card` and friends are *unlayered* CSS, so they beat
 every Tailwind utility regardless of source order. Combining `.card` with
 `bg-*`/`border-*` utilities silently does nothing. `.gg-play-card` exists precisely
-because of this — it reproduces the card look without setting colours.
+because of this. All three go in stage 8.
 
 ## Known issues
 
