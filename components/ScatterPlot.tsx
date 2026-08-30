@@ -34,19 +34,33 @@ const metricLabels: Record<AxisMetric, string> = {
   manufacturing_per_capita: 'Manufacturing ($/capita)',
 };
 
+/**
+ * Categories are steps along the one ramp, not separate hues.
+ *
+ * The five regions and four income levels were previously orange, blue, red,
+ * green, purple and amber — six hues on a chart whose entire argument is a
+ * single relationship. The design system's rule is that a design needing
+ * another colour needs another *value*.
+ *
+ * That trade is clearly right for income, which is ordinal: dark to light reads
+ * as poor to rich without a legend. It is weaker for region, which is nominal —
+ * five lightness steps are harder to tell apart than five hues would be. The
+ * legend carries the mapping, and hover names the country, so nothing depends
+ * on distinguishing them by eye alone.
+ */
 const regionColors: Record<Region, string> = {
-  Africa: '#F97316',
-  Americas: '#3B82F6',
-  Asia: '#EF4444',
-  Europe: '#22C55E',
-  Oceania: '#A855F7',
+  Africa: 'var(--scale-2)',
+  Americas: 'var(--scale-3)',
+  Asia: 'var(--scale-4)',
+  Europe: 'var(--scale-5)',
+  Oceania: 'var(--scale-6)',
 };
 
 const incomeColors: Record<IncomeLevel, string> = {
-  low: '#EF4444',
-  'lower-middle': '#F97316',
-  'upper-middle': '#FBBF24',
-  high: '#22C55E',
+  low: 'var(--scale-1)',
+  'lower-middle': 'var(--scale-3)',
+  'upper-middle': 'var(--scale-5)',
+  high: 'var(--scale-7)',
 };
 
 const MARGIN = { top: 20, right: 30, bottom: 50, left: 70 };
@@ -145,8 +159,8 @@ export default function ScatterPlot({
 
     // Get theme colors
     const styles = getComputedStyle(document.documentElement);
-    const textColor = styles.getPropertyValue('--text-primary').trim() || '#1A1A1A';
-    const mutedColor = styles.getPropertyValue('--text-muted').trim() || '#78808C';
+    const textColor = styles.getPropertyValue('--paper').trim() || '#eef2f2';
+    const mutedColor = styles.getPropertyValue('--chart-axis-text').trim() || 'rgba(238,242,242,0.32)';
     const borderColor = styles.getPropertyValue('--border').trim() || 'rgba(0,0,0,0.08)';
 
     // Create scales
@@ -273,7 +287,7 @@ export default function ScatterPlot({
         g.append('path')
           .attr('d', d3.line()(points))
           .attr('fill', 'none')
-          .attr('stroke', '#6366F1')
+          .attr('stroke', 'var(--green)')
           .attr('stroke-width', 2)
           .attr('stroke-dasharray', '6,4')
           .attr('opacity', 0.7);
@@ -284,7 +298,7 @@ export default function ScatterPlot({
         .attr('x', plotWidth - 10)
         .attr('y', 20)
         .attr('text-anchor', 'end')
-        .attr('fill', '#6366F1')
+        .attr('fill', 'var(--green)')
         .attr('font-size', '13px')
         .attr('font-weight', '600')
         .text(`r² = ${regression.rSquared.toFixed(2)}`);

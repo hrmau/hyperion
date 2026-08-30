@@ -15,7 +15,9 @@ function QuoteBlock({ children, attribution }: { children: React.ReactNode; attr
 }
 
 function Callout({ type = 'info', icon, title, children }: { type?: 'info' | 'warning' | 'success' | 'danger'; icon?: string; title?: string; children: React.ReactNode }) {
-  const icons = { info: '💡', warning: '⚠️', success: '✓', danger: '⚠️' };
+  // No emoji anywhere in this system. The callout's title carries the meaning
+  // and the left border carries the tone.
+  const icons = { info: '', warning: '', success: '', danger: '' };
   return (
     <div className={`callout callout-${type}`}>
       {title && (
@@ -29,12 +31,39 @@ function Callout({ type = 'info', icon, title, children }: { type?: 'info' | 'wa
   );
 }
 
-function StatCard({ icon, value, label }: { icon: string; value: string; label: string }) {
+function StatCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="stat-card">
-      <div className="stat-card__icon">{icon}</div>
-      <div className="stat-card__value">{value}</div>
-      <div className="stat-card__label">{label}</div>
+    <div
+      style={{
+        padding: 'var(--space-7)',
+        borderRadius: 'var(--r-well)',
+        background: 'var(--bg-raised)',
+        border: '1px solid var(--border-default)',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 'var(--fs-stat-sm)',
+          fontWeight: 'var(--fw-bold)',
+          letterSpacing: 'var(--ls-stat)',
+          lineHeight: 'var(--lh-stat)',
+          color: 'var(--text-primary)',
+        }}
+      >
+        {value}
+      </div>
+      <div
+        style={{
+          marginTop: 'var(--space-4)',
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--fs-mono-xxs)',
+          letterSpacing: 'var(--ls-label)',
+          textTransform: 'uppercase',
+          color: 'var(--text-label)',
+        }}
+      >
+        {label}
+      </div>
     </div>
   );
 }
@@ -107,15 +136,15 @@ export default function WhyEnergyMattersPage() {
             </p>
 
             <div className="grid-3 my-6">
-              <StatCard icon="🇳🇴" value="23,000" label="Norway kWh/capita" />
-              <StatCard icon="🇺🇸" value="12,000" label="USA kWh/capita" />
-              <StatCard icon="🇩🇪" value="6,500" label="Germany kWh/capita" />
+              <StatCard value="23,000" label="Norway kWh/capita" />
+              <StatCard value="12,000" label="USA kWh/capita" />
+              <StatCard value="6,500" label="Germany kWh/capita" />
             </div>
 
             <div className="grid-3 my-6">
-              <StatCard icon="🇨🇳" value="6,000" label="China kWh/capita" />
-              <StatCard icon="🇳🇬" value="160" label="Nigeria kWh/capita" />
-              <StatCard icon="🇧🇩" value="500" label="Bangladesh kWh/capita" />
+              <StatCard value="6,000" label="China kWh/capita" />
+              <StatCard value="160" label="Nigeria kWh/capita" />
+              <StatCard value="500" label="Bangladesh kWh/capita" />
             </div>
 
             <Callout type="info" title="Key Insight">
@@ -141,7 +170,7 @@ export default function WhyEnergyMattersPage() {
               Countries with unreliable electricity cannot compete economically:
             </p>
 
-            <Callout type="danger" icon="🔌" title="Energy Crisis Examples">
+            <Callout type="danger" title="Energy Crisis Examples">
               <strong>South Africa (2023):</strong> 300+ days load-shedding, 0.7% GDP growth, 33% unemployment<br />
               <strong>Pakistan (2023):</strong> Textile factories closed, lost orders to Vietnam, billions in exports gone
             </Callout>
@@ -446,7 +475,7 @@ export default function WhyEnergyMattersPage() {
               <li>What&apos;s the timeline? Who bears the costs?</li>
             </ul>
 
-            <Callout type="danger" icon="🚩" title="Red Flags">
+            <Callout type="danger" title="Red Flags">
               Promises with no cost estimates • &quot;Just build more renewables&quot; with no backup plan • Closing reliable plants with no replacement ready • Claims of &quot;independence&quot; while increasing imports
             </Callout>
 
@@ -579,7 +608,7 @@ export default function WhyEnergyMattersPage() {
             </div>
 
             <h3>The Hope</h3>
-            <Callout type="success" icon="✓" title="Good News">
+            <Callout type="success" title="Good News">
               Technology is improving, costs are falling, and awareness is rising (2022 was a wake-up call). Solutions exist.
             </Callout>
             <p>
@@ -617,7 +646,6 @@ export default function WhyEnergyMattersPage() {
             <h3>Three Things You Can Do Right Now</h3>
             <div className="grid-3 my-8">
               <div className="action-card">
-                <div className="action-card__icon">🔍</div>
                 <div className="action-card__title">1. Explore Your Country</div>
                 <div className="action-card__description">
                   Understand your country&apos;s energy reality
@@ -627,14 +655,12 @@ export default function WhyEnergyMattersPage() {
                 </Link>
               </div>
               <div className="action-card">
-                <div className="action-card__icon">❓</div>
                 <div className="action-card__title">2. Ask Questions</div>
                 <div className="action-card__description">
                   Ask about costs, backup plans, dependencies
                 </div>
               </div>
               <div className="action-card">
-                <div className="action-card__icon">📤</div>
                 <div className="action-card__title">3. Share This</div>
                 <div className="action-card__description">
                   Send to anyone who pays an electricity bill

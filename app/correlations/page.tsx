@@ -7,6 +7,7 @@ import ScatterPlot, { ScatterPlotLegend, type AxisMetric, type ColorMode } from 
 import CorrelationFilters from '@/components/CorrelationFilters';
 import CorrelationTooltip from '@/components/CorrelationTooltip';
 import InsightCard from '@/components/InsightCard';
+import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { fitRegression } from '@/lib/regression';
 import {
   loadCountries,
@@ -145,14 +146,44 @@ export default function CorrelationsPage() {
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav active="correlations" />
 
-      {/* Hero Section */}
-      <div className="max-w-[1800px] mx-auto px-4 pt-5 pb-3">
-        <h1 className="text-sm font-medium text-primary mb-0.5">Energy & Prosperity</h1>
-        <p className="text-xs text-secondary">Is there a connection between electricity consumption and human development? Explore the data across 88 countries and discover what patterns emerge.</p>
+      <div style={{ padding: 'var(--band-y) var(--gutter) var(--space-8)' }}>
+        <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Energy &amp; prosperity</Eyebrow>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: 'var(--fs-h2)',
+            fontWeight: 'var(--fw-bold)',
+            letterSpacing: 'var(--ls-h2)',
+            lineHeight: 'var(--lh-h2)',
+            maxWidth: '24ch',
+            textWrap: 'pretty',
+          }}
+        >
+          No country got rich without getting electricity first.
+        </h1>
+        <p
+          style={{
+            margin: 'var(--space-8) 0 0',
+            maxWidth: 'var(--maxw-lead)',
+            fontSize: 'var(--fs-lead)',
+            lineHeight: 'var(--lh-lead)',
+            color: 'var(--text-secondary)',
+            textWrap: 'pretty',
+          }}
+        >
+          Four measures of human development against electricity per person, across 88 countries.
+          The relationship is strong enough that the interesting question is which countries sit
+          furthest off the line.
+        </p>
       </div>
 
-      {/* Insight Cards */}
-      <div className="max-w-[1800px] mx-auto px-4 py-4">
+      <div
+        style={{
+          padding: 'var(--space-8) var(--gutter)',
+          borderTop: '1px solid var(--border-default)',
+          borderBottom: '1px solid var(--border-default)',
+        }}
+      >
         <InsightCard data={filteredData} rSquared={rSquared} />
       </div>
 

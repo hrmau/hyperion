@@ -9,7 +9,8 @@ interface InsightCardProps {
 }
 
 interface Insight {
-  icon: string;
+  /** Mono kicker above the claim. Replaces the emoji the design system forbids. */
+  kicker: string;
   title: string;
   description: string;
 }
@@ -26,7 +27,7 @@ function calculateInsights(data: CorrelationDataPoint[], rSquared: number | null
     if (rSquared >= 0.85) strength = 'very strong';
 
     insights.push({
-      icon: '📊',
+      kicker: 'Correlation',
       title: `${strength.charAt(0).toUpperCase() + strength.slice(1)} Correlation`,
       description: `r² = ${rSquared.toFixed(2)} — ${Math.round(rSquared * 100)}% of the variance in prosperity metrics can be explained by electricity consumption.`,
     });
@@ -38,7 +39,7 @@ function calculateInsights(data: CorrelationDataPoint[], rSquared: number | null
 
   if (highGdpCountries.length > 0) {
     insights.push({
-      icon: '💡',
+      kicker: 'Threshold',
       title: 'No Wealthy Nation Without Power',
       description: `All ${highGdpCountries.length} countries with GDP >$30k have at least ${Math.round(minElectricity).toLocaleString()} kWh/capita. Prosperity requires energy abundance.`,
     });
@@ -55,7 +56,7 @@ function calculateInsights(data: CorrelationDataPoint[], rSquared: number | null
     const avgLifeHigh = highElectricity.reduce((sum, d) => sum + d.life_expectancy, 0) / highElectricity.length;
 
     insights.push({
-      icon: '🚀',
+      kicker: 'Development',
       title: 'The Development Threshold',
       description: `Countries with >5,000 kWh/capita: HDI ${avgHdiHigh.toFixed(2)}, life expectancy ${avgLifeHigh.toFixed(0)} yrs. Below 1,000 kWh: HDI ${avgHdiLow.toFixed(2)}, life expectancy ${avgLifeLow.toFixed(0)} yrs.`,
     });
@@ -67,7 +68,7 @@ function calculateInsights(data: CorrelationDataPoint[], rSquared: number | null
 
   if (leader) {
     insights.push({
-      icon: '🏆',
+      kicker: 'Leader',
       title: 'Top Energy Consumer',
       description: `${leader.name} leads with ${Math.round(leader.electricity_per_capita_kwh).toLocaleString()} kWh/capita, GDP $${Math.round(leader.gdp_per_capita_ppp / 1000)}k, and HDI ${leader.hdi.toFixed(2)}.`,
     });
@@ -82,19 +83,56 @@ export default function InsightCard({ data, rSquared }: InsightCardProps) {
   if (insights.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-      {insights.map((insight, idx) => (
+    <div
+      className="gg-card-row"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: 'var(--space-6)',
+      }}
+    >
+      {insights.map((insight) => (
         <div
-          key={idx}
-          className="card p-4 bg-card"
+          key={insight.title}
+          style={{
+            padding: 'var(--space-7)',
+            borderRadius: 'var(--r-card)',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-default)',
+          }}
         >
-          <div className="flex items-start gap-3">
-            <span className="text-xl">{insight.icon}</span>
-            <div>
-              <h4 className="text-sm font-medium text-primary mb-1">{insight.title}</h4>
-              <p className="text-xs text-secondary leading-relaxed">{insight.description}</p>
-            </div>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xxs)',
+              letterSpacing: 'var(--ls-label)',
+              textTransform: 'uppercase',
+              color: 'var(--text-label)',
+              marginBottom: 'var(--space-4)',
+            }}
+          >
+            {insight.kicker}
           </div>
+          <h3
+            style={{
+              margin: 0,
+              fontSize: 'var(--fs-body)',
+              fontWeight: 'var(--fw-semibold)',
+              color: 'var(--text-primary)',
+            }}
+          >
+            {insight.title}
+          </h3>
+          <p
+            style={{
+              margin: 'var(--space-4) 0 0',
+              fontSize: 'var(--fs-caption)',
+              lineHeight: 1.5,
+              color: 'var(--text-tertiary)',
+            }}
+          >
+            {insight.description}
+          </p>
         </div>
       ))}
     </div>
