@@ -8,521 +8,162 @@
 /* Configure Tailwind v4 to use class-based dark mode */
 @variant dark (&:where(.dark, .dark *));
 
-:root {
-  /* ========================================
-     TYPOGRAPHY - Data Interface (default)
-     ======================================== */
-  --text-xs: 11px;
-  --text-sm: 12px;
-  --text-base: 13px;
-  --text-md: 14px;
-  --text-lg: 15px;
-  --text-xl: 17px;
-  --text-2xl: 19px;
-  --text-3xl: 21px;
-  --text-4xl: 29px;
 
-  /* Typography - Article Context */
-  --text-article-base: 14px;
-  --text-article-lg: 16px;
-  --text-article-xl: 18px;
-  --text-article-2xl: 20px;
-  --text-article-3xl: 28px;
-
-  /* Line Heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
-
-  /* ========================================
-     SPACING (4px base)
-     ======================================== */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-
-  /* ========================================
-     LAYOUT
-     ======================================== */
-  --container-md: 720px;
-  --container-lg: 960px;
-  --container-xl: 1200px;
-
-  /* ========================================
-     COLORS - Background
-     ======================================== */
-  --canvas: #FAFAF8;
-  --card: #FFFFFF;
-  --inset: #F8F7F5;
-  --bg-muted: #e9ecef;
-
-  /* Text — muted bumped from #9CA3AF to #78808C for readability */
-  --text-primary: #1A1A1A;
-  --text-secondary: #5A6270;
-  --text-muted: #78808C;
-  --text-inverted: #ffffff;
-
-  /* Energy sources */
-  --coal: #374151;
-  --gas: #F59E0B;
-  --other-fossil: #D97706;
-  --nuclear: #8B5CF6;
-  --hydro: #3B82F6;
-  --wind: #14B8A6;
-  --solar: #FCD34D;
-  --bioenergy: #22C55E;
-
-  /* Semantic */
-  --positive: #22C55E;
-  --negative: #EF4444;
-  --color-info: #17a2b8;
-  --color-info-bg: #d1ecf1;
-  --color-info-border: #bee5eb;
-  --color-warning: #fd7e14;
-  --color-warning-bg: #fff3cd;
-  --color-warning-border: #ffeaa7;
-  --color-success-bg: #d4edda;
-  --color-success-border: #c3e6cb;
-  --color-danger-bg: #f8d7da;
-  --color-danger-border: #f5c6cb;
-
-  /* Borders / surfaces */
-  --border: rgba(0, 0, 0, 0.08);
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border-light: #e9ecef;
-  --border-default: #dee2e6;
-
-  /* Brand */
-  --color-primary-brand: #0066cc;
-  --color-primary-dark: #0052a3;
-  --color-primary-light: #3385d6;
-  --color-accent: #ff6b35;
-
-  /* Choropleth scale */
-  --choro-1: #F3F4F6;
-  --choro-2: #DBEAFE;
-  --choro-3: #93C5FD;
-  --choro-4: #3B82F6;
-  --choro-5: #1D4ED8;
-  --choro-6: #1E3A8A;
-}
-
-.dark {
-  --canvas: #0F1117;
-  --card: #1A1D26;
-  --inset: #22252F;
-  --bg-muted: #2d3139;
-
-  --choro-1: #1E2230;
-
-  --text-primary: #E8EAED;
-  --text-secondary: #9BA1AE;
-  --text-muted: #6E7582;
-  --text-inverted: #1A1A1A;
-
-  --positive: #34D399;
-  --negative: #F87171;
-  --color-info: #3dc5db;
-  --color-info-bg: #1a3a40;
-  --color-info-border: #2a4a50;
-  --color-warning: #ffa040;
-  --color-warning-bg: #3d3020;
-  --color-warning-border: #4d4030;
-  --color-success-bg: #1a3d25;
-  --color-success-border: #2a4d35;
-  --color-danger-bg: #3d1a20;
-  --color-danger-border: #4d2a30;
-
-  --border: rgba(255, 255, 255, 0.08);
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-light: #3d4350;
-  --border-default: #4d5360;
-
-  --color-primary-brand: #4d9fff;
-  --color-primary-dark: #3385e6;
-  --color-primary-light: #66b3ff;
-}
 
 @theme inline {
-  --color-canvas: var(--canvas);
-  --color-card: var(--card);
-  --color-inset: var(--inset);
+  /* Tailwind utilities, backed by design-system tokens.
+     Roughly 300 call sites across the app use these (text-primary, text-muted,
+     border-border, bg-inset...). They are a perfectly good way to reference a
+     token; what was wrong was that they pointed at a second, conflicting set of
+     values. They now resolve to the same tokens the components use. */
+  --color-canvas: var(--bg-page);
+  --color-card: var(--bg-card);
+  --color-inset: var(--bg-raised);
   --color-primary: var(--text-primary);
   --color-secondary: var(--text-secondary);
-  --color-muted: var(--text-muted);
-  --color-coal: var(--coal);
-  --color-gas: var(--gas);
-  --color-other-fossil: var(--other-fossil);
-  --color-nuclear: var(--nuclear);
-  --color-hydro: var(--hydro);
-  --color-wind: var(--wind);
-  --color-solar: var(--solar);
-  --color-bioenergy: var(--bioenergy);
-  --color-positive: var(--positive);
-  --color-negative: var(--negative);
-  --color-border: var(--border);
-  --color-border-subtle: var(--border-subtle);
+  --color-muted: var(--text-tertiary);
+  --color-positive: var(--green);
+  --color-negative: var(--clay);
+  --color-border: var(--border-default);
+  --color-border-subtle: var(--line-soft);
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
 }
 
 body {
-  background: var(--canvas);
+  background: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-sans-family), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ========================================
-   CARD STYLES
-   ======================================== */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow:
-    0 1px 2px var(--border-subtle),
-    0 4px 12px var(--border-subtle),
-    0 8px 24px var(--border-subtle);
-}
+   LEGACY COMPONENT CLASSES
+   ========================================
+   These predate the redesign and are still used across the content pages —
+   .card alone has 79 call sites. They are kept rather than deleted, but two
+   things about them have changed.
 
-.card-hover {
-  transition: all 0.2s;
-}
+   They are in @layer components, so a Tailwind utility now beats them. That
+   was the actual defect: as unlayered CSS they outranked every utility
+   regardless of source order, so combining .card with bg-* or border-* silently
+   did nothing. .gg-play-card existed only to work around it.
 
-.card-hover:hover {
-  background: var(--inset);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* ========================================
-   PROSE - Article Typography Context
-   ======================================== */
-.prose {
-  max-width: 896px; /* matches max-w-4xl */
-  margin: 0 auto;
-  padding: 0 var(--space-6);
-  font-size: var(--text-article-base);
-  line-height: 1.6;
-  color: var(--text-primary);
-}
-
-.prose h1 {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: var(--space-2);
-}
-
-@media (min-width: 768px) {
-  .prose h1 {
-    font-size: 17px;
-  }
-}
-
-.prose h2 {
-  font-size: var(--text-article-2xl);
-  font-weight: 700;
-  line-height: 1.3;
-  margin-top: var(--space-16);
-  margin-bottom: var(--space-5);
-}
-
-.prose h3 {
-  font-size: var(--text-article-lg);
-  font-weight: 600;
-  line-height: 1.4;
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-3);
-}
-
-.prose h4 {
-  font-size: var(--text-article-base);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-2);
-}
-
-/* Quick nav h4 shouldn't have top margin inside card */
-.prose nav h4 {
-  margin-top: 0;
-}
-
-.prose p {
-  margin-bottom: var(--space-4);
-}
-
-.prose ul,
-.prose ol {
-  margin-bottom: var(--space-4);
-  padding-left: 24px;
-}
-
-.prose li {
-  margin-bottom: 6px;
-}
-
-.prose blockquote {
-  font-size: var(--text-article-base);
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  border-left: 3px solid var(--color-primary-brand);
-  padding-left: var(--space-5);
-  margin: var(--space-6) 0;
-}
-
-/* ========================================
-   STAT CARD
-   ======================================== */
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border-light);
-  border-radius: 8px;
-  padding: var(--space-5);
-  text-align: center;
-}
-
-.stat-card__icon {
-  font-size: 32px;
-  margin-bottom: var(--space-2);
-}
-
-.stat-card__value {
-  font-size: var(--text-3xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: var(--space-1);
-}
-
-.stat-card__label {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* ========================================
-   CALLOUT BOX
-   ======================================== */
-.callout {
-  border-left: 4px solid var(--border-default);
-  padding: var(--space-4) var(--space-5);
-  margin: var(--space-6) 0;
-  border-radius: 4px;
-  font-size: var(--text-article-base);
-}
-
-.callout-info {
-  background: var(--color-info-bg);
-  border-left-color: var(--color-info);
-}
-
-.callout-warning {
-  background: var(--color-warning-bg);
-  border-left-color: var(--color-warning);
-}
-
-.callout-success {
-  background: var(--color-success-bg);
-  border-left-color: var(--positive);
-}
-
-.callout-danger {
-  background: var(--color-danger-bg);
-  border-left-color: var(--negative);
-}
-
-.callout__header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-weight: 600;
-  margin-bottom: var(--space-2);
-  color: var(--text-primary);
-}
-
-.callout__icon {
-  font-size: 20px;
-}
-
-.callout p {
-  margin: 0;
-  color: var(--text-secondary);
-}
-
-/* ========================================
-   COMPARISON TABLE
-   ======================================== */
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: var(--space-6) 0;
-  font-size: var(--text-article-base);
-}
-
-.comparison-table thead {
-  background: var(--text-primary);
-  color: var(--text-inverted);
-}
-
-.comparison-table th {
-  padding: 12px 16px;
-  text-align: left;
-  font-weight: 600;
-}
-
-.comparison-table td {
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.comparison-table tbody tr:nth-child(even) {
-  background: var(--inset);
-}
-
-.comparison-table tbody tr:hover {
-  background: var(--bg-muted);
-}
-
-.comparison-table .increase {
-  color: var(--negative);
-  font-weight: 600;
-}
-
-.comparison-table .decrease {
-  color: var(--positive);
-  font-weight: 600;
-}
-
-/* ========================================
-   ACTION CARD
-   ======================================== */
-.action-card {
-  background: var(--canvas);
-  border: 2px solid var(--border-light);
-  border-radius: 12px;
-  padding: var(--space-8);
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.action-card:hover {
-  border-color: var(--color-primary-brand);
-  box-shadow: 0 8px 24px rgba(0, 102, 204, 0.1);
-}
-
-.action-card__icon {
-  font-size: 48px;
-  margin-bottom: var(--space-4);
-}
-
-.action-card__title {
-  font-size: var(--text-xl);
-  font-weight: 600;
-  margin-bottom: var(--space-2);
-  color: var(--text-primary);
-}
-
-.action-card__description {
-  font-size: var(--text-article-base);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-5);
-}
-
-.action-card__button {
-  display: inline-block;
-  padding: 10px 20px;
-  background: var(--color-primary-brand);
-  color: var(--text-inverted);
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-.action-card__button:hover {
-  background: var(--color-primary-dark);
-}
-
-/* ========================================
-   GRID LAYOUTS
-   ======================================== */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-
-.grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
-}
-
-@media (max-width: 768px) {
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
+   And they are built from design-system tokens, with no shadows — elevation in
+   this system is a step up the ink ramp plus a hairline. */
+@layer components {
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-card);
   }
 
-  .prose {
-    padding: 0 var(--space-4);
+  .card-hover {
+    transition: background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .card-hover:hover {
+    background: var(--bg-card-strong);
+    border-color: var(--border-emphasis);
+  }
+
+  .content-container {
+    max-width: var(--maxw-prose);
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-well);
+    padding: var(--space-7);
+  }
+
+  .stat-card__value {
+    font-size: var(--fs-stat-sm);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-stat);
+    line-height: var(--lh-stat);
+    color: var(--text-primary);
+  }
+
+  .stat-card__label {
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xxs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-label);
   }
 
   .action-card {
-    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-card);
+    padding: var(--space-7);
+    transition: border-color var(--dur-fast) var(--ease-out);
   }
 
-  .action-card__icon {
-    font-size: 36px;
+  .action-card:hover {
+    border-color: var(--border-emphasis);
   }
-}
 
-/* ========================================
-   NATIVE SELECT DARK MODE
-   ======================================== */
-.dark select {
-  color-scheme: dark;
-}
-
-.dark .comparison-table thead {
-  background: var(--inset);
-  color: var(--text-primary);
-}
-
-.dark .action-card:hover {
-  box-shadow: 0 8px 24px rgba(77, 159, 255, 0.15);
-}
-
-/* ========================================
-   CONTENT CONTAINER
-   ======================================== */
-.content-container {
-  max-width: 896px;
-  margin: 0 auto;
-  padding: 0 var(--space-6);
-}
-
-@media (max-width: 768px) {
-  .content-container {
-    padding: 0 var(--space-4);
+  /* Callouts: a hairline and a mono label, never a coloured fill. */
+  .callout {
+    margin: var(--space-9) 0;
+    padding: var(--space-7) var(--space-8);
+    border-left: 2px solid var(--text-label);
+    background: var(--bg-raised);
+    border-radius: 0 var(--r-well) var(--r-well) 0;
   }
+
+  .callout-info { border-left-color: var(--sage); }
+  .callout-success { border-left-color: var(--green); }
+  .callout-warning,
+  .callout-danger { border-left-color: var(--clay); }
+
+  .callout__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xxs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-label);
+    margin-bottom: var(--space-4);
+  }
+
+  .callout p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-9) 0;
+    font-size: var(--fs-body-sm);
+  }
+
+  .comparison-table th {
+    padding: 0 var(--space-5) var(--space-3);
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xxs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-label);
+    border-bottom: 1px solid var(--border-emphasis);
+  }
+
+  .comparison-table td {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .comparison-table .increase { color: var(--clay); }
+  .comparison-table .decrease { color: var(--green); }
 }
 
 /* ========================================

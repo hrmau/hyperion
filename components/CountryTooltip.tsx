@@ -2,10 +2,10 @@
 
 import { useRef, useLayoutEffect, useState } from 'react';
 import type { Country, FossilFuelData } from '@/lib/types';
+import { getIso2 } from '@/lib/flags';
 import { formatTWh, formatPercent } from '@/lib/scales';
 import { getLatestYearData } from '@/lib/data';
 import { calculateIndependenceScoreV2, getFossilDataForYear } from '@/lib/independence';
-import FlagImg from './FlagImg';
 
 interface CountryTooltipProps {
   country: Country | null;
@@ -82,7 +82,17 @@ export default function CountryTooltip({ country, position, fossilFuelData, onDi
       onClick={onDismiss}
     >
       <div className="text-xs font-medium text-primary mb-1.5 flex items-center gap-1.5">
-        <FlagImg iso3={country.iso3} size={16} />
+        <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--fs-mono-xs)',
+          letterSpacing: '0.06em',
+          color: 'var(--text-quiet)',
+          flex: 'none',
+        }}
+      >
+        {getIso2(country.iso3) ?? '--'}
+      </span>
         <span>{country.name}</span>
         <span className="text-muted font-normal">({year})</span>
       </div>

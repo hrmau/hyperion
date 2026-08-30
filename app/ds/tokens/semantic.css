@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   /* Aliases. Prefer these in product code — they survive a re-theme. */
   --bg-page: var(--ink-900);
   --bg-raised: var(--ink-800);
@@ -26,16 +26,12 @@
   --focus-offset: 2px;
 }
 
-/* Global reset, SCOPED.
-   Deviation from the design system, deliberate and temporary: upstream applies
-   these to `html`/`body`/`a` globally. During the staged redesign that would
-   restyle pages not yet rebuilt — every link on every content page would turn
-   green, which the system reserves for "the one thing to click".
-   Scoping to .gg-page means a surface opts in by being rebuilt.
-   Stage 8 removes the old token layer and this can go global. */
+/* Global reset. Scoped to .gg-page during the staged redesign so it could not
+   restyle pages that had not been rebuilt; every surface is rebuilt now, so it
+   applies as the design system wrote it. */
 html { -webkit-text-size-adjust: 100% }
 
-.gg-page {
+:root {
   background: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-sans);

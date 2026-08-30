@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   /* ── Ground: four steps of one cold slate. Darkest is the page. ─────── */
   --ink-900: #0f1416;   /* page background */
   --ink-800: #121a1c;   /* raised panel (chart wells, right rail) */

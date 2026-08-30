@@ -134,37 +134,37 @@ refresh brings them back into range.
 
 ## Design system
 
-Mid-migration. Two token sets coexist on purpose — see `docs/redesign-plan.md`
-for the stage list.
+`docs/design-system/` is the source of truth — guideline cards, `.prompt.md`
+constraint docs and `.d.ts` contracts. Read the matching `.prompt.md` before
+using a component; the constraints are the design.
 
-**New (`app/ds/tokens.css`).** The Grid Gorilla design system, copied from
-`docs/design-system/tokens/`. One cold-slate hue stepped by value plus one accent
-(`--green`, three to four appearances per screen). No shadows — elevation is a
-step up the ink ramp plus a hairline. Space Grotesk for reading, IBM Plex Mono
-for measuring, both via `next/font`.
+**Tokens** live in `app/ds/tokens/` (copied from `docs/design-system/tokens/`)
+and are imported by `app/globals.css`. One cold-slate hue stepped by value plus
+one accent — `--green`, which means clean energy, a live signal, or the one
+thing on screen you want clicked, and appears three or four times a screen.
+No shadows: elevation is a step up the ink ramp plus a hairline. Space Grotesk
+for reading, IBM Plex Mono for measuring, both via `next/font`.
 
-**Its tokens are scoped to `.gg-page`, not `:root`.** The old set declares 11 of
-the same names with different values (`--space-3` is 12px there, 8px here), so at
-`:root` the later block would silently win and break every DS component's spacing.
-A surface opts in by being wrapped in `.gg-page`. Stage 8 deletes the old set and
-this goes back to `:root`.
+**Components** are in `components/ds/`, ported to TSX from the system's `.jsx`.
 
-**Old (`app/globals.css` `:root`).** Pre-redesign tokens, still driving every
-surface not yet rebuilt.
+`lib/fuels.ts` owns the canonical fuel order, the fill and ink tokens, the
+sequential ramp and the mapping from our data sources. Never re-sort the order
+per country — charts that do lose comparability across pages. `SCALE_NEUTRAL`
+is the ramp minus its green top stop, for measures that are not about
+cleanliness: only clean share earns the accent on a map.
 
-The site is **dark only**. The design system declines to specify a light theme —
-its fuel ramp does not invert cleanly. `dark` is on `<html>` unconditionally;
-there is no toggle, no probe and no `localStorage` key.
+The site is **dark only**. The system declines to specify a light theme because
+its fuel ramp does not invert cleanly. `dark` is on `<html>` unconditionally.
 
-Components live in `components/ds/`, ported from `docs/design-system/components/`
-with types from the supplied `.d.ts` files. Read the matching `.prompt.md` before
-using one — the constraints are the design. `lib/fuels.ts` owns the canonical fuel
-order and the mapping from our data sources; never re-sort it per country.
+**No flags, no emoji, no icon set.** Country identity is an ISO 3166 two-letter
+code in mono (`getIso2` in `lib/flags.ts`). These are system rules, not
+preferences — see the iconography section of the design system readme.
 
-**Watch out:** `.card`, `.stat-card` and friends are *unlayered* CSS, so they beat
-every Tailwind utility regardless of source order. Combining `.card` with
-`bg-*`/`border-*` utilities silently does nothing. `.gg-play-card` exists precisely
-because of this. All three go in stage 8.
+The legacy classes (`.card`, `.stat-card`, `.callout`, `.comparison-table`)
+still exist for the content pages but now sit in `@layer components` and are
+built from design-system tokens, so a Tailwind utility beats them. That was the
+old defect: as unlayered CSS they outranked every utility regardless of source
+order.
 
 ## Known issues
 

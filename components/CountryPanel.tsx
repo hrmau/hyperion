@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import type { Country, YearData, FossilFuelData, BlocsData } from '@/lib/types';
+import { getIso2 } from '@/lib/flags';
 import type { BlocAggregates } from '@/lib/data';
 import { getLatestYearData, getBlocsForCountry } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
-import FlagImg from './FlagImg';
 import EnergyMixChart from './EnergyMixChart';
 
 const BLOC_LABELS: Record<string, string> = {
@@ -93,7 +93,7 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
               label="Renewables"
               pct={score.breakdown.renewable.pct}
               contribution={score.breakdown.renewable.contribution}
-              color="#22C55E"
+              color="var(--fuel-wind)"
               isIndependent
             />
             <BreakdownRow
@@ -101,7 +101,7 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
               pct={score.breakdown.nuclear.pct}
               contribution={score.breakdown.nuclear.contribution}
               independence={score.breakdown.nuclear.independence}
-              color="#8B5CF6"
+              color="var(--fuel-nuclear)"
             />
             {score.breakdown.coal.pct > 0.5 && (
               <BreakdownRow
@@ -109,7 +109,7 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
                 pct={score.breakdown.coal.pct}
                 contribution={score.breakdown.coal.contribution}
                 independence={score.breakdown.coal.independence}
-                color="#374151"
+                color="var(--fuel-coal)"
               />
             )}
             {score.breakdown.gas.pct > 0.5 && (
@@ -118,7 +118,7 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
                 pct={score.breakdown.gas.pct}
                 contribution={score.breakdown.gas.contribution}
                 independence={score.breakdown.gas.independence}
-                color="#F59E0B"
+                color="var(--fuel-gas)"
               />
             )}
             {score.breakdown.oil.pct > 0.5 && (
@@ -127,7 +127,7 @@ function IndependenceScoreDisplay({ score }: { score: IndependenceScore }) {
                 pct={score.breakdown.oil.pct}
                 contribution={score.breakdown.oil.contribution}
                 independence={score.breakdown.oil.independence}
-                color="#D97706"
+                color="var(--fuel-oil)"
               />
             )}
             {score.breakdown.electricityImports && score.breakdown.electricityImports.pct > 0.5 && (
@@ -247,7 +247,17 @@ function CountryDetail({ country, yearData, year, fossilFuelData, blocsData }: {
       </div>
       <div>
         <h3 className="text-xs font-medium text-secondary mb-2 flex items-center gap-1.5">
-          <FlagImg iso3={country.iso3} size={14} />
+          <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--fs-mono-xs)',
+          letterSpacing: '0.06em',
+          color: 'var(--text-quiet)',
+          flex: 'none',
+        }}
+      >
+        {getIso2(country.iso3) ?? '--'}
+      </span>
           <span>Energy Mix ({year})</span>
         </h3>
         <EnergyMixChart yearData={yearData} />
@@ -286,7 +296,17 @@ function CountryListItem({ country, index, onClick }: {
       className="w-full flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg hover:bg-inset transition-colors text-left"
     >
       <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
-      <FlagImg iso3={country.iso3} size={18} />
+      <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--fs-mono-xs)',
+          letterSpacing: '0.06em',
+          color: 'var(--text-quiet)',
+          flex: 'none',
+        }}
+      >
+        {getIso2(country.iso3) ?? '--'}
+      </span>
       <div className="flex-1 min-w-0">
         <div className="text-xs font-medium text-primary truncate">
           {country.name}
@@ -311,7 +331,17 @@ export default function CountryPanel({
       <div className="card h-full overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 flex items-center justify-between z-10">
           <div className="flex items-center gap-2">
-            <FlagImg iso3={country.iso3} size={24} />
+            <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--fs-mono-xs)',
+          letterSpacing: '0.06em',
+          color: 'var(--text-quiet)',
+          flex: 'none',
+        }}
+      >
+        {getIso2(country.iso3) ?? '--'}
+      </span>
             <div>
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
               <p className="text-[11px] text-muted">{country.emberRegion}{latest ? ` · ${latest.year}` : ''}</p>

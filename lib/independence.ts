@@ -361,17 +361,25 @@ export function calculateIndependenceScore(yearData: YearData): IndependenceScor
   };
 }
 
+/**
+ * Band colours are steps on the design system's one ramp, not five hues.
+ *
+ * They were emerald, green, yellow, orange and red — a traffic light, which
+ * reads as a verdict. Independence is not a virtue: Norway scores high because
+ * of geography it did not earn, and Saudi Arabia scoring low is an interesting
+ * fact rather than a failing. Value steps describe; traffic lights judge.
+ */
 function getScoreBand(score: number): { band: IndependenceScore['band']; label: string; color: string } {
   if (score >= 95) {
-    return { band: 'fortress', label: 'Energy Fortress', color: '#059669' }; // emerald-600
+    return { band: 'fortress', label: 'Energy Fortress', color: 'var(--scale-6)' };
   } else if (score >= 80) {
-    return { band: 'strong', label: 'Strong Position', color: '#22C55E' }; // green-500
+    return { band: 'strong', label: 'Strong Position', color: 'var(--scale-5)' };
   } else if (score >= 60) {
-    return { band: 'moderate', label: 'Moderate', color: '#EAB308' }; // yellow-500
+    return { band: 'moderate', label: 'Moderate', color: 'var(--scale-4)' };
   } else if (score >= 40) {
-    return { band: 'dependent', label: 'Dependent', color: '#F97316' }; // orange-500
+    return { band: 'dependent', label: 'Dependent', color: 'var(--scale-3)' };
   } else {
-    return { band: 'critical', label: 'Critical Dependency', color: '#EF4444' }; // red-500
+    return { band: 'critical', label: 'Critical Dependency', color: 'var(--scale-2)' };
   }
 }
 

@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   /* Display / UI — Space Grotesk. Tight tracking, tighter the bigger it gets. */
   /* Display sizes are fluid: the clamp IS the responsive step, so no screen
      ever overrides them. Upper bounds are the reference-design values. */

@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-in-out: cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
@@ -13,5 +13,5 @@
 @keyframes gg-spin { to { transform: rotate(360deg) } }
 
 @media (prefers-reduced-motion: reduce) {
-  .gg-page { --dur-instant: 0ms; --dur-fast: 0ms; --dur-base: 0ms; --dur-chart: 0ms }
+  :root { --dur-instant: 0ms; --dur-fast: 0ms; --dur-base: 0ms; --dur-chart: 0ms }
 }

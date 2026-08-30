@@ -1,4 +1,4 @@
-.gg-page {
+:root {
   /* Not a strict 4pt grid — these are the real measured values from the
      reference layout. Use them verbatim; do not snap to 4/8. */
   --space-1: 4px;
