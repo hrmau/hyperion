@@ -163,9 +163,17 @@ cleanliness: only clean share earns the accent on a map.
 The site is **dark only**. The system declines to specify a light theme because
 its fuel ramp does not invert cleanly. `dark` is on `<html>` unconditionally.
 
-**No flags, no emoji, no icon set.** Country identity is an ISO 3166 two-letter
-code in mono (`getIso2` in `lib/flags.ts`). These are system rules, not
-preferences — see the iconography section of the design system readme.
+**No emoji, no icon set.** These are system rules, not preferences — see the
+iconography section of the design system readme.
+
+**Flags are a deliberate deviation.** The design system says country identity is
+an ISO 3166 two-letter code in mono and never a flag. That was followed through
+the redesign and then overruled by the product owner: people recognise a flag
+instantly and have to decode a code. `components/FlagImg.tsx` renders from
+flagcdn.com and falls back to an ISO2 chip when the image fails — which it will
+for a meaningful share of visitors, because Brave and uBlock Origin block
+flagcdn by default. Never render one below 16px. Do not "fix" this back to
+codes; see docs/backlog.md.
 
 The legacy classes (`.card`, `.stat-card`, `.callout`, `.comparison-table`)
 still exist for the content pages but now sit in `@layer components` and are

@@ -1,7 +1,7 @@
 'use client';
 
 import type { CorrelationDataPoint } from '@/lib/types';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 
 interface CorrelationTooltipProps {
   point: CorrelationDataPoint | null;
@@ -32,17 +32,7 @@ export default function CorrelationTooltip({ point, position }: CorrelationToolt
     >
       <div className="card p-3 min-w-[220px] shadow-lg">
         <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border">
-          <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xs)',
-          letterSpacing: '0.06em',
-          color: 'var(--text-quiet)',
-          flex: 'none',
-        }}
-      >
-        {getIso2(point.iso3) ?? '--'}
-      </span>
+          <FlagImg iso3={point.iso3} size={20} />
           <div>
             <h4 className="text-sm font-medium text-primary">{point.name}</h4>
             <p className="text-[10px] text-muted">{point.region} · {point.income_level.replace('-', ' ')}</p>

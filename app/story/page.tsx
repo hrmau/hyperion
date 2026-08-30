@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { loadCountries, getLatestYear } from '@/lib/data';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 import type { CountriesData, Country } from '@/lib/types';
 import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
@@ -159,17 +159,7 @@ function MiniEnergyBar({ country, year }: { country: Country; year: number }) {
   return (
     <div className="space-y-1">
       <div className="flex items-center gap-2">
-        <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xs)',
-          letterSpacing: '0.06em',
-          color: 'var(--text-quiet)',
-          flex: 'none',
-        }}
-      >
-        {getIso2(country.iso3) ?? '--'}
-      </span>
+        <FlagImg iso3={country.iso3} size={16} />
         <span className="text-xs font-medium text-primary">{country.name}</span>
         <span className="text-[10px] text-muted ml-auto">
           {formatPercent(yearData.aggregates.clean_pct)} clean

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { Country, YearData, FossilFuelData, BlocsData } from '@/lib/types';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 import type { BlocAggregates } from '@/lib/data';
 import { getLatestYearData, getBlocsForCountry } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
@@ -247,17 +247,7 @@ function CountryDetail({ country, yearData, year, fossilFuelData, blocsData }: {
       </div>
       <div>
         <h3 className="text-xs font-medium text-secondary mb-2 flex items-center gap-1.5">
-          <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xs)',
-          letterSpacing: '0.06em',
-          color: 'var(--text-quiet)',
-          flex: 'none',
-        }}
-      >
-        {getIso2(country.iso3) ?? '--'}
-      </span>
+          <FlagImg iso3={country.iso3} size={18} />
           <span>Energy Mix ({year})</span>
         </h3>
         <EnergyMixChart yearData={yearData} />
@@ -296,17 +286,7 @@ function CountryListItem({ country, index, onClick }: {
       className="w-full flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg hover:bg-inset transition-colors text-left"
     >
       <span className="text-[11px] text-muted w-5 text-right tabular-nums">{index + 1}</span>
-      <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xs)',
-          letterSpacing: '0.06em',
-          color: 'var(--text-quiet)',
-          flex: 'none',
-        }}
-      >
-        {getIso2(country.iso3) ?? '--'}
-      </span>
+      <FlagImg iso3={country.iso3} size={18} />
       <div className="flex-1 min-w-0">
         <div className="text-xs font-medium text-primary truncate">
           {country.name}
@@ -331,17 +311,7 @@ export default function CountryPanel({
       <div className="card h-full overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 flex items-center justify-between z-10">
           <div className="flex items-center gap-2">
-            <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xs)',
-          letterSpacing: '0.06em',
-          color: 'var(--text-quiet)',
-          flex: 'none',
-        }}
-      >
-        {getIso2(country.iso3) ?? '--'}
-      </span>
+            <FlagImg iso3={country.iso3} size={18} />
             <div>
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
               <p className="text-[11px] text-muted">{country.emberRegion}{latest ? ` · ${latest.year}` : ''}</p>

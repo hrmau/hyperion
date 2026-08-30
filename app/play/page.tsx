@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 import { showToast, ToastProvider } from '@/components/Toast';
 import { loadQuestions } from '@/lib/data';
 import {
@@ -339,14 +339,12 @@ export default function PlayPage() {
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: 'var(--fs-mono-xs)',
-                      letterSpacing: '0.06em',
-                      color: 'var(--text-quiet)',
-                      marginBottom: 'var(--space-4)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      marginBottom: 'var(--space-5)',
                     }}
                   >
-                    {getIso2(side.iso3) ?? '--'}
+                    <FlagImg iso3={side.iso3} size={28} />
                   </div>
                   <div style={{ fontSize: 'var(--fs-h4)', fontWeight: 'var(--fw-semibold)' }}>
                     {side.name}

@@ -17,7 +17,7 @@ import {
   formatIndependenceScore,
 } from '@/lib/independence';
 import { fuelShares } from '@/lib/fuels';
-import { getIso2 } from '@/lib/flags';
+import FlagImg from '@/components/FlagImg';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
@@ -207,19 +207,8 @@ export default function RankingsPage() {
         key: 'country',
         label: 'Country',
         render: (r) => (
-          <span style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-4)' }}>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--fs-mono-xs)',
-                letterSpacing: '0.06em',
-                color: 'var(--text-quiet)',
-                width: '2.2em',
-                flex: 'none',
-              }}
-            >
-              {getIso2(r.country.iso3) ?? '--'}
-            </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+            <FlagImg iso3={r.country.iso3} size={16} />
             <span>{r.country.name}</span>
             <span
               style={{
