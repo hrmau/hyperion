@@ -38,48 +38,56 @@ function ZoomButton({ onClick, disabled, children, title }: {
   );
 }
 
-// ISO 3166-1 numeric -> ISO3, covering every country present in BOTH
-// world-110m.json and countries-yearly.json. Regenerate after a data refresh:
+// ISO 3166-1 numeric -> ISO3, covering every country present in BOTH the
+// shipped geometry and countries-yearly.json. Regenerate after a data refresh:
 // any country missing here renders as no-data grey and is not clickable, even
 // when it has full generation records.
+//
+// Sized against world-50m.json. The 110m file drawn on first paint is a subset,
+// so entries it does not carry simply never match while it is showing.
 // Excluded deliberately: Antarctica and Fr. S. Antarctic Lands (no grid), and
-// N. Cyprus / Somaliland / Kosovo (no ISO numeric id in the source geometry).
+// territories with no ISO numeric id in the source geometry.
 const numericToIso3: Record<string, string> = {
-  '004': 'AFG', '008': 'ALB', '012': 'DZA', '024': 'AGO', '031': 'AZE',
-  '032': 'ARG', '036': 'AUS', '040': 'AUT', '044': 'BHS', '050': 'BGD',
-  '051': 'ARM', '056': 'BEL', '064': 'BTN', '068': 'BOL', '070': 'BIH',
-  '072': 'BWA', '076': 'BRA', '084': 'BLZ', '090': 'SLB', '096': 'BRN',
-  '100': 'BGR', '104': 'MMR', '108': 'BDI', '112': 'BLR', '116': 'KHM',
-  '120': 'CMR', '124': 'CAN', '140': 'CAF', '144': 'LKA', '148': 'TCD',
-  '152': 'CHL', '156': 'CHN', '158': 'TWN', '170': 'COL', '178': 'COG',
+  '004': 'AFG', '008': 'ALB', '012': 'DZA', '016': 'ASM', '024': 'AGO',
+  '031': 'AZE', '032': 'ARG', '036': 'AUS', '040': 'AUT', '044': 'BHS',
+  '048': 'BHR', '050': 'BGD', '051': 'ARM', '052': 'BRB', '056': 'BEL',
+  '060': 'BMU', '064': 'BTN', '068': 'BOL', '070': 'BIH', '072': 'BWA',
+  '076': 'BRA', '084': 'BLZ', '090': 'SLB', '096': 'BRN', '100': 'BGR',
+  '104': 'MMR', '108': 'BDI', '112': 'BLR', '116': 'KHM', '120': 'CMR',
+  '124': 'CAN', '140': 'CAF', '144': 'LKA', '148': 'TCD', '152': 'CHL',
+  '156': 'CHN', '158': 'TWN', '170': 'COL', '174': 'COM', '178': 'COG',
   '180': 'COD', '188': 'CRI', '191': 'HRV', '192': 'CUB', '196': 'CYP',
-  '203': 'CZE', '204': 'BEN', '208': 'DNK', '214': 'DOM', '218': 'ECU',
-  '222': 'SLV', '226': 'GNQ', '231': 'ETH', '232': 'ERI', '233': 'EST',
-  '238': 'FLK', '242': 'FJI', '246': 'FIN', '250': 'FRA', '262': 'DJI',
-  '266': 'GAB', '268': 'GEO', '270': 'GMB', '275': 'PSE', '276': 'DEU',
-  '288': 'GHA', '300': 'GRC', '304': 'GRL', '320': 'GTM', '324': 'GIN',
-  '328': 'GUY', '332': 'HTI', '340': 'HND', '348': 'HUN', '352': 'ISL',
+  '203': 'CZE', '204': 'BEN', '208': 'DNK', '212': 'DMA', '214': 'DOM',
+  '218': 'ECU', '222': 'SLV', '226': 'GNQ', '231': 'ETH', '232': 'ERI',
+  '233': 'EST', '238': 'FLK', '242': 'FJI', '246': 'FIN', '250': 'FRA',
+  '262': 'DJI', '266': 'GAB', '268': 'GEO', '270': 'GMB', '275': 'PSE',
+  '276': 'DEU', '288': 'GHA', '296': 'KIR', '300': 'GRC', '304': 'GRL',
+  '308': 'GRD', '316': 'GUM', '320': 'GTM', '324': 'GIN', '328': 'GUY',
+  '332': 'HTI', '340': 'HND', '344': 'HKG', '348': 'HUN', '352': 'ISL',
   '356': 'IND', '360': 'IDN', '364': 'IRN', '368': 'IRQ', '372': 'IRL',
   '376': 'ISR', '380': 'ITA', '384': 'CIV', '388': 'JAM', '392': 'JPN',
   '398': 'KAZ', '400': 'JOR', '404': 'KEN', '408': 'PRK', '410': 'KOR',
   '414': 'KWT', '417': 'KGZ', '418': 'LAO', '422': 'LBN', '426': 'LSO',
   '428': 'LVA', '430': 'LBR', '434': 'LBY', '440': 'LTU', '442': 'LUX',
-  '450': 'MDG', '454': 'MWI', '458': 'MYS', '466': 'MLI', '478': 'MRT',
-  '484': 'MEX', '496': 'MNG', '498': 'MDA', '499': 'MNE', '504': 'MAR',
-  '508': 'MOZ', '512': 'OMN', '516': 'NAM', '524': 'NPL', '528': 'NLD',
-  '540': 'NCL', '548': 'VUT', '554': 'NZL', '558': 'NIC', '562': 'NER',
-  '566': 'NGA', '578': 'NOR', '586': 'PAK', '591': 'PAN', '598': 'PNG',
-  '600': 'PRY', '604': 'PER', '608': 'PHL', '616': 'POL', '620': 'PRT',
-  '624': 'GNB', '626': 'TLS', '630': 'PRI', '634': 'QAT', '642': 'ROU',
-  '643': 'RUS', '646': 'RWA', '682': 'SAU', '686': 'SEN', '688': 'SRB',
-  '694': 'SLE', '702': 'SGP', '703': 'SVK', '704': 'VNM', '705': 'SVN',
-  '706': 'SOM', '710': 'ZAF', '716': 'ZWE', '724': 'ESP', '728': 'SSD',
-  '729': 'SDN', '732': 'ESH', '740': 'SUR', '748': 'SWZ', '752': 'SWE',
-  '756': 'CHE', '760': 'SYR', '762': 'TJK', '764': 'THA', '768': 'TGO',
-  '780': 'TTO', '784': 'ARE', '788': 'TUN', '792': 'TUR', '795': 'TKM',
-  '800': 'UGA', '804': 'UKR', '807': 'MKD', '818': 'EGY', '826': 'GBR',
-  '834': 'TZA', '840': 'USA', '854': 'BFA', '858': 'URY', '860': 'UZB',
-  '862': 'VEN', '887': 'YEM', '894': 'ZMB',
+  '446': 'MAC', '450': 'MDG', '454': 'MWI', '458': 'MYS', '462': 'MDV',
+  '466': 'MLI', '470': 'MLT', '478': 'MRT', '480': 'MUS', '484': 'MEX',
+  '496': 'MNG', '498': 'MDA', '499': 'MNE', '500': 'MSR', '504': 'MAR',
+  '508': 'MOZ', '512': 'OMN', '516': 'NAM', '520': 'NRU', '524': 'NPL',
+  '528': 'NLD', '533': 'ABW', '540': 'NCL', '548': 'VUT', '554': 'NZL',
+  '558': 'NIC', '562': 'NER', '566': 'NGA', '570': 'NIU', '578': 'NOR',
+  '586': 'PAK', '591': 'PAN', '598': 'PNG', '600': 'PRY', '604': 'PER',
+  '608': 'PHL', '616': 'POL', '620': 'PRT', '624': 'GNB', '626': 'TLS',
+  '630': 'PRI', '634': 'QAT', '642': 'ROU', '643': 'RUS', '646': 'RWA',
+  '654': 'SHN', '662': 'LCA', '682': 'SAU', '686': 'SEN', '688': 'SRB',
+  '690': 'SYC', '694': 'SLE', '702': 'SGP', '703': 'SVK', '704': 'VNM',
+  '705': 'SVN', '706': 'SOM', '710': 'ZAF', '716': 'ZWE', '724': 'ESP',
+  '728': 'SSD', '729': 'SDN', '732': 'ESH', '740': 'SUR', '748': 'SWZ',
+  '752': 'SWE', '756': 'CHE', '760': 'SYR', '762': 'TJK', '764': 'THA',
+  '768': 'TGO', '776': 'TON', '780': 'TTO', '784': 'ARE', '788': 'TUN',
+  '792': 'TUR', '795': 'TKM', '800': 'UGA', '804': 'UKR', '807': 'MKD',
+  '818': 'EGY', '826': 'GBR', '834': 'TZA', '840': 'USA', '854': 'BFA',
+  '858': 'URY', '860': 'UZB', '862': 'VEN', '882': 'WSM', '887': 'YEM',
+  '894': 'ZMB',
 };
 
 function getIso3(featureId: string | number | undefined): string | undefined {
@@ -122,10 +130,38 @@ export default function WorldMap({
     return () => observer.disconnect();
   }, []);
 
+  // Geometry loads in two passes.
+  //
+  // The 110m file is 38KB gzipped and draws immediately, so the map is
+  // interactive on first paint. The 50m file is 230KB and carries 23 countries
+  // that 110m omits entirely despite their having full generation records —
+  // Hong Kong, Bahrain, Malta, Mauritius, Macao among them. Loading the big one
+  // first would add ~190KB to first paint, a 52% increase on this page's
+  // payload, for territories most visitors never look for.
+  //
+  // So: draw small, then upgrade. The redraw restores the current zoom
+  // transform, and the two files use identical ISO numeric ids, so the swap
+  // costs nothing but a little more coastline detail.
   useEffect(() => {
-    fetch('/data/world-110m.json')
-      .then(res => res.json())
-      .then(data => setWorldData(data));
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const fast = await fetch('/data/world-110m.json').then((r) => r.json());
+        if (cancelled) return;
+        setWorldData(fast);
+
+        const detailed = await fetch('/data/world-50m.json').then((r) => r.json());
+        if (cancelled) return;
+        setWorldData(detailed);
+      } catch {
+        // A failed upgrade leaves the 110m map in place, which is a working map.
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleMouseMove = useCallback(
