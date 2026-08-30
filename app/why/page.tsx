@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { ArticleShell } from '@/components/ds/content/Prose';
 
 function QuoteBlock({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
@@ -43,18 +44,22 @@ export default function WhyEnergyMattersPage() {
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav active="why" />
 
-      <main className="flex-1 py-8">
-        <div className="prose">
+      <ArticleShell
+        kicker="The argument"
+        title="Why energy matters"
+        standfirst="Electricity is not one sector among many. It is the input to all the others."
+      >
+        <div>
           {/* Hero Section */}
           <div className="mb-6">
-            <h1 className="text-[15px] md:text-[17px] font-bold">Why Energy Matters</h1>
-            <p className="text-[var(--text-article-lg)] text-secondary leading-relaxed">
+            
+            <p className="text-[var(--text-article-lg)]">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>
             <QuoteBlock>
               Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from - until it&apos;s not there.
             </QuoteBlock>
-            <div className="flex items-center gap-4 text-[var(--text-sm)] text-muted">
+            <div className="flex items-center gap-4 text-[var(--)]">
               <span>30-40 min read</span>
               <span>•</span>
               <span>Last updated: February 2026</span>
@@ -63,7 +68,7 @@ export default function WhyEnergyMattersPage() {
 
           {/* Quick Navigation */}
           <nav className="card px-4 py-3 mb-6">
-            <h4 className="text-xs font-medium text-primary mt-0 mb-1.5 uppercase tracking-wider">Quick Navigation</h4>
+            <h4 className="mt-0 mb-1.5 uppercase tracking-wider">Quick Navigation</h4>
             <div className="flex flex-wrap gap-1.5">
               {[
                 { id: 'economy', label: 'Energy IS the Economy' },
@@ -78,7 +83,7 @@ export default function WhyEnergyMattersPage() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="px-2.5 py-1 text-xs font-medium bg-inset text-secondary hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
+                  className="px-2.5 py-1 bg-inset hover: hover:bg-canvas border border-border rounded-full transition-colors"
                 >
                   {label}
                 </a>
@@ -638,8 +643,8 @@ export default function WhyEnergyMattersPage() {
             </div>
 
             <div className="text-center py-6">
-              <p className="text-[var(--text-article-lg)] text-primary font-semibold mb-2">Energy is too important for apathy.</p>
-              <p className="text-secondary">Get informed. Ask questions. Demand better.</p>
+              <p className="text-[var(--text-article-lg)] mb-2">Energy is too important for apathy.</p>
+              <p>Get informed. Ask questions. Demand better.</p>
             </div>
           </section>
         </div>
@@ -648,7 +653,7 @@ export default function WhyEnergyMattersPage() {
         <div className="mt-12 pt-6 border-t border-border text-center">
           <a
             href="#"
-            className="text-[var(--text-article-base)] text-muted hover:text-primary transition-colors"
+            className="text-[var(--text-article-base)] hover: transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -658,7 +663,7 @@ export default function WhyEnergyMattersPage() {
           </a>
         </div>
         </div>
-      </main>
+      </ArticleShell>
 
       <SiteFooter />
     </div>

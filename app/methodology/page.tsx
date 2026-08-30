@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { ArticleShell } from '@/components/ds/content/Prose';
 
 interface CollapsibleSectionProps {
   title: string;
@@ -81,19 +82,23 @@ export default function MethodologyPage() {
     <div className="gg-page min-h-screen flex flex-col">
       <TopNav active="methodology" />
 
-      <main className="flex-1 py-8">
+      <ArticleShell
+        kicker="How this works"
+        title="Methodology"
+        standfirst="Where the numbers come from, how the scores are built, and what they cannot tell you."
+      >
         <div className="content-container">
         {/* Hero Section */}
         <div className="mb-8">
-          <h1 className="text-[18px] font-semibold text-primary mb-2">How Grid Gorilla Works</h1>
-          <p className="text-sm text-secondary leading-relaxed">
+          
+          <p>
             Understanding our data, calculations, and energy independence methodology
           </p>
         </div>
 
         {/* Quick Navigation */}
         <nav className="card px-3 py-2.5 mb-6">
-          <h3 className="text-xs font-semibold text-primary mb-2">Quick Navigation</h3>
+          <h3 className="mb-2">Quick Navigation</h3>
           <div className="flex flex-wrap gap-1.5">
             {[
               { id: 'mission', label: 'Our Mission' },
@@ -107,7 +112,7 @@ export default function MethodologyPage() {
               <a
                 key={id}
                 href={`#${id}`}
-                className="px-3 py-1.5 text-xs font-medium bg-inset text-secondary hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
+                className="px-3 py-1.5 bg-inset hover: hover:bg-canvas border border-border rounded-full transition-colors"
               >
                 {label}
               </a>
@@ -118,51 +123,51 @@ export default function MethodologyPage() {
         <div className="space-y-0">
           {/* Section 1: Our Mission */}
           <CollapsibleSection title="Our Mission" id="mission" defaultOpen={true}>
-            <p className="text-sm text-secondary leading-relaxed">
+            <p>
               Grid Gorilla exists to provide honest, data-driven insights into global energy systems. We believe that{' '}
-              <strong className="text-primary">energy abundance is the foundation of economic prosperity</strong>{' '}
+              <strong>energy abundance is the foundation of economic prosperity</strong>{' '}
               and that understanding energy independence is critical to evaluating national security and economic resilience.
             </p>
-            <p className="text-sm text-secondary leading-relaxed">
+            <p>
               Unlike many energy dashboards that show only production or consumption, Grid Gorilla reveals the{' '}
-              <strong className="text-primary">reality behind the numbers</strong>: where energy actually comes from,
+              <strong>reality behind the numbers</strong>: where energy actually comes from,
               who controls it, and what that means for geopolitical stability.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mt-6">
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">🎯</span>
-                  <h4 className="font-semibold text-primary text-sm">Honest</h4>
+                  <span>🎯</span>
+                  <h4>Honest</h4>
                 </div>
-                <p className="text-xs text-secondary">
+                <p>
                   We don't hide import dependencies or overstate &quot;green&quot; credentials
                 </p>
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">📊</span>
-                  <h4 className="font-semibold text-primary text-sm">Data-driven</h4>
+                  <span>📊</span>
+                  <h4>Data-driven</h4>
                 </div>
-                <p className="text-xs text-secondary">
+                <p>
                   Every metric is traceable to authoritative sources
                 </p>
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">🌍</span>
-                  <h4 className="font-semibold text-primary text-sm">Educational</h4>
+                  <span>🌍</span>
+                  <h4>Educational</h4>
                 </div>
-                <p className="text-xs text-secondary">
+                <p>
                   We explain the &quot;why&quot; behind energy policy decisions
                 </p>
               </div>
               <div className="card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">🔓</span>
-                  <h4 className="font-semibold text-primary text-sm">Open</h4>
+                  <span>🔓</span>
+                  <h4>Open</h4>
                 </div>
-                <p className="text-xs text-secondary">
+                <p>
                   Our methodology is transparent and our data sources are cited
                 </p>
               </div>
@@ -171,7 +176,7 @@ export default function MethodologyPage() {
 
           {/* Section 2: Data Sources */}
           <CollapsibleSection title="Data Sources" id="data-sources">
-            <p className="text-sm text-secondary leading-relaxed mb-6">
+            <p className="mb-6">
               Grid Gorilla combines data from multiple authoritative sources to provide a complete picture of global energy systems.
               All data is freely available and regularly updated.
             </p>
@@ -179,18 +184,18 @@ export default function MethodologyPage() {
             {/* Our World in Data - Primary Source */}
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-primary">Our World in Data Energy Dataset</h4>
-                <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
+                <h4>Our World in Data Energy Dataset</h4>
+                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
                   Primary Data Source
                 </span>
               </div>
-              <p className="text-sm text-secondary mb-3">
+              <p className="mb-3">
                 Comprehensive electricity generation, demand, emissions, and fossil fuel data compiled from multiple authoritative sources.
               </p>
-              <div className="grid sm:grid-cols-2 gap-4 text-xs">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <span className="text-muted">Coverage:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
+                  <span>Coverage:</span>
+                  <ul className="mt-1 space-y-1">
                     <li>• 220+ countries and territories</li>
                     <li>• Annual data from 2000-present</li>
                     <li>• Electricity by source (coal, gas, nuclear, hydro, wind, solar, etc.)</li>
@@ -198,8 +203,8 @@ export default function MethodologyPage() {
                   </ul>
                 </div>
                 <div>
-                  <span className="text-muted">Underlying sources:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
+                  <span>Underlying sources:</span>
+                  <ul className="mt-1 space-y-1">
                     <li>• <strong>Ember</strong> - Electricity generation data</li>
                     <li>• <strong>Energy Institute</strong> - Fossil fuel production/consumption</li>
                     <li>• <strong>US EIA</strong> - Additional energy statistics</li>
@@ -211,7 +216,7 @@ export default function MethodologyPage() {
                   href="https://github.com/owid/energy-data"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   github.com/owid/energy-data →
                 </a>
@@ -219,13 +224,13 @@ export default function MethodologyPage() {
                   href="https://ember-climate.org/data/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   ember-climate.org (underlying data) →
                 </a>
               </div>
               <div className="mt-3 p-3 bg-inset rounded-lg">
-                <p className="text-xs text-muted">
+                <p>
                   <strong>License:</strong> CC BY 4.0 — Our World in Data layer, with underlying Ember data also CC BY 4.0
                 </p>
               </div>
@@ -234,23 +239,23 @@ export default function MethodologyPage() {
             {/* Uranium Data */}
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-primary">World Nuclear Association & EIA</h4>
-                <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
+                <h4>World Nuclear Association & EIA</h4>
+                <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
                   Uranium Production
                 </span>
               </div>
-              <p className="text-sm text-secondary mb-3">
+              <p className="mb-3">
                 Uranium mining production by country
               </p>
-              <p className="text-xs text-secondary mb-3">
-                <strong className="text-primary">Key insight:</strong> Only ~15 countries produce uranium. Everyone else imports 100%.
+              <p className="mb-3">
+                <strong>Key insight:</strong> Only ~15 countries produce uranium. Everyone else imports 100%.
               </p>
               <div className="mt-4 pt-3 border-t border-border flex flex-wrap gap-4">
                 <a
                   href="https://world-nuclear.org/information-library/nuclear-fuel-cycle/mining-of-uranium/world-uranium-mining-production"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   World Nuclear Association →
                 </a>
@@ -258,7 +263,7 @@ export default function MethodologyPage() {
                   href="https://www.eia.gov/uranium/marketing/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   US EIA Uranium Reports →
                 </a>
@@ -268,18 +273,18 @@ export default function MethodologyPage() {
             {/* Socioeconomic Data */}
             <div className="card p-5">
               <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-primary">World Bank & UNDP</h4>
-                <span className="text-xs bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
+                <h4>World Bank & UNDP</h4>
+                <span className="bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
                   Socioeconomic Data
                 </span>
               </div>
-              <p className="text-sm text-secondary mb-3">
+              <p className="mb-3">
                 GDP, Human Development Index (HDI), life expectancy, and manufacturing output for our Energy & Prosperity correlations
               </p>
-              <div className="grid sm:grid-cols-2 gap-4 text-xs">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <span className="text-muted">Metrics:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
+                  <span>Metrics:</span>
+                  <ul className="mt-1 space-y-1">
                     <li>• GDP per capita (PPP adjusted)</li>
                     <li>• Human Development Index (HDI)</li>
                     <li>• Life expectancy at birth</li>
@@ -287,8 +292,8 @@ export default function MethodologyPage() {
                   </ul>
                 </div>
                 <div>
-                  <span className="text-muted">Why we chose it:</span>
-                  <ul className="mt-1 space-y-1 text-secondary">
+                  <span>Why we chose it:</span>
+                  <ul className="mt-1 space-y-1">
                     <li>• Authoritative global coverage</li>
                     <li>• Standardized methodology</li>
                     <li>• Annual updates</li>
@@ -300,7 +305,7 @@ export default function MethodologyPage() {
                   href="https://data.worldbank.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   World Bank Open Data →
                 </a>
@@ -308,7 +313,7 @@ export default function MethodologyPage() {
                   href="https://hdr.undp.org/data-center"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   UNDP Human Development Data →
                 </a>
@@ -318,9 +323,9 @@ export default function MethodologyPage() {
 
           {/* Section 3: Energy Independence Score */}
           <CollapsibleSection title="Energy Independence Score - Detailed Methodology" id="methodology">
-            <h3 className="text-sm font-semibold text-primary mb-2">What is Energy Independence?</h3>
-            <p className="text-sm text-secondary leading-relaxed mb-4">
-              <strong className="text-primary">Energy Independence</strong> measures how much of a country's electricity
+            <h3 className="mb-2">What is Energy Independence?</h3>
+            <p className="mb-4">
+              <strong>Energy Independence</strong> measures how much of a country's electricity
               demand is met by domestic sources versus imported fuels or imported electricity.
             </p>
 
@@ -330,11 +335,11 @@ export default function MethodologyPage() {
               via interconnectors is 20% dependent on foreign grids — that imported portion contributes zero to independence.
             </InfoCard>
 
-            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">Why Energy Independence Matters</h3>
-            <p className="text-sm text-secondary leading-relaxed mb-4">
+            <h3 className="mt-6 mb-2">Why Energy Independence Matters</h3>
+            <p className="mb-4">
               The 2022 European energy crisis demonstrated the vulnerability of energy dependence:
             </p>
-            <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-4">
+            <ul className="space-y-1 mb-4">
               <li>Russia reduced gas exports to Europe</li>
               <li>Electricity prices spiked 10x in some markets</li>
               <li>Industrial production declined</li>
@@ -342,19 +347,19 @@ export default function MethodologyPage() {
             </ul>
 
             <InfoCard>
-              <strong className="text-primary">Energy independence ≠ Energy security</strong>, but it&apos;s a critical component.
+              <strong>Energy independence ≠ Energy security</strong>, but it&apos;s a critical component.
             </InfoCard>
 
-            <h3 className="text-sm font-semibold text-primary mt-6 mb-2">The Four Calculation Layers</h3>
-            <p className="text-sm text-secondary leading-relaxed mb-4">
+            <h3 className="mt-6 mb-2">The Four Calculation Layers</h3>
+            <p className="mb-4">
               Our Energy Independence Score has four progressive layers of sophistication:
             </p>
 
             {/* Layer 0 - Demand-Based Calculation */}
             <div className="card p-5 mb-4 border-l-4 border-l-blue-500">
-              <h4 className="font-semibold text-primary mb-2">Layer 0: Demand-Based Calculation (Foundation)</h4>
-              <p className="text-sm text-secondary mb-3">
-                All percentages are calculated against <strong className="text-primary">electricity demand</strong>, not generation.
+              <h4 className="mb-2">Layer 0: Demand-Based Calculation (Foundation)</h4>
+              <p className="mb-3">
+                All percentages are calculated against <strong>electricity demand</strong>, not generation.
                 This is a critical design choice that captures electricity imports.
               </p>
               <CodeBlock title="Why demand, not generation?">
@@ -370,7 +375,7 @@ Using demand as denominator:
   → 80 TWh / 100 TWh = 80% max independence ✓ CORRECT
   → The 20% import gap contributes ZERO to score`}
               </CodeBlock>
-              <p className="text-xs text-muted mt-3">
+              <p className="mt-3">
                 <strong>Key insight:</strong> Electricity imported via interconnectors is the most direct form of energy dependence —
                 it&apos;s not even fuel-for-generation, but finished electricity controlled by a neighboring grid.
               </p>
@@ -378,8 +383,8 @@ Using demand as denominator:
 
             {/* Layer 1 */}
             <div className="card p-5 mb-4">
-              <h4 className="font-semibold text-primary mb-2">Layer 1: Renewable & Nuclear Baseline</h4>
-              <p className="text-sm text-secondary mb-3">
+              <h4 className="mb-2">Layer 1: Renewable & Nuclear Baseline</h4>
+              <p className="mb-3">
                 Renewable energy sources are 100% domestic by definition.
               </p>
               <CodeBlock title="Renewable sources (100% independent)">
@@ -389,15 +394,15 @@ Hydro     → Water falls in domestic rivers
 Geothermal → Heat from domestic underground
 Bioenergy → Crops grown on domestic land`}
               </CodeBlock>
-              <p className="text-xs text-muted mt-3">
+              <p className="mt-3">
                 <strong>Nuclear:</strong> Initially counted as 100% independent, but see Layer 3 below.
               </p>
             </div>
 
             {/* Layer 2 */}
             <div className="card p-5 mb-4">
-              <h4 className="font-semibold text-primary mb-2">Layer 2: Fossil Fuel Import Dependency</h4>
-              <p className="text-sm text-secondary mb-3">
+              <h4 className="mb-2">Layer 2: Fossil Fuel Import Dependency</h4>
+              <p className="mb-3">
                 A country might generate electricity from coal, but where did the coal come from?
                 We use production/consumption ratios from Our World in Data.
               </p>
@@ -409,15 +414,15 @@ Germany coal: 140 TWh produced / 280 TWh consumed = 50% independent
 Germany gas:  20 TWh produced / 850 TWh consumed  = 2.4% independent
 Norway gas:   1200 TWh produced / 50 TWh consumed = 2400% → capped at 100%`}
               </CodeBlock>
-              <p className="text-xs text-muted mt-3">
+              <p className="mt-3">
                 <strong>Assumption:</strong> We assume the import ratio is consistent across all sectors (electricity, heating, transport, industry).
               </p>
             </div>
 
             {/* Layer 3 */}
             <div className="card p-5">
-              <h4 className="font-semibold text-primary mb-2">Layer 3: Nuclear Fuel Dependency</h4>
-              <p className="text-sm text-secondary mb-3">
+              <h4 className="mb-2">Layer 3: Nuclear Fuel Dependency</h4>
+              <p className="mb-3">
                 Nuclear plants need uranium fuel. Where does it come from?
                 Only ~15 countries mine uranium. France, Japan, Germany, South Korea, etc. produce zero uranium domestically.
               </p>
@@ -444,28 +449,28 @@ Everyone Else: 0% (imports 100%)
 
           {/* Section 4: The Complete Calculation */}
           <CollapsibleSection title="The Complete Calculation" id="calculation">
-            <h3 className="text-sm font-semibold text-primary mb-2">Step-by-Step Formula</h3>
+            <h3 className="mb-2">Step-by-Step Formula</h3>
 
             <div className="space-y-4">
               <div className="card p-5">
-                <h4 className="font-semibold text-primary mb-2">Step 1: Calculate Renewable Contribution</h4>
-                <p className="text-sm text-muted mb-3">(100% independent, relative to demand)</p>
+                <h4 className="mb-2">Step 1: Calculate Renewable Contribution</h4>
+                <p className="mb-3">(100% independent, relative to demand)</p>
                 <FormulaBox>
                   <div>renewable_electricity = solar + wind + hydro + bioenergy + other_renewables</div>
-                  <div className="mt-2 text-muted text-xs">// Note: denominator is DEMAND, not generation</div>
+                  <div className="mt-2">// Note: denominator is DEMAND, not generation</div>
                   <div>renewable_contribution = (renewable_electricity / demand) × 100</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
-                <h4 className="font-semibold text-primary mb-2">Step 2: Calculate Fossil Fuel Contributions</h4>
-                <p className="text-sm text-muted mb-3">(weighted by import dependency, relative to demand)</p>
+                <h4 className="mb-2">Step 2: Calculate Fossil Fuel Contributions</h4>
+                <p className="mb-3">(weighted by import dependency, relative to demand)</p>
                 <FormulaBox>
-                  <div className="text-muted text-xs mb-2">// For each fossil fuel (coal, gas, oil):</div>
+                  <div className="mb-2">// For each fossil fuel (coal, gas, oil):</div>
                   <div>fuel_independence_ratio = fuel_production / fuel_consumption</div>
-                  <div className="mt-2 text-muted text-xs">// Cap at 100% for net exporters</div>
+                  <div className="mt-2">// Cap at 100% for net exporters</div>
                   <div>if (fuel_independence_ratio {'>'} 1.0) fuel_independence_ratio = 1.0</div>
-                  <div className="mt-3 text-muted text-xs">// All percentages relative to DEMAND</div>
+                  <div className="mt-3">// All percentages relative to DEMAND</div>
                   <div>coal_contribution = (coal_elec / demand) × coal_independence × 100</div>
                   <div>gas_contribution = (gas_elec / demand) × gas_independence × 100</div>
                   <div>oil_contribution = (oil_elec / demand) × oil_independence × 100</div>
@@ -473,51 +478,51 @@ Everyone Else: 0% (imports 100%)
               </div>
 
               <div className="card p-5">
-                <h4 className="font-semibold text-primary mb-2">Step 3: Calculate Nuclear Contribution</h4>
-                <p className="text-sm text-muted mb-3">(weighted by uranium independence, relative to demand)</p>
+                <h4 className="mb-2">Step 3: Calculate Nuclear Contribution</h4>
+                <p className="mb-3">(weighted by uranium independence, relative to demand)</p>
                 <FormulaBox>
                   <div>uranium_independence = URANIUM_LOOKUP_TABLE[country_code] || 0</div>
-                  <div className="mt-2 text-muted text-xs">// Nuclear percentage relative to DEMAND</div>
+                  <div className="mt-2">// Nuclear percentage relative to DEMAND</div>
                   <div>nuclear_contribution = (nuclear_elec / demand) × (uranium_independence / 100) × 100</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
-                <h4 className="font-semibold text-primary mb-2">Step 4: Sum All Contributions</h4>
+                <h4 className="mb-2">Step 4: Sum All Contributions</h4>
                 <FormulaBox>
-                  <div className="text-muted text-xs mb-2">// Imported electricity contributes 0 automatically</div>
-                  <div className="text-muted text-xs mb-2">// because generation {'<'} demand creates a gap that isn&apos;t counted</div>
+                  <div className="mb-2">// Imported electricity contributes 0 automatically</div>
+                  <div className="mb-2">// because generation {'<'} demand creates a gap that isn&apos;t counted</div>
                   <div>total_score = renewable_contribution + nuclear_contribution +</div>
                   <div className="ml-12">coal_contribution + gas_contribution + oil_contribution</div>
-                  <div className="mt-2 text-muted text-xs">// Max score limited by (generation / demand) ratio</div>
-                  <div className="text-muted text-xs">// If demand = 100 TWh and generation = 80 TWh, max score is 80</div>
-                  <div className="mt-2 text-muted text-xs">// Round to 1 decimal place</div>
+                  <div className="mt-2">// Max score limited by (generation / demand) ratio</div>
+                  <div>// If demand = 100 TWh and generation = 80 TWh, max score is 80</div>
+                  <div className="mt-2">// Round to 1 decimal place</div>
                   <div>final_score = Math.round(total_score × 10) / 10</div>
                 </FormulaBox>
               </div>
 
               <div className="card p-5">
-                <h4 className="font-semibold text-primary mb-2">Step 5: Assign Score Band</h4>
+                <h4 className="mb-2">Step 5: Assign Score Band</h4>
                 <div className="grid sm:grid-cols-5 gap-2 mt-4">
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#059669' }}>
-                    <div className="text-white font-bold text-lg">≥95</div>
-                    <div className="text-white/90 text-xs">Energy Fortress</div>
+                    <div className="text-white">≥95</div>
+                    <div className="text-white/90">Energy Fortress</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#22C55E' }}>
-                    <div className="text-white font-bold text-lg">80-94</div>
-                    <div className="text-white/90 text-xs">Strong Position</div>
+                    <div className="text-white">80-94</div>
+                    <div className="text-white/90">Strong Position</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#EAB308' }}>
-                    <div className="text-white font-bold text-lg">60-79</div>
-                    <div className="text-white/90 text-xs">Moderate</div>
+                    <div className="text-white">60-79</div>
+                    <div className="text-white/90">Moderate</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#F97316' }}>
-                    <div className="text-white font-bold text-lg">40-59</div>
-                    <div className="text-white/90 text-xs">Dependent</div>
+                    <div className="text-white">40-59</div>
+                    <div className="text-white/90">Dependent</div>
                   </div>
                   <div className="text-center p-3 rounded-lg" style={{ backgroundColor: '#EF4444' }}>
-                    <div className="text-white font-bold text-lg">{'<'}40</div>
-                    <div className="text-white/90 text-xs">Critical</div>
+                    <div className="text-white">{'<'}40</div>
+                    <div className="text-white/90">Critical</div>
                   </div>
                 </div>
               </div>
@@ -529,30 +534,30 @@ Everyone Else: 0% (imports 100%)
             {/* Example 1: Germany */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">🇩🇪</span>
+                <span>🇩🇪</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Germany (2023)</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EAB308', color: 'white' }}>
+                  <h4>Germany (2023)</h4>
+                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EAB308', color: 'white' }}>
                     Score: 68.7 - Moderate
                   </span>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Electricity Mix (Ember)</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Electricity Mix (Ember)</h5>
+                  <ul className="space-y-1">
                     <li>Total: 508 TWh</li>
                     <li>Renewables: 255 TWh (50.2%)</li>
                     <li>Nuclear: 0 TWh (shut down April 2023)</li>
-                    <li className="text-muted italic text-[10px] pl-3">Was 6% in 2022, 13.3% in 2021</li>
+                    <li className="italic text-[10px] pl-3">Was 6% in 2022, 13.3% in 2021</li>
                     <li>Coal: 185 TWh (36.4%)</li>
                     <li>Gas: 66 TWh (13.0%)</li>
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Fossil Fuel Independence (OWID)</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Fossil Fuel Independence (OWID)</h5>
+                  <ul className="space-y-1">
                     <li>Coal: 140/280 TWh = 50%</li>
                     <li>Gas: 20/850 TWh = 2.4%</li>
                     <li>Oil: 10/1200 TWh = 0.8%</li>
@@ -573,12 +578,12 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
 
               <div className="grid sm:grid-cols-2 gap-4 mt-4">
                 <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                  <h5 className="text-xs font-medium text-green-700 dark:text-green-400 mb-1">Strengths</h5>
-                  <p className="text-xs text-green-600 dark:text-green-300">50% renewable electricity is fully independent</p>
+                  <h5 className="text-green-700 dark:text-green-400 mb-1">Strengths</h5>
+                  <p className="text-green-600 dark:text-green-300">50% renewable electricity is fully independent</p>
                 </div>
                 <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                  <h5 className="text-xs font-medium text-red-700 dark:text-red-400 mb-1">Vulnerabilities</h5>
-                  <p className="text-xs text-red-600 dark:text-red-300">Extreme gas dependency (imports 97.6%)</p>
+                  <h5 className="text-red-700 dark:text-red-400 mb-1">Vulnerabilities</h5>
+                  <p className="text-red-600 dark:text-red-300">Extreme gas dependency (imports 97.6%)</p>
                 </div>
               </div>
             </div>
@@ -586,10 +591,10 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
             {/* Example 2: France */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">🇫🇷</span>
+                <span>🇫🇷</span>
                 <div>
-                  <h4 className="font-semibold text-primary">France (2023)</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
+                  <h4>France (2023)</h4>
+                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
                     Score: 20.2 - Critical Dependency
                   </span>
                 </div>
@@ -599,10 +604,10 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
                 This is the most controversial calculation in Grid Gorilla, and it&apos;s intentionally provocative.
               </InfoCard>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs my-4">
+              <div className="grid sm:grid-cols-2 gap-4 my-4">
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Electricity Mix (Ember)</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Electricity Mix (Ember)</h5>
+                  <ul className="space-y-1">
                     <li>Total: 445 TWh</li>
                     <li>Renewables: 90 TWh (20.2%)</li>
                     <li>Nuclear: 320 TWh (71.9%)</li>
@@ -611,8 +616,8 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Independence Ratios</h5>
+                  <ul className="space-y-1">
                     <li>Coal: 0% (no domestic coal)</li>
                     <li>Gas: 0% (no domestic gas)</li>
                     <li>Oil: 0.6%</li>
@@ -632,16 +637,16 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
               </CodeBlock>
 
               <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
-                <h5 className="font-semibold text-amber-800 dark:text-amber-300 mb-2">Why we score it this way</h5>
-                <ul className="text-xs text-amber-700 dark:text-amber-400 space-y-1">
+                <h5 className="text-amber-800 dark:text-amber-300 mb-2">Why we score it this way</h5>
+                <ul className="text-amber-700 dark:text-amber-400 space-y-1">
                   <li>• Uranium dependency is real: France imports 100% of uranium ore</li>
                   <li>• Supply chain vulnerability: Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
                   <li>• Educational mission: We&apos;re measuring <em>independence</em>, not <em>security</em></li>
                 </ul>
 
                 <div className="mt-3 pt-3 border-t border-amber-200 dark:border-amber-700">
-                  <h6 className="font-medium text-amber-800 dark:text-amber-300 mb-1">Important Distinction:</h6>
-                  <ul className="text-xs text-amber-700 dark:text-amber-400 space-y-1">
+                  <h6 className="text-amber-800 dark:text-amber-300 mb-1">Important Distinction:</h6>
+                  <ul className="text-amber-700 dark:text-amber-400 space-y-1">
                     <li>Energy Security: France HAS this (reliable nuclear fleet, diversified uranium suppliers, strategic fuel reserves)</li>
                     <li>Energy Independence: France LACKS this (zero uranium mining, zero fossil fuel production)</li>
                   </ul>
@@ -652,27 +657,27 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
             {/* Example 3: Norway */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">🇳🇴</span>
+                <span>🇳🇴</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Norway (2023)</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
+                  <h4>Norway (2023)</h4>
+                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
                     Score: 97.4 - Energy Fortress
                   </span>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Electricity Mix (Ember)</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Electricity Mix (Ember)</h5>
+                  <ul className="space-y-1">
                     <li>Total: 155 TWh</li>
                     <li>Renewables: 148 TWh (95.5%)</li>
                     <li>Gas: 3 TWh (1.9%)</li>
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Fossil Fuel Independence</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Fossil Fuel Independence</h5>
+                  <ul className="space-y-1">
                     <li>Gas: 1200/50 TWh = 2400% → capped at 100%</li>
                     <li>Oil: 2000/200 TWh = 1000% → capped at 100%</li>
                   </ul>
@@ -687,7 +692,7 @@ Nuclear contribution:   0 pts (no nuclear)
 TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </CodeBlock>
 
-              <p className="text-sm text-secondary mt-4">
+              <p className="mt-4">
                 Norway exports huge amounts of oil and gas to Europe,
                 but uses almost none domestically for electricity. They&apos;re energy independent AND energy secure.
               </p>
@@ -696,19 +701,19 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             {/* Example 4: Japan */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">🇯🇵</span>
+                <span>🇯🇵</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Japan (2023)</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
+                  <h4>Japan (2023)</h4>
+                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
                     Score: 25.5 - Critical Dependency
                   </span>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Electricity Mix</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Electricity Mix</h5>
+                  <ul className="space-y-1">
                     <li>Total: 950 TWh</li>
                     <li>Renewables: 240 TWh (25.3%)</li>
                     <li>Nuclear: 48 TWh (5.1%)</li>
@@ -717,8 +722,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
-                  <ul className="space-y-1 text-secondary text-negative">
+                  <h5 className="mb-2">Independence Ratios</h5>
+                  <ul className="space-y-1 text-negative">
                     <li>Coal: 0%</li>
                     <li>Gas: 0.5%</li>
                     <li>Oil: 0.1%</li>
@@ -727,7 +732,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </div>
               </div>
 
-              <p className="text-sm text-secondary">
+              <p>
                 Japan is one of the world&apos;s most energy-dependent major economies.
                 This drives their LNG import infrastructure (world&apos;s largest LNG importer), energy efficiency focus,
                 and interest in hydrogen as an alternative.
@@ -737,19 +742,19 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             {/* Example 5: Kazakhstan */}
             <div className="card p-5">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">🇰🇿</span>
+                <span>🇰🇿</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Kazakhstan (2023)</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
+                  <h4>Kazakhstan (2023)</h4>
+                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
                     Score: 100 - Energy Fortress
                   </span>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Electricity Mix</h5>
-                  <ul className="space-y-1 text-secondary">
+                  <h5 className="mb-2">Electricity Mix</h5>
+                  <ul className="space-y-1">
                     <li>Total: 115 TWh</li>
                     <li>Coal: 72 TWh (62.6%)</li>
                     <li>Gas: 25 TWh (21.7%)</li>
@@ -757,8 +762,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-medium text-primary mb-2">Independence Ratios</h5>
-                  <ul className="space-y-1 text-secondary text-positive">
+                  <h5 className="mb-2">Independence Ratios</h5>
+                  <ul className="space-y-1 text-positive">
                     <li>Coal: 100% (net exporter)</li>
                     <li>Gas: 100% (net exporter)</li>
                     <li>Uranium: 100% (world&apos;s #1 producer)</li>
@@ -766,7 +771,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </div>
               </div>
 
-              <p className="text-sm text-secondary">
+              <p>
                 Kazakhstan is the world&apos;s largest uranium producer
                 but operates zero nuclear power plants domestically. Exports uranium to France, China, USA, etc.
               </p>
@@ -775,30 +780,30 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 6: What This Score Does NOT Measure */}
           <CollapsibleSection title="What This Score Does NOT Measure" id="not-measuring">
-            <p className="text-sm text-secondary leading-relaxed mb-6">
-              It&apos;s critical to understand what the Energy Independence Score is <strong className="text-primary">not</strong>:
+            <p className="mb-6">
+              It&apos;s critical to understand what the Energy Independence Score is <strong>not</strong>:
             </p>
 
             <div className="space-y-4">
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="font-semibold text-primary mb-2">❌ NOT a measure of &quot;good&quot; vs &quot;bad&quot; energy policy</h4>
-                <p className="text-sm text-secondary">
+                <h4 className="mb-2">❌ NOT a measure of &quot;good&quot; vs &quot;bad&quot; energy policy</h4>
+                <p>
                   A country with 100% coal from domestic mines scores higher than a country with 100% imported renewables.
                   This doesn&apos;t mean coal is &quot;better&quot; - it means the coal country is more independent.
                 </p>
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="font-semibold text-primary mb-2">❌ NOT a measure of energy security</h4>
+                <h4 className="mb-2">❌ NOT a measure of energy security</h4>
                 <div className="overflow-x-auto mt-3">
-                  <table className="w-full text-xs">
+                  <table className="w-full">
                     <thead>
                       <tr className="border-b border-border">
-                        <th className="text-left py-2 font-medium text-primary">Energy Independence</th>
-                        <th className="text-left py-2 font-medium text-primary">Energy Security</th>
+                        <th className="text-left py-2">Energy Independence</th>
+                        <th className="text-left py-2">Energy Security</th>
                       </tr>
                     </thead>
-                    <tbody className="text-secondary">
+                    <tbody>
                       <tr className="border-b border-border-subtle">
                         <td className="py-2">Domestic production</td>
                         <td className="py-2">Reliable supply</td>
@@ -821,24 +826,24 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="font-semibold text-primary mb-2">❌ NOT a measure of sustainability</h4>
-                <p className="text-sm text-secondary">
+                <h4 className="mb-2">❌ NOT a measure of sustainability</h4>
+                <p>
                   Fossil fuel independence counts the same as renewable independence.
                   A country running on domestic coal gets the same score as one running on domestic solar.
                 </p>
               </div>
 
               <div className="card p-4 border-l-4 border-l-red-500">
-                <h4 className="font-semibold text-primary mb-2">❌ NOT a measure of electricity prices or grid reliability</h4>
-                <p className="text-sm text-secondary">
+                <h4 className="mb-2">❌ NOT a measure of electricity prices or grid reliability</h4>
+                <p>
                   Norway is independent AND has low prices. South Africa has domestic coal but frequent load-shedding.
                 </p>
               </div>
             </div>
 
             <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-              <h4 className="font-semibold text-green-800 dark:text-green-300 mb-2">What it IS measuring</h4>
-              <ul className="text-sm text-green-700 dark:text-green-400 space-y-1">
+              <h4 className="text-green-800 dark:text-green-300 mb-2">What it IS measuring</h4>
+              <ul className="text-green-700 dark:text-green-400 space-y-1">
                 <li>✅ Geopolitical vulnerability to supply disruptions</li>
                 <li>✅ Exposure to foreign fuel price shocks</li>
                 <li>✅ Dependence on international trade routes</li>
@@ -850,82 +855,82 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 7: Limitations & Assumptions */}
           <CollapsibleSection title="Limitations & Assumptions" id="limitations">
-            <h3 className="text-sm font-semibold text-primary mb-2">Known Limitations</h3>
+            <h3 className="mb-2">Known Limitations</h3>
 
             <div className="space-y-4">
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">1. Annual Averages Hide Seasonal Variation</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">1. Annual Averages Hide Seasonal Variation</h4>
+                <p>
                   We use annual data (2023 full year). Doesn&apos;t capture winter gas shortages or summer solar peaks.
                   Energy independence can vary month-to-month.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">2. Sector-Agnostic Fuel Ratios</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">2. Sector-Agnostic Fuel Ratios</h4>
+                <p className="mb-2">
                   We assume electricity generation uses the same domestic/imported fuel mix as other sectors (heating, transport, industry).
                 </p>
-                <p className="text-xs text-muted">
+                <p>
                   No publicly available data breaks down imports by end-use sector.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">3. Electricity Only, Not Total Energy</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">3. Electricity Only, Not Total Energy</h4>
+                <p className="mb-2">
                   Score measures electricity independence only. Doesn&apos;t include transport fuels (gasoline, diesel) or heating fuels (natural gas, heating oil).
                   Electricity is only ~20-40% of total energy in most countries.
                 </p>
-                <p className="text-xs text-muted">
+                <p>
                   <strong>Why electricity:</strong> It&apos;s the most data-complete sector and growing due to electrification.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">4. One-Year Lag</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">4. One-Year Lag</h4>
+                <p>
                   Our World in Data updates annually, usually ~1 year behind. 2023 is the latest year with complete data (as of 2025).
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">5. Missing Fossil Fuel Data for Some Countries</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">5. Missing Fossil Fuel Data for Some Countries</h4>
+                <p className="mb-2">
                   Our World in Data does not have fossil fuel production/consumption data for all countries. For countries without this data,
                   we assume 100% of fossil fuels are imported, which may underestimate independence for countries that produce their own fossil fuels.
                 </p>
-                <p className="text-xs text-secondary mb-2">
-                  <strong className="text-primary">How to identify:</strong> Independence scores marked with an asterisk (*) indicate
+                <p className="mb-2">
+                  <strong>How to identify:</strong> Independence scores marked with an asterisk (*) indicate
                   missing fossil fuel data. This is common for smaller countries and newer territories.
                 </p>
-                <p className="text-xs text-muted">
+                <p>
                   This conservative assumption ensures we don&apos;t overstate energy independence when data is unavailable.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">6. No Bilateral Trade Data</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">6. No Bilateral Trade Data</h4>
+                <p>
                   We know Germany imports gas, but not specifically from Russia vs Norway vs USA.
                   Future enhancement could add Herfindahl Index for import concentration.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">7. Nuclear Scoring Is Controversial</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">7. Nuclear Scoring Is Controversial</h4>
+                <p>
                   Scoring France at 20/100 despite 70% nuclear is provocative. Some will argue enrichment/fabrication capacity should count.
                   We intentionally score conservatively to spark debate.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">8. Renewables Hardware Imports</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">8. Renewables Hardware Imports</h4>
+                <p className="mb-2">
                   If Germany installs Chinese solar panels powered by German sunlight, is it independent?
                 </p>
-                <p className="text-xs text-secondary">
+                <p>
                   We say yes, because the energy source (sunlight) is domestic, even if the hardware is imported.
                   The marginal cost of solar is ~$0/MWh once installed.
                 </p>
@@ -937,8 +942,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           <CollapsibleSection title="Frequently Asked Questions" id="faq">
             <div className="space-y-4">
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Why does my country score so low?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">Why does my country score so low?</h4>
+                <p>
                   Energy independence is hard! Most countries import significant amounts of fuel.
                   A low score reveals vulnerability but doesn&apos;t mean the country is &quot;failing&quot; -
                   it means they&apos;re exposed to supply disruptions.
@@ -946,20 +951,20 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">How do you handle electricity imports?</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">How do you handle electricity imports?</h4>
+                <p className="mb-2">
                   Electricity imports are factored in automatically. The score is calculated against <strong>demand</strong>, not generation.
                   If a country generates 80 TWh but demands 100 TWh, the 20 TWh imported via interconnectors contributes zero to the score.
                 </p>
-                <p className="text-xs text-secondary">
+                <p>
                   This is arguably the most direct form of energy dependence — it&apos;s not even fuel-for-generation,
                   but finished electricity controlled by a neighboring grid.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">What does the asterisk (*) next to a score mean?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">What does the asterisk (*) next to a score mean?</h4>
+                <p>
                   An asterisk indicates that fossil fuel import data is not available for that country.
                   In these cases, we assume 100% of fossil fuels are imported, which may underestimate
                   independence for countries that actually produce their own coal, gas, or oil.
@@ -968,50 +973,50 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Why does France only score 20/100 despite nuclear?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">Why does France only score 20/100 despite nuclear?</h4>
+                <p>
                   Because France imports 100% of its uranium fuel. Nuclear provides energy <em>security</em> (reliable baseload),
                   but not energy <em>independence</em> (domestic resources). See the France example above.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Isn&apos;t coal independence &quot;bad&quot; for climate?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">Isn&apos;t coal independence &quot;bad&quot; for climate?</h4>
+                <p>
                   The independence score is NOT a sustainability metric. A country running on domestic coal scores higher
                   than one running on imported solar panels. Use case: understanding geopolitical leverage, not carbon footprint.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Why count renewables as 100% independent?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">Why count renewables as 100% independent?</h4>
+                <p>
                   The energy source (sun, wind, water) is free and domestic. Even if hardware is imported,
                   the marginal cost of energy production is ~$0/MWh. The sunlight/wind can&apos;t be cut off by foreign powers.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">What about strategic reserves?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">What about strategic reserves?</h4>
+                <p>
                   Not currently factored in. Future enhancement could add points for oil/gas storage capacity.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Do you factor in rare earth minerals for solar/wind?</h4>
-                <p className="text-xs text-secondary">
+                <h4 className="mb-2">Do you factor in rare earth minerals for solar/wind?</h4>
+                <p>
                   No. We count the energy source (sunlight, wind) as domestic, even if turbine components are imported.
                   Once installed, the energy is free.
                 </p>
               </div>
 
               <div className="card p-4">
-                <h4 className="font-semibold text-primary text-sm mb-2">Can I download your data?</h4>
-                <p className="text-xs text-secondary mb-2">
+                <h4 className="mb-2">Can I download your data?</h4>
+                <p className="mb-2">
                   Yes! All our source data is open. Here are all the sources we use:
                 </p>
-                <ul className="text-xs text-secondary space-y-1">
+                <ul className="space-y-1">
                   <li>
                     <strong>Energy data (primary):</strong>
                     <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Our World in Data Energy Dataset</a>
@@ -1038,32 +1043,32 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           {/* Section 9: Data Update Frequency */}
           <CollapsibleSection title="Data Update Frequency" id="updates">
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-3 font-medium text-primary">Source</th>
-                    <th className="text-left py-3 font-medium text-primary">Frequency</th>
-                    <th className="text-left py-3 font-medium text-primary">Lag</th>
+                    <th className="text-left py-3">Source</th>
+                    <th className="text-left py-3">Frequency</th>
+                    <th className="text-left py-3">Lag</th>
                   </tr>
                 </thead>
-                <tbody className="text-secondary">
+                <tbody>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-3 font-medium text-primary">Ember Climate</td>
+                    <td className="py-3">Ember Climate</td>
                     <td className="py-3">Twice monthly</td>
                     <td className="py-3">2-3 months</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-3 font-medium text-primary">Our World in Data</td>
+                    <td className="py-3">Our World in Data</td>
                     <td className="py-3">Annually (Q3)</td>
                     <td className="py-3">~1 year</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-3 font-medium text-primary">Uranium Production</td>
+                    <td className="py-3">Uranium Production</td>
                     <td className="py-3">Annually</td>
                     <td className="py-3">~1 year</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-medium text-primary">World Bank / UNDP</td>
+                    <td className="py-3">World Bank / UNDP</td>
                     <td className="py-3">Annually</td>
                     <td className="py-3">~1-2 years</td>
                   </tr>
@@ -1074,8 +1079,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Section 10: Acknowledgments */}
           <CollapsibleSection title="Acknowledgments" id="acknowledgments">
-            <h3 className="text-sm font-semibold text-primary mb-2">Data Providers</h3>
-            <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
+            <h3 className="mb-2">Data Providers</h3>
+            <ul className="space-y-1 mb-6">
               <li><strong>Our World in Data</strong> - Primary energy dataset combining Ember, Energy Institute, and EIA data</li>
               <li><strong>Ember Climate</strong> - Underlying electricity generation data</li>
               <li><strong>Energy Institute</strong> - Historical energy statistics and fossil fuel data</li>
@@ -1085,15 +1090,15 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               <li><strong>United Nations Development Programme (UNDP)</strong> - Human Development Index</li>
             </ul>
 
-            <h3 className="text-sm font-semibold text-primary mb-2">Inspiration</h3>
-            <ul className="list-disc list-inside space-y-1 text-sm text-secondary mb-6">
+            <h3 className="mb-2">Inspiration</h3>
+            <ul className="space-y-1 mb-6">
               <li>IEA Energy Security Dashboard - Highlighted importance of import dependency</li>
               <li>BP Statistical Review - Historical reference for energy data</li>
               <li>Hannah Ritchie & Max Roser (OWID) - Championing open energy data</li>
             </ul>
 
-            <h3 className="text-sm font-semibold text-primary mb-2">License</h3>
-            <ul className="list-disc list-inside space-y-1 text-sm text-secondary">
+            <h3 className="mb-2">License</h3>
+            <ul className="space-y-1">
               <li>Source data: CC BY 4.0 (Ember, OWID)</li>
               <li>Uranium data: Publicly available from WNA/EIA</li>
             </ul>
@@ -1101,55 +1106,55 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
 
           {/* Uranium Table Appendix */}
           <CollapsibleSection title="Appendix: Complete Uranium Production Table" id="uranium-table">
-            <p className="text-sm text-secondary mb-4">
+            <p className="mb-4">
               For reference, here&apos;s the complete uranium independence lookup table used in our calculations:
             </p>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-2 font-medium text-primary">Category</th>
-                    <th className="text-left py-2 font-medium text-primary">Countries</th>
-                    <th className="text-right py-2 font-medium text-primary">Independence</th>
+                    <th className="text-left py-2">Category</th>
+                    <th className="text-left py-2">Countries</th>
+                    <th className="text-right py-2">Independence</th>
                   </tr>
                 </thead>
-                <tbody className="text-secondary">
+                <tbody>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-2 font-medium text-primary">Major Producers</td>
+                    <td className="py-2">Major Producers</td>
                     <td className="py-2">Kazakhstan (43%), Canada (15%), Namibia (11%), Australia (8%), Uzbekistan (7%), Niger (4%), Russia (5%)</td>
-                    <td className="py-2 text-right text-positive font-medium">100%</td>
+                    <td className="py-2 text-right text-positive">100%</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-2 font-medium text-primary">Partial Producers</td>
+                    <td className="py-2">Partial Producers</td>
                     <td className="py-2">China, Ukraine</td>
-                    <td className="py-2 text-right font-medium">50%</td>
+                    <td className="py-2 text-right">50%</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-2 font-medium text-primary">Partial Producers</td>
+                    <td className="py-2">Partial Producers</td>
                     <td className="py-2">India</td>
-                    <td className="py-2 text-right font-medium">30%</td>
+                    <td className="py-2 text-right">30%</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-2 font-medium text-primary">Minor Producers</td>
+                    <td className="py-2">Minor Producers</td>
                     <td className="py-2">South Africa, Brazil, Czech Republic, Pakistan</td>
-                    <td className="py-2 text-right font-medium">5%</td>
+                    <td className="py-2 text-right">5%</td>
                   </tr>
                   <tr className="border-b border-border-subtle">
-                    <td className="py-2 font-medium text-primary">Minor Producers</td>
+                    <td className="py-2">Minor Producers</td>
                     <td className="py-2">USA</td>
-                    <td className="py-2 text-right font-medium">1%</td>
+                    <td className="py-2 text-right">1%</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-medium text-primary">Everyone Else</td>
+                    <td className="py-2">Everyone Else</td>
                     <td className="py-2">France, Germany, Japan, UK, South Korea, Spain, Belgium, Sweden, Finland, Switzerland, etc.</td>
-                    <td className="py-2 text-right text-negative font-medium">0%</td>
+                    <td className="py-2 text-right text-negative">0%</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <p className="text-xs text-muted mt-4">
+            <p className="mt-4">
               Total world production: ~49,000 MT/year. Top 10 producers account for ~99% of world production.
             </p>
           </CollapsibleSection>
@@ -1159,7 +1164,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
         <div className="mt-12 pt-6 border-t border-border text-center">
           <a
             href="#"
-            className="text-sm text-muted hover:text-primary transition-colors"
+            className="hover: transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1169,7 +1174,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
           </a>
         </div>
         </div>
-      </main>
+      </ArticleShell>
 
       <SiteFooter />
     </div>
