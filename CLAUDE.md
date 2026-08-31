@@ -88,6 +88,23 @@ unknown consumption as imported and flags the score with an asterisk — it used
 to treat it as 100% independent, which scored grids running on imported diesel
 as energy fortresses. Never collapse `null` to `0` in the transform.
 
+Region assignment is keyed by **ISO3**, not country name, in
+`scripts/transform-owid.py`. The name-keyed version covered 138 of 214 and left
+76 countries as `Unknown`/`Other` — the long tail, and the countries that need a
+regional comparison most, since they are too small to place in a world ranking.
+
+`emberRegion` splits the Americas the way its own labels imply: only USA,
+Canada, Bermuda, Greenland and Saint Pierre stay in `North America`; Mexico,
+Central America and the Caribbean are `Latin America and Caribbean`. That leaves
+North America with 5 members, below the 8-country floor for a regional ranking,
+which is correct — ranking Cuba against the United States produced exactly the
+kind of fact nobody believes.
+
+Every country-year carries `population` from OWID. It is `null`, never `0`, for
+the same reason the fossil file is: a zero divides to infinity and puts the
+country top of every per-capita ranking. See docs/backlog.md — this is a second
+population source alongside `socioeconomic.json`, and they disagree.
+
 **`bioenergy` and `other_renewables` are separate sources, and must stay that
 way.** The transform used to fold OWID's `other_renewable_exc_biofuel` into
 `bioenergy` "for backwards compat". Harmless while it was one unlabelled band in

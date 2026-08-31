@@ -251,6 +251,14 @@ export interface BlocAggregates {
   wind_solar_pct: number;
   country_count: number;
   /**
+   * Summed population of the members, or null if any member is missing one.
+   *
+   * Null rather than a partial sum: an undercounted population inflates every
+   * per-capita figure derived from it, which is the same failure mode as
+   * treating a missing value as zero.
+   */
+  population: number | null;
+  /**
    * Span of data years actually summed. Equal when every member contributed the
    * same year; different when members' latest available years diverge, which
    * callers must surface rather than presenting a blended total as one period.
@@ -278,6 +286,8 @@ export function aggregateBloc(
   let renewablesTwh = 0;
   let windSolarTwh = 0;
   let count = 0;
+  let population = 0;
+  let populationComplete = true;
 
   const genBySource: Record<string, number> = {};
   for (const s of ENERGY_SOURCES) genBySource[s] = 0;
@@ -289,6 +299,8 @@ export function aggregateBloc(
     totalGen += yd.total_generation_twh;
     totalDemand += yd.demand_twh;
     totalEmissions += yd.emissions.total_mtco2;
+    if (yd.population == null) populationComplete = false;
+    else population += yd.population;
 
     const gen = yd.generation;
     for (const s of ENERGY_SOURCES) {
@@ -322,6 +334,7 @@ export function aggregateBloc(
     renewables_pct: totalGen > 0 ? (renewablesTwh / totalGen) * 100 : 0,
     wind_solar_pct: totalGen > 0 ? (windSolarTwh / totalGen) * 100 : 0,
     country_count: count,
+    population: populationComplete ? population : null,
     year_min: year,
     year_max: year,
     generation,
@@ -333,6 +346,7 @@ export function blocAggToYearData(agg: BlocAggregates): YearData {
   return {
     demand_twh: agg.total_demand_twh,
     total_generation_twh: agg.total_generation_twh,
+    population: agg.population,
     generation: agg.generation,
     aggregates: {
       clean_pct: agg.clean_pct,
