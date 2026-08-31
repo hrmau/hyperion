@@ -66,6 +66,22 @@ export const publishableIso3 = cache(async (): Promise<string[]> => {
   return Object.keys(facts).sort();
 });
 
+/** In the dataset, but with no hook — so no profile page. */
+export const loadPagelessCountry = cache(async (iso3: string) => {
+  const code = iso3.toUpperCase();
+  const [facts, countries] = await Promise.all([loadFacts(), loadCountriesServer()]);
+  if (facts[code]) return null;
+  const c = countries[code];
+  return c ? { iso3: code, name: c.name, region: c.emberRegion } : null;
+});
+
+/** Display name for an ISO3, from the dataset. */
+export const countryName = cache(async (iso3: string): Promise<string | null> => {
+  const countries = await loadCountriesServer();
+  const c = countries[iso3.toUpperCase()];
+  return c ? c.name : null;
+});
+
 export interface CountryProfile {
   facts: CountryFacts;
   country: Country;
@@ -95,8 +111,7 @@ export const loadNeighbours = cache(
     const code = iso3.toUpperCase();
     const [facts, countries] = await Promise.all([loadFacts(), loadCountriesServer()]);
     const self = countries[code];
-    const selfFacts = facts[code];
-    if (!self || !selfFacts) return [];
+    if (!self) return [];
 
     const region = self.emberRegion;
     if (!region || region === 'Other') return [];
@@ -106,8 +121,23 @@ export const loadNeighbours = cache(
       const yd = f && countries[iso]?.years[String(f.year)];
       return yd ? yd.total_generation_twh : null;
     };
-    const mine = outputOf(code);
-    if (mine == null) return [];
+    // Falls back to the country's own latest year when it has no facts — the
+    // pageless ones still need somewhere to send a reader.
+    // Falls back to the country's own latest year, and then to zero. Zero is not
+    // a failure to find a size — Niue really does report no generation, and the
+    // right neighbours for it are the smallest grids in its region, which is
+    // exactly what a zero reference selects. Returning nothing here left the
+    // pageless countries as the dead ends this is meant to fix.
+    const mine =
+      outputOf(code) ??
+      (() => {
+        const ys = Object.keys(self.years).map(Number).sort((a, b) => b - a);
+        for (const y of ys) {
+          const d = self.years[String(y)];
+          if (d && d.total_generation_twh > 0) return d.total_generation_twh;
+        }
+        return 0;
+      })();
 
     return Object.keys(facts)
       .filter((i) => i !== code && countries[i]?.emberRegion === region)
