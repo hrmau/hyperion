@@ -154,6 +154,7 @@ function MiniEnergyBar({ country, year }: { country: Country; year: number }) {
     { key: 'wind', pct: yearData.generation.wind?.pct || 0 },
     { key: 'solar', pct: yearData.generation.solar?.pct || 0 },
     { key: 'bioenergy', pct: yearData.generation.bioenergy?.pct || 0 },
+    { key: 'other_renewables', pct: yearData.generation.other_renewables?.pct || 0 },
   ].filter(s => s.pct > 0);
 
   return (

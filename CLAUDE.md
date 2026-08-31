@@ -88,6 +88,23 @@ unknown consumption as imported and flags the score with an asterisk — it used
 to treat it as 100% independent, which scored grids running on imported diesel
 as energy fortresses. Never collapse `null` to `0` in the transform.
 
+**`bioenergy` and `other_renewables` are separate sources, and must stay that
+way.** The transform used to fold OWID's `other_renewable_exc_biofuel` into
+`bioenergy` "for backwards compat". Harmless while it was one unlabelled band in
+a chart; wrong the moment anything states a source in a sentence, because Kenya
+is 46% geothermal and 2% biomass, and the folded version called all 48%
+bioenergy. Iceland, New Zealand and the Philippines are the same story.
+
+OWID publishes no geothermal column — `other_renewable_exc_biofuel` is
+geothermal plus wave/tidal — so the source is deliberately **not** named
+`geothermal`. Charts still draw both as one "Other" band via `SOURCE_TO_FUEL` in
+`lib/fuels.ts`, so no published figure moved when they were split.
+
+Anything that iterates sources must handle two of them mapping to one fuel.
+`energyOrder` in `lib/colors.ts` originally used `find` and silently dropped
+`other_renewables`; `EnergyMixChart` now renders from `fuelShares()` rather than
+raw sources for the same reason.
+
 `scripts/generate-questions.js` carries a **port** of that scoring model. If you
 change `lib/independence.ts`, mirror it there and re-run — the file says so, and
 that comment has already caught one drift.

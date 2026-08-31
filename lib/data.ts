@@ -263,6 +263,7 @@ export interface BlocAggregates {
 
 const ENERGY_SOURCES: EnergySource[] = [
   'coal', 'gas', 'other_fossil', 'nuclear', 'hydro', 'wind', 'solar', 'bioenergy',
+  'other_renewables',
 ];
 
 export function aggregateBloc(
@@ -295,7 +296,8 @@ export function aggregateBloc(
     }
 
     fossilTwh += (gen.coal?.twh || 0) + (gen.gas?.twh || 0) + (gen.other_fossil?.twh || 0);
-    renewablesTwh += (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) + (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0);
+    renewablesTwh += (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) + (gen.solar?.twh || 0) +
+      (gen.bioenergy?.twh || 0) + (gen.other_renewables?.twh || 0);
     windSolarTwh += (gen.wind?.twh || 0) + (gen.solar?.twh || 0);
   }
 

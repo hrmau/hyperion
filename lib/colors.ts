@@ -22,6 +22,7 @@ const SOURCE_TO_FUEL: Record<EnergySource, Fuel> = {
   wind: 'wind',
   solar: 'solar',
   bioenergy: 'other',
+  other_renewables: 'other',
 };
 
 export const energyColors: Record<EnergySource, string> = Object.fromEntries(
@@ -32,9 +33,16 @@ export const energyLabels: Record<EnergySource, string> = Object.fromEntries(
   (Object.keys(SOURCE_TO_FUEL) as EnergySource[]).map((s) => [s, FUEL_LABEL[SOURCE_TO_FUEL[s]]])
 ) as Record<EnergySource, string>;
 
-/** Canonical order, expressed in EnergySource keys. Never re-sort per country. */
-export const energyOrder: EnergySource[] = FUEL_ORDER.map(
-  (f) => (Object.keys(SOURCE_TO_FUEL) as EnergySource[]).find((s) => SOURCE_TO_FUEL[s] === f)!
+/**
+ * Canonical order, expressed in EnergySource keys. Never re-sort per country.
+ *
+ * flatMap, not map: "other" is fed by two sources (bioenergy and
+ * other_renewables), and a find() here silently dropped the second — which cost
+ * Kenya 46 points of its mix, all of it geothermal. Every source appears exactly
+ * once, grouped by the fuel it draws as.
+ */
+export const energyOrder: EnergySource[] = FUEL_ORDER.flatMap((f) =>
+  (Object.keys(SOURCE_TO_FUEL) as EnergySource[]).filter((s) => SOURCE_TO_FUEL[s] === f)
 );
 
 export type MapColorMode = 'production' | 'independence' | 'clean';

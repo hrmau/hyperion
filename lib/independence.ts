@@ -154,7 +154,8 @@ export function calculateIndependenceScoreV2(
     (gen.hydro?.twh || 0) +
     (gen.wind?.twh || 0) +
     (gen.solar?.twh || 0) +
-    (gen.bioenergy?.twh || 0);
+    (gen.bioenergy?.twh || 0) +
+    (gen.other_renewables?.twh || 0);
   const renewablePct = (renewableTwh / denominator) * 100;
 
   // Nuclear - weighted by uranium import independence
@@ -376,7 +377,8 @@ export function calculateIndependenceScore(yearData: YearData): IndependenceScor
   const gen = yearData.generation;
   const total = yearData.total_generation_twh;
   const renewableTwh = (gen.hydro?.twh || 0) + (gen.wind?.twh || 0) +
-                       (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0);
+                       (gen.solar?.twh || 0) + (gen.bioenergy?.twh || 0) +
+                       (gen.other_renewables?.twh || 0);
   const nuclearTwh = gen.nuclear?.twh || 0;
   const coalTwh = gen.coal?.twh || 0;
   const gasTwh = gen.gas?.twh || 0;

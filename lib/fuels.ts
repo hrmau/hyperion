@@ -3,12 +3,17 @@ import type { EnergySource, YearData } from './types';
 /**
  * Fuel vocabulary for the redesign.
  *
- * The design system names eight fuels; the data pipeline names eight sources.
- * They correspond one-to-one, with two renames — see docs/design-system/readme.md
- * and scripts/transform-owid.py:
+ * The design system names eight fuels; the data pipeline names nine sources.
+ * See docs/design-system/readme.md and scripts/transform-owid.py:
  *
  *   oil   <- other_fossil   (transform maps OWID's oil_electricity into it)
- *   other <- bioenergy      (already carries other_renewables, e.g. geothermal)
+ *   other <- bioenergy + other_renewables
+ *
+ * "other" is the one many-to-one mapping. bioenergy and other_renewables are
+ * distinct in the data — burning biomass is not geothermal — but the design
+ * system names eight fuels and neither is big enough anywhere to earn its own
+ * band. Keeping them separate in the data and merged on the chart is what lets
+ * a country page say which one it actually is.
  */
 export type Fuel =
   | 'wind'
@@ -102,6 +107,7 @@ const SOURCE_TO_FUEL: Record<EnergySource, Fuel> = {
   wind: 'wind',
   solar: 'solar',
   bioenergy: 'other',
+  other_renewables: 'other',
   hydro: 'hydro',
   nuclear: 'nuclear',
   gas: 'gas',
