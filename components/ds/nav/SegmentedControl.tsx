@@ -7,6 +7,7 @@ export interface SegmentedControlProps<T extends string> {
   value: T;
   onChange: (value: T) => void;
   label?: string;
+  className?: string;
   style?: CSSProperties;
 }
 
@@ -19,12 +20,14 @@ export function SegmentedControl<T extends string>({
   value,
   onChange,
   label,
+  className,
   style,
 }: SegmentedControlProps<T>) {
   return (
     <div
       role="group"
       aria-label={label}
+      className={className}
       style={{
         display: 'inline-flex',
         gap: 2,

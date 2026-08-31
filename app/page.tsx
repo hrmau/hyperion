@@ -187,6 +187,7 @@ export default function Explore() {
         }}
       >
         <SegmentedControl
+          className="gg-measure-switch"
           label="Measure"
           options={MEASURES}
           value={measure}
@@ -194,7 +195,7 @@ export default function Explore() {
         />
         <div
           className="gg-scroll-row"
-          style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', flex: 1 }}
+          style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}
         >
           {BLOCS.map((b) => (
             <Pill
@@ -207,7 +208,9 @@ export default function Explore() {
           ))}
         </div>
         <span
+          className="gg-hover-hint"
           style={{
+            marginLeft: 'auto',
             fontFamily: 'var(--font-mono)',
             fontSize: 'var(--fs-mono-xs)',
             textTransform: 'uppercase',
