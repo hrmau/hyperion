@@ -14,9 +14,18 @@ import { Banner } from '@/components/ds/feedback/Banner';
 import { MixBar } from '@/components/ds/data/MixBar';
 import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
+import { RankedBarList } from '@/components/ds/data/RankedBarList';
+import { GorillaNote } from '@/components/ds/core/GorillaNote';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
-import { loadProfile, loadNeighbours, publishableIso3, type CountryProfile, type NeighbourLink } from '@/lib/facts';
+import {
+  loadProfile,
+  loadNeighbours,
+  loadPagelessCountry,
+  countryName,
+  publishableIso3,
+  type NeighbourLink,
+} from '@/lib/facts';
 
 /**
  * True, so /country/DEU resolves as well as /country/deu — the spec asks for
@@ -39,7 +48,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { iso3 } = await params;
   const p = await loadProfile(iso3);
-  if (!p) return { title: 'Country not found | Grid Gorilla' };
+  if (!p) {
+    const pageless = await loadPagelessCountry(iso3);
+    // Deliberately noindex: this page exists to give a reader somewhere to go,
+    // not to add a fifteenth near-identical entry to the index.
+    return pageless
+      ? {
+          title: `${pageless.name} | Grid Gorilla`,
+          description: `${pageless.name}'s grid is too small to profile. Nearby grids and where to find them.`,
+          robots: { index: false, follow: true },
+        }
+      : { title: 'Country not found | Grid Gorilla', robots: { index: false, follow: true } };
+  }
 
   const { facts } = p;
   // The description is the hook itself. A link to /country/nor in a group chat
@@ -61,39 +81,22 @@ export async function generateMetadata({
 /* Composition                                                                 */
 /* -------------------------------------------------------------------------- */
 
-type ModuleKey = 'hero' | 'stats' | 'mix' | 'history' | 'evidence' | 'neighbours' | 'exits';
-
 /**
- * Which sections this country's page is made of, and in what order.
+ * Which chart sits beside the hook.
  *
- * Deliberately a list rather than a fixed template. If every page were the same
- * sequence with different numbers, the only thing distinguishing 200 pages would
- * be the digits — which is the doorway-page failure arriving through the back
- * door, and it caps what a country page can ever become.
+ * This is where the per-country composition actually lives. The rule is that the
+ * graph has to be about the sentence next to it — a stacked area chart beside
+ * "Nigeria has a fifth of Brazil's electricity per person" is decoration, and
+ * decoration is how 200 pages become one page printed 200 times.
  *
- * The hero's family decides the order. When the hook is a crossover or a
- * trajectory the story is the shape of the series, so the chart comes first and
- * the reader sees the claim happen. When it is a rank or a concentration, the
- * present-day mix is the evidence, so that leads.
+ * `peer` is the case that forces the point: its claim is a comparison between
+ * two countries, so the chart is two bars, not forty years of fuel mix.
  */
-function modulesFor(p: CountryProfile & { neighbours: NeighbourLink[] }): ModuleKey[] {
-  const family = p.facts.hero.family;
-  const timeIsThePoint = family === 'crossover' || family === 'trajectory';
-  const hasHistory = p.years.length >= 5;
+type RightPanel = 'series' | 'peer';
 
-  const mods: ModuleKey[] = ['hero', 'stats'];
-  if (timeIsThePoint && hasHistory) mods.push('history', 'mix');
-  else {
-    mods.push('mix');
-    if (hasHistory) mods.push('history');
-  }
-  if (p.facts.supporting.length) mods.push('evidence');
-  if (p.neighbours.length) mods.push('neighbours');
-  mods.push('exits');
-  return mods;
+function panelFor(family: string): RightPanel {
+  return family === 'peer' ? 'peer' : 'series';
 }
-
-/* -------------------------------------------------------------------------- */
 
 const num = (n: number, dp = 0) =>
   n.toLocaleString('en-GB', { minimumFractionDigits: dp, maximumFractionDigits: dp });
@@ -107,263 +110,364 @@ const headingStyle = {
   letterSpacing: 'var(--ls-h4)',
 };
 
+const panelLabelStyle = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: 'var(--fs-mono-xs)',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.08em',
+  color: 'var(--text-quiet)',
+  marginBottom: 'var(--space-5)',
+};
+
+/** A country in the dataset that the engine has nothing to say about. */
+async function NoProfile({ iso3 }: { iso3: string }) {
+  const c = await loadPagelessCountry(iso3);
+  if (!c) notFound();
+  const neighbours = await loadNeighbours(iso3, 6);
+
+  return (
+    <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <TopNav />
+      <main style={{ flex: 1, padding: 'var(--band-y) var(--gutter)' }}>
+        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>No profile</Eyebrow>
+        <h1
+          style={{
+            margin: 0,
+            maxWidth: '24ch',
+            fontSize: 'var(--fs-h2)',
+            fontWeight: 'var(--fw-bold)',
+            letterSpacing: 'var(--ls-h2)',
+            lineHeight: 'var(--lh-h2)',
+          }}
+        >
+          {c.name}&rsquo;s grid is too small to profile.
+        </h1>
+        <p
+          style={{
+            margin: 'var(--space-6) 0 0',
+            maxWidth: '58ch',
+            fontSize: 'var(--fs-body-lg)',
+            color: 'var(--text-secondary)',
+            lineHeight: 'var(--lh-body)',
+          }}
+        >
+          It generates less electricity in a year than a single large power station does in a
+          week, which is not enough for us to say anything about it that is both true and worth
+          reading. Rather than pad a page out, here are the grids nearest to it.
+        </p>
+        {neighbours.length > 0 && (
+          <ul
+            style={{
+              listStyle: 'none',
+              margin: 'var(--space-8) 0 0',
+              padding: 0,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 'var(--space-4)',
+              maxWidth: '84ch',
+            }}
+          >
+            {neighbours.map((n) => (
+              <li key={n.iso3}>
+                <NeighbourCard n={n} />
+              </li>
+            ))}
+          </ul>
+        )}
+        <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', marginTop: 'var(--space-8)' }}>
+          <Button as={Link} href="/explore" variant="primary">
+            Find it on the map
+          </Button>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
+
+function NeighbourCard({ n }: { n: NeighbourLink }) {
+  return (
+    <Link
+      href={`/country/${n.iso3.toLowerCase()}`}
+      style={{
+        display: 'block',
+        padding: 'var(--space-5)',
+        borderRadius: 'var(--r-card)',
+        border: '1px solid var(--border-default)',
+        background: 'var(--bg-card)',
+        color: 'var(--text-primary)',
+        height: '100%',
+      }}
+    >
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-3)',
+          marginBottom: 'var(--space-3)',
+        }}
+      >
+        <FlagImg iso3={n.iso3} size={18} />
+        <span style={{ fontWeight: 'var(--fw-medium)' }}>{n.name}</span>
+      </span>
+      <span
+        style={{ fontSize: 'var(--fs-ui)', color: 'var(--text-secondary)', lineHeight: 'var(--lh-body)' }}
+      >
+        {n.headline}
+      </span>
+    </Link>
+  );
+}
+
 export default async function CountryPage({ params }: { params: Promise<{ iso3: string }> }) {
   const { iso3 } = await params;
   const p = await loadProfile(iso3);
-  if (!p) notFound();
+  if (!p) return <NoProfile iso3={iso3} />;
 
   const neighbours = await loadNeighbours(iso3);
   const { facts, country, data, year, years } = p;
   const shares = fuelShares(data).filter((s) => s.pct > 0);
   const { years: seriesYears, series } = fuelSeries(years, (y) => country.years[String(y)]);
   const perPerson = data.population ? (data.total_generation_twh * 1e9) / data.population : null;
-  const modules = modulesFor({ ...p, neighbours });
+  const panel = panelFor(facts.hero.family);
+  const note = facts.supporting[0] ?? null;
+  // The peer is chosen by population, so it is usually not a regional neighbour
+  // and has to be looked up rather than found in that list.
+  const peerName = panel === 'peer' ? await countryName(facts.hero.comparisonSet) : null;
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <TopNav meta={`${facts.name} · ${year}`} />
 
       <main style={{ flex: 1, paddingBottom: 'var(--space-10)' }}>
-        {/* Identity — always first, never optional */}
-        <header style={{ padding: 'var(--band-y) var(--gutter) 0' }}>
-          <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>
-            {country.emberRegion && country.emberRegion !== 'Other'
-              ? country.emberRegion
-              : 'Country profile'}
-          </Eyebrow>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-5)', flexWrap: 'wrap' }}>
-            <FlagImg iso3={facts.iso3} size={40} />
-            <h1
-              style={{
-                margin: 0,
-                fontSize: 'var(--fs-h1)',
-                fontWeight: 'var(--fw-bold)',
-                letterSpacing: 'var(--ls-h1)',
-                lineHeight: 'var(--lh-h1)',
-              }}
-            >
-              {facts.name}
-            </h1>
-            <Badge tone="outline">{facts.iso3}</Badge>
-          </div>
-
-          {facts.stale && (
-            <Banner label="Older figures" style={{ marginTop: 'var(--space-6)', maxWidth: '68ch' }}>
+        {facts.stale && (
+          <div style={{ padding: 'var(--space-6) var(--gutter) 0' }}>
+            <Banner label="Older figures" style={{ maxWidth: '68ch' }}>
               {facts.name}&rsquo;s electricity data stops in {year}, so everything on this page
               describes {year} rather than today.
             </Banner>
-          )}
-        </header>
+          </div>
+        )}
 
-        {modules.map((key) => {
-          switch (key) {
-            case 'hero':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <p
-                    style={{
-                      margin: 0,
-                      maxWidth: '26ch',
-                      fontSize: 'var(--fs-h2)',
-                      fontWeight: 'var(--fw-bold)',
-                      letterSpacing: 'var(--ls-h2)',
-                      lineHeight: 'var(--lh-h2)',
-                      textWrap: 'pretty',
-                    }}
-                  >
-                    {facts.hero.headline}
+        {/* Hook left, the chart it is about on the right. */}
+        <div
+          className="gg-hero-split"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            alignItems: 'start',
+            borderBottom: '1px solid var(--border-default)',
+          }}
+        >
+          <div
+            style={{
+              padding: 'var(--band-y) var(--space-9) var(--space-10) var(--gutter)',
+              borderRight: '1px solid var(--border-default)',
+            }}
+          >
+            <Eyebrow tone="accent" style={{ marginBottom: 'var(--space-5)' }}>
+              {country.emberRegion && country.emberRegion !== 'Other'
+                ? country.emberRegion
+                : 'Country profile'}
+            </Eyebrow>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--space-4)',
+                marginBottom: 'var(--space-6)',
+                flexWrap: 'wrap',
+              }}
+            >
+              <FlagImg iso3={facts.iso3} size={28} />
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: 'var(--fs-h3)',
+                  fontWeight: 'var(--fw-bold)',
+                  letterSpacing: 'var(--ls-h3)',
+                }}
+              >
+                {facts.name}
+              </h1>
+              <Badge tone="outline">{facts.iso3}</Badge>
+            </div>
+
+            <p
+              style={{
+                margin: 0,
+                maxWidth: '18ch',
+                fontSize: 'var(--fs-h2)',
+                fontWeight: 'var(--fw-bold)',
+                letterSpacing: 'var(--ls-h2)',
+                lineHeight: 'var(--lh-h2)',
+                textWrap: 'pretty',
+              }}
+            >
+              {facts.hero.headline}
+            </p>
+
+            {facts.hero.detail && (
+              <p
+                style={{
+                  margin: 'var(--space-6) 0 0',
+                  maxWidth: '46ch',
+                  fontSize: 'var(--fs-body-lg)',
+                  lineHeight: 'var(--lh-body)',
+                  color: 'var(--text-secondary)',
+                  textWrap: 'pretty',
+                }}
+              >
+                {facts.hero.detail}
+              </p>
+            )}
+
+            <div
+              style={{
+                display: 'flex',
+                gap: 'var(--space-8)',
+                flexWrap: 'wrap',
+                margin: 'var(--space-8) 0',
+                paddingTop: 'var(--space-7)',
+                borderTop: '1px solid var(--border-default)',
+              }}
+            >
+              <Stat
+                label="Clean share"
+                value={num(data.aggregates.clean_pct)}
+                unit="%"
+                note={`in ${year}`}
+                tone={data.aggregates.clean_pct >= 60 ? 'accent' : 'default'}
+              />
+              <Stat
+                label="Total output"
+                value={num(data.total_generation_twh, data.total_generation_twh < 10 ? 1 : 0)}
+                unit="TWh"
+                note="a year"
+              />
+              {perPerson != null && (
+                <Stat label="Per person" value={num(perPerson)} unit="kWh" note="a year" />
+              )}
+            </div>
+
+            <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+              <Button as={Link} href={`/compare?a=${facts.iso3}`} variant="primary">
+                Compare {facts.name}
+              </Button>
+              <Button as={Link} href="/explore" variant="secondary">
+                See it on the map
+              </Button>
+            </div>
+          </div>
+
+          <div style={{ padding: 'var(--band-y) var(--gutter) var(--space-10) var(--space-9)' }}>
+            {panel === 'series' ? (
+              <>
+                <div style={panelLabelStyle}>
+                  {facts.name} · mix since {seriesYears[0]}
+                </div>
+                <StackedAreaChart series={series} years={seriesYears} height={280} />
+                <FuelLegend
+                  shares={shares.map((s) => ({ fuel: s.fuel, pct: s.pct }))}
+                  style={{ marginTop: 'var(--space-5)' }}
+                />
+              </>
+            ) : (
+              <>
+                <div style={panelLabelStyle}>Electricity per person, a year</div>
+                <RankedBarList
+                  items={[
+                    {
+                      label: facts.name,
+                      value: facts.hero.values.kwh_per_person ?? 0,
+                      display: `${num(facts.hero.values.kwh_per_person ?? 0)} kWh`,
+                      tone: 'accent',
+                    },
+                    {
+                      label: peerName ?? facts.hero.comparisonSet,
+                      value: facts.hero.values.peer_kwh_per_person ?? 0,
+                      display: `${num(facts.hero.values.peer_kwh_per_person ?? 0)} kWh`,
+                    },
+                  ]}
+                  barHeight={22}
+                />
+                <div style={{ marginTop: 'var(--space-7)' }}>
+                  <MixBar shares={shares} height={24} />
+                  <FuelLegend
+                    shares={shares.map((s) => ({ fuel: s.fuel, pct: s.pct }))}
+                    style={{ marginTop: 'var(--space-5)' }}
+                  />
+                </div>
+              </>
+            )}
+
+            {note && (
+              <GorillaNote lead={note.headline} style={{ marginTop: 'var(--space-7)' }}>
+                {note.detail}
+              </GorillaNote>
+            )}
+          </div>
+        </div>
+
+        {facts.supporting.length > 1 && (
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>Also true of {facts.name}</h2>
+            <div
+              className="gg-card-row"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: 'var(--space-5)',
+                maxWidth: '96ch',
+              }}
+            >
+              {facts.supporting.slice(1).map((f) => (
+                <Card key={f.id}>
+                  <p style={{ margin: 0, fontSize: 'var(--fs-body)', lineHeight: 'var(--lh-body)' }}>
+                    {f.headline}
                   </p>
-                  {facts.hero.detail && (
+                  {f.detail && (
                     <p
                       style={{
-                        margin: 'var(--space-5) 0 0',
-                        maxWidth: '58ch',
-                        fontSize: 'var(--fs-body-lg)',
-                        lineHeight: 'var(--lh-body)',
+                        margin: 'var(--space-3) 0 0',
+                        fontSize: 'var(--fs-ui)',
                         color: 'var(--text-secondary)',
-                        textWrap: 'pretty',
+                        lineHeight: 'var(--lh-body)',
                       }}
                     >
-                      {facts.hero.detail}
+                      {f.detail}
                     </p>
                   )}
-                </section>
-              );
+                </Card>
+              ))}
+            </div>
+          </section>
+        )}
 
-            case 'stats':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                      gap: 'var(--space-6)',
-                      maxWidth: '72ch',
-                    }}
-                  >
-                    <Stat
-                      label="Clean share"
-                      value={num(data.aggregates.clean_pct)}
-                      unit="%"
-                      note={`of everything it generates in ${year}`}
-                      tone={data.aggregates.clean_pct >= 60 ? 'accent' : 'default'}
-                    />
-                    <Stat
-                      label="Total output"
-                      value={num(data.total_generation_twh, data.total_generation_twh < 10 ? 1 : 0)}
-                      unit="TWh"
-                      note="a year"
-                    />
-                    {perPerson != null && (
-                      <Stat
-                        label="Per person"
-                        value={num(perPerson)}
-                        unit="kWh"
-                        note="per year"
-                      />
-                    )}
-                  </div>
-                </section>
-              );
-
-            case 'mix':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <h2 style={headingStyle}>What it runs on</h2>
-                  <div style={{ maxWidth: '72ch' }}>
-                    <MixBar shares={shares} height={28} />
-                    <FuelLegend
-                      shares={shares.map((s) => ({ fuel: s.fuel, pct: s.pct }))}
-                      style={{ marginTop: 'var(--space-5)' }}
-                    />
-                  </div>
-                </section>
-              );
-
-            case 'history':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <h2 style={headingStyle}>
-                    How that changed, {seriesYears[0]} to {seriesYears[seriesYears.length - 1]}
-                  </h2>
-                  <div style={{ maxWidth: '80ch' }}>
-                    <StackedAreaChart series={series} years={seriesYears} height={260} />
-                  </div>
-                </section>
-              );
-
-            case 'evidence':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <h2 style={headingStyle}>Also true of {facts.name}</h2>
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                      gap: 'var(--space-5)',
-                      maxWidth: '84ch',
-                    }}
-                  >
-                    {facts.supporting.map((f) => (
-                      <Card key={f.id}>
-                        <p style={{ margin: 0, fontSize: 'var(--fs-body)', lineHeight: 'var(--lh-body)' }}>
-                          {f.headline}
-                        </p>
-                        {f.detail && (
-                          <p
-                            style={{
-                              margin: 'var(--space-3) 0 0',
-                              fontSize: 'var(--fs-ui)',
-                              color: 'var(--text-secondary)',
-                              lineHeight: 'var(--lh-body)',
-                            }}
-                          >
-                            {f.detail}
-                          </p>
-                        )}
-                      </Card>
-                    ))}
-                  </div>
-                </section>
-              );
-
-            case 'neighbours':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <h2 style={headingStyle}>Grids of a similar size nearby</h2>
-                  <ul
-                    style={{
-                      listStyle: 'none',
-                      margin: 0,
-                      padding: 0,
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                      gap: 'var(--space-4)',
-                      maxWidth: '84ch',
-                    }}
-                  >
-                    {neighbours.map((n) => (
-                      <li key={n.iso3}>
-                        <Link
-                          href={`/country/${n.iso3.toLowerCase()}`}
-                          style={{
-                            display: 'block',
-                            padding: 'var(--space-5)',
-                            borderRadius: 'var(--r-card)',
-                            border: '1px solid var(--border-default)',
-                            background: 'var(--bg-card)',
-                            color: 'var(--text-primary)',
-                          }}
-                        >
-                          <span
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 'var(--space-3)',
-                              marginBottom: 'var(--space-3)',
-                            }}
-                          >
-                            <FlagImg iso3={n.iso3} size={18} />
-                            <span style={{ fontWeight: 'var(--fw-medium)' }}>{n.name}</span>
-                          </span>
-                          <span
-                            style={{
-                              fontSize: 'var(--fs-ui)',
-                              color: 'var(--text-secondary)',
-                              lineHeight: 'var(--lh-body)',
-                            }}
-                          >
-                            {n.headline}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              );
-
-            case 'exits':
-              return (
-                <section key={key} style={sectionStyle}>
-                  <h2 style={headingStyle}>Keep going</h2>
-                  <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-                    <Button as={Link} href="/explore" variant="primary">
-                      See {facts.name} on the map
-                    </Button>
-                    <Button as={Link} href="/compare" variant="ghost">
-                      Compare it with another country
-                    </Button>
-                    <Button as={Link} href="/rankings" variant="ghost">
-                      All rankings
-                    </Button>
-                  </div>
-                </section>
-              );
-
-            default:
-              return null;
-          }
-        })}
+        {neighbours.length > 0 && (
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>Grids of a similar size nearby</h2>
+            <ul
+              className="gg-card-row"
+              style={{
+                listStyle: 'none',
+                margin: 0,
+                padding: 0,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: 'var(--space-4)',
+                maxWidth: '96ch',
+              }}
+            >
+              {neighbours.map((n) => (
+                <li key={n.iso3}>
+                  <NeighbourCard n={n} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section style={{ ...sectionStyle, marginTop: 'var(--space-10)' }}>
           <p style={{ margin: 0, maxWidth: '68ch', fontSize: 'var(--fs-ui)', color: 'var(--text-quiet)' }}>
