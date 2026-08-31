@@ -1,0 +1,3591 @@
+[
+ {
+  "iso3": "SEN",
+  "name": "Senegal",
+  "region": "Africa",
+  "dataQuality": "thin",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.417,
+  "hero": "[trajectory] Senegal has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 9% to 20% in 10 years.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "UZB",
+  "name": "Uzbekistan",
+  "region": "Asia",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.446,
+  "hero": "[trajectory] Uzbekistan has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 8% to 19% in 5 years.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GIN",
+  "name": "Guinea",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.457,
+  "hero": "[crossover] Hydro overtook oil on Guinea's grid in 2004.",
+  "heroDetail": "Today hydro supplies 74% and oil 25%.",
+  "supporting": [
+   "[trajectory] Guinea has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "KAZ",
+  "name": "Kazakhstan",
+  "region": "Asia",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.485,
+  "hero": "[crossover] Gas overtook hydro on Kazakhstan's grid in 2011.",
+  "heroDetail": "Today gas supplies 29% and hydro 9%.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "KGZ",
+  "name": "Kyrgyzstan",
+  "region": "Asia",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.492,
+  "hero": "[concentration] Kyrgyzstan runs almost entirely on hydro.",
+  "heroDetail": "85% of its electricity comes from one source.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PAN",
+  "name": "Panama",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.517,
+  "hero": "[crossover] Gas overtook oil on Panama's grid in 2019.",
+  "heroDetail": "Today gas supplies 21% and oil 7%.",
+  "supporting": [
+   "[crossover] Gas overtook wind on Panama's grid in 2018."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "HND",
+  "name": "Honduras",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "thin",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.521,
+  "hero": "[trajectory] Honduras has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 41% to 55% in 10 years.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ZMB",
+  "name": "Zambia",
+  "region": "Africa",
+  "dataQuality": "thin",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.539,
+  "hero": "[concentration] Zambia runs almost entirely on hydro.",
+  "heroDetail": "86% of its electricity comes from one source.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "DMA",
+  "name": "Dominica",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 0.569,
+  "hero": "[concentration] Dominica runs almost entirely on oil.",
+  "heroDetail": "87% of its electricity comes from one source.",
+  "supporting": [
+   "[trajectory] Dominica's grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "VCT",
+  "name": "Saint Vincent and the Grenadines",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.569,
+  "hero": "[concentration] Saint Vincent and the Grenadines runs almost entirely on oil.",
+  "heroDetail": "87% of its electricity comes from one source.",
+  "supporting": [
+   "[trajectory] Saint Vincent and the Grenadines' grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "JPN",
+  "name": "Japan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.579,
+  "hero": "[crossover] Gas overtook coal on Japan's grid in 2009.",
+  "heroDetail": "Today gas supplies 33% and coal 32%.",
+  "supporting": [
+   "[rank] Japan is second in the OECD for how much electricity it makes.",
+   "[concentration] Japan has no dominant fuel at all.",
+   "[trajectory] Japan has cleaned up its grid faster than most people realise.",
+   "[crossover] Gas overtook nuclear on Japan's grid in 2007."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CAN",
+  "name": "Canada",
+  "region": "North America",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.601,
+  "hero": "[crossover] Gas overtook nuclear on Canada's grid in 2022.",
+  "heroDetail": "Today gas supplies 18% and nuclear 13%.",
+  "supporting": [
+   "[rank] Canada is third in the OECD for electricity used per person.",
+   "[rank] Canada is third in the OECD for how much electricity it makes."
+  ],
+  "runnersUp": [
+   "[rank] 0.62 Canada is second in NATO for how much electricity it makes.",
+   "[rank] 0.58 Canada is third in NATO for electricity used per person.",
+   "[rank] 0.56 Canada uses more electricity per person than any country in the G20."
+  ]
+ },
+ {
+  "iso3": "NCL",
+  "name": "New Caledonia",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.64,
+  "hero": "[crossover] Coal overtook hydro on New Caledonia's grid in 2010.",
+  "heroDetail": "Today coal supplies 37% and hydro 17%.",
+  "supporting": [
+   "[trajectory] New Caledonia has cleaned up its grid faster than most people realise.",
+   "[concentration] New Caledonia has no dominant fuel at all."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "AUT",
+  "name": "Austria",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.652,
+  "hero": "[trajectory] Austria has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 64% to 84% in 20 years.",
+  "supporting": [
+   "[rank] Austria is first in the EU for hydro.",
+   "[crossover] Solar overtook wind on Austria's grid in 2025.",
+   "[crossover] Solar overtook gas on Austria's grid in 2024."
+  ],
+  "runnersUp": [
+   "[crossover] 0.5 Gas overtook wind on Austria's grid in 2025.",
+   "[crossover] 0.41 Solar overtook bioenergy on Austria's grid in 2023."
+  ]
+ },
+ {
+  "iso3": "BOL",
+  "name": "Bolivia",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.678,
+  "hero": "[rank] Bolivia is second in Latin America and the Caribbean for gas.",
+  "heroDetail": "Gas supplies 62% of its electricity.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MEX",
+  "name": "Mexico",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.678,
+  "hero": "[rank] Mexico is second in Latin America and the Caribbean for how much electricity it makes.",
+  "heroDetail": "357 TWh a year.",
+  "supporting": [
+   "[rank] Mexico runs one of the most fossil-dependent grids in the OECD."
+  ],
+  "runnersUp": [
+   "[rank] 0.66 Mexico is second in the OECD for gas.",
+   "[rank] 0.66 Mexico is second in the OECD for oil.",
+   "[rank] 0.64 Mexico is third in Latin America and the Caribbean for gas."
+  ]
+ },
+ {
+  "iso3": "BRN",
+  "name": "Brunei",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.69,
+  "hero": "[rank] Brunei runs one of the most fossil-dependent grids in Asia.",
+  "heroDetail": "0% of its electricity is low-carbon, 49th of 51.",
+  "supporting": [
+   "[absence] Brunei generates no hydro electricity at all, in a region built on it.",
+   "[rank] Brunei uses more electricity per person than any country in ASEAN."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "THA",
+  "name": "Thailand",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.69,
+  "hero": "[rank] Thailand is third in Asia for bioenergy.",
+  "heroDetail": "Bioenergy supplies 5% of its electricity.",
+  "supporting": [
+   "[trajectory] Thailand has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "COL",
+  "name": "Colombia",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.693,
+  "hero": "[rank] Colombia uses less electricity per person than any other country in the OECD.",
+  "heroDetail": "1,691 kWh per person per year, 38th of 38.",
+  "supporting": [
+   "[trajectory] Colombia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BGD",
+  "name": "Bangladesh",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.695,
+  "hero": "[crossover] Coal overtook oil on Bangladesh's grid in 2024.",
+  "heroDetail": "Today coal supplies 22% and oil 12%.",
+  "supporting": [
+   "[absence] Bangladesh gets next to none of its electricity from hydro, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "AZE",
+  "name": "Azerbaijan",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.697,
+  "hero": "[absence] Azerbaijan generates no coal electricity at all, in a region built on it.",
+  "heroDetail": "45% of grids in Asia draw more than a tenth of their power from coal.",
+  "supporting": [
+   "[concentration] Azerbaijan runs almost entirely on gas."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GEO",
+  "name": "Georgia",
+  "region": "Asia",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.697,
+  "hero": "[absence] Georgia generates no coal electricity at all, in a region built on it.",
+  "heroDetail": "45% of grids in Asia draw more than a tenth of their power from coal.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "IRN",
+  "name": "Iran",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.697,
+  "hero": "[absence] Iran gets next to none of its electricity from coal, in a region built on it.",
+  "heroDetail": "45% of grids in Asia draw more than a tenth of their power from coal.",
+  "supporting": [
+   "[concentration] Iran runs almost entirely on gas."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 Iran is first among the BRICS+ countries for gas."
+  ]
+ },
+ {
+  "iso3": "MDA",
+  "name": "Moldova",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.707,
+  "hero": "[rank] Moldova uses less electricity per person than any other country in Europe.",
+  "heroDetail": "2,056 kWh per person per year, 41th of 41.",
+  "supporting": [
+   "[rank] Moldova is first in Europe for gas."
+  ],
+  "runnersUp": [
+   "[rank] 0.67 Moldova runs one of the most fossil-dependent grids in Europe.",
+   "[concentration] 0.49 Moldova runs almost entirely on gas."
+  ]
+ },
+ {
+  "iso3": "SGP",
+  "name": "Singapore",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.71,
+  "hero": "[concentration] Singapore runs almost entirely on gas.",
+  "heroDetail": "91% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Singapore gets next to none of its electricity from coal, in a region built on it.",
+   "[absence] Singapore generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 Singapore is first in ASEAN for gas."
+  ]
+ },
+ {
+  "iso3": "ARG",
+  "name": "Argentina",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.712,
+  "hero": "[rank] Argentina is first in Latin America and the Caribbean for nuclear.",
+  "heroDetail": "Nuclear supplies 7% of its electricity.",
+  "supporting": [
+   "[rank] Argentina is third in Latin America and the Caribbean for how much electricity it makes."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 Argentina is third in the G20 for gas.",
+   "[rank] 0.44 Argentina is third in the G20 for hydro."
+  ]
+ },
+ {
+  "iso3": "BRA",
+  "name": "Brazil",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.712,
+  "hero": "[rank] Brazil is first in Latin America and the Caribbean for how much electricity it makes.",
+  "heroDetail": "751 TWh a year.",
+  "supporting": [
+   "[rank] Brazil is second in Latin America and the Caribbean for wind.",
+   "[crossover] Wind overtook gas on Brazil's grid in 2022.",
+   "[crossover] Wind overtook bioenergy on Brazil's grid in 2021."
+  ],
+  "runnersUp": [
+   "[rank] 0.64 Brazil is third in Latin America and the Caribbean for solar.",
+   "[rank] 0.5 Brazil runs one of the cleanest grids in the G20.",
+   "[rank] 0.5 Brazil is second in the G20 for hydro."
+  ]
+ },
+ {
+  "iso3": "WSM",
+  "name": "Samoa",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.712,
+  "hero": "[contradiction] Samoa is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "19% of its electricity is wind and solar; 56% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[trajectory] Samoa has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SVN",
+  "name": "Slovenia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.715,
+  "hero": "[crossover] Hydro overtook coal on Slovenia's grid in 2018.",
+  "heroDetail": "Today hydro supplies 27% and coal 15%.",
+  "supporting": [
+   "[absence] Slovenia gets next to none of its electricity from wind, in a region built on it.",
+   "[concentration] Slovenia has no dominant fuel at all.",
+   "[trajectory] Slovenia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PAK",
+  "name": "Pakistan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.716,
+  "hero": "[crossover] Solar overtook coal on Pakistan's grid in 2025.",
+  "heroDetail": "Today solar supplies 19% and coal 15%.",
+  "supporting": [
+   "[concentration] Pakistan has no dominant fuel at all.",
+   "[rank] Pakistan is third in Asia for solar.",
+   "[crossover] Solar overtook nuclear on Pakistan's grid in 2025.",
+   "[trajectory] Pakistan has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[crossover] 0.63 Gas overtook hydro on Pakistan's grid in 2015.",
+   "[contradiction] 0.59 Pakistan is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[crossover] 0.58 Solar overtook oil on Pakistan's grid in 2024."
+  ]
+ },
+ {
+  "iso3": "GTM",
+  "name": "Guatemala",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.717,
+  "hero": "[crossover] Bioenergy overtook coal on Guatemala's grid in 2020.",
+  "heroDetail": "Today bioenergy supplies 22% and coal 16%.",
+  "supporting": [
+   "[rank] Guatemala is close to the bottom in Latin America and the Caribbean for electricity used per person.",
+   "[rank] Guatemala is third in Latin America and the Caribbean for bioenergy.",
+   "[crossover] Hydro overtook oil on Guatemala's grid in 2010.",
+   "[concentration] Guatemala has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.56 Bioenergy overtook oil on Guatemala's grid in 2013.",
+   "[trajectory] 0.43 Guatemala has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "IDN",
+  "name": "Indonesia",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.719,
+  "hero": "[rank] Indonesia is second in Asia for bioenergy.",
+  "heroDetail": "Bioenergy supplies 6% of its electricity.",
+  "supporting": [
+   "[rank] Indonesia is third in Asia for coal."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 Indonesia is third in the G20 for coal.",
+   "[rank] 0.44 Indonesia is first in ASEAN for how much electricity it makes.",
+   "[rank] 0.44 Indonesia is first in ASEAN for coal."
+  ]
+ },
+ {
+  "iso3": "NLD",
+  "name": "Netherlands",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.722,
+  "hero": "[contradiction] The Netherlands is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "46% of its electricity is wind and solar; 46% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] The Netherlands gets next to none of its electricity from hydro, in a region built on it.",
+   "[trajectory] The Netherlands has cleaned up its grid faster than most people realise.",
+   "[concentration] The Netherlands has no dominant fuel at all.",
+   "[crossover] Wind overtook coal on the Netherlands' grid in 2020."
+  ],
+  "runnersUp": [
+   "[crossover] 0.55 Solar overtook coal on the Netherlands' grid in 2022.",
+   "[crossover] 0.49 Solar overtook bioenergy on the Netherlands' grid in 2021."
+  ]
+ },
+ {
+  "iso3": "GNQ",
+  "name": "Equatorial Guinea",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.729,
+  "hero": "[absence] Equatorial Guinea gets next to none of its electricity from oil, in a region built on it.",
+  "heroDetail": "47% of grids in Africa draw more than a tenth of their power from oil.",
+  "supporting": [
+   "[peer] Equatorial Guinea has about as many people as Slovenia, and 9 times less electricity to share between them.",
+   "[trajectory] Equatorial Guinea has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "KWT",
+  "name": "Kuwait",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.731,
+  "hero": "[crossover] Gas overtook oil on Kuwait's grid in 2014.",
+  "heroDetail": "Today gas supplies 62% and oil 36%.",
+  "supporting": [
+   "[rank] Kuwait is second in Asia for electricity used per person.",
+   "[absence] Kuwait generates no coal electricity at all, in a region built on it.",
+   "[absence] Kuwait generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GBR",
+  "name": "United Kingdom",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.739,
+  "hero": "[crossover] Wind overtook nuclear on United Kingdom's grid in 2019.",
+  "heroDetail": "Today wind supplies 29% and nuclear 12%.",
+  "supporting": [
+   "[concentration] United Kingdom has no dominant fuel at all.",
+   "[rank] United Kingdom is third in Europe for how much electricity it makes.",
+   "[trajectory] United Kingdom has cleaned up its grid faster than most people realise.",
+   "[crossover] Bioenergy overtook nuclear on United Kingdom's grid in 2025."
+  ],
+  "runnersUp": [
+   "[rank] 0.56 United Kingdom is first in the G20 for wind.",
+   "[rank] 0.56 United Kingdom is first in the G20 for bioenergy.",
+   "[crossover] 0.47 Wind overtook coal on United Kingdom's grid in 2016."
+  ]
+ },
+ {
+  "iso3": "OMN",
+  "name": "Oman",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.743,
+  "hero": "[concentration] Oman runs almost entirely on gas.",
+  "heroDetail": "92% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Oman generates no coal electricity at all, in a region built on it.",
+   "[absence] Oman generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PHL",
+  "name": "Philippines",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.749,
+  "hero": "[rank] The Philippines is first in Asia for other renewables.",
+  "heroDetail": "Other renewables supplies 8% of its electricity.",
+  "supporting": [
+   "[crossover] Coal overtook gas on the Philippines' grid in 2010.",
+   "[peer] The Philippines has about as many people as Japan, and 8 times less electricity to share between them."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 The Philippines is first in ASEAN for other renewables."
+  ]
+ },
+ {
+  "iso3": "ROU",
+  "name": "Romania",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.752,
+  "hero": "[trajectory] Romania has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 43% to 68% in 20 years.",
+  "supporting": [
+   "[concentration] Romania has no dominant fuel at all.",
+   "[crossover] Gas overtook coal on Romania's grid in 2023.",
+   "[crossover] Hydro overtook coal on Romania's grid in 2018.",
+   "[rank] Romania is close to the bottom in Europe for electricity used per person."
+  ],
+  "runnersUp": [
+   "[crossover] 0.62 Nuclear overtook coal on Romania's grid in 2020.",
+   "[rank] 0.62 Romania is close to the bottom in NATO for electricity used per person.",
+   "[rank] 0.58 Romania is close to the bottom in the EU for electricity used per person."
+  ]
+ },
+ {
+  "iso3": "EGY",
+  "name": "Egypt",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.756,
+  "hero": "[rank] Egypt is first in Africa for how much electricity it makes.",
+  "heroDetail": "246 TWh a year.",
+  "supporting": [
+   "[rank] Egypt is third in Africa for gas."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "RWA",
+  "name": "Rwanda",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.761,
+  "hero": "[crossover] Hydro overtook oil on Rwanda's grid in 2014.",
+  "heroDetail": "Today hydro supplies 46% and oil 9%.",
+  "supporting": [
+   "[peer] Rwanda has about as many people as Tunisia, and 23 times less electricity to share between them.",
+   "[crossover] Gas overtook oil on Rwanda's grid in 2019."
+  ],
+  "runnersUp": [
+   "[crossover] 0.49 Coal overtook oil on Rwanda's grid in 2023."
+  ]
+ },
+ {
+  "iso3": "NGA",
+  "name": "Nigeria",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.768,
+  "hero": "[peer] Nigeria has about as many people as Brazil, and 20 times less electricity to share between them.",
+  "heroDetail": "238 million people against 213 million, but 175 kWh per person a year against 3,527.",
+  "supporting": [
+   "[absence] Nigeria generates no oil electricity at all, in a region built on it.",
+   "[trajectory] Nigeria has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "RUS",
+  "name": "Russia",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.783,
+  "hero": "[crossover] Coal overtook nuclear on Russia's grid in 2025.",
+  "heroDetail": "Today coal supplies 18% and nuclear 18%.",
+  "supporting": [
+   "[crossover] Coal overtook hydro on Russia's grid in 2023.",
+   "[rank] Russia is third in Asia for how much electricity it makes.",
+   "[rank] Russia is third in the G20 for nuclear."
+  ],
+  "runnersUp": [
+   "[crossover] 0.51 Nuclear overtook hydro on Russia's grid in 2014."
+  ]
+ },
+ {
+  "iso3": "BEL",
+  "name": "Belgium",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.792,
+  "hero": "[absence] Belgium gets next to none of its electricity from hydro, in a region built on it.",
+  "heroDetail": "51% of grids in Europe draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Belgium has no dominant fuel at all.",
+   "[rank] Belgium is third in NATO for oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GIB",
+  "name": "Gibraltar",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.792,
+  "hero": "[absence] Gibraltar generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "51% of grids in Europe draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[absence] Gibraltar generates no solar electricity at all, in a region built on it.",
+   "[rank] Gibraltar runs one of the most fossil-dependent grids in Europe.",
+   "[rank] Gibraltar is third in Europe for gas."
+  ],
+  "runnersUp": [
+   "[absence] 0.75 Gibraltar generates no wind electricity at all, in a region built on it.",
+   "[concentration] 0.42 Gibraltar runs almost entirely on gas."
+  ]
+ },
+ {
+  "iso3": "MYS",
+  "name": "Malaysia",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.792,
+  "hero": "[crossover] Coal overtook gas on Malaysia's grid in 2016.",
+  "heroDetail": "Today coal supplies 45% and gas 34%.",
+  "supporting": [
+   "[trajectory] Malaysia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SRB",
+  "name": "Serbia",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.792,
+  "hero": "[absence] Serbia gets next to none of its electricity from solar, in a region built on it.",
+  "heroDetail": "51% of grids in Europe draw more than a tenth of their power from solar.",
+  "supporting": [
+   "[rank] Serbia is first in Europe for coal."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GRL",
+  "name": "Greenland",
+  "region": "North America",
+  "dataQuality": "thin",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.794,
+  "hero": "[trajectory] Greenland has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 58% to 83% in 20 years.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "EST",
+  "name": "Estonia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.795,
+  "hero": "[crossover] Wind overtook solar on Estonia's grid in 2025.",
+  "heroDetail": "Today wind supplies 19% and solar 18%.",
+  "supporting": [
+   "[absence] Estonia gets next to none of its electricity from hydro, in a region built on it.",
+   "[rank] Estonia is first in the OECD for oil.",
+   "[rank] Estonia is second in Europe for bioenergy.",
+   "[concentration] Estonia has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.66 Estonia is first in NATO for oil.",
+   "[rank] 0.66 Estonia is second in the OECD for bioenergy.",
+   "[rank] 0.64 Estonia is third in Europe for oil."
+  ]
+ },
+ {
+  "iso3": "IRL",
+  "name": "Ireland",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.801,
+  "hero": "[contradiction] Ireland is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "43% of its electricity is wind and solar; 52% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[rank] Ireland is third in Europe for wind.",
+   "[rank] Ireland is third in the OECD for gas.",
+   "[crossover] Wind overtook coal on Ireland's grid in 2013.",
+   "[crossover] Wind overtook oil on Ireland's grid in 2010."
+  ],
+  "runnersUp": [
+   "[rank] 0.62 Ireland is third in the OECD for wind.",
+   "[rank] 0.58 Ireland is second in the EU for gas.",
+   "[rank] 0.53 Ireland is third in the EU for wind."
+  ]
+ },
+ {
+  "iso3": "MOZ",
+  "name": "Mozambique",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.806,
+  "hero": "[peer] Mozambique has about as many people as Saudi Arabia, and 23 times less electricity to share between them.",
+  "heroDetail": "35 million people against 34 million, but 571 kWh per person a year against 13,386.",
+  "supporting": [
+   "[absence] Mozambique gets next to none of its electricity from oil, in a region built on it.",
+   "[concentration] Mozambique runs almost entirely on hydro."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ATG",
+  "name": "Antigua and Barbuda",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Antigua and Barbuda generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Antigua and Barbuda runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BRB",
+  "name": "Barbados",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Barbados generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Barbados runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CUB",
+  "name": "Cuba",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Cuba gets next to none of its electricity from hydro, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Cuba runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GLP",
+  "name": "Guadeloupe",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Guadeloupe gets next to none of its electricity from hydro, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[crossover] Bioenergy overtook coal on Guadeloupe's grid in 2021.",
+   "[trajectory] Guadeloupe has cleaned up its grid faster than most people realise.",
+   "[crossover] Bioenergy overtook solar on Guadeloupe's grid in 2021."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "KNA",
+  "name": "Saint Kitts and Nevis",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Saint Kitts and Nevis generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Saint Kitts and Nevis runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MTQ",
+  "name": "Martinique",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 0.81,
+  "hero": "[absence] Martinique generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "52% of grids in Latin America and the Caribbean draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[trajectory] Martinique has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MLT",
+  "name": "Malta",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.822,
+  "hero": "[crossover] Gas overtook oil on Malta's grid in 2017.",
+  "heroDetail": "Today gas supplies 83% and oil 1%.",
+  "supporting": [
+   "[crossover] Gas overtook solar on Malta's grid in 2017.",
+   "[absence] Malta generates no hydro electricity at all, in a region built on it.",
+   "[absence] Malta generates no wind electricity at all, in a region built on it.",
+   "[rank] Malta is second in Europe for gas."
+  ],
+  "runnersUp": [
+   "[rank] 0.64 Malta runs one of the most fossil-dependent grids in Europe.",
+   "[rank] 0.63 Malta runs one of the most fossil-dependent grids in the EU.",
+   "[rank] 0.63 Malta is first in the EU for gas."
+  ]
+ },
+ {
+  "iso3": "SAU",
+  "name": "Saudi Arabia",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.822,
+  "hero": "[crossover] Gas overtook oil on Saudi Arabia's grid in 2016.",
+  "heroDetail": "Today gas supplies 63% and oil 35%.",
+  "supporting": [
+   "[absence] Saudi Arabia generates no coal electricity at all, in a region built on it.",
+   "[absence] Saudi Arabia generates no hydro electricity at all, in a region built on it.",
+   "[rank] Saudi Arabia is first in the G20 for gas.",
+   "[rank] Saudi Arabia is first in the G20 for oil."
+  ],
+  "runnersUp": [
+   "[rank] 0.5 Saudi Arabia is second in the G20 for electricity used per person.",
+   "[rank] 0.44 Saudi Arabia is first among the BRICS+ countries for oil."
+  ]
+ },
+ {
+  "iso3": "BIH",
+  "name": "Bosnia and Herzegovina",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.829,
+  "hero": "[absence] Bosnia and Herzegovina generates no gas electricity at all, in a region built on it.",
+  "heroDetail": "54% of grids in Europe draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[rank] Bosnia and Herzegovina is second in Europe for coal."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CHE",
+  "name": "Switzerland",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.829,
+  "hero": "[absence] Switzerland gets next to none of its electricity from gas, in a region built on it.",
+  "heroDetail": "54% of grids in Europe draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[absence] Switzerland gets next to none of its electricity from wind, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "FRO",
+  "name": "Faroe Islands",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 0.829,
+  "hero": "[absence] The Faroe Islands generates no gas electricity at all, in a region built on it.",
+  "heroDetail": "54% of grids in Europe draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[absence] The Faroe Islands generates no solar electricity at all, in a region built on it.",
+   "[rank] The Faroe Islands is second in Europe for oil.",
+   "[contradiction] The Faroe Islands is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PNG",
+  "name": "Papua New Guinea",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.836,
+  "hero": "[crossover] Hydro overtook gas on Papua New Guinea's grid in 2023.",
+  "heroDetail": "Today hydro supplies 21% and gas 19%.",
+  "supporting": [
+   "[peer] Papua New Guinea has about as many people as the United Arab Emirates, and 36 times less electricity to share between them.",
+   "[rank] Papua New Guinea is first in Oceania for gas."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MAC",
+  "name": "Macao",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.853,
+  "hero": "[crossover] Gas overtook oil on Macao's grid in 2017.",
+  "heroDetail": "Today gas supplies 63% and oil 6%.",
+  "supporting": [
+   "[crossover] Gas overtook bioenergy on Macao's grid in 2017.",
+   "[rank] Macao is first in Asia for bioenergy.",
+   "[trajectory] Macao has cleaned up its grid faster than most people realise.",
+   "[absence] Macao generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[crossover] 0.68 Bioenergy overtook oil on Macao's grid in 2019.",
+   "[absence] 0.64 Macao generates no hydro electricity at all, in a region built on it."
+  ]
+ },
+ {
+  "iso3": "VNM",
+  "name": "Vietnam",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.853,
+  "hero": "[crossover] Coal overtook hydro on Vietnam's grid in 2018.",
+  "heroDetail": "Today coal supplies 48% and hydro 33%.",
+  "supporting": [
+   "[crossover] Coal overtook gas on Vietnam's grid in 2015."
+  ],
+  "runnersUp": [
+   "[crossover] 0.5 Hydro overtook gas on Vietnam's grid in 2011."
+  ]
+ },
+ {
+  "iso3": "ZWE",
+  "name": "Zimbabwe",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.853,
+  "hero": "[crossover] Hydro overtook coal on Zimbabwe's grid in 2017.",
+  "heroDetail": "Today hydro supplies 56% and coal 43%.",
+  "supporting": [
+   "[absence] Zimbabwe generates no oil electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "HRV",
+  "name": "Croatia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.857,
+  "hero": "[crossover] Wind overtook gas on Croatia's grid in 2025.",
+  "heroDetail": "Today wind supplies 21% and gas 19%.",
+  "supporting": [
+   "[concentration] Croatia has no dominant fuel at all.",
+   "[crossover] Wind overtook coal on Croatia's grid in 2020.",
+   "[trajectory] Croatia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ECU",
+  "name": "Ecuador",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.858,
+  "hero": "[trajectory] Ecuador has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 51% to 79% in 10 years.",
+  "supporting": [
+   "[rank] Ecuador is third in Latin America and the Caribbean for hydro.",
+   "[crossover] Hydro overtook oil on Ecuador's grid in 2011."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MMR",
+  "name": "Myanmar",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.872,
+  "hero": "[peer] Myanmar has about as many people as South Korea, and 30 times less electricity to share between them.",
+  "heroDetail": "55 million people against 52 million, but 398 kWh per person a year against 12,090.",
+  "supporting": [
+   "[trajectory] Myanmar's grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ARE",
+  "name": "United Arab Emirates",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.877,
+  "hero": "[trajectory] The United Arab Emirates has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 3% to 32% in 5 years.",
+  "supporting": [
+   "[absence] The United Arab Emirates generates no coal electricity at all, in a region built on it.",
+   "[rank] The United Arab Emirates is third in Asia for nuclear.",
+   "[absence] The United Arab Emirates generates no hydro electricity at all, in a region built on it.",
+   "[rank] The United Arab Emirates uses more electricity per person than any country among the BRICS+ countries."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 The United Arab Emirates is first among the BRICS+ countries for nuclear."
+  ]
+ },
+ {
+  "iso3": "FIN",
+  "name": "Finland",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.881,
+  "hero": "[crossover] Wind overtook hydro on Finland's grid in 2024.",
+  "heroDetail": "Today wind supplies 27% and hydro 15%.",
+  "supporting": [
+   "[crossover] Wind overtook bioenergy on Finland's grid in 2023.",
+   "[rank] Finland runs one of the cleanest grids in the EU.",
+   "[rank] Finland is second in the EU for electricity used per person.",
+   "[concentration] Finland has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.51 Hydro overtook bioenergy on Finland's grid in 2020.",
+   "[crossover] 0.49 Wind overtook oil on Finland's grid in 2017.",
+   "[crossover] 0.47 Wind overtook coal on Finland's grid in 2018."
+  ]
+ },
+ {
+  "iso3": "FJI",
+  "name": "Fiji",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.883,
+  "hero": "[crossover] Hydro overtook oil on Fiji's grid in 2018.",
+  "heroDetail": "Today hydro supplies 52% and oil 37%.",
+  "supporting": [
+   "[trajectory] Fiji has cleaned up its grid faster than most people realise.",
+   "[rank] Fiji is first in Oceania for bioenergy."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "IRQ",
+  "name": "Iraq",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.883,
+  "hero": "[crossover] Gas overtook oil on Iraq's grid in 2018.",
+  "heroDetail": "Today gas supplies 53% and oil 45%.",
+  "supporting": [
+   "[absence] Iraq generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ESP",
+  "name": "Spain",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.901,
+  "hero": "[crossover] Solar overtook wind on Spain's grid in 2025.",
+  "heroDetail": "Today solar supplies 22% and wind 20%.",
+  "supporting": [
+   "[crossover] Solar overtook gas on Spain's grid in 2024.",
+   "[concentration] Spain has no dominant fuel at all.",
+   "[rank] Spain is third in the EU for how much electricity it makes.",
+   "[trajectory] Spain has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[crossover] 0.89 Gas overtook wind on Spain's grid in 2025.",
+   "[crossover] 0.86 Gas overtook nuclear on Spain's grid in 2025.",
+   "[crossover] 0.84 Solar overtook nuclear on Spain's grid in 2024."
+  ]
+ },
+ {
+  "iso3": "CYM",
+  "name": "Cayman Islands",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.903,
+  "hero": "[concentration] The Cayman Islands runs almost entirely on oil.",
+  "heroDetail": "96% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] The Cayman Islands generates no hydro electricity at all, in a region built on it.",
+   "[rank] The Cayman Islands uses more electricity per person than any country in Latin America and the Caribbean."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "AUS",
+  "name": "Australia",
+  "region": "Oceania",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.904,
+  "hero": "[contradiction] Australia is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "33% of its electricity is wind and solar; 61% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[crossover] Solar overtook gas on Australia's grid in 2024.",
+   "[rank] Australia is second in the OECD for coal.",
+   "[crossover] Solar overtook wind on Australia's grid in 2020.",
+   "[rank] Australia is first in the G20 for solar."
+  ],
+  "runnersUp": [
+   "[trajectory] 0.51 Australia has cleaned up its grid faster than most people realise.",
+   "[rank] 0.44 Australia is first in Oceania for how much electricity it makes.",
+   "[rank] 0.44 Australia is first in Oceania for coal."
+  ]
+ },
+ {
+  "iso3": "GRC",
+  "name": "Greece",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.908,
+  "hero": "[crossover] Solar overtook wind on Greece's grid in 2025.",
+  "heroDetail": "Today solar supplies 22% and wind 20%.",
+  "supporting": [
+   "[contradiction] Greece is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[crossover] Gas overtook coal on Greece's grid in 2019.",
+   "[rank] Greece is third in the OECD for oil.",
+   "[concentration] Greece has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.62 Greece is second in NATO for oil.",
+   "[rank] 0.58 Greece is third in NATO for gas.",
+   "[crossover] 0.55 Solar overtook hydro on Greece's grid in 2022."
+  ]
+ },
+ {
+  "iso3": "QAT",
+  "name": "Qatar",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.909,
+  "hero": "[concentration] Qatar runs almost entirely on gas.",
+  "heroDetail": "96% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Qatar generates no coal electricity at all, in a region built on it.",
+   "[rank] Qatar is third in Asia for electricity used per person.",
+   "[absence] Qatar generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.69 Qatar is third in Asia for gas."
+  ]
+ },
+ {
+  "iso3": "BEN",
+  "name": "Benin",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.914,
+  "hero": "[crossover] Gas overtook oil on Benin's grid in 2019.",
+  "heroDetail": "Today gas supplies 72% and oil 24%.",
+  "supporting": [
+   "[absence] Benin generates no hydro electricity at all, in a region built on it.",
+   "[peer] Benin has about as many people as Tunisia, and 26 times less electricity to share between them."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "LVA",
+  "name": "Latvia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.914,
+  "hero": "[crossover] Hydro overtook gas on Latvia's grid in 2020.",
+  "heroDetail": "Today hydro supplies 47% and gas 26%.",
+  "supporting": [
+   "[rank] Latvia is second in the EU for hydro.",
+   "[trajectory] Latvia has cleaned up its grid faster than most people realise.",
+   "[peer] Latvia has about as many people as Bahrain, and 7 times less electricity to share between them.",
+   "[crossover] Solar overtook bioenergy on Latvia's grid in 2025."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PRI",
+  "name": "Puerto Rico",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.914,
+  "hero": "[crossover] Oil overtook gas on Puerto Rico's grid in 2020.",
+  "heroDetail": "Today oil supplies 48% and gas 30%.",
+  "supporting": [
+   "[absence] Puerto Rico gets next to none of its electricity from hydro, in a region built on it.",
+   "[rank] Puerto Rico is third in Latin America and the Caribbean for coal.",
+   "[crossover] Gas overtook coal on Puerto Rico's grid in 2012."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SWE",
+  "name": "Sweden",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.914,
+  "hero": "[crossover] Hydro overtook nuclear on Sweden's grid in 2020.",
+  "heroDetail": "Today hydro supplies 40% and nuclear 28%.",
+  "supporting": [
+   "[absence] Sweden gets next to none of its electricity from gas, in a region built on it.",
+   "[rank] Sweden is third in Europe for electricity used per person.",
+   "[rank] Sweden runs one of the cleanest grids in the EU.",
+   "[concentration] Sweden has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.63 Sweden uses more electricity per person than any country in the EU.",
+   "[rank] 0.53 Sweden is third in the EU for hydro.",
+   "[crossover] 0.42 Wind overtook bioenergy on Sweden's grid in 2014."
+  ]
+ },
+ {
+  "iso3": "PSE",
+  "name": "Palestine",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.922,
+  "hero": "[contradiction] Palestine is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "39% of its electricity is wind and solar; 61% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[rank] Palestine is first in the world for solar.",
+   "[absence] Palestine generates no gas electricity at all, in a region built on it.",
+   "[peer] Palestine has about as many people as Norway, and 159 times less electricity to share between them.",
+   "[trajectory] Palestine has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[rank] 0.75 Palestine is first in Asia for solar.",
+   "[absence] 0.7 Palestine generates no coal electricity at all, in a region built on it.",
+   "[rank] 0.69 Palestine is close to the bottom in Asia for electricity used per person."
+  ]
+ },
+ {
+  "iso3": "TCA",
+  "name": "Turks and Caicos Islands",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.924,
+  "hero": "[concentration] The Turks and Caicos Islands runs almost entirely on oil.",
+  "heroDetail": "96% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] The Turks and Caicos Islands generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GUY",
+  "name": "Guyana",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.926,
+  "hero": "[concentration] Guyana runs almost entirely on oil.",
+  "heroDetail": "96% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Guyana generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ASM",
+  "name": "American Samoa",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.927,
+  "hero": "[absence] American Samoa generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "60% of grids in Oceania draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] American Samoa runs almost entirely on oil."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 American Samoa is first in Oceania for oil."
+  ]
+ },
+ {
+  "iso3": "GUM",
+  "name": "Guam",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.927,
+  "hero": "[absence] Guam generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "60% of grids in Oceania draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Guam runs almost entirely on oil.",
+   "[rank] Guam uses more electricity per person than any country in Oceania."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SLB",
+  "name": "Solomon Islands",
+  "region": "Oceania",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.927,
+  "hero": "[absence] The Solomon Islands generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "60% of grids in Oceania draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] The Solomon Islands runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ETH",
+  "name": "Ethiopia",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.931,
+  "hero": "[concentration] Ethiopia runs almost entirely on hydro.",
+  "heroDetail": "96% of its electricity comes from one source.",
+  "supporting": [
+   "[peer] Ethiopia has about as many people as Russia, and 34 times less electricity to share between them.",
+   "[absence] Ethiopia generates no oil electricity at all, in a region built on it.",
+   "[rank] Ethiopia runs one of the cleanest grids in Africa."
+  ],
+  "runnersUp": [
+   "[rank] 0.7 Ethiopia is third in Africa for hydro.",
+   "[rank] 0.44 Ethiopia runs one of the cleanest grids among the BRICS+ countries.",
+   "[rank] 0.44 Ethiopia is first among the BRICS+ countries for hydro."
+  ]
+ },
+ {
+  "iso3": "MKD",
+  "name": "North Macedonia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.931,
+  "hero": "[crossover] Solar overtook hydro on North Macedonia's grid in 2025.",
+  "heroDetail": "Today solar supplies 24% and hydro 20%.",
+  "supporting": [
+   "[crossover] Solar overtook gas on North Macedonia's grid in 2025.",
+   "[contradiction] North Macedonia is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[rank] North Macedonia is third in Europe for solar.",
+   "[concentration] North Macedonia has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.77 Hydro overtook gas on North Macedonia's grid in 2022.",
+   "[rank] 0.58 North Macedonia is third in NATO for solar.",
+   "[trajectory] 0.49 North Macedonia has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "LBY",
+  "name": "Libya",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.933,
+  "hero": "[absence] Libya generates no hydro electricity at all, in a region built on it.",
+  "heroDetail": "60% of grids in Africa draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[rank] Libya is second in Africa for electricity used per person.",
+   "[rank] Libya runs one of the most fossil-dependent grids in Africa.",
+   "[crossover] Gas overtook oil on Libya's grid in 2011."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "TUN",
+  "name": "Tunisia",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.933,
+  "hero": "[absence] Tunisia gets next to none of its electricity from hydro, in a region built on it.",
+  "heroDetail": "60% of grids in Africa draw more than a tenth of their power from hydro.",
+  "supporting": [
+   "[concentration] Tunisia runs almost entirely on gas."
+  ],
+  "runnersUp": [
+   "[rank] 0.73 Tunisia is second in Africa for gas."
+  ]
+ },
+ {
+  "iso3": "AGO",
+  "name": "Angola",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.94,
+  "hero": "[peer] Angola has about as many people as Canada, and 40 times less electricity to share between them.",
+  "heroDetail": "38 million people against 40 million, but 411 kWh per person a year against 16,259.",
+  "supporting": [
+   "[trajectory] Angola has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CIV",
+  "name": "Cote d'Ivoire",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.941,
+  "hero": "[peer] Cote d'Ivoire has about as many people as Saudi Arabia, and 40 times less electricity to share between them.",
+  "heroDetail": "32 million people against 34 million, but 338 kWh per person a year against 13,386.",
+  "supporting": [
+   "[absence] Cote d'Ivoire gets next to none of its electricity from oil, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GHA",
+  "name": "Ghana",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Gas overtook hydro on Ghana's grid in 2020.",
+  "heroDetail": "Today gas supplies 61% and hydro 35%.",
+  "supporting": [
+   "[trajectory] Ghana's grid has been getting dirtier, not cleaner.",
+   "[crossover] Gas overtook oil on Ghana's grid in 2014.",
+   "[peer] Ghana has about as many people as Saudi Arabia, and 19 times less electricity to share between them."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "HKG",
+  "name": "Hong Kong",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Gas overtook coal on Hong Kong's grid in 2020.",
+  "heroDetail": "Today gas supplies 64% and coal 34%.",
+  "supporting": [
+   "[absence] Hong Kong generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "JAM",
+  "name": "Jamaica",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Gas overtook oil on Jamaica's grid in 2020.",
+  "heroDetail": "Today gas supplies 57% and oil 30%.",
+  "supporting": [
+   "[crossover] Gas overtook wind on Jamaica's grid in 2017.",
+   "[peer] Jamaica has about as many people as Qatar, and 10 times less electricity to share between them."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "LKA",
+  "name": "Sri Lanka",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Hydro overtook coal on Sri Lanka's grid in 2021.",
+  "heroDetail": "Today hydro supplies 38% and coal 28%.",
+  "supporting": [
+   "[absence] Sri Lanka generates no gas electricity at all, in a region built on it.",
+   "[crossover] Hydro overtook oil on Sri Lanka's grid in 2020.",
+   "[trajectory] Sri Lanka has cleaned up its grid faster than most people realise.",
+   "[concentration] Sri Lanka has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.65 Coal overtook oil on Sri Lanka's grid in 2018.",
+   "[crossover] 0.58 Solar overtook oil on Sri Lanka's grid in 2025."
+  ]
+ },
+ {
+  "iso3": "LTU",
+  "name": "Lithuania",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Wind overtook gas on Lithuania's grid in 2021.",
+  "heroDetail": "Today wind supplies 45% and gas 17%.",
+  "supporting": [
+   "[rank] Lithuania is second in the world for wind.",
+   "[trajectory] Lithuania has cleaned up its grid faster than most people realise.",
+   "[crossover] Solar overtook gas on Lithuania's grid in 2023.",
+   "[rank] Lithuania is close to the bottom in the EU for electricity used per person."
+  ],
+  "runnersUp": [
+   "[rank] 0.67 Lithuania is second in Europe for wind.",
+   "[rank] 0.66 Lithuania is second in the OECD for wind.",
+   "[crossover] 0.65 Wind overtook hydro on Lithuania's grid in 2012."
+  ]
+ },
+ {
+  "iso3": "PRK",
+  "name": "North Korea",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.944,
+  "hero": "[crossover] Hydro overtook coal on North Korea's grid in 2020.",
+  "heroDetail": "Today hydro supplies 63% and coal 34%.",
+  "supporting": [
+   "[absence] North Korea generates no gas electricity at all, in a region built on it.",
+   "[trajectory] North Korea has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SDN",
+  "name": "Sudan",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.951,
+  "hero": "[peer] Sudan has about as many people as South Korea, and 41 times less electricity to share between them.",
+  "heroDetail": "50 million people against 52 million, but 293 kWh per person a year against 12,090.",
+  "supporting": [
+   "[crossover] Hydro overtook oil on Sudan's grid in 2010.",
+   "[trajectory] Sudan has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "POL",
+  "name": "Poland",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.954,
+  "hero": "[contradiction] Poland is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "25% of its electricity is wind and solar; 68% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] Poland gets next to none of its electricity from hydro, in a region built on it.",
+   "[rank] Poland is first in the OECD for coal.",
+   "[rank] Poland runs one of the most fossil-dependent grids in NATO.",
+   "[crossover] Gas overtook wind on Poland's grid in 2025."
+  ],
+  "runnersUp": [
+   "[rank] 0.66 Poland is first in NATO for coal.",
+   "[rank] 0.64 Poland is third in Europe for coal.",
+   "[rank] 0.63 Poland is first in the EU for coal."
+  ]
+ },
+ {
+  "iso3": "VIR",
+  "name": "United States Virgin Islands",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 0.956,
+  "hero": "[concentration] United States Virgin Islands runs almost entirely on oil.",
+  "heroDetail": "97% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] United States Virgin Islands generates no hydro electricity at all, in a region built on it.",
+   "[rank] United States Virgin Islands is third in Latin America and the Caribbean for electricity used per person."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CMR",
+  "name": "Cameroon",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.959,
+  "hero": "[peer] Cameroon has about as many people as Australia, and 43 times less electricity to share between them.",
+  "heroDetail": "29 million people against 27 million, but 249 kWh per person a year against 10,615.",
+  "supporting": [
+   "[crossover] Gas overtook oil on Cameroon's grid in 2016."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ITA",
+  "name": "Italy",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.959,
+  "hero": "[trajectory] Italy has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 16% to 49% in 20 years.",
+  "supporting": [
+   "[contradiction] Italy is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[crossover] Solar overtook hydro on Italy's grid in 2025.",
+   "[rank] Italy is first in NATO for gas.",
+   "[rank] Italy is third in the G20 for solar."
+  ],
+  "runnersUp": [
+   "[rank] 0.53 Italy is third in the EU for gas."
+  ]
+ },
+ {
+  "iso3": "DEU",
+  "name": "Germany",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.961,
+  "hero": "[crossover] Wind overtook coal on Germany's grid in 2023.",
+  "heroDetail": "Today wind supplies 27% and coal 21%.",
+  "supporting": [
+   "[crossover] Solar overtook gas on Germany's grid in 2025.",
+   "[concentration] Germany has no dominant fuel at all.",
+   "[rank] Germany is second in Europe for how much electricity it makes.",
+   "[trajectory] Germany has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[crossover] 0.72 Wind overtook gas on Germany's grid in 2017.",
+   "[rank] 0.58 Germany is second in the EU for how much electricity it makes.",
+   "[crossover] 0.53 Solar overtook bioenergy on Germany's grid in 2021."
+  ]
+ },
+ {
+  "iso3": "DJI",
+  "name": "Djibouti",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.962,
+  "hero": "[contradiction] Djibouti is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "35% of its electricity is wind and solar; 65% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[trajectory] Djibouti has cleaned up its grid faster than most people realise.",
+   "[absence] Djibouti generates no hydro electricity at all, in a region built on it.",
+   "[rank] Djibouti is first in Africa for wind.",
+   "[peer] Djibouti has about as many people as Mauritius, and 16 times less electricity to share between them."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "VEN",
+  "name": "Venezuela",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.969,
+  "hero": "[trajectory] Venezuela has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 58% to 91% in 5 years.",
+  "supporting": [
+   "[concentration] Venezuela runs almost entirely on hydro."
+  ],
+  "runnersUp": [
+   "[rank] 0.68 Venezuela is second in Latin America and the Caribbean for hydro."
+  ]
+ },
+ {
+  "iso3": "LCA",
+  "name": "Saint Lucia",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.974,
+  "hero": "[concentration] Saint Lucia runs almost entirely on oil.",
+  "heroDetail": "98% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Saint Lucia generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "DOM",
+  "name": "Dominican Republic",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.975,
+  "hero": "[crossover] Coal overtook gas on Dominican Republic's grid in 2022.",
+  "heroDetail": "Today coal supplies 29% and gas 27%.",
+  "supporting": [
+   "[contradiction] Dominican Republic is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[crossover] Coal overtook oil on Dominican Republic's grid in 2020.",
+   "[rank] Dominican Republic is first in Latin America and the Caribbean for coal.",
+   "[concentration] Dominican Republic has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.86 Gas overtook oil on Dominican Republic's grid in 2020.",
+   "[trajectory] 0.55 Dominican Republic has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "KOR",
+  "name": "South Korea",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.975,
+  "hero": "[crossover] Nuclear overtook gas on South Korea's grid in 2022.",
+  "heroDetail": "Today nuclear supplies 30% and gas 28%.",
+  "supporting": [
+   "[rank] South Korea is first in Asia for nuclear.",
+   "[absence] South Korea gets next to none of its electricity from hydro, in a region built on it.",
+   "[concentration] South Korea has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.5 South Korea is second in the G20 for nuclear."
+  ]
+ },
+ {
+  "iso3": "SWZ",
+  "name": "Eswatini",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 0.975,
+  "hero": "[crossover] Hydro overtook bioenergy on Eswatini's grid in 2021.",
+  "heroDetail": "Today hydro supplies 57% and bioenergy 34%.",
+  "supporting": [
+   "[rank] Eswatini is first in the world for bioenergy.",
+   "[absence] Eswatini generates no oil electricity at all, in a region built on it.",
+   "[peer] Eswatini has about as many people as Estonia, and 9 times less electricity to share between them."
+  ],
+  "runnersUp": [
+   "[rank] 0.76 Eswatini is first in Africa for bioenergy."
+  ]
+ },
+ {
+  "iso3": "TUR",
+  "name": "Turkey",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.975,
+  "hero": "[crossover] Coal overtook gas on Turkey's grid in 2022.",
+  "heroDetail": "Today coal supplies 34% and gas 22%.",
+  "supporting": [
+   "[crossover] Gas overtook hydro on Turkey's grid in 2025.",
+   "[rank] Turkey is first in Asia for wind.",
+   "[contradiction] Turkey is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[concentration] Turkey has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.58 Turkey runs one of the most fossil-dependent grids in NATO.",
+   "[rank] 0.58 Turkey is third in NATO for coal.",
+   "[crossover] 0.46 Coal overtook hydro on Turkey's grid in 2005."
+  ]
+ },
+ {
+  "iso3": "HUN",
+  "name": "Hungary",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.984,
+  "hero": "[crossover] Solar overtook gas on Hungary's grid in 2024.",
+  "heroDetail": "Today solar supplies 27% and gas 20%.",
+  "supporting": [
+   "[absence] Hungary gets next to none of its electricity from hydro, in a region built on it.",
+   "[rank] Hungary is second in Europe for solar.",
+   "[crossover] Solar overtook bioenergy on Hungary's grid in 2020.",
+   "[trajectory] Hungary has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[rank] 0.66 Hungary is second in the OECD for solar.",
+   "[rank] 0.62 Hungary is second in NATO for solar.",
+   "[rank] 0.58 Hungary is second in the EU for solar."
+  ]
+ },
+ {
+  "iso3": "IND",
+  "name": "India",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.99,
+  "hero": "[rank] India is third in the world for how much electricity it makes.",
+  "heroDetail": "2,082 TWh a year.",
+  "supporting": [
+   "[rank] India is second in Asia for coal.",
+   "[peer] India has about as many people as China, and 5 times less electricity to share between them."
+  ],
+  "runnersUp": [
+   "[rank] 0.72 India is second in Asia for how much electricity it makes.",
+   "[rank] 0.5 India is second in the G20 for coal.",
+   "[rank] 0.44 India is third in the G20 for how much electricity it makes."
+  ]
+ },
+ {
+  "iso3": "NZL",
+  "name": "New Zealand",
+  "region": "Oceania",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.99,
+  "hero": "[rank] New Zealand is third in the world for other renewables.",
+  "heroDetail": "Other renewables supplies 22% of its electricity.",
+  "supporting": [
+   "[trajectory] New Zealand has cleaned up its grid faster than most people realise.",
+   "[crossover] Other renewables overtook gas on New Zealand's grid in 2015.",
+   "[rank] New Zealand is first in Oceania for hydro."
+  ],
+  "runnersUp": [
+   "[rank] 0.66 New Zealand is second in the OECD for other renewables.",
+   "[rank] 0.44 New Zealand runs one of the cleanest grids in Oceania.",
+   "[rank] 0.44 New Zealand is first in Oceania for other renewables."
+  ]
+ },
+ {
+  "iso3": "UKR",
+  "name": "Ukraine",
+  "region": "Europe",
+  "dataQuality": "thin",
+  "year": 2022,
+  "stale": true,
+  "heroScore": 0.99,
+  "hero": "[rank] Ukraine is third in the world for nuclear.",
+  "heroDetail": "Nuclear supplies 56% of its electricity.",
+  "supporting": [],
+  "runnersUp": [
+   "[rank] 0.64 Ukraine is third in Europe for nuclear."
+  ]
+ },
+ {
+  "iso3": "ZAF",
+  "name": "South Africa",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 0.99,
+  "hero": "[rank] South Africa is third in the world for coal.",
+  "heroDetail": "Coal supplies 81% of its electricity.",
+  "supporting": [
+   "[absence] South Africa gets next to none of its electricity from hydro, in a region built on it.",
+   "[absence] South Africa gets next to none of its electricity from oil, in a region built on it.",
+   "[rank] South Africa is second in Africa for how much electricity it makes.",
+   "[trajectory] South Africa has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[rank] 0.73 South Africa is second in Africa for coal.",
+   "[rank] 0.7 South Africa is third in Africa for electricity used per person.",
+   "[rank] 0.56 South Africa is first in the G20 for coal."
+  ]
+ },
+ {
+  "iso3": "ABW",
+  "name": "Aruba",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Aruba is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "17% of its electricity is wind and solar; 83% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] Aruba generates no hydro electricity at all, in a region built on it.",
+   "[rank] Aruba is second in Latin America and the Caribbean for electricity used per person.",
+   "[rank] Aruba is third in Latin America and the Caribbean for wind.",
+   "[trajectory] Aruba has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[concentration] 0.44 Aruba runs almost entirely on oil."
+  ]
+ },
+ {
+  "iso3": "AFG",
+  "name": "Afghanistan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] Afghanistan generates no gas electricity at all, in a region built on it.",
+  "heroDetail": "65% of grids in Asia draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[peer] Afghanistan has about as many people as Canada, and 700 times less electricity to share between them.",
+   "[rank] Afghanistan is close to the bottom in the world for electricity used per person.",
+   "[trajectory] Afghanistan has cleaned up its grid faster than most people realise.",
+   "[crossover] Solar overtook oil on Afghanistan's grid in 2024."
+  ],
+  "runnersUp": [
+   "[rank] 0.75 Afghanistan uses less electricity per person than any other country in Asia."
+  ]
+ },
+ {
+  "iso3": "ALB",
+  "name": "Albania",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Albania runs one of the cleanest grids in the world.",
+  "heroDetail": "100% of its electricity is low-carbon, first of 201.",
+  "supporting": [
+   "[concentration] Albania runs almost entirely on hydro.",
+   "[absence] Albania generates no gas electricity at all, in a region built on it.",
+   "[absence] Albania generates no wind electricity at all, in a region built on it.",
+   "[rank] Albania is close to the bottom in NATO for electricity used per person."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Albania runs one of the cleanest grids in Europe.",
+   "[rank] 0.71 Albania is first in Europe for hydro.",
+   "[rank] 0.66 Albania runs one of the cleanest grids in NATO."
+  ]
+ },
+ {
+  "iso3": "ARM",
+  "name": "Armenia",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook nuclear on Armenia's grid in 2025.",
+  "heroDetail": "Today hydro supplies 28% and nuclear 27%.",
+  "supporting": [
+   "[rank] Armenia is second in Asia for nuclear.",
+   "[absence] Armenia generates no coal electricity at all, in a region built on it.",
+   "[crossover] Gas overtook hydro on Armenia's grid in 2012.",
+   "[concentration] Armenia has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.64 Gas overtook nuclear on Armenia's grid in 2011."
+  ]
+ },
+ {
+  "iso3": "BDI",
+  "name": "Burundi",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Burundi has about as many people as Tunisia, and 52 times less electricity to share between them.",
+  "heroDetail": "14 million people against 12.3 million, but 35 kWh per person a year against 1,807.",
+  "supporting": [
+   "[trajectory] Burundi's grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BFA",
+  "name": "Burkina Faso",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Burkina Faso has about as many people as Taiwan, and 174 times less electricity to share between them.",
+  "heroDetail": "24 million people against 23 million, but 72 kWh per person a year against 12,478.",
+  "supporting": [
+   "[concentration] Burkina Faso runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BGR",
+  "name": "Bulgaria",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Nuclear overtook coal on Bulgaria's grid in 2023.",
+  "heroDetail": "Today nuclear supplies 39% and coal 23%.",
+  "supporting": [
+   "[concentration] Bulgaria has no dominant fuel at all.",
+   "[rank] Bulgaria is third in the EU for coal.",
+   "[crossover] Solar overtook hydro on Bulgaria's grid in 2023."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BHR",
+  "name": "Bahrain",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Bahrain is second in the world for gas.",
+  "heroDetail": "Gas supplies 100% of its electricity.",
+  "supporting": [
+   "[rank] Bahrain is third in the world for electricity used per person.",
+   "[absence] Bahrain generates no coal electricity at all, in a region built on it.",
+   "[absence] Bahrain generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 1 Bahrain runs almost entirely on gas.",
+   "[rank] 0.75 Bahrain uses more electricity per person than any country in Asia.",
+   "[rank] 0.72 Bahrain is second in Asia for gas."
+  ]
+ },
+ {
+  "iso3": "BHS",
+  "name": "Bahamas",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] The Bahamas runs almost entirely on oil.",
+  "heroDetail": "99% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] The Bahamas generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.64 The Bahamas is third in Latin America and the Caribbean for oil."
+  ]
+ },
+ {
+  "iso3": "BLR",
+  "name": "Belarus",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[trajectory] Belarus has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 4% to 41% in 5 years.",
+  "supporting": [
+   "[absence] Belarus gets next to none of its electricity from solar, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BLZ",
+  "name": "Belize",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Belize is second in the world for bioenergy.",
+  "heroDetail": "Bioenergy supplies 34% of its electricity.",
+  "supporting": [
+   "[trajectory] Belize has cleaned up its grid faster than most people realise.",
+   "[crossover] Bioenergy overtook oil on Belize's grid in 2010.",
+   "[crossover] Hydro overtook oil on Belize's grid in 2006."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Belize is first in Latin America and the Caribbean for bioenergy."
+  ]
+ },
+ {
+  "iso3": "BMU",
+  "name": "Bermuda",
+  "region": "North America",
+  "dataQuality": "thin",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Bermuda runs almost entirely on oil.",
+  "heroDetail": "98% of its electricity comes from one source.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "BTN",
+  "name": "Bhutan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Bhutan runs one of the cleanest grids in the world.",
+  "heroDetail": "100% of its electricity is low-carbon, second of 201.",
+  "supporting": [
+   "[rank] Bhutan is first in the world for hydro.",
+   "[absence] Bhutan generates no gas electricity at all, in a region built on it.",
+   "[absence] Bhutan generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 1 Bhutan runs almost entirely on hydro.",
+   "[rank] 0.75 Bhutan runs one of the cleanest grids in Asia.",
+   "[rank] 0.75 Bhutan is first in Asia for hydro."
+  ]
+ },
+ {
+  "iso3": "BWA",
+  "name": "Botswana",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Botswana is first in the world for coal.",
+  "heroDetail": "Coal supplies 98% of its electricity.",
+  "supporting": [
+   "[absence] Botswana generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 1 Botswana runs almost entirely on coal.",
+   "[rank] 0.76 Botswana is first in Africa for coal."
+  ]
+ },
+ {
+  "iso3": "CAF",
+  "name": "Central African Republic",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Central African Republic is second in the world for hydro.",
+  "heroDetail": "Hydro supplies 100% of its electricity.",
+  "supporting": [
+   "[peer] Central African Republic has about as many people as Norway, and 1052 times less electricity to share between them.",
+   "[rank] Central African Republic runs one of the cleanest grids in the world.",
+   "[absence] Central African Republic generates no oil electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 1 Central African Republic runs almost entirely on hydro.",
+   "[trajectory] 0.83 Central African Republic has cleaned up its grid faster than most people realise.",
+   "[rank] 0.76 Central African Republic runs one of the cleanest grids in Africa."
+  ]
+ },
+ {
+  "iso3": "CHL",
+  "name": "Chile",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Solar overtook hydro on Chile's grid in 2025.",
+  "heroDetail": "Today solar supplies 25% and hydro 22%.",
+  "supporting": [
+   "[absence] Chile gets next to none of its electricity from oil, in a region built on it.",
+   "[crossover] Solar overtook coal on Chile's grid in 2023.",
+   "[concentration] Chile has no dominant fuel at all.",
+   "[rank] Chile is first in Latin America and the Caribbean for solar."
+  ],
+  "runnersUp": [
+   "[crossover] 0.81 Solar overtook gas on Chile's grid in 2023.",
+   "[crossover] 0.8 Hydro overtook coal on Chile's grid in 2023.",
+   "[crossover] 0.68 Coal overtook gas on Chile's grid in 2024."
+  ]
+ },
+ {
+  "iso3": "CHN",
+  "name": "China",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] China is first in the world for how much electricity it makes.",
+  "heroDetail": "10,583 TWh a year.",
+  "supporting": [
+   "[contradiction] China is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[rank] China is second in Asia for wind.",
+   "[crossover] Solar overtook wind on China's grid in 2025."
+  ],
+  "runnersUp": [
+   "[rank] 0.75 China is first in Asia for how much electricity it makes.",
+   "[rank] 0.56 China is first in the G20 for how much electricity it makes.",
+   "[rank] 0.44 China is first among the BRICS+ countries for how much electricity it makes."
+  ]
+ },
+ {
+  "iso3": "COD",
+  "name": "Democratic Republic of Congo",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] The Democratic Republic of Congo has about as many people as Japan, and 57 times less electricity to share between them.",
+  "heroDetail": "109 million people against 123 million, but 146 kWh per person a year against 8,366.",
+  "supporting": [
+   "[absence] The Democratic Republic of Congo generates no oil electricity at all, in a region built on it.",
+   "[rank] The Democratic Republic of Congo runs one of the cleanest grids in Africa.",
+   "[concentration] The Democratic Republic of Congo runs almost entirely on hydro."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "COG",
+  "name": "Congo",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[trajectory] the Congo's grid has been getting dirtier, not cleaner.",
+  "heroDetail": "Low-carbon electricity went from 55% to 21% in 10 years.",
+  "supporting": [
+   "[peer] The Congo has about as many people as Norway, and 33 times less electricity to share between them.",
+   "[crossover] Gas overtook hydro on the Congo's grid in 2015."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "COM",
+  "name": "Comoros",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] The Comoros is first in the world for oil.",
+  "heroDetail": "Oil supplies 100% of its electricity.",
+  "supporting": [
+   "[absence] The Comoros generates no hydro electricity at all, in a region built on it.",
+   "[rank] The Comoros runs one of the most fossil-dependent grids in Africa."
+  ],
+  "runnersUp": [
+   "[concentration] 1 The Comoros runs almost entirely on oil.",
+   "[rank] 0.76 The Comoros is first in Africa for oil."
+  ]
+ },
+ {
+  "iso3": "CPV",
+  "name": "Cape Verde",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Cape Verde is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "31% of its electricity is wind and solar; 69% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] Cape Verde generates no hydro electricity at all, in a region built on it.",
+   "[trajectory] Cape Verde has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "CRI",
+  "name": "Costa Rica",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] Costa Rica generates no oil electricity at all, in a region built on it.",
+  "heroDetail": "69% of grids in Latin America and the Caribbean draw more than a tenth of their power from oil.",
+  "supporting": [
+   "[rank] Costa Rica runs one of the cleanest grids in Latin America and the Caribbean.",
+   "[rank] Costa Rica is second in the OECD for hydro.",
+   "[crossover] Wind overtook other renewables on Costa Rica's grid in 2025."
+  ],
+  "runnersUp": [
+   "[rank] 0.69 Costa Rica runs one of the cleanest grids in the OECD.",
+   "[rank] 0.64 Costa Rica is third in Latin America and the Caribbean for other renewables.",
+   "[rank] 0.62 Costa Rica is close to the bottom in the OECD for electricity used per person."
+  ]
+ },
+ {
+  "iso3": "CYP",
+  "name": "Cyprus",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Cyprus is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "27% of its electricity is wind and solar; 72% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] Cyprus generates no gas electricity at all, in a region built on it.",
+   "[absence] Cyprus generates no hydro electricity at all, in a region built on it.",
+   "[rank] Cyprus is first in Europe for oil.",
+   "[rank] Cyprus runs one of the most fossil-dependent grids in the EU."
+  ],
+  "runnersUp": [
+   "[rank] 0.63 Cyprus is first in the EU for oil.",
+   "[rank] 0.53 Cyprus is third in the EU for solar.",
+   "[trajectory] 0.53 Cyprus has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "CZE",
+  "name": "Czechia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Nuclear overtook coal on the Czechia's grid in 2023.",
+  "heroDetail": "Today nuclear supplies 42% and coal 35%.",
+  "supporting": [
+   "[absence] The Czechia gets next to none of its electricity from wind, in a region built on it.",
+   "[rank] The Czechia is third in the OECD for coal.",
+   "[rank] The Czechia is third in the OECD for nuclear.",
+   "[trajectory] The Czechia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": [
+   "[rank] 0.62 The Czechia is second in NATO for coal.",
+   "[rank] 0.58 The Czechia is second in the EU for coal.",
+   "[rank] 0.58 The Czechia is third in NATO for nuclear."
+  ]
+ },
+ {
+  "iso3": "DNK",
+  "name": "Denmark",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Denmark is first in the world for wind.",
+  "heroDetail": "Wind supplies 58% of its electricity.",
+  "supporting": [
+   "[absence] Denmark gets next to none of its electricity from hydro, in a region built on it.",
+   "[trajectory] Denmark has cleaned up its grid faster than most people realise.",
+   "[crossover] Wind overtook coal on Denmark's grid in 2014.",
+   "[crossover] Wind overtook gas on Denmark's grid in 2011."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Denmark is first in Europe for wind.",
+   "[rank] 0.69 Denmark is first in the OECD for wind.",
+   "[rank] 0.66 Denmark is first in NATO for wind."
+  ]
+ },
+ {
+  "iso3": "DZA",
+  "name": "Algeria",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Algeria runs almost entirely on gas.",
+  "heroDetail": "99% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Algeria gets next to none of its electricity from hydro, in a region built on it.",
+   "[absence] Algeria gets next to none of its electricity from oil, in a region built on it.",
+   "[rank] Algeria is third in Africa for how much electricity it makes."
+  ],
+  "runnersUp": [
+   "[rank] 0.76 Algeria is first in Africa for gas."
+  ]
+ },
+ {
+  "iso3": "ERI",
+  "name": "Eritrea",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Eritrea has about as many people as Qatar, and 142 times less electricity to share between them.",
+  "heroDetail": "3.5 million people against 3.1 million, but 127 kWh per person a year against 18,030.",
+  "supporting": [
+   "[absence] Eritrea generates no hydro electricity at all, in a region built on it.",
+   "[concentration] Eritrea runs almost entirely on oil.",
+   "[trajectory] Eritrea has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "FRA",
+  "name": "France",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] France is first in the world for nuclear.",
+  "heroDetail": "Nuclear supplies 69% of its electricity.",
+  "supporting": [
+   "[rank] France is first in Europe for how much electricity it makes."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 France is first in Europe for nuclear.",
+   "[rank] 0.69 France is first in the OECD for nuclear.",
+   "[rank] 0.66 France is first in NATO for nuclear."
+  ]
+ },
+ {
+  "iso3": "GAB",
+  "name": "Gabon",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Gas overtook hydro on Gabon's grid in 2023.",
+  "heroDetail": "Today gas supplies 44% and hydro 35%.",
+  "supporting": [
+   "[crossover] Gas overtook oil on Gabon's grid in 2008."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "GMB",
+  "name": "Gambia",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] The Gambia is second in the world for oil.",
+  "heroDetail": "Oil supplies 100% of its electricity.",
+  "supporting": [
+   "[peer] The Gambia has about as many people as Qatar, and 98 times less electricity to share between them.",
+   "[absence] The Gambia generates no hydro electricity at all, in a region built on it.",
+   "[rank] The Gambia runs one of the most fossil-dependent grids in Africa."
+  ],
+  "runnersUp": [
+   "[concentration] 1 The Gambia runs almost entirely on oil.",
+   "[rank] 0.73 The Gambia is second in Africa for oil."
+  ]
+ },
+ {
+  "iso3": "GRD",
+  "name": "Grenada",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Grenada runs almost entirely on oil.",
+  "heroDetail": "100% of its electricity comes from one source.",
+  "supporting": [
+   "[rank] Grenada runs one of the most fossil-dependent grids in the world.",
+   "[absence] Grenada generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.99 Grenada is third in the world for oil.",
+   "[rank] 0.71 Grenada is first in Latin America and the Caribbean for oil.",
+   "[rank] 0.68 Grenada runs one of the most fossil-dependent grids in Latin America and the Caribbean."
+  ]
+ },
+ {
+  "iso3": "GUF",
+  "name": "French Guiana",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "thin",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook oil on French Guiana's grid in 2021.",
+  "heroDetail": "Today hydro supplies 53% and oil 35%.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "HTI",
+  "name": "Haiti",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Haiti has about as many people as the United Arab Emirates, and 220 times less electricity to share between them.",
+  "heroDetail": "11.8 million people against 11 million, but 73 kWh per person a year against 16,075.",
+  "supporting": [
+   "[trajectory] Haiti's grid has been getting dirtier, not cleaner.",
+   "[rank] Haiti uses less electricity per person than any other country in Latin America and the Caribbean.",
+   "[concentration] Haiti runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "ISL",
+  "name": "Iceland",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Iceland uses more electricity per person than any country in the world.",
+  "heroDetail": "48,424 kWh per person per year, first of 201.",
+  "supporting": [
+   "[rank] Iceland is second in the world for other renewables.",
+   "[absence] Iceland generates no gas electricity at all, in a region built on it.",
+   "[absence] Iceland gets next to none of its electricity from solar, in a region built on it."
+  ],
+  "runnersUp": [
+   "[absence] 0.75 Iceland gets next to none of its electricity from wind, in a region built on it.",
+   "[rank] 0.71 Iceland uses more electricity per person than any country in Europe.",
+   "[rank] 0.71 Iceland is first in Europe for other renewables."
+  ]
+ },
+ {
+  "iso3": "ISR",
+  "name": "Israel",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Israel is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "17% of its electricity is wind and solar; 83% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[crossover] Gas overtook coal on Israel's grid in 2015.",
+   "[rank] Israel runs one of the most fossil-dependent grids in the OECD.",
+   "[rank] Israel is first in the OECD for gas.",
+   "[absence] Israel generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[trajectory] 0.42 Israel has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "JOR",
+  "name": "Jordan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Jordan is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "24% of its electricity is wind and solar; 76% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[crossover] Gas overtook oil on Jordan's grid in 2016.",
+   "[trajectory] Jordan has cleaned up its grid faster than most people realise.",
+   "[absence] Jordan generates no coal electricity at all, in a region built on it.",
+   "[rank] Jordan is third in Asia for wind."
+  ],
+  "runnersUp": [
+   "[crossover] 0.65 Solar overtook oil on Jordan's grid in 2024.",
+   "[absence] 0.64 Jordan gets next to none of its electricity from hydro, in a region built on it.",
+   "[crossover] 0.44 Oil overtook wind on Jordan's grid in 2023."
+  ]
+ },
+ {
+  "iso3": "KEN",
+  "name": "Kenya",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Kenya is first in the world for other renewables.",
+  "heroDetail": "Other renewables supplies 46% of its electricity.",
+  "supporting": [
+   "[peer] Kenya has about as many people as South Korea, and 50 times less electricity to share between them.",
+   "[crossover] Other renewables overtook hydro on Kenya's grid in 2015.",
+   "[trajectory] Kenya has cleaned up its grid faster than most people realise.",
+   "[rank] Kenya is second in Africa for wind."
+  ],
+  "runnersUp": [
+   "[rank] 0.76 Kenya is first in Africa for other renewables.",
+   "[crossover] 0.7 Other renewables overtook oil on Kenya's grid in 2013.",
+   "[crossover] 0.47 Wind overtook oil on Kenya's grid in 2019."
+  ]
+ },
+ {
+  "iso3": "KHM",
+  "name": "Cambodia",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Coal overtook hydro on Cambodia's grid in 2023.",
+  "heroDetail": "Today coal supplies 57% and hydro 30%.",
+  "supporting": [
+   "[absence] Cambodia generates no gas electricity at all, in a region built on it.",
+   "[crossover] Coal overtook oil on Cambodia's grid in 2014.",
+   "[trajectory] Cambodia's grid has been getting dirtier, not cleaner.",
+   "[rank] Cambodia is first in ASEAN for solar."
+  ],
+  "runnersUp": [
+   "[crossover] 0.45 Hydro overtook oil on Cambodia's grid in 2013."
+  ]
+ },
+ {
+  "iso3": "LAO",
+  "name": "Laos",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] Laos generates no gas electricity at all, in a region built on it.",
+  "heroDetail": "65% of grids in Asia draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[trajectory] Laos has cleaned up its grid faster than most people realise.",
+   "[rank] Laos is first in ASEAN for hydro."
+  ],
+  "runnersUp": [
+   "[rank] 0.44 Laos runs one of the cleanest grids in ASEAN."
+  ]
+ },
+ {
+  "iso3": "LBN",
+  "name": "Lebanon",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[trajectory] Lebanon has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 5% to 44% in 5 years.",
+  "supporting": [
+   "[absence] Lebanon generates no gas electricity at all, in a region built on it.",
+   "[peer] Lebanon has about as many people as Norway, and 31 times less electricity to share between them.",
+   "[crossover] Solar overtook hydro on Lebanon's grid in 2022.",
+   "[contradiction] Lebanon is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power."
+  ],
+  "runnersUp": [
+   "[rank] 0.72 Lebanon is second in Asia for solar.",
+   "[absence] 0.7 Lebanon generates no coal electricity at all, in a region built on it."
+  ]
+ },
+ {
+  "iso3": "LBR",
+  "name": "Liberia",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook oil on Liberia's grid in 2023.",
+  "heroDetail": "Today hydro supplies 53% and oil 46%.",
+  "supporting": [
+   "[peer] Liberia has about as many people as Norway, and 282 times less electricity to share between them.",
+   "[trajectory] Liberia has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "LSO",
+  "name": "Lesotho",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2022,
+  "stale": true,
+  "heroScore": 1,
+  "hero": "[concentration] Lesotho runs almost entirely on hydro.",
+  "heroDetail": "100% of its electricity comes from one source.",
+  "supporting": [
+   "[peer] Lesotho has about as many people as Slovenia, and 33 times less electricity to share between them.",
+   "[absence] Lesotho generates no oil electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.99 Lesotho is third in the world for hydro.",
+   "[rank] 0.73 Lesotho is second in Africa for hydro."
+  ]
+ },
+ {
+  "iso3": "LUX",
+  "name": "Luxembourg",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Wind overtook bioenergy on Luxembourg's grid in 2023.",
+  "heroDetail": "Today wind supplies 31% and bioenergy 27%.",
+  "supporting": [
+   "[crossover] Solar overtook bioenergy on Luxembourg's grid in 2025.",
+   "[rank] Luxembourg is third in the world for solar.",
+   "[rank] Luxembourg is first in Europe for bioenergy.",
+   "[concentration] Luxembourg has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Luxembourg is first in Europe for solar.",
+   "[rank] 0.69 Luxembourg is first in the OECD for solar.",
+   "[rank] 0.69 Luxembourg is first in the OECD for bioenergy."
+  ]
+ },
+ {
+  "iso3": "MAR",
+  "name": "Morocco",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Morocco is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "22% of its electricity is wind and solar; 76% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[rank] Morocco is third in Africa for coal.",
+   "[rank] Morocco is third in Africa for wind.",
+   "[trajectory] Morocco has cleaned up its grid faster than most people realise.",
+   "[crossover] Wind overtook gas on Morocco's grid in 2019."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MDG",
+  "name": "Madagascar",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Madagascar has about as many people as Saudi Arabia, and 176 times less electricity to share between them.",
+  "heroDetail": "32 million people against 34 million, but 76 kWh per person a year against 13,386.",
+  "supporting": [
+   "[concentration] Madagascar has no dominant fuel at all.",
+   "[trajectory] Madagascar's grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MDV",
+  "name": "Maldives",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] The Maldives generates no gas electricity at all, in a region built on it.",
+  "heroDetail": "65% of grids in Asia draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[concentration] The Maldives runs almost entirely on oil.",
+   "[absence] The Maldives generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.72 The Maldives is second in Asia for oil.",
+   "[absence] 0.64 The Maldives generates no hydro electricity at all, in a region built on it."
+  ]
+ },
+ {
+  "iso3": "MLI",
+  "name": "Mali",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Mali has about as many people as Taiwan, and 51 times less electricity to share between them.",
+  "heroDetail": "24 million people against 23 million, but 243 kWh per person a year against 12,478.",
+  "supporting": [
+   "[crossover] Oil overtook hydro on Mali's grid in 2017.",
+   "[trajectory] Mali's grid has been getting dirtier, not cleaner."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MNE",
+  "name": "Montenegro",
+  "region": "Europe",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook coal on Montenegro's grid in 2023.",
+  "heroDetail": "Today hydro supplies 59% and coal 24%.",
+  "supporting": [
+   "[absence] Montenegro generates no gas electricity at all, in a region built on it.",
+   "[trajectory] Montenegro has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MNG",
+  "name": "Mongolia",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Mongolia is second in the world for coal.",
+  "heroDetail": "Coal supplies 86% of its electricity.",
+  "supporting": [
+   "[absence] Mongolia generates no gas electricity at all, in a region built on it.",
+   "[absence] Mongolia gets next to none of its electricity from hydro, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.75 Mongolia is first in Asia for coal.",
+   "[concentration] 0.51 Mongolia runs almost entirely on coal."
+  ]
+ },
+ {
+  "iso3": "MRT",
+  "name": "Mauritania",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Mauritania has about as many people as Norway, and 71 times less electricity to share between them.",
+  "heroDetail": "5.2 million people against 5.6 million, but 400 kWh per person a year against 28,598.",
+  "supporting": [
+   "[trajectory] Mauritania has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MUS",
+  "name": "Mauritius",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Oil overtook coal on Mauritius' grid in 2022.",
+  "heroDetail": "Today oil supplies 43% and coal 39%.",
+  "supporting": [
+   "[rank] Mauritius is third in Africa for bioenergy."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "MWI",
+  "name": "Malawi",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Malawi has about as many people as Taiwan, and 148 times less electricity to share between them.",
+  "heroDetail": "22 million people against 23 million, but 85 kWh per person a year against 12,478.",
+  "supporting": [
+   "[concentration] Malawi runs almost entirely on hydro."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "NAM",
+  "name": "Namibia",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Namibia is second in the world for solar.",
+  "heroDetail": "Solar supplies 35% of its electricity.",
+  "supporting": [
+   "[peer] Namibia has about as many people as Qatar, and 33 times less electricity to share between them.",
+   "[absence] Namibia generates no oil electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.76 Namibia is first in Africa for solar."
+  ]
+ },
+ {
+  "iso3": "NER",
+  "name": "Niger",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Niger has about as many people as Taiwan, and 355 times less electricity to share between them.",
+  "heroDetail": "27 million people against 23 million, but 35 kWh per person a year against 12,478.",
+  "supporting": [
+   "[absence] Niger generates no hydro electricity at all, in a region built on it.",
+   "[crossover] Oil overtook coal on Niger's grid in 2015."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "NIC",
+  "name": "Nicaragua",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[trajectory] Nicaragua has cleaned up its grid faster than most people realise.",
+  "heroDetail": "Low-carbon electricity went from 28% to 62% in 20 years.",
+  "supporting": [
+   "[crossover] Bioenergy overtook other renewables on Nicaragua's grid in 2021.",
+   "[rank] Nicaragua is close to the bottom in Latin America and the Caribbean for electricity used per person.",
+   "[rank] Nicaragua is second in Latin America and the Caribbean for other renewables.",
+   "[concentration] Nicaragua has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[peer] 0.6 Nicaragua has about as many people as Laos, and 10 times less electricity to share between them.",
+   "[crossover] 0.59 Bioenergy overtook wind on Nicaragua's grid in 2019.",
+   "[crossover] 0.54 Hydro overtook wind on Nicaragua's grid in 2022."
+  ]
+ },
+ {
+  "iso3": "NOR",
+  "name": "Norway",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Norway is second in the world for electricity used per person.",
+  "heroDetail": "28,598 kWh per person per year, second of 201.",
+  "supporting": [
+   "[absence] Norway gets next to none of its electricity from gas, in a region built on it.",
+   "[absence] Norway gets next to none of its electricity from solar, in a region built on it.",
+   "[rank] Norway is first in the OECD for hydro."
+  ],
+  "runnersUp": [
+   "[concentration] 0.68 Norway runs almost entirely on hydro.",
+   "[rank] 0.67 Norway is second in Europe for electricity used per person.",
+   "[rank] 0.67 Norway is second in Europe for hydro."
+  ]
+ },
+ {
+  "iso3": "NPL",
+  "name": "Nepal",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Nepal runs almost entirely on hydro.",
+  "heroDetail": "99% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Nepal generates no gas electricity at all, in a region built on it.",
+   "[peer] Nepal has about as many people as Saudi Arabia, and 36 times less electricity to share between them.",
+   "[rank] Nepal runs one of the cleanest grids in Asia.",
+   "[absence] Nepal generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.72 Nepal is second in Asia for hydro."
+  ]
+ },
+ {
+  "iso3": "PER",
+  "name": "Peru",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "thin",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] Peru gets next to none of its electricity from oil, in a region built on it.",
+  "heroDetail": "69% of grids in Latin America and the Caribbean draw more than a tenth of their power from oil.",
+  "supporting": [],
+  "runnersUp": []
+ },
+ {
+  "iso3": "PRT",
+  "name": "Portugal",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook wind on Portugal's grid in 2024.",
+  "heroDetail": "Today hydro supplies 30% and wind 27%.",
+  "supporting": [
+   "[crossover] Hydro overtook gas on Portugal's grid in 2023.",
+   "[trajectory] Portugal has cleaned up its grid faster than most people realise.",
+   "[concentration] Portugal has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.87 Wind overtook gas on Portugal's grid in 2023.",
+   "[crossover] 0.7 Solar overtook gas on Portugal's grid in 2024.",
+   "[crossover] 0.51 Hydro overtook coal on Portugal's grid in 2018."
+  ]
+ },
+ {
+  "iso3": "PRY",
+  "name": "Paraguay",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Paraguay runs almost entirely on hydro.",
+  "heroDetail": "99% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Paraguay generates no oil electricity at all, in a region built on it.",
+   "[rank] Paraguay runs one of the cleanest grids in Latin America and the Caribbean."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Paraguay is first in Latin America and the Caribbean for hydro."
+  ]
+ },
+ {
+  "iso3": "REU",
+  "name": "Reunion",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Bioenergy overtook coal on Reunion's grid in 2023.",
+  "heroDetail": "Today bioenergy supplies 34% and coal 13%.",
+  "supporting": [
+   "[crossover] Bioenergy overtook oil on Reunion's grid in 2023.",
+   "[rank] Reunion is third in the world for bioenergy.",
+   "[trajectory] Reunion has cleaned up its grid faster than most people realise.",
+   "[concentration] Reunion has no dominant fuel at all."
+  ],
+  "runnersUp": [
+   "[crossover] 0.99 Bioenergy overtook hydro on Reunion's grid in 2023.",
+   "[crossover] 0.92 Bioenergy overtook solar on Reunion's grid in 2023.",
+   "[crossover] 0.87 Oil overtook coal on Reunion's grid in 2021."
+  ]
+ },
+ {
+  "iso3": "SLE",
+  "name": "Sierra Leone",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Sierra Leone has about as many people as Israel, and 355 times less electricity to share between them.",
+  "heroDetail": "8.6 million people against 9.5 million, but 24 kWh per person a year against 8,627.",
+  "supporting": [
+   "[rank] Sierra Leone is close to the bottom in Africa for electricity used per person.",
+   "[crossover] Hydro overtook oil on Sierra Leone's grid in 2010.",
+   "[concentration] Sierra Leone runs almost entirely on hydro."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SLV",
+  "name": "El Salvador",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook other renewables on El Salvador's grid in 2024.",
+  "heroDetail": "Today hydro supplies 30% and other renewables 21%.",
+  "supporting": [
+   "[trajectory] El Salvador has cleaned up its grid faster than most people realise.",
+   "[peer] El Salvador has about as many people as Norway, and 28 times less electricity to share between them.",
+   "[crossover] Hydro overtook oil on El Salvador's grid in 2020.",
+   "[rank] El Salvador is first in Latin America and the Caribbean for other renewables."
+  ],
+  "runnersUp": [
+   "[crossover] 0.8 Other renewables overtook solar on El Salvador's grid in 2022.",
+   "[rank] 0.68 El Salvador is second in Latin America and the Caribbean for solar.",
+   "[concentration] 0.67 El Salvador has no dominant fuel at all."
+  ]
+ },
+ {
+  "iso3": "SOM",
+  "name": "Somalia",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] Somalia is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "21% of its electricity is wind and solar; 79% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[rank] Somalia is close to the bottom in the world for electricity used per person.",
+   "[peer] Somalia has about as many people as the Netherlands, and 325 times less electricity to share between them.",
+   "[absence] Somalia generates no hydro electricity at all, in a region built on it.",
+   "[rank] Somalia is second in Africa for solar."
+  ],
+  "runnersUp": [
+   "[rank] 0.73 Somalia is close to the bottom in Africa for electricity used per person.",
+   "[trajectory] 0.54 Somalia has cleaned up its grid faster than most people realise."
+  ]
+ },
+ {
+  "iso3": "SSD",
+  "name": "South Sudan",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] South Sudan runs almost entirely on oil.",
+  "heroDetail": "98% of its electricity comes from one source.",
+  "supporting": [
+   "[peer] South Sudan has about as many people as the United Arab Emirates, and 343 times less electricity to share between them.",
+   "[absence] South Sudan generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.7 South Sudan is third in Africa for oil."
+  ]
+ },
+ {
+  "iso3": "SUR",
+  "name": "Suriname",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Hydro overtook oil on Suriname's grid in 2023.",
+  "heroDetail": "Today hydro supplies 52% and oil 46%.",
+  "supporting": [
+   "[trajectory] Suriname has cleaned up its grid faster than most people realise."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SVK",
+  "name": "Slovakia",
+  "region": "Europe",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Slovakia is second in the world for nuclear.",
+  "heroDetail": "Nuclear supplies 66% of its electricity.",
+  "supporting": [
+   "[absence] Slovakia generates no wind electricity at all, in a region built on it.",
+   "[trajectory] Slovakia has cleaned up its grid faster than most people realise.",
+   "[crossover] Gas overtook hydro on Slovakia's grid in 2025."
+  ],
+  "runnersUp": [
+   "[rank] 0.67 Slovakia is second in Europe for nuclear.",
+   "[rank] 0.66 Slovakia is second in the OECD for nuclear.",
+   "[rank] 0.62 Slovakia is second in NATO for nuclear."
+  ]
+ },
+ {
+  "iso3": "SYC",
+  "name": "Seychelles",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[contradiction] The Seychelles is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+  "heroDetail": "16% of its electricity is wind and solar; 84% is still fossil. Both are true at once, and that tension is the whole story of the transition.",
+  "supporting": [
+   "[absence] The Seychelles generates no hydro electricity at all, in a region built on it.",
+   "[rank] The Seychelles uses more electricity per person than any country in Africa.",
+   "[trajectory] The Seychelles has cleaned up its grid faster than most people realise.",
+   "[concentration] The Seychelles runs almost entirely on oil."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "SYR",
+  "name": "Syria",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Gas overtook oil on Syria's grid in 2023.",
+  "heroDetail": "Today gas supplies 52% and oil 44%.",
+  "supporting": [
+   "[absence] Syria generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "TCD",
+  "name": "Chad",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Chad uses less electricity per person than any other country in the world.",
+  "heroDetail": "18 kWh per person per year, 201th of 201.",
+  "supporting": [
+   "[peer] Chad has about as many people as Taiwan, and 685 times less electricity to share between them.",
+   "[absence] Chad generates no hydro electricity at all, in a region built on it.",
+   "[concentration] Chad runs almost entirely on oil."
+  ],
+  "runnersUp": [
+   "[rank] 0.76 Chad uses less electricity per person than any other country in Africa."
+  ]
+ },
+ {
+  "iso3": "TGO",
+  "name": "Togo",
+  "region": "Africa",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Togo has about as many people as Israel, and 102 times less electricity to share between them.",
+  "heroDetail": "8.4 million people against 9.5 million, but 84 kWh per person a year against 8,627.",
+  "supporting": [
+   "[crossover] Gas overtook oil on Togo's grid in 2018.",
+   "[crossover] Gas overtook hydro on Togo's grid in 2018.",
+   "[contradiction] Togo is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[absence] Togo generates no oil electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.7 Togo is third in Africa for solar.",
+   "[crossover] 0.59 Solar overtook hydro on Togo's grid in 2022."
+  ]
+ },
+ {
+  "iso3": "TJK",
+  "name": "Tajikistan",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[absence] Tajikistan gets next to none of its electricity from gas, in a region built on it.",
+  "heroDetail": "65% of grids in Asia draw more than a tenth of their power from gas.",
+  "supporting": [
+   "[concentration] Tajikistan runs almost entirely on hydro.",
+   "[rank] Tajikistan runs one of the cleanest grids in Asia."
+  ],
+  "runnersUp": [
+   "[rank] 0.69 Tajikistan is third in Asia for hydro."
+  ]
+ },
+ {
+  "iso3": "TKM",
+  "name": "Turkmenistan",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] Turkmenistan is first in the world for gas.",
+  "heroDetail": "Gas supplies 100% of its electricity.",
+  "supporting": [
+   "[rank] Turkmenistan runs one of the most fossil-dependent grids in Asia.",
+   "[absence] Turkmenistan generates no coal electricity at all, in a region built on it.",
+   "[absence] Turkmenistan gets next to none of its electricity from hydro, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 1 Turkmenistan runs almost entirely on gas.",
+   "[rank] 0.75 Turkmenistan is first in Asia for gas."
+  ]
+ },
+ {
+  "iso3": "TLS",
+  "name": "East Timor",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] East Timor runs one of the most fossil-dependent grids in the world.",
+  "heroDetail": "0% of its electricity is low-carbon, 200th of 201.",
+  "supporting": [
+   "[concentration] East Timor runs almost entirely on oil.",
+   "[absence] East Timor generates no gas electricity at all, in a region built on it.",
+   "[peer] East Timor has about as many people as Bahrain, and 65 times less electricity to share between them.",
+   "[absence] East Timor generates no coal electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.75 East Timor runs one of the most fossil-dependent grids in Asia.",
+   "[rank] 0.75 East Timor is first in Asia for oil.",
+   "[absence] 0.64 East Timor generates no hydro electricity at all, in a region built on it."
+  ]
+ },
+ {
+  "iso3": "TTO",
+  "name": "Trinidad and Tobago",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[concentration] Trinidad and Tobago runs almost entirely on gas.",
+  "heroDetail": "99% of its electricity comes from one source.",
+  "supporting": [
+   "[absence] Trinidad and Tobago gets next to none of its electricity from oil, in a region built on it.",
+   "[absence] Trinidad and Tobago generates no hydro electricity at all, in a region built on it.",
+   "[rank] Trinidad and Tobago runs one of the most fossil-dependent grids in Latin America and the Caribbean."
+  ],
+  "runnersUp": [
+   "[rank] 0.99 Trinidad and Tobago is third in the world for gas.",
+   "[rank] 0.71 Trinidad and Tobago is first in Latin America and the Caribbean for gas."
+  ]
+ },
+ {
+  "iso3": "TWN",
+  "name": "Taiwan",
+  "region": "Asia",
+  "dataQuality": "partial",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Gas overtook coal on Taiwan's grid in 2024.",
+  "heroDetail": "Today gas supplies 49% and coal 36%.",
+  "supporting": [
+   "[crossover] Gas overtook nuclear on Taiwan's grid in 2005."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "TZA",
+  "name": "Tanzania",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[trajectory] Tanzania's grid has been getting dirtier, not cleaner.",
+  "heroDetail": "Low-carbon electricity went from 79% to 33% in 20 years.",
+  "supporting": [
+   "[peer] Tanzania has about as many people as France, and 66 times less electricity to share between them.",
+   "[crossover] Gas overtook hydro on Tanzania's grid in 2011."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "UGA",
+  "name": "Uganda",
+  "region": "Africa",
+  "dataQuality": "partial",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Uganda has about as many people as South Korea, and 104 times less electricity to share between them.",
+  "heroDetail": "50 million people against 52 million, but 116 kWh per person a year against 12,090.",
+  "supporting": [
+   "[concentration] Uganda runs almost entirely on hydro."
+  ],
+  "runnersUp": []
+ },
+ {
+  "iso3": "URY",
+  "name": "Uruguay",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[crossover] Wind overtook hydro on Uruguay's grid in 2023.",
+  "heroDetail": "Today wind supplies 41% and hydro 27%.",
+  "supporting": [
+   "[rank] Uruguay is third in the world for wind.",
+   "[crossover] Wind overtook bioenergy on Uruguay's grid in 2016.",
+   "[rank] Uruguay is second in Latin America and the Caribbean for bioenergy."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 Uruguay is first in Latin America and the Caribbean for wind.",
+   "[rank] 0.64 Uruguay runs one of the cleanest grids in Latin America and the Caribbean.",
+   "[crossover] 0.63 Wind overtook oil on Uruguay's grid in 2014."
+  ]
+ },
+ {
+  "iso3": "USA",
+  "name": "United States",
+  "region": "North America",
+  "dataQuality": "full",
+  "year": 2025,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] The United States is second in the world for how much electricity it makes.",
+  "heroDetail": "4,520 TWh a year.",
+  "supporting": [
+   "[crossover] Gas overtook coal on the United States' grid in 2016.",
+   "[contradiction] The United States is among the world's biggest wind and solar producers and still burns fossil fuels for most of its power.",
+   "[crossover] Nuclear overtook coal on the United States' grid in 2023.",
+   "[rank] The United States runs one of the most fossil-dependent grids in NATO."
+  ],
+  "runnersUp": [
+   "[rank] 0.69 The United States is first in the OECD for how much electricity it makes.",
+   "[rank] 0.66 The United States is first in NATO for how much electricity it makes.",
+   "[rank] 0.62 The United States is second in NATO for gas."
+  ]
+ },
+ {
+  "iso3": "VGB",
+  "name": "British Virgin Islands",
+  "region": "Latin America and Caribbean",
+  "dataQuality": "partial",
+  "year": 2023,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[rank] British Virgin Islands runs one of the most fossil-dependent grids in the world.",
+  "heroDetail": "0% of its electricity is low-carbon, 201th of 201.",
+  "supporting": [
+   "[concentration] British Virgin Islands runs almost entirely on oil.",
+   "[absence] British Virgin Islands generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[rank] 0.71 British Virgin Islands runs one of the most fossil-dependent grids in Latin America and the Caribbean.",
+   "[rank] 0.68 British Virgin Islands is second in Latin America and the Caribbean for oil."
+  ]
+ },
+ {
+  "iso3": "YEM",
+  "name": "Yemen",
+  "region": "Asia",
+  "dataQuality": "full",
+  "year": 2024,
+  "stale": false,
+  "heroScore": 1,
+  "hero": "[peer] Yemen has about as many people as Canada, and 126 times less electricity to share between them.",
+  "heroDetail": "41 million people against 40 million, but 129 kWh per person a year against 16,259.",
+  "supporting": [
+   "[rank] Yemen is close to the bottom in Asia for electricity used per person.",
+   "[absence] Yemen generates no coal electricity at all, in a region built on it.",
+   "[rank] Yemen is third in Asia for oil.",
+   "[absence] Yemen generates no hydro electricity at all, in a region built on it."
+  ],
+  "runnersUp": [
+   "[concentration] 0.59 Yemen runs almost entirely on oil.",
+   "[trajectory] 0.43 Yemen has cleaned up its grid faster than most people realise."
+  ]
+ }
+]

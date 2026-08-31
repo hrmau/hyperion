@@ -6,6 +6,9 @@ name: Refresh energy data
 # published on the site, and it can invalidate the hand-written insight lines in
 # the Higher/Lower bank — scripts/generate-questions.js refuses to ship a question
 # whose winner has flipped, and the PR body quotes any line that has gone stale.
+# The same applies to country hooks: the body quotes every hook that changed to a
+# different kind of claim, so a rewritten homepage lead is read rather than
+# buried in six megabytes of JSON diff.
 # Those need a person, so the last step is a human clicking merge. Vercel deploys
 # from main on merge.
 
@@ -56,6 +59,7 @@ jobs:
         run: |
           npm run transform-data
           npm run generate-questions -- --report /tmp/report.md
+          npm run generate-facts -- --baseline /tmp/baseline --report /tmp/facts.md
 
       - name: Validate
         # Fails the job outright on a bad upstream release — countries vanishing,
@@ -87,6 +91,8 @@ jobs:
             cat /tmp/coverage.md
             echo
             cat /tmp/report.md
+            echo
+            cat /tmp/facts.md
             echo
             echo "---"
             echo
