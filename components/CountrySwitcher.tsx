@@ -12,7 +12,11 @@ import FlagImg from '@/components/FlagImg';
  * display preference rather than anything worth protecting.
  */
 function rememberCountry(iso3: string) {
-  document.cookie = `gg_country=${iso3}; path=/; max-age=31536000; samesite=lax`;
+  // Secure on https, omitted on http so local development still works. Not
+  // HttpOnly: the switcher has to write it from the page, and it holds a country
+  // code rather than anything worth protecting from script.
+  const secure = window.location.protocol === 'https:' ? '; secure' : '';
+  document.cookie = `gg_country=${iso3}; path=/; max-age=31536000; samesite=lax${secure}`;
   window.location.assign('/');
 }
 
