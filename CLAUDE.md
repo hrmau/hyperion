@@ -22,15 +22,29 @@ npm run generate-questions   # rebuild the Higher/Lower question bank
 ## Layout
 
 ```
-app/                  one directory per route; client pages pair page.tsx with
-                      layout.tsx purely to export metadata
+app/                  one directory per route
+  page.tsx            never rendered directly — middleware rewrites / here
+  home/[iso3]/        201 prerendered homepage variants (200 countries + world)
+  country/[iso3]/     200 prerendered country profiles
+  explore/            the world map, which used to live at /
 components/           shared UI; navItems.ts is the single source of nav truth
 lib/                  data loading, types, colour scales, scoring, game logic
+                      facts.ts is server-only — it reads the filesystem
+middleware.ts         picks the homepage variant from cookie, then IP country
 public/data/          shipped JSON the client fetches at runtime
 data/                 raw + intermediate pipeline inputs (not served)
 scripts/              build-time data pipeline
 docs/                 specs and status notes
 ```
+
+**Two rendering models now coexist.** The older pages are `'use client'` with a
+sibling `layout.tsx` that exists only to export metadata. `/home/[iso3]` and
+`/country/[iso3]` are server components that read JSON from the filesystem at
+build time via `lib/facts.ts`, so the fact and the chart are both in the HTML.
+That is deliberate and load-bearing: it is what makes 200 country pages worth
+publishing. Do not convert them to client components — almost everything in
+`components/ds/` is already a server component, and `StackedAreaChart` is
+hand-rolled SVG with no library, so they do not need to be.
 
 ## Data
 
@@ -176,6 +190,53 @@ all read from it. Primary nav is **Explore, Play, Compare, Rankings**. Correlati
 Story, Why, Methodology, Updates, Credits, Privacy and Terms live in the footer
 "More" group and the mobile menu. All those routes are live — only their nav
 placement is demoted.
+
+**Explore is `/explore`, not `/`.** The map moved there when the homepage became
+the personalised hook. The logo links to `/`; anything meaning "the map" links to
+`/explore`. Nine links had to be sorted into those two groups when it moved, so
+check which one you mean.
+
+## The homepage (`/`)
+
+`/` is never rendered by `app/page.tsx` directly. `middleware.ts` rewrites it to
+a prerendered `/home/<iso3>`, choosing by:
+
+1. the `gg_country` cookie — an explicit choice from the country switcher
+2. `x-vercel-ip-country` — where the connection appears to be
+3. the world view — no header, an uncovered country, or one with no hook
+
+A rewrite rather than a redirect, so the URL stays `/` while the response is a
+page built at compile time. Every variant canonicalises to `/` and none appear in
+the sitemap, so `/home/*` cannot be indexed alongside the homepage it renders.
+Their metadata is identical on purpose: `/` must not describe itself differently
+depending on where the reader is sitting.
+
+The choice is a **cookie, not localStorage**, because middleware has to read it
+before any JavaScript runs. It holds one ISO3 code, it is a display preference
+like `gg_best_streak`, and it sits outside the analytics consent gate. `/privacy`
+documents it.
+
+Next's dev overlay reports a hydration mismatch on `/`. It is an artefact of the
+rewrite — server renders `/home/irl`, client router initialises at `/` — and the
+production build has no console output at all. `npm run build && npm start` via
+the `hyperion-prod` preview config is how to confirm that rather than chasing it.
+
+## Country pages (`/country/[iso3]`)
+
+200 prerendered profiles, and the site's SEO surface. The homepage varies by IP,
+so a crawler only ever sees one version of it; indexable content lives here.
+
+What makes 200 same-shaped pages legitimate rather than a doorway farm is that
+each leads with a different **kind** of claim, and that the page composes itself
+around that claim: the hero fact's family picks which chart sits beside it — two
+bars for a peer comparison, the forty-year mix for everything else. Keep that
+indirection. A fixed template with variable numbers is the failure mode.
+
+14 countries generate too little to say anything about and deliberately have no
+page. They render a `noindex` view offering the nearest grids in their region
+instead of a 404. `public/data/country-pages.json` is the 1.2KB index of which
+countries have one — every surface that offers a profile link checks it through
+`countryPagePath()` in `lib/data.ts` rather than linking blindly.
 
 ## Higher/Lower game (`/play`)
 
