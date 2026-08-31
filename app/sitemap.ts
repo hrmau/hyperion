@@ -18,14 +18,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...countryPages,
-    // `/` is intentionally absent while it redirects to /explore — a URL that
-    // 307s does not belong in a sitemap. It returns at priority 1 with the
-    // homepage.
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    // The /home/* variants are never listed. They exist only as rewrite targets
+    // for `/`, and every one of them declares `/` as its canonical.
     {
       url: `${baseUrl}/explore`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/play`,
