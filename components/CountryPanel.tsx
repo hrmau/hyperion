@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import type { Country, YearData, FossilFuelData, BlocsData } from '@/lib/types';
 import FlagImg from '@/components/FlagImg';
 import type { BlocAggregates } from '@/lib/data';
-import { getLatestYearData, getBlocsForCountry } from '@/lib/data';
+import { getLatestYearData, getBlocsForCountry, countryPagePath } from '@/lib/data';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import EnergyMixChart from './EnergyMixChart';
@@ -20,6 +21,8 @@ interface CountryPanelProps {
   country: Country | null;
   topCountries: Country[];
   onClose: () => void;
+  /** Which countries have a profile page; null until loaded. */
+  countryPages?: Set<string> | null;
   onSelectCountry: (country: Country) => void;
   selectedBloc: string;
   blocAgg: BlocAggregates | null;
@@ -301,7 +304,7 @@ function CountryListItem({ country, index, onClick }: {
 
 export default function CountryPanel({
   country, topCountries, onClose, onSelectCountry,
-  selectedBloc, blocAgg, blocYearData, fossilFuelData, blocsData,
+  selectedBloc, blocAgg, blocYearData, fossilFuelData, blocsData, countryPages,
 }: CountryPanelProps) {
 
   // Single country detail - use latest available data
@@ -315,6 +318,15 @@ export default function CountryPanel({
             <div>
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
               <p className="text-[11px] text-muted">{country.emberRegion}{latest ? ` · ${latest.year}` : ''}</p>
+              {countryPagePath(country.iso3, countryPages ?? null) && (
+                <Link
+                  href={countryPagePath(country.iso3, countryPages ?? null)!}
+                  className="text-[11px]"
+                  style={{ color: 'var(--green)' }}
+                >
+                  Full profile →
+                </Link>
+              )}
             </div>
           </div>
           <CloseButton onClick={onClose} />

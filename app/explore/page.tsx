@@ -17,6 +17,7 @@ import {
   loadCountries,
   loadBlocs,
   loadFossilFuelData,
+  loadCountryPages,
   getCountriesInBloc,
   getLatestYearData,
   aggregateBlocCommonYear,
@@ -73,10 +74,13 @@ export default function Explore() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<Country | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
+  const [countryPages, setCountryPages] = useState<Set<string> | null>(null);
 
   const mapMode = MEASURE_TO_MODE[measure];
 
   useEffect(() => {
+    // 1.2KB; decides whether the panel offers a profile link at all.
+    loadCountryPages().then(setCountryPages).catch(() => {});
     Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
       .then(([countriesData, blocsData, fossilData]) => {
         setCountries(countriesData);
@@ -305,6 +309,7 @@ export default function Explore() {
             blocYearData={blocYearData}
             fossilFuelData={fossilFuelData}
             blocsData={blocs}
+            countryPages={countryPages}
           />
         </div>
       </main>

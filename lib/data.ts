@@ -5,6 +5,7 @@ let blocsCache: BlocsData | null = null;
 let fossilFuelCache: FossilFuelData | null = null;
 let socioeconomicCache: SocioeconomicData | null = null;
 let questionsCache: Question[] | null = null;
+let countryPagesCache: Set<string> | null = null;
 
 async function fetchJSON<T>(url: string): Promise<T> {
   const res = await fetch(url);
@@ -43,6 +44,26 @@ export async function loadQuestions(): Promise<Question[]> {
   if (questionsCache) return questionsCache;
   questionsCache = await fetchJSON<Question[]>('/data/questions.json');
   return questionsCache;
+}
+
+/**
+ * Which countries have a /country/[iso3] page.
+ *
+ * 14 generate too little electricity for the fact engine to say anything worth
+ * reading, and deliberately have no page. Surfaces that offer a profile link
+ * must check first rather than send a reader to a 404.
+ */
+export async function loadCountryPages(): Promise<Set<string>> {
+  if (countryPagesCache) return countryPagesCache;
+  const list = await fetchJSON<string[]>('/data/country-pages.json');
+  countryPagesCache = new Set(list);
+  return countryPagesCache;
+}
+
+/** Path to a country's profile, or null if it has no page. */
+export function countryPagePath(iso3: string, pages: Set<string> | null): string | null {
+  if (!pages || !pages.has(iso3)) return null;
+  return `/country/${iso3.toLowerCase()}`;
 }
 
 /**
