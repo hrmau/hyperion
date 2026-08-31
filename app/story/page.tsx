@@ -306,7 +306,7 @@ export default function StoryPage() {
                 {i === chapters.length - 1 && (
                   <div className="pt-4">
                     <Link
-                      href="/"
+                      href="/explore"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-canvas transition-colors"
                       style={{ backgroundColor: chapter.color }}
                     >

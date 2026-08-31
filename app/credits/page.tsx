@@ -181,7 +181,7 @@ export default function CreditsPage() {
 
           <div className="mt-6 text-center">
             <Link
-              href="/"
+              href="/explore"
               className="hover: transition-colors"
             >
               ← Back to explorer

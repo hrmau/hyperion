@@ -188,7 +188,7 @@ export default function PlayPage() {
               Couldn&apos;t load the question bank.
             </p>
             <p style={{ marginTop: 'var(--space-5)', color: 'var(--text-tertiary)' }}>
-              Try reloading, or <Link href="/">explore the map</Link> instead.
+              Try reloading, or <Link href="/explore">explore the map</Link> instead.
             </p>
           </div>
         </main>
@@ -454,7 +454,7 @@ export default function PlayPage() {
             }}
           >
             Every round compares both countries in the same year.{' '}
-            <Link href="/">See the whole map</Link>.
+            <Link href="/explore">See the whole map</Link>.
           </p>
         </main>
 

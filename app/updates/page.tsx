@@ -368,7 +368,7 @@ export default function UpdatesPage() {
           {/* Back link */}
           <div className="mt-6 text-center">
             <Link
-              href="/"
+              href="/explore"
               className="hover: transition-colors"
             >
               ← Back to explorer

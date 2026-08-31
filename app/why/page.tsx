@@ -650,7 +650,7 @@ export default function WhyEnergyMattersPage() {
                 <div className="action-card__description">
                   Understand your country&apos;s energy reality
                 </div>
-                <Link href="/" className="action-card__button">
+                <Link href="/explore" className="action-card__button">
                   Explore the map →
                 </Link>
               </div>
