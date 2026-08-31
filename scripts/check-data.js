@@ -53,6 +53,7 @@ function main() {
   const fossil = readJSON(DATA, 'fossil-fuel-independence.json');
   const socio = readJSON(DATA, 'socioeconomic.json');
   const questions = readJSON(DATA, 'questions.json');
+  const facts = readJSON(DATA, 'country-facts.json');
 
   for (const [name, val] of Object.entries({ countries, fossil, socio, questions })) {
     if (!val) fail(`${name} is missing or unreadable`);
@@ -105,12 +106,35 @@ function main() {
     fail(`${missingInsight.length} questions have no insight line: ${missingInsight.slice(0,3).map(q=>q.id).join(', ')}`);
   }
 
+  // Country facts lead the homepage and every /country page. A country with no
+  // hook has no page worth publishing, so a collapse in coverage is a build
+  // failure, not a note.
+  if (facts) {
+    const withFacts = Object.keys(facts).length;
+    if (withFacts < 150) {
+      fail(`Only ${withFacts} countries have a hook (floor is 150)`);
+    }
+    const noHero = Object.values(facts).filter((c) => !c.hero || !c.hero.headline);
+    if (noHero.length) fail(`${noHero.length} countries have no hero fact`);
+  }
+
   // --- Comparison with the previous data ----------------------------------
   const report = [];
   if (baselineDir) {
     const prevCountries = readJSON(baselineDir, 'countries-yearly.json');
     const prevFossil = readJSON(baselineDir, 'fossil-fuel-independence.json');
     const prevQuestions = readJSON(baselineDir, 'questions.json');
+    const prevFacts = readJSON(baselineDir, 'country-facts.json');
+
+    if (prevFacts && facts) {
+      const lost = Object.keys(prevFacts).filter((i) => !facts[i]);
+      // A country that had a hook and now has none loses the lead on its page.
+      if (lost.length > 5) {
+        fail(`${lost.length} countries lost their hook: ${lost.slice(0, 10).join(', ')}`);
+      } else if (lost.length) {
+        notes.push(`${lost.length} countries lost their hook: ${lost.join(', ')}`);
+      }
+    }
 
     if (prevCountries) {
       const prevIso = new Set(Object.keys(prevCountries));

@@ -127,6 +127,35 @@ Anything that iterates sources must handle two of them mapping to one fuel.
 `other_renewables`; `EnergyMixChart` now renders from `fuelShares()` rather than
 raw sources for the same reason.
 
+## Country facts
+
+`scripts/generate-facts.js` writes `public/data/country-facts.json` — one hero
+fact plus up to four supporting ones for 200 countries — and
+`scripts/fact-candidates.json`, a **worst-first** review file meant to be skimmed
+in one sitting. Facts are read at build time; the JSON never reaches the client.
+
+Seven families (rank, crossover, trajectory, contradiction, concentration,
+absence, peer) exist so that each country leads with a different *kind* of claim.
+That is not decoration: 214 pages of "X generated Y TWh" is a doorway-page farm,
+and the variety is what makes the pages worth publishing at all. If a change
+makes one family win most of the hero slots, that is a regression — `peer` once
+took 137 of 198 and had to be pulled out of the hero-preference set.
+
+**Every numeral printed in a fact must appear in its `values`.** The build fails
+otherwise. This is what makes the copy auditable, and it is the same guarantee
+`question-insights.json` gives the game. It has already caught three real bugs,
+including a headline that printed `rank - 1`.
+
+Family scores are normalised against each family's own distribution across all
+countries, against the 95th percentile rather than the max, before they compete.
+
+Suppression rules mostly exist because a prototype produced the exact fact they
+kill, and each is commented with it. The two worth knowing: a bottom-end rank is
+only publishable for clean share and per-capita (being last for wind when you run
+on hydro is not a finding — that was Iceland), and a crossover is suppressed once
+it has been reversed (Israel's oil passed gas in 2012 and gas took it back while
+oil was under the noise floor).
+
 `scripts/generate-questions.js` carries a **port** of that scoring model. If you
 change `lib/independence.ts`, mirror it there and re-run — the file says so, and
 that comment has already caught one drift.
