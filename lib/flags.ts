@@ -49,6 +49,18 @@ const iso3ToIso2: Record<string, string> = {
 };
 
 /** Get ISO2 code from ISO3 */
+/**
+ * ISO2 -> ISO3, for turning Vercel's `x-vercel-ip-country` header into a code
+ * the dataset uses. Built from the map above so the two cannot drift.
+ */
+const iso2ToIso3: Record<string, string> = Object.fromEntries(
+  Object.entries(iso3ToIso2).map(([three, two]) => [two, three])
+);
+
+export function getIso3(iso2: string): string | undefined {
+  return iso2ToIso3[iso2.toUpperCase()];
+}
+
 export function getIso2(iso3: string): string | undefined {
   return iso3ToIso2[iso3];
 }

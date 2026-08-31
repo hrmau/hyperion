@@ -174,3 +174,134 @@ export const loadProfile = cache(async (iso3: string): Promise<CountryProfile | 
 
   return { facts: f, country, year: f.year, data, years };
 });
+
+/* -------------------------------------------------------------------------- */
+/* Homepage views                                                              */
+/* -------------------------------------------------------------------------- */
+
+export interface HomeView {
+  /** ISO3, or 'WORLD'. */
+  key: string;
+  name: string;
+  /** ISO3 for a flag, or null for the world. */
+  iso3: string | null;
+  year: number;
+  stale: boolean;
+  headline: string;
+  detail: string | null;
+  /** The second claim, shown as the gorilla's reading beside the chart. */
+  note: { headline: string; detail: string | null } | null;
+  data: YearData;
+  years: number[];
+  yearData: (year: number) => YearData | undefined;
+  /** Peer comparison when that is what the hook is about. */
+  peer: { name: string; mine: number; theirs: number } | null;
+  profilePath: string | null;
+  neighbours: NeighbourLink[];
+}
+
+interface AggregateEntity {
+  years: Record<string, YearData>;
+}
+
+const loadAggregates = cache(async (): Promise<Record<string, AggregateEntity>> => {
+  const file = await readJSON<{ aggregates: Record<string, AggregateEntity> }>(
+    'owid-aggregates.json'
+  );
+  return file.aggregates;
+});
+
+/**
+ * The world view: what `/` shows when there is no usable location.
+ *
+ * Local dev, a VPN, a crawler, a country the dataset does not cover, and every
+ * grid too small to have a hook all land here, so it has to be a real page
+ * rather than an apology. Its headline is computed from the data for the same
+ * reason every other one is — a hand-written "a third of the planet runs on
+ * coal" is a claim that quietly stops being true.
+ */
+export const loadWorldView = cache(async (): Promise<HomeView | null> => {
+  const world = (await loadAggregates())['World'];
+  if (!world) return null;
+
+  const years = Object.keys(world.years).map(Number).sort((a, b) => a - b);
+  const year = years[years.length - 1];
+  const data = world.years[String(year)];
+  if (!data) return null;
+
+  const coal = data.generation.coal?.pct ?? 0;
+  const clean = data.aggregates.clean_pct;
+  const solar = data.generation.solar?.pct ?? 0;
+  const fiveBack = world.years[String(year - 5)];
+  const solarThen = fiveBack?.generation.solar?.pct ?? null;
+
+  return {
+    key: 'WORLD',
+    name: 'The world',
+    iso3: null,
+    year,
+    stale: false,
+    headline: `Coal still makes ${Math.round(coal)}% of the world's electricity.`,
+    detail: `Low-carbon sources reached ${Math.round(clean)}% of global generation in ${year}. The other half of the grid is the argument.`,
+    note:
+      solarThen != null
+        ? {
+            headline: 'Watch the solar band.',
+            detail: `It was ${solarThen.toFixed(1)}% of world generation five years ago and is ${solar.toFixed(1)}% now — the fastest change on this chart, and the one most forecasts missed.`,
+          }
+        : null,
+    data,
+    years,
+    yearData: (y: number) => world.years[String(y)],
+    peer: null,
+    profilePath: null,
+    neighbours: [],
+  };
+});
+
+/** The homepage as one country, or as the world. */
+export const loadHomeView = cache(async (key: string): Promise<HomeView | null> => {
+  if (key.toUpperCase() === 'WORLD') return loadWorldView();
+
+  const p = await loadProfile(key);
+  if (!p) return null;
+  const { facts, country, data, year, years } = p;
+  const note = facts.supporting[0] ?? null;
+
+  let peer: HomeView['peer'] = null;
+  if (facts.hero.family === 'peer') {
+    const name = await countryName(facts.hero.comparisonSet);
+    peer = {
+      name: name ?? facts.hero.comparisonSet,
+      mine: facts.hero.values.kwh_per_person ?? 0,
+      theirs: facts.hero.values.peer_kwh_per_person ?? 0,
+    };
+  }
+
+  return {
+    key: facts.iso3,
+    name: facts.name,
+    iso3: facts.iso3,
+    year,
+    stale: facts.stale,
+    headline: facts.hero.headline,
+    detail: facts.hero.detail,
+    note: note ? { headline: note.headline, detail: note.detail } : null,
+    data,
+    years,
+    yearData: (y: number) => country.years[String(y)],
+    peer,
+    profilePath: `/country/${facts.iso3.toLowerCase()}`,
+    neighbours: await loadNeighbours(facts.iso3, 3),
+  };
+});
+
+/** Name and code for every country the switcher can offer. */
+export const loadSwitcherIndex = cache(
+  async (): Promise<{ iso3: string; name: string }[]> => {
+    const facts = await loadFacts();
+    return Object.values(facts)
+      .map((c) => ({ iso3: c.iso3, name: c.name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+);

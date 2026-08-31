@@ -34,6 +34,26 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
+            <h2>Your country, and how the homepage picks it</h2>
+            <p>
+              The homepage leads with a fact about your own country. To choose which one, we read
+              the country your connection appears to come from &mdash; a two-letter code supplied
+              by our host with the request, such as <code>IE</code>. We do not receive your IP
+              address, we do not log the code, and it is not written anywhere. It is used to pick
+              a page and then it is gone.
+            </p>
+            <p>
+              If you choose a different country with the &ldquo;change&rdquo; control, that choice
+              is stored in a cookie named <code>gg_country</code> on your own device. It holds one
+              three-letter country code and nothing else &mdash; no identifier, nothing that could
+              distinguish you from anyone else who picked the same country. It is a display
+              preference, in the same category as the best streak that <code>/play</code> keeps,
+              so it is not part of the analytics consent choice below. Clearing your site data
+              removes it, after which the homepage goes back to guessing.
+            </p>
+          </section>
+
+          <section className="space-y-3">
             <h2>Google Analytics</h2>
             <p>
               We use Google Analytics to collect anonymized usage data, including:
