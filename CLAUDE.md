@@ -318,6 +318,35 @@ as blocking on the redesign. Read it before "fixing" something that looks broken
 — several entries are deliberate, and one (the independence score's treatment of
 missing fuel data) has a guard in CI that should not be dismissed without it.
 
+## Security
+
+Headers are set in `next.config.ts` for every route. Three things about them are
+worth knowing before changing anything:
+
+- **`Content-Security-Policy` allows exactly two external origins** —
+  googletagmanager for the analytics tag, flagcdn for country flags. Adding a
+  third means adding it here, and a resource that silently fails to load is the
+  first thing to check.
+- **`script-src` carries `unsafe-inline`**, which is a real weakening and is
+  commented as such. Next inlines bootstrap scripts and the alternative is a
+  per-request nonce, meaning middleware on every route rather than just `/`. The
+  site takes no user input, so there is nothing to inject; revisit if that
+  changes. `unsafe-eval` is development-only, for Turbopack's HMR.
+- **`Strict-Transport-Security` is deliberately absent.** Vercel already serves
+  it at `max-age=63072000`; a second, weaker header here would be the one that
+  wins.
+
+`package.json` pins `sharp` via `overrides`. It is an optional dependency of
+Next, it had four high-severity libvips advisories, and overriding it was a
+smaller change than moving Next for that alone.
+
+The `gg_country` cookie is `samesite=lax`, `secure` on https, and deliberately
+not `HttpOnly` — the switcher writes it from the page. It holds a country code.
+
+`middleware.ts` builds a path from that cookie, so **the value is checked
+against the 200-code allowlist before it is used**. Keep that check: it is the
+only thing between a cookie and the routing table.
+
 ## Conventions
 
 - Client pages are `'use client'` with a sibling `layout.tsx` that exports metadata.
@@ -325,5 +354,6 @@ missing fuel data) has a guard in CI that should not be dismissed without it.
   never raw emoji.
 - Analytics goes through `lib/analytics.ts`, which no-ops unless the visitor has
   consented to analytics cookies.
-- `npm run lint` currently reports pre-existing errors in `WorldMap.tsx`,
-  `CookieConsent.tsx` and a few content pages. Don't add new ones.
+- `npm run lint` is clean, and `npm audit` reports zero vulnerabilities. Both
+  were not true before; keep them that way rather than re-establishing a
+  tolerated baseline.
