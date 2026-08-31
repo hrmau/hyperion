@@ -9,6 +9,8 @@ import {
   getLatestYear,
   aggregateBloc,
   blocAggToYearData,
+  loadCountryPages,
+  countryPagePath,
 } from '@/lib/data';
 import type { BlocAggregates } from '@/lib/data';
 import type { CountriesData, BlocsData, YearData, FossilFuelData } from '@/lib/types';
@@ -28,6 +30,7 @@ import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { DonutStat } from '@/components/ds/data/DonutStat';
 import { MixBar } from '@/components/ds/data/MixBar';
 import { fuelShares, fuelSeries } from '@/lib/fuels';
+import Link from 'next/link';
 import FlagImg from '@/components/FlagImg';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
@@ -329,6 +332,7 @@ function Side({
   countries,
   blocs,
   fossilFuelData,
+  countryPages,
 }: {
   sel: ResolvedSelection;
   type: SelectionType;
@@ -337,6 +341,7 @@ function Side({
   countries: CountriesData;
   blocs: BlocsData;
   fossilFuelData: FossilFuelData | null;
+  countryPages: Set<string> | null;
 }) {
   const { years, series } = seriesFor(sel, type, id, countries, blocs);
   const shares = fuelShares(sel.yearData);
@@ -384,6 +389,16 @@ function Side({
           >
             {sel.subtitle} · {sel.actualYear}
           </div>
+          {sel.iso3 && countryPagePath(sel.iso3, countryPages) && (
+            <div style={{ marginTop: 'var(--space-3)' }}>
+              <Link
+                href={countryPagePath(sel.iso3, countryPages)!}
+                style={{ fontSize: 'var(--fs-ui)', color: 'var(--green)' }}
+              >
+                Full profile →
+              </Link>
+            </div>
+          )}
         </div>
         <DonutStat value={yd.aggregates.clean_pct} label="Clean" size={78} thickness={11} />
       </div>
@@ -423,11 +438,13 @@ function ComparePageContent() {
   const [fossilFuelData, setFossilFuelData] = useState<FossilFuelData | null>(null);
   const [loading, setLoading] = useState(true);
   const [defaultYear, setDefaultYear] = useState(2025);
+  const [countryPages, setCountryPages] = useState<Set<string> | null>(null);
 
   // URL-driven state
   const { params, setSelectionA, setSelectionB, yearIsExplicit } = useCompareParams(defaultYear);
 
   useEffect(() => {
+    loadCountryPages().then(setCountryPages).catch(() => {});
     Promise.all([loadCountries(), loadBlocs(), loadFossilFuelData()])
       .then(([countriesData, blocsData, fossilData]) => {
         setCountries(countriesData);
@@ -561,8 +578,8 @@ function ComparePageContent() {
               borderTop: '1px solid var(--border-default)',
             }}
           >
-            <Side sel={resolvedA} type={typeA} id={idA} border countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} />
-            <Side sel={resolvedB} type={typeB} id={idB} countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} />
+            <Side sel={resolvedA} type={typeA} id={idA} border countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} countryPages={countryPages} />
+            <Side sel={resolvedB} type={typeB} id={idB} countries={countries} blocs={blocs} fossilFuelData={fossilFuelData} countryPages={countryPages} />
           </div>
 
           <div

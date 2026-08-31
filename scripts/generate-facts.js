@@ -774,6 +774,17 @@ function writeReport(file, d) {
 }
 
 fs.writeFileSync(path.join(DATA, 'country-facts.json'), JSON.stringify(out, null, 1));
+
+// A ~2KB index of which countries actually have a page.
+//
+// The client surfaces (/explore, /rankings, /compare) need to know whether to
+// offer a profile link, and 14 countries deliberately have no page. Fetching the
+// 330KB fact file to answer that would be absurd, and linking unconditionally
+// would send readers to a 404.
+fs.writeFileSync(
+  path.join(DATA, 'country-pages.json'),
+  JSON.stringify(Object.keys(out).sort())
+);
 fs.writeFileSync(path.join(__dirname, 'fact-candidates.json'), JSON.stringify(candidates, null, 1));
 
 
@@ -788,4 +799,4 @@ if (REPORT) {
   writeReport(REPORT, BASELINE ? diffAgainst(BASELINE) : null);
   console.log(`Wrote report to ${REPORT}`);
 }
-console.log(`Wrote public/data/country-facts.json and scripts/fact-candidates.json`);
+console.log(`Wrote public/data/country-facts.json, country-pages.json and scripts/fact-candidates.json`);

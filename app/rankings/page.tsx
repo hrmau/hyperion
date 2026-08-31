@@ -4,6 +4,8 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import {
   loadCountries,
+  loadCountryPages,
+  countryPagePath,
   loadFossilFuelData,
   loadBlocs,
   getLatestYearData,
@@ -120,8 +122,10 @@ export default function RankingsPage() {
   const [loading, setLoading] = useState(true);
   const [measure, setMeasure] = useState<Measure>('Generation');
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [countryPages, setCountryPages] = useState<Set<string> | null>(null);
 
   useEffect(() => {
+    loadCountryPages().then(setCountryPages).catch(() => {});
     Promise.all([loadCountries(), loadFossilFuelData(), loadBlocs()])
       .then(([data, fossilData, blocs]) => {
         setCountries(data);
@@ -372,6 +376,14 @@ export default function RankingsPage() {
                     </div>
                   )}
                   <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+                    {(() => {
+                      const profile = countryPagePath(r.country.iso3, countryPages);
+                      return profile ? (
+                        <Button as={Link} href={profile} variant="primary" size="sm">
+                          Full profile
+                        </Button>
+                      ) : null;
+                    })()}
                     <Button
                       as={Link}
                       href={`/compare?a=${r.country.iso3}`}
