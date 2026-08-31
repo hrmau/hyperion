@@ -63,18 +63,24 @@ export function getCorrelationData(
 
     if (!yearData || !socioData) continue;
 
-    // Calculate electricity per capita in kWh/person/year
-    // total_generation_twh * 1,000,000,000 (TWh -> kWh) / (population_millions * 1,000,000)
-    // Simplifies to: total_generation_twh * 1,000 / population_millions
-    const electricity_per_capita_kwh =
-      (yearData.total_generation_twh * 1_000) / socioData.population_millions;
+    const population = yearData.population;
+    if (population == null) continue;
+
+    // kWh per person per year: TWh * 1e9 / people.
+    //
+    // Population comes from the same row as the generation figure, not from
+    // socioeconomic.json. Numerator and denominator then share a source and a
+    // year, which is the only way this number is comparable with the per-capita
+    // figures elsewhere on the site. See docs/backlog.md.
+    const electricity_per_capita_kwh = (yearData.total_generation_twh * 1e9) / population;
+    const population_millions = population / 1e6;
 
     result.push({
       iso3,
       name: country.name,
       region: socioData.region,
       income_level: socioData.income_level,
-      population_millions: socioData.population_millions,
+      population_millions,
       electricity_per_capita_kwh,
       gdp_per_capita_ppp: socioData.gdp_per_capita_ppp,
       hdi: socioData.hdi,
@@ -106,16 +112,19 @@ export function getCorrelationDataLatest(
 
     const { year, data: yearData } = latest;
 
-    // Calculate electricity per capita in kWh/person/year (see getCorrelationData)
-    const electricity_per_capita_kwh =
-      (yearData.total_generation_twh * 1_000) / socioData.population_millions;
+    const population = yearData.population;
+    if (population == null) continue;
+
+    // See getCorrelationData: population comes from the same row as generation.
+    const electricity_per_capita_kwh = (yearData.total_generation_twh * 1e9) / population;
+    const population_millions = population / 1e6;
 
     result.push({
       iso3,
       name: country.name,
       region: socioData.region,
       income_level: socioData.income_level,
-      population_millions: socioData.population_millions,
+      population_millions,
       electricity_per_capita_kwh,
       gdp_per_capita_ppp: socioData.gdp_per_capita_ppp,
       hdi: socioData.hdi,
