@@ -14,6 +14,7 @@ export interface YearData {
     wind: Generation;
     solar: Generation;
     bioenergy: Generation;
+    other_renewables: Generation;
     other_fossil: Generation;
   };
   aggregates: {
@@ -65,6 +66,7 @@ export type EnergySource =
   | 'wind'
   | 'solar'
   | 'bioenergy'
+  | 'other_renewables'
   | 'other_fossil';
 
 // Fossil fuel independence data types

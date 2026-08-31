@@ -81,7 +81,7 @@ function main() {
 
   // Source figures must add up to the reported total, or the choropleth and the
   // energy mix chart will disagree with each other.
-  const SOURCES = ['coal','gas','nuclear','hydro','wind','solar','bioenergy','other_fossil'];
+  const SOURCES = ['coal','gas','nuclear','hydro','wind','solar','bioenergy','other_renewables','other_fossil'];
   let sumMismatches = 0;
   for (const [iso, c] of Object.entries(countries)) {
     const ly = latestYear(c);

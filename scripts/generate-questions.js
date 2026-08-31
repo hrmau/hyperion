@@ -70,7 +70,8 @@ function independenceScore(yearData, fossilData, iso3) {
   const pct = (twh) => ((twh || 0) / denominator) * 100;
 
   const renewablePct =
-    pct(gen.hydro?.twh) + pct(gen.wind?.twh) + pct(gen.solar?.twh) + pct(gen.bioenergy?.twh);
+    pct(gen.hydro?.twh) + pct(gen.wind?.twh) + pct(gen.solar?.twh) + pct(gen.bioenergy?.twh) +
+    pct(gen.other_renewables?.twh);
   const nuclearPct = pct(gen.nuclear?.twh);
   const coalPct = pct(gen.coal?.twh);
   const gasPct = pct(gen.gas?.twh);

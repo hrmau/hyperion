@@ -40,14 +40,25 @@ BLOC_MEMBERSHIPS = {
     'ASEAN': ['BRN', 'KHM', 'IDN', 'LAO', 'MYS', 'MMR', 'PHL', 'SGP', 'THA', 'VNM'],
 }
 
-# Column mappings from OWID to our internal structure
-# For backwards compatibility, we map to the 8 sources the frontend expects:
-# coal, gas, nuclear, hydro, wind, solar, bioenergy, other_fossil
+# Column mappings from OWID to our internal structure.
+# Nine sources: coal, gas, nuclear, hydro, wind, solar, bioenergy,
+# other_renewables, other_fossil
 #
 # OWID has: coal, gas, oil, nuclear, hydro, wind, solar, biofuel, other_renewables
 # Mapping:
 #   - oil → other_fossil (Ember's "other_fossil" was primarily oil)
-#   - other_renewables (geothermal, etc.) → added to bioenergy for backwards compat
+#
+# other_renewables used to be folded into bioenergy "for backwards compat". It is
+# a separate source now, because the two are not the same thing and the country
+# pages state sources in sentences rather than drawing them as an unlabelled
+# band. Folded together, Kenya reads as 48% bioenergy when it is overwhelmingly
+# geothermal; so do Iceland (29%), New Zealand (23%) and the Philippines (9%).
+#
+# OWID publishes no geothermal column — other_renewable_exc_biofuel is
+# geothermal plus wave/tidal — so this source is NOT named "geothermal". Calling
+# it that would swap one false claim for another. Charts still draw the two as
+# one "Other" band (see SOURCE_TO_FUEL in lib/fuels.ts), so no published figure
+# moves; only the data gains the distinction.
 
 # Generation TWh columns
 GEN_TWH_COLS = {
@@ -58,6 +69,7 @@ GEN_TWH_COLS = {
     'wind': 'wind_electricity',
     'solar': 'solar_electricity',
     'bioenergy': 'biofuel_electricity',
+    'other_renewables': 'other_renewable_exc_biofuel_electricity',
     'other_fossil': 'oil_electricity',  # Oil maps to other_fossil
 }
 
@@ -70,6 +82,7 @@ GEN_PCT_COLS = {
     'wind': 'wind_share_elec',
     'solar': 'solar_share_elec',
     'bioenergy': 'biofuel_share_elec',
+    'other_renewables': 'other_renewables_share_elec_exc_biofuel',
     'other_fossil': 'oil_share_elec',
 }
 
@@ -168,7 +181,8 @@ def transform_row(row: dict) -> dict | None:
     """Transform a single CSV row into our year data structure.
 
     Output structure matches the existing frontend expectations:
-    - generation: { coal, gas, nuclear, hydro, wind, solar, bioenergy, other_fossil }
+    - generation: { coal, gas, nuclear, hydro, wind, solar, bioenergy,
+                    other_renewables, other_fossil }
     - aggregates: { clean_pct, fossil_pct, renewables_pct, wind_solar_pct }
     - emissions: { total_mtco2 }
     """
@@ -177,19 +191,13 @@ def transform_row(row: dict) -> dict | None:
     if total_gen is None:
         return None
 
-    # Build generation dict with 8 sources for backwards compat
+    # Build generation dict
     generation = {}
     for source_key, twh_col in GEN_TWH_COLS.items():
         twh = parse_float(row.get(twh_col)) or 0.0
         pct_col = GEN_PCT_COLS[source_key]
         pct = parse_float(row.get(pct_col)) or 0.0
         generation[source_key] = {'twh': twh, 'pct': pct}
-
-    # Add other_renewables (geothermal etc) to bioenergy for backwards compat
-    other_ren_twh = parse_float(row.get('other_renewable_exc_biofuel_electricity')) or 0.0
-    other_ren_pct = parse_float(row.get('other_renewables_share_elec_exc_biofuel')) or 0.0
-    generation['bioenergy']['twh'] = round(generation['bioenergy']['twh'] + other_ren_twh, 2)
-    generation['bioenergy']['pct'] = round(generation['bioenergy']['pct'] + other_ren_pct, 2)
 
     # Get aggregate percentages from OWID (pre-calculated)
     fossil_pct = parse_float(row.get('fossil_share_elec')) or 0.0
@@ -467,7 +475,7 @@ def main():
             yd = country['years']['2023']
             source_sum = sum(
                 yd['generation'][s]['twh']
-                for s in ['coal', 'gas', 'nuclear', 'hydro', 'wind', 'solar', 'bioenergy', 'other_fossil']
+                for s in ['coal', 'gas', 'nuclear', 'hydro', 'wind', 'solar', 'bioenergy', 'other_renewables', 'other_fossil']
             )
             total = yd['total_generation_twh']
             diff_pct = abs(source_sum - total) / total * 100 if total > 0 else 0
