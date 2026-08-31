@@ -110,6 +110,40 @@
   }
   .gg-nav-items > * { flex: 1; text-align: center; min-height: 44px; display: grid; place-items: center }
   .gg-page { padding-bottom: 72px }
+
+  /* Filter strips become one horizontally scrollable line.
+     .gg-scroll-row supplies the overflow but nothing stopped it wrapping, so a
+     13-pill bloc filter sharing a line with a segmented control collapsed to a
+     211px column ten rows deep. On a narrow screen a taxonomy strip should be a
+     strip: full width, one line, swipeable, bleeding to the screen edges so it
+     is visibly scrollable.
+
+     .gg-nav-items is excluded — it is a .gg-scroll-row too, and at this width it
+     is the fixed bottom bar, whose children must stay flexible. */
+  .gg-scroll-row:not(.gg-nav-items) {
+    flex-wrap: nowrap !important;
+    /* The basis absorbs both gutters the negative margins give back, or the
+       strip shifts left without widening and dead-ends short of the edge. */
+    flex: 0 0 calc(100% + var(--gutter) * 2) !important;
+    margin-inline: calc(var(--gutter) * -1) !important;
+    padding-inline: var(--gutter) !important;
+  }
+  .gg-scroll-row:not(.gg-nav-items) > * { flex: none !important }
+
+  /* "Hover a country" is not an instruction you can follow on a touch screen. */
+  .gg-hover-hint { display: none !important }
+
+  /* The measure switch is inline-flex with nowrap labels, so at ~320px it ran
+     past the right edge with no way to reach the last option. Let it shrink and
+     scroll in place — it keeps its pill border, so it must not bleed like the
+     strips above. */
+  .gg-measure-switch {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .gg-measure-switch::-webkit-scrollbar { display: none }
 }
 
 
@@ -168,4 +202,39 @@
      padding could never apply. A narrow EMBED keeps the scrollable nav row;
      a narrow DEVICE gets the bottom bar from the @media half above. */
   .gg-nav { padding: 14px var(--gutter) !important }
+
+  /* Filter strips become one horizontally scrollable line.
+     .gg-scroll-row supplies the overflow but nothing stopped it wrapping, so a
+     13-pill bloc filter sharing a line with a segmented control collapsed to a
+     211px column ten rows deep. On a narrow screen a taxonomy strip should be a
+     strip: full width, one line, swipeable, bleeding to the screen edges so it
+     is visibly scrollable.
+
+     .gg-nav-items is excluded — it is a .gg-scroll-row too, and at this width it
+     is the fixed bottom bar, whose children must stay flexible. */
+  .gg-scroll-row:not(.gg-nav-items) {
+    flex-wrap: nowrap !important;
+    /* The basis absorbs both gutters the negative margins give back, or the
+       strip shifts left without widening and dead-ends short of the edge. */
+    flex: 0 0 calc(100% + var(--gutter) * 2) !important;
+    margin-inline: calc(var(--gutter) * -1) !important;
+    padding-inline: var(--gutter) !important;
+  }
+  .gg-scroll-row:not(.gg-nav-items) > * { flex: none !important }
+
+  /* "Hover a country" is not an instruction you can follow on a touch screen. */
+  .gg-hover-hint { display: none !important }
+
+  /* The measure switch is inline-flex with nowrap labels, so at ~320px it ran
+     past the right edge with no way to reach the last option. Let it shrink and
+     scroll in place — it keeps its pill border, so it must not bleed like the
+     strips above. */
+  .gg-measure-switch {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .gg-measure-switch::-webkit-scrollbar { display: none }
+
 }
