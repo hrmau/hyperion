@@ -212,9 +212,17 @@ def transform_row(row: dict) -> dict | None:
     ghg = parse_float(row.get('greenhouse_gas_emissions'))
 
     # Build backwards-compatible year data structure
+    # Population, for per-capita facts and rankings.
+    #
+    # None, never 0. A missing population must not read as an empty country: it
+    # would divide to infinity and rank that country first on every per-capita
+    # measure. Same discipline as the null-vs-zero rule in the fossil fuel file.
+    population = parse_float(row.get('population'))
+
     year_data = {
         'demand_twh': demand_twh if demand_twh is not None else total_gen,
         'total_generation_twh': total_gen,
+        'population': population,
         'generation': generation,
         'aggregates': {
             'clean_pct': low_carbon_pct,
@@ -230,72 +238,79 @@ def transform_row(row: dict) -> dict | None:
     return year_data
 
 
-def get_continent(country_name: str) -> str:
-    """Map country to continent (simplified mapping)."""
-    # This is a simplified mapping - in production, use a proper library
-    CONTINENT_MAP = {
-        # Europe
-        'Albania': 'Europe', 'Austria': 'Europe', 'Belgium': 'Europe', 'Bosnia and Herzegovina': 'Europe',
-        'Bulgaria': 'Europe', 'Croatia': 'Europe', 'Cyprus': 'Europe', 'Czechia': 'Europe',
-        'Denmark': 'Europe', 'Estonia': 'Europe', 'Finland': 'Europe', 'France': 'Europe',
-        'Germany': 'Europe', 'Greece': 'Europe', 'Hungary': 'Europe', 'Iceland': 'Europe',
-        'Ireland': 'Europe', 'Italy': 'Europe', 'Kosovo': 'Europe', 'Latvia': 'Europe',
-        'Lithuania': 'Europe', 'Luxembourg': 'Europe', 'Malta': 'Europe', 'Moldova': 'Europe',
-        'Montenegro': 'Europe', 'Netherlands': 'Europe', 'North Macedonia': 'Europe', 'Norway': 'Europe',
-        'Poland': 'Europe', 'Portugal': 'Europe', 'Romania': 'Europe', 'Serbia': 'Europe',
-        'Slovakia': 'Europe', 'Slovenia': 'Europe', 'Spain': 'Europe', 'Sweden': 'Europe',
-        'Switzerland': 'Europe', 'Ukraine': 'Europe', 'United Kingdom': 'Europe',
-        # Asia
-        'Armenia': 'Asia', 'Azerbaijan': 'Asia', 'Bahrain': 'Asia', 'Bangladesh': 'Asia',
-        'Brunei': 'Asia', 'Cambodia': 'Asia', 'China': 'Asia', 'Georgia': 'Asia',
-        'Hong Kong': 'Asia', 'India': 'Asia', 'Indonesia': 'Asia', 'Iran': 'Asia',
-        'Iraq': 'Asia', 'Israel': 'Asia', 'Japan': 'Asia', 'Jordan': 'Asia',
-        'Kazakhstan': 'Asia', 'Kuwait': 'Asia', 'Kyrgyzstan': 'Asia', 'Laos': 'Asia',
-        'Lebanon': 'Asia', 'Malaysia': 'Asia', 'Mongolia': 'Asia', 'Myanmar': 'Asia',
-        'Nepal': 'Asia', 'North Korea': 'Asia', 'Oman': 'Asia', 'Pakistan': 'Asia',
-        'Palestine': 'Asia', 'Philippines': 'Asia', 'Qatar': 'Asia', 'Russia': 'Asia',
-        'Saudi Arabia': 'Asia', 'Singapore': 'Asia', 'South Korea': 'Asia', 'Sri Lanka': 'Asia',
-        'Syria': 'Asia', 'Taiwan': 'Asia', 'Tajikistan': 'Asia', 'Thailand': 'Asia',
-        'Timor': 'Asia', 'Turkey': 'Asia', 'Turkmenistan': 'Asia', 'United Arab Emirates': 'Asia',
-        'Uzbekistan': 'Asia', 'Vietnam': 'Asia', 'Yemen': 'Asia',
-        # Africa
-        'Algeria': 'Africa', 'Angola': 'Africa', 'Benin': 'Africa', 'Botswana': 'Africa',
-        'Cameroon': 'Africa', 'Democratic Republic of Congo': 'Africa', 'Egypt': 'Africa',
-        'Eritrea': 'Africa', 'Ethiopia': 'Africa', 'Gabon': 'Africa', 'Ghana': 'Africa',
-        'Kenya': 'Africa', 'Libya': 'Africa', 'Mauritius': 'Africa', 'Morocco': 'Africa',
-        'Mozambique': 'Africa', 'Namibia': 'Africa', 'Niger': 'Africa', 'Nigeria': 'Africa',
-        'Republic of Congo': 'Africa', 'Senegal': 'Africa', 'South Africa': 'Africa',
-        'Sudan': 'Africa', 'Tanzania': 'Africa', 'Togo': 'Africa', 'Tunisia': 'Africa',
-        'Zambia': 'Africa', 'Zimbabwe': 'Africa', 'Cote d\'Ivoire': 'Africa',
-        # North America
-        'Canada': 'North America', 'Costa Rica': 'North America', 'Cuba': 'North America',
-        'Dominican Republic': 'North America', 'El Salvador': 'North America', 'Guatemala': 'North America',
-        'Haiti': 'North America', 'Honduras': 'North America', 'Jamaica': 'North America',
-        'Mexico': 'North America', 'Nicaragua': 'North America', 'Panama': 'North America',
-        'Trinidad and Tobago': 'North America', 'United States': 'North America',
-        # South America
-        'Argentina': 'South America', 'Bolivia': 'South America', 'Brazil': 'South America',
-        'Chile': 'South America', 'Colombia': 'South America', 'Ecuador': 'South America',
-        'Paraguay': 'South America', 'Peru': 'South America', 'Uruguay': 'South America',
-        'Venezuela': 'South America',
-        # Oceania
-        'Australia': 'Oceania', 'New Zealand': 'Oceania',
-    }
-    return CONTINENT_MAP.get(country_name, 'Unknown')
+# ISO3 -> continent, covering every country in the dataset.
+#
+# This was keyed by country name and covered ~138 of 214, so 76 countries fell
+# through to 'Unknown'/'Other' — Belarus, Bhutan, Uganda, Fiji, Mali and 71
+# others. They are the long tail, and they are exactly the countries that need a
+# regional comparison most: "3rd in East Africa" is a fact, "147th of 214" is
+# not. Keyed by ISO3 now, because names drift and codes do not.
+_CONTINENT_GROUPS = {
+    'Africa': [
+        'AGO', 'BDI', 'BEN', 'BFA', 'BWA', 'CAF', 'CIV', 'CMR', 'COD', 'COG',
+        'COM', 'CPV', 'DJI', 'DZA', 'EGY', 'ERI', 'ESH', 'ETH', 'GAB', 'GHA',
+        'GIN', 'GMB', 'GNB', 'GNQ', 'KEN', 'LBR', 'LBY', 'LSO', 'MAR', 'MDG',
+        'MLI', 'MOZ', 'MRT', 'MUS', 'MWI', 'NAM', 'NER', 'NGA', 'REU', 'RWA',
+        'SDN', 'SEN', 'SHN', 'SLE', 'SOM', 'SSD', 'STP', 'SWZ', 'SYC', 'TCD',
+        'TGO', 'TUN', 'TZA', 'UGA', 'ZAF', 'ZMB', 'ZWE',
+    ],
+    'Asia': [
+        'AFG', 'ARE', 'ARM', 'AZE', 'BGD', 'BHR', 'BRN', 'BTN', 'CHN', 'GEO',
+        'HKG', 'IDN', 'IND', 'IRN', 'IRQ', 'ISR', 'JOR', 'JPN', 'KAZ', 'KGZ',
+        'KHM', 'KOR', 'KWT', 'LAO', 'LBN', 'LKA', 'MAC', 'MDV', 'MMR', 'MNG',
+        'MYS', 'NPL', 'OMN', 'PAK', 'PHL', 'PRK', 'PSE', 'QAT', 'RUS', 'SAU',
+        'SGP', 'SYR', 'THA', 'TJK', 'TKM', 'TLS', 'TUR', 'TWN', 'UZB', 'VNM',
+        'YEM',
+    ],
+    'Europe': [
+        'ALB', 'AUT', 'BEL', 'BGR', 'BIH', 'BLR', 'CHE', 'CYP', 'CZE', 'DEU',
+        'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'FRO', 'GBR', 'GIB', 'GRC', 'HRV',
+        'HUN', 'IRL', 'ISL', 'ITA', 'LTU', 'LUX', 'LVA', 'MDA', 'MKD', 'MLT',
+        'MNE', 'NLD', 'NOR', 'POL', 'PRT', 'ROU', 'SRB', 'SVK', 'SVN', 'SWE',
+        'UKR',
+    ],
+    'North America': [
+        'ABW', 'ATG', 'BHS', 'BLZ', 'BMU', 'BRB', 'CAN', 'CRI', 'CUB', 'CYM',
+        'DMA', 'DOM', 'GLP', 'GRD', 'GRL', 'GTM', 'HND', 'HTI', 'JAM', 'KNA',
+        'LCA', 'MEX', 'MSR', 'MTQ', 'NIC', 'PAN', 'PRI', 'SLV', 'SPM', 'TCA',
+        'TTO', 'USA', 'VCT', 'VGB', 'VIR',
+    ],
+    'South America': [
+        'ARG', 'BOL', 'BRA', 'CHL', 'COL', 'ECU', 'FLK', 'GUF', 'GUY', 'PER',
+        'PRY', 'SUR', 'URY', 'VEN',
+    ],
+    'Oceania': [
+        'ASM', 'AUS', 'COK', 'FJI', 'GUM', 'KIR', 'NCL', 'NIU', 'NRU', 'NZL',
+        'PNG', 'PYF', 'SLB', 'TON', 'VUT', 'WSM',
+    ],
+}
+
+CONTINENT_BY_ISO3 = {
+    iso: continent
+    for continent, isos in _CONTINENT_GROUPS.items()
+    for iso in isos
+}
+
+# Ember region. Only the northern set stays "North America": a region named
+# "Latin America and Caribbean" that contains neither Latin America nor the
+# Caribbean is not a region, and ranking Cuba against the United States is how
+# you generate a fact nobody believes.
+_NORTH_AMERICA = {'USA', 'CAN', 'BMU', 'GRL', 'SPM'}
 
 
-def get_region(country_name: str) -> str:
-    """Map country to Ember region (simplified)."""
-    continent = get_continent(country_name)
-    REGION_MAP = {
-        'Europe': 'Europe',
-        'Asia': 'Asia',
-        'Africa': 'Africa',
-        'North America': 'North America',
-        'South America': 'Latin America and Caribbean',
-        'Oceania': 'Oceania',
-    }
-    return REGION_MAP.get(continent, 'Other')
+def get_continent(iso3: str) -> str:
+    """Continent for an ISO3 code. 'Unknown' means the table needs updating."""
+    return CONTINENT_BY_ISO3.get(iso3, 'Unknown')
+
+
+def get_region(iso3: str) -> str:
+    """Ember analytic region for an ISO3 code."""
+    continent = get_continent(iso3)
+    if continent == 'South America':
+        return 'Latin America and Caribbean'
+    if continent == 'North America':
+        return 'North America' if iso3 in _NORTH_AMERICA else 'Latin America and Caribbean'
+    return continent if continent != 'Unknown' else 'Other'
 
 
 def main():
@@ -383,8 +398,8 @@ def main():
                 countries[iso_code] = {
                     'name': country_name,
                     'iso3': iso_code,
-                    'continent': get_continent(country_name),
-                    'emberRegion': get_region(country_name),
+                    'continent': get_continent(iso_code),
+                    'emberRegion': get_region(iso_code),
                     'blocs': get_blocs_for_country(iso_code),  # Populate from our bloc definitions
                     'years': {},
                 }

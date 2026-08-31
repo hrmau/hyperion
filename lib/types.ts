@@ -6,6 +6,12 @@ export interface Generation {
 export interface YearData {
   demand_twh: number;
   total_generation_twh: number;
+  /**
+   * Population for this country-year, from OWID. `null` where OWID does not
+   * report it — never 0, which would divide to infinity and put the country
+   * top of every per-capita ranking.
+   */
+  population: number | null;
   generation: {
     coal: Generation;
     gas: Generation;
