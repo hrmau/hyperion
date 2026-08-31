@@ -102,8 +102,13 @@ kind of fact nobody believes.
 
 Every country-year carries `population` from OWID. It is `null`, never `0`, for
 the same reason the fossil file is: a zero divides to infinity and puts the
-country top of every per-capita ranking. See docs/backlog.md — this is a second
-population source alongside `socioeconomic.json`, and they disagree.
+country top of every per-capita ranking.
+
+**Every per-capita figure divides by that field**, so the numerator and the
+denominator share a source and a year. `socioeconomic.json` still has a
+`population_millions` column and nothing reads it — it is rounded to 0.1m, which
+is a ±9% error for Malta on its own, and it is a 2023 snapshot. That file is
+still the source for GDP PPP, HDI and life expectancy. See docs/backlog.md.
 
 **`bioenergy` and `other_renewables` are separate sources, and must stay that
 way.** The transform used to fold OWID's `other_renewable_exc_biofuel` into
