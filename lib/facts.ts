@@ -95,6 +95,8 @@ export interface NeighbourLink {
   iso3: string;
   name: string;
   headline: string;
+  /** Clean share, so a card can say how the two actually differ. */
+  cleanPct: number | null;
 }
 
 /**
@@ -149,11 +151,16 @@ export const loadNeighbours = cache(
           Math.abs(Math.log10(b.out + 0.01) - Math.log10(mine + 0.01))
       )
       .slice(0, limit)
-      .map((x) => ({
-        iso3: x.iso3,
-        name: facts[x.iso3].name,
-        headline: facts[x.iso3].hero.headline,
-      }));
+      .map((x) => {
+        const f = facts[x.iso3];
+        const yd = countries[x.iso3]?.years[String(f.year)];
+        return {
+          iso3: x.iso3,
+          name: f.name,
+          headline: f.hero.headline,
+          cleanPct: yd ? yd.aggregates.clean_pct : null,
+        };
+      });
   }
 );
 
@@ -293,6 +300,38 @@ export const loadHomeView = cache(async (key: string): Promise<HomeView | null> 
     peer,
     profilePath: `/country/${facts.iso3.toLowerCase()}`,
     neighbours: await loadNeighbours(facts.iso3, 3),
+  };
+});
+
+export interface HomeQuestion {
+  prompt: string;
+  a: { iso3: string; name: string };
+  b: { iso3: string; name: string };
+  aboutYou: boolean;
+}
+
+/**
+ * A Higher-or-Lower question for the homepage card.
+ *
+ * Prefers one the visitor's own country is in — only about a third of countries
+ * appear in the 56-question bank, so most visitors get a general one, and it
+ * prefers the questions the generator marked surprising because a card that
+ * gives itself away is not worth clicking.
+ */
+export const loadHomeQuestion = cache(async (iso3: string | null): Promise<HomeQuestion | null> => {
+  const all = await readJSON<
+    { id: string; prompt: string; surprising?: boolean; a: { iso3: string; name: string }; b: { iso3: string; name: string } }[]
+  >('questions.json');
+  if (!all.length) return null;
+
+  const mine = iso3 ? all.filter((q) => q.a.iso3 === iso3 || q.b.iso3 === iso3) : [];
+  const pool = mine.length ? mine : all.filter((q) => q.surprising) || all;
+  const chosen = (pool.length ? pool : all)[0];
+  return {
+    prompt: chosen.prompt,
+    a: { iso3: chosen.a.iso3, name: chosen.a.name },
+    b: { iso3: chosen.b.iso3, name: chosen.b.name },
+    aboutYou: mine.length > 0,
   };
 });
 

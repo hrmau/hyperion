@@ -297,7 +297,9 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
             <p
               style={{
                 margin: 0,
-                maxWidth: '18ch',
+                // No ch cap — the column is already half the page, and capping
+                // the measure on top of that left the headline in a narrow
+                // ribbon with most of its own column empty beside it.
                 fontSize: 'var(--fs-h2)',
                 fontWeight: 'var(--fw-bold)',
                 letterSpacing: 'var(--ls-h2)',
@@ -312,7 +314,7 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
               <p
                 style={{
                   margin: 'var(--space-6) 0 0',
-                  maxWidth: '46ch',
+                  maxWidth: '52ch',
                   fontSize: 'var(--fs-body-lg)',
                   lineHeight: 'var(--lh-body)',
                   color: 'var(--text-secondary)',

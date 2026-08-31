@@ -18,7 +18,8 @@ import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
 import { RankedBarList } from '@/components/ds/data/RankedBarList';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
-import { loadHomeView, loadSwitcherIndex, publishableIso3 } from '@/lib/facts';
+import { loadHomeView, loadSwitcherIndex, loadHomeQuestion, publishableIso3 } from '@/lib/facts';
+import { theName, subjectName, possessiveName } from '@/lib/countryNames';
 
 /**
  * The homepage, one variant per country plus the world.
@@ -56,6 +57,23 @@ export async function generateMetadata(): Promise<Metadata> {
 const num = (n: number, dp = 0) =>
   n.toLocaleString('en-GB', { minimumFractionDigits: dp, maximumFractionDigits: dp });
 
+/** "H3 25px — card claims", per the display type card in the design system. */
+const claimStyle = {
+  margin: 0,
+  fontSize: 'var(--fs-h3)',
+  fontWeight: 'var(--fw-bold)' as const,
+  letterSpacing: 'var(--ls-h3)',
+  lineHeight: 'var(--lh-h3)',
+  textWrap: 'pretty' as const,
+};
+
+const supportStyle = {
+  margin: 'var(--space-4) 0 var(--space-6)',
+  fontSize: 'var(--fs-ui)',
+  color: 'var(--text-secondary)',
+  lineHeight: 'var(--lh-body)',
+};
+
 const panelLabelStyle = {
   fontFamily: 'var(--font-mono)',
   fontSize: 'var(--fs-mono-xs)',
@@ -77,6 +95,8 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
     ? (view.data.total_generation_twh * 1e9) / view.data.population
     : null;
   const isWorld = view.key === 'WORLD';
+  const question = await loadHomeQuestion(view.iso3);
+  const named = theName(view.name);
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -124,7 +144,9 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
             <h1
               style={{
                 margin: 0,
-                maxWidth: '18ch',
+                // No ch cap. The column is already half the page; capping the
+                // measure on top of that left the headline in a narrow ribbon
+                // with most of its own column empty beside it.
                 fontSize: 'var(--fs-h1)',
                 fontWeight: 'var(--fw-bold)',
                 letterSpacing: 'var(--ls-h1)',
@@ -139,7 +161,7 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
               <p
                 style={{
                   margin: 'var(--space-6) 0 0',
-                  maxWidth: '46ch',
+                  maxWidth: '52ch',
                   fontSize: 'var(--fs-body-lg)',
                   lineHeight: 'var(--lh-body)',
                   color: 'var(--text-secondary)',
@@ -254,63 +276,121 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
               gap: 'var(--space-5)',
+              alignItems: 'stretch',
             }}
           >
-            <Card>
-              <Eyebrow tone="accent" style={{ marginBottom: 'var(--space-4)' }}>
+            {/* The accent card. Green is "the one thing to click", so exactly
+                one of the three carries it, and it is the one that asks
+                something rather than telling you something. */}
+            <Card tone="accent" style={{ display: 'flex', flexDirection: 'column' }}>
+              <Eyebrow style={{ marginBottom: 'var(--space-4)', color: 'var(--green-ink)', opacity: 0.75 }}>
                 Higher or lower
               </Eyebrow>
-              <p style={{ margin: 0, fontSize: 'var(--fs-body-lg)', fontWeight: 'var(--fw-medium)' }}>
-                Two grids, one question. Most people do worse than they expect.
-              </p>
-              <p style={{ margin: 'var(--space-4) 0 var(--space-5)', fontSize: 'var(--fs-ui)', color: 'var(--text-secondary)' }}>
-                Guess which country gets more of its power from wind, coal or the sun.
-              </p>
-              <Link href="/play" style={{ color: 'var(--green)', fontSize: 'var(--fs-ui)' }}>
-                Play a round →
-              </Link>
+              {question ? (
+                <>
+                  <p style={{ ...claimStyle, color: 'var(--green-ink)' }}>{question.prompt}</p>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: 'var(--space-3)',
+                      margin: 'var(--space-6) 0 var(--space-4)',
+                    }}
+                  >
+                    {[question.a, question.b].map((side) => (
+                      <Link
+                        key={side.iso3}
+                        href="/play"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 'var(--space-3)',
+                          padding: '10px 12px',
+                          borderRadius: 'var(--r-pill)',
+                          background: 'var(--green-ink)',
+                          color: 'var(--green)',
+                          fontSize: 'var(--fs-ui)',
+                          fontWeight: 'var(--fw-medium)',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <FlagImg iso3={side.iso3} size={16} />
+                        {side.name}
+                      </Link>
+                    ))}
+                  </div>
+                  <p style={{ margin: 0, fontSize: 'var(--fs-ui)', color: 'var(--green-ink)', opacity: 0.8 }}>
+                    {question.aboutYou
+                      ? `Pick one — it is your grid on the line.`
+                      : `Pick one and see how many you get right.`}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p style={{ ...claimStyle, color: 'var(--green-ink)' }}>
+                    Two grids, one question. Most people do worse than they expect.
+                  </p>
+                  <Link
+                    href="/play"
+                    style={{ marginTop: 'auto', color: 'var(--green-ink)', fontSize: 'var(--fs-ui)', fontWeight: 'var(--fw-medium)' }}
+                  >
+                    Play a round →
+                  </Link>
+                </>
+              )}
             </Card>
 
             {view.neighbours[0] ? (
-              <Card>
+              <Card style={{ display: 'flex', flexDirection: 'column' }}>
                 <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>Your neighbours</Eyebrow>
-                <p style={{ margin: 0, fontSize: 'var(--fs-body-lg)', fontWeight: 'var(--fw-medium)' }}>
-                  {view.neighbours[0].headline}
+                {/* Leads with how the two DIFFER, not with a fact about the
+                    neighbour. "Thailand is third in Asia for bioenergy" under a
+                    heading that says "your neighbours" leaves a reader in the
+                    UAE wondering why they are being told that. */}
+                <p style={claimStyle}>
+                  {view.neighbours[0].cleanPct != null
+                    ? `${subjectName(view.neighbours[0].name)} runs a grid the size of ${possessiveName(view.name)}, and ${Math.round(view.neighbours[0].cleanPct)}% of it is clean against ${Math.round(view.data.aggregates.clean_pct)}%.`
+                    : `${subjectName(view.neighbours[0].name)} runs a grid about the size of ${possessiveName(view.name)}.`}
                 </p>
-                <p style={{ margin: 'var(--space-4) 0 var(--space-5)', fontSize: 'var(--fs-ui)', color: 'var(--text-secondary)' }}>
-                  {view.neighbours[0].name} runs a grid about the size of {view.name}&rsquo;s.
-                </p>
+                <p style={supportStyle}>{view.neighbours[0].headline}</p>
                 <Link
                   href={`/compare?a=${view.key}&b=${view.neighbours[0].iso3}`}
-                  style={{ color: 'var(--green)', fontSize: 'var(--fs-ui)' }}
+                  style={{ marginTop: 'auto', color: 'var(--green)', fontSize: 'var(--fs-ui)' }}
                 >
                   Compare them →
                 </Link>
               </Card>
             ) : (
-              <Card>
+              <Card style={{ display: 'flex', flexDirection: 'column' }}>
                 <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>Side by side</Eyebrow>
-                <p style={{ margin: 0, fontSize: 'var(--fs-body-lg)', fontWeight: 'var(--fw-medium)' }}>
-                  France against Germany is the argument that never ends.
-                </p>
-                <p style={{ margin: 'var(--space-4) 0 var(--space-5)', fontSize: 'var(--fs-ui)', color: 'var(--text-secondary)' }}>
+                <p style={claimStyle}>France against Germany is the argument that never ends.</p>
+                <p style={supportStyle}>
                   One bet on nuclear, one on renewables and coal. Here is the tape.
                 </p>
-                <Link href="/compare?a=FRA&b=DEU" style={{ color: 'var(--green)', fontSize: 'var(--fs-ui)' }}>
+                <Link
+                  href="/compare?a=FRA&b=DEU"
+                  style={{ marginTop: 'auto', color: 'var(--green)', fontSize: 'var(--fs-ui)' }}
+                >
                   Settle it →
                 </Link>
               </Card>
             )}
 
-            <Card>
+            <Card style={{ display: 'flex', flexDirection: 'column' }}>
               <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>The world</Eyebrow>
-              <p style={{ margin: 0, fontSize: 'var(--fs-body-lg)', fontWeight: 'var(--fw-medium)' }}>
+              <p style={claimStyle}>
                 Every country on Earth, coloured by what keeps its lights on.
               </p>
-              <p style={{ margin: 'var(--space-4) 0 var(--space-5)', fontSize: 'var(--fs-ui)', color: 'var(--text-secondary)' }}>
-                Zoom out to all 214 grids and see where {view.name} actually sits.
+              <p style={supportStyle}>
+                {isWorld
+                  ? 'Zoom out to all 214 grids and see how unevenly the world is wired.'
+                  : `Zoom out to all 214 grids and see where ${named} actually sits.`}
               </p>
-              <Link href="/explore" style={{ color: 'var(--green)', fontSize: 'var(--fs-ui)' }}>
+              <Link
+                href="/explore"
+                style={{ marginTop: 'auto', color: 'var(--green)', fontSize: 'var(--fs-ui)' }}
+              >
                 Open the map →
               </Link>
             </Card>
@@ -328,8 +408,8 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
               }}
             >
               <FlagImg iso3={view.iso3} size={16} />
-              Location detected from your connection, never stored. Your choice of country is kept
-              on this device only.
+              Location detected from your connection, never stored. Your choice of country is
+              kept on this device only.
             </p>
           )}
         </section>
