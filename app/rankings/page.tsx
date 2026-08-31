@@ -380,7 +380,7 @@ export default function RankingsPage() {
                     >
                       Compare
                     </Button>
-                    <Button as={Link} href="/" variant="ghost" size="sm">
+                    <Button as={Link} href="/explore" variant="ghost" size="sm">
                       See on map
                     </Button>
                   </div>

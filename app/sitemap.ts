@@ -4,8 +4,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://gridgorilla.app'
 
   return [
+    // `/` is intentionally absent while it redirects to /explore — a URL that
+    // 307s does not belong in a sitemap. It returns at priority 1 with the
+    // homepage.
     {
-      url: baseUrl,
+      url: `${baseUrl}/explore`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,

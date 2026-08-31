@@ -19,7 +19,7 @@ export interface NavLink {
 
 /** Primary nav — desktop header and the top block of the mobile menu. */
 export const primaryNavItems: { key: NavItem; label: string; href: string }[] = [
-  { key: 'explore', label: 'Explore', href: '/' },
+  { key: 'explore', label: 'Explore', href: '/explore' },
   { key: 'play', label: 'Play', href: '/play' },
   { key: 'compare', label: 'Compare', href: '/compare' },
   { key: 'rankings', label: 'Rankings', href: '/rankings' },
