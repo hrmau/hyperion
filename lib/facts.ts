@@ -98,70 +98,74 @@ export interface NeighbourLink {
   headline: string;
   /** Clean share, so a card can say how the two actually differ. */
   cleanPct: number | null;
+  /** True when the two share a land border, rather than merely being near. */
+  borders: boolean;
 }
 
+interface Adjacency {
+  borders: string[];
+  nearest: string[];
+}
+
+const loadAdjacency = cache(async (): Promise<Record<string, Adjacency>> =>
+  readJSON<Record<string, Adjacency>>('neighbours.json')
+);
+
 /**
- * Other grids in the same region, closest in size.
+ * A country's actual neighbours.
  *
- * These links are the point of the set, not decoration. Two hundred pages that
- * only link back to /explore are two hundred orphans, and a crawler has no
- * reason to walk them. Neighbours are chosen by proximity in total output rather
- * than alphabetically, so the comparison a reader clicks into is one worth
- * making.
+ * These used to be "the grids nearest in size within the same region", which
+ * made Thailand a neighbour of the United Arab Emirates, because Asia is a
+ * region. Adjacency now comes from shared arcs in the shipped TopoJSON, with a
+ * great-circle fallback for islands - see scripts/generate-neighbours.js.
+ *
+ * Land borders come first, because that is what the word means. Within them the
+ * order is by similarity of output, so the reader is offered the comparison
+ * worth making rather than the alphabetically first one, and nearest-by-distance
+ * tops up anyone short.
  */
 export const loadNeighbours = cache(
   async (iso3: string, limit = 5): Promise<NeighbourLink[]> => {
     const code = iso3.toUpperCase();
-    const [facts, countries] = await Promise.all([loadFacts(), loadCountriesServer()]);
-    const self = countries[code];
-    if (!self) return [];
-
-    const region = self.emberRegion;
-    if (!region || region === 'Other') return [];
+    const [facts, countries, adjacency] = await Promise.all([
+      loadFacts(),
+      loadCountriesServer(),
+      loadAdjacency(),
+    ]);
+    const adj = adjacency[code];
+    if (!adj) return [];
 
     const outputOf = (iso: string) => {
       const f = facts[iso];
       const yd = f && countries[iso]?.years[String(f.year)];
       return yd ? yd.total_generation_twh : null;
     };
-    // Falls back to the country's own latest year when it has no facts — the
-    // pageless ones still need somewhere to send a reader.
-    // Falls back to the country's own latest year, and then to zero. Zero is not
-    // a failure to find a size — Niue really does report no generation, and the
-    // right neighbours for it are the smallest grids in its region, which is
-    // exactly what a zero reference selects. Returning nothing here left the
-    // pageless countries as the dead ends this is meant to fix.
-    const mine =
-      outputOf(code) ??
-      (() => {
-        const ys = Object.keys(self.years).map(Number).sort((a, b) => b - a);
-        for (const y of ys) {
-          const d = self.years[String(y)];
-          if (d && d.total_generation_twh > 0) return d.total_generation_twh;
-        }
-        return 0;
-      })();
+    const mine = outputOf(code) ?? 0;
+    const closenessInSize = (iso: string) => {
+      const out = outputOf(iso);
+      return out == null
+        ? Number.POSITIVE_INFINITY
+        : Math.abs(Math.log10(out + 0.01) - Math.log10(mine + 0.01));
+    };
 
-    return Object.keys(facts)
-      .filter((i) => i !== code && countries[i]?.emberRegion === region)
-      .map((i) => ({ iso3: i, out: outputOf(i) }))
-      .filter((x): x is { iso3: string; out: number } => x.out != null)
-      .sort(
-        (a, b) =>
-          Math.abs(Math.log10(a.out + 0.01) - Math.log10(mine + 0.01)) -
-          Math.abs(Math.log10(b.out + 0.01) - Math.log10(mine + 0.01))
-      )
-      .slice(0, limit)
-      .map((x) => {
-        const f = facts[x.iso3];
-        const yd = countries[x.iso3]?.years[String(f.year)];
-        return {
-          iso3: x.iso3,
-          name: f.name,
-          headline: f.hero.headline,
-          cleanPct: yd ? yd.aggregates.clean_pct : null,
-        };
-      });
+    const publishable = (iso: string) => iso !== code && Boolean(facts[iso]);
+    const bordering = adj.borders
+      .filter(publishable)
+      .sort((a, b) => closenessInSize(a) - closenessInSize(b));
+    // `nearest` already arrives in distance order; keep it for the top-up.
+    const nearby = adj.nearest.filter((i) => publishable(i) && !bordering.includes(i));
+
+    return [...bordering, ...nearby].slice(0, limit).map((iso) => {
+      const f = facts[iso];
+      const yd = countries[iso]?.years[String(f.year)];
+      return {
+        iso3: iso,
+        name: f.name,
+        headline: f.hero.headline,
+        cleanPct: yd ? yd.aggregates.clean_pct : null,
+        borders: adj.borders.includes(iso),
+      };
+    });
   }
 );
 

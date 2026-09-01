@@ -121,11 +121,23 @@ export function formatPercent(value: number): string {
   return `${value.toFixed(1)}%`;
 }
 
+/**
+ * CO2e, not CO2.
+ *
+ * OWID's codebook calls this field "Lifecycle emissions from electricity
+ * generation", measured in "million tonnes CO2 equivalents" - so it counts
+ * methane and the rest of the lifecycle, not just carbon dioxide at the stack.
+ * The site printed "Mt CO2", which understated what the number covers.
+ *
+ * The difference is not academic. Turkmenistan's grid is 100% gas and still
+ * carries a higher intensity than most coal grids, because of what leaks before
+ * the gas is ever burned. Labelled as plain CO2 that reads as an error.
+ */
 export function formatEmissions(value: number): string {
   if (value >= 1000) {
-    return `${(value / 1000).toFixed(1)} Gt CO₂`;
+    return `${(value / 1000).toFixed(1)} Gt CO₂e`;
   }
-  return `${value.toFixed(1)} Mt CO₂`;
+  return `${value.toFixed(1)} Mt CO₂e`;
 }
 
 /** Same ramp, for the latest-per-country view. */

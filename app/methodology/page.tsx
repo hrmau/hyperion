@@ -196,6 +196,11 @@ export default function MethodologyPage() {
                     <li>• Annual data from 2000-present</li>
                     <li>• Electricity by source (coal, gas, nuclear, hydro, wind, solar, etc.)</li>
                     <li>• Demand, imports, and emissions data</li>
+                    <li>
+                      • Emissions are <strong>lifecycle CO&#8322;e</strong>, not stack CO&#8322;: they
+                      include methane and the rest of the lifecycle, which is why a
+                      gas-only grid can carry a higher intensity than a coal one
+                    </li>
                   </ul>
                 </div>
                 <div>

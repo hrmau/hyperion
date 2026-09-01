@@ -9,6 +9,7 @@
     "lint": "eslint",
     "generate-questions": "node scripts/generate-questions.js",
     "generate-facts": "node scripts/generate-facts.js",
+    "generate-neighbours": "node scripts/generate-neighbours.js",
     "fetch-data": "node scripts/fetch-owid.js",
     "transform-data": "python3 scripts/transform-owid.py",
     "check-data": "node scripts/check-data.js",

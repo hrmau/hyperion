@@ -11,6 +11,12 @@ interface CountrySelectProps {
   placeholder?: string;
 }
 
+/**
+ * Every control here clears the design system's 44px floor, which the
+ * accessibility card states applies "at every breakpoint - not just touch".
+ * The trigger, the search field and each option row were around 36px, which is
+ * a miss on a phone and a documented violation everywhere else.
+ */
 export default function CountrySelect({
   countries,
   value,
@@ -53,7 +59,7 @@ export default function CountrySelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-3 py-2 bg-inset border border-border rounded-lg text-sm text-left focus:outline-none focus:ring-1 focus:ring-border flex items-center justify-between gap-2"
+        className="w-full min-h-[44px] px-4 py-2.5 bg-inset border border-border rounded-lg text-sm text-left focus:outline-none focus:ring-1 focus:ring-border flex items-center justify-between gap-2"
       >
         <span className="flex items-center gap-2 min-w-0">
           {selectedCountry ? (
@@ -76,7 +82,7 @@ export default function CountrySelect({
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1 w-full bg-card border border-border rounded-lg shadow-lg max-h-64 overflow-hidden">
+        <div className="absolute z-50 mt-1 w-full bg-card border border-border rounded-lg shadow-lg max-h-80 overflow-hidden">
           <div className="p-2 border-b border-border">
             <input
               ref={inputRef}
@@ -84,12 +90,12 @@ export default function CountrySelect({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search countries..."
-              className="w-full px-2 py-1.5 bg-inset border border-border rounded text-sm text-primary placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-border"
+              className="w-full min-h-[44px] px-3 bg-inset border border-border rounded text-sm text-primary placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-border"
             />
           </div>
-          <div className="overflow-y-auto max-h-48">
+          <div className="overflow-y-auto max-h-60">
             {filtered.length === 0 ? (
-              <div className="px-3 py-2 text-sm text-muted">No countries found</div>
+              <div className="px-4 py-3 text-sm text-muted">No countries found</div>
             ) : (
               filtered.map(country => (
                 <button
@@ -100,7 +106,7 @@ export default function CountrySelect({
                     setIsOpen(false);
                     setSearch('');
                   }}
-                  className={`w-full px-3 py-2 text-left text-sm flex items-center gap-2 hover:bg-inset transition-colors ${
+                  className={`w-full min-h-[44px] px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-inset transition-colors ${
                     value === country.iso3 ? 'bg-inset' : ''
                   }`}
                 >
