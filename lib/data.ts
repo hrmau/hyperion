@@ -377,6 +377,12 @@ export function blocAggToYearData(agg: BlocAggregates): YearData {
     demand_twh: agg.total_demand_twh,
     total_generation_twh: agg.total_generation_twh,
     population: agg.population,
+    // Null rather than a sum. Summing members would net intra-bloc flows to zero
+    // and give the bloc's position against the rest of the world, which is a
+    // defensible figure but not one anything currently asks for - and a wrong
+    // one the moment a member is missing.
+    net_imports_pct: null,
+    net_imports_twh: null,
     generation: agg.generation,
     aggregates: {
       clean_pct: agg.clean_pct,

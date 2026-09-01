@@ -12,6 +12,13 @@ export interface YearData {
    * top of every per-capita ranking.
    */
   population: number | null;
+  /**
+   * Net electricity trade as a share of demand: positive means a net importer,
+   * negative a net exporter, `null` where OWID does not report it. There is no
+   * gross split upstream - a country is one or the other, never both.
+   */
+  net_imports_pct: number | null;
+  net_imports_twh: number | null;
   generation: {
     coal: Generation;
     gas: Generation;

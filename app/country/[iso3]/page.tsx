@@ -19,11 +19,16 @@ import { GorillaNote } from '@/components/ds/core/GorillaNote';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
 import { leadStat } from '@/lib/leadStat';
+import GridMetrics from '@/components/GridMetrics';
+import { intensityMetric, tradeMetric, independenceMetric } from '@/lib/gridMetrics';
+import { calculateIndependenceScoreV2, getFossilDataForYear } from '@/lib/independence';
+import { loadFossilServer } from '@/lib/facts';
 import {
   loadProfile,
   loadNeighbours,
   loadPagelessCountry,
   countryName,
+  loadIntensityRanks,
   publishableIso3,
   type NeighbourLink,
 } from '@/lib/facts';
@@ -237,6 +242,26 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
   const peerName = panel === 'peer' ? await countryName(facts.hero.comparisonSet) : null;
   const lead = leadStat(facts.hero, data);
 
+  // The three measures under the hook. Independence is shown only where the
+  // fossil data exists: a country absent from that file is scored as fully
+  // import-dependent, so publishing the number for the other 101 would not be a
+  // rough figure, it would be a wrong one.
+  const [{ ranks, of }, fossil] = await Promise.all([loadIntensityRanks(), loadFossilServer()]);
+  const indep = (() => {
+    const entry = fossil[facts.iso3];
+    if (!entry) return null;
+    const { data: fossilYear } = getFossilDataForYear(entry, year);
+    if (!fossilYear) return null;
+    const s = calculateIndependenceScoreV2(data, fossilYear, facts.iso3);
+    return s && !s.missingFossilData ? s : null;
+  })();
+
+  const metrics = [
+    intensityMetric(data, ranks[facts.iso3] ?? null, of),
+    tradeMetric(data, facts.name),
+    indep ? independenceMetric(indep.score, indep.label) : null,
+  ].filter((m) => m !== null);
+
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <TopNav meta={`${facts.name} · ${year}`} />
@@ -428,6 +453,25 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
             )}
           </div>
         </div>
+
+        {metrics.length > 0 && (
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>What this grid depends on</h2>
+            <p
+              style={{
+                margin: '0 0 var(--space-6)',
+                maxWidth: '62ch',
+                fontSize: 'var(--fs-body)',
+                color: 'var(--text-secondary)',
+                lineHeight: 'var(--lh-body)',
+              }}
+            >
+              Three measures that say more about a country than how much power it makes. Each one
+              is explained underneath, because none of them mean much on their own.
+            </p>
+            <GridMetrics metrics={metrics} />
+          </section>
+        )}
 
         {facts.supporting.length > 1 && (
           <section style={sectionStyle}>
