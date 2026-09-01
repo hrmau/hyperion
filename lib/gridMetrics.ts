@@ -93,7 +93,7 @@ export function intensityMetric(
     unit: 'g CO₂e per kWh',
     verdict,
     meaning:
-      'How much planet-warming gas is released to make one unit of electricity. Two countries can make exactly the same amount of power and one of them can be ten times dirtier doing it. Lower is better.',
+      'How much planet-warming gas is released to make one unit of electricity. Two countries can generate exactly the same amount and one of them be ten times dirtier doing it. Lower is better.',
     tone: cleanerThan != null && cleanerThan >= 7 ? 'accent' : cleanerThan != null && cleanerThan <= 2 ? 'down' : 'default',
   };
 }
@@ -107,9 +107,9 @@ export function tradeMetric(d: YearData, name: string): GridMetric | null {
       key: 'trade',
       label: 'Electricity trade',
       value: 'Self-contained',
-      verdict: `${name} makes about as much electricity as it uses.`,
+      verdict: `${name} generates almost exactly what it uses, with next to nothing crossing its borders.`,
       meaning:
-        'Electricity can cross a border like anything else. A country that buys it in is leaning on its neighbours to keep the lights on; one that sells it is making more than it needs. This grid does neither to any real degree - often because it has no cables to anywhere else.',
+        'Electricity can be sold across a border like anything else, through high-voltage lines connecting one country\'s grid to the next. Buying it in means leaning on a neighbour to keep the lights on. Selling it means generating more than the country needs.',
       tone: 'default',
     };
   }
@@ -125,7 +125,7 @@ export function tradeMetric(d: YearData, name: string): GridMetric | null {
           ? `${name} depends heavily on its neighbours for power.`
           : `${name} buys in more electricity than it sends out.`,
       meaning:
-        'The share of the electricity people here use that was generated in another country and brought in over a cable. The higher it goes, the more this grid depends on somebody else producing power - and on staying on good terms with them.',
+        'The share of the electricity used here that was generated abroad and carried in over high-voltage lines. The higher it climbs, the more this country relies on a neighbour to keep its lights on.',
       tone: t.pct >= 25 ? 'down' : 'default',
     };
   }
@@ -137,7 +137,7 @@ export function tradeMetric(d: YearData, name: string): GridMetric | null {
     unit: '% of what it makes',
     verdict: `${name} generates a surplus and sells it on.`,
     meaning:
-      'The share of what this country generates that is sent abroad rather than used at home. Exporting means producing more than the country needs, which usually means abundant hydro, nuclear or wind - and it earns money from the surplus.',
+      'The share of what this country generates that is sold abroad rather than used at home. A country can only export if it produces more than it needs, which usually means plentiful hydro, nuclear or wind.',
     tone: 'accent',
   };
 }
