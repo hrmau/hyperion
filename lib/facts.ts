@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { cache } from 'react';
-import type { CountriesData, Country, YearData } from './types';
+import type { CountriesData, Country, FossilFuelData, YearData } from './types';
 import type { HeroShape } from './leadStat';
 
 /**
@@ -61,6 +61,12 @@ export const loadCountriesServer = cache(async (): Promise<CountriesData> =>
   readJSON<CountriesData>('countries-yearly.json')
 );
 
+/** Fossil production-vs-consumption, for the independence score. 99 countries. */
+export const loadFossilServer = cache(async (): Promise<FossilFuelData['countries']> => {
+  const file = await readJSON<FossilFuelData>('fossil-fuel-independence.json');
+  return file.countries;
+});
+
 /** Every country with a publishable hook, which is the set that gets a page. */
 export const publishableIso3 = cache(async (): Promise<string[]> => {
   const facts = await loadFacts();
@@ -75,6 +81,32 @@ export const loadPagelessCountry = cache(async (iso3: string) => {
   const c = countries[code];
   return c ? { iso3: code, name: c.name, region: c.emberRegion } : null;
 });
+
+/**
+ * Carbon-intensity rank across every country with a page, cleanest first.
+ *
+ * A number on its own does not tell a reader whether 267 g is good. The rank is
+ * what turns it into "cleaner than 7 in 10 grids", which is the part they can
+ * actually use.
+ */
+export const loadIntensityRanks = cache(
+  async (): Promise<{ ranks: Record<string, number>; of: number }> => {
+    const [facts, countries] = await Promise.all([loadFacts(), loadCountriesServer()]);
+    const rows: { iso3: string; g: number }[] = [];
+    for (const [iso3, f] of Object.entries(facts)) {
+      const yd = countries[iso3]?.years[String(f.year)];
+      if (!yd) continue;
+      const mt = yd.emissions?.total_mtco2;
+      if (mt == null || !(yd.total_generation_twh > 0)) continue;
+      const g = (mt * 1e12) / (yd.total_generation_twh * 1e9);
+      if (g > 0) rows.push({ iso3, g });
+    }
+    rows.sort((a, b) => a.g - b.g);
+    const ranks: Record<string, number> = {};
+    rows.forEach((r, i) => (ranks[r.iso3] = i + 1));
+    return { ranks, of: rows.length };
+  }
+);
 
 /** Display name for an ISO3, from the dataset. */
 export const countryName = cache(async (iso3: string): Promise<string | null> => {
@@ -149,9 +181,23 @@ export const loadNeighbours = cache(
     };
 
     const publishable = (iso: string) => iso !== code && Boolean(facts[iso]);
+
+    // Borders inside the country's own region come first.
+    //
+    // France borders Brazil, because the topology puts French Guiana inside
+    // France and that really is France's longest land border. True, and it reads
+    // as a bug sitting above Germany and Spain, so a cross-region border sorts
+    // last rather than being dropped.
+    const myRegion = countries[code]?.emberRegion;
+    const sameRegion = (iso: string) =>
+      Boolean(myRegion) && countries[iso]?.emberRegion === myRegion;
     const bordering = adj.borders
       .filter(publishable)
-      .sort((a, b) => closenessInSize(a) - closenessInSize(b));
+      .sort(
+        (a, b) =>
+          Number(sameRegion(b)) - Number(sameRegion(a)) ||
+          closenessInSize(a) - closenessInSize(b)
+      );
     // `nearest` already arrives in distance order; keep it for the top-up.
     const nearby = adj.nearest.filter((i) => publishable(i) && !bordering.includes(i));
 

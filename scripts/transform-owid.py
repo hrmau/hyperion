@@ -212,6 +212,16 @@ def transform_row(row: dict) -> dict | None:
     ghg = parse_float(row.get('greenhouse_gas_emissions'))
 
     # Build backwards-compatible year data structure
+    # Net electricity trade, from OWID's own columns rather than derived from
+    # demand minus generation.
+    #
+    # There is no gross import/export split upstream: a country is a net importer
+    # or a net exporter, never reported as both. `None` where OWID does not
+    # report it, so a country with no interconnectors reads as unknown rather
+    # than as perfectly balanced.
+    net_imports_twh = parse_float(row.get('net_elec_imports'))
+    net_imports_pct = parse_float(row.get('net_elec_imports_share_demand'))
+
     # Population, for per-capita facts and rankings.
     #
     # None, never 0. A missing population must not read as an empty country: it
@@ -223,6 +233,8 @@ def transform_row(row: dict) -> dict | None:
         'demand_twh': demand_twh if demand_twh is not None else total_gen,
         'total_generation_twh': total_gen,
         'population': population,
+        'net_imports_twh': net_imports_twh,
+        'net_imports_pct': net_imports_pct,
         'generation': generation,
         'aggregates': {
             'clean_pct': low_carbon_pct,

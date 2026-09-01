@@ -12,6 +12,8 @@
           "demand_twh": 378.76,
           "total_generation_twh": 378.76,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 76.03,
@@ -64,6 +66,8 @@
           "demand_twh": 405.09,
           "total_generation_twh": 405.09,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 86.26,
@@ -116,6 +120,8 @@
           "demand_twh": 433.19,
           "total_generation_twh": 433.19,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 93.43,
@@ -168,6 +174,8 @@
           "demand_twh": 458.3,
           "total_generation_twh": 458.3,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 102.01,
@@ -220,6 +228,8 @@
           "demand_twh": 496.61,
           "total_generation_twh": 496.61,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 115.01,
@@ -272,6 +282,8 @@
           "demand_twh": 522.68,
           "total_generation_twh": 522.68,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 124.53,
@@ -324,6 +336,8 @@
           "demand_twh": 547.17,
           "total_generation_twh": 547.17,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 138.08,
@@ -376,6 +390,8 @@
           "demand_twh": 578.98,
           "total_generation_twh": 578.98,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 155.7,
@@ -428,6 +444,8 @@
           "demand_twh": 603.96,
           "total_generation_twh": 603.96,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 152.03,
@@ -480,6 +498,8 @@
           "demand_twh": 624.57,
           "total_generation_twh": 624.57,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 162.79,
@@ -532,6 +552,8 @@
           "demand_twh": 686.86,
           "total_generation_twh": 686.86,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 187.49,
@@ -584,6 +606,8 @@
           "demand_twh": 717.07,
           "total_generation_twh": 717.07,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 211.18,
@@ -636,6 +660,8 @@
           "demand_twh": 776.57,
           "total_generation_twh": 776.57,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 242.69,
@@ -688,6 +714,8 @@
           "demand_twh": 816.74,
           "total_generation_twh": 816.74,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 257.1,
@@ -740,6 +768,8 @@
           "demand_twh": 863.97,
           "total_generation_twh": 863.97,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 282.54,
@@ -792,6 +822,8 @@
           "demand_twh": 907.23,
           "total_generation_twh": 907.23,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 321.14,
@@ -844,6 +876,8 @@
           "demand_twh": 969.34,
           "total_generation_twh": 969.34,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 364.27,
@@ -896,6 +930,8 @@
           "demand_twh": 1007.89,
           "total_generation_twh": 1007.89,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 383.71,
@@ -948,6 +984,8 @@
           "demand_twh": 1071.01,
           "total_generation_twh": 1071.01,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 433.99,
@@ -1000,6 +1038,8 @@
           "demand_twh": 1122.19,
           "total_generation_twh": 1122.19,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 483.31,
@@ -1052,6 +1092,8 @@
           "demand_twh": 1113.63,
           "total_generation_twh": 1113.63,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 505.77,
@@ -1104,6 +1146,8 @@
           "demand_twh": 1156.89,
           "total_generation_twh": 1156.89,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 504.85,
@@ -1156,6 +1200,8 @@
           "demand_twh": 1221.62,
           "total_generation_twh": 1221.62,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 508.35,
@@ -1208,6 +1254,8 @@
           "demand_twh": 1272.63,
           "total_generation_twh": 1272.63,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 554.95,
@@ -1260,6 +1308,8 @@
           "demand_twh": 1352.11,
           "total_generation_twh": 1352.11,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 603.6,
@@ -1312,6 +1362,8 @@
           "demand_twh": 1369.85,
           "total_generation_twh": 1369.85,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 610.43,
@@ -1369,6 +1421,8 @@
           "demand_twh": 2631.02,
           "total_generation_twh": 2622.18,
           "population": null,
+          "net_imports_twh": 8.84,
+          "net_imports_pct": 0.34,
           "generation": {
             "coal": {
               "twh": 800.33,
@@ -1421,6 +1475,8 @@
           "demand_twh": 2695.57,
           "total_generation_twh": 2698.92,
           "population": null,
+          "net_imports_twh": -3.35,
+          "net_imports_pct": -0.12,
           "generation": {
             "coal": {
               "twh": 792.92,
@@ -1473,6 +1529,8 @@
           "demand_twh": 2729.24,
           "total_generation_twh": 2722.12,
           "population": null,
+          "net_imports_twh": 7.12,
+          "net_imports_pct": 0.26,
           "generation": {
             "coal": {
               "twh": 814.34,
@@ -1525,6 +1583,8 @@
           "demand_twh": 2797.84,
           "total_generation_twh": 2799.93,
           "population": null,
+          "net_imports_twh": -2.09,
+          "net_imports_pct": -0.07,
           "generation": {
             "coal": {
               "twh": 849.04,
@@ -1577,6 +1637,8 @@
           "demand_twh": 2855.74,
           "total_generation_twh": 2867.55,
           "population": null,
+          "net_imports_twh": -11.81,
+          "net_imports_pct": -0.41,
           "generation": {
             "coal": {
               "twh": 835.42,
@@ -1629,6 +1691,8 @@
           "demand_twh": 2891.72,
           "total_generation_twh": 2884.39,
           "population": null,
+          "net_imports_twh": 7.33,
+          "net_imports_pct": 0.25,
           "generation": {
             "coal": {
               "twh": 808.89,
@@ -1681,6 +1745,8 @@
           "demand_twh": 2932.77,
           "total_generation_twh": 2932.31,
           "population": null,
+          "net_imports_twh": 0.46,
+          "net_imports_pct": 0.02,
           "generation": {
             "coal": {
               "twh": 816.5,
@@ -1733,6 +1799,8 @@
           "demand_twh": 2958.35,
           "total_generation_twh": 2947.71,
           "population": null,
+          "net_imports_twh": 10.64,
+          "net_imports_pct": 0.36,
           "generation": {
             "coal": {
               "twh": 828.74,
@@ -1785,6 +1853,8 @@
           "demand_twh": 2971.81,
           "total_generation_twh": 2959.78,
           "population": null,
+          "net_imports_twh": 12.03,
+          "net_imports_pct": 0.4,
           "generation": {
             "coal": {
               "twh": 757.01,
@@ -1837,6 +1907,8 @@
           "demand_twh": 2825.63,
           "total_generation_twh": 2808.34,
           "population": null,
+          "net_imports_twh": 17.29,
+          "net_imports_pct": 0.61,
           "generation": {
             "coal": {
               "twh": 703.55,
@@ -1889,6 +1961,8 @@
           "demand_twh": 2950.46,
           "total_generation_twh": 2945.54,
           "population": null,
+          "net_imports_twh": 4.92,
+          "net_imports_pct": 0.17,
           "generation": {
             "coal": {
               "twh": 701.2,
@@ -1941,6 +2015,8 @@
           "demand_twh": 2909.64,
           "total_generation_twh": 2908.68,
           "population": null,
+          "net_imports_twh": 0.96,
+          "net_imports_pct": 0.03,
           "generation": {
             "coal": {
               "twh": 724.81,
@@ -1993,6 +2069,8 @@
           "demand_twh": 2910.22,
           "total_generation_twh": 2903.46,
           "population": null,
+          "net_imports_twh": 6.76,
+          "net_imports_pct": 0.23,
           "generation": {
             "coal": {
               "twh": 742.68,
@@ -2045,6 +2123,8 @@
           "demand_twh": 2881.88,
           "total_generation_twh": 2883.69,
           "population": null,
+          "net_imports_twh": -1.81,
+          "net_imports_pct": -0.06,
           "generation": {
             "coal": {
               "twh": 728.9,
@@ -2097,6 +2177,8 @@
           "demand_twh": 2818.88,
           "total_generation_twh": 2823.91,
           "population": null,
+          "net_imports_twh": -5.03,
+          "net_imports_pct": -0.18,
           "generation": {
             "coal": {
               "twh": 692.78,
@@ -2149,6 +2231,8 @@
           "demand_twh": 2863.72,
           "total_generation_twh": 2870.37,
           "population": null,
+          "net_imports_twh": -6.65,
+          "net_imports_pct": -0.23,
           "generation": {
             "coal": {
               "twh": 705.03,
@@ -2201,6 +2285,8 @@
           "demand_twh": 2892.05,
           "total_generation_twh": 2891.4,
           "population": null,
+          "net_imports_twh": 0.65,
+          "net_imports_pct": 0.02,
           "generation": {
             "coal": {
               "twh": 659.16,
@@ -2253,6 +2339,8 @@
           "demand_twh": 2918.43,
           "total_generation_twh": 2922.98,
           "population": null,
+          "net_imports_twh": -4.55,
+          "net_imports_pct": -0.16,
           "generation": {
             "coal": {
               "twh": 638.86,
@@ -2305,6 +2393,8 @@
           "demand_twh": 2917.46,
           "total_generation_twh": 2908.62,
           "population": null,
+          "net_imports_twh": 8.84,
+          "net_imports_pct": 0.3,
           "generation": {
             "coal": {
               "twh": 595.54,
@@ -2357,6 +2447,8 @@
           "demand_twh": 2877.43,
           "total_generation_twh": 2874.5,
           "population": null,
+          "net_imports_twh": 2.93,
+          "net_imports_pct": 0.1,
           "generation": {
             "coal": {
               "twh": 450.79,
@@ -2409,6 +2501,8 @@
           "demand_twh": 2767.06,
           "total_generation_twh": 2753.09,
           "population": null,
+          "net_imports_twh": 13.97,
+          "net_imports_pct": 0.5,
           "generation": {
             "coal": {
               "twh": 352.33,
@@ -2461,6 +2555,8 @@
           "demand_twh": 2882.27,
           "total_generation_twh": 2874.99,
           "population": null,
+          "net_imports_twh": 7.28,
+          "net_imports_pct": 0.25,
           "generation": {
             "coal": {
               "twh": 419.0,
@@ -2513,6 +2609,8 @@
           "demand_twh": 2790.43,
           "total_generation_twh": 2777.49,
           "population": null,
+          "net_imports_twh": 12.94,
+          "net_imports_pct": 0.46,
           "generation": {
             "coal": {
               "twh": 448.43,
@@ -2565,6 +2663,8 @@
           "demand_twh": 2709.73,
           "total_generation_twh": 2710.2,
           "population": null,
+          "net_imports_twh": -0.47,
+          "net_imports_pct": -0.02,
           "generation": {
             "coal": {
               "twh": 318.59,
@@ -2617,6 +2717,8 @@
           "demand_twh": 2760.9,
           "total_generation_twh": 2773.21,
           "population": null,
+          "net_imports_twh": -12.31,
+          "net_imports_pct": -0.45,
           "generation": {
             "coal": {
               "twh": 270.95,
@@ -2669,6 +2771,8 @@
           "demand_twh": 2774.64,
           "total_generation_twh": 2797.09,
           "population": null,
+          "net_imports_twh": -22.45,
+          "net_imports_pct": -0.81,
           "generation": {
             "coal": {
               "twh": 256.79,
@@ -2726,6 +2830,8 @@
           "demand_twh": 2631.02,
           "total_generation_twh": 2622.18,
           "population": 427627361.0,
+          "net_imports_twh": 8.84,
+          "net_imports_pct": 0.34,
           "generation": {
             "coal": {
               "twh": 800.33,
@@ -2778,6 +2884,8 @@
           "demand_twh": 2695.57,
           "total_generation_twh": 2698.92,
           "population": 428578326.0,
+          "net_imports_twh": -3.35,
+          "net_imports_pct": -0.12,
           "generation": {
             "coal": {
               "twh": 792.92,
@@ -2830,6 +2938,8 @@
           "demand_twh": 2729.24,
           "total_generation_twh": 2722.12,
           "population": 429890525.0,
+          "net_imports_twh": 7.12,
+          "net_imports_pct": 0.26,
           "generation": {
             "coal": {
               "twh": 814.34,
@@ -2882,6 +2992,8 @@
           "demand_twh": 2797.84,
           "total_generation_twh": 2799.93,
           "population": 431461841.0,
+          "net_imports_twh": -2.09,
+          "net_imports_pct": -0.07,
           "generation": {
             "coal": {
               "twh": 849.04,
@@ -2934,6 +3046,8 @@
           "demand_twh": 2855.74,
           "total_generation_twh": 2867.55,
           "population": 433058605.0,
+          "net_imports_twh": -11.81,
+          "net_imports_pct": -0.41,
           "generation": {
             "coal": {
               "twh": 835.42,
@@ -2986,6 +3100,8 @@
           "demand_twh": 2891.72,
           "total_generation_twh": 2884.39,
           "population": 434557134.0,
+          "net_imports_twh": 7.33,
+          "net_imports_pct": 0.25,
           "generation": {
             "coal": {
               "twh": 808.89,
@@ -3038,6 +3154,8 @@
           "demand_twh": 2932.77,
           "total_generation_twh": 2932.31,
           "population": 435683170.0,
+          "net_imports_twh": 0.46,
+          "net_imports_pct": 0.02,
           "generation": {
             "coal": {
               "twh": 816.5,
@@ -3090,6 +3208,8 @@
           "demand_twh": 2958.35,
           "total_generation_twh": 2947.71,
           "population": 436994510.0,
+          "net_imports_twh": 10.64,
+          "net_imports_pct": 0.36,
           "generation": {
             "coal": {
               "twh": 828.74,
@@ -3142,6 +3262,8 @@
           "demand_twh": 2971.81,
           "total_generation_twh": 2959.78,
           "population": 438548227.0,
+          "net_imports_twh": 12.03,
+          "net_imports_pct": 0.4,
           "generation": {
             "coal": {
               "twh": 757.01,
@@ -3194,6 +3316,8 @@
           "demand_twh": 2825.63,
           "total_generation_twh": 2808.34,
           "population": 439690812.0,
+          "net_imports_twh": 17.29,
+          "net_imports_pct": 0.61,
           "generation": {
             "coal": {
               "twh": 703.55,
@@ -3246,6 +3370,8 @@
           "demand_twh": 2950.46,
           "total_generation_twh": 2945.54,
           "population": 440608965.0,
+          "net_imports_twh": 4.92,
+          "net_imports_pct": 0.17,
           "generation": {
             "coal": {
               "twh": 701.2,
@@ -3298,6 +3424,8 @@
           "demand_twh": 2909.64,
           "total_generation_twh": 2908.68,
           "population": 441440625.0,
+          "net_imports_twh": 0.96,
+          "net_imports_pct": 0.03,
           "generation": {
             "coal": {
               "twh": 724.81,
@@ -3350,6 +3478,8 @@
           "demand_twh": 2910.22,
           "total_generation_twh": 2903.46,
           "population": 441999248.0,
+          "net_imports_twh": 6.76,
+          "net_imports_pct": 0.23,
           "generation": {
             "coal": {
               "twh": 742.68,
@@ -3402,6 +3532,8 @@
           "demand_twh": 2881.88,
           "total_generation_twh": 2883.69,
           "population": 442399413.0,
+          "net_imports_twh": -1.81,
+          "net_imports_pct": -0.06,
           "generation": {
             "coal": {
               "twh": 728.9,
@@ -3454,6 +3586,8 @@
           "demand_twh": 2818.88,
           "total_generation_twh": 2823.91,
           "population": 442964758.0,
+          "net_imports_twh": -5.03,
+          "net_imports_pct": -0.18,
           "generation": {
             "coal": {
               "twh": 692.78,
@@ -3506,6 +3640,8 @@
           "demand_twh": 2863.72,
           "total_generation_twh": 2870.37,
           "population": 443910920.0,
+          "net_imports_twh": -6.65,
+          "net_imports_pct": -0.23,
           "generation": {
             "coal": {
               "twh": 705.03,
@@ -3558,6 +3694,8 @@
           "demand_twh": 2892.05,
           "total_generation_twh": 2891.4,
           "population": 444911502.0,
+          "net_imports_twh": 0.65,
+          "net_imports_pct": 0.02,
           "generation": {
             "coal": {
               "twh": 659.16,
@@ -3610,6 +3748,8 @@
           "demand_twh": 2918.43,
           "total_generation_twh": 2922.98,
           "population": 445696788.0,
+          "net_imports_twh": -4.55,
+          "net_imports_pct": -0.16,
           "generation": {
             "coal": {
               "twh": 638.86,
@@ -3662,6 +3802,8 @@
           "demand_twh": 2917.46,
           "total_generation_twh": 2908.62,
           "population": 446503671.0,
+          "net_imports_twh": 8.84,
+          "net_imports_pct": 0.3,
           "generation": {
             "coal": {
               "twh": 595.54,
@@ -3714,6 +3856,8 @@
           "demand_twh": 2877.43,
           "total_generation_twh": 2874.5,
           "population": 447369201.0,
+          "net_imports_twh": 2.93,
+          "net_imports_pct": 0.1,
           "generation": {
             "coal": {
               "twh": 450.79,
@@ -3766,6 +3910,8 @@
           "demand_twh": 2767.06,
           "total_generation_twh": 2753.09,
           "population": 447777523.0,
+          "net_imports_twh": 13.97,
+          "net_imports_pct": 0.5,
           "generation": {
             "coal": {
               "twh": 352.33,
@@ -3818,6 +3964,8 @@
           "demand_twh": 2882.27,
           "total_generation_twh": 2874.99,
           "population": 447705920.0,
+          "net_imports_twh": 7.28,
+          "net_imports_pct": 0.25,
           "generation": {
             "coal": {
               "twh": 419.0,
@@ -3870,6 +4018,8 @@
           "demand_twh": 2790.43,
           "total_generation_twh": 2777.49,
           "population": 449113463.0,
+          "net_imports_twh": 12.94,
+          "net_imports_pct": 0.46,
           "generation": {
             "coal": {
               "twh": 448.43,
@@ -3922,6 +4072,8 @@
           "demand_twh": 2709.73,
           "total_generation_twh": 2710.2,
           "population": 450657572.0,
+          "net_imports_twh": -0.47,
+          "net_imports_pct": -0.02,
           "generation": {
             "coal": {
               "twh": 318.59,
@@ -3974,6 +4126,8 @@
           "demand_twh": 2760.9,
           "total_generation_twh": 2773.21,
           "population": 450259560.0,
+          "net_imports_twh": -12.31,
+          "net_imports_pct": -0.45,
           "generation": {
             "coal": {
               "twh": 270.95,
@@ -4026,6 +4180,8 @@
           "demand_twh": 2774.64,
           "total_generation_twh": 2797.09,
           "population": 448992615.0,
+          "net_imports_twh": -22.45,
+          "net_imports_pct": -0.81,
           "generation": {
             "coal": {
               "twh": 256.79,
@@ -4083,6 +4239,8 @@
           "demand_twh": 13030.16,
           "total_generation_twh": 13030.16,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 5462.29,
@@ -4135,6 +4293,8 @@
           "demand_twh": 13187.94,
           "total_generation_twh": 13187.94,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 5516.35,
@@ -4187,6 +4347,8 @@
           "demand_twh": 13629.91,
           "total_generation_twh": 13629.91,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 5752.99,
@@ -4239,6 +4401,8 @@
           "demand_twh": 14125.77,
           "total_generation_twh": 14125.77,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6149.15,
@@ -4291,6 +4455,8 @@
           "demand_twh": 14779.59,
           "total_generation_twh": 14779.59,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6357.84,
@@ -4343,6 +4509,8 @@
           "demand_twh": 15357.69,
           "total_generation_twh": 15357.69,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6708.63,
@@ -4395,6 +4563,8 @@
           "demand_twh": 15946.05,
           "total_generation_twh": 15946.05,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7078.46,
@@ -4447,6 +4617,8 @@
           "demand_twh": 16696.26,
           "total_generation_twh": 16696.26,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7530.89,
@@ -4499,6 +4671,8 @@
           "demand_twh": 16998.38,
           "total_generation_twh": 16998.38,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7553.3,
@@ -4551,6 +4725,8 @@
           "demand_twh": 16822.33,
           "total_generation_twh": 16822.33,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7435.18,
@@ -4603,6 +4779,8 @@
           "demand_twh": 17946.65,
           "total_generation_twh": 17946.65,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7910.15,
@@ -4655,6 +4833,8 @@
           "demand_twh": 18578.93,
           "total_generation_twh": 18578.93,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8326.88,
@@ -4707,6 +4887,8 @@
           "demand_twh": 18951.38,
           "total_generation_twh": 18951.38,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8357.65,
@@ -4759,6 +4941,8 @@
           "demand_twh": 19483.09,
           "total_generation_twh": 19483.09,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8804.38,
@@ -4811,6 +4995,8 @@
           "demand_twh": 19983.93,
           "total_generation_twh": 19983.93,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8981.48,
@@ -4863,6 +5049,8 @@
           "demand_twh": 20121.65,
           "total_generation_twh": 20121.65,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8645.31,
@@ -4915,6 +5103,8 @@
           "demand_twh": 20676.08,
           "total_generation_twh": 20676.08,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8648.54,
@@ -4967,6 +5157,8 @@
           "demand_twh": 21330.37,
           "total_generation_twh": 21330.37,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8962.61,
@@ -5019,6 +5211,8 @@
           "demand_twh": 22203.05,
           "total_generation_twh": 22203.05,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9283.77,
@@ -5071,6 +5265,8 @@
           "demand_twh": 22483.11,
           "total_generation_twh": 22483.11,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9028.03,
@@ -5123,6 +5319,8 @@
           "demand_twh": 22358.26,
           "total_generation_twh": 22358.26,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8638.14,
@@ -5175,6 +5373,8 @@
           "demand_twh": 23682.63,
           "total_generation_twh": 23682.63,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9373.1,
@@ -5227,6 +5427,8 @@
           "demand_twh": 24275.41,
           "total_generation_twh": 24275.41,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9500.71,
@@ -5279,6 +5481,8 @@
           "demand_twh": 24889.29,
           "total_generation_twh": 24889.29,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9633.11,
@@ -5331,6 +5535,8 @@
           "demand_twh": 26009.64,
           "total_generation_twh": 26009.64,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9742.53,
@@ -5383,6 +5589,8 @@
           "demand_twh": 26769.54,
           "total_generation_twh": 26769.54,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9703.64,
@@ -5440,6 +5648,8 @@
           "demand_twh": 7254.1,
           "total_generation_twh": 7254.1,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2790.65,
@@ -5492,6 +5702,8 @@
           "demand_twh": 7176.68,
           "total_generation_twh": 7176.68,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2746.97,
@@ -5544,6 +5756,8 @@
           "demand_twh": 7346.86,
           "total_generation_twh": 7346.86,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2791.24,
@@ -5596,6 +5810,8 @@
           "demand_twh": 7395.44,
           "total_generation_twh": 7395.44,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2883.52,
@@ -5648,6 +5864,8 @@
           "demand_twh": 7535.17,
           "total_generation_twh": 7535.17,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2874.04,
@@ -5700,6 +5918,8 @@
           "demand_twh": 7684.02,
           "total_generation_twh": 7684.02,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2928.83,
@@ -5752,6 +5972,8 @@
           "demand_twh": 7720.1,
           "total_generation_twh": 7720.1,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2902.65,
@@ -5804,6 +6026,8 @@
           "demand_twh": 7852.79,
           "total_generation_twh": 7852.79,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2941.84,
@@ -5856,6 +6080,8 @@
           "demand_twh": 7826.14,
           "total_generation_twh": 7826.14,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2886.02,
@@ -5908,6 +6134,8 @@
           "demand_twh": 7447.66,
           "total_generation_twh": 7447.66,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2570.6,
@@ -5960,6 +6188,8 @@
           "demand_twh": 7742.27,
           "total_generation_twh": 7742.27,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2684.16,
@@ -6012,6 +6242,8 @@
           "demand_twh": 7670.33,
           "total_generation_twh": 7670.33,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2531.42,
@@ -6064,6 +6296,8 @@
           "demand_twh": 7630.6,
           "total_generation_twh": 7630.6,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2407.31,
@@ -6116,6 +6350,8 @@
           "demand_twh": 7649.8,
           "total_generation_twh": 7649.8,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2501.6,
@@ -6168,6 +6404,8 @@
           "demand_twh": 7611.37,
           "total_generation_twh": 7611.37,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2436.05,
@@ -6220,6 +6458,8 @@
           "demand_twh": 7607.07,
           "total_generation_twh": 7607.07,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2170.17,
@@ -6272,6 +6512,8 @@
           "demand_twh": 7643.88,
           "total_generation_twh": 7643.88,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1981.02,
@@ -6324,6 +6566,8 @@
           "demand_twh": 7629.03,
           "total_generation_twh": 7629.03,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1941.35,
@@ -6376,6 +6620,8 @@
           "demand_twh": 7774.02,
           "total_generation_twh": 7774.02,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1844.94,
@@ -6428,6 +6674,8 @@
           "demand_twh": 7644.27,
           "total_generation_twh": 7644.27,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1566.72,
@@ -6480,6 +6728,8 @@
           "demand_twh": 7391.21,
           "total_generation_twh": 7391.21,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1309.45,
@@ -6532,6 +6782,8 @@
           "demand_twh": 7563.22,
           "total_generation_twh": 7563.22,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1471.99,
@@ -6584,6 +6836,8 @@
           "demand_twh": 7631.62,
           "total_generation_twh": 7631.62,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1421.63,
@@ -6636,6 +6890,8 @@
           "demand_twh": 7481.58,
           "total_generation_twh": 7481.58,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1169.17,
@@ -6688,6 +6944,8 @@
           "demand_twh": 7653.69,
           "total_generation_twh": 7653.69,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1117.63,
@@ -6740,6 +6998,8 @@
           "demand_twh": 7829.55,
           "total_generation_twh": 7829.55,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1202.86,
@@ -6797,6 +7057,8 @@
           "demand_twh": 9620.07,
           "total_generation_twh": 9620.07,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3596.8,
@@ -6849,6 +7111,8 @@
           "demand_twh": 9609.45,
           "total_generation_twh": 9609.45,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3563.5,
@@ -6901,6 +7165,8 @@
           "demand_twh": 9826.39,
           "total_generation_twh": 9826.39,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3618.73,
@@ -6953,6 +7219,8 @@
           "demand_twh": 9937.52,
           "total_generation_twh": 9937.52,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3740.88,
@@ -7005,6 +7273,8 @@
           "demand_twh": 10177.75,
           "total_generation_twh": 10177.75,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3729.14,
@@ -7057,6 +7327,8 @@
           "demand_twh": 10403.32,
           "total_generation_twh": 10403.32,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3796.1,
@@ -7109,6 +7381,8 @@
           "demand_twh": 10498.76,
           "total_generation_twh": 10498.76,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3788.85,
@@ -7161,6 +7435,8 @@
           "demand_twh": 10734.33,
           "total_generation_twh": 10734.33,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3852.93,
@@ -7213,6 +7489,8 @@
           "demand_twh": 10750.31,
           "total_generation_twh": 10750.31,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3761.11,
@@ -7265,6 +7543,8 @@
           "demand_twh": 10335.49,
           "total_generation_twh": 10335.49,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3447.49,
@@ -7317,6 +7597,8 @@
           "demand_twh": 10747.56,
           "total_generation_twh": 10747.56,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3552.19,
@@ -7369,6 +7651,8 @@
           "demand_twh": 10720.11,
           "total_generation_twh": 10720.11,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3432.49,
@@ -7421,6 +7705,8 @@
           "demand_twh": 10727.68,
           "total_generation_twh": 10727.68,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3316.6,
@@ -7473,6 +7759,8 @@
           "demand_twh": 10723.7,
           "total_generation_twh": 10723.7,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3379.48,
@@ -7525,6 +7813,8 @@
           "demand_twh": 10668.48,
           "total_generation_twh": 10668.48,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3312.56,
@@ -7577,6 +7867,8 @@
           "demand_twh": 10725.97,
           "total_generation_twh": 10725.97,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 3075.26,
@@ -7629,6 +7921,8 @@
           "demand_twh": 10839.15,
           "total_generation_twh": 10839.15,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2877.81,
@@ -7681,6 +7975,8 @@
           "demand_twh": 10901.95,
           "total_generation_twh": 10901.95,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2857.84,
@@ -7733,6 +8029,8 @@
           "demand_twh": 11077.99,
           "total_generation_twh": 11077.99,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2750.87,
@@ -7785,6 +8083,8 @@
           "demand_twh": 10952.67,
           "total_generation_twh": 10952.67,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2391.34,
@@ -7837,6 +8137,8 @@
           "demand_twh": 10658.75,
           "total_generation_twh": 10658.75,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2015.01,
@@ -7889,6 +8191,8 @@
           "demand_twh": 10969.5,
           "total_generation_twh": 10969.5,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2189.91,
@@ -7941,6 +8245,8 @@
           "demand_twh": 11056.62,
           "total_generation_twh": 11056.62,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 2136.06,
@@ -7993,6 +8299,8 @@
           "demand_twh": 10896.06,
           "total_generation_twh": 10896.06,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1822.9,
@@ -8045,6 +8353,8 @@
           "demand_twh": 11158.41,
           "total_generation_twh": 11158.41,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1749.93,
@@ -8097,6 +8407,8 @@
           "demand_twh": 11365.01,
           "total_generation_twh": 11365.01,
           "population": null,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 1808.77,
@@ -8154,6 +8466,8 @@
           "demand_twh": 15278.78,
           "total_generation_twh": 15278.78,
           "population": 6171702992.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 5808.81,
@@ -8206,6 +8520,8 @@
           "demand_twh": 15500.83,
           "total_generation_twh": 15500.83,
           "population": 6254936464.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 5890.67,
@@ -8258,6 +8574,8 @@
           "demand_twh": 16049.89,
           "total_generation_twh": 16049.89,
           "population": 6337730343.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6144.3,
@@ -8310,6 +8628,8 @@
           "demand_twh": 16628.01,
           "total_generation_twh": 16628.01,
           "population": 6420361633.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6574.95,
@@ -8362,6 +8682,8 @@
           "demand_twh": 17414.99,
           "total_generation_twh": 17414.99,
           "population": 6503377774.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 6797.3,
@@ -8414,6 +8736,8 @@
           "demand_twh": 18134.08,
           "total_generation_twh": 18134.08,
           "population": 6586970132.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7167.21,
@@ -8466,6 +8790,8 @@
           "demand_twh": 18838.99,
           "total_generation_twh": 18838.99,
           "population": 6671452019.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7566.97,
@@ -8518,6 +8844,8 @@
           "demand_twh": 19713.96,
           "total_generation_twh": 19713.96,
           "population": 6757308776.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8051.83,
@@ -8570,6 +8898,8 @@
           "demand_twh": 20102.64,
           "total_generation_twh": 20102.64,
           "population": 6844457659.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8074.19,
@@ -8622,6 +8952,8 @@
           "demand_twh": 19943.51,
           "total_generation_twh": 19943.51,
           "population": 6932766416.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 7950.77,
@@ -8674,6 +9006,8 @@
           "demand_twh": 21263.75,
           "total_generation_twh": 21263.75,
           "population": 7021732143.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8458.0,
@@ -8726,6 +9060,8 @@
           "demand_twh": 21972.03,
           "total_generation_twh": 21972.03,
           "population": 7110923773.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8911.04,
@@ -8778,6 +9114,8 @@
           "demand_twh": 22515.66,
           "total_generation_twh": 22515.66,
           "population": 7201202478.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 8960.28,
@@ -8830,6 +9168,8 @@
           "demand_twh": 23155.03,
           "total_generation_twh": 23155.03,
           "population": 7291793585.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9423.85,
@@ -8882,6 +9222,8 @@
           "demand_twh": 23747.07,
           "total_generation_twh": 23747.07,
           "population": 7381616239.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9603.84,
@@ -8934,6 +9276,8 @@
           "demand_twh": 24002.35,
           "total_generation_twh": 24002.35,
           "population": 7470491876.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9283.61,
@@ -8986,6 +9330,8 @@
           "demand_twh": 24694.51,
           "total_generation_twh": 24694.51,
           "population": 7558554527.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9327.96,
@@ -9038,6 +9384,8 @@
           "demand_twh": 25441.04,
           "total_generation_twh": 25441.04,
           "population": 7645617952.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9655.05,
@@ -9090,6 +9438,8 @@
           "demand_twh": 26464.49,
           "total_generation_twh": 26464.49,
           "population": 7729902779.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10033.03,
@@ -9142,6 +9492,8 @@
           "demand_twh": 26832.42,
           "total_generation_twh": 26832.42,
           "population": 7811293699.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9826.39,
@@ -9194,6 +9546,8 @@
           "demand_twh": 26723.37,
           "total_generation_twh": 26723.37,
           "population": 7887001289.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 9437.05,
@@ -9246,6 +9600,8 @@
           "demand_twh": 28259.07,
           "total_generation_twh": 28259.07,
           "population": 7954448387.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10156.49,
@@ -9298,6 +9654,8 @@
           "demand_twh": 28917.76,
           "total_generation_twh": 28917.76,
           "population": 8021407196.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10240.44,
@@ -9350,6 +9708,8 @@
           "demand_twh": 29665.34,
           "total_generation_twh": 29665.34,
           "population": 8091734933.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10395.94,
@@ -9402,6 +9762,8 @@
           "demand_twh": 30930.23,
           "total_generation_twh": 30930.23,
           "population": 8161972574.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10538.94,
@@ -9454,6 +9816,8 @@
           "demand_twh": 31772.35,
           "total_generation_twh": 31772.35,
           "population": 8231613067.0,
+          "net_imports_twh": null,
+          "net_imports_pct": null,
           "generation": {
             "coal": {
               "twh": 10471.53,
