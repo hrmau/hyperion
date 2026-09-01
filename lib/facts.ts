@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { cache } from 'react';
 import type { CountriesData, Country, YearData } from './types';
+import type { HeroShape } from './leadStat';
 
 /**
  * Build-time access to the generated country facts.
@@ -196,6 +197,8 @@ export interface HomeView {
   stale: boolean;
   headline: string;
   detail: string | null;
+  /** Enough of the hero fact to pick which figure to set in green. */
+  hero: HeroShape | null;
   /** The second claim, shown as the gorilla's reading beside the chart. */
   note: { headline: string; detail: string | null } | null;
   data: YearData;
@@ -248,6 +251,7 @@ export const loadWorldView = cache(async (): Promise<HomeView | null> => {
     iso3: null,
     year,
     stale: false,
+    hero: null,
     headline: `Coal still makes ${Math.round(coal)}% of the world's electricity.`,
     detail: `Low-carbon sources reached ${Math.round(clean)}% of global generation in ${year}. The other half of the grid is the argument.`,
     note:
@@ -291,6 +295,13 @@ export const loadHomeView = cache(async (key: string): Promise<HomeView | null> 
     iso3: facts.iso3,
     year,
     stale: facts.stale,
+    hero: {
+      family: facts.hero.family,
+      metric: facts.hero.metric,
+      comparisonSet: facts.hero.comparisonSet,
+      values: facts.hero.values,
+      year: facts.hero.year,
+    },
     headline: facts.hero.headline,
     detail: facts.hero.detail,
     note: note ? { headline: note.headline, detail: note.detail } : null,

@@ -18,6 +18,7 @@ import { RankedBarList } from '@/components/ds/data/RankedBarList';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
+import { leadStat } from '@/lib/leadStat';
 import {
   loadProfile,
   loadNeighbours,
@@ -234,6 +235,7 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
   // The peer is chosen by population, so it is usually not a regional neighbour
   // and has to be looked up rather than found in that list.
   const peerName = panel === 'peer' ? await countryName(facts.hero.comparisonSet) : null;
+  const lead = leadStat(facts.hero, data);
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -325,30 +327,45 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
               </p>
             )}
 
+            {/* Key figures, ruled off from the actions below them. Without the
+                second rule the buttons read as a fourth statistic. */}
             <div
               style={{
                 display: 'flex',
                 gap: 'var(--space-8)',
                 flexWrap: 'wrap',
                 margin: 'var(--space-8) 0',
-                paddingTop: 'var(--space-7)',
+                padding: 'var(--space-7) 0',
                 borderTop: '1px solid var(--border-default)',
+                borderBottom: '1px solid var(--border-default)',
               }}
             >
-              <Stat
-                label="Clean share"
-                value={num(data.aggregates.clean_pct)}
-                unit="%"
-                note={`in ${year}`}
-                tone={data.aggregates.clean_pct >= 60 ? 'accent' : 'default'}
-              />
-              <Stat
-                label="Total output"
-                value={num(data.total_generation_twh, data.total_generation_twh < 10 ? 1 : 0)}
-                unit="TWh"
-                note="a year"
-              />
-              {perPerson != null && (
+              {lead && (
+                <Stat
+                  label={lead.label}
+                  value={lead.value}
+                  unit={lead.unit}
+                  note={lead.note}
+                  tone="accent"
+                />
+              )}
+              {lead?.label !== 'Clean share' && (
+                <Stat
+                  label="Clean share"
+                  value={num(data.aggregates.clean_pct)}
+                  unit="%"
+                  note={`in ${year}`}
+                />
+              )}
+              {lead?.label !== 'Total output' && (
+                <Stat
+                  label="Total output"
+                  value={num(data.total_generation_twh, data.total_generation_twh < 10 ? 1 : 0)}
+                  unit="TWh"
+                  note="a year"
+                />
+              )}
+              {perPerson != null && lead?.label !== 'Per person' && (
                 <Stat label="Per person" value={num(perPerson)} unit="kWh" note="a year" />
               )}
             </div>

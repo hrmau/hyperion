@@ -102,6 +102,25 @@ export function needsOutline(fuel: Fuel): boolean {
   return fuel === 'coal' || fuel === 'oil';
 }
 
+/**
+ * Human labels for the nine data sources, as opposed to the eight chart fuels.
+ * "Other renewables" needs saying in a sentence even though it draws as "Other".
+ *
+ * scripts/generate-facts.js has the same map for the generated hooks; keep them
+ * in step so a stat and the headline above it call a fuel the same thing.
+ */
+export const SOURCE_LABEL: Record<EnergySource, string> = {
+  coal: 'Coal',
+  gas: 'Gas',
+  other_fossil: 'Oil',
+  nuclear: 'Nuclear',
+  hydro: 'Hydro',
+  wind: 'Wind',
+  solar: 'Solar',
+  bioenergy: 'Bioenergy',
+  other_renewables: 'Other renewables',
+};
+
 /** Data source -> design-system fuel. */
 const SOURCE_TO_FUEL: Record<EnergySource, Fuel> = {
   wind: 'wind',
