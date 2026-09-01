@@ -321,7 +321,7 @@ export default function UpdatesPage() {
                 </span>
               </div>
               <p>
-                {meta.countryCount} countries, {meta.earliestYear}&ndash;{meta.latestYear}.{' '}
+                {meta.countryCount} countries, {meta.earliestYear}-{meta.latestYear}.{' '}
                 {currentYearCount} of them already report {meta.latestYear} figures; the rest
                 run to whichever year their national statistics office has published.
                 That is why country labels across the site show different years.
