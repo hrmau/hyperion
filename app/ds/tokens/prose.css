@@ -13,8 +13,23 @@
   font-size: clamp(16px, 1.35vw, 18px);
   line-height: 1.68;
   color: var(--paper-a76);
-  max-width: var(--prose-measure);
   text-wrap: pretty;
+}
+
+/* The measure applies to running text, not to the column.
+ *
+ * Capping .gg-prose itself clipped everything inside it, so a three-up stat grid
+ * or a comparison table was squeezed into a width chosen for paragraphs. Only
+ * the elements a reader reads along get the measure; grids, tables, figures and
+ * cards use the full column. */
+.gg-prose > p,
+.gg-prose > ul,
+.gg-prose > ol,
+.gg-prose > h2,
+.gg-prose > h3,
+.gg-prose > h4,
+.gg-prose > blockquote {
+  max-width: var(--prose-measure);
 }
 
 /* Paragraphs: space between, never indents. */

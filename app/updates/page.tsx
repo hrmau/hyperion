@@ -49,6 +49,60 @@ interface Update {
 
 const updates: Update[] = [
   {
+    date: 'Sep 2026',
+    title: 'A Profile for Every Country',
+    description: 'Two hundred countries now have a page of their own, and each one opens on a different kind of claim rather than the same sentence with the numbers swapped. Bhutan leads on running entirely off one river system, Germany on the year wind passed coal, Tanzania on having France\'s population and a fortieth of its electricity.',
+    highlights: [
+      'The lead fact is picked from seven families, so no two pages read alike',
+      'Every figure printed in one is checked against the data that produced it',
+      'Fourteen grids too small to say anything true about deliberately have no page',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'A Homepage About Your Own Grid',
+    description: 'The front page now opens with a fact about the country you are reading from, rather than a world map with no obvious first move. The map moved to /explore, where it still is.',
+    highlights: [
+      'Switch to any other country from the header, and it is remembered',
+      'Location is read from the connection and never stored',
+      'No country detected, or one we cannot cover, shows the world instead',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'What a Grid Depends On',
+    description: 'Country pages now carry carbon intensity, electricity trade and energy independence - three measures that say more about a country than how much power it makes. Each explains itself in plain English, because none of those terms mean anything on their own.',
+    highlights: [
+      'Carbon intensity is ranked, so a number becomes "cleaner than 7 in 10 grids"',
+      'Trade is stated from whichever side a country is on: Luxembourg buys in 77%, Paraguay sells 35%',
+      'Independence is never coloured good or bad - mining your own coal scores well',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'Charts You Can Read a Year Off',
+    description: 'The forty-year mix charts told you wind grew and nothing else. Hovering one now marks the year and gives every fuel\'s share at it, and the keyboard walks the years for anyone not using a mouse.',
+    highlights: [
+      'The figure beside each hook is now the one the hook is about, set in green',
+      'Arrow keys move through the years, Home and End jump to either end',
+    ],
+    tag: 'feature',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'Geothermal Separated From Bioenergy',
+    description: 'The two were reported as one source, which was harmless while it was an unlabelled band on a chart and wrong the moment a page described it in words. Kenya read as 48% bioenergy when it is overwhelmingly geothermal; so did Iceland, New Zealand and the Philippines.',
+    highlights: [
+      'No published figure moved - the chart band is the sum of the two',
+      'Emissions relabelled CO2e: the source counts methane and the full lifecycle, not just carbon dioxide',
+      'Every country gained a region, so the smallest grids can be compared with their neighbours',
+    ],
+    tag: 'data',
+  },
+  {
     date: 'Aug 2026',
     title: 'Automatic Data Refresh',
     description: 'Energy data now refreshes from Our World in Data on a weekly schedule instead of by hand, so country figures stop drifting months behind the source.',
@@ -243,7 +297,18 @@ function TagBadge({ tag }: { tag: Update['tag'] }) {
   if (!tag) return null;
 
   return (
-    <span className={`text-[10px] px-2 py-0.5 rounded-full ${colors[tag]}`}>
+    <span
+      className={colors[tag]}
+      style={{
+        padding: '3px 9px',
+        borderRadius: 'var(--r-pill)',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 'var(--fs-mono-xs)',
+        letterSpacing: '0.05em',
+        textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
+      }}
+    >
       {labels[tag]}
     </span>
   );
@@ -263,23 +328,64 @@ function TimelineItem({ update, isLast }: { update: Update; isLast: boolean }) {
       </div>
 
       {/* Content */}
-      <div className="card p-4">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-muted tabular-nums">{update.date}</span>
-            <TagBadge tag={update.tag} />
-          </div>
+      <div className="card" style={{ padding: 'var(--space-6)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-3)',
+            marginBottom: 'var(--space-4)',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xs)',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--text-quiet)',
+            }}
+          >
+            {update.date}
+          </span>
+          <TagBadge tag={update.tag} />
         </div>
 
-        <h3 className="text-sm font-medium text-primary mb-1.5">{update.title}</h3>
-        <p className="text-xs text-secondary leading-relaxed">{update.description}</p>
+        <h3
+          style={{
+            margin: '0 0 var(--space-3)',
+            fontSize: 'var(--fs-h4)',
+            fontWeight: 'var(--fw-bold)',
+            letterSpacing: 'var(--ls-h4)',
+          }}
+        >
+          {update.title}
+        </h3>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 'var(--fs-body)',
+            lineHeight: 'var(--lh-body)',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          {update.description}
+        </p>
 
+        {/* No bullet of its own: .gg-prose already draws a mono marker on every
+            list item, so the hand-rolled dot rendered a second one beside it. */}
         {update.highlights && update.highlights.length > 0 && (
-          <ul className="mt-3 space-y-1">
+          <ul style={{ margin: 'var(--space-5) 0 0' }}>
             {update.highlights.map((highlight, i) => (
-              <li key={i} className="text-xs text-muted flex items-start gap-2">
-                <span className="text-border mt-0.5">•</span>
-                <span>{highlight}</span>
+              <li
+                key={i}
+                style={{
+                  fontSize: 'var(--fs-body-sm)',
+                  lineHeight: 'var(--lh-body-sm)',
+                  color: 'var(--text-tertiary)',
+                }}
+              >
+                {highlight}
               </li>
             ))}
           </ul>
@@ -316,7 +422,7 @@ export default function UpdatesPage() {
             <div className="card p-4 mb-8">
               <div className="flex items-baseline justify-between gap-3 mb-2">
                 <h2 className="text-[13px]">Data currency</h2>
-                <span className="text-[11px]">
+                <span style={{ fontSize: 'var(--fs-body-sm)' }}>
                   source published {meta.sourceUpdatedOn}
                 </span>
               </div>
@@ -326,7 +432,7 @@ export default function UpdatesPage() {
                 run to whichever year their national statistics office has published.
                 That is why country labels across the site show different years.
               </p>
-              <p className="text-[11px] mt-2">
+              <p style={{ fontSize: 'var(--fs-body-sm)', marginTop: 'var(--space-4)' }}>
                 Checked weekly against{' '}
                 <a
                   href="https://ourworldindata.org/energy"
