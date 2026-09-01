@@ -466,8 +466,8 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
                 lineHeight: 'var(--lh-body)',
               }}
             >
-              Three measures that say more about a country than how much power it makes. Each one
-              is explained underneath, because none of them mean much on their own.
+              Three measures that say more about a country than how much power it makes. Open
+              &ldquo;what this means&rdquo; on any of them if the term is new.
             </p>
             <GridMetrics metrics={metrics} />
           </section>

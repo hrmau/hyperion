@@ -51,6 +51,42 @@ body {
    And they are built from design-system tokens, with no shadows — elevation in
    this system is a step up the ink ramp plus a hairline. */
 @layer components {
+  /* Native disclosure, restyled.
+   *
+   * The metric cards carry a plain-English definition of a term most readers
+   * will not know. Rendered open, three of those turned a scannable row of
+   * figures into a wall of prose; hidden behind a tooltip they would be
+   * unreachable on a phone and invisible to a screen reader. <details> keeps
+   * them one tap away, needs no JavaScript, and is server-rendered like the rest
+   * of the page. */
+  .gg-disclosure > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    /* A summary is a control, so it clears the system's 44px floor like every
+       other one. The label stays small and quiet; only the hit area grows. */
+    min-height: 44px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-quiet);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .gg-disclosure > summary::-webkit-details-marker { display: none }
+  .gg-disclosure > summary:hover { color: var(--text-secondary) }
+
+  /* The marker is text, not an icon set: the system ships no icons. */
+  .gg-disclosure > summary::after {
+    content: '+';
+    font-size: 1.1em;
+    line-height: 1;
+    color: var(--text-tertiary);
+  }
+  .gg-disclosure[open] > summary::after { content: '\2212' }
+
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border-default);

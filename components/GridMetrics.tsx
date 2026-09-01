@@ -2,13 +2,15 @@ import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import type { GridMetric } from '@/lib/gridMetrics';
 
 /**
- * The measures under the hook, each carrying its own definition.
+ * The measures under the hook: a figure, a line about this country, and the
+ * definition tucked behind a disclosure.
  *
- * Three cards rather than a row of bare figures, because the explanation is the
- * point. A reader who does not already know what carbon intensity is learns it
- * here, without hovering anything or leaving the page, and a reader who does
- * know can read the number and skip the rest - the value is set large and the
- * definition small, so the two audiences are served by the same card.
+ * The definitions were rendered open to begin with. They are the reason the
+ * section exists - "carbon intensity" teaches nobody anything on its own - but
+ * three paragraphs of prose turned a row a reader should take in at a glance
+ * into something they had to work through. Behind a native <details> the card is
+ * scannable again and the explanation is still one tap away, on every device,
+ * with no JavaScript and nothing hidden from a screen reader.
  */
 export default function GridMetrics({ metrics }: { metrics: GridMetric[] }) {
   if (!metrics.length) return null;
@@ -18,17 +20,16 @@ export default function GridMetrics({ metrics }: { metrics: GridMetric[] }) {
       className="gg-card-row"
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(auto-fit, minmax(260px, 1fr))`,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         gap: 'var(--space-5)',
-        maxWidth: '108ch',
+        maxWidth: '100ch',
+        alignItems: 'start',
       }}
     >
       {metrics.map((m) => (
         <div
           key={m.key}
           style={{
-            display: 'flex',
-            flexDirection: 'column',
             padding: 'var(--space-6)',
             borderRadius: 'var(--r-card)',
             border: '1px solid var(--border-default)',
@@ -73,24 +74,25 @@ export default function GridMetrics({ metrics }: { metrics: GridMetric[] }) {
               margin: 'var(--space-4) 0 var(--space-5)',
               fontSize: 'var(--fs-body)',
               lineHeight: 'var(--lh-body)',
-              color: 'var(--text-primary)',
+              color: 'var(--text-secondary)',
             }}
           >
             {m.verdict}
           </p>
 
-          <p
-            style={{
-              margin: 'auto 0 0',
-              paddingTop: 'var(--space-5)',
-              borderTop: '1px solid var(--border-default)',
-              fontSize: 'var(--fs-body-sm)',
-              lineHeight: 'var(--lh-body-sm)',
-              color: 'var(--text-tertiary)',
-            }}
-          >
-            {m.meaning}
-          </p>
+          <details className="gg-disclosure">
+            <summary>What this means</summary>
+            <p
+              style={{
+                margin: 'var(--space-4) 0 0',
+                fontSize: 'var(--fs-body-sm)',
+                lineHeight: 'var(--lh-body-sm)',
+                color: 'var(--text-tertiary)',
+              }}
+            >
+              {m.meaning}
+            </p>
+          </details>
         </div>
       ))}
     </div>
