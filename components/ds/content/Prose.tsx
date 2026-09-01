@@ -156,10 +156,27 @@ export interface ArticleShellProps {
  * and Terms structurally identical so they read as one publication.
  */
 export function ArticleShell({ kicker, title, standfirst, updated, children }: ArticleShellProps) {
+  // The column is centred, and the rules that separate the bands are not.
+  //
+  // .gg-prose caps the measure at 68ch and never centred it, so on a wide screen
+  // a content page was a narrow ribbon pinned to the left with half the viewport
+  // empty beside it. /methodology centred its own inner container and /why did
+  // not, so the two pages did not even agree with each other.
+  //
+  // The band divs stay full width so their rules still span the page; only their
+  // contents are centred, which keeps the furniture and the reading column doing
+  // different jobs.
+  const column: CSSProperties = {
+    maxWidth: 'var(--maxw-article)',
+    marginInline: 'auto',
+  };
+
   return (
     <main className="gg-article" style={{ flex: 1 }}>
       <div style={{ padding: 'var(--band-y) var(--gutter) var(--space-9)' }}>
-        <ArticleHeader kicker={kicker} title={title} standfirst={standfirst} updated={updated} />
+        <div style={column}>
+          <ArticleHeader kicker={kicker} title={title} standfirst={standfirst} updated={updated} />
+        </div>
       </div>
       <div
         style={{
@@ -167,7 +184,9 @@ export function ArticleShell({ kicker, title, standfirst, updated, children }: A
           borderTop: '1px solid var(--border-default)',
         }}
       >
-        <Prose>{children}</Prose>
+        <div style={column}>
+          <Prose>{children}</Prose>
+        </div>
       </div>
     </main>
   );

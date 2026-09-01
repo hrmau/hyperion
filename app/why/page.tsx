@@ -4,6 +4,7 @@ import Link from 'next/link';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { ArticleShell } from '@/components/ds/content/Prose';
+import FlagImg from '@/components/FlagImg';
 
 function QuoteBlock({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
@@ -17,12 +18,11 @@ function QuoteBlock({ children, attribution }: { children: React.ReactNode; attr
 function Callout({ type = 'info', icon, title, children }: { type?: 'info' | 'warning' | 'success' | 'danger'; icon?: string; title?: string; children: React.ReactNode }) {
   // No emoji anywhere in this system. The callout's title carries the meaning
   // and the left border carries the tone.
-  const icons = { info: '', warning: '', success: '', danger: '' };
   return (
     <div className={`callout callout-${type}`}>
       {title && (
         <div className="callout__header">
-          <span className="callout__icon">{icon || icons[type]}</span>
+          {icon ? <span className="callout__icon">{icon}</span> : null}
           <span>{title}</span>
         </div>
       )}
@@ -88,7 +88,7 @@ export default function WhyEnergyMattersPage() {
             <QuoteBlock>
               Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from - until it&apos;s not there.
             </QuoteBlock>
-            <div className="flex items-center gap-4 text-[var(--)]">
+            <div className="flex items-center gap-4 text-muted">
               <span>30-40 min read</span>
               <span>•</span>
               <span>Last updated: February 2026</span>
@@ -112,7 +112,7 @@ export default function WhyEnergyMattersPage() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="px-2.5 py-1 bg-inset hover: hover:bg-canvas border border-border rounded-full transition-colors"
+                  className="px-2.5 py-1 bg-inset hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
                 >
                   {label}
                 </a>
@@ -591,17 +591,17 @@ export default function WhyEnergyMattersPage() {
             <h3>Countries Getting It (Mostly) Right</h3>
             <div className="grid-3 my-6">
               <div className="stat-card">
-                <div className="stat-card__icon">🇳🇴</div>
+                <div className="stat-card__flag"><FlagImg iso3="NOR" size={24} /></div>
                 <div className="stat-card__value">Norway</div>
                 <div className="stat-card__label">95%+ renewable, hydro-based, independent & affordable</div>
               </div>
               <div className="stat-card">
-                <div className="stat-card__icon">🇫🇷</div>
+                <div className="stat-card__flag"><FlagImg iso3="FRA" size={24} /></div>
                 <div className="stat-card__value">France</div>
                 <div className="stat-card__label">70% nuclear, low-carbon, 50-year strategic bet</div>
               </div>
               <div className="stat-card">
-                <div className="stat-card__icon">🇵🇱</div>
+                <div className="stat-card__flag"><FlagImg iso3="POL" size={24} /></div>
                 <div className="stat-card__value">Poland</div>
                 <div className="stat-card__label">Diversifying: nuclear + offshore wind + coal backup</div>
               </div>
@@ -679,7 +679,7 @@ export default function WhyEnergyMattersPage() {
         <div className="mt-12 pt-6 border-t border-border text-center">
           <a
             href="#"
-            className="text-[var(--text-article-base)] hover: transition-colors"
+            className="text-[var(--text-article-base)] hover:text-primary transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });

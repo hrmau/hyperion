@@ -139,6 +139,21 @@ const chapters: Chapter[] = [
     dataYear: 2024,
     color: 'var(--scale-6)',
   },
+  {
+    id: 'chokepoint',
+    era: 'Chapter 9',
+    title: 'One Channel, Twenty Miles Wide',
+    years: '2026',
+    narrative: [
+      'Roughly a fifth of the world\'s oil, and a large share of its liquefied gas, leaves through a single channel about twenty miles across at its narrowest. The Strait of Hormuz has always been the most concentrated risk in the energy system, and for decades it held.',
+      'When that route is interrupted the price of everything moves - not because the oil has stopped existing, but because it cannot get to where it is burned. Shipping insurance, gas contracts and industrial output reprice within days of each other.',
+      'The part nobody had costed: Qatar produces much of the world\'s helium as a by-product of the same gas, and it leaves by the same water. Helium cannot be manufactured, only extracted. Semiconductor fabs need it to make chips, and every MRI scanner in every hospital needs it to stay cold.',
+      'Electricity is the one link in that chain a country can choose to build at home. That is the argument this whole site is making.',
+    ],
+    showCountries: ['QAT', 'ARE', 'SAU', 'JPN'],
+    dataYear: 2025,
+    color: 'var(--clay)',
+  },
 ];
 
 function MiniEnergyBar({ country, year }: { country: Country; year: number }) {
@@ -181,12 +196,24 @@ function MiniEnergyBar({ country, year }: { country: Country; year: number }) {
   );
 }
 
+/**
+ * A chapter's accent at low opacity, for the panel behind its illustration.
+ *
+ * These were built by appending hex alpha - `${color}15` - which worked while
+ * the accents were literal hexes and silently produced `var(--scale-5)15` once
+ * they became tokens. Invalid, so every chapter lost its tint and the page went
+ * flat. color-mix takes a token and gives back a real colour.
+ */
+function tint(color: string, percent: number): string {
+  return `color-mix(in oklab, ${color} ${percent}%, transparent)`;
+}
+
 function ChapterViz({ chapter, countries }: { chapter: Chapter; countries: CountriesData | null }) {
   if (!chapter.showCountries || !countries || !chapter.dataYear) {
     return (
       <div
         className="w-full h-full rounded-2xl flex items-center justify-center"
-        style={{ backgroundColor: `${chapter.color}15` }}
+        style={{ backgroundColor: tint(chapter.color, 14) }}
       >
         <div
           className="text-6xl font-bold opacity-20"
@@ -205,7 +232,7 @@ function ChapterViz({ chapter, countries }: { chapter: Chapter; countries: Count
   return (
     <div
       className="w-full h-full rounded-2xl p-6 flex flex-col justify-center"
-      style={{ backgroundColor: `${chapter.color}10` }}
+      style={{ backgroundColor: tint(chapter.color, 9) }}
     >
       <div className="text-xs text-muted uppercase tracking-wider mb-4">
         Energy Mix ({chapter.dataYear})

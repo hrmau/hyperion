@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { ArticleShell } from '@/components/ds/content/Prose';
+import FlagImg from '@/components/FlagImg';
 
 interface CollapsibleSectionProps {
   title: string;
@@ -12,6 +13,12 @@ interface CollapsibleSectionProps {
   children: React.ReactNode;
 }
 
+/**
+ * The header carried `rounded-lg px-2 -mx-2`, so its hover fill hung 8px past
+ * the section on each side while the divider under it did not - the fill and the
+ * rules simply did not line up. Full width now, and it clears the 44px control
+ * floor, which py-3 alone did not.
+ */
 function CollapsibleSection({ title, id, defaultOpen = false, children }: CollapsibleSectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -19,7 +26,7 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
     <section id={id} className="border-b border-border last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-3 flex items-center justify-between text-left hover:bg-inset transition-colors rounded-lg px-2 -mx-2"
+        className="w-full min-h-[44px] py-3 flex items-center justify-between text-left hover:bg-inset transition-colors"
         aria-expanded={isOpen}
       >
         <h2 className="text-sm font-medium text-primary">{title}</h2>
@@ -41,9 +48,9 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
 
 function InfoCard({ title, children, variant = 'default' }: { title?: string; children: React.ReactNode; variant?: 'default' | 'warning' | 'success' }) {
   const borderColors = {
-    default: 'border-l-blue-500',
-    warning: 'border-l-yellow-500',
-    success: 'border-l-green-500',
+    default: 'border-l-[var(--sage)]',
+    warning: 'border-l-[var(--clay)]',
+    success: 'border-l-[var(--green)]',
   };
 
   return (
@@ -87,7 +94,7 @@ export default function MethodologyPage() {
         title="Methodology"
         standfirst="Where the numbers come from, how the scores are built, and what they cannot tell you."
       >
-        <div className="content-container">
+        <div>
         {/* Hero Section */}
         <div className="mb-8">
           
@@ -112,7 +119,7 @@ export default function MethodologyPage() {
               <a
                 key={id}
                 href={`#${id}`}
-                className="px-3 py-1.5 bg-inset hover: hover:bg-canvas border border-border rounded-full transition-colors"
+                className="px-3 py-1.5 bg-inset hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
               >
                 {label}
               </a>
@@ -181,7 +188,7 @@ export default function MethodologyPage() {
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4>Our World in Data Energy Dataset</h4>
-                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
+                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
                   Primary Data Source
                 </span>
               </div>
@@ -217,7 +224,7 @@ export default function MethodologyPage() {
                   href="https://github.com/owid/energy-data"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   github.com/owid/energy-data →
                 </a>
@@ -225,7 +232,7 @@ export default function MethodologyPage() {
                   href="https://ember-climate.org/data/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   ember-climate.org (underlying data) →
                 </a>
@@ -241,7 +248,7 @@ export default function MethodologyPage() {
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4>World Nuclear Association & EIA</h4>
-                <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
+                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
                   Uranium Production
                 </span>
               </div>
@@ -256,7 +263,7 @@ export default function MethodologyPage() {
                   href="https://world-nuclear.org/information-library/nuclear-fuel-cycle/mining-of-uranium/world-uranium-mining-production"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   World Nuclear Association →
                 </a>
@@ -264,7 +271,7 @@ export default function MethodologyPage() {
                   href="https://www.eia.gov/uranium/marketing/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   US EIA Uranium Reports →
                 </a>
@@ -275,7 +282,7 @@ export default function MethodologyPage() {
             <div className="card p-5">
               <div className="flex items-start justify-between mb-3">
                 <h4>World Bank & UNDP</h4>
-                <span className="bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
+                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
                   Socioeconomic Data
                 </span>
               </div>
@@ -306,7 +313,7 @@ export default function MethodologyPage() {
                   href="https://data.worldbank.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   World Bank Open Data →
                 </a>
@@ -314,7 +321,7 @@ export default function MethodologyPage() {
                   href="https://hdr.undp.org/data-center"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors"
                 >
                   UNDP Human Development Data →
                 </a>
@@ -357,7 +364,7 @@ export default function MethodologyPage() {
             </p>
 
             {/* Layer 0 - Demand-Based Calculation */}
-            <div className="card p-5 mb-4 border-l-4 border-l-blue-500">
+            <div className="card p-5 mb-4 border-l-4 border-l-[var(--sage)]">
               <h4 className="mb-2">Layer 0: Demand-Based Calculation (Foundation)</h4>
               <p className="mb-3">
                 All percentages are calculated against <strong>electricity demand</strong>, not generation.
@@ -370,7 +377,7 @@ export default function MethodologyPage() {
   - Imports: 20 TWh (from neighboring grids)
 
 Using generation as denominator:
-  → 80 TWh / 80 TWh = 100% "independent" WRONG
+  → 80 TWh / 80 TWh = 100%"independent" WRONG
 
 Using demand as denominator:
   → 80 TWh / 100 TWh = 80% max independence CORRECT
@@ -535,7 +542,7 @@ Everyone Else: 0% (imports 100%)
             {/* Example 1: Germany */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span>🇩🇪</span>
+                <FlagImg iso3="DEU" size={20} />
                 <div>
                   <h4>Germany (2023)</h4>
                   <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EAB308', color: 'white' }}>
@@ -578,13 +585,13 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
               </CodeBlock>
 
               <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                  <h5 className="text-green-700 dark:text-green-400 mb-1">Strengths</h5>
-                  <p className="text-green-600 dark:text-green-300">50% renewable electricity is fully independent</p>
+                <div className="p-3 bg-inset border border-border rounded-lg">
+                  <h5 className="text-[var(--green)] mb-1">Strengths</h5>
+                  <p className="text-[var(--green)] dark:text-[var(--green)]">50% renewable electricity is fully independent</p>
                 </div>
-                <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                  <h5 className="text-red-700 dark:text-red-400 mb-1">Vulnerabilities</h5>
-                  <p className="text-red-600 dark:text-red-300">Extreme gas dependency (imports 97.6%)</p>
+                <div className="p-3 bg-inset border border-border rounded-lg">
+                  <h5 className="text-secondary dark:text-secondary mb-1">Vulnerabilities</h5>
+                  <p className="text-secondary dark:text-secondary">Extreme gas dependency (imports 97.6%)</p>
                 </div>
               </div>
             </div>
@@ -592,7 +599,7 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
             {/* Example 2: France */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span>🇫🇷</span>
+                <FlagImg iso3="FRA" size={20} />
                 <div>
                   <h4>France (2023)</h4>
                   <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
@@ -637,17 +644,17 @@ Oil contribution:       (2/445) × 0.6% = 0.003 pts
 TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
               </CodeBlock>
 
-              <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
-                <h5 className="text-amber-800 dark:text-amber-300 mb-2">Why we score it this way</h5>
-                <ul className="text-amber-700 dark:text-amber-400 space-y-1">
+              <div className="mt-4 p-4 bg-inset border border-border rounded-lg">
+                <h5 className="text-[var(--clay)] mb-2">Why we score it this way</h5>
+                <ul className="text-[var(--clay)] space-y-1">
                   <li>• Uranium dependency is real: France imports 100% of uranium ore</li>
                   <li>• Supply chain vulnerability: Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
                   <li>• Educational mission: We&apos;re measuring <em>independence</em>, not <em>security</em></li>
                 </ul>
 
-                <div className="mt-3 pt-3 border-t border-amber-200 dark:border-amber-700">
-                  <h6 className="text-amber-800 dark:text-amber-300 mb-1">Important Distinction:</h6>
-                  <ul className="text-amber-700 dark:text-amber-400 space-y-1">
+                <div className="mt-3 pt-3 border-t border-border">
+                  <h6 className="text-[var(--clay)] mb-1">Important Distinction:</h6>
+                  <ul className="text-[var(--clay)] space-y-1">
                     <li>Energy Security: France HAS this (reliable nuclear fleet, diversified uranium suppliers, strategic fuel reserves)</li>
                     <li>Energy Independence: France LACKS this (zero uranium mining, zero fossil fuel production)</li>
                   </ul>
@@ -658,7 +665,7 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
             {/* Example 3: Norway */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span>🇳🇴</span>
+                <FlagImg iso3="NOR" size={20} />
                 <div>
                   <h4>Norway (2023)</h4>
                   <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
@@ -702,7 +709,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             {/* Example 4: Japan */}
             <div className="card p-5 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span>🇯🇵</span>
+                <FlagImg iso3="JPN" size={20} />
                 <div>
                   <h4>Japan (2023)</h4>
                   <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
@@ -743,7 +750,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             {/* Example 5: Kazakhstan */}
             <div className="card p-5">
               <div className="flex items-center gap-3 mb-4">
-                <span>🇰🇿</span>
+                <FlagImg iso3="KAZ" size={20} />
                 <div>
                   <h4>Kazakhstan (2023)</h4>
                   <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
@@ -786,7 +793,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             </p>
 
             <div className="space-y-4">
-              <div className="card p-4 border-l-4 border-l-red-500">
+              <div className="card p-4 border-l-4 border-l-[var(--clay)]">
                 <h4 className="mb-2">NOT a measure of &quot;good&quot; vs &quot;bad&quot; energy policy</h4>
                 <p>
                   A country with 100% coal from domestic mines scores higher than a country with 100% imported renewables.
@@ -794,7 +801,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </p>
               </div>
 
-              <div className="card p-4 border-l-4 border-l-red-500">
+              <div className="card p-4 border-l-4 border-l-[var(--clay)]">
                 <h4 className="mb-2">NOT a measure of energy security</h4>
                 <div className="overflow-x-auto mt-3">
                   <table className="w-full">
@@ -826,7 +833,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </div>
               </div>
 
-              <div className="card p-4 border-l-4 border-l-red-500">
+              <div className="card p-4 border-l-4 border-l-[var(--clay)]">
                 <h4 className="mb-2">NOT a measure of sustainability</h4>
                 <p>
                   Fossil fuel independence counts the same as renewable independence.
@@ -834,7 +841,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 </p>
               </div>
 
-              <div className="card p-4 border-l-4 border-l-red-500">
+              <div className="card p-4 border-l-4 border-l-[var(--clay)]">
                 <h4 className="mb-2">NOT a measure of electricity prices or grid reliability</h4>
                 <p>
                   Norway is independent AND has low prices. South Africa has domestic coal but frequent load-shedding.
@@ -842,9 +849,9 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-              <h4 className="text-green-800 dark:text-green-300 mb-2">What it IS measuring</h4>
-              <ul className="text-green-700 dark:text-green-400 space-y-1">
+            <div className="mt-6 p-4 bg-inset border border-border rounded-lg">
+              <h4 className="text-[var(--green)] dark:text-[var(--green)] mb-2">What it IS measuring</h4>
+              <ul className="text-[var(--green)] space-y-1">
                 <li>Geopolitical vulnerability to supply disruptions</li>
                 <li>Exposure to foreign fuel price shocks</li>
                 <li>Dependence on international trade routes</li>
@@ -1020,21 +1027,21 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 <ul className="space-y-1">
                   <li>
                     <strong>Energy data (primary):</strong>
-                    <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Our World in Data Energy Dataset</a>
+                    <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">Our World in Data Energy Dataset</a>
                   </li>
                   <li>
                     <strong>Electricity generation (underlying):</strong>
-                    <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">Ember Climate</a>
+                    <a href="https://ember-climate.org/data/" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">Ember Climate</a>
                   </li>
                   <li>
                     <strong>Uranium production:</strong>
-                    <a href="https://world-nuclear.org/information-library/nuclear-fuel-cycle/mining-of-uranium/world-uranium-mining-production" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">World Nuclear Association</a>,
-                    <a href="https://www.eia.gov/uranium/marketing/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">US EIA</a>
+                    <a href="https://world-nuclear.org/information-library/nuclear-fuel-cycle/mining-of-uranium/world-uranium-mining-production" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">World Nuclear Association</a>,
+                    <a href="https://www.eia.gov/uranium/marketing/" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">US EIA</a>
                   </li>
                   <li>
                     <strong>Socioeconomic data:</strong>
-                    <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">World Bank</a>,
-                    <a href="https://hdr.undp.org/data-center" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">UNDP Human Development</a>
+                    <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">World Bank</a>,
+                    <a href="https://hdr.undp.org/data-center" target="_blank" rel="noopener noreferrer" className="text-secondary underline decoration-dotted underline-offset-2 hover:text-primary transition-colors ml-1">UNDP Human Development</a>
                   </li>
                 </ul>
               </div>
@@ -1165,7 +1172,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
         <div className="mt-12 pt-6 border-t border-border text-center">
           <a
             href="#"
-            className="hover: transition-colors"
+            className="hover:text-primary transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
