@@ -124,7 +124,7 @@ export default function SiteFooter({ style }: SiteFooterProps) {
               color: 'var(--text-tertiary)',
             }}
           >
-            Where the world&rsquo;s electricity actually comes from — {coverage}, free, no account.
+            Where the world&rsquo;s electricity actually comes from - {coverage}, free, no account.
           </p>
         </div>
 

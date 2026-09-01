@@ -29,7 +29,7 @@ function calculateInsights(data: CorrelationDataPoint[], rSquared: number | null
     insights.push({
       kicker: 'Correlation',
       title: `${strength.charAt(0).toUpperCase() + strength.slice(1)} Correlation`,
-      description: `r² = ${rSquared.toFixed(2)} — ${Math.round(rSquared * 100)}% of the variance in prosperity metrics can be explained by electricity consumption.`,
+      description: `r² = ${rSquared.toFixed(2)} - ${Math.round(rSquared * 100)}% of the variance in prosperity metrics can be explained by electricity consumption.`,
     });
   }
 

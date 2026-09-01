@@ -423,7 +423,7 @@ function Side({
         <Stat label="Generation" value={formatTWh(yd.total_generation_twh)} />
         <Stat
           label="Independence"
-          value={score ? formatIndependenceScore(score.score) : '—'}
+          value={score ? formatIndependenceScore(score.score) : '-'}
           note={score?.missingFossilData ? 'Incomplete fuel data' : undefined}
         />
         <Stat label="Emissions" value={formatEmissions(yd.emissions.total_mtco2)} />
@@ -502,9 +502,9 @@ function ComparePageContent() {
   // Dynamic page title
   useEffect(() => {
     if (resolvedA && resolvedB) {
-      document.title = `${resolvedA.label} vs ${resolvedB.label} — Grid Gorilla`;
+      document.title = `${resolvedA.label} vs ${resolvedB.label} - Grid Gorilla`;
     } else {
-      document.title = 'Compare — Grid Gorilla';
+      document.title = 'Compare - Grid Gorilla';
     }
   }, [resolvedA, resolvedB]);
 
@@ -652,7 +652,7 @@ function ComparePageContent() {
                 </>
               ) : (
                 <>
-                  These two are not the same year — {resolvedA.label} is {resolvedA.actualYear} and{' '}
+                  These two are not the same year - {resolvedA.label} is {resolvedA.actualYear} and{' '}
                   {resolvedB.label} is {resolvedB.actualYear}. National statistics offices publish
                   at different speeds, and a comparison across years is worth less than one within
                   a year.

@@ -274,7 +274,7 @@ export default function Explore() {
             style={{ marginTop: 'var(--space-8)', maxWidth: '72ch' }}
           >
             Area is land, not electricity. Singapore and Malta are almost invisible here and both
-            matter — and the countries that top the clean rankings are often the ones a map makes
+            matter - and the countries that top the clean rankings are often the ones a map makes
             smallest.
           </Banner>
         </div>

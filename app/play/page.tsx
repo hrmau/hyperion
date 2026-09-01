@@ -400,7 +400,7 @@ export default function PlayPage() {
                     marginBottom: 'var(--space-8)',
                   }}
                 >
-                  {wasCorrect ? 'Correct.' : `Not quite — it's ${
+                  {wasCorrect ? 'Correct.' : `Not quite - it's ${
                     [left, right].find((s) => s.iso3 === winner)?.name
                   }.`}
                 </div>

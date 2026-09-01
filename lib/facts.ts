@@ -254,7 +254,7 @@ export const loadWorldView = cache(async (): Promise<HomeView | null> => {
       solarThen != null
         ? {
             headline: 'Watch the solar band.',
-            detail: `It was ${solarThen.toFixed(1)}% of world generation five years ago and is ${solar.toFixed(1)}% now — the fastest change on this chart, and the one most forecasts missed.`,
+            detail: `It was ${solarThen.toFixed(1)}% of world generation five years ago and is ${solar.toFixed(1)}% now - the fastest change on this chart, and the one most forecasts missed.`,
           }
         : null,
     data,

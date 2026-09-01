@@ -107,7 +107,7 @@
       },
       "PETROSTATES": {
         "name": "Petrostates",
-        "description": "OPEC core members + Russia — the fossil fuel powers",
+        "description": "OPEC core members + Russia - the fossil fuel powers",
         "source": "manual",
         "members": ["SAU", "IRN", "IRQ", "KWT", "VEN", "ARE", "DZA", "NGA", "RUS"]
       },
