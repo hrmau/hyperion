@@ -18,6 +18,7 @@ import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
 import { RankedBarList } from '@/components/ds/data/RankedBarList';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
+import { leadStat } from '@/lib/leadStat';
 import { loadHomeView, loadSwitcherIndex, loadHomeQuestion, publishableIso3 } from '@/lib/facts';
 import { theName, subjectName, possessiveName } from '@/lib/countryNames';
 
@@ -97,6 +98,7 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
   const isWorld = view.key === 'WORLD';
   const question = await loadHomeQuestion(view.iso3);
   const named = theName(view.name);
+  const lead = view.hero ? leadStat(view.hero, view.data) : null;
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -172,33 +174,48 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
               </p>
             )}
 
+            {/* Key figures, ruled off from the actions below them. Without the
+                second rule the buttons read as a fourth statistic. */}
             <div
               style={{
                 display: 'flex',
                 gap: 'var(--space-8)',
                 flexWrap: 'wrap',
                 margin: 'var(--space-8) 0',
-                paddingTop: 'var(--space-7)',
+                padding: 'var(--space-7) 0',
                 borderTop: '1px solid var(--border-default)',
+                borderBottom: '1px solid var(--border-default)',
               }}
             >
-              <Stat
-                label="Clean share"
-                value={num(view.data.aggregates.clean_pct)}
-                unit="%"
-                note={`in ${view.year}`}
-                tone={view.data.aggregates.clean_pct >= 60 ? 'accent' : 'default'}
-              />
-              <Stat
-                label="Total output"
-                value={num(
-                  view.data.total_generation_twh,
-                  view.data.total_generation_twh < 10 ? 1 : 0
-                )}
-                unit="TWh"
-                note="a year"
-              />
-              {perPerson != null && (
+              {lead && (
+                <Stat
+                  label={lead.label}
+                  value={lead.value}
+                  unit={lead.unit}
+                  note={lead.note}
+                  tone="accent"
+                />
+              )}
+              {lead?.label !== 'Clean share' && (
+                <Stat
+                  label="Clean share"
+                  value={num(view.data.aggregates.clean_pct)}
+                  unit="%"
+                  note={`in ${view.year}`}
+                />
+              )}
+              {lead?.label !== 'Total output' && (
+                <Stat
+                  label="Total output"
+                  value={num(
+                    view.data.total_generation_twh,
+                    view.data.total_generation_twh < 10 ? 1 : 0
+                  )}
+                  unit="TWh"
+                  note="a year"
+                />
+              )}
+              {perPerson != null && lead?.label !== 'Per person' && (
                 <Stat label="Per person" value={num(perPerson)} unit="kWh" note="a year" />
               )}
             </div>
