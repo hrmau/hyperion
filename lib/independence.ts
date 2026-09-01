@@ -325,7 +325,7 @@ export function calculateIndependenceScoreV2(
   // "no data" — which of them is missing changes how much the score is worth.
   if (unknownBurnedFuels.length > 0) {
     vulnerabilities.push(
-      `Import data missing for ${unknownBurnedFuels.join(', ')} — assumed imported`
+      `Import data missing for ${unknownBurnedFuels.join(', ')} - assumed imported`
     );
   } else if (!fossilData && yearData.aggregates.fossil_pct > 10) {
     vulnerabilities.push(

@@ -246,7 +246,7 @@ export default function RankingsPage() {
         align: 'right',
         width: 120,
         render: (r) =>
-          r.available ? formatMeasure(measure, r.value, r.missingFossilData) : '—',
+          r.available ? formatMeasure(measure, r.value, r.missingFossilData) : '-',
       },
     ],
     [measure]
@@ -354,7 +354,7 @@ export default function RankingsPage() {
                       r.independenceAvailable
                         ? formatIndependenceScore(r.independence) +
                           (r.missingFossilData ? '*' : '')
-                        : '—'
+                        : '-'
                     }
                     note={r.missingFossilData ? 'Incomplete fuel data' : undefined}
                   />
@@ -404,7 +404,7 @@ export default function RankingsPage() {
 
         <GorillaNote lead="The top of this table is often geology, not policy.">
           Norway, Brazil and Paraguay are clean because of where they are. Denmark and France chose
-          it. That distinction matters more than the ordering does — and an asterisk means the
+          it. That distinction matters more than the ordering does - and an asterisk means the
           independence score is built on incomplete fuel data.
         </GorillaNote>
       </main>

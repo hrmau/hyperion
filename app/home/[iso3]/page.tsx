@@ -47,7 +47,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Grid Gorilla — what keeps your lights on',
+    title: 'Grid Gorilla - what keeps your lights on',
     description:
       'Every country on Earth runs on something. See what your grid actually burns, how clean it is, and how it compares with 200 others.',
     alternates: { canonical: '/' },
@@ -322,7 +322,7 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
                   </div>
                   <p style={{ margin: 0, fontSize: 'var(--fs-ui)', color: 'var(--green-ink)', opacity: 0.8 }}>
                     {question.aboutYou
-                      ? `Pick one — it is your grid on the line.`
+                      ? `Pick one - it is your grid on the line.`
                       : `Pick one and see how many you get right.`}
                   </p>
                 </>

@@ -9,7 +9,7 @@ function QuoteBlock({ children, attribution }: { children: React.ReactNode; attr
   return (
     <blockquote className="border-l-[3px] border-[var(--color-primary-brand)] pl-5 py-1 my-6 italic text-secondary leading-relaxed">
       <p>{children}</p>
-      {attribution && <cite className="text-[var(--text-sm)] text-muted mt-2 block not-italic">— {attribution}</cite>}
+      {attribution && <cite className="text-[var(--text-sm)] text-muted mt-2 block not-italic">- {attribution}</cite>}
     </blockquote>
   );
 }
@@ -157,12 +157,12 @@ export default function WhyEnergyMattersPage() {
             </p>
 
             <ul>
-              <li><strong>Manufacturing & Industry</strong> — Steel (5,000 kWh/tonne), aluminum (15,000 kWh/tonne), jobs, exports</li>
-              <li><strong>Food System</strong> — Fertilizer, irrigation, processing, cold chain → 8 billion people fed</li>
-              <li><strong>Healthcare</strong> — 24/7 hospitals, vaccines, medical imaging → doubled life expectancy</li>
-              <li><strong>Clean Water</strong> — Treatment, pumping, desalination → eliminated waterborne disease</li>
-              <li><strong>Technology</strong> — Data centers, telecom, cloud services → the digital economy</li>
-              <li><strong>Transportation</strong> — EVs, electric rail, urban transit → increasingly electrifying</li>
+              <li><strong>Manufacturing & Industry</strong> - Steel (5,000 kWh/tonne), aluminum (15,000 kWh/tonne), jobs, exports</li>
+              <li><strong>Food System</strong> - Fertilizer, irrigation, processing, cold chain → 8 billion people fed</li>
+              <li><strong>Healthcare</strong> - 24/7 hospitals, vaccines, medical imaging → doubled life expectancy</li>
+              <li><strong>Clean Water</strong> - Treatment, pumping, desalination → eliminated waterborne disease</li>
+              <li><strong>Technology</strong> - Data centers, telecom, cloud services → the digital economy</li>
+              <li><strong>Transportation</strong> - EVs, electric rail, urban transit → increasingly electrifying</li>
             </ul>
 
             <h3>The Harsh Reality</h3>
@@ -176,7 +176,7 @@ export default function WhyEnergyMattersPage() {
             </Callout>
 
             <Callout type="warning" title="The Lesson">
-              Energy isn&apos;t just infrastructure — it&apos;s economic survival.
+              Energy isn&apos;t just infrastructure - it&apos;s economic survival.
             </Callout>
           </section>
 
@@ -195,10 +195,10 @@ export default function WhyEnergyMattersPage() {
             </p>
 
             <ul>
-              <li><strong>Household bills</strong> — German households: €100/month → €300-500/month, energy poverty, heat vs food</li>
-              <li><strong>Industrial shutdown</strong> — Fertilizer plants closed, chemical production curtailed, aluminum smelters gone permanently</li>
-              <li><strong>Food prices</strong> — High gas → expensive fertilizer → food prices up 15-20%, UK food bank usage +30%</li>
-              <li><strong>Competitiveness</strong> — EU factories at €200/MWh vs US €100/MWh vs China €70/MWh → production fled abroad</li>
+              <li><strong>Household bills</strong> - German households: €100/month → €300-500/month, energy poverty, heat vs food</li>
+              <li><strong>Industrial shutdown</strong> - Fertilizer plants closed, chemical production curtailed, aluminum smelters gone permanently</li>
+              <li><strong>Food prices</strong> - High gas → expensive fertilizer → food prices up 15-20%, UK food bank usage +30%</li>
+              <li><strong>Competitiveness</strong> - EU factories at €200/MWh vs US €100/MWh vs China €70/MWh → production fled abroad</li>
             </ul>
 
             <h3>Why This Matters to Regular People</h3>
@@ -255,8 +255,8 @@ export default function WhyEnergyMattersPage() {
 
             <h3>Modern Examples</h3>
             <ul>
-              <li><strong>China rare earths</strong> — Controls 70% of production. 2010: restricted exports during Japan dispute → Japan backed down</li>
-              <li><strong>Japan WWII</strong> — No domestic oil. US embargo 1941 → Pearl Harbor partly to secure Southeast Asian oil</li>
+              <li><strong>China rare earths</strong> - Controls 70% of production. 2010: restricted exports during Japan dispute → Japan backed down</li>
+              <li><strong>Japan WWII</strong> - No domestic oil. US embargo 1941 → Pearl Harbor partly to secure Southeast Asian oil</li>
             </ul>
 
             <h3>The Uncomfortable Truth</h3>
@@ -456,7 +456,7 @@ export default function WhyEnergyMattersPage() {
             </table>
 
             <Callout type="info" title="Long-term Impact">
-              These decisions will shape electricity bills, industrial base, job opportunities, and national security — for decades.
+              These decisions will shape electricity bills, industrial base, job opportunities, and national security - for decades.
             </Callout>
           </section>
 
@@ -567,11 +567,11 @@ export default function WhyEnergyMattersPage() {
               Good energy policy balances:
             </p>
             <ul>
-              <li><strong>Affordability</strong> — reasonable costs</li>
-              <li><strong>Reliability</strong> — 24/7 availability</li>
-              <li><strong>Security</strong> — minimize dependencies</li>
-              <li><strong>Sustainability</strong> — environmental concerns</li>
-              <li><strong>Realism</strong> — engineering reality</li>
+              <li><strong>Affordability</strong> - reasonable costs</li>
+              <li><strong>Reliability</strong> - 24/7 availability</li>
+              <li><strong>Security</strong> - minimize dependencies</li>
+              <li><strong>Sustainability</strong> - environmental concerns</li>
+              <li><strong>Realism</strong> - engineering reality</li>
             </ul>
 
             <Callout type="info" title="The Energy Trilemma">
@@ -612,7 +612,7 @@ export default function WhyEnergyMattersPage() {
               Technology is improving, costs are falling, and awareness is rising (2022 was a wake-up call). Solutions exist.
             </Callout>
             <p>
-              The challenge: Build faster than ever while maintaining reliability, managing costs, navigating geopolitics. Hard, but doable — if we&apos;re smart.
+              The challenge: Build faster than ever while maintaining reliability, managing costs, navigating geopolitics. Hard, but doable - if we&apos;re smart.
             </p>
           </section>
 

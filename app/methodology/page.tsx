@@ -227,7 +227,7 @@ export default function MethodologyPage() {
               </div>
               <div className="mt-3 p-3 bg-inset rounded-lg">
                 <p>
-                  <strong>License:</strong> CC BY 4.0 — Our World in Data layer, with underlying Ember data also CC BY 4.0
+                  <strong>License:</strong> CC BY 4.0 - Our World in Data layer, with underlying Ember data also CC BY 4.0
                 </p>
               </div>
             </div>
@@ -328,7 +328,7 @@ export default function MethodologyPage() {
             <InfoCard variant="warning" title="Key Principle">
               A country generating 1000 TWh of electricity from imported natural gas is NOT energy independent,
               even though it &quot;produces&quot; lots of electricity. Similarly, a country importing 20% of its electricity
-              via interconnectors is 20% dependent on foreign grids — that imported portion contributes zero to independence.
+              via interconnectors is 20% dependent on foreign grids - that imported portion contributes zero to independence.
             </InfoCard>
 
             <h3 className="mt-6 mb-2">Why Energy Independence Matters</h3>
@@ -372,7 +372,7 @@ Using demand as denominator:
   → The 20% import gap contributes ZERO to score`}
               </CodeBlock>
               <p className="mt-3">
-                <strong>Key insight:</strong> Electricity imported via interconnectors is the most direct form of energy dependence —
+                <strong>Key insight:</strong> Electricity imported via interconnectors is the most direct form of energy dependence -
                 it&apos;s not even fuel-for-generation, but finished electricity controlled by a neighboring grid.
               </p>
             </div>
@@ -953,7 +953,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                   If a country generates 80 TWh but demands 100 TWh, the 20 TWh imported via interconnectors contributes zero to the score.
                 </p>
                 <p>
-                  This is arguably the most direct form of energy dependence — it&apos;s not even fuel-for-generation,
+                  This is arguably the most direct form of energy dependence - it&apos;s not even fuel-for-generation,
                   but finished electricity controlled by a neighboring grid.
                 </p>
               </div>
