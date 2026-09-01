@@ -41,7 +41,7 @@ const MEASURES = [
   'Renewables %',
   'Wind+Solar %',
   'Nuclear %',
-  'CO₂',
+  'CO₂e',
 ] as const;
 type Measure = (typeof MEASURES)[number];
 
@@ -97,7 +97,7 @@ function measureOf(measure: Measure, yd: YearData, independence: number | null):
       return yd.aggregates.wind_solar_pct;
     case 'Nuclear %':
       return yd.generation.nuclear?.pct ?? 0;
-    case 'CO₂':
+    case 'CO₂e':
       return yd.emissions.total_mtco2;
   }
 }
@@ -106,7 +106,7 @@ function formatMeasure(measure: Measure, value: number, missingFossil: boolean):
   switch (measure) {
     case 'Generation':
       return formatTWh(value);
-    case 'CO₂':
+    case 'CO₂e':
       return formatEmissions(value);
     case 'Independence':
       return formatIndependenceScore(value) + (missingFossil ? '*' : '');

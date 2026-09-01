@@ -466,7 +466,7 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
 
         {neighbours.length > 0 && (
           <section style={sectionStyle}>
-            <h2 style={headingStyle}>Grids of a similar size nearby</h2>
+            <h2 style={headingStyle}>{facts.name}&rsquo;s neighbours</h2>
             <ul
               className="gg-card-row"
               style={{

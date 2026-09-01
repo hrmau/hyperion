@@ -102,7 +102,9 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <TopNav active="explore" />
+      {/* No active item: the homepage is not one of the primary nav destinations,
+          and marking Explore made it look as though you were already on the map. */}
+      <TopNav />
 
       <div
         style={{
@@ -365,10 +367,14 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
                     neighbour. "Thailand is third in Asia for bioenergy" under a
                     heading that says "your neighbours" leaves a reader in the
                     UAE wondering why they are being told that. */}
+                {/* The relationship has to be stated accurately: these are real
+                    neighbours now, not the nearest grid of a similar size, so
+                    the sentence must not claim a size match it no longer picks
+                    for. */}
                 <p style={claimStyle}>
                   {view.neighbours[0].cleanPct != null
-                    ? `${subjectName(view.neighbours[0].name)} runs a grid the size of ${possessiveName(view.name)}, and ${Math.round(view.neighbours[0].cleanPct)}% of it is clean against ${Math.round(view.data.aggregates.clean_pct)}%.`
-                    : `${subjectName(view.neighbours[0].name)} runs a grid about the size of ${possessiveName(view.name)}.`}
+                    ? `${subjectName(view.neighbours[0].name)} is ${view.neighbours[0].borders ? `over ${possessiveName(view.name)} border` : `the closest grid to ${theName(view.name)}`}, and ${Math.round(view.neighbours[0].cleanPct)}% of its electricity is clean against ${Math.round(view.data.aggregates.clean_pct)}%.`
+                    : `${subjectName(view.neighbours[0].name)} is ${view.neighbours[0].borders ? `over ${possessiveName(view.name)} border` : `the closest grid to ${theName(view.name)}`}.`}
                 </p>
                 <p style={supportStyle}>{view.neighbours[0].headline}</p>
                 <Link
