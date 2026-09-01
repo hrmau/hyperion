@@ -175,6 +175,44 @@ body {
     color: var(--text-secondary);
   }
 
+  /* Content-page grids.
+   *
+   * .grid-3 was used by /why and /methodology and defined nowhere - it was lost
+   * when this file went from 613 lines to 240 in the redesign, so every stat
+   * card stacked full-width and the pages read as a column of boxes. auto-fit
+   * rather than three fixed columns, so they collapse without a media query. */
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    display: grid;
+    gap: var(--space-5);
+    margin-block: var(--space-7);
+  }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) }
+
+  /* The action-card children went the same way as .grid-3. */
+  .action-card__title {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-body);
+    margin-bottom: var(--space-3);
+  }
+  .action-card__description {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--text-secondary);
+  }
+  .action-card__button {
+    display: inline-block;
+    margin-top: var(--space-5);
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-medium);
+    color: var(--green);
+  }
+
+  .stat-card__flag { margin-bottom: var(--space-4) }
+
   .comparison-table {
     width: 100%;
     border-collapse: collapse;

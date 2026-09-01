@@ -332,7 +332,7 @@ export default function UpdatesPage() {
                   href="https://ourworldindata.org/energy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover: underline decoration-dotted underline-offset-2"
+                  className="hover:text-primary underline decoration-dotted underline-offset-2"
                 >
                   Our World in Data
                 </a>
@@ -358,7 +358,7 @@ export default function UpdatesPage() {
               Have a feature request?{' '}
               <a
                 href="mailto:contact@gridgorilla.app"
-                className="hover: underline"
+                className="hover:text-primary underline"
               >
                 Let us know
               </a>
@@ -369,7 +369,7 @@ export default function UpdatesPage() {
           <div className="mt-6 text-center">
             <Link
               href="/explore"
-              className="hover: transition-colors"
+              className="hover:text-primary transition-colors"
             >
               ← Back to explorer
             </Link>

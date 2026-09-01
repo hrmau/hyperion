@@ -172,7 +172,7 @@ export default function CreditsPage() {
               or made an error, please{' '}
               <a
                 href="mailto:contact@gridgorilla.app"
-                className="hover: underline"
+                className="hover:text-primary underline"
               >
                 contact us
               </a>.
@@ -182,7 +182,7 @@ export default function CreditsPage() {
           <div className="mt-6 text-center">
             <Link
               href="/explore"
-              className="hover: transition-colors"
+              className="hover:text-primary transition-colors"
             >
               ← Back to explorer
             </Link>
