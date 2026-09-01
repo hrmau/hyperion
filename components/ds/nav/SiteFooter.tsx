@@ -82,7 +82,7 @@ export interface SiteFooterProps {
 }
 
 export default function SiteFooter({ style }: SiteFooterProps) {
-  const coverage = `${dataMeta.countryCount} countries · ${dataMeta.earliestYear}–${dataMeta.latestYear}`;
+  const coverage = `${dataMeta.countryCount} countries · ${dataMeta.earliestYear}-${dataMeta.latestYear}`;
 
   return (
     <footer
