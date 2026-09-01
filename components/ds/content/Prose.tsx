@@ -156,19 +156,16 @@ export interface ArticleShellProps {
  * and Terms structurally identical so they read as one publication.
  */
 export function ArticleShell({ kicker, title, standfirst, updated, children }: ArticleShellProps) {
-  // The column is centred, and the rules that separate the bands are not.
+  // Left-aligned at the gutter, like every other page on the site, and wide
+  // enough for what actually sits in it.
   //
-  // .gg-prose caps the measure at 68ch and never centred it, so on a wide screen
-  // a content page was a narrow ribbon pinned to the left with half the viewport
-  // empty beside it. /methodology centred its own inner container and /why did
-  // not, so the two pages did not even agree with each other.
-  //
-  // The band divs stay full width so their rules still span the page; only their
-  // contents are centred, which keeps the furniture and the reading column doing
-  // different jobs.
+  // Centring was the wrong fix: it matched /methodology to /why but left the
+  // same narrow ribbon, just with the empty space split in two. The real problem
+  // was the width. The column runs to --maxw-article now, and prose.css holds
+  // only the running text to a reading measure - so paragraphs stay legible
+  // while stat grids, tables and cards use the room.
   const column: CSSProperties = {
     maxWidth: 'var(--maxw-article)',
-    marginInline: 'auto',
   };
 
   return (

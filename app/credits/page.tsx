@@ -19,8 +19,17 @@ function AttributionCard({
   items: { name: string; url?: string; license: string; description: string }[]
 }) {
   return (
-    <div className="card p-5">
-      <h2 className="text-base font-semibold text-primary mb-4">{title}</h2>
+    <div className="card" style={{ padding: 'var(--space-6)' }}>
+      <h2
+        style={{
+          margin: '0 0 var(--space-5)',
+          fontSize: 'var(--fs-h4)',
+          fontWeight: 'var(--fw-bold)',
+          letterSpacing: 'var(--ls-h4)',
+        }}
+      >
+        {title}
+      </h2>
       <div className="space-y-4">
         {items.map((item, i) => (
           <div key={i} className="pb-4 border-b border-border-subtle last:border-b-0 last:pb-0">
@@ -31,16 +40,16 @@ function AttributionCard({
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-primary hover:text-secondary underline"
+                    style={{ fontSize: 'var(--fs-body)', fontWeight: 'var(--fw-medium)', textDecoration: 'underline', textUnderlineOffset: 3 }}
                   >
                     {item.name}
                   </a>
                 ) : (
-                  <span className="text-sm font-medium text-primary">{item.name}</span>
+                  <span style={{ fontSize: 'var(--fs-body)', fontWeight: 'var(--fw-medium)' }}>{item.name}</span>
                 )}
-                <p className="text-xs text-muted mt-1">{item.description}</p>
+                <p style={{ margin: 'var(--space-3) 0 0', fontSize: 'var(--fs-body-sm)', lineHeight: 'var(--lh-body-sm)', color: 'var(--text-secondary)' }}>{item.description}</p>
               </div>
-              <span className="text-xs text-muted bg-inset px-2 py-0.5 rounded shrink-0">
+              <span className="bg-inset shrink-0" style={{ padding: '3px 8px', borderRadius: 'var(--r-pill)', fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-mono-xs)', color: 'var(--text-tertiary)', whiteSpace: 'nowrap' }}>
                 {item.license}
               </span>
             </div>

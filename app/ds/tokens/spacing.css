@@ -28,8 +28,9 @@
   --maxw-hero: 17ch;    /* hero headline measure — keeps 2-3 lines */
   --maxw-lead: 46ch;    /* lead paragraph measure */
   --maxw-prose: 56ch;
-  /* The article column: the 68ch reading measure plus room for the wider
-     furniture that sits in it - stat grids, comparison tables, callouts - which
-     would otherwise be clipped to the measure meant for running text. */
-  --maxw-article: 78ch;
+  /* The article column. Wider than the reading measure on purpose: stat grids,
+     comparison tables and card rows live in here and were being clipped to a
+     width meant for running text. prose.css holds the text itself to
+     --prose-measure, so paragraphs stay legible inside the wider column. */
+  --maxw-article: 104ch;
 }
