@@ -4,7 +4,7 @@ import { ArticleShell } from '@/components/ds/content/Prose';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Credits & Attributions | Grid Gorilla',
+  title: 'Credits and sources',
   description: 'Data sources, attributions, and acknowledgements for Grid Gorilla.',
   alternates: {
     canonical: '/credits',

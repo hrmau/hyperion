@@ -48,7 +48,10 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Grid Gorilla - what keeps your lights on',
+    // Keyword-first like every other page, and the same separator. The old
+    // title led with the brand and contained no term anyone searches for; the
+    // voice lives in the description, where it has room.
+    title: { absolute: 'Electricity by country | Grid Gorilla' },
     description:
       'Every country on Earth runs on something. See what your grid actually burns, how clean it is, and how it compares with 200 others.',
     alternates: { canonical: '/' },

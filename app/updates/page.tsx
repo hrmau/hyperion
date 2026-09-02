@@ -32,7 +32,7 @@ function readDataMeta(): DataMeta | null {
 }
 
 export const metadata = {
-  title: "What's New | Grid Gorilla",
+  title: "What's new",
   description: 'Latest updates and feature releases for Grid Gorilla.',
   alternates: {
     canonical: '/updates',

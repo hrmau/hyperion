@@ -23,7 +23,19 @@ import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gridgorilla.app'),
-  title: "Grid Gorilla - Global Electricity Production",
+  /**
+   * One separator, one brand position, set once.
+   *
+   * Titles had drifted into three patterns - "Grid Gorilla - tagline",
+   * "Page | Grid Gorilla" and "Compare - Grid Gorilla" - because each route
+   * spelled its own out. A template means a page declares only its own half and
+   * cannot get the rest wrong. `absolute` opts out where a page needs full
+   * control.
+   */
+  title: {
+    default: 'Grid Gorilla',
+    template: '%s | Grid Gorilla',
+  },
   description: "Interactive visualization of global electricity production by country and geopolitical bloc",
   alternates: {
     canonical: '/',

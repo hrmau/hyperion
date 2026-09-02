@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Country Rankings | Grid Gorilla',
+  title: 'Country rankings',
   description: 'Rank countries by electricity generation, clean energy share, and emissions.',
   alternates: {
     canonical: '/rankings',

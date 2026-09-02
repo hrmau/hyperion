@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Compare Countries | Grid Gorilla',
+  title: 'Compare countries',
   description: 'Compare electricity generation and energy mix between countries and blocs.',
   alternates: {
     canonical: '/compare',

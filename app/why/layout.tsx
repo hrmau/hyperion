@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Why Grid Gorilla? | Grid Gorilla',
+  title: 'Why electricity matters',
   description: 'Why we built Grid Gorilla - making global energy data accessible.',
   alternates: {
     canonical: '/why',

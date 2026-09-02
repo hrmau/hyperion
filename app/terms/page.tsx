@@ -4,7 +4,7 @@ import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { ArticleShell } from '@/components/ds/content/Prose';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | Grid Gorilla',
+  title: 'Terms of use',
   description: 'Terms of use for Grid Gorilla, an educational data visualization tool for global electricity generation and energy data.',
   alternates: {
     canonical: '/terms',
