@@ -16,6 +16,18 @@
   text-wrap: pretty;
 }
 
+/* A heading inside a card opens the card; it does not continue the page.
+ *
+ * .gg-prose h2 carries a 2.4em top margin, which is the rhythm between sections
+ * of an article. Applied to the first heading inside a box it put roughly 70px
+ * of empty space above the text - the card looked broken rather than spaced. */
+.gg-prose .card :where(h2, h3, h4),
+.gg-prose .stat-card :where(h2, h3, h4),
+.gg-prose .callout :where(h2, h3, h4) {
+  margin-top: 0;
+  max-width: none;
+}
+
 /* The measure applies to running text, not to the column.
  *
  * Capping .gg-prose itself clipped everything inside it, so a three-up stat grid

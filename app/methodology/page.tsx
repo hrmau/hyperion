@@ -5,6 +5,7 @@ import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { ArticleShell } from '@/components/ds/content/Prose';
 import FlagImg from '@/components/FlagImg';
+import OnThisPage from '@/components/OnThisPage';
 
 interface CollapsibleSectionProps {
   title: string;
@@ -103,29 +104,17 @@ export default function MethodologyPage() {
           </p>
         </div>
 
-        {/* Quick Navigation */}
-        <nav className="card px-3 py-2.5 mb-6">
-          <h3 className="mb-2">Quick Navigation</h3>
-          <div className="flex flex-wrap gap-1.5">
-            {[
-              { id: 'mission', label: 'Our Mission' },
-              { id: 'data-sources', label: 'Data Sources' },
-              { id: 'methodology', label: 'Independence Score' },
-              { id: 'calculation', label: 'Calculation' },
-              { id: 'examples', label: 'Worked Examples' },
-              { id: 'limitations', label: 'Limitations' },
-              { id: 'faq', label: 'FAQ' },
-            ].map(({ id, label }) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className="px-3 py-1.5 bg-inset hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-        </nav>
+        <OnThisPage
+          items={[
+            { id: 'mission', label: 'Our Mission' },
+            { id: 'data-sources', label: 'Data Sources' },
+            { id: 'methodology', label: 'Independence Score' },
+            { id: 'calculation', label: 'Calculation' },
+            { id: 'examples', label: 'Worked Examples' },
+            { id: 'limitations', label: 'Limitations' },
+            { id: 'faq', label: 'FAQ' },
+          ]}
+        />
 
         <div className="space-y-0">
           {/* Section 1: Our Mission */}
