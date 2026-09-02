@@ -124,6 +124,20 @@
   font-family: var(--font-mono);
   color: var(--paper-a32);
 }
+
+/* A nav is not a list of points.
+ *
+ * The marker above is drawn on every li inside .gg-prose and positioned at
+ * left:0. In a navigation strip, where the li holds a pill rather than a
+ * sentence, it landed a stray dash on the corner of every pill.
+ *
+ * Deliberately one element deeper than the rule it overrides, so it wins on
+ * specificity rather than on source order - an earlier attempt matched the same
+ * weight, sat above it in the file, and simply lost. */
+.gg-prose nav ul > li::before,
+.gg-prose nav ol > li::before { content: none }
+.gg-prose nav ul > li,
+.gg-prose nav ol > li { padding-left: 0; margin-bottom: 0 }
 .gg-prose ol { counter-reset: gg-ol }
 .gg-prose ol > li { counter-increment: gg-ol }
 .gg-prose ol > li::before {
