@@ -227,17 +227,12 @@ export default function SiteFooter({ style }: SiteFooterProps) {
           </a>
           .
         </span>
-        <span
-          style={{
-            marginLeft: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 4,
-            textAlign: 'right',
-          }}
-        >
-          <span>Source data published {dataMeta.sourceUpdatedOn}</span>
-          <span>Analytics only with your consent.</span>
+        {/* One line, so no stacked column wrapper. The consent note that used to
+            sit under it is gone: the banner and /privacy say it where it counts,
+            and a footer telling people their analytics are consented is reassuring
+            nobody who was not already reassured. */}
+        <span style={{ marginLeft: 'auto', textAlign: 'right' }}>
+          Source data published {dataMeta.sourceUpdatedOn}
         </span>
       </div>
     </footer>
