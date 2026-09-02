@@ -502,9 +502,9 @@ function ComparePageContent() {
   // Dynamic page title
   useEffect(() => {
     if (resolvedA && resolvedB) {
-      document.title = `${resolvedA.label} vs ${resolvedB.label} - Grid Gorilla`;
+      document.title = `${resolvedA.label} vs ${resolvedB.label} | Grid Gorilla`;
     } else {
-      document.title = 'Compare - Grid Gorilla';
+      document.title = 'Compare countries | Grid Gorilla';
     }
   }, [resolvedA, resolvedB]);
 

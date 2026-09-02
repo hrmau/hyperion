@@ -60,26 +60,30 @@ export async function generateMetadata({
     // not to add a fifteenth near-identical entry to the index.
     return pageless
       ? {
-          title: `${pageless.name} | Grid Gorilla`,
+          title: `No profile for ${pageless.name}`,
           description: `${pageless.name}'s grid is too small to profile. Nearby grids and where to find them.`,
           robots: { index: false, follow: true },
         }
-      : { title: 'Country not found | Grid Gorilla', robots: { index: false, follow: true } };
+      : { title: 'Country not found', robots: { index: false, follow: true } };
   }
 
   const { facts } = p;
   // The description is the hook itself. A link to /country/nor in a group chat
   // should preview as the fact about Norway, not as the site's boilerplate.
   const description = [facts.hero.headline, facts.hero.detail].filter(Boolean).join(' ');
-  const title = `${facts.name}: where its electricity comes from`;
+  // "{Name}: where its electricity comes from" was nicer copy and pushed 29 of
+  // the 200 titles past 60 characters, where a search result truncates it -
+  // Saint Vincent and the Grenadines ran to 81. This is also closer to how the
+  // search is actually typed: "germany electricity mix".
+  const title = `${facts.name} electricity mix`;
   const url = `/country/${facts.iso3.toLowerCase()}`;
 
   return {
-    title: `${title} | Grid Gorilla`,
+    title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: 'article', siteName: 'Grid Gorilla' },
-    twitter: { card: 'summary', title, description },
+    openGraph: { title: `${title} | Grid Gorilla`, description, url, type: 'article', siteName: 'Grid Gorilla' },
+    twitter: { card: 'summary', title: `${title} | Grid Gorilla`, description },
   };
 }
 
