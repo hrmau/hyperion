@@ -40,6 +40,26 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   headers: async () => [
     {
+      /**
+       * Keep the site out of the index on every host but its own.
+       *
+       * hyperion-bice.vercel.app serves a complete, crawlable copy of all 419
+       * pages - 200, Allow: /, no robots header - and so does every preview
+       * deployment. The canonical tag points at gridgorilla.app, but a canonical
+       * is a hint rather than a directive, and this site's whole search case
+       * rests on 200 country pages that are similar to each other by design.
+       * A second full copy of them on another host is the one duplicate-content
+       * risk worth pre-empting.
+       *
+       * noindex rather than a robots.txt disallow, deliberately: a disallow
+       * stops the crawl before the directive is ever read, which can leave the
+       * URL indexed with no way to remove it. Let the crawler in, tell it no.
+       */
+      source: '/(.*)',
+      has: [{ type: 'host', value: '.*\\.vercel\\.app' }],
+      headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+    },
+    {
       source: '/(.*)',
       headers: [
         { key: 'X-Content-Type-Options', value: 'nosniff' },
