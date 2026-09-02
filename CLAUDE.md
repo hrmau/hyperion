@@ -336,6 +336,13 @@ worth knowing before changing anything:
   it at `max-age=63072000`; a second, weaker header here would be the one that
   wins.
 
+**Every host but `gridgorilla.app` returns `X-Robots-Tag: noindex`.** The
+project's `*.vercel.app` alias and every preview deployment serve a complete,
+crawlable copy of all 419 pages, and a canonical tag is a hint rather than a
+directive. It is `noindex` and not a robots.txt disallow on purpose: a disallow
+stops the crawl before the directive is read, which can leave a URL indexed with
+no way to remove it.
+
 `package.json` pins `sharp` via `overrides`. It is an optional dependency of
 Next, it had four high-severity libvips advisories, and overriding it was a
 smaller change than moving Next for that alone.
