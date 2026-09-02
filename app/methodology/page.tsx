@@ -197,6 +197,16 @@ export default function MethodologyPage() {
                       include methane and the rest of the lifecycle, which is why a
                       gas-only grid can carry a higher intensity than a coal one
                     </li>
+                    <li>
+                      • Our source publishes no geothermal column. The series behind it is
+                      &ldquo;other renewables excluding biofuel&rdquo;, which is geothermal plus
+                      wave, tidal and some non-biogenic waste. We call it{' '}
+                      <strong>geothermal</strong> only for the 18 grids where geothermal
+                      accounts for that series &mdash; together 97.6% of world generation in it
+                      &mdash; and &ldquo;other renewables&rdquo; everywhere else. Switzerland has
+                      1.04 TWh in the series and no geothermal industry; France&rsquo;s is a
+                      tidal barrage
+                    </li>
                   </ul>
                 </div>
                 <div>

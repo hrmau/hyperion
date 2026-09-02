@@ -618,14 +618,14 @@
   "year": 2025,
   "stale": false,
   "heroScore": 0.749,
-  "hero": "[rank] The Philippines is first in Asia for other renewables.",
-  "heroDetail": "Other renewables supplies 8% of its electricity.",
+  "hero": "[rank] The Philippines is first in Asia for geothermal.",
+  "heroDetail": "Geothermal supplies 8% of its electricity.",
   "supporting": [
    "[crossover] Coal overtook gas on the Philippines' grid in 2010.",
    "[peer] The Philippines has about as many people as Japan, and 8 times less electricity to share between them."
   ],
   "runnersUp": [
-   "[rank] 0.44 The Philippines is first in ASEAN for other renewables."
+   "[rank] 0.44 The Philippines is first in ASEAN for geothermal."
   ]
  },
  {
@@ -2009,17 +2009,17 @@
   "year": 2025,
   "stale": false,
   "heroScore": 0.99,
-  "hero": "[rank] New Zealand is third in the world for other renewables.",
-  "heroDetail": "Other renewables supplies 22% of its electricity.",
+  "hero": "[rank] New Zealand is third in the world for geothermal.",
+  "heroDetail": "Geothermal supplies 22% of its electricity.",
   "supporting": [
    "[trajectory] New Zealand has cleaned up its grid faster than most people realise.",
-   "[crossover] Other renewables overtook gas on New Zealand's grid in 2015.",
+   "[crossover] Geothermal overtook gas on New Zealand's grid in 2015.",
    "[rank] New Zealand is first in Oceania for hydro."
   ],
   "runnersUp": [
-   "[rank] 0.66 New Zealand is second in the OECD for other renewables.",
+   "[rank] 0.66 New Zealand is second in the OECD for geothermal.",
    "[rank] 0.44 New Zealand runs one of the cleanest grids in Oceania.",
-   "[rank] 0.44 New Zealand is first in Oceania for other renewables."
+   "[rank] 0.44 New Zealand is first in Oceania for geothermal."
   ]
  },
  {
@@ -2457,11 +2457,11 @@
   "supporting": [
    "[rank] Costa Rica runs one of the cleanest grids in Latin America and the Caribbean.",
    "[rank] Costa Rica is second in the OECD for hydro.",
-   "[crossover] Wind overtook other renewables on Costa Rica's grid in 2025."
+   "[crossover] Wind overtook geothermal on Costa Rica's grid in 2025."
   ],
   "runnersUp": [
    "[rank] 0.69 Costa Rica runs one of the cleanest grids in the OECD.",
-   "[rank] 0.64 Costa Rica is third in Latin America and the Caribbean for other renewables.",
+   "[rank] 0.64 Costa Rica is third in Latin America and the Caribbean for geothermal.",
    "[rank] 0.62 Costa Rica is close to the bottom in the OECD for electricity used per person."
   ]
  },
@@ -2682,14 +2682,14 @@
   "hero": "[rank] Iceland uses more electricity per person than any country in the world.",
   "heroDetail": "48,424 kWh per person per year, first of 201.",
   "supporting": [
-   "[rank] Iceland is second in the world for other renewables.",
+   "[rank] Iceland is second in the world for geothermal.",
    "[absence] Iceland generates no gas electricity at all, in a region built on it.",
    "[absence] Iceland gets next to none of its electricity from solar, in a region built on it."
   ],
   "runnersUp": [
    "[absence] 0.75 Iceland gets next to none of its electricity from wind, in a region built on it.",
    "[rank] 0.71 Iceland uses more electricity per person than any country in Europe.",
-   "[rank] 0.71 Iceland is first in Europe for other renewables."
+   "[rank] 0.71 Iceland is first in Europe for geothermal."
   ]
  },
  {
@@ -2742,17 +2742,17 @@
   "year": 2025,
   "stale": false,
   "heroScore": 1,
-  "hero": "[rank] Kenya is first in the world for other renewables.",
-  "heroDetail": "Other renewables supplies 46% of its electricity.",
+  "hero": "[rank] Kenya is first in the world for geothermal.",
+  "heroDetail": "Geothermal supplies 46% of its electricity.",
   "supporting": [
    "[peer] Kenya has about as many people as South Korea, and 50 times less electricity to share between them.",
-   "[crossover] Other renewables overtook hydro on Kenya's grid in 2015.",
+   "[crossover] Geothermal overtook hydro on Kenya's grid in 2015.",
    "[trajectory] Kenya has cleaned up its grid faster than most people realise.",
    "[rank] Kenya is second in Africa for wind."
   ],
   "runnersUp": [
-   "[rank] 0.76 Kenya is first in Africa for other renewables.",
-   "[crossover] 0.7 Other renewables overtook oil on Kenya's grid in 2013.",
+   "[rank] 0.76 Kenya is first in Africa for geothermal.",
+   "[crossover] 0.7 Geothermal overtook oil on Kenya's grid in 2013.",
    "[crossover] 0.47 Wind overtook oil on Kenya's grid in 2019."
   ]
  },
@@ -3066,9 +3066,9 @@
   "hero": "[trajectory] Nicaragua has cleaned up its grid faster than most people realise.",
   "heroDetail": "Low-carbon electricity went from 28% to 62% in 20 years.",
   "supporting": [
-   "[crossover] Bioenergy overtook other renewables on Nicaragua's grid in 2021.",
+   "[crossover] Bioenergy overtook geothermal on Nicaragua's grid in 2021.",
    "[rank] Nicaragua is close to the bottom in Latin America and the Caribbean for electricity used per person.",
-   "[rank] Nicaragua is second in Latin America and the Caribbean for other renewables.",
+   "[rank] Nicaragua is second in Latin America and the Caribbean for geothermal.",
    "[concentration] Nicaragua has no dominant fuel at all."
   ],
   "runnersUp": [
@@ -3217,16 +3217,16 @@
   "year": 2025,
   "stale": false,
   "heroScore": 1,
-  "hero": "[crossover] Hydro overtook other renewables on El Salvador's grid in 2024.",
-  "heroDetail": "Today hydro supplies 30% and other renewables 21%.",
+  "hero": "[crossover] Hydro overtook geothermal on El Salvador's grid in 2024.",
+  "heroDetail": "Today hydro supplies 30% and geothermal 21%.",
   "supporting": [
    "[trajectory] El Salvador has cleaned up its grid faster than most people realise.",
    "[peer] El Salvador has about as many people as Norway, and 28 times less electricity to share between them.",
    "[crossover] Hydro overtook oil on El Salvador's grid in 2020.",
-   "[rank] El Salvador is first in Latin America and the Caribbean for other renewables."
+   "[rank] El Salvador is first in Latin America and the Caribbean for geothermal."
   ],
   "runnersUp": [
-   "[crossover] 0.8 Other renewables overtook solar on El Salvador's grid in 2022.",
+   "[crossover] 0.8 Geothermal overtook solar on El Salvador's grid in 2022.",
    "[rank] 0.68 El Salvador is second in Latin America and the Caribbean for solar.",
    "[concentration] 0.67 El Salvador has no dominant fuel at all."
   ]

@@ -346,6 +346,7 @@ export const loadHomeView = cache(async (key: string): Promise<HomeView | null> 
     year,
     stale: facts.stale,
     hero: {
+      iso3: facts.iso3,
       family: facts.hero.family,
       metric: facts.hero.metric,
       comparisonSet: facts.hero.comparisonSet,
