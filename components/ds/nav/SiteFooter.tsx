@@ -24,7 +24,9 @@ const COLUMNS: { label: string; links: { label: string; href: string }[] }[] = [
   {
     label: 'Explore',
     links: [
-      { label: 'The map', href: '/' },
+      // /explore, not /. The map moved there when the homepage became the
+      // personalised hook; this one was missed in that pass.
+      { label: 'The map', href: '/explore' },
       { label: 'Higher or lower', href: '/play' },
       { label: 'Compare', href: '/compare' },
       { label: 'Rankings', href: '/rankings' },
