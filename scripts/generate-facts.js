@@ -808,6 +808,22 @@ fs.writeFileSync(
   path.join(DATA, 'country-pages.json'),
   JSON.stringify(Object.keys(out).sort())
 );
+
+// ISO3 -> name for every country in the dataset, not only the ones with a page.
+//
+// ~5KB. /compare builds its title on the server from ?a= and ?b=, and that route
+// is dynamic, so it needs to resolve a code to a name per request. Reading the
+// 6MB dataset to print two words would be absurd.
+fs.writeFileSync(
+  path.join(DATA, 'country-names.json'),
+  JSON.stringify(
+    Object.fromEntries(
+      Object.entries(countries)
+        .map(([iso, c]) => [iso, c.name])
+        .sort(([a], [b]) => a.localeCompare(b))
+    )
+  )
+);
 fs.writeFileSync(path.join(__dirname, 'fact-candidates.json'), JSON.stringify(candidates, null, 1));
 
 
@@ -822,4 +838,4 @@ if (REPORT) {
   writeReport(REPORT, BASELINE ? diffAgainst(BASELINE) : null);
   console.log(`Wrote report to ${REPORT}`);
 }
-console.log(`Wrote public/data/country-facts.json, country-pages.json and scripts/fact-candidates.json`);
+console.log(`Wrote public/data/country-facts.json, country-pages.json, country-names.json and scripts/fact-candidates.json`);
