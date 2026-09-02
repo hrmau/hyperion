@@ -1,4 +1,5 @@
 import type { EnergySource, YearData } from './types';
+import geothermalGrids from '@/data/geothermal-grids.json';
 
 /**
  * Fuel vocabulary for the redesign.
@@ -120,6 +121,27 @@ export const SOURCE_LABEL: Record<EnergySource, string> = {
   bioenergy: 'Bioenergy',
   other_renewables: 'Other renewables',
 };
+
+/**
+ * Countries where "other renewables" is geothermal and may be called that.
+ *
+ * The series is other_renewable_exc_biofuel: geothermal plus wave, tidal and
+ * some non-biogenic waste, which is why the default label is cautious. It is not
+ * geothermal everywhere - Switzerland has 1.04 TWh of it and no geothermal
+ * industry. The listed grids cover 97.6% of world generation in that series, so
+ * nearly every sentence naming the source can name it properly.
+ *
+ * scripts/generate-facts.js reads the same file. See data/geothermal-grids.json.
+ */
+const GEOTHERMAL_GRIDS = new Set(geothermalGrids.geothermal);
+
+/** Source name as it should read for a given country. */
+export function sourceLabel(source: EnergySource, iso3?: string | null): string {
+  if (source === 'other_renewables' && iso3 && GEOTHERMAL_GRIDS.has(iso3.toUpperCase())) {
+    return 'Geothermal';
+  }
+  return SOURCE_LABEL[source];
+}
 
 /** Data source -> design-system fuel. */
 const SOURCE_TO_FUEL: Record<EnergySource, Fuel> = {

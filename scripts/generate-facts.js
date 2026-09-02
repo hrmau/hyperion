@@ -72,6 +72,29 @@ const SOURCE_LABEL = {
 const SOURCES = Object.keys(SOURCE_LABEL);
 
 /**
+ * Countries where "other renewables" is geothermal, and may be called that.
+ *
+ * OWID publishes no geothermal column, so the bucket is geothermal plus wave,
+ * tidal and some non-biogenic waste - which is why the label is cautious by
+ * default. It is not geothermal everywhere: Switzerland has 1.04 TWh in it and
+ * no geothermal industry, and France's is the La Rance tidal barrage.
+ *
+ * The listed grids cover 97.6% of world other-renewables generation, so almost
+ * every sentence that mentions the source gets to name it properly, and the
+ * handful that cannot stay honestly vague. See data/geothermal-grids.json for
+ * the reasoning and the exclusions.
+ */
+const GEOTHERMAL_GRIDS = new Set(
+  JSON.parse(fs.readFileSync(path.join(ROOT, 'data/geothermal-grids.json'), 'utf8')).geothermal
+);
+
+/** Source name as it should read for a given country. */
+const label = (source, iso3) =>
+  source === 'other_renewables' && GEOTHERMAL_GRIDS.has(iso3)
+    ? 'geothermal'
+    : SOURCE_LABEL[source];
+
+/**
  * Comparison blocs, and how each reads mid-sentence.
  *
  * Restricted to groupings a reader already knows. blocs.json also carries the
@@ -333,8 +356,8 @@ families.rank = (r) => {
         detail = `${round(r.total).toLocaleString('en-GB')} TWh a year.`;
       } else {
         values = { rank, of: n, share_pct: round(r[metric]) };
-        headline = `${subject} is ${ordinal(rank)} ${where} for ${SOURCE_LABEL[metric]}.`;
-        detail = `${cap(SOURCE_LABEL[metric])} supplies ${pctStr(r[metric])} of its electricity.`;
+        headline = `${subject} is ${ordinal(rank)} ${where} for ${label(metric, r.iso3)}.`;
+        detail = `${cap(label(metric, r.iso3))} supplies ${pctStr(r[metric])} of its electricity.`;
       }
       out.push(fact({ iso3: r.iso3, family: 'rank', score, headline, detail,
         metric, year: r.year, comparisonSet: setName, values }));
@@ -358,7 +381,7 @@ families.concentration = (r) => {
   if (hhi > HHI_MEDIAN && r[dom] >= 50) {
     return [fact({ iso3: r.iso3, family: 'concentration', score, metric: dom, year: r.year,
       comparisonSet: 'self',
-      headline: `${subj(r)} runs almost entirely on ${SOURCE_LABEL[dom]}.`,
+      headline: `${subj(r)} runs almost entirely on ${label(dom, r.iso3)}.`,
       detail: `${pctStr(r[dom])} of its electricity comes from one source.`,
       values: { share_pct: round(r[dom]) } })];
   }
@@ -425,8 +448,8 @@ families.crossover = (r) => {
         const score = recency * Math.min(1, (r[A] + r[B]) / 50);
         out.push(fact({ iso3: r.iso3, family: 'crossover', score, metric: `${hi}_over_${lo}`,
           year, comparisonSet: 'self',
-          headline: `${cap(SOURCE_LABEL[hi])} overtook ${SOURCE_LABEL[lo]} on ${possessive(r.name)} grid in ${year}.`,
-          detail: `Today ${SOURCE_LABEL[hi]} supplies ${pctStr(r[hi])} and ${SOURCE_LABEL[lo]} ${pctStr(r[lo])}.`,
+          headline: `${cap(label(hi, r.iso3))} overtook ${label(lo, r.iso3)} on ${possessive(r.name)} grid in ${year}.`,
+          detail: `Today ${label(hi, r.iso3)} supplies ${pctStr(r[hi])} and ${label(lo, r.iso3)} ${pctStr(r[lo])}.`,
           // headline opens on the fuel name, so capitalise there instead
           values: { crossover_year: year, winner_pct: round(r[hi]), loser_pct: round(r[lo]) } }));
         break;
@@ -466,9 +489,9 @@ families.absence = (r) => {
     out.push(fact({ iso3: r.iso3, family: 'absence', score: prevalence, metric: s,
       year: r.year, comparisonSet: r.region,
       headline: none
-        ? `${subj(r)} generates no ${SOURCE_LABEL[s]} electricity at all, in a region built on it.`
-        : `${subj(r)} gets next to none of its electricity from ${SOURCE_LABEL[s]}, in a region built on it.`,
-      detail: `${Math.round(prevalence * 100)}% of grids ${REGION_PHRASE[r.region] || `in ${r.region}`} draw more than a tenth of their power from ${SOURCE_LABEL[s]}.`,
+        ? `${subj(r)} generates no ${label(s, r.iso3)} electricity at all, in a region built on it.`
+        : `${subj(r)} gets next to none of its electricity from ${label(s, r.iso3)}, in a region built on it.`,
+      detail: `${Math.round(prevalence * 100)}% of grids ${REGION_PHRASE[r.region] || `in ${r.region}`} draw more than a tenth of their power from ${label(s, r.iso3)}.`,
       values: { prevalence_pct: Math.round(prevalence * 100) } }));
   }
   return out;

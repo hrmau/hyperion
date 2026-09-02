@@ -1,4 +1,4 @@
-import { SOURCE_LABEL } from './fuels';
+import { SOURCE_LABEL, sourceLabel } from './fuels';
 import type { EnergySource, YearData } from './types';
 
 /**
@@ -22,6 +22,8 @@ export interface LeadStat {
 }
 
 export interface HeroShape {
+  /** Needed to decide whether "other renewables" may be called geothermal. */
+  iso3: string;
   family: string;
   metric: string;
   comparisonSet: string;
@@ -56,7 +58,7 @@ export function leadStat(hero: HeroShape, data: YearData): LeadStat | null {
       if (v.rank == null || v.of == null) return null;
       const where = `${ordinal(v.rank)} of ${v.of} ${setLabel(hero.comparisonSet)}`;
       if (isSource(hero.metric) && v.share_pct != null) {
-        return { label: `${SOURCE_LABEL[hero.metric]} share`, value: num(v.share_pct), unit: '%', note: where };
+        return { label: `${sourceLabel(hero.metric, hero.iso3)} share`, value: num(v.share_pct), unit: '%', note: where };
       }
       if (hero.metric === 'clean_pct' && v.clean_pct != null) {
         return { label: 'Clean share', value: num(v.clean_pct), unit: '%', note: where };
@@ -73,7 +75,7 @@ export function leadStat(hero: HeroShape, data: YearData): LeadStat | null {
     case 'concentration': {
       if (v.share_pct != null && isSource(hero.metric)) {
         return {
-          label: `${SOURCE_LABEL[hero.metric]} share`,
+          label: `${sourceLabel(hero.metric, hero.iso3)} share`,
           value: num(v.share_pct),
           unit: '%',
           note: 'of everything it generates',
@@ -112,7 +114,7 @@ export function leadStat(hero: HeroShape, data: YearData): LeadStat | null {
       if (v.winner_pct == null || v.crossover_year == null) return null;
       const fuel = hero.metric.split('_over_')[0];
       return {
-        label: isSource(fuel) ? `${SOURCE_LABEL[fuel]} share` : 'Leading source',
+        label: isSource(fuel) ? `${sourceLabel(fuel, hero.iso3)} share` : 'Leading source',
         value: num(v.winner_pct),
         unit: '%',
         note: `ahead since ${v.crossover_year}`,
