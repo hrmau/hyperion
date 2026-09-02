@@ -5,6 +5,7 @@ import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import { ArticleShell } from '@/components/ds/content/Prose';
 import FlagImg from '@/components/FlagImg';
+import OnThisPage from '@/components/OnThisPage';
 
 function QuoteBlock({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
@@ -95,30 +96,18 @@ export default function WhyEnergyMattersPage() {
             </div>
           </div>
 
-          {/* Quick Navigation */}
-          <nav className="card px-4 py-3 mb-6">
-            <h4 className="mt-0 mb-1.5 uppercase tracking-wider">Quick Navigation</h4>
-            <div className="flex flex-wrap gap-1.5">
-              {[
-                { id: 'economy', label: 'Energy IS the Economy' },
-                { id: 'price', label: 'Price of Everything' },
-                { id: 'security', label: 'National Security' },
-                { id: 'policy', label: 'Policy Decisions' },
-                { id: 'current', label: 'Current Decisions' },
-                { id: 'action', label: 'What You Can Do' },
-                { id: 'forward', label: 'Path Forward' },
-                { id: 'final', label: 'Final Thoughts' },
-              ].map(({ id, label }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className="px-2.5 py-1 bg-inset hover:text-primary hover:bg-canvas border border-border rounded-full transition-colors"
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
-          </nav>
+          <OnThisPage
+            items={[
+              { id: 'economy', label: 'Energy IS the Economy' },
+              { id: 'price', label: 'Price of Everything' },
+              { id: 'security', label: 'National Security' },
+              { id: 'policy', label: 'Policy Decisions' },
+              { id: 'current', label: 'Current Decisions' },
+              { id: 'action', label: 'What You Can Do' },
+              { id: 'forward', label: 'Path Forward' },
+              { id: 'final', label: 'Final Thoughts' },
+            ]}
+          />
 
           <div className="space-y-12">
           {/* Section 1: Energy IS the Economy */}

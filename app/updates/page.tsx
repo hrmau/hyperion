@@ -408,7 +408,7 @@ export default function UpdatesPage() {
         title="What's new"
         standfirst="Feature releases and data corrections, newest first."
       >
-        <div className="max-w-2xl mx-auto px-4">
+        <div>
           {/* Header */}
           <div className="mb-8">
             
@@ -419,9 +419,19 @@ export default function UpdatesPage() {
 
           {/* Data currency — generated, never hand-edited. See readDataMeta above. */}
           {meta && (
-            <div className="card p-4 mb-8">
+            <div className="card" style={{ padding: 'var(--space-6)', marginBottom: 'var(--space-9)' }}>
               <div className="flex items-baseline justify-between gap-3 mb-2">
-                <h2 className="text-[13px]">Data currency</h2>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: 'var(--fs-h4)',
+                    fontWeight: 'var(--fw-bold)',
+                    letterSpacing: 'var(--ls-h4)',
+                    maxWidth: 'none',
+                  }}
+                >
+                  Data currency
+                </h2>
                 <span style={{ fontSize: 'var(--fs-body-sm)' }}>
                   source published {meta.sourceUpdatedOn}
                 </span>
