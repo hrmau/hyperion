@@ -1,12 +1,8 @@
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Compare countries',
-  description: 'Compare electricity generation and energy mix between countries and blocs.',
-  alternates: {
-    canonical: '/compare',
-  },
-};
+/**
+ * No metadata here. page.tsx derives the title and description from ?a= and ?b=,
+ * and a static title in the layout would only be the thing someone edits by
+ * mistake when the dynamic one looks wrong.
+ */
 
 export default function CompareLayout({
   children,
