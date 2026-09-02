@@ -9,6 +9,7 @@ import { formatPercent } from '@/lib/scales';
 import { energyColors } from '@/lib/colors';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import { Button } from '@/components/ds/core/Button';
 
 /**
  * Chapter accents are design-system tokens, not hues.
@@ -330,18 +331,21 @@ export default function StoryPage() {
                     </p>
                   ))}
                 </div>
+                {/* The system's own call to action, rather than a chapter-tinted
+                    pill.
+                    
+                    The old one filled with the chapter accent and set its label
+                    with the `text-canvas` utility. That utility is real, but
+                    `.gg-prose a` sets link colour at one specificity point
+                    higher, so inside an article it wins - and the end of the
+                    story came out as green text on clay. Button sets its colours
+                    inline, which nothing in prose can override, and it is the
+                    control the rest of the site already uses. */}
                 {i === chapters.length - 1 && (
-                  <div className="pt-4">
-                    <Link
-                      href="/explore"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-canvas transition-colors"
-                      style={{ backgroundColor: chapter.color }}
-                    >
-                      Explore the Data
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                  <div style={{ marginTop: 'var(--space-7)' }}>
+                    <Button as={Link} href="/explore" variant="primary">
+                      Explore the data
+                    </Button>
                   </div>
                 )}
               </div>
