@@ -136,6 +136,14 @@ geothermal plus wave/tidal — so the source is deliberately **not** named
 `geothermal`. Charts still draw both as one "Other" band via `SOURCE_TO_FUEL` in
 `lib/fuels.ts`, so no published figure moved when they were split.
 
+`data/geothermal-grids.json` is the editorial list of the 18 grids where that
+bucket **is** geothermal and the copy says so — together 97.6% of world
+generation in the series. Curated, in the spirit of `blocs.json`, not inferred:
+Switzerland has 1.04 TWh in the series and no geothermal industry, and France's
+is a tidal barrage. Japan and Mexico are real geothermal producers and are absent
+because OWID reports no non-biofuel share for either. Both `lib/fuels.ts`
+(`sourceLabel`) and `scripts/generate-facts.js` read that one file.
+
 Anything that iterates sources must handle two of them mapping to one fuel.
 `energyOrder` in `lib/colors.ts` originally used `find` and silently dropped
 `other_renewables`; `EnergyMixChart` now renders from `fuelShares()` rather than
