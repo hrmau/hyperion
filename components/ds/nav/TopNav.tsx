@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import type { NavItem } from '@/components/navItems';
 import { primaryNavItems } from '@/components/navItems';
 import { MARK } from '@/components/ds/core/tokens';
+import CountryFinder from '@/components/CountryFinder';
 
 export interface TopNavProps {
   /** Which primary item is current. */
@@ -37,6 +38,12 @@ const itemStyle = (on: boolean): CSSProperties => ({
  * demoted routes live in SiteFooter. That is the system's answer to small
  * screens, and it is a better one than the drawer it replaces: the four things
  * people actually navigate between stay one tap away instead of two.
+ *
+ * `CountryFinder` sits in the trailing group rather than becoming a fifth nav
+ * item, because that bottom bar is full at four — see `navItems.ts`. At mobile
+ * width this row is otherwise just the wordmark, so search gets an empty row to
+ * itself; on desktop it shares the trailing group with `meta`, which is why the
+ * `marginLeft: auto` moved off the meta span and onto the group.
  *
  * The system's `location` / LocationPill props are not ported. Geolocation is
  * deferred with the homepage, and a location affordance that cannot detect
@@ -94,20 +101,30 @@ export default function TopNav({ active, meta, bordered = true, style }: TopNavP
         ))}
       </div>
 
-      {meta && (
-        <span
-          className="gg-nav-meta"
-          style={{
-            marginLeft: 'auto',
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--fs-mono)',
-            color: 'var(--text-quiet)',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {meta}
-        </span>
-      )}
+      <div
+        style={{
+          marginLeft: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-6)',
+          flex: 'none',
+        }}
+      >
+        {meta && (
+          <span
+            className="gg-nav-meta"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono)',
+              color: 'var(--text-quiet)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {meta}
+          </span>
+        )}
+        <CountryFinder />
+      </div>
     </nav>
   );
 }

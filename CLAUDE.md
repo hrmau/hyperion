@@ -25,6 +25,7 @@ npm run generate-questions   # rebuild the Higher/Lower question bank
 app/                  one directory per route
   page.tsx            never rendered directly — middleware rewrites / here
   home/[iso3]/        201 prerendered homepage variants (200 countries + world)
+  countries/          the hub that lists all 200; r/[region]/ are its 6 variants
   country/[iso3]/     200 prerendered country profiles
   explore/            the world map, which used to live at /
 components/           shared UI; navItems.ts is the single source of primary-nav truth
@@ -54,6 +55,7 @@ hand-rolled SVG with no library, so they do not need to be.
 | `fossil-fuel-independence.json` | 99 countries, coal/gas/oil production vs consumption |
 | `socioeconomic.json` | 88 countries: population, GDP PPP, HDI, life expectancy |
 | `blocs.json` | EU, NATO, BRICS+, G7, G20, OECD, ASEAN and custom blocs |
+| `country-regions.json` | ISO3 -> Ember region, for the 200 with a page. 4KB, so middleware can resolve a region without the 6MB dataset |
 | `questions.json` | Curated Higher/Lower question bank |
 | `world-110m.json` | TopoJSON world geometry |
 
@@ -183,8 +185,9 @@ change `lib/independence.ts`, mirror it there and re-run — the file says so, a
 that comment has already caught one drift.
 
 Not automated, on purpose: `socioeconomic.json` (World Bank + UNDP, annual, and
-HDI has no clean API), `blocs.json` (who counts as BRICS is editorial), and
-`world-110m.json` (geometry does not change).
+HDI has no clean API), `blocs.json` (who counts as BRICS is editorial),
+`data/country-picks.json` (see `/countries` below), and `world-110m.json`
+(geometry does not change).
 
 ### Required attribution
 
@@ -208,6 +211,10 @@ four**. At 375px four items leave about 58px for a label, which "Rankings"
 already fills, and the items are `nowrap`, so a fifth overflows rather than
 wraps. Anything that must be reachable from every page goes in the top bar next
 to the wordmark, which is empty at that width, or into the footer.
+
+`CountryFinder` sits in the top bar on every page rather than in either tier.
+See "Finding a country" below for why, and `navItems.ts` for the four-item cap
+it exists to work around.
 
 **Explore is `/explore`, not `/`.** The map moved there when the homepage became
 the personalised hook. The logo links to `/`; anything meaning "the map" links to
@@ -255,6 +262,43 @@ page. They render a `noindex` view offering the nearest grids in their region
 instead of a 404. `public/data/country-pages.json` is the 1.2KB index of which
 countries have one — every surface that offers a profile link checks it through
 `countryPagePath()` in `lib/data.ts` rather than linking blindly.
+
+## Finding a country (`/countries`)
+
+Until this existed there was no page that listed the country profiles. You
+reached one from the homepage's "viewing as", from a position in the rankings
+(Luxembourg is 150th), from the map, or from the five regional peers on another
+profile. Nothing linked the set, which is a strange thing to be true of the
+pages the site exists for.
+
+Two surfaces, doing two different jobs:
+
+- **`CountryFinder`** in the top bar of every page - a dropdown for "I know
+  which country I want". It imports `country-names.json` and
+  `country-pages.json` (5KB together) rather than fetching, because a search box
+  that waits for a round trip is not a search box.
+- **`/countries`** - the browse page. Its A-Z index renders all 200 links into
+  the HTML, which is what finally gives the profiles an internal-link hub.
+
+**The finder is in the top bar, not the primary nav**, because the primary nav
+is capped at four - see the Navigation section. At mobile width the top bar is
+otherwise just the wordmark, so search gets an empty row to itself.
+
+**`/countries` is region-personalised the same way `/` is**: middleware rewrites
+it to a prerendered `/countries/r/<slug>`, which canonicalises back to
+`/countries` and stays out of the sitemap. Six variants, not 200 - the only
+thing that varies is which cards sit under "Worth a look", and the index below
+them is identical. North America has no variant on purpose: 4 of its countries
+have a page, the same reason it has no regional ranking, so those visitors get
+the world set.
+
+`data/country-picks.json` is the curated selection. It is **selection only, no
+copy** - each card renders that country's own hero headline, which is already
+numeral-audited and regenerates on a refresh. The obvious alternative was to
+rank countries by the fact engine's own score; that does not work, because the
+score is normalised within each family against its 95th percentile, so 82 of 200
+sit at exactly 1.0 and the ties fall out alphabetically. The file says so at
+length. `check-data.js` fails the build if a pick names a country with no page.
 
 ## Higher/Lower game (`/play`)
 

@@ -1,9 +1,12 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getIso3 } from '@/lib/flags';
+import { REGION_SLUG } from '@/lib/regions';
 import countryPages from './public/data/country-pages.json';
+import countryRegions from './public/data/country-regions.json';
 
 /**
- * Serves the homepage as the visitor's own country.
+ * Serves the homepage as the visitor's own country, and `/countries` as their
+ * own region.
  *
  * A rewrite, not a redirect: the URL stays `/` while the response is the
  * prerendered `/home/<iso3>`. Every variant is built ahead of time and served
@@ -16,6 +19,7 @@ import countryPages from './public/data/country-pages.json';
  */
 
 const PAGES = new Set(countryPages as string[]);
+const REGIONS = countryRegions as Record<string, string>;
 const COOKIE = 'gg_country';
 
 export function middleware(req: NextRequest) {
@@ -31,8 +35,24 @@ export function middleware(req: NextRequest) {
     'WORLD';
 
   const url = req.nextUrl.clone();
+
+  if (req.nextUrl.pathname === '/countries') {
+    // Only the six recommendation cards differ between variants; the A-Z index
+    // under them is the same 200 links on every one, which is the part that has
+    // to be indexable. So this is six prerendered pages rather than 200: the
+    // reader's region is enough personalisation, and their own country is
+    // already what `/` leads with.
+    url.pathname = `/countries/r/${slugFor(iso3)}`;
+    return NextResponse.rewrite(url);
+  }
+
   url.pathname = `/home/${iso3.toLowerCase()}`;
   return NextResponse.rewrite(url);
+}
+
+/** Unknown region, or North America, which has too few pages to draw from. */
+function slugFor(iso3: string): string {
+  return REGION_SLUG[REGIONS[iso3]] ?? 'world';
 }
 
 function pageFor(iso2: string): string | null {
@@ -41,5 +61,5 @@ function pageFor(iso2: string): string | null {
 }
 
 export const config = {
-  matcher: '/',
+  matcher: ['/', '/countries'],
 };

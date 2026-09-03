@@ -116,6 +116,28 @@ function main() {
     }
     const noHero = Object.values(facts).filter((c) => !c.hero || !c.hero.headline);
     if (noHero.length) fail(`${noHero.length} countries have no hero fact`);
+
+    // The curated /countries picks name countries by ISO3 and render each one's
+    // hero headline. A refresh that drops a country would leave a card with
+    // nothing in it, so this is a hard failure rather than a warning: unlike the
+    // fossil country set, there is no judgement involved - the code either has a
+    // page or it does not.
+    let picks = null;
+    try {
+      picks = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'country-picks.json'), 'utf8'));
+    } catch (err) {
+      fail(`country-picks.json is missing or unreadable: ${err.message}`);
+    }
+    if (picks) {
+      const missing = [];
+      for (const [set, codes] of Object.entries(picks.sets || {})) {
+        for (const iso of codes) if (!facts[iso]) missing.push(`${set}/${iso}`);
+      }
+      if (missing.length) {
+        fail(`${missing.length} /countries picks name a country with no page: ${missing.join(', ')}`);
+      }
+      if (!picks.sets || !picks.sets.world) fail('country-picks.json has no world set to fall back to');
+    }
   }
 
   // --- Comparison with the previous data ----------------------------------

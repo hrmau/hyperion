@@ -130,6 +130,14 @@
   }
   .gg-scroll-row:not(.gg-nav-items) > * { flex: none !important }
 
+
+  /* The country finder and the /countries index sit at 34px on desktop, where
+     they are mouse targets in a long list and 44px each would turn 200 links
+     into a wall. Below 768px they are thumbs, and the system's 44px floor is a
+     hard one - it applies to the trigger pill in the top bar as much as to the
+     rows, which is why the header grows a little at this width. */
+  .gg-touch-target { min-height: 44px !important }
+
   /* "Hover a country" is not an instruction you can follow on a touch screen. */
   .gg-hover-hint { display: none !important }
 
@@ -221,6 +229,14 @@
     padding-inline: var(--gutter) !important;
   }
   .gg-scroll-row:not(.gg-nav-items) > * { flex: none !important }
+
+
+  /* The country finder and the /countries index sit at 34px on desktop, where
+     they are mouse targets in a long list and 44px each would turn 200 links
+     into a wall. Below 768px they are thumbs, and the system's 44px floor is a
+     hard one - it applies to the trigger pill in the top bar as much as to the
+     rows, which is why the header grows a little at this width. */
+  .gg-touch-target { min-height: 44px !important }
 
   /* "Hover a country" is not an instruction you can follow on a touch screen. */
   .gg-hover-hint { display: none !important }

@@ -809,6 +809,25 @@ fs.writeFileSync(
   JSON.stringify(Object.keys(out).sort())
 );
 
+// ISO3 -> Ember region, for the countries that have a page.
+//
+// ~4KB, and it exists so middleware can resolve a visitor's country to a region
+// without touching the 6MB dataset - it runs on every /countries request and has
+// to answer before anything else does. Regenerated here rather than hand-written
+// because CLAUDE.md is emphatic that region assignment is keyed by ISO3 in the
+// transform, and a second copy of that mapping would be a second thing to drift.
+fs.writeFileSync(
+  path.join(DATA, 'country-regions.json'),
+  JSON.stringify(
+    Object.fromEntries(
+      Object.keys(out)
+        .sort()
+        .map((iso) => [iso, countries[iso].emberRegion || null])
+        .filter(([, r]) => r && r !== 'Other')
+    )
+  )
+);
+
 // ISO3 -> name for every country in the dataset, not only the ones with a page.
 //
 // ~5KB. /compare builds its title on the server from ?a= and ?b=, and that route
@@ -838,4 +857,4 @@ if (REPORT) {
   writeReport(REPORT, BASELINE ? diffAgainst(BASELINE) : null);
   console.log(`Wrote report to ${REPORT}`);
 }
-console.log(`Wrote public/data/country-facts.json, country-pages.json, country-names.json and scripts/fact-candidates.json`);
+console.log(`Wrote public/data/country-facts.json, country-pages.json, country-regions.json, country-names.json and scripts/fact-candidates.json`);
