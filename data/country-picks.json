@@ -1,0 +1,37 @@
+{
+  "description": "Curated 'worth a look' country sets for /countries, keyed by Ember region plus a world default.",
+  "why": [
+    "The obvious way to build this list was to rank countries by the score the fact",
+    "engine already gives each hero fact. That does not work: the score is normalised",
+    "within each family against that family's 95th percentile, so its job is 'is this",
+    "fact publishable', not 'is this country more interesting than that one'. 82 of",
+    "200 countries sit at exactly 1.0 and the ties fall out alphabetically. Sorting by",
+    "it would produce Aruba, Afghanistan, Albania, Armenia - an alphabetical list",
+    "wearing a ranking's clothes.",
+    "",
+    "So this is editorial, in the same spirit as blocs.json and geothermal-grids.json:",
+    "a person picked them. The bar is that a reader who knows nothing about",
+    "electricity should be surprised by the claim, and that the six in a set should",
+    "surprise them in six different ways rather than six variations of 'runs on oil'.",
+    "",
+    "Selection only, no copy. Each card renders the country's own hero headline from",
+    "country-facts.json, which is already numeral-audited and regenerates on a data",
+    "refresh. A hand-written line here would be a third place for the same claim to",
+    "go stale, and question-insights.json is enough of that already.",
+    "",
+    "North America has no set on purpose. Only 4 of its countries have a page - the",
+    "same reason CLAUDE.md gives for it having no regional ranking - and 'grids worth",
+    "a look near you' drawn from four, one of which is the reader's own, is not a",
+    "recommendation. Those visitors get the world set, which is the better answer.",
+    "",
+    "check-data.js fails the build if any code here has no page."
+  ],
+  "sets": {
+    "world": ["PRY", "ISL", "BTN", "KEN", "TKM", "BWA", "PAK", "TCD"],
+    "Africa": ["KEN", "ETH", "BWA", "ZAF", "NAM", "TCD"],
+    "Asia": ["BTN", "PAK", "NPL", "TKM", "PHL", "SGP"],
+    "Europe": ["ISL", "ALB", "DNK", "SVK", "ESP", "MDA"],
+    "Latin America and Caribbean": ["PRY", "URY", "CHL", "BHS", "TTO", "COL"],
+    "Oceania": ["NZL", "AUS", "FJI", "PNG", "NCL"]
+  }
+}

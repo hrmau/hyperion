@@ -36,11 +36,13 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2>Your country, and how the homepage picks it</h2>
             <p>
-              The homepage leads with a fact about your own country. To choose which one, we read
-              the country your connection appears to come from - a two-letter code supplied
-              by our host with the request, such as <code>IE</code>. We do not receive your IP
-              address, we do not log the code, and it is not written anywhere. It is used to pick
-              a page and then it is gone.
+              The homepage leads with a fact about your own country, and the
+              &ldquo;all countries&rdquo; page suggests a few grids from your own
+              region. To choose, we read the country your connection appears to come
+              from - a two-letter code supplied by our host with the request, such
+              as <code>IE</code>. We do not receive your IP address, we do not log
+              the code, and it is not written anywhere. It is used to pick a page and
+              then it is gone.
             </p>
             <p>
               If you choose a different country with the &ldquo;change&rdquo; control, that choice

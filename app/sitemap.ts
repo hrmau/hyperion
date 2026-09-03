@@ -24,8 +24,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 1,
     },
-    // The /home/* variants are never listed. They exist only as rewrite targets
-    // for `/`, and every one of them declares `/` as its canonical.
+    // The /home/* and /countries/r/* variants are never listed. They exist only
+    // as rewrite targets for `/` and `/countries`, and every one of them
+    // declares the page it renders as its canonical.
+    {
+      // The hub that links all 200 country pages. High priority for its own
+      // sake and for theirs: it is the only page that links the whole set, so
+      // it is how a crawler finds the long tail without walking the sitemap.
+      url: `${baseUrl}/countries`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/explore`,
       lastModified: new Date(),
