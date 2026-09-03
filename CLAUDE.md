@@ -27,7 +27,7 @@ app/                  one directory per route
   home/[iso3]/        201 prerendered homepage variants (200 countries + world)
   country/[iso3]/     200 prerendered country profiles
   explore/            the world map, which used to live at /
-components/           shared UI; navItems.ts is the single source of nav truth
+components/           shared UI; navItems.ts is the single source of primary-nav truth
 lib/                  data loading, types, colour scales, scoring, game logic
                       facts.ts is server-only — it reads the filesystem
 middleware.ts         picks the homepage variant from cookie, then IP country
@@ -188,16 +188,26 @@ HDI has no clean API), `blocs.json` (who counts as BRICS is editorial), and
 
 ### Required attribution
 
-Every page carries it via `components/Footer.tsx`: Ember and Our World in Data,
-both CC BY 4.0. Do not remove it.
+Every page carries it via `components/ds/nav/SiteFooter.tsx`: Ember and Our World
+in Data, both CC BY 4.0. Do not remove it.
 
 ## Navigation
 
-`components/navItems.ts` defines both tiers; `Header`, `Navigation` and `Footer`
-all read from it. Primary nav is **Explore, Play, Compare, Rankings**. Correlations,
-Story, Why, Methodology, Updates, Credits, Privacy and Terms live in the footer
-"More" group and the mobile menu. All those routes are live — only their nav
-placement is demoted.
+`components/navItems.ts` holds the primary tier and `components/ds/nav/TopNav.tsx`
+is its only reader. Primary nav is **Explore, Play, Compare, Rankings**.
+Correlations, Story, Why, Methodology, Updates, Credits, Privacy and Terms are
+demoted to `SiteFooter`, which keeps its own three labelled columns — Explore,
+Learn, About — rather than one flat "More" list. All those routes are live; only
+their nav placement is demoted.
+
+**There is no hamburger and no mobile menu.** Below 768px `responsive.css` turns
+the primary nav into a fixed bottom bar with 44px targets, and the footer is how
+the demoted routes are reached. That is the design system's answer to small
+screens and it is deliberate — but it means **the primary tier is capped at
+four**. At 375px four items leave about 58px for a label, which "Rankings"
+already fills, and the items are `nowrap`, so a fifth overflows rather than
+wraps. Anything that must be reachable from every page goes in the top bar next
+to the wordmark, which is empty at that width, or into the footer.
 
 **Explore is `/explore`, not `/`.** The map moved there when the homepage became
 the personalised hook. The logo links to `/`; anything meaning "the map" links to
