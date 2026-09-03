@@ -11,7 +11,6 @@
     "Insight rule of thumb: if the sentence would still be true and interesting to",
     "someone who never sees the numbers, it works. Restating the values does not."
   ],
-
   "solar-DEU-FRA": {
     "winner": "DEU",
     "insight": "Cloudy Germany out-solars sunny France by almost 3x. Sunlight was never the constraint; installed panels are."
@@ -40,7 +39,6 @@
     "winner": "DEU",
     "insight": "Germany still out-produces Spain on solar with roughly half the sunshine. It started twenty years earlier and never stopped installing."
   },
-
   "wind-FRA-GBR": {
     "winner": "GBR",
     "insight": "Britain built the world's largest offshore wind fleet while France bet on nuclear. Both are low-carbon strategies; they just look nothing alike."
@@ -65,7 +63,6 @@
     "winner": "TUR",
     "insight": "Denmark invented the modern wind industry and gets a larger share of its power from wind than any country on earth. It is also small, so its total output is easily beaten."
   },
-
   "nuclear_pct-BEL-SVK": {
     "winner": "SVK",
     "insight": "Slovakia draws two thirds of its electricity from nuclear, among the highest shares in the world. Belgium has been legislating a nuclear phase-out since 2003 and postponing it ever since."
@@ -90,7 +87,6 @@
     "winner": "FIN",
     "insight": "Finland's Olkiluoto 3 took some seventeen years to build, but a single reactor was enough to visibly shift a small country's entire electricity mix."
   },
-
   "coal_pct-CHN-IND": {
     "winner": "IND",
     "insight": "China burns far more coal than India in absolute terms, yet has also built more wind, solar and hydro than anyone. India's grid is the more coal-dependent of the two."
@@ -115,7 +111,6 @@
     "winner": "IND",
     "insight": "Both grids run on domestic coal. India's is the more dependent, and it is also the fastest-growing large electricity market in the world."
   },
-
   "clean_pct-ESP-GBR": {
     "winner": "ESP",
     "insight": "Britain's coal-to-wind switch is one of the fastest grid decarbonisations ever recorded. Spain got further still, using solar and hydro Britain simply doesn't have."
@@ -140,7 +135,6 @@
     "winner": "BRA",
     "insight": "Both grids were built on big hydro. Brazil added wind and solar on top; Canada's remaining fossil generation is concentrated in Alberta and Saskatchewan."
   },
-
   "independence-DEU-FRA": {
     "winner": "DEU",
     "insight": "France's reactors sit on French soil, but France mines no uranium at all - every fuel rod is imported. Independence is about where the fuel comes from, not where the plant stands."
@@ -161,7 +155,6 @@
     "winner": "AUT",
     "insight": "Austrian Alpine hydro needs no fuel at all. India burns a great deal of coal but digs most of it up itself, which is why it scores better here than its emissions would suggest."
   },
-
   "generation_per_capita-CAN-USA": {
     "winner": "CAN",
     "insight": "Canada generates more electricity per person than the US: cold winters, heavy industry, and hydro cheap enough to make electric heating the rational choice."
@@ -190,7 +183,6 @@
     "winner": "JPN",
     "insight": "Japan out-generates the Netherlands per person despite a decade of hard-won post-Fukushima efficiency gains. Industrial structure sets the floor."
   },
-
   "total_generation-JPN-RUS": {
     "winner": "RUS",
     "insight": "Russia out-generates Japan. Cheap domestic gas and an energy-intensive heavy industry base make electricity worth using in ways it simply isn't in Japan."
@@ -215,7 +207,6 @@
     "winner": "THA",
     "insight": "Thailand out-generates Poland. The centre of gravity in global electricity has moved decisively to Asia, and it is still moving."
   },
-
   "emissions-DEU-JPN": {
     "winner": "JPN",
     "insight": "Japan's power sector emits roughly triple Germany's, largely because the reactors idled after Fukushima were backfilled with coal and gas."
@@ -279,5 +270,53 @@
   "emissions-CZE-FRA": {
     "winner": "CZE",
     "insight": "Czechia has around a seventh of France's population and a dirtier grid in absolute terms. Coal at a small scale beats nuclear at a large one, for emissions."
+  },
+  "clean_pct-KGZ-URY": {
+    "winner": "URY",
+    "insight": "Uruguay rebuilt its grid in about a decade: an auction programme begun in 2009 offered twenty-year fixed prices, and wind went from nothing to its single largest source. Kyrgyzstan's score comes from Soviet-era hydro it has simply kept running - the same clean result, arrived at by standing still."
+  },
+  "clean_pct-ECU-LUX": {
+    "winner": "LUX",
+    "insight": "Luxembourg imports more than three quarters of the electricity it uses, so its clean score describes only the sliver it generates itself, which is now almost all wind, solar and biomass. Ecuador's number covers a grid that actually meets its own demand, nearly all of it hydro."
+  },
+  "solar-HUN-PRT": {
+    "winner": "HUN",
+    "insight": "Hungary out-produces sunnier Portugal on solar, and a large share of it sits on houses: a net-metering scheme made domestic panels pay back fast enough that rooftops became a third of national capacity. Latitude set the ceiling; the tariff decided who got near it."
+  },
+  "wind-NZL-URY": {
+    "winner": "URY",
+    "insight": "These two generate almost the same amount of wind power, and it means completely different things - roughly a tenth of New Zealand's hydro-dominated grid, and about forty per cent of Uruguay's. The same turbines can be a rounding error or the backbone."
+  },
+  "total_generation-NGA-PRT": {
+    "winner": "PRT",
+    "insight": "Portugal generates more electricity than Nigeria, from a country with a twentieth of the people. Nigeria's problem is not fuel or even power stations: its transmission network can carry only about half the capacity that is already built, so much of it never reaches anyone."
+  },
+  "generation_per_capita-BLR-EST": {
+    "winner": "BLR",
+    "insight": "Belarus had no nuclear power at all in 2020; the Russian-built Astravets plant now supplies more than a third of its electricity and pushed output to a record. Estonia moved the other way, generation more than halving as it wound down the oil shale that once ran the country."
+  },
+  "coal_pct-BGR-LKA": {
+    "winner": "LKA",
+    "insight": "Sri Lanka's coal is essentially one power station - Lakvijaya, opened in 2011 and finished in 2014 - which alone carries roughly a quarter of the grid. Bulgaria has spent twenty years going the other way, its coal share falling as nuclear held steady and solar arrived."
+  },
+  "emissions-BGR-DOM": {
+    "winner": "DOM",
+    "insight": "The Dominican Republic emits more from electricity than Bulgaria while generating substantially less of it. Three quarters of what it burns is coal, gas or oil; most of Bulgaria's power comes from a nuclear plant and its rivers."
+  },
+  "clean_pct-LKA-MMR": {
+    "winner": "LKA",
+    "insight": "Both grids were built on hydro and both have been diluted by fossil fuel since. Sri Lanka has started clawing it back with solar, which now supplies about a sixth of its power; in Myanmar, gas has grown as fast as the dams have."
+  },
+  "independence-ARG-ECU": {
+    "winner": "ECU",
+    "insight": "Ecuador scores higher for the simple reason that water needs no fuel supply chain. Argentina produces most of the gas it burns, which is genuinely unusual and valuable - but a grid that runs on fuel still depends on continuing to pull it out of the ground."
+  },
+  "generation_per_capita-CRI-MNG": {
+    "winner": "MNG",
+    "insight": "Mongolia uses more electricity per person than Costa Rica and burns coal for nearly all of it, because mining alone takes around forty per cent of national demand. Costa Rica's grid is effectively fully renewable, but serves an economy that asks less of it."
+  },
+  "coal_pct-BGD-THA": {
+    "winner": "BGD",
+    "insight": "Bangladesh had almost no coal power a decade ago and now leans on it more heavily than Thailand does. Its domestic gas fields have been declining faster than imported LNG could cover, and a run of new coal plants from 2020 onward filled the gap."
   }
 }
