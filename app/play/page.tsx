@@ -24,6 +24,7 @@ import {
   writeBestStreak,
 } from '@/lib/questions';
 import { trackEvent } from '@/lib/analytics';
+import { trackShare } from '@/lib/analytics';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Badge } from '@/components/ds/core/Badge';
 import { Button } from '@/components/ds/core/Button';
@@ -60,6 +61,10 @@ export default function PlayPage() {
 
   // Deck position lives in a ref: advancing a round must not depend on stale state.
   const cursor = useRef(0);
+  // Separate from `cursor`, which wraps back to 0 at the end of the deck. This
+  // one only ever goes up, because the question it answers is "how many rounds
+  // before they left", not "where in the deck were they".
+  const roundsPlayed = useRef(0);
   const nextButton = useRef<HTMLButtonElement>(null);
 
   const dealFrom = useCallback((source: Question[]) => {
@@ -69,9 +74,12 @@ export default function PlayPage() {
     setRound({ question, left, right });
     setPhase('question');
     setPicked(null);
+    // round_index is the drop-off curve: without it the bank's own stats say
+    // nothing about how long anyone actually stays.
     trackEvent('play_round_start', {
       question_id: question.id,
       metric: question.metric,
+      round_index: ++roundsPlayed.current,
     });
   }, []);
 
@@ -111,7 +119,10 @@ export default function PlayPage() {
       setStreak(nextStreak);
       setEndedStreak(correct ? 0 : streak);
 
-      if (correct && nextStreak > bestStreak) writeBestStreak(nextStreak);
+      if (correct && nextStreak > bestStreak) {
+        writeBestStreak(nextStreak);
+        trackEvent('play_best_streak', { streak_length: nextStreak });
+      }
 
       trackEvent('play_answer', {
         question_id: question.id,
@@ -144,9 +155,10 @@ export default function PlayPage() {
     if (!round) return;
     // Never leak the answer into the shared text.
     const text = `Grid Gorilla - I got a streak of ${endedStreak}\n${round.question.prompt}\nhttps://gridgorilla.app/play`;
-    trackEvent('play_share', { streak_length: endedStreak });
+    const canWebShare = typeof navigator !== 'undefined' && !!navigator.share;
+    trackShare('streak', canWebShare ? 'web_share' : 'copy_link', String(endedStreak));
 
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (canWebShare) {
       try {
         await navigator.share({ text });
         return;

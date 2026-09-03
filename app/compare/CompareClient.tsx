@@ -20,6 +20,7 @@ import CountrySelect from '@/components/CountrySelect';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import ShareButton from '@/components/ShareButton';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import { ToastProvider } from '@/components/Toast';
 import { useCompareParams } from '@/hooks/useCompareParams';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
@@ -30,7 +31,6 @@ import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { DonutStat } from '@/components/ds/data/DonutStat';
 import { MixBar } from '@/components/ds/data/MixBar';
 import { fuelShares, fuelSeries } from '@/lib/fuels';
-import Link from 'next/link';
 import FlagImg from '@/components/FlagImg';
 
 const BLOC_OPTIONS: { id: string; label: string }[] = [
@@ -391,12 +391,14 @@ function Side({
           </div>
           {sel.iso3 && countryPagePath(sel.iso3, countryPages) && (
             <div style={{ marginTop: 'var(--space-3)' }}>
-              <Link
+              <CountryProfileLink
+                iso3={sel.iso3}
+                source="compare"
                 href={countryPagePath(sel.iso3, countryPages)!}
                 style={{ fontSize: 'var(--fs-ui)', color: 'var(--green)' }}
               >
                 Full profile →
-              </Link>
+              </CountryProfileLink>
             </div>
           )}
         </div>
@@ -560,7 +562,7 @@ function ComparePageContent() {
             type={typeB}
             onTypeChange={handleSetTypeB}
           />
-          <ShareButton disabled={!hasComparison} />
+          <ShareButton disabled={!hasComparison} itemId={`${idA}_${idB}`} />
         </div>
       </div>
 

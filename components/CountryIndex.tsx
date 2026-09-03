@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import FlagImg from '@/components/FlagImg';
+import CountryProfileLink from '@/components/CountryProfileLink';
 
 /**
  * The browsable index on `/countries`: a filter box over every country that has
@@ -138,14 +138,15 @@ export default function CountryIndex({ entries }: { entries: IndexEntry[] }) {
             >
               {list.map((e) => (
                 <li key={e.iso3}>
-                  <Link
-                    href={`/country/${e.iso3.toLowerCase()}`}
+                  <CountryProfileLink
+                    iso3={e.iso3}
+                    source="countries_index"
                     className="gg-touch-target"
                     style={ROW}
                   >
                     <FlagImg iso3={e.iso3} size={16} />
                     {e.name}
-                  </Link>
+                  </CountryProfileLink>
                 </li>
               ))}
             </ul>

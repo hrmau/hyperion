@@ -19,6 +19,8 @@ import { GorillaNote } from '@/components/ds/core/GorillaNote';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
 import { mapPathFor } from '@/lib/data';
+import CountryProfileLink from '@/components/CountryProfileLink';
+import type { ProfileSource } from '@/lib/analytics';
 import { leadStat } from '@/lib/leadStat';
 import GridMetrics from '@/components/GridMetrics';
 import { intensityMetric, tradeMetric, independenceMetric } from '@/lib/gridMetrics';
@@ -180,7 +182,7 @@ async function NoProfile({ iso3 }: { iso3: string }) {
           >
             {neighbours.map((n) => (
               <li key={n.iso3}>
-                <NeighbourCard n={n} />
+                <NeighbourCard n={n} source="pageless_fallback" />
               </li>
             ))}
           </ul>
@@ -196,10 +198,11 @@ async function NoProfile({ iso3 }: { iso3: string }) {
   );
 }
 
-function NeighbourCard({ n }: { n: NeighbourLink }) {
+function NeighbourCard({ n, source }: { n: NeighbourLink; source: ProfileSource }) {
   return (
-    <Link
-      href={`/country/${n.iso3.toLowerCase()}`}
+    <CountryProfileLink
+      iso3={n.iso3}
+      source={source}
       style={{
         display: 'block',
         padding: 'var(--space-5)',
@@ -226,7 +229,7 @@ function NeighbourCard({ n }: { n: NeighbourLink }) {
       >
         {n.headline}
       </span>
-    </Link>
+    </CountryProfileLink>
   );
 }
 
@@ -530,7 +533,7 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
             >
               {neighbours.map((n) => (
                 <li key={n.iso3}>
-                  <NeighbourCard n={n} />
+                  <NeighbourCard n={n} source="country_peers" />
                 </li>
               ))}
             </ul>

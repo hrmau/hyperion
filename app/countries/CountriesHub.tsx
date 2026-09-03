@@ -4,6 +4,7 @@ import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import FlagImg from '@/components/FlagImg';
 import CountryIndex, { type IndexEntry } from '@/components/CountryIndex';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Card } from '@/components/ds/core/Card';
 import { Button } from '@/components/ds/core/Button';
@@ -135,7 +136,11 @@ export default async function CountriesHub({ region }: CountriesHubProps) {
               if (!c) return null;
               return (
                 <li key={iso3} style={{ display: 'flex' }}>
-                  <Link href={`/country/${iso3.toLowerCase()}`} style={{ display: 'flex', width: '100%' }}>
+                  <CountryProfileLink
+                    iso3={iso3}
+                    source="countries_picks"
+                    style={{ display: 'flex', width: '100%' }}
+                  >
                     <Card tone="card" padding="var(--space-7)" style={{ width: '100%' }}>
                       <div
                         style={{
@@ -168,7 +173,7 @@ export default async function CountriesHub({ region }: CountriesHubProps) {
                         {c.hero.headline}
                       </p>
                     </Card>
-                  </Link>
+                  </CountryProfileLink>
                 </li>
               );
             })}

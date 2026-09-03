@@ -23,6 +23,7 @@ import { fuelShares } from '@/lib/fuels';
 import FlagImg from '@/components/FlagImg';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Pill } from '@/components/ds/core/Pill';
 import { Stat } from '@/components/ds/core/Stat';
@@ -383,9 +384,16 @@ export default function RankingsPage() {
                     {(() => {
                       const profile = countryPagePath(r.country.iso3, countryPages);
                       return profile ? (
-                        <Button as={Link} href={profile} variant="primary" size="sm">
-                          Full profile
-                        </Button>
+                        <CountryProfileLink
+                          iso3={r.country.iso3}
+                          source="rankings"
+                          href={profile}
+                          style={{ display: 'inline-flex' }}
+                        >
+                          <Button as="span" variant="primary" size="sm">
+                            Full profile
+                          </Button>
+                        </CountryProfileLink>
                       ) : null;
                     })()}
                     <Button

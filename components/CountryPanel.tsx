@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import type { Country, YearData, FossilFuelData, BlocsData } from '@/lib/types';
 import FlagImg from '@/components/FlagImg';
 import type { BlocAggregates } from '@/lib/data';
 import { getLatestYearData, getBlocsForCountry, countryPagePath } from '@/lib/data';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
 import { calculateIndependenceScoreV2, getFossilDataForYear, formatIndependenceScore, getIndependenceDescription, type IndependenceScore } from '@/lib/independence';
 import EnergyMixChart from './EnergyMixChart';
@@ -319,13 +319,15 @@ export default function CountryPanel({
               <h2 className="text-sm font-medium text-primary">{country.name}</h2>
               <p className="text-[11px] text-muted">{country.emberRegion}{latest ? ` · ${latest.year}` : ''}</p>
               {countryPagePath(country.iso3, countryPages ?? null) && (
-                <Link
+                <CountryProfileLink
+                  iso3={country.iso3}
+                  source="map_panel"
                   href={countryPagePath(country.iso3, countryPages ?? null)!}
                   className="text-[11px]"
                   style={{ color: 'var(--green)' }}
                 >
                   Full profile →
-                </Link>
+                </CountryProfileLink>
               )}
             </div>
           </div>
