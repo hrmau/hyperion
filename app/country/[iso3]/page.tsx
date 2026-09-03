@@ -18,6 +18,7 @@ import { RankedBarList } from '@/components/ds/data/RankedBarList';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
 
 import { fuelShares, fuelSeries } from '@/lib/fuels';
+import { mapPathFor } from '@/lib/data';
 import { leadStat } from '@/lib/leadStat';
 import GridMetrics from '@/components/GridMetrics';
 import { intensityMetric, tradeMetric, independenceMetric } from '@/lib/gridMetrics';
@@ -403,7 +404,7 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
               <Button as={Link} href={`/compare?a=${facts.iso3}`} variant="primary">
                 Compare {facts.name}
               </Button>
-              <Button as={Link} href="/explore" variant="secondary">
+              <Button as={Link} href={mapPathFor(facts.iso3)} variant="secondary">
                 See it on the map
               </Button>
             </div>

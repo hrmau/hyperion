@@ -23,6 +23,12 @@ interface WorldMapProps {
   selectedCountry: Country | null;
   mapMode: MapColorMode;
   fossilFuelData: FossilFuelData | null;
+  /**
+   * Frame the map on this country on arrival. Deliberately separate from
+   * `selectedCountry`: clicking a country on the map must not move the
+   * viewport under the reader, so only a deep link sets this.
+   */
+  focusIso3?: string | null;
 }
 
 // Zoom control button component
@@ -66,6 +72,53 @@ const MAP_HEIGHT = 500;
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 8;
 
+/**
+ * How many country-widths of context to keep in frame when focusing.
+ *
+ * 4 was chosen against the real projected geometry rather than by eye. It puts
+ * Ireland at the 8x cap, which frames it with Britain and the top of France;
+ * Kenya lands at 4.0x, Great Britain 5.0x, New Zealand 6.7x, the United States
+ * 1.7x, and Russia and Brazil stay at 1x because they already fill the frame.
+ */
+const FOCUS_CONTEXT = 4;
+
+/**
+ * Projected bounds of a country's largest polygon.
+ *
+ * A plain `path.bounds(feature)` covers every island and overseas territory the
+ * feature carries, which for framing purposes is the wrong answer — see the
+ * focus effect for the numbers.
+ */
+/** Only what this needs from a GeoJSON feature; the union's other members have no `coordinates`. */
+type BoundsFeature = { geometry?: { type: string; coordinates?: unknown } | null };
+
+function mainlandBounds(
+  feature: BoundsFeature,
+  path: d3.GeoPath
+): [[number, number], [number, number]] | null {
+  const geometry = feature.geometry;
+  if (!geometry) return null;
+  if (geometry.type !== 'MultiPolygon' || !Array.isArray(geometry.coordinates)) {
+    return path.bounds(feature as never);
+  }
+
+  let bestArea = -1;
+  let bestBounds: [[number, number], [number, number]] | null = null;
+  for (const coordinates of geometry.coordinates) {
+    const polygon = {
+      type: 'Feature',
+      properties: {},
+      geometry: { type: 'Polygon', coordinates },
+    };
+    const area = path.area(polygon as never);
+    if (area > bestArea) {
+      bestArea = area;
+      bestBounds = path.bounds(polygon as never);
+    }
+  }
+  return bestBounds;
+}
+
 export default function WorldMap({
   countries,
   selectedBloc,
@@ -75,6 +128,7 @@ export default function WorldMap({
   selectedCountry,
   mapMode,
   fossilFuelData,
+  focusIso3,
 }: WorldMapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const gRef = useRef<d3.Selection<SVGGElement, unknown, null, undefined> | null>(null);
@@ -82,6 +136,9 @@ export default function WorldMap({
   const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
   const [worldData, setWorldData] = useState<Topology | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
+  // Set once the reader pans or zooms themselves, so the 110m -> 50m upgrade
+  // cannot re-frame a map they have since moved.
+  const userMovedRef = useRef(false);
 
   // Geometry loads in two passes.
   //
@@ -173,6 +230,9 @@ export default function WorldMap({
         g.attr('transform', event.transform);
         transformRef.current = event.transform;
         setZoomLevel(event.transform.k);
+        // Programmatic transforms carry no sourceEvent; a wheel, drag or pinch
+        // does. Only the latter means the reader has taken over.
+        if (event.sourceEvent) userMovedRef.current = true;
       });
 
     zoomRef.current = zoom;
@@ -250,6 +310,67 @@ export default function WorldMap({
     }
 
   }, [worldData, countries, selectedBloc, blocCountryIds, selectedCountry, handleMouseMove, handleClick, onHover, mapMode, fossilFuelData]);
+
+
+  /**
+   * Frame the map on `focusIso3`, arriving from a "see on map" link.
+   *
+   * Bounds come from the country's LARGEST landmass, not from the whole
+   * feature, and that is the part that matters. `path.bounds()` of the feature
+   * spans every scattered territory it owns, which is nonsense to zoom to: the
+   * Netherlands measures 196px wide because of Aruba and Curacao, Fiji 943px
+   * because it straddles the antimeridian, New Zealand 897px because of the
+   * Kermadecs. All three fell back to no zoom at all. Against the main landmass
+   * they are 8.5, 3.7 and 28.7px, which frame properly.
+   *
+   * Runs again when the 50m geometry replaces the 110m: some countries are not
+   * in the small file at all, and a redraw mid-transition would otherwise leave
+   * the map stranded part-way. Re-running from wherever it got to lands it in
+   * the right place. It gives way to the reader, though - once they have panned
+   * or zoomed themselves, the upgrade must not yank the map back.
+   */
+  useEffect(() => {
+    if (!focusIso3 || !worldData || !svgRef.current || !zoomRef.current) return;
+    if (userMovedRef.current) return;
+
+    const projection = d3.geoNaturalEarth1()
+      .scale(MAP_WIDTH / 5.5)
+      .translate([MAP_WIDTH / 2, MAP_HEIGHT / 2]);
+    const path = d3.geoPath().projection(projection);
+
+    const geomCollection = worldData.objects.countries as GeometryCollection;
+    const feature = topojson
+      .feature(worldData, geomCollection)
+      .features.find((f) => getIso3(f.id) === focusIso3);
+    // Absent from the 110m subset; the 50m upgrade re-runs this and finds it.
+    if (!feature) return;
+
+    const bounds = mainlandBounds(feature as BoundsFeature, path);
+    if (!bounds) return;
+    const [[x0, y0], [x1, y1]] = bounds;
+    const w = Math.max(x1 - x0, 1);
+    const h = Math.max(y1 - y0, 1);
+    const k = Math.min(
+      MAX_ZOOM,
+      Math.max(MIN_ZOOM, Math.min(MAP_WIDTH / (w * FOCUS_CONTEXT), MAP_HEIGHT / (h * FOCUS_CONTEXT)))
+    );
+
+    const transform = d3.zoomIdentity
+      .translate(MAP_WIDTH / 2, MAP_HEIGHT / 2)
+      .scale(k)
+      .translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
+
+    // `tokens/motion.css` zeroes every duration under prefers-reduced-motion,
+    // but that only reaches CSS. This pan is a 700ms camera move the reader did
+    // not ask for, so it honours the same preference by simply arriving.
+    const svg = d3.select(svgRef.current);
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) svg.call(zoomRef.current.transform, transform);
+    else svg.transition().duration(700).call(zoomRef.current.transform, transform);
+  }, [focusIso3, worldData]);
 
   // Zoom control functions
   const handleZoomIn = useCallback(() => {
