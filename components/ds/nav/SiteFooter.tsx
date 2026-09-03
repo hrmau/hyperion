@@ -28,7 +28,7 @@ const COLUMNS: { label: string; links: { label: string; href: string }[] }[] = [
       // personalised hook; this one was missed in that pass.
       { label: 'The map', href: '/explore' },
       { label: 'All countries', href: '/countries' },
-      { label: 'Higher or lower', href: '/play' },
+      { label: 'Higher or Lower', href: '/play' },
       { label: 'Compare', href: '/compare' },
       { label: 'Rankings', href: '/rankings' },
     ],
