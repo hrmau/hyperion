@@ -248,7 +248,7 @@ export default function PlayPage() {
               marginBottom: 'var(--space-9)',
             }}
           >
-            <Eyebrow>Higher or lower</Eyebrow>
+            <Eyebrow>Higher or Lower</Eyebrow>
             <Badge tone={streak > 0 ? 'accent' : 'neutral'}>
               <span aria-hidden="true">Streak {streak}</span>
               <span className="sr-only">Current streak: {streak}</span>

@@ -20,6 +20,7 @@ import { RankedBarList } from '@/components/ds/data/RankedBarList';
 import { fuelShares, fuelSeries } from '@/lib/fuels';
 import { leadStat } from '@/lib/leadStat';
 import { loadHomeView, loadSwitcherIndex, loadHomeQuestion, publishableIso3 } from '@/lib/facts';
+import { mapPathFor } from '@/lib/data';
 import { theName, subjectName, possessiveName } from '@/lib/countryNames';
 
 /**
@@ -235,9 +236,19 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
                   See every country ranked
                 </Button>
               )}
-              <Button as={Link} href="/explore" variant="secondary">
-                Explore the map
-              </Button>
+              {/* The country, not the world. The "The world" card lower down
+                  already carries a generic "Open the map" and says so in its
+                  copy, so spending the hero's second button on the same
+                  destination was spending it twice. */}
+              {view.iso3 ? (
+                <Button as={Link} href={mapPathFor(view.iso3)} variant="secondary">
+                  See {view.name} on the map
+                </Button>
+              ) : (
+                <Button as={Link} href="/explore" variant="secondary">
+                  Explore the map
+                </Button>
+              )}
             </div>
           </div>
 
@@ -306,7 +317,7 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
                 something rather than telling you something. */}
             <Card tone="accent" style={{ display: 'flex', flexDirection: 'column' }}>
               <Eyebrow style={{ marginBottom: 'var(--space-4)', color: 'var(--green-ink)', opacity: 0.75 }}>
-                Higher or lower
+                Higher or Lower
               </Eyebrow>
               {question ? (
                 <>
