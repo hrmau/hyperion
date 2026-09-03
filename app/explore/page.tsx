@@ -18,6 +18,7 @@ import {
   loadBlocs,
   loadFossilFuelData,
   loadCountryPages,
+  MAP_COUNTRY_PARAM,
   getCountriesInBloc,
   getLatestYearData,
   aggregateBlocCommonYear,
@@ -75,6 +76,7 @@ export default function Explore() {
   const [hoveredCountry, setHoveredCountry] = useState<Country | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
   const [countryPages, setCountryPages] = useState<Set<string> | null>(null);
+  const [focusIso3, setFocusIso3] = useState<string | null>(null);
 
   const mapMode = MEASURE_TO_MODE[measure];
 
@@ -87,6 +89,21 @@ export default function Explore() {
         setBlocs(blocsData);
         setFossilFuelData(fossilData);
         setLoading(false);
+
+        // Arriving from a "see on map" link: select that country and frame the
+        // map on it, rather than dropping the reader on the world view to find
+        // it themselves.
+        //
+        // Read from `window.location` rather than `useSearchParams`, which
+        // would put this statically-rendered page behind a Suspense boundary
+        // for a value that is only ever read once, on the client, on arrival.
+        const wanted = new URLSearchParams(window.location.search)
+          .get(MAP_COUNTRY_PARAM)
+          ?.toUpperCase();
+        if (wanted && countriesData[wanted]) {
+          setSelectedCountry(countriesData[wanted]);
+          setFocusIso3(wanted);
+        }
       })
       .catch(console.error);
   }, []);
@@ -257,6 +274,7 @@ export default function Explore() {
                 selectedCountry={selectedCountry}
                 mapMode={mapMode}
                 fossilFuelData={fossilFuelData}
+                focusIso3={focusIso3}
               />
             </div>
           </div>

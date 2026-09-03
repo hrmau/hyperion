@@ -67,6 +67,19 @@ export function countryPagePath(iso3: string, pages: Set<string> | null): string
 }
 
 /**
+ * Path to the map, framed on one country and with it selected.
+ *
+ * The query key lives here rather than being typed at each call site, because
+ * `/explore` is the only reader and a typo in a link would fail silently — you
+ * would land on the world view and not know anything was meant to happen.
+ */
+export const MAP_COUNTRY_PARAM = 'country';
+
+export function mapPathFor(iso3: string): string {
+  return `/explore?${MAP_COUNTRY_PARAM}=${iso3.toLowerCase()}`;
+}
+
+/**
  * Combine electricity and socioeconomic data for correlation analysis.
  * Returns data points with electricity per capita calculated from total TWh and population.
  */

@@ -10,6 +10,7 @@ import {
   loadBlocs,
   getLatestYearData,
   getBlocsForCountry,
+  mapPathFor,
 } from '@/lib/data';
 import type { CountriesData, Country, FossilFuelData, YearData, BlocsData } from '@/lib/types';
 import { formatTWh, formatPercent, formatEmissions } from '@/lib/scales';
@@ -395,7 +396,12 @@ export default function RankingsPage() {
                     >
                       Compare
                     </Button>
-                    <Button as={Link} href="/explore" variant="ghost" size="sm">
+                    <Button
+                      as={Link}
+                      href={mapPathFor(r.country.iso3)}
+                      variant="ghost"
+                      size="sm"
+                    >
                       See on map
                     </Button>
                   </div>
