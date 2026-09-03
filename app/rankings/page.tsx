@@ -230,7 +230,10 @@ export default function RankingsPage() {
         key: 'mix',
         label: 'Generation mix',
         mobileOptional: true,
-        render: (r) => <MixBar shares={fuelShares(r.yearData)} height={10} />,
+        // Not interactive: one focus stop per row would put 200 of them between
+        // the table and the controls under it, and the row already expands to a
+        // full mix with a legend.
+        render: (r) => <MixBar shares={fuelShares(r.yearData)} height={10} interactive={false} />,
       },
       {
         key: 'trend',
