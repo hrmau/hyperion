@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import FlagImg from '@/components/FlagImg';
+import { trackCountryProfileOpen } from '@/lib/analytics';
 import names from '@/public/data/country-names.json';
 import pages from '@/public/data/country-pages.json';
 
@@ -98,6 +99,7 @@ export default function CountryFinder() {
 
   const go = (iso3: string) => {
     close();
+    trackCountryProfileOpen('country_finder', iso3);
     router.push(`/country/${iso3.toLowerCase()}`);
   };
 

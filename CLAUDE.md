@@ -380,6 +380,44 @@ as blocking on the redesign. Read it before "fixing" something that looks broken
 — several entries are deliberate, and one (the independence score's treatment of
 missing fuel data) has a guard in CI that should not be dismissed without it.
 
+## Analytics
+
+`lib/analytics.ts` is the only writer, and it no-ops unless the visitor has
+consented. **Every figure below is a floor, not a count** — whatever share of
+visitors decline analytics is missing from all of it.
+
+| Event | Parameters | Answers |
+|---|---|---|
+| `country_profile_open` | `source`, `country` | which surface drives traffic to the 200 profiles |
+| `share` | `content_type`, `method`, `item_id` | how much sharing happens, and of what |
+| `play_round_start` | `question_id`, `metric`, `round_index` | how far into a run people get before leaving |
+| `play_answer` | `question_id`, `metric`, `correct`, `streak_after` | which questions everyone gets wrong |
+| `play_streak_end` | `streak_length` | |
+| `play_best_streak` | `streak_length` | |
+
+**Parameters are typed unions, not free strings.** A misspelled `source` does not
+fail loudly — it quietly becomes a new row in a report nobody reconciles — so it
+fails at build time instead. `ProfileSource` in `lib/analytics.ts` is the closed
+list of every internal route to a profile, and adding a new one means adding it
+there first.
+
+**Referrers cannot answer the first question**, which is why the click is
+tracked instead. App Router navigations are client-side, and a referrer names
+the page a reader came from, not which of the several links on it they took —
+`/countries` alone has two. External and search traffic is deliberately not in
+this event: session source/medium and the landing-page report already cover it.
+
+`components/CountryProfileLink.tsx` carries the click handler so the pages that
+link to profiles can stay server components — the homepage, the country pages
+and the `/countries` hub all are, and an `onClick` cannot live in one.
+
+**Custom parameters are invisible in GA4 reports until they are registered as
+custom dimensions** (Admin -> Custom definitions -> Create custom dimension,
+scope Event). Until then they exist only in DebugView and the BigQuery export.
+The ones that need registering: `source`, `country`, `content_type`, `method`,
+`item_id`, `question_id`, `metric`, `correct`, `streak_after`, `streak_length`,
+`round_index`.
+
 ## Security
 
 Headers are set in `next.config.ts` for every route. Three things about them are
@@ -422,7 +460,8 @@ only thing between a cookie and the routing table.
 - Country flags come from `components/FlagImg.tsx` (CDN with an ISO2 text fallback),
   never raw emoji.
 - Analytics goes through `lib/analytics.ts`, which no-ops unless the visitor has
-  consented to analytics cookies.
+  consented to analytics cookies. See the Analytics section for the event
+  vocabulary; never call `trackEvent` with an ad-hoc name from a component.
 - `npm run lint` is clean, and `npm audit` reports zero vulnerabilities. Both
   were not true before; keep them that way rather than re-establishing a
   tolerated baseline.

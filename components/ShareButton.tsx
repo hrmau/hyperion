@@ -2,16 +2,20 @@
 
 import { useCallback, useState } from 'react';
 import { showToast } from './Toast';
+import { trackShare } from '@/lib/analytics';
 
 interface ShareButtonProps {
   disabled?: boolean;
+  /** The pair being shared, e.g. "IRL_GBR" — the `item_id` on the share event. */
+  itemId?: string;
 }
 
-export default function ShareButton({ disabled }: ShareButtonProps) {
+export default function ShareButton({ disabled, itemId }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = useCallback(async () => {
     const url = window.location.href;
+    trackShare('comparison', 'copy_link', itemId ?? 'unknown');
 
     try {
       await navigator.clipboard.writeText(url);
@@ -30,7 +34,7 @@ export default function ShareButton({ disabled }: ShareButtonProps) {
       showToast('Link copied!');
       setTimeout(() => setCopied(false), 2000);
     }
-  }, []);
+  }, [itemId]);
 
   return (
     <button

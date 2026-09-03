@@ -6,6 +6,7 @@ import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import FlagImg from '@/components/FlagImg';
 import CountrySwitcher from '@/components/CountrySwitcher';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Card } from '@/components/ds/core/Card';
 import { Stat } from '@/components/ds/core/Stat';
@@ -226,10 +227,21 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
             </div>
 
             <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+              {/* The anchor is the link, the Button is only its styling.
+                  `ButtonProps` does not accept props it knows nothing about, and
+                  widening it to forward them would cost type-checking on every
+                  other Button on the site. */}
               {view.profilePath ? (
-                <Button as={Link} href={view.profilePath} variant="primary">
-                  See {view.name}&rsquo;s full profile
-                </Button>
+                <CountryProfileLink
+                  iso3={view.key}
+                  source="home_hero"
+                  href={view.profilePath}
+                  style={{ display: 'inline-flex' }}
+                >
+                  <Button as="span" variant="primary">
+                    See {view.name}&rsquo;s full profile
+                  </Button>
+                </CountryProfileLink>
               ) : (
                 <Button as={Link} href="/rankings" variant="primary">
                   See every country ranked
