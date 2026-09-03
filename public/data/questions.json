@@ -1,5 +1,25 @@
 [
   {
+    "id": "clean_pct-ARG-MMR-2024",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "ARG",
+      "name": "Argentina",
+      "value": 41.2
+    },
+    "b": {
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "value": 47.9
+    },
+    "insight": "Myanmar edges ahead on a near-even split between its dams and its gas fields. Argentina's mix is broader - gas, hydro, wind and a nuclear programme running since the 1970s - but gas still carries more than half of it.",
+    "surprising": true
+  },
+  {
     "id": "clean_pct-AUT-CHE-2025",
     "metric": "clean_pct",
     "metricLabel": "Clean electricity share",
@@ -40,6 +60,26 @@
     "surprising": true
   },
   {
+    "id": "clean_pct-BOL-NGA-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "BOL",
+      "name": "Bolivia",
+      "value": 36.1
+    },
+    "b": {
+      "iso3": "NGA",
+      "name": "Nigeria",
+      "value": 31.3
+    },
+    "insight": "These two grids are near-twins in shape despite having nothing else in common: roughly two thirds gas, most of the rest hydro. Both found gas at home and built around it, which is the most common way a country ends up neither clean nor dirty.",
+    "surprising": true
+  },
+  {
     "id": "clean_pct-CAN-KEN-2025",
     "metric": "clean_pct",
     "metricLabel": "Clean electricity share",
@@ -57,6 +97,26 @@
       "value": 90
     },
     "insight": "Kenya runs on Rift Valley geothermal plus hydro and wind, giving it one of the cleanest grids on earth. Clean electricity is not a rich-country privilege.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-CYP-MAR-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "CYP",
+      "name": "Cyprus",
+      "value": 27.8
+    },
+    "b": {
+      "iso3": "MAR",
+      "name": "Morocco",
+      "value": 24
+    },
+    "insight": "Cyprus ran on oil and nothing else for most of this century, and is now roughly a quarter clean on solar alone. An island with no cable to anywhere pays for every barrel it lands; Morocco has more sun and less pressure, and imported coal still carries most of its grid.",
     "surprising": true
   },
   {
@@ -97,6 +157,46 @@
       "value": 64.4
     },
     "insight": "Britain's coal-to-wind switch is one of the fastest grid decarbonisations ever recorded. Spain got further still, using solar and hydro Britain simply doesn't have.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-EST-MMR-2024",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "EST",
+      "name": "Estonia",
+      "value": 55.8
+    },
+    "b": {
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "value": 47.9
+    },
+    "insight": "Estonia ran on oil shale, among the dirtiest fuels in Europe, for the whole of the last century - and has cut it from nearly all its electricity to under half in about fifteen years. Myanmar has drifted the other way, its gas growing as fast as its dams.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-GEO-LUX-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "GEO",
+      "name": "Georgia",
+      "value": 79.6
+    },
+    "b": {
+      "iso3": "LUX",
+      "name": "Luxembourg",
+      "value": 91.6
+    },
+    "insight": "Georgia's four fifths comes from rivers powering a grid that nearly meets its own demand. Luxembourg's higher score covers only the fifth of its electricity it actually generates - the rest arrives over the border carrying whatever its neighbours happened to burn.",
     "surprising": true
   },
   {
@@ -157,6 +257,46 @@
       "value": 47.9
     },
     "insight": "Both grids were built on hydro and both have been diluted by fossil fuel since. Sri Lanka has started clawing it back with solar, which now supplies about a sixth of its power; in Myanmar, gas has grown as fast as the dams have.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-LUX-SVN-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "LUX",
+      "name": "Luxembourg",
+      "value": 91.6
+    },
+    "b": {
+      "iso3": "SVN",
+      "name": "Slovenia",
+      "value": 78.9
+    },
+    "insight": "Slovenia's score rests on one reactor and its rivers, though half of Krsko's output belongs to Croatia under a 50-50 agreement - the plant sits on Slovenia's books while the electricity leaves. Luxembourg's higher figure covers only the fifth of its supply it makes at all.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-MAR-SRB-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "MAR",
+      "name": "Morocco",
+      "value": 24
+    },
+    "b": {
+      "iso3": "SRB",
+      "name": "Serbia",
+      "value": 27.8
+    },
+    "insight": "Two coal grids at almost the same clean share, reached from opposite directions. Serbia's quarter is hydro on the Danube and its tributaries, built decades ago; Morocco's is wind and solar built in the last fifteen years, on top of coal it kept adding at the same time.",
     "surprising": true
   },
   {
@@ -300,6 +440,26 @@
     "surprising": true
   },
   {
+    "id": "coal_pct-KGZ-SVN-2025",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "KGZ",
+      "name": "Kyrgyzstan",
+      "value": 12.6
+    },
+    "b": {
+      "iso3": "SVN",
+      "name": "Slovenia",
+      "value": 14.7
+    },
+    "insight": "Slovenia is on its way out of coal: a third of the grid at the turn of the century, a seventh now, with nuclear and hydro carrying the load. Kyrgyzstan is heading the other way, burning more coal each year as demand outgrows what its dams can deliver.",
+    "surprising": true
+  },
+  {
     "id": "coal_pct-KOR-TWN-2025",
     "metric": "coal_pct",
     "metricLabel": "Coal share of electricity",
@@ -317,6 +477,26 @@
       "value": 36.3
     },
     "insight": "Taiwan has been phasing out nuclear while electricity demand from chip fabrication climbs. Coal and gas filled the gap. South Korea kept its reactors.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-MMR-TJK-2024",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2024,
+    "unit": "%",
+    "a": {
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "value": 5.5
+    },
+    "b": {
+      "iso3": "TJK",
+      "name": "Tajikistan",
+      "value": 4.5
+    },
+    "insight": "Neither burns much coal, and for the same reason - both grids were built on rivers. Tajikistan is the extreme case at around ninety-five per cent hydro, which leaves it exporting power in summer when the rivers are high and short of it every winter.",
     "surprising": true
   },
   {
@@ -357,6 +537,46 @@
       "value": 12
     },
     "insight": "The Dominican Republic emits more from electricity than Bulgaria while generating substantially less of it. Three quarters of what it burns is coal, gas or oil; most of Bulgaria's power comes from a nuclear plant and its rivers.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-BOL-ECU-2025",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2025,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "BOL",
+      "name": "Bolivia",
+      "value": 7
+    },
+    "b": {
+      "iso3": "ECU",
+      "name": "Ecuador",
+      "value": 6
+    },
+    "insight": "Bolivia emits more from a grid barely a third the size of Ecuador's. Ecuador's power is mostly falling water and Bolivia's is mostly burning gas - proof that how much a country generates says very little about what it emits.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-BOL-LKA-2025",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2025,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "BOL",
+      "name": "Bolivia",
+      "value": 7
+    },
+    "b": {
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "value": 6
+    },
+    "insight": "Bolivia emits more than Sri Lanka while generating less electricity. Gas is the cleaner fuel per unit burned, but Bolivia burns it for two thirds of its power, while more than half of Sri Lanka's comes from water and sun.",
     "surprising": true
   },
   {
@@ -440,6 +660,26 @@
     "surprising": true
   },
   {
+    "id": "emissions-MMR-PRI-2024",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2024,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "value": 11
+    },
+    "b": {
+      "iso3": "PRI",
+      "name": "Puerto Rico",
+      "value": 13
+    },
+    "insight": "Puerto Rico emits more from electricity than Myanmar, with a population seventeen times smaller. Almost half its power still comes from oil, a fuel most grids abandoned decades ago - an island that ships in every drop has no cheap clean option waiting on the shelf.",
+    "surprising": true
+  },
+  {
     "id": "emissions-VNM-ZAF-2025",
     "metric": "emissions",
     "metricLabel": "Power sector emissions",
@@ -457,6 +697,26 @@
       "value": 170
     },
     "insight": "South Africa's grid is almost entirely coal, run by a single struggling utility. Vietnam is growing fast but has added serious solar alongside its coal.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-AZE-LUX-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "AZE",
+      "name": "Azerbaijan",
+      "value": 2754
+    },
+    "b": {
+      "iso3": "LUX",
+      "name": "Luxembourg",
+      "value": 2333
+    },
+    "insight": "This flatters neither country. Luxembourg imports more than three quarters of the electricity it uses, so the figure measures only what it bothers to make itself; Azerbaijan makes nearly all of its own, and burns gas for close to nine tenths of it.",
     "surprising": true
   },
   {
@@ -560,6 +820,26 @@
     "surprising": true
   },
   {
+    "id": "generation_per_capita-COL-ECU-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "COL",
+      "name": "Colombia",
+      "value": 1734
+    },
+    "b": {
+      "iso3": "ECU",
+      "name": "Ecuador",
+      "value": 2033
+    },
+    "insight": "Two Andean grids built on the same mountain rivers, and Ecuador gets more electricity per person out of them. Both are unusually exposed to weather: when the reservoirs drop, so does the national power supply.",
+    "surprising": true
+  },
+  {
     "id": "generation_per_capita-CRI-MNG-2025",
     "metric": "generation_per_capita",
     "metricLabel": "Electricity generation per person",
@@ -617,6 +897,46 @@
       "value": 10195
     },
     "insight": "Both are dense, rich and urban. South Korea's steel, shipbuilding and semiconductor plants push it above Singapore's services-and-trade economy.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-MDA-MNG-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "MDA",
+      "name": "Moldova",
+      "value": 2464
+    },
+    "b": {
+      "iso3": "MNG",
+      "name": "Mongolia",
+      "value": 2850
+    },
+    "insight": "Mongolia's higher figure is industrial rather than domestic: mining alone accounts for around forty per cent of national demand, and coal supplies nearly all of it. Moldova runs on gas for close to nine tenths of its power and asks less of the grid overall.",
+    "surprising": true
+  },
+  {
+    "id": "generation_per_capita-MEX-MKD-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "MEX",
+      "name": "Mexico",
+      "value": 2769
+    },
+    "b": {
+      "iso3": "MKD",
+      "name": "North Macedonia",
+      "value": 3248
+    },
+    "insight": "North Macedonia has fewer people than many single cities and still generates more electricity per person than Mexico. Small grids often do - one large plant or industrial site moves the per-person figure in a way nothing can across 130 million people.",
     "surprising": true
   },
   {
@@ -880,6 +1200,26 @@
     "surprising": true
   },
   {
+    "id": "solar-DOM-LKA-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "DOM",
+      "name": "Dominican Republic",
+      "value": 2.3
+    },
+    "b": {
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "value": 2.8
+    },
+    "insight": "Both are island grids paying import prices for fuel, which is the strongest argument for solar there is. Sri Lanka has taken it further, to roughly a sixth of its electricity against about a tenth in the Dominican Republic.",
+    "surprising": true
+  },
+  {
     "id": "solar-GBR-ITA-2025",
     "metric": "solar",
     "metricLabel": "Solar generation",
@@ -917,6 +1257,126 @@
       "value": 8.9
     },
     "insight": "Hungary out-produces sunnier Portugal on solar, and a large share of it sits on houses: a net-metering scheme made domestic panels pay back fast enough that rooftops became a third of national capacity. Latitude set the ceiling; the tariff decided who got near it.",
+    "surprising": true
+  },
+  {
+    "id": "solar-LKA-OMN-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "value": 2.8
+    },
+    "b": {
+      "iso3": "OMN",
+      "name": "Oman",
+      "value": 2.3
+    },
+    "insight": "Sri Lanka produces more solar power than Oman, which has far more sun and far more money. Oman's first grid-scale solar plant only came online in 2021: when the gas is cheap and comes out of your own ground, there is little pressure to build anything else.",
+    "surprising": true
+  },
+  {
+    "id": "solar-LKA-QAT-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "value": 2.8
+    },
+    "b": {
+      "iso3": "QAT",
+      "name": "Qatar",
+      "value": 2.2
+    },
+    "insight": "Sri Lanka took solar from almost nothing to roughly a sixth of its electricity in a handful of years. Qatar started later and from a far stronger position, and solar is still a rounding error on a grid that is otherwise entirely gas.",
+    "surprising": true
+  },
+  {
+    "id": "solar-MAR-QAT-2025",
+    "metric": "solar",
+    "metricLabel": "Solar generation",
+    "prompt": "Which generates more solar power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "MAR",
+      "name": "Morocco",
+      "value": 2.6
+    },
+    "b": {
+      "iso3": "QAT",
+      "name": "Qatar",
+      "value": 2.2
+    },
+    "insight": "Qatar generated no solar power at all until Al Kharsaah opened in 2022 - a country with abundant sun and even more abundant gas had no particular reason to hurry. Morocco, which imports every tonne of coal it burns, started far earlier.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-BGD-PHL-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BGD",
+      "name": "Bangladesh",
+      "value": 103
+    },
+    "b": {
+      "iso3": "PHL",
+      "name": "Philippines",
+      "value": 123
+    },
+    "insight": "The Philippines generates more electricity than Bangladesh from a third fewer people. Both depend heavily on imported fuel, and both have spent the last decade adding coal rather than replacing it.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-BLR-HUN-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BLR",
+      "name": "Belarus",
+      "value": 46
+    },
+    "b": {
+      "iso3": "HUN",
+      "name": "Hungary",
+      "value": 40
+    },
+    "insight": "Both lean on a single reactor site for a large share of their power - Hungary on Paks, Belarus on Astravets, which only opened in 2020. The difference is what fills the rest: Hungary has been adding solar at pace, while Belarus still burns gas for over half.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-BLR-OMN-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "BLR",
+      "name": "Belarus",
+      "value": 46
+    },
+    "b": {
+      "iso3": "OMN",
+      "name": "Oman",
+      "value": 53
+    },
+    "insight": "Oman generates more electricity than Belarus with barely half the population. Almost all of it is gas, and much of it goes on cooling buildings and making fresh water - two things a Gulf summer demands relentlessly and a Belarusian one does not.",
     "surprising": true
   },
   {
@@ -997,6 +1457,26 @@
       "value": 1193
     },
     "insight": "Russia out-generates Japan. Cheap domestic gas and an energy-intensive heavy industry base make electricity worth using in ways it simply isn't in Japan.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-MAR-OMN-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "MAR",
+      "name": "Morocco",
+      "value": 45
+    },
+    "b": {
+      "iso3": "OMN",
+      "name": "Oman",
+      "value": 53
+    },
+    "insight": "Oman generates more electricity than Morocco from about a seventh of the people. Per person the gap is enormous: Morocco produces roughly a tenth of what Oman does, which is less a fact about power stations than about how differently the two countries live.",
     "surprising": true
   },
   {
@@ -1117,6 +1597,66 @@
       "value": 85.8
     },
     "insight": "Britain built the world's largest offshore wind fleet while France bet on nuclear. Both are low-carbon strategies; they just look nothing alike.",
+    "surprising": true
+  },
+  {
+    "id": "wind-HRV-LTU-2025",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "HRV",
+      "name": "Croatia",
+      "value": 3.2
+    },
+    "b": {
+      "iso3": "LTU",
+      "name": "Lithuania",
+      "value": 4
+    },
+    "insight": "Both built wind quickly, for different reasons. Croatia added it alongside long-standing hydro; Lithuania needed something to replace a nuclear plant it was required to close. Wind is now Lithuania's largest single source and Croatia's second.",
+    "surprising": true
+  },
+  {
+    "id": "wind-LTU-THA-2025",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "LTU",
+      "name": "Lithuania",
+      "value": 4
+    },
+    "b": {
+      "iso3": "THA",
+      "name": "Thailand",
+      "value": 3.4
+    },
+    "insight": "Lithuania generates more wind power than Thailand from a country twenty-five times smaller. It had little choice: closing the Ignalina nuclear plant in 2009, a condition of joining the EU, removed roughly eighty per cent of its electricity.",
+    "surprising": true
+  },
+  {
+    "id": "wind-NZL-THA-2025",
+    "metric": "wind",
+    "metricLabel": "Wind generation",
+    "prompt": "Which generates more wind power?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "NZL",
+      "name": "New Zealand",
+      "value": 4.2
+    },
+    "b": {
+      "iso3": "THA",
+      "name": "Thailand",
+      "value": 3.4
+    },
+    "insight": "New Zealand out-produces Thailand on wind with a fourteenth of the population, though wind is still a junior partner at home behind hydro and geothermal. Thailand's constraint is not turbines but the wind itself, which is modest across most of the country.",
     "surprising": true
   },
   {
