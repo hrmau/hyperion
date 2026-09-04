@@ -495,7 +495,7 @@ export default function PlayPage() {
                       }}
                     >
                       {endedStreak >= bestStreak
-                        ? 'That is your best run so far. The streak resets, but the run keeps going - there is no game over here.'
+                        ? 'That is your best run so far. The streak resets, but the run does not end.'
                         : `${bestStreak - endedStreak} more would have matched your best. The streak resets, but the run keeps going.`}
                     </p>
                   </Card>
