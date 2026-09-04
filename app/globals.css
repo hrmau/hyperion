@@ -264,6 +264,63 @@ body {
   animation: gg-fade-in 0.28s ease-out both;
 }
 
+/* A correct answer is the one moment in this game worth marking.
+   
+   Not confetti. The design system names exactly one place motion is allowed to
+   be expressive - the 520ms chart redraw - and says hover must never scale and
+   press must not transform at all. Scattered shapes would be the loudest thing
+   on the site by a distance, in a system with no icon set and no shadows. A
+   bloom of the accent is the same celebration expressed in the vocabulary that
+   already exists: green means "the one thing on screen", and elevation here is
+   a step up the ink ramp rather than a drop shadow.
+
+   The duration is `--dur-chart` deliberately. It is the system's one expressive
+   value, and it collapses to 0ms under prefers-reduced-motion, so a 0-duration
+   animation with `both` lands straight on its final frame - opacity 0, nothing
+   seen, nothing moved. The explicit rule below says so anyway. */
+.gg-play-correct {
+  position: relative;
+}
+
+.gg-play-correct::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(520px, 90vw);
+  height: 220px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--green) 24%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: gg-bloom var(--dur-chart) var(--ease-out) both;
+}
+
+/* The bloom is decoration behind the verdict, never on top of it. */
+.gg-play-correct > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes gg-bloom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+  45% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
 @keyframes gg-fade-in {
   from {
     opacity: 0;
@@ -282,6 +339,11 @@ body {
 
   .gg-play-reveal {
     animation: none;
+  }
+
+  .gg-play-correct::before {
+    animation: none;
+    opacity: 0;
   }
 }
 
