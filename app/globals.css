@@ -303,16 +303,21 @@ body {
      `transparent` fades toward transparent BLACK, which greys the midtones out
      and is why this read as a white haze rather than as the accent.
 
-     44% is a ceiling, not a taste. The verdict above it is #00c758 at 22.8px
-     bold, which WCAG counts as large text and so needs 3:1. Against the page it
-     has 8.2:1; laid over its own accent the ratio collapses fast - 3.27:1 at
-     44%, 2.82:1 at 50%, 2.35:1 at 58%, which is where this started. The bloom
-     is centred below the words so the real overlap is gentler than that, but
-     the cap means it would pass even if it were not. */
+     33% is the chosen weight; 46% is the hard ceiling. The verdict above it is
+     #00c758 at 22.8px bold, which WCAG counts as large text and so needs 3:1.
+     Against the page it has 8.2:1, but laid over its own accent the ratio
+     collapses fast - 4.25:1 at 33%, 3.27:1 at 44%, 3.14:1 at 46%, then 2.82:1
+     at 50% and 2.35:1 at 58%, which is where this was first rebuilt and would
+     have failed. The bloom is centred below the words so the real overlap is
+     gentler than any of that, but the ceiling means it would pass even if the
+     text sat dead centre on it. Do not go above 46%.
+
+     The midpoint moves with the peak, keeping the same falloff - dropping only
+     the centre would flatten the gradient into a wash rather than dimming it. */
   background: radial-gradient(
     ellipse at center,
-    color-mix(in oklab, var(--green) 44%, transparent) 0%,
-    color-mix(in oklab, var(--green) 24%, transparent) 50%,
+    color-mix(in oklab, var(--green) 33%, transparent) 0%,
+    color-mix(in oklab, var(--green) 18%, transparent) 50%,
     color-mix(in oklab, var(--green) 0%, transparent) 76%
   );
   /* The blur is what makes it a glow instead of a shape. */
