@@ -265,16 +265,37 @@ function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
           placeholder="Select a country..."
         />
       ) : (
-        <select
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full px-3 py-2 bg-inset border border-border rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-border"
-        >
-          <option value="">Select a bloc...</option>
-          {BLOC_OPTIONS.map(b => (
-            <option key={b.id} value={b.id}>{b.label}</option>
-          ))}
-        </select>
+        /* Matched to CountrySelect's trigger deliberately, class for class.
+           The two sit in the same slot and swap on a toggle, so any difference
+           between them reads as the box resizing rather than as two controls -
+           this one was `px-3 py-2` against `px-4 py-2.5` and, more to the point,
+           had no `min-h-[44px]`, which is both why the card jumped and a control
+           under the design system's 44px floor.
+
+           `appearance-none` plus the same chevron for the same reason: a native
+           select arrow next to a custom one looks like a bug even when nothing
+           moves. */
+        <div className="relative">
+          <select
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full min-h-[44px] px-4 py-2.5 pr-10 appearance-none bg-inset border border-border rounded-lg text-sm text-primary focus:outline-none focus:ring-1 focus:ring-border"
+          >
+            <option value="">Select a bloc...</option>
+            {BLOC_OPTIONS.map(b => (
+              <option key={b.id} value={b.id}>{b.label}</option>
+            ))}
+          </select>
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       )}
     </div>
   );
