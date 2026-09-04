@@ -28,6 +28,8 @@ import {
 } from '@/lib/questions';
 import { trackEvent, trackShare } from '@/lib/analytics';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
+import { Card } from '@/components/ds/core/Card';
+import { Stat } from '@/components/ds/core/Stat';
 import { Badge } from '@/components/ds/core/Badge';
 import { Button } from '@/components/ds/core/Button';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
@@ -441,7 +443,7 @@ export default function PlayPage() {
           {/* Colour is never the only signal — the verdict is text. */}
           <div aria-live="polite" style={{ marginTop: 'var(--space-9)' }}>
             {phase === 'reveal' && (
-              <div className="gg-play-reveal">
+              <div className={`gg-play-reveal${wasCorrect ? ' gg-play-correct' : ''}`}>
                 <div
                   style={{
                     fontSize: 'var(--fs-h3)',
@@ -462,17 +464,41 @@ export default function PlayPage() {
                   {question.insight}
                 </GorillaNote>
 
+                {/* A run ending is a moment, but it is not a game over - this
+                    game deliberately has none, and the page says so two lines
+                    further down. So this is a panel in the flow rather than a
+                    modal over it: nothing to dismiss, and Next is still the
+                    thing under your cursor. It appears for a streak of one,
+                    because ending a run of two is worth marking even though it
+                    is not worth sharing. */}
                 {!wasCorrect && endedStreak > 0 && (
-                  <p
-                    style={{
-                      marginTop: 'var(--space-6)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: 'var(--fs-mono-xs)',
-                      color: 'var(--text-quiet)',
-                    }}
+                  <Card
+                    tone="raised"
+                    padding="var(--space-7)"
+                    style={{ marginTop: 'var(--space-8)' }}
                   >
-                    Streak reset to zero. The run keeps going.
-                  </p>
+                    <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Run ended</Eyebrow>
+                    <div style={{ display: 'flex', gap: 'var(--space-10)', flexWrap: 'wrap' }}>
+                      <Stat label="This run" value={String(endedStreak)} note="in a row" />
+                      <Stat
+                        label="Your best"
+                        value={String(Math.max(bestStreak, endedStreak))}
+                        note="all time"
+                      />
+                    </div>
+                    <p
+                      style={{
+                        margin: 'var(--space-6) 0 0',
+                        fontSize: 'var(--fs-ui)',
+                        color: 'var(--text-secondary)',
+                        lineHeight: 'var(--lh-body)',
+                      }}
+                    >
+                      {endedStreak >= bestStreak
+                        ? 'That is your best run so far. The streak resets, but the run keeps going - there is no game over here.'
+                        : `${bestStreak - endedStreak} more would have matched your best. The streak resets, but the run keeps going.`}
+                    </p>
+                  </Card>
                 )}
 
                 <div
