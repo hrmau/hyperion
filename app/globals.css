@@ -403,3 +403,85 @@ body {
   color: var(--text-primary);
   border-color: var(--paper-a55);
 }
+
+/* ========================================
+   THE STORY'S CHAPTER NAVIGATION
+   ======================================== */
+
+/* Snapping is on the document because the document is the scroll container -
+   the class goes on <html> while /story is mounted and comes off on the way out.
+
+   `proximity`, deliberately, never `mandatory`. Mandatory snapping fights the
+   reader on any chapter taller than the viewport, which these become on a narrow
+   screen with a long narrative, and can strand content between two snap points.
+   Proximity only settles a scroll that has already come to rest near a boundary,
+   so scrolling deliberately past three chapters still does that.
+
+   This is also why there is no wheel handler anywhere near this page. Taking
+   over the wheel to advance a chapter per notch breaks trackpad momentum,
+   Page Down, find-in-page and every screen reader, and cannot be undone by the
+   reader. Snapping asks the browser for the same feel and leaves them in charge. */
+.gg-story-snap {
+  scroll-snap-type: y proximity;
+}
+
+/* No `scroll-behavior: smooth` here. On the root it overrides every scroll on
+   the page - the browser's own anchor jumps, find-in-page, keyboard paging -
+   and not just the one this feature initiates. The chapter jump asks for smooth
+   itself in `goToChapter`, where it can also be turned off for a reader who has
+   asked for less motion. Setting it globally took that choice away and, because
+   a smooth scroll needs an animation frame, made programmatic scrolling fail
+   outright anywhere frames are not being served. */
+
+.gg-story-snap .gg-story-chapter {
+  scroll-snap-align: start;
+  scroll-margin-top: var(--space-6);
+}
+
+.gg-story-next {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 44px;
+  padding: 10px var(--space-7);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+/* Per the system's state rules: the hairline brightens, nothing moves and
+   nothing changes colour. */
+.gg-story-next:hover {
+  border-color: var(--border-emphasis);
+  color: var(--text-primary);
+}
+
+.gg-story-next__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xxs);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.gg-story-next__title {
+  font-size: var(--fs-ui);
+  font-weight: var(--fw-medium);
+}
+
+.gg-story-next__arrow {
+  color: var(--text-quiet);
+}
+
+/* Snapping produces movement the reader did not ask for, so it goes with the
+   rest of the motion. The button still works; it just arrives instead of
+   travelling. */
+@media (prefers-reduced-motion: reduce) {
+  .gg-story-snap {
+    scroll-snap-type: none;
+  }
+}

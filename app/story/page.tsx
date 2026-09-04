@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { loadCountries } from '@/lib/data';
 import FlagImg from '@/components/FlagImg';
@@ -258,6 +258,38 @@ export default function StoryPage() {
       .catch(console.error);
   }, []);
 
+  /**
+   * Jump to a chapter.
+   *
+   * Smooth unless the reader has asked for less motion, in which case it lands
+   * without the travel. The dot rail used to hard-code `behavior: 'smooth'`,
+   * which meant the one control that already existed for this ignored the
+   * preference; it goes through here now too.
+   */
+  const goToChapter = useCallback((index: number) => {
+    const target = chapterRefs.current[index];
+    if (!target) return;
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  }, []);
+
+  /**
+   * Scroll snapping lives on the document, so it is switched on for this page
+   * and off again on the way out.
+   *
+   * `proximity`, never `mandatory`. Mandatory snapping fights the reader on any
+   * chapter taller than their viewport - which these become on a narrow screen
+   * with a long narrative - and can leave content unreachable between two snap
+   * points. Proximity only settles the scroll when it is already close to a
+   * boundary, so a deliberate scroll past three chapters still works.
+   */
+  useEffect(() => {
+    document.documentElement.classList.add('gg-story-snap');
+    return () => document.documentElement.classList.remove('gg-story-snap');
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -287,7 +319,7 @@ export default function StoryPage() {
         {chapters.map((ch, i) => (
           <button
             key={ch.id}
-            onClick={() => chapterRefs.current[i]?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => goToChapter(i)}
             className={`w-8 h-8 rounded-full transition-all flex items-center justify-center cursor-pointer ${
               i === activeChapter ? '' : 'opacity-60 hover:opacity-100'
             }`}
@@ -308,9 +340,10 @@ export default function StoryPage() {
           <section
             key={chapter.id}
             ref={el => { chapterRefs.current[i] = el; }}
-            className="min-h-screen flex items-center"
+            className="gg-story-chapter min-h-screen flex items-center"
           >
-            <div className="max-w-6xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="max-w-6xl mx-auto px-4 py-16 w-full">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Text side */}
               <div className={`space-y-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                 <div>
@@ -350,10 +383,34 @@ export default function StoryPage() {
                 )}
               </div>
 
-              {/* Visualization side */}
-              <div className={`aspect-[4/3] lg:aspect-square ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <ChapterViz chapter={chapter} countries={countries} />
+                {/* Visualization side */}
+                <div className={`aspect-[4/3] lg:aspect-square ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <ChapterViz chapter={chapter} countries={countries} />
+                </div>
               </div>
+
+              {/* Where the next chapter is, and what it is about.
+                  A bare arrow would say there is more; naming the chapter gives
+                  a reason to go, which is the difference between an affordance
+                  and a decoration. The last chapter ends with "Explore the
+                  data" instead and needs none of this. */}
+              {i < chapters.length - 1 && (
+                <div style={{ marginTop: 'var(--space-11)', textAlign: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={() => goToChapter(i + 1)}
+                    className="gg-story-next"
+                  >
+                    <span className="gg-story-next__label">Next</span>
+                    <span className="gg-story-next__title">
+                      {chapters[i + 1].title}
+                    </span>
+                    <span aria-hidden="true" className="gg-story-next__arrow">
+                      &darr;
+                    </span>
+                  </button>
+                </div>
+              )}
             </div>
           </section>
         ))}
