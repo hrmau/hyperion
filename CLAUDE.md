@@ -361,6 +361,21 @@ To add questions: run `npm run generate-questions`, read
 `scripts/question-candidates.json`, write insight lines into
 `scripts/question-insights.json`, re-run. Ship no fewer than 40.
 
+**Every new line records its `sources`.** A line asserts a cause - a policy, a
+dam, a closure date - and a claim whose provenance is only in the author's head
+cannot be re-checked later. Two kinds of entry: a `dataset:` note points at
+figures in `countries-yearly.json`, which ship with the site and stay checkable
+forever, and a URL covers the causal half the data cannot supply. About a third
+of the lines need no URL at all - Luxembourg's 77% import share was already in
+the file. The generator prints `Insight lines with sources: n/m` on every run.
+It is a count, not a gate: an unsourced line is not wrong, only unverifiable.
+
+Sources live on the entry rather than in a separate document, so they are
+dropped and restored along with the claim they support, and none of it reaches
+the browser - `generate-questions.js` builds each shipped question field by
+field. The 65 lines predating the convention are deliberately left unsourced
+rather than retrofitted with plausible-looking citations.
+
 A data refresh can invalidate a line — the first live test of this dropped
 `solar-NLD-PAK`, because Pakistan overtook the Netherlands on solar and the line
 said the opposite. That is why the refresh opens a PR: the generator quotes any
