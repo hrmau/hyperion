@@ -22,6 +22,7 @@ import { fuelShares, fuelSeries } from '@/lib/fuels';
 import { leadStat } from '@/lib/leadStat';
 import { loadHomeView, loadSwitcherIndex, loadHomeQuestion, publishableIso3 } from '@/lib/facts';
 import { mapPathFor } from '@/lib/data';
+import { playPathFor } from '@/lib/questions';
 import { theName, subjectName, possessiveName } from '@/lib/countryNames';
 
 /**
@@ -345,7 +346,7 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
                     {[question.a, question.b].map((side) => (
                       <Link
                         key={side.iso3}
-                        href="/play"
+                        href={playPathFor(question.id, side.iso3, view.key)}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
