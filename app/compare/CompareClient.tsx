@@ -21,6 +21,7 @@ import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
 import ShareButton from '@/components/ShareButton';
 import CountryProfileLink from '@/components/CountryProfileLink';
+import { theName, subjectName } from '@/lib/countryNames';
 import { ToastProvider } from '@/components/Toast';
 import { useCompareParams } from '@/hooks/useCompareParams';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
@@ -521,7 +522,7 @@ function ComparePageContent() {
       <TopNav active="compare" />
 
       <div style={{ padding: 'var(--band-y) var(--gutter) 0' }}>
-        <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Compare · two grids</Eyebrow>
+        <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Compare · side by side</Eyebrow>
         <h1
           style={{
             margin: 0,
@@ -534,18 +535,18 @@ function ComparePageContent() {
           }}
         >
           {hasComparison
-            ? `${resolvedA.label} and ${resolvedB.label}, side by side.`
-            : 'Pick two grids and see what separates them.'}
+            ? `${subjectName(resolvedA.label)} and ${theName(resolvedB.label)}, side by side.`
+            : 'Pick two countries or blocs and see how they compare.'}
         </h1>
 
         <div
           className="gg-card-row"
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr auto',
+            gridTemplateColumns: '1fr 1fr',
             gap: 'var(--space-6)',
             alignItems: 'end',
-            margin: 'var(--space-9) 0 var(--space-8)',
+            margin: 'var(--space-9) 0 var(--space-6)',
           }}
         >
           <SelectionDropdown
@@ -562,8 +563,38 @@ function ComparePageContent() {
             type={typeB}
             onTypeChange={handleSetTypeB}
           />
-          <ShareButton disabled={!hasComparison} itemId={`${idA}_${idB}`} />
         </div>
+
+        {/* Sharing waits until there is something to share, and then asks.
+            It used to be a small chip in a third column beside the two
+            selectors, permanently present and disabled most of the time -
+            which put the least interesting control on the row at the moment
+            it could do nothing, and hid it at the moment it could. */}
+        {hasComparison && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-6)',
+              flexWrap: 'wrap',
+              margin: '0 0 var(--space-8)',
+            }}
+          >
+            <ShareButton itemId={`${idA}_${idB}`} />
+            <p
+              style={{
+                margin: 0,
+                maxWidth: '46ch',
+                fontSize: 'var(--fs-ui)',
+                lineHeight: 'var(--lh-body)',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              The link opens on {theName(resolvedA.label)} and {theName(resolvedB.label)},
+              exactly as you have it here.
+            </p>
+          </div>
+        )}
       </div>
 
       {hasComparison ? (
@@ -645,7 +676,7 @@ function ComparePageContent() {
             <GorillaNote lead="Check the year before you quote this.">
               {resolvedA.actualYear === resolvedB.actualYear ? (
                 <>
-                  Both grids are shown for {resolvedA.actualYear}, the most recent year they
+                  Both are shown for {resolvedA.actualYear}, the most recent year they
                   both report.
                 </>
               ) : (
