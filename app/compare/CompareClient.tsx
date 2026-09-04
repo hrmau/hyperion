@@ -590,8 +590,7 @@ function ComparePageContent() {
                 color: 'var(--text-secondary)',
               }}
             >
-              The link opens on {theName(resolvedA.label)} and {theName(resolvedB.label)},
-              exactly as you have it here.
+              Send it to someone who would have guessed wrong.
             </p>
           </div>
         )}
@@ -667,9 +666,26 @@ function ComparePageContent() {
 
             <div style={{ marginTop: 'var(--space-8)' }}>
               <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Mix, this year</Eyebrow>
-              <div style={{ display: 'grid', gap: 'var(--space-5)', maxWidth: 900 }}>
-                <MixBar shares={fuelShares(resolvedA.yearData)} height={14} />
-                <MixBar shares={fuelShares(resolvedB.yearData)} height={14} />
+              {/* Two unlabelled bars are a quiz, not a comparison - nothing on
+                  screen said which was which, and the order is not something a
+                  reader should have to infer from the columns above. */}
+              <div style={{ display: 'grid', gap: 'var(--space-6)', maxWidth: 900 }}>
+                {[resolvedA, resolvedB].map((sel, i) => (
+                  <div key={`${sel.label}-${i}`}>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 'var(--fs-mono-xxs)',
+                        letterSpacing: 'var(--ls-label)',
+                        textTransform: 'uppercase',
+                        color: 'var(--text-label)',
+                      }}
+                    >
+                      {sel.label}
+                    </div>
+                    <MixBar shares={fuelShares(sel.yearData)} height={14} />
+                  </div>
+                ))}
               </div>
             </div>
 
