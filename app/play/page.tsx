@@ -443,8 +443,13 @@ export default function PlayPage() {
           {/* Colour is never the only signal — the verdict is text. */}
           <div aria-live="polite" style={{ marginTop: 'var(--space-9)' }}>
             {phase === 'reveal' && (
-              <div className={`gg-play-reveal${wasCorrect ? ' gg-play-correct' : ''}`}>
+              <div className="gg-play-reveal">
+                {/* The bloom is anchored to the verdict, not to the block. On
+                    the wrapper it centred itself in the middle of the bars and
+                    the insight note - a glow around nothing in particular,
+                    which is most of why it was hard to see. */}
                 <div
+                  className={wasCorrect ? 'gg-play-correct' : undefined}
                   style={{
                     fontSize: 'var(--fs-h3)',
                     fontWeight: 'var(--fw-bold)',

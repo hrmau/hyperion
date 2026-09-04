@@ -280,25 +280,46 @@ body {
    seen, nothing moved. The explicit rule below says so anyway. */
 .gg-play-correct {
   position: relative;
+  /* Longer than anything in tokens/motion.css, whose longest value is the 520ms
+     chart redraw. That is a UI transition and this is not: it is a flourish the
+     eye has to catch and lose again, and at 520ms it read as a flicker. Kept
+     local rather than added to the token file so the design system's scale
+     still describes the design system. */
+  --dur-bloom: 1400ms;
 }
 
 .gg-play-correct::before {
   content: '';
   position: absolute;
   left: 50%;
-  top: 50%;
-  width: min(520px, 90vw);
-  height: 220px;
+  /* Below the midline, so the brightest part of the bloom sits under the words
+     rather than behind them - green text on a green glow loses contrast fast. */
+  top: 86%;
+  width: min(620px, 94vw);
+  height: 240px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
+  /* Every stop is the same green, only the alpha changes. Fading to a bare
+     `transparent` fades toward transparent BLACK, which greys the midtones out
+     and is why this read as a white haze rather than as the accent.
+
+     44% is a ceiling, not a taste. The verdict above it is #00c758 at 22.8px
+     bold, which WCAG counts as large text and so needs 3:1. Against the page it
+     has 8.2:1; laid over its own accent the ratio collapses fast - 3.27:1 at
+     44%, 2.82:1 at 50%, 2.35:1 at 58%, which is where this started. The bloom
+     is centred below the words so the real overlap is gentler than that, but
+     the cap means it would pass even if it were not. */
   background: radial-gradient(
     ellipse at center,
-    color-mix(in oklab, var(--green) 24%, transparent),
-    transparent 70%
+    color-mix(in oklab, var(--green) 44%, transparent) 0%,
+    color-mix(in oklab, var(--green) 24%, transparent) 50%,
+    color-mix(in oklab, var(--green) 0%, transparent) 76%
   );
+  /* The blur is what makes it a glow instead of a shape. */
+  filter: blur(30px);
   pointer-events: none;
   z-index: 0;
-  animation: gg-bloom var(--dur-chart) var(--ease-out) both;
+  animation: gg-bloom var(--dur-bloom) var(--ease-out) both;
 }
 
 /* The bloom is decoration behind the verdict, never on top of it. */
@@ -310,14 +331,17 @@ body {
 @keyframes gg-bloom {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.72);
+    transform: translate(-50%, -50%) scale(0.8);
   }
-  45% {
+  18% {
     opacity: 1;
+  }
+  58% {
+    opacity: 0.9;
   }
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(1.18);
+    transform: translate(-50%, -50%) scale(1.14);
   }
 }
 
