@@ -434,6 +434,22 @@ function main() {
   console.log(`\nCurated questions written: ${questions.length} -> ${path.relative(ROOT, OUT_QUESTIONS)}`);
   console.log(`Candidates awaiting insight: ${uncurated.length} -> ${path.relative(ROOT, OUT_CANDIDATES)}`);
 
+  // Not a gate. A line without a source is not wrong, it is just unverifiable
+  // later, and the count is here so that stays visible rather than becoming the
+  // quiet default. See the `sources` note in question-insights.json.
+  const shippedKeys = new Set(
+    Object.entries(insights)
+      .filter(([key]) => !dropped.includes(key))
+      .map(([key]) => key)
+  );
+  const unsourced = [...shippedKeys].filter((key) => {
+    const entry = insights[key];
+    return !Array.isArray(entry.sources) || entry.sources.length === 0;
+  });
+  console.log(
+    `Insight lines with sources: ${shippedKeys.size - unsourced.length}/${shippedKeys.size}`
+  );
+
   const mix = {};
   for (const q of questions) mix[q.metric] = (mix[q.metric] || 0) + 1;
   console.log('\nShipped mix:');
