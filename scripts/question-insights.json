@@ -595,5 +595,91 @@
       "Al Kharsaah solar power plant (TotalEnergies): https://totalenergies.com/company/projects/solar/al-kharsaah-solar-power-plant-qatar",
       "dataset: QAT 100% gas from 2000 to 2020; LKA solar 0% to 16%"
     ]
+  },
+  "coal_pct-BIH-VNM": {
+    "winner": "BIH",
+    "insight": "Vietnam's coal share is falling for an unusual reason: a feed-in tariff expiring at the end of 2020 set off a rooftop solar rush, six gigawatts of it in that December alone. Bosnia has no such story, and its lignite still carries more than half the grid.",
+    "sources": [
+      "Vietnam rooftop solar records major boom, 9GW installed in 2020 (PV Tech): https://www.pv-tech.org/vietnam-rooftop-solar-records-major-boom-as-more-than-9gw-installed-in-2020/",
+      "Feed-in tariffs for solar and wind in Vietnam (Vietnam Briefing): https://www.vietnam-briefing.com/news/feed-in-tariffs-solar-wind-vietnam.html/",
+      "dataset: VNM solar 0% in 2015 to 7% in 2025; BIH coal 55% with hydro 37%"
+    ]
+  },
+  "independence-FIN-LVA": {
+    "winner": "LVA",
+    "insight": "Latvia scores higher because three dams on one river, the Daugava, supply around forty per cent of its electricity and need no fuel at all. Finland generates far more and far cleaner, but two fifths of it is nuclear, and the uranium is somebody else's.",
+    "sources": [
+      "Daugava HPP cascade - Plavinas, Kegums, Riga (Latvenergo): https://latvenergo.lv/en/par-mums/razosana",
+      "Riga Hydroelectric Power Plant: https://en.wikipedia.org/wiki/Riga_Hydroelectric_Power_Plant",
+      "lib/independence.ts: the score weighs nuclear by uranium independence, so reactors help only a country that mines its own"
+    ]
+  },
+  "nuclear_pct-ARM-ROU": {
+    "winner": "ARM",
+    "insight": "Armenia's single Soviet-era reactor at Metsamor was shut down after the 1988 earthquake and restarted six and a half years later, in the middle of an energy crisis, because the country had nothing else to turn to. It still carries about a quarter of the grid, and Armenia now exports power.",
+    "sources": [
+      "Armenian Nuclear Power Plant: https://en.wikipedia.org/wiki/Armenian_Nuclear_Power_Plant",
+      "Nuclear Power in Armenia (World Nuclear Association): https://world-nuclear.org/information-library/country-profiles/countries-a-f/armenia",
+      "How nuclear power saved Armenia (MIT Center for International Studies): https://cis.mit.edu/news/how-nuclear-power-saved-armenia",
+      "dataset: ARM nuclear 27% and net_imports_pct -19%, i.e. a net exporter"
+    ]
+  },
+  "clean_pct-ESP-SLV": {
+    "winner": "SLV",
+    "insight": "El Salvador is called the land of volcanoes and runs partly on them: geothermal has supplied a fifth or more of its electricity since the 1970s, long before anyone was calling it a transition. Spain's far more visible wind and solar build still leaves it behind.",
+    "sources": [
+      "Geothermal power in El Salvador - Ahuachapan operating since 1975, Berlin since 1992: https://en.wikipedia.org/wiki/Geothermal_power_in_El_Salvador",
+      "El Salvador, the land of volcanoes and geothermal energy (CDKN): https://cdkn.org/story/el-salvador-the-land-of-volcanoes-and-geothermal-energy",
+      "data/geothermal-grids.json: SLV is on the curated list, so naming this bucket geothermal is sourced rather than assumed"
+    ]
+  },
+  "clean_pct-PAK-PER": {
+    "winner": "PER",
+    "insight": "Peru's grid was over eighty per cent hydro until the Camisea gas field opened in 2004; within a decade gas had taken a third of it. Pakistan is travelling the other way, its solar share going from nothing to nearly a fifth in about five years.",
+    "sources": [
+      "Camisea Gas Project: https://en.wikipedia.org/wiki/Camisea_Gas_Project",
+      "Electricity sector in Peru: https://en.wikipedia.org/wiki/Electricity_sector_in_Peru",
+      "dataset: PER hydro 81% in 2000 to 56% in 2025 with gas at 36%; PAK solar 0% in 2020 to 19% in 2025"
+    ]
+  },
+  "clean_pct-GBR-MNE": {
+    "winner": "MNE",
+    "insight": "Montenegro has exactly one coal plant, at Pljevlja, and almost everything else is water and wind - which is how its clean share beats Britain's without any of the effort. It is also why a dry year leaves it importing a large slice of what it uses.",
+    "sources": [
+      "Pljevlja Power Station, Montenegro's only coal-fired station: https://en.wikipedia.org/wiki/Pljevlja_Power_Station",
+      "The energy sector in Montenegro (Bankwatch): https://bankwatch.org/beyond-fossil-fuels/the-energy-sector-in-montenegro",
+      "dataset: MNE net_imports_pct 43% in 2025 with hydro 59% and coal 24%"
+    ]
+  },
+  "emissions-BEL-TUN": {
+    "winner": "TUN",
+    "insight": "Tunisia emits more from electricity than Belgium while generating under a third as much, because effectively all of it is gas. Much of that gas is Algerian, some of it taken in kind as a royalty on the pipeline crossing Tunisian soil to Italy - a grid partly powered by a transit fee.",
+    "sources": [
+      "Energy in Tunisia - 5.625% royalty in kind under the 1977 TransMed treaty: https://en.wikipedia.org/wiki/Energy_in_Tunisia",
+      "Tunisia natural gas (IEA): https://www.iea.org/countries/tunisia/natural-gas",
+      "dataset: TUN gas 95% on 22 TWh against BEL 73 TWh with nuclear at 33%"
+    ]
+  },
+  "total_generation-PER-ROU": {
+    "winner": "PER",
+    "insight": "Peru generates more electricity than Romania from a country with nearly twice the people, which per person leaves it well behind - about two thirds of the Romanian figure. Totals flatter large populations and say nothing about what anyone actually gets.",
+    "sources": [
+      "dataset: PER 34.6m people at 1,748 kWh/person against ROU 18.9m at 2,634"
+    ]
+  },
+  "coal_pct-DEU-MNE": {
+    "winner": "MNE",
+    "insight": "Montenegro's entire coal industry is one 225 MW station at Pljevlja. Germany's coal fleet is among the largest in Europe and is still the smaller share of its grid, because Germany's grid is roughly two hundred times the size.",
+    "sources": [
+      "Pljevlja Power Station, 225 MW: https://en.wikipedia.org/wiki/Pljevlja_Power_Station",
+      "dataset: DEU 500 TWh against MNE 2.5 TWh; coal 21% against 24%"
+    ]
+  },
+  "generation_per_capita-LVA-ZAF": {
+    "winner": "ZAF",
+    "insight": "South Africa generates more electricity per person than Latvia and burns coal for four fifths of it, the legacy of an economy built around cheap domestic coal and the mines that dig it. Latvia makes less, from dams and gas, and imports the remainder.",
+    "sources": [
+      "dataset: ZAF coal 81% of generation in 2025, 93% in 2000; LVA net_imports_pct 17% with hydro 47%"
+    ]
   }
 }

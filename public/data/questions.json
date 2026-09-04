@@ -160,6 +160,26 @@
     "surprising": true
   },
   {
+    "id": "clean_pct-ESP-SLV-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "ESP",
+      "name": "Spain",
+      "value": 74.6
+    },
+    "b": {
+      "iso3": "SLV",
+      "name": "El Salvador",
+      "value": 86.5
+    },
+    "insight": "El Salvador is called the land of volcanoes and runs partly on them: geothermal has supplied a fifth or more of its electricity since the 1970s, long before anyone was calling it a transition. Spain's far more visible wind and solar build still leaves it behind.",
+    "surprising": true
+  },
+  {
     "id": "clean_pct-EST-MMR-2024",
     "metric": "clean_pct",
     "metricLabel": "Clean electricity share",
@@ -177,6 +197,26 @@
       "value": 47.9
     },
     "insight": "Estonia ran on oil shale, among the dirtiest fuels in Europe, for the whole of the last century - and has cut it from nearly all its electricity to under half in about fifteen years. Myanmar has drifted the other way, its gas growing as fast as its dams.",
+    "surprising": true
+  },
+  {
+    "id": "clean_pct-GBR-MNE-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "value": 64.4
+    },
+    "b": {
+      "iso3": "MNE",
+      "name": "Montenegro",
+      "value": 75.6
+    },
+    "insight": "Montenegro has exactly one coal plant, at Pljevlja, and almost everything else is water and wind - which is how its clean share beats Britain's without any of the effort. It is also why a dry year leaves it importing a large slice of what it uses.",
     "surprising": true
   },
   {
@@ -300,6 +340,26 @@
     "surprising": true
   },
   {
+    "id": "clean_pct-PAK-PER-2025",
+    "metric": "clean_pct",
+    "metricLabel": "Clean electricity share",
+    "prompt": "Which gets a bigger share of its electricity from clean sources?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "PAK",
+      "name": "Pakistan",
+      "value": 54.9
+    },
+    "b": {
+      "iso3": "PER",
+      "name": "Peru",
+      "value": 63.7
+    },
+    "insight": "Peru's grid was over eighty per cent hydro until the Camisea gas field opened in 2004; within a decade gas had taken a third of it. Pakistan is travelling the other way, its solar share going from nothing to nearly a fifth in about five years.",
+    "surprising": true
+  },
+  {
     "id": "coal_pct-AUS-DEU-2025",
     "metric": "coal_pct",
     "metricLabel": "Coal share of electricity",
@@ -400,6 +460,26 @@
     "surprising": true
   },
   {
+    "id": "coal_pct-BIH-VNM-2025",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "value": 55.4
+    },
+    "b": {
+      "iso3": "VNM",
+      "name": "Vietnam",
+      "value": 48.1
+    },
+    "insight": "Vietnam's coal share is falling for an unusual reason: a feed-in tariff expiring at the end of 2020 set off a rooftop solar rush, six gigawatts of it in that December alone. Bosnia has no such story, and its lignite still carries more than half the grid.",
+    "surprising": true
+  },
+  {
     "id": "coal_pct-CHN-IND-2025",
     "metric": "coal_pct",
     "metricLabel": "Coal share of electricity",
@@ -417,6 +497,26 @@
       "value": 70.8
     },
     "insight": "China burns far more coal than India in absolute terms, yet has also built more wind, solar and hydro than anyone. India's grid is the more coal-dependent of the two.",
+    "surprising": true
+  },
+  {
+    "id": "coal_pct-DEU-MNE-2025",
+    "metric": "coal_pct",
+    "metricLabel": "Coal share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from coal?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "DEU",
+      "name": "Germany",
+      "value": 20.6
+    },
+    "b": {
+      "iso3": "MNE",
+      "name": "Montenegro",
+      "value": 24.4
+    },
+    "insight": "Montenegro's entire coal industry is one 225 MW station at Pljevlja. Germany's coal fleet is among the largest in Europe and is still the smaller share of its grid, because Germany's grid is roughly two hundred times the size.",
     "surprising": true
   },
   {
@@ -517,6 +617,26 @@
       "value": 124
     },
     "insight": "Australia and Canada have similar populations and similar wealth. Canada's grid is hydro and nuclear, Australia's is still substantially coal - same conditions, opposite outcome.",
+    "surprising": true
+  },
+  {
+    "id": "emissions-BEL-TUN-2025",
+    "metric": "emissions",
+    "metricLabel": "Power sector emissions",
+    "prompt": "Whose electricity produces more CO2?",
+    "year": 2025,
+    "unit": " MtCO2",
+    "a": {
+      "iso3": "BEL",
+      "name": "Belgium",
+      "value": 11
+    },
+    "b": {
+      "iso3": "TUN",
+      "name": "Tunisia",
+      "value": 13
+    },
+    "insight": "Tunisia emits more from electricity than Belgium while generating under a third as much, because effectively all of it is gas. Much of that gas is Algerian, some of it taken in kind as a royalty on the pipeline crossing Tunisian soil to Italy - a grid partly powered by a transit fee.",
     "surprising": true
   },
   {
@@ -900,6 +1020,26 @@
     "surprising": true
   },
   {
+    "id": "generation_per_capita-LVA-ZAF-2025",
+    "metric": "generation_per_capita",
+    "metricLabel": "Electricity generation per person",
+    "prompt": "Which generates more electricity per person?",
+    "year": 2025,
+    "unit": " kWh",
+    "a": {
+      "iso3": "LVA",
+      "name": "Latvia",
+      "value": 3483
+    },
+    "b": {
+      "iso3": "ZAF",
+      "name": "South Africa",
+      "value": 4019
+    },
+    "insight": "South Africa generates more electricity per person than Latvia and burns coal for four fifths of it, the legacy of an economy built around cheap domestic coal and the mines that dig it. Latvia makes less, from dams and gas, and imports the remainder.",
+    "surprising": true
+  },
+  {
     "id": "generation_per_capita-MDA-MNG-2025",
     "metric": "generation_per_capita",
     "metricLabel": "Electricity generation per person",
@@ -980,6 +1120,26 @@
     "surprising": true
   },
   {
+    "id": "independence-FIN-LVA-2025",
+    "metric": "independence",
+    "metricLabel": "Energy independence score",
+    "prompt": "Which is more energy independent?",
+    "year": 2025,
+    "unit": "",
+    "a": {
+      "iso3": "FIN",
+      "name": "Finland",
+      "value": 52.9
+    },
+    "b": {
+      "iso3": "LVA",
+      "name": "Latvia",
+      "value": 60.9
+    },
+    "insight": "Latvia scores higher because three dams on one river, the Daugava, supply around forty per cent of its electricity and need no fuel at all. Finland generates far more and far cleaner, but two fifths of it is nuclear, and the uranium is somebody else's.",
+    "surprising": true
+  },
+  {
     "id": "independence-FRA-IRL-2025",
     "metric": "independence",
     "metricLabel": "Energy independence score",
@@ -1037,6 +1197,26 @@
       "value": 23.7
     },
     "insight": "Japan imports almost all its fossil fuel and shut most of its reactors after Fukushima, leaving it among the most import-exposed developed economies.",
+    "surprising": true
+  },
+  {
+    "id": "nuclear_pct-ARM-ROU-2025",
+    "metric": "nuclear_pct",
+    "metricLabel": "Nuclear share of electricity",
+    "prompt": "Which gets a bigger share of its electricity from nuclear?",
+    "year": 2025,
+    "unit": "%",
+    "a": {
+      "iso3": "ARM",
+      "name": "Armenia",
+      "value": 27
+    },
+    "b": {
+      "iso3": "ROU",
+      "name": "Romania",
+      "value": 20.5
+    },
+    "insight": "Armenia's single Soviet-era reactor at Metsamor was shut down after the 1988 earthquake and restarted six and a half years later, in the middle of an energy crisis, because the country had nothing else to turn to. It still carries about a quarter of the grid, and Armenia now exports power.",
     "surprising": true
   },
   {
@@ -1517,6 +1697,26 @@
       "value": 51
     },
     "insight": "Portugal generates more electricity than Nigeria, from a country with a twentieth of the people. Nigeria's problem is not fuel or even power stations: its transmission network can carry only about half the capacity that is already built, so much of it never reaches anyone.",
+    "surprising": true
+  },
+  {
+    "id": "total_generation-PER-ROU-2025",
+    "metric": "total_generation",
+    "metricLabel": "Total electricity generation",
+    "prompt": "Which generates more electricity in total?",
+    "year": 2025,
+    "unit": " TWh",
+    "a": {
+      "iso3": "PER",
+      "name": "Peru",
+      "value": 60
+    },
+    "b": {
+      "iso3": "ROU",
+      "name": "Romania",
+      "value": 50
+    },
+    "insight": "Peru generates more electricity than Romania from a country with nearly twice the people, which per person leaves it well behind - about two thirds of the Romanian figure. Totals flatter large populations and say nothing about what anyone actually gets.",
     "surprising": true
   },
   {
