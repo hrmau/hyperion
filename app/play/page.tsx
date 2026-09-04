@@ -22,9 +22,11 @@ import {
   sidesFor,
   subscribeBestStreak,
   writeBestStreak,
+  leadWith,
+  winnerOf,
+  PLAY_PARAMS,
 } from '@/lib/questions';
-import { trackEvent } from '@/lib/analytics';
-import { trackShare } from '@/lib/analytics';
+import { trackEvent, trackShare } from '@/lib/analytics';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Badge } from '@/components/ds/core/Badge';
 import { Button } from '@/components/ds/core/Button';
@@ -90,11 +92,48 @@ export default function PlayPage() {
           setError(true);
           return;
         }
-        const built = buildDeck(questions);
+
+        // Arriving from the homepage card. Read from `window.location` rather
+        // than `useSearchParams`, which would put this page behind a Suspense
+        // boundary for three values only ever read once, on the client, on
+        // arrival.
+        const params = new URLSearchParams(window.location.search);
+        const wantId = params.get(PLAY_PARAMS.question);
+        const pick = params.get(PLAY_PARAMS.pick)?.toUpperCase() ?? null;
+        const from = params.get(PLAY_PARAMS.from)?.toUpperCase() ?? null;
+
+        const built = leadWith(buildDeck(questions), { questionId: wantId, iso3: from });
         setBank(questions);
         setDeck(built);
         cursor.current = 0;
         dealFrom(built);
+
+        // The reader already answered on the homepage. Replaying the question
+        // and making them click again would throw that away, so resolve it here
+        // and open on the reveal.
+        const first = built[0];
+        const onThisQuestion =
+          pick && first && (pick === first.a.iso3 || pick === first.b.iso3);
+        if (!onThisQuestion || first.id !== wantId) return;
+
+        const correct = winnerOf(first) === null || winnerOf(first) === pick;
+        setPicked(pick);
+        setPhase('reveal');
+        setStreak(correct ? 1 : 0);
+
+        // getBestStreak() rather than the `bestStreak` this render closed over:
+        // that value can still be the server snapshot of 0 during hydration, and
+        // writing a best of 1 over a stored 5 would lose the reader's record.
+        if (correct && getBestStreak() < 1) {
+          writeBestStreak(1);
+          trackEvent('play_best_streak', { streak_length: 1 });
+        }
+        trackEvent('play_answer', {
+          question_id: first.id,
+          metric: first.metric,
+          correct,
+          streak_after: correct ? 1 : 0,
+        });
       })
       .catch(() => setError(true));
   }, [dealFrom]);

@@ -319,6 +319,23 @@ refuses to ship a question whose winner has since flipped.
 trivia rather than a teaching tool. Rule of thumb: if the sentence would still be
 true and interesting to someone who never sees the numbers, it works.
 
+**A run continues from the homepage card, it does not restart.** Each answer on
+that card links to `/play?q=<id>&pick=<iso3>&from=<iso3>`: the run opens on the
+question the reader was looking at, resolves the answer they already gave, and
+then leads with other questions their own country appears in. It used to point
+at a bare `/play`, which threw the answer away and dealt something unrelated -
+asked about Austria and Switzerland, you arrived at Germany and France.
+
+Leading is not a quota. 86 of the 200 countries appear in the bank at all, and
+60 of those in only one or two questions, so "about you" is a round or two and
+then the world. Forcing a higher share would mean repeating the same pair.
+
+**The homepage card is keyed off the country code, not taken from the front of
+the list.** `/home/[iso3]` is prerendered so the card cannot vary per visit, but
+it must vary per country: picking `pool[0]` showed all 114 countries with no
+question of their own the same card, to everyone, forever. Hashing the code
+spreads them over 60 different cards instead.
+
 To add questions: run `npm run generate-questions`, read
 `scripts/question-candidates.json`, write insight lines into
 `scripts/question-insights.json`, re-run. Ship no fewer than 40.

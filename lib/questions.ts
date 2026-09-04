@@ -107,3 +107,65 @@ export function formatValue(value: number, unit: string): string {
   const num = value.toLocaleString(undefined, { maximumFractionDigits: 1 });
   return unit ? `${num}${unit}` : num;
 }
+
+/**
+ * Reorder a deck so a run opens where the reader came from.
+ *
+ * Two things move to the front, in order: the exact question they clicked on
+ * the homepage, then any other question their own country appears in. Everything
+ * else keeps the order `buildDeck` gave it.
+ *
+ * This is a lead, not a quota. Of the 86 countries in the bank, 60 appear in
+ * only one or two questions, so for most visitors "about you" is one or two
+ * rounds and then the world. Forcing a higher share would mean repeating the
+ * same pair, which is worse than moving on.
+ */
+export function leadWith(
+  deck: Question[],
+  opts: { questionId?: string | null; iso3?: string | null }
+): Question[] {
+  const { questionId, iso3 } = opts;
+  if (!questionId && !iso3) return deck;
+
+  const lead: Question[] = [];
+  const mine: Question[] = [];
+  const rest: Question[] = [];
+  for (const q of deck) {
+    if (questionId && q.id === questionId) lead.push(q);
+    else if (iso3 && (q.a.iso3 === iso3 || q.b.iso3 === iso3)) mine.push(q);
+    else rest.push(q);
+  }
+  return [...lead, ...mine, ...rest];
+}
+
+/** The side with the higher value, or null for a tie the generator should have rejected. */
+export function winnerOf(question: Question): string | null {
+  if (question.a.value === question.b.value) return null;
+  return question.a.value > question.b.value ? question.a.iso3 : question.b.iso3;
+}
+
+/**
+ * Link from the homepage card into a run.
+ *
+ * The card used to point at a bare `/play`, so clicking an answer threw the
+ * answer away and dealt an unrelated question - the reader was asked about
+ * Austria and Switzerland, clicked one, and arrived at Germany and France. The
+ * three parameters carry enough to continue rather than restart: which question
+ * they were looking at, which side they picked, and where they were viewing
+ * from so the rest of the run can lead with their own country.
+ */
+export const PLAY_PARAMS = { question: 'q', pick: 'pick', from: 'from' } as const;
+
+export function playPathFor(
+  questionId: string,
+  pick: string,
+  fromIso3?: string | null
+): string {
+  const params = new URLSearchParams({
+    [PLAY_PARAMS.question]: questionId,
+    [PLAY_PARAMS.pick]: pick,
+  });
+  // 'WORLD' is the homepage's no-country variant, not a country to lead with.
+  if (fromIso3 && fromIso3 !== 'WORLD') params.set(PLAY_PARAMS.from, fromIso3);
+  return `/play?${params.toString()}`;
+}

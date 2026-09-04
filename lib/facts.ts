@@ -366,6 +366,8 @@ export const loadHomeView = cache(async (key: string): Promise<HomeView | null> 
 });
 
 export interface HomeQuestion {
+  /** Carried into /play so the run opens on the question the reader clicked. */
+  id: string;
   prompt: string;
   a: { iso3: string; name: string };
   b: { iso3: string; name: string };
@@ -375,11 +377,26 @@ export interface HomeQuestion {
 /**
  * A Higher-or-Lower question for the homepage card.
  *
- * Prefers one the visitor's own country is in — only about a third of countries
- * appear in the 56-question bank, so most visitors get a general one, and it
- * prefers the questions the generator marked surprising because a card that
- * gives itself away is not worth clicking.
+ * Prefers one the visitor's own country is in. 86 of the 200 countries with a
+ * page appear somewhere in the bank, so a good share of visitors get a question
+ * about themselves and the rest get a general one, preferring those the
+ * generator marked surprising — a card that gives itself away is not worth
+ * clicking.
+ *
+ * The choice is keyed off the country code rather than taken from the front of
+ * the list. `/home/[iso3]` is prerendered, so this cannot vary per visit; what
+ * it can do is vary per country, and it must. Taking `pool[0]` meant every one
+ * of the 114 countries with no question of its own showed the same card, to
+ * everyone, forever.
  */
+/** Stable index from a country code, so neighbouring codes do not collide. */
+function spread(key: string, length: number): number {
+  if (length <= 1) return 0;
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) | 0;
+  return Math.abs(hash) % length;
+}
+
 export const loadHomeQuestion = cache(async (iso3: string | null): Promise<HomeQuestion | null> => {
   const all = await readJSON<
     { id: string; prompt: string; surprising?: boolean; a: { iso3: string; name: string }; b: { iso3: string; name: string } }[]
@@ -387,9 +404,13 @@ export const loadHomeQuestion = cache(async (iso3: string | null): Promise<HomeQ
   if (!all.length) return null;
 
   const mine = iso3 ? all.filter((q) => q.a.iso3 === iso3 || q.b.iso3 === iso3) : [];
-  const pool = mine.length ? mine : all.filter((q) => q.surprising) || all;
-  const chosen = (pool.length ? pool : all)[0];
+  // `.filter()` returns [] rather than something falsy, so the old `|| all`
+  // here could never run. Fall back explicitly instead.
+  const surprising = all.filter((q) => q.surprising);
+  const pool = mine.length ? mine : surprising.length ? surprising : all;
+  const chosen = pool[spread(iso3 ?? 'WORLD', pool.length)];
   return {
+    id: chosen.id,
     prompt: chosen.prompt,
     a: { iso3: chosen.a.iso3, name: chosen.a.name },
     b: { iso3: chosen.b.iso3, name: chosen.b.name },
