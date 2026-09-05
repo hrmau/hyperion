@@ -17,7 +17,8 @@ import { Button } from '@/components/ds/core/Button';
  * The original eight were amber, red, purple, grey, orange, green, crimson and
  * blue — eight competing hues, which is what the one-hue rule exists to
  * prevent. They are now steps along the single ramp, with clay reserved for the
- * two crisis chapters and green for the one about the transition.
+ * three crisis chapters - the embargo, the invasion and the strait - and green
+ * for the one about the transition.
  */
 interface Chapter {
   id: string;
@@ -128,16 +129,17 @@ const chapters: Chapter[] = [
     color: 'var(--clay)',
   },
   {
-    id: 'present',
+    id: 'solar-run',
     era: 'Chapter 8',
-    title: 'The Current Moment',
-    years: '2024-2025',
+    title: 'The Fastest Thing on the Grid',
+    years: '2019-2025',
     narrative: [
-      'We stand at a crossroads. The energy trilemma: affordability, reliability, sustainability.',
-      'Different countries are making different bets. Some double down on renewables, others on nuclear.',
-      'The data tells the story. Now it\'s your turn to explore it.',
+      'Solar was 2.7% of the world\'s electricity in 2019 and is 9.2% now. That six-year gain is the largest by any fuel at any point in this data - close to double wind\'s best run, and more than coal managed at the height of its expansion in the 2000s.',
+      'It has drawn level with wind, having been less than half its size when the run began. The countries doing it are not the ones anyone would have picked: solar passed coal on Pakistan\'s grid in 2025, and Hungary now takes a larger share of its power from panels than sunnier Portugal does.',
+      'None of which has dented coal, still the single largest source of electricity on earth at about a third of it. Both are true at once - the fastest change the grid has ever recorded, and the oldest fuel still on top.',
     ],
-    dataYear: 2024,
+    showCountries: ['CHN', 'PAK', 'ESP', 'HUN'],
+    dataYear: 2025,
     color: 'var(--scale-6)',
   },
   {
