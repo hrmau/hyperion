@@ -233,12 +233,10 @@ export default async function WhyEnergyMattersPage() {
               kicker="The argument"
               title="Why energy matters"
               standfirst="Electricity is not one sector among many. It is the input to all the others."
-              readingTime="7 min read"
-              updated="September 2026"
             />
             <OnThisPage
               items={[
-                { id: 'spread', label: 'The spread' },
+                { id: 'spread', label: 'How much you have' },
                 { id: 'price', label: 'The price' },
                 { id: 'leverage', label: 'The leverage' },
                 { id: 'bets', label: 'Two long bets' },
@@ -248,14 +246,28 @@ export default async function WhyEnergyMattersPage() {
           </div>
         </div>
 
-        {/* 1 - The spread */}
-        <section id="spread" style={bandStyle}>
+        {/*
+          1 - How much you have.
+
+          No borderTop on this one band: OnThisPage already closes with a rule,
+          and a second one 24px under it made four hairlines stack in the first
+          screen. The header is furniture, not sections.
+        */}
+        <section id="spread" style={{ ...bandStyle, borderTop: 'none' }}>
           <div style={columnStyle}>
-            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>The spread</Eyebrow>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>How much you have</Eyebrow>
             <Prose>
-              <h2>
-                {top.name} uses {spread} times more electricity per person than {bottom.name}
-              </h2>
+              <h2>How much electricity a country has decides what it can build</h2>
+              <p className="lede">
+                Most people picture electricity as keeping the lights on. Lighting is a rounding
+                error. What the meter is really measuring is steel, fertiliser, clean water,
+                hospitals and data centres &mdash; which makes electricity per person the plainest
+                measure there is of what an economy can actually do.
+              </p>
+              <p>
+                So it matters that countries do not have remotely similar amounts of it. Here is
+                the range, from one of the highest in the world to one of the lowest.
+              </p>
             </Prose>
 
             <div style={wellStyle}>
@@ -274,17 +286,16 @@ export default async function WhyEnergyMattersPage() {
               </div>
             </div>
 
-            <GorillaNote lead="This is the whole argument.">
-              Every other number on this site is a detail of that gap. Coverage is uneven &mdash;
-              the most recent year runs from 2022 to {deuNow} depending on the country &mdash; so
-              each bar is that country&rsquo;s own latest full year, not a common one.
+            <GorillaNote lead="Read the range, not the order.">
+              {top.name} uses {spread} times what {bottom.name} does. That is not the same life
+              lived more simply &mdash; it is a ceiling on what {bottom.name} can build, and every
+              other number on this site is a detail of it. Coverage is uneven, so each bar is that
+              country&rsquo;s own latest full year rather than a common one; the most recent
+              available runs from 2022 to {deuNow} depending on the country.
             </GorillaNote>
 
             <Prose style={{ marginTop: 'var(--space-9)' }}>
-              <p>
-                Most people picture electricity as keeping the lights on. Lighting is a rounding
-                error. What the gap actually buys is:
-              </p>
+              <p>What the difference actually buys:</p>
               <ul>
                 <li>
                   <strong>Industry</strong> &mdash; steel at roughly 5,000 kWh a tonne, aluminium
@@ -307,10 +318,6 @@ export default async function WhyEnergyMattersPage() {
                   the services a modern economy is now assembled from.
                 </li>
               </ul>
-              <p>
-                Which is why the bottom of that chart is not a lifestyle difference. It is a
-                ceiling on what a country can build.
-              </p>
             </Prose>
 
             <div className="gg-action-row" style={actionRowStyle}>
@@ -664,21 +671,32 @@ export default async function WhyEnergyMattersPage() {
             padding: 'var(--space-7) var(--gutter)',
           }}
         >
-          <a
-            href="#top"
+          <div
             style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: 'var(--space-6)',
               fontFamily: 'var(--font-mono)',
               fontSize: 'var(--fs-mono-xs)',
               letterSpacing: 'var(--ls-label)',
               textTransform: 'uppercase',
               color: 'var(--text-quiet)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              minHeight: 44,
             }}
           >
-            &uarr; Back to top
-          </a>
+            <a
+              href="#top"
+              style={{
+                color: 'inherit',
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: 44,
+              }}
+            >
+              &uarr; Back to top
+            </a>
+            <span>Updated September 2026</span>
+          </div>
         </div>
       </main>
 
