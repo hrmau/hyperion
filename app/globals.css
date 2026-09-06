@@ -388,8 +388,7 @@ body {
    Navigation inside prose is navigation, not prose. This lives in the app
    rather than in app/ds/tokens/ because it is our content's shape, not the
    design system's rule. */
-.gg-prose nav a,
-.gg-toc a {
+.gg-prose nav a {
   color: var(--text-secondary);
   text-decoration: none;
   padding: 5px 11px;
@@ -400,8 +399,7 @@ body {
     border-color var(--dur-fast) var(--ease-out);
 }
 
-.gg-prose nav a:hover,
-.gg-toc a:hover {
+.gg-prose nav a:hover {
   color: var(--text-primary);
   border-color: var(--paper-a55);
 }

@@ -259,10 +259,10 @@ export default async function WhyEnergyMattersPage() {
             <Prose>
               <h2>How much electricity a country has decides what it can build</h2>
               <p className="lede">
-                Most people picture electricity as keeping the lights on. Lighting is a rounding
-                error. What the meter is really measuring is steel, fertiliser, clean water,
-                hospitals and data centres. That makes electricity per person the plainest
-                measure there is of what an economy can actually do.
+                Most people picture electricity as keeping the lights on. Lighting is a tiny part
+                of it. What the meter really measures is steel, fertiliser, clean water,
+                hospitals and phone networks. So how much a country uses per person says more
+                about what it can do than almost any other single number.
               </p>
               <p>
                 So it matters that countries do not have remotely similar amounts of it. Here is
@@ -298,24 +298,31 @@ export default async function WhyEnergyMattersPage() {
               <p>What the difference actually buys:</p>
               <ul>
                 <li>
-                  <strong>Industry.</strong> Steel at roughly 5,000 kWh a tonne, aluminium at
-                  15,000. A country without cheap power does not smelt. It imports.
+                  <strong>Making things.</strong> Melting metal takes more electricity than
+                  almost anything else people do: about 5,000 kWh for a tonne of steel, three
+                  times that for aluminium. Countries without cheap power do not make these
+                  things. They buy them from countries that do.
                 </li>
                 <li>
-                  <strong>Food.</strong> Synthetic fertiliser, irrigation pumps, and a cold chain
-                  that reaches the last mile.
+                  <strong>Food.</strong> The fertiliser that grows it, the pumps that water it,
+                  and the fridges and refrigerated lorries that get it to a shop before it
+                  spoils. Where the power is short, less food is grown and more of it is lost on
+                  the way.
                 </li>
                 <li>
-                  <strong>Health.</strong> Theatres and ventilators that cannot pause, vaccines
-                  that have to stay cold, imaging that has to stay on.
+                  <strong>Hospitals.</strong> An operating theatre, an incubator or a
+                  ventilator cannot stop when the power does, and neither can the fridge holding
+                  the vaccines.
                 </li>
                 <li>
-                  <strong>Water.</strong> Treatment and pumping, and desalination where there is
-                  no river to take it from.
+                  <strong>Clean water.</strong> It has to be pumped, cleaned, and in dry
+                  countries made out of seawater. All of that runs on electricity. Where the
+                  power is unreliable, so is the tap.
                 </li>
                 <li>
-                  <strong>Everything digital.</strong> Data centres, mobile networks, and the
-                  services a modern economy is now assembled from.
+                  <strong>Everything on a phone.</strong> Mobile networks, banking, and every
+                  app and site people use all day. All of it is electricity, running in buildings
+                  most of us never see.
                 </li>
               </ul>
             </Prose>
@@ -342,7 +349,7 @@ export default async function WhyEnergyMattersPage() {
               <p>
                 Gas sets the electricity price in most European markets, so the rise did not stay
                 in the gas market. Fertiliser is made from gas, so food got more expensive.
-                Aluminium and chemicals are made from electricity, so smelters stopped. Household
+                Aluminium and chemicals are made with electricity, so those plants shut. Household
                 bills in Germany went from roughly &euro;100 a month to several times that, and
                 energy poverty stopped being a technical term.
               </p>
@@ -577,7 +584,7 @@ export default async function WhyEnergyMattersPage() {
                   <ul>
                     <li>A target with no cost attached to it.</li>
                     <li>More renewables, and nothing about what backs them up.</li>
-                    <li>A firm plant closing before its replacement runs.</li>
+                    <li>A power station closing before its replacement is running.</li>
                     <li>Independence claimed alongside a new import.</li>
                   </ul>
                 </Prose>
@@ -604,7 +611,7 @@ export default async function WhyEnergyMattersPage() {
                   <td>
                     <strong>Coal</strong>
                   </td>
-                  <td>Cheap, firm, widely available</td>
+                  <td>Cheap, available almost everywhere, runs whenever you need it</td>
                   <td>The highest emissions on the grid, and the local air</td>
                 </tr>
                 <tr>
@@ -618,7 +625,7 @@ export default async function WhyEnergyMattersPage() {
                   <td>
                     <strong>Nuclear</strong>
                   </td>
-                  <td>Firm, dense, very low carbon, decades of life</td>
+                  <td>Runs day and night for decades, very little carbon, very little land</td>
                   <td>Slow and expensive to build, waste, imported fuel</td>
                 </tr>
                 <tr>
@@ -632,7 +639,7 @@ export default async function WhyEnergyMattersPage() {
                   <td>
                     <strong>Hydro</strong>
                   </td>
-                  <td>Firm, clean, and the only storage that scales today</td>
+                  <td>Clean, runs on demand, and the only way we can store power in bulk today</td>
                   <td>You need the geography, and rivers have other claims on them</td>
                 </tr>
               </tbody>
