@@ -60,6 +60,7 @@ export type ProfileSource =
   | 'compare'            // "Full profile" beside a column on /compare
   | 'map_panel'          // the country panel on /explore
   | 'country_peers'      // the regional peers on another country's profile
+  | 'why_article'        // a country named in the argument on /why
   | 'pageless_fallback'; // the nearest grids offered to a country with no page
 
 export function trackCountryProfileOpen(source: ProfileSource, iso3: string): void {

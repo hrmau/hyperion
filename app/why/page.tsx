@@ -1,685 +1,686 @@
-'use client';
-
 import Link from 'next/link';
+import type { CSSProperties } from 'react';
 import TopNav from '@/components/ds/nav/TopNav';
 import SiteFooter from '@/components/ds/nav/SiteFooter';
-import { ArticleShell } from '@/components/ds/content/Prose';
-import FlagImg from '@/components/FlagImg';
+import { ArticleHeader, Prose } from '@/components/ds/content/Prose';
+import { Eyebrow } from '@/components/ds/core/Eyebrow';
+import { Button } from '@/components/ds/core/Button';
+import { Stat } from '@/components/ds/core/Stat';
+import { GorillaNote } from '@/components/ds/core/GorillaNote';
+import { RankedBarList } from '@/components/ds/data/RankedBarList';
+import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
+import { FuelLegend } from '@/components/ds/data/FuelLegend';
+import CountryProfileLink from '@/components/CountryProfileLink';
 import OnThisPage from '@/components/OnThisPage';
+import { loadCountriesServer, publishableIso3 } from '@/lib/facts';
+import { fuelSeries, fuelShares } from '@/lib/fuels';
+import type { Country, YearData } from '@/lib/types';
 
-function QuoteBlock({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
+/**
+ * The argument for why any of this matters.
+ *
+ * A server component, and that is the point. The previous version hard-coded
+ * six per-capita figures in JSX; four had drifted, China's was out by 24%, and
+ * China had quietly overtaken Germany, which inverted the ladder the section
+ * was built on. Every figure below is read from `countries-yearly.json` at
+ * build time and moves on its own at the next refresh, exactly like the 200
+ * country pages. A page arguing that people should follow the numbers cannot
+ * be the one page on the site that types them in by hand.
+ *
+ * Laid out as full-bleed bands rather than one prose column, which is the
+ * system's own layout language - ruled panels stacked vertically, each
+ * introduced by a mono eyebrow. /story already leaves ArticleShell for the same
+ * reason. The header stays, so the page still opens like the rest of the
+ * publication; only the body is banded.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Data                                                                       */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * The per-capita ladder. Ten grids chosen to span the range with names a reader
+ * recognises, rather than the literal top and bottom five - a ladder of
+ * countries nobody can place is a chart about nothing. Sorted by value at build
+ * time, so a refresh that moves two of them past each other cannot leave the
+ * list in the wrong order. It already has: China passed Germany.
+ */
+const LADDER = ['ISL', 'NOR', 'CAN', 'USA', 'CHN', 'DEU', 'ZAF', 'IND', 'PAK', 'NGA'];
+
+/** Latest year for this country holding both halves of a per-person figure. */
+function latestWithPopulation(country: Country): { year: number; data: YearData } | null {
+  const years = Object.keys(country.years)
+    .map(Number)
+    .sort((a, b) => b - a);
+  for (const year of years) {
+    const data = country.years[String(year)];
+    if (data?.population && data.demand_twh) return { year, data };
+  }
+  return null;
+}
+
+function kwhPerPerson(country: Country): number | null {
+  const latest = latestWithPopulation(country);
+  if (!latest) return null;
+  return (latest.data.demand_twh * 1e9) / latest.data.population!;
+}
+
+/** Latest year present in the series, whatever it holds. */
+function latestYear(country: Country): number {
+  return Math.max(...Object.keys(country.years).map(Number));
+}
+
+const num = (n: number) => Math.round(n).toLocaleString('en-GB');
+const oneDp = (n: number) => n.toFixed(1);
+
+/* -------------------------------------------------------------------------- */
+/* Layout                                                                     */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * One band: hairline on top, gutter padding, content held to the article
+ * column - the same shape as a section on a country page, so the two read as
+ * the same publication.
+ */
+const bandStyle: CSSProperties = {
+  borderTop: '1px solid var(--border-default)',
+  padding: 'var(--band-y) var(--gutter) var(--space-10)',
+};
+
+const columnStyle: CSSProperties = { maxWidth: 'var(--maxw-article)' };
+
+/** A chart sits in a well, never loose on the page ground. */
+const wellStyle: CSSProperties = {
+  background: 'var(--bg-raised)',
+  borderRadius: 'var(--r-well)',
+  padding: 'var(--space-7)',
+  marginTop: 'var(--space-8)',
+};
+
+const actionRowStyle: CSSProperties = {
+  display: 'flex',
+  gap: 'var(--space-4)',
+  flexWrap: 'wrap',
+  marginTop: 'var(--space-9)',
+};
+
+const splitStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  marginTop: 'var(--space-8)',
+  border: '1px solid var(--border-default)',
+  borderRadius: 'var(--r-well)',
+  overflow: 'hidden',
+};
+
+const splitPanelStyle: CSSProperties = {
+  padding: 'var(--space-7)',
+  borderRight: '1px solid var(--border-default)',
+};
+
+const statRowStyle: CSSProperties = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: 'var(--space-9)',
+  marginTop: 'var(--space-8)',
+};
+
+const wellLabelStyle: CSSProperties = {
+  marginTop: 'var(--space-6)',
+  fontFamily: 'var(--font-mono)',
+  fontSize: 'var(--fs-mono-xxs)',
+  letterSpacing: 'var(--ls-label)',
+  textTransform: 'uppercase',
+  color: 'var(--text-quiet)',
+};
+
+/** A dated row of events. Mono year, hairline between, no bullets. */
+function Timeline({ rows }: { rows: { year: string; text: string }[] }) {
   return (
-    <blockquote className="border-l-[3px] border-[var(--color-primary-brand)] pl-5 py-1 my-6 italic text-secondary leading-relaxed">
-      <p>{children}</p>
-      {attribution && <cite className="text-[var(--text-sm)] text-muted mt-2 block not-italic">- {attribution}</cite>}
-    </blockquote>
+    <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+      {rows.map((r) => (
+        <li
+          key={r.year}
+          style={{
+            display: 'flex',
+            gap: 'var(--space-5)',
+            padding: 'var(--space-5) 0',
+            margin: 0,
+            borderTop: '1px solid var(--border-subtle)',
+            fontSize: 'var(--fs-body-sm)',
+            lineHeight: 'var(--lh-body-sm)',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xs)',
+              letterSpacing: '0.06em',
+              color: 'var(--text-label)',
+              minWidth: 40,
+              flex: 'none',
+            }}
+          >
+            {r.year}
+          </span>
+          <span>{r.text}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function Callout({ type = 'info', icon, title, children }: { type?: 'info' | 'warning' | 'success' | 'danger'; icon?: string; title?: string; children: React.ReactNode }) {
-  // No emoji anywhere in this system. The callout's title carries the meaning
-  // and the left border carries the tone.
-  return (
-    <div className={`callout callout-${type}`}>
-      {title && (
-        <div className="callout__header">
-          {icon ? <span className="callout__icon">{icon}</span> : null}
-          <span>{title}</span>
-        </div>
-      )}
-      <div className="callout__body">{children}</div>
-    </div>
-  );
-}
+/* -------------------------------------------------------------------------- */
+/* Page                                                                       */
+/* -------------------------------------------------------------------------- */
 
-function StatCard({ value, label }: { value: string; label: string }) {
-  return (
-    <div
-      style={{
-        padding: 'var(--space-7)',
-        borderRadius: 'var(--r-well)',
-        background: 'var(--bg-raised)',
-        border: '1px solid var(--border-default)',
-      }}
-    >
-      <div
-        style={{
-          fontSize: 'var(--fs-stat-sm)',
-          fontWeight: 'var(--fw-bold)',
-          letterSpacing: 'var(--ls-stat)',
-          lineHeight: 'var(--lh-stat)',
-          color: 'var(--text-primary)',
-        }}
-      >
-        {value}
-      </div>
-      <div
-        style={{
-          marginTop: 'var(--space-4)',
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-mono-xxs)',
-          letterSpacing: 'var(--ls-label)',
-          textTransform: 'uppercase',
-          color: 'var(--text-label)',
-        }}
-      >
-        {label}
-      </div>
-    </div>
-  );
-}
+export default async function WhyEnergyMattersPage() {
+  const [countries, pages] = await Promise.all([loadCountriesServer(), publishableIso3()]);
 
-export default function WhyEnergyMattersPage() {
+  /* The spread. */
+  const ladder = LADDER.map((iso3) => {
+    const country = countries[iso3];
+    const kwh = country ? kwhPerPerson(country) : null;
+    return kwh == null ? null : { iso3, name: country.name, kwh };
+  })
+    .filter((r): r is { iso3: string; name: string; kwh: number } => r !== null)
+    .sort((a, b) => b.kwh - a.kwh);
+
+  const top = ladder[0];
+  const bottom = ladder[ladder.length - 1];
+  const spread = Math.round(top.kwh / bottom.kwh);
+
+  /*
+   * The price. The gas price is not in our data; the demand it destroyed is,
+   * which is the half of the 2022 story this site can actually stand behind.
+   */
+  const deu = countries.DEU;
+  const deuNow = latestYear(deu);
+  const deu2021 = deu.years['2021'];
+  const deu2023 = deu.years['2023'];
+  const deuLatest = deu.years[String(deuNow)];
+  const demandDrop = ((deu2021.demand_twh - deu2023.demand_twh) / deu2021.demand_twh) * 100;
+
+  /* Two long bets. */
+  const fra = countries.FRA;
+  const fraNow = latestYear(fra);
+  const fraLatest = fra.years[String(fraNow)];
+
+  const yearsOf = (c: Country) =>
+    Object.keys(c.years)
+      .map(Number)
+      .sort((a, b) => a - b);
+  const fraYears = yearsOf(fra);
+  const deuYears = yearsOf(deu);
+  const fraSeries = fuelSeries(fraYears, (y) => fra.years[String(y)]);
+  const deuSeries = fuelSeries(deuYears, (y) => deu.years[String(y)]);
+
+  const emissionsRatio = deuLatest.emissions.total_mtco2 / fraLatest.emissions.total_mtco2;
+  const demandGap = (deuLatest.demand_twh / fraLatest.demand_twh - 1) * 100;
+  const deuFirst = deu.years[String(deuYears[0])];
+  const deuCut = (1 - deuLatest.emissions.total_mtco2 / deuFirst.emissions.total_mtco2) * 100;
+
   return (
-    <div className="gg-page min-h-screen flex flex-col">
+    <div className="gg-page min-h-screen flex flex-col" id="top">
       <TopNav active="why" />
 
-      <ArticleShell
-        kicker="The argument"
-        title="Why energy matters"
-        standfirst="Electricity is not one sector among many. It is the input to all the others."
-        readingTime="30-40 min read"
-        updated="February 2026"
-      >
-        <div>
-          {/* Hero Section */}
-          <div className="mb-6">
-            <p className="text-[var(--text-article-lg)]">
-              How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
-            </p>
-            <QuoteBlock>
-              Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from - until it&apos;s not there.
-            </QuoteBlock>
+      <main className="gg-article" style={{ flex: 1 }}>
+        {/* Header */}
+        <div style={{ padding: 'var(--band-y) var(--gutter) var(--space-9)' }}>
+          <div style={columnStyle}>
+            <ArticleHeader
+              kicker="The argument"
+              title="Why energy matters"
+              standfirst="Electricity is not one sector among many. It is the input to all the others."
+              readingTime="7 min read"
+              updated="September 2026"
+            />
+            <OnThisPage
+              items={[
+                { id: 'spread', label: 'The spread' },
+                { id: 'price', label: 'The price' },
+                { id: 'leverage', label: 'The leverage' },
+                { id: 'bets', label: 'Two long bets' },
+                { id: 'reading', label: 'How to read a claim' },
+              ]}
+            />
           </div>
+        </div>
 
-          <OnThisPage
-            items={[
-              { id: 'economy', label: 'Energy IS the Economy' },
-              { id: 'price', label: 'Price of Everything' },
-              { id: 'security', label: 'National Security' },
-              { id: 'policy', label: 'Policy Decisions' },
-              { id: 'current', label: 'Current Decisions' },
-              { id: 'action', label: 'What You Can Do' },
-              { id: 'forward', label: 'Path Forward' },
-              { id: 'final', label: 'Final Thoughts' },
-            ]}
-          />
+        {/* 1 - The spread */}
+        <section id="spread" style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>The spread</Eyebrow>
+            <Prose>
+              <h2>
+                {top.name} uses {spread} times more electricity per person than {bottom.name}
+              </h2>
+            </Prose>
 
-          <div className="space-y-12">
-          {/* Section 1: Energy IS the Economy */}
-          <section id="economy">
-            <h2>1. Energy IS the Economy</h2>
-
-            <h3>The Fundamental Truth</h3>
-            <p>
-              Energy isn&apos;t just part of the economy - it is the economy. Everything we produce, every service we consume, every comfort we enjoy requires energy.
-            </p>
-
-            <h3>The Connection</h3>
-            <p>
-              The relationship between energy consumption and prosperity isn&apos;t theoretical - it&apos;s observable in data from every country on Earth:
-            </p>
-
-            <div className="grid-3 my-6">
-              <StatCard value="23,000" label="Norway kWh/capita" />
-              <StatCard value="12,000" label="USA kWh/capita" />
-              <StatCard value="6,500" label="Germany kWh/capita" />
+            <div style={wellStyle}>
+              <RankedBarList
+                labelWidth={132}
+                barHeight={11}
+                items={ladder.map((r) => ({
+                  label: r.name,
+                  value: r.kwh,
+                  display: `${num(r.kwh)} kWh`,
+                }))}
+              />
+              <div style={wellLabelStyle}>
+                Electricity demand per person, a year &middot; each country&rsquo;s own latest
+                full year
+              </div>
             </div>
 
-            <div className="grid-3 my-6">
-              <StatCard value="6,000" label="China kWh/capita" />
-              <StatCard value="160" label="Nigeria kWh/capita" />
-              <StatCard value="500" label="Bangladesh kWh/capita" />
-            </div>
+            <GorillaNote lead="This is the whole argument.">
+              Every other number on this site is a detail of that gap. Coverage is uneven &mdash;
+              the most recent year runs from 2022 to {deuNow} depending on the country &mdash; so
+              each bar is that country&rsquo;s own latest full year, not a common one.
+            </GorillaNote>
 
-            <Callout type="info" title="Key Insight">
-              Countries with 10x more electricity consumption have ~8x higher GDP. This isn&apos;t correlation - it&apos;s causation. You can&apos;t run factories, hospitals, or data centers without electricity.
-            </Callout>
-
-            <h3>What Energy Powers</h3>
-            <p>
-              Most people think of energy as &quot;keeping the lights on.&quot; But energy powers everything:
-            </p>
-
-            <ul>
-              <li><strong>Manufacturing & Industry</strong> - Steel (5,000 kWh/tonne), aluminum (15,000 kWh/tonne), jobs, exports</li>
-              <li><strong>Food System</strong> - Fertilizer, irrigation, processing, cold chain → 8 billion people fed</li>
-              <li><strong>Healthcare</strong> - 24/7 hospitals, vaccines, medical imaging → doubled life expectancy</li>
-              <li><strong>Clean Water</strong> - Treatment, pumping, desalination → eliminated waterborne disease</li>
-              <li><strong>Technology</strong> - Data centers, telecom, cloud services → the digital economy</li>
-              <li><strong>Transportation</strong> - EVs, electric rail, urban transit → increasingly electrifying</li>
-            </ul>
-
-            <h3>The Harsh Reality</h3>
-            <p>
-              Countries with unreliable electricity cannot compete economically:
-            </p>
-
-            <Callout type="danger" title="Energy Crisis Examples">
-              <strong>South Africa (2023):</strong> 300+ days load-shedding, 0.7% GDP growth, 33% unemployment<br />
-              <strong>Pakistan (2023):</strong> Textile factories closed, lost orders to Vietnam, billions in exports gone
-            </Callout>
-
-            <Callout type="warning" title="The Lesson">
-              Energy isn&apos;t just infrastructure - it&apos;s economic survival.
-            </Callout>
-          </section>
-
-          {/* Section 2: The Price of Energy */}
-          <section id="price">
-            <h2>2. The Price of Energy IS the Price of Everything</h2>
-
-            <h3>Understanding the Ripple Effect</h3>
-            <p>
-              When energy prices rise, everything costs more. This isn&apos;t abstract economics - it&apos;s your grocery bill, your rent, your job security.
-            </p>
-
-            <h3>The 2022 European Energy Crisis</h3>
-            <p>
-              Russia reduced natural gas exports to Europe. Gas prices went from €20/MWh to €200/MWh - a 10x increase. The cascading impact:
-            </p>
-
-            <ul>
-              <li><strong>Household bills</strong> - German households: €100/month → €300-500/month, energy poverty, heat vs food</li>
-              <li><strong>Industrial shutdown</strong> - Fertilizer plants closed, chemical production curtailed, aluminum smelters gone permanently</li>
-              <li><strong>Food prices</strong> - High gas → expensive fertilizer → food prices up 15-20%, UK food bank usage +30%</li>
-              <li><strong>Competitiveness</strong> - EU factories at €200/MWh vs US €100/MWh vs China €70/MWh → production fled abroad</li>
-            </ul>
-
-            <h3>Why This Matters to Regular People</h3>
-            <p>
-              The abstract version: &quot;Energy policy affects macroeconomic competitiveness.&quot;
-            </p>
-            <p>
-              The reality: Your electricity bill tripled. Your grocery costs rose 20%. Your company closed the local factory. Your neighbor lost their job.
-            </p>
-
-            <Callout type="warning" title="Permanent Economic Scarring">
-              High energy costs cause lasting damage: factories close and don&apos;t come back, investment goes elsewhere, engineers move to countries with better jobs, and competitive disadvantage becomes structural.
-            </Callout>
-
-            <p>
-              Your children will inherit an economy shaped by today&apos;s energy decisions. If heavy industry leaves, those jobs don&apos;t come back for a generation.
-            </p>
-          </section>
-
-          {/* Section 3: Energy Security IS National Security */}
-          <section id="security">
-            <h2>3. Energy Security IS National Security</h2>
-
-            <h3>The Geopolitical Reality</h3>
-            <p>
-              Energy dependence gives other countries leverage over you. This isn&apos;t paranoid - it&apos;s just how power works.
-            </p>
-
-            <h3>Historical Examples</h3>
-
-            <h4>The 1970s Oil Embargos</h4>
-            <ul>
-              <li>1973: OPEC imposed oil embargo against Western nations</li>
-              <li>Oil prices quadrupled ($3 → $12/barrel)</li>
-              <li>Gas lines stretched for miles in the USA, rationing in Europe</li>
-              <li>Economic recession, &quot;stagflation&quot; began</li>
-            </ul>
-
-            <Callout type="info" title="The Lesson">
-              Whoever controls your energy can control your economy.
-            </Callout>
-
-            <h4>Russia-Europe Gas (2000-2022)</h4>
-            <ul>
-              <li>Germany: 55% of gas from Russia by 2021</li>
-              <li>Justified as &quot;economic interdependence promotes peace&quot;</li>
-              <li>Reality: gas cut to Ukraine in 2006, 2009; threats after Crimea 2014</li>
-              <li>2022: gas weaponized completely after Ukraine invasion</li>
-            </ul>
-
-            <Callout type="warning" title="Hard Truth">
-              &quot;Interdependence&quot; with an adversary is just dependency.
-            </Callout>
-
-            <h3>Modern Examples</h3>
-            <ul>
-              <li><strong>China rare earths</strong> - Controls 70% of production. 2010: restricted exports during Japan dispute → Japan backed down</li>
-              <li><strong>Japan WWII</strong> - No domestic oil. US embargo 1941 → Pearl Harbor partly to secure Southeast Asian oil</li>
-            </ul>
-
-            <h3>The Uncomfortable Truth</h3>
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Energy Independence</th>
-                  <th>Energy Dependence</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>No foreign country can cut your supply</td>
-                  <td>Suppliers can threaten cutoffs</td>
-                </tr>
-                <tr>
-                  <td>Political decisions remain yours</td>
-                  <td>Economy hostage to others&apos; decisions</td>
-                </tr>
-                <tr>
-                  <td>Economic resilience during crises</td>
-                  <td>Foreign policy constrained</td>
-                </tr>
-                <tr>
-                  <td>Strategic autonomy in foreign policy</td>
-                  <td>National security compromised</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          {/* Section 4: Policy Decisions That Shape Our Future */}
-          <section id="policy">
-            <h2>4. The Policy Decisions That Shape Our Future</h2>
-
-            <h3>Why Energy Policy Matters More Than You Think</h3>
-            <p>
-              Energy decisions made today will shape:
-            </p>
-            <ul>
-              <li>Your children&apos;s job prospects</li>
-              <li>Your country&apos;s economic competitiveness</li>
-              <li>Your national security posture</li>
-              <li>Your household budget for decades</li>
-            </ul>
-            <p>
-              These aren&apos;t &quot;future problems&quot; - they&apos;re happening now.
-            </p>
-
-            <h3>Case Study: Germany&apos;s Energiewende (2011-2024)</h3>
-            <p>
-              After Fukushima, Germany phased out nuclear (13.3% in 2021 → 0% by April 2023).
-            </p>
-
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th>Before (2011)</th>
-                  <th>After (2023)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Nuclear</td>
-                  <td>13.3%</td>
-                  <td className="decrease">0%</td>
-                </tr>
-                <tr>
-                  <td>Renewables</td>
-                  <td>20%</td>
-                  <td className="increase">50%</td>
-                </tr>
-                <tr>
-                  <td>Gas Dependency</td>
-                  <td>35%</td>
-                  <td className="increase">55%</td>
-                </tr>
-                <tr>
-                  <td>Electricity Price vs USA</td>
-                  <td>2x</td>
-                  <td className="increase">3x</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <Callout type="warning" title="The Lesson">
-              Good intentions don&apos;t equal good outcomes. Nuclear was shut down before alternatives were ready.
-            </Callout>
-
-            <h3>Case Study: France&apos;s Nuclear Bet (1970s-Present)</h3>
-            <p>
-              After the 1973 oil crisis, France built 50+ reactors in 25 years.
-            </p>
-
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th>France</th>
-                  <th>Germany (comparison)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Nuclear electricity</td>
-                  <td>70%</td>
-                  <td>0%</td>
-                </tr>
-                <tr>
-                  <td>Electricity prices</td>
-                  <td>Lowest in Europe</td>
-                  <td>Highest in Europe</td>
-                </tr>
-                <tr>
-                  <td>CO₂ per kWh</td>
-                  <td>50g</td>
-                  <td>350g</td>
-                </tr>
-                <tr>
-                  <td>Fuel imports</td>
-                  <td>100% uranium</td>
-                  <td>55% gas (Russia)</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <Callout type="info" title="The Lesson">
-              Strategic energy decisions have 50-year consequences.
-            </Callout>
-
-            <h3>The Common Pattern</h3>
-            <p>
-              Energy infrastructure lasts decades (nuclear 60+ years, pipelines 40+, renewables 20-30). Once you make a choice, you live with it. There are no perfect answers - only trade-offs.
-            </p>
-          </section>
-
-          {/* Section 5: Current Decisions */}
-          <section id="current">
-            <h2>5. The Decisions Being Made Right Now</h2>
-
-            <h3>Why This Moment Matters</h3>
-            <p>
-              The 2020s are critical: climate commitments accelerating, geopolitical tensions reshaping trade, technology costs falling. Decisions made now will define 2050-2070. Are your elected officials making them wisely?
-            </p>
-
-            <h3>Current Global Trends</h3>
-
-            <h4>Renewable Energy Transition</h4>
-            <ul>
-              <li>Solar/wind costs fallen 90% in a decade</li>
-              <li>Many countries committing to &quot;net zero&quot; by 2050</li>
-              <li>Challenges: intermittency, grid stability, China-concentrated manufacturing, material requirements</li>
-            </ul>
-
-            <h4>The Nuclear Question</h4>
-            <ul>
-              <li>Some reconsidering (France, UK, Poland)</li>
-              <li>Others phasing out (Germany, Belgium)</li>
-              <li>New SMR technologies in development</li>
-              <li>Debates: safety, waste, cost, time to build</li>
-            </ul>
-
-            <h4>Electrification of Everything</h4>
-            <ul>
-              <li>EVs replacing combustion cars, heat pumps replacing gas boilers</li>
-              <li>Electricity demand could double by 2050</li>
-              <li>Must build capacity, transition fuels, maintain reliability, keep costs reasonable - simultaneously</li>
-            </ul>
-
-            <h3>Policy Choices Being Made Now</h3>
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Energy Mix Questions</th>
-                  <th>Dependency Questions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Close coal plants? When?</td>
-                  <td>Accept gas imports? From whom?</td>
-                </tr>
-                <tr>
-                  <td>Keep nuclear or phase out?</td>
-                  <td>Import solar panels from China?</td>
-                </tr>
-                <tr>
-                  <td>How much renewable? How fast?</td>
-                  <td>Buy uranium from Kazakhstan?</td>
-                </tr>
-                <tr>
-                  <td>What provides backup?</td>
-                  <td>Rely on undersea cables?</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <Callout type="info" title="Long-term Impact">
-              These decisions will shape electricity bills, industrial base, job opportunities, and national security - for decades.
-            </Callout>
-          </section>
-
-          {/* Section 6: What You Can Do */}
-          <section id="action">
-            <h2>6. What You Can Do</h2>
-
-            <h3>Follow the Numbers</h3>
-            <p>
-              When politicians talk about energy, ask:
-            </p>
-            <ul>
-              <li>What&apos;s the total cost (not just generation)?</li>
-              <li>Where does reliability come from?</li>
-              <li>What are the dependencies?</li>
-              <li>What&apos;s the timeline? Who bears the costs?</li>
-            </ul>
-
-            <Callout type="danger" title="Red Flags">
+            <Prose style={{ marginTop: 'var(--space-9)' }}>
+              <p>
+                Most people picture electricity as keeping the lights on. Lighting is a rounding
+                error. What the gap actually buys is:
+              </p>
               <ul>
-                <li>Promises with no cost estimates</li>
-                <li>&quot;Just build more renewables&quot; with no backup plan</li>
-                <li>Closing reliable plants with no replacement ready</li>
-                <li>Claims of &quot;independence&quot; while increasing imports</li>
+                <li>
+                  <strong>Industry</strong> &mdash; steel at roughly 5,000 kWh a tonne, aluminium
+                  at 15,000. A country without cheap power does not smelt. It imports.
+                </li>
+                <li>
+                  <strong>Food</strong> &mdash; synthetic fertiliser, irrigation pumps, and a cold
+                  chain that reaches the last mile.
+                </li>
+                <li>
+                  <strong>Health</strong> &mdash; theatres and ventilators that cannot pause,
+                  vaccines that have to stay cold, imaging that has to stay on.
+                </li>
+                <li>
+                  <strong>Water</strong> &mdash; treatment and pumping, and desalination where
+                  there is no river to take it from.
+                </li>
+                <li>
+                  <strong>Everything digital</strong> &mdash; data centres, mobile networks, and
+                  the services a modern economy is now assembled from.
+                </li>
               </ul>
-            </Callout>
+              <p>
+                Which is why the bottom of that chart is not a lifestyle difference. It is a
+                ceiling on what a country can build.
+              </p>
+            </Prose>
 
-            <h3>Understand Trade-offs</h3>
-            <p>
-              No perfect solutions. Every choice has trade-offs:
-            </p>
+            <div className="gg-action-row" style={actionRowStyle}>
+              <Button as={Link} href="/countries" variant="primary">
+                Find your own country
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* 2 - The price */}
+        <section id="price" style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>The price</Eyebrow>
+            <Prose>
+              <h2>When electricity gets expensive, everything does</h2>
+              <p>
+                Russia began reducing gas deliveries to Europe in 2021 and cut them outright after
+                invading Ukraine in 2022. European wholesale gas went from about &euro;20/MWh in
+                early 2021 to more than &euro;300 at the peak in August 2022.
+              </p>
+              <p>
+                Gas sets the electricity price in most European markets, so the rise did not stay
+                in the gas market. Fertiliser is made from gas, so food got more expensive.
+                Aluminium and chemicals are made from electricity, so smelters stopped. Household
+                bills in Germany went from roughly &euro;100 a month to several times that, and
+                energy poverty stopped being a technical term.
+              </p>
+            </Prose>
+
+            <div className="gg-stat-row" style={statRowStyle}>
+              <Stat
+                label="German demand, 2021"
+                value={num(deu2021.demand_twh)}
+                unit="TWh"
+                note="the year before the cut"
+              />
+              <Stat
+                label="Two years later"
+                value={num(deu2023.demand_twh)}
+                unit="TWh"
+                tone="down"
+                note={`${oneDp(demandDrop)}% below 2021`}
+              />
+              <Stat
+                label={`And in ${deuNow}`}
+                value={num(deuLatest.demand_twh)}
+                unit="TWh"
+                note="still short of where it started"
+              />
+            </div>
+
+            <GorillaNote lead="Demand that leaves does not always come back.">
+              Some of that fall is efficiency and mild winters, and some of it is production that
+              moved abroad &mdash; the series cannot tell you the split. What it can tell you is
+              that Germany still uses less electricity than it did before the shock, which is not
+              what a recovery looks like.
+            </GorillaNote>
+
+            <div className="gg-action-row" style={actionRowStyle}>
+              <CountryProfileLink iso3="DEU" source="why_article" style={{ display: 'inline-flex' }}>
+                <Button as="span" variant="secondary">
+                  See Germany&rsquo;s grid
+                </Button>
+              </CountryProfileLink>
+            </div>
+          </div>
+        </section>
+
+        {/* 3 - The leverage */}
+        <section id="leverage" style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>The leverage</Eyebrow>
+            <Prose>
+              <h2>Whoever supplies your energy gets a say in your politics</h2>
+              <p>
+                This is not a theory about bad actors. It is what happens whenever one side of a
+                trade can survive its interruption and the other cannot.
+              </p>
+            </Prose>
+
+            <div className="gg-compare-split" style={splitStyle}>
+              <div style={splitPanelStyle}>
+                <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>How it has gone</Eyebrow>
+                <Timeline
+                  rows={[
+                    {
+                      year: '1973',
+                      text: 'OPEC embargoes the West. Oil roughly quadruples, from about $3 a barrel to $12. Rationing in Europe, queues in the United States.',
+                    },
+                    {
+                      year: '2006',
+                      text: 'Russia cuts gas to Ukraine in January. Deliveries onward into Europe fall with it.',
+                    },
+                    {
+                      year: '2009',
+                      text: 'It happens again and lasts nearly two weeks. South-east Europe is worst hit.',
+                    },
+                    {
+                      year: '2014',
+                      text: 'Crimea is annexed. Germany’s share of gas from Russia keeps rising afterwards, not falling.',
+                    },
+                    {
+                      year: '2022',
+                      text: 'Pipeline gas to Europe is cut outright. Germany had been taking about 55% of its gas from Russia the year before.',
+                    },
+                  ]}
+                />
+              </div>
+              <div style={{ ...splitPanelStyle, borderRight: 'none' }}>
+                <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>What it costs you</Eyebrow>
+                <Prose style={{ fontSize: 'var(--fs-body-sm)' }}>
+                  <p>
+                    A country that makes its own power decides its own foreign policy. A country
+                    that imports it negotiates with someone who can turn the supply off.
+                  </p>
+                  <ul>
+                    <li>Your supplier raises the price and there is no second bidder.</li>
+                    <li>
+                      Your position on their behaviour becomes a domestic heating question.
+                    </li>
+                    <li>
+                      A crisis somewhere else arrives as your electricity bill, on a timetable you
+                      do not set.
+                    </li>
+                  </ul>
+                  <p>
+                    Interdependence describes two parties who can each hurt the other. Where only
+                    one of them can, it is dependence with better manners.
+                  </p>
+                </Prose>
+              </div>
+            </div>
+
+            <div className="gg-action-row" style={actionRowStyle}>
+              <Button as={Link} href="/rankings" variant="secondary">
+                Who is least exposed
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* 4 - Two long bets */}
+        <section id="bets" style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Two long bets</Eyebrow>
+            <Prose>
+              <h2>France and Germany chose differently, and both still live with it</h2>
+              <p>
+                After the 1973 embargo France built more than 50 reactors in 25 years. After
+                Fukushima in 2011 Germany decided to close the reactors it had. Neither choice
+                could be undone by a later government, because power stations outlast the
+                parliaments that order them. Which is why it is worth looking at the two grids as
+                they actually ran, rather than at what either country said it was doing.
+              </p>
+            </Prose>
+
+            <div className="gg-compare-split" style={splitStyle}>
+              <div style={splitPanelStyle}>
+                <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>
+                  France &middot; mix since {fraYears[0]}
+                </Eyebrow>
+                <StackedAreaChart series={fraSeries.series} years={fraSeries.years} height={200} />
+                <FuelLegend
+                  shares={fuelShares(fraLatest)
+                    .filter((s) => s.pct > 0)
+                    .map((s) => ({ fuel: s.fuel, value: `${oneDp(s.pct)}%` }))}
+                  style={{ marginTop: 'var(--space-5)' }}
+                />
+              </div>
+              <div style={{ ...splitPanelStyle, borderRight: 'none' }}>
+                <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>
+                  Germany &middot; mix since {deuYears[0]}
+                </Eyebrow>
+                <StackedAreaChart series={deuSeries.series} years={deuSeries.years} height={200} />
+                <FuelLegend
+                  shares={fuelShares(deuLatest)
+                    .filter((s) => s.pct > 0)
+                    .map((s) => ({ fuel: s.fuel, value: `${oneDp(s.pct)}%` }))}
+                  style={{ marginTop: 'var(--space-5)' }}
+                />
+              </div>
+            </div>
+
+            <div className="gg-stat-row" style={statRowStyle}>
+              <Stat
+                label={`France, clean share ${fraNow}`}
+                value={oneDp(fraLatest.aggregates.clean_pct)}
+                unit="%"
+                tone="accent"
+                note={`${num(fraLatest.emissions.total_mtco2)} Mt CO₂e`}
+              />
+              <Stat
+                label={`Germany, clean share ${deuNow}`}
+                value={oneDp(deuLatest.aggregates.clean_pct)}
+                unit="%"
+                note={`${num(deuLatest.emissions.total_mtco2)} Mt CO₂e`}
+              />
+              <Stat
+                label="So Germany emits"
+                value={`${oneDp(emissionsRatio)}×`}
+                tone="down"
+                note={`more, for ${Math.round(demandGap)}% more electricity`}
+              />
+            </div>
+
+            <GorillaNote lead="Neither one gets to be the simple answer.">
+              Germany has cut its own electricity emissions by {Math.round(deuCut)}% since{' '}
+              {deuYears[0]} and is still cutting &mdash; the half of the story a gap of{' '}
+              {oneDp(emissionsRatio)}&times; hides. France imports 100% of the uranium its bet runs
+              on, which is why its independence score is nothing like as high as its clean share.
+              A 50-year decision buys one set of problems in exchange for another.
+            </GorillaNote>
+
+            <div className="gg-action-row" style={actionRowStyle}>
+              <CountryProfileLink iso3="FRA" source="why_article" style={{ display: 'inline-flex' }}>
+                <Button as="span" variant="secondary">
+                  France in full
+                </Button>
+              </CountryProfileLink>
+              <CountryProfileLink iso3="DEU" source="why_article" style={{ display: 'inline-flex' }}>
+                <Button as="span" variant="secondary">
+                  Germany in full
+                </Button>
+              </CountryProfileLink>
+            </div>
+          </div>
+        </section>
+
+        {/* 5 - How to read a claim */}
+        <section id="reading" style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>How to read a claim</Eyebrow>
+            <Prose>
+              <h2>Four questions, and four answers that should worry you</h2>
+              <p>
+                Everything above is background. This is the part worth keeping: what to ask when
+                someone tells you what your grid should do next.
+              </p>
+            </Prose>
+
+            <div className="gg-compare-split" style={splitStyle}>
+              <div style={splitPanelStyle}>
+                <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>Ask</Eyebrow>
+                <Prose style={{ fontSize: 'var(--fs-body-sm)' }}>
+                  <ul>
+                    <li>What is the total cost, including the grid, and who pays it?</li>
+                    <li>What runs when this one does not, at 6pm in January?</li>
+                    <li>What are we importing to make it work, and from whom?</li>
+                    <li>What is the plan if it takes twice as long as promised?</li>
+                  </ul>
+                </Prose>
+              </div>
+              <div style={{ ...splitPanelStyle, borderRight: 'none' }}>
+                <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>Worry when you hear</Eyebrow>
+                <Prose style={{ fontSize: 'var(--fs-body-sm)' }}>
+                  <ul>
+                    <li>A target with no cost attached to it.</li>
+                    <li>More renewables, and nothing about what backs them up.</li>
+                    <li>A firm plant closing before its replacement runs.</li>
+                    <li>Independence claimed alongside a new import.</li>
+                  </ul>
+                </Prose>
+              </div>
+            </div>
+
+            <Prose style={{ marginTop: 'var(--space-9)' }}>
+              <p>
+                Those questions work because there is no source without a cost. Anyone who tells
+                you their option has no trade-off is selling something.
+              </p>
+            </Prose>
 
             <table className="comparison-table">
               <thead>
                 <tr>
                   <th>Source</th>
-                  <th>Pros</th>
-                  <th>Cons</th>
+                  <th>What it gives you</th>
+                  <th>What it costs you</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Coal</strong></td>
-                  <td>Cheap, reliable, abundant</td>
-                  <td>CO₂, air pollution</td>
+                  <td>
+                    <strong>Coal</strong>
+                  </td>
+                  <td>Cheap, firm, widely available</td>
+                  <td>The highest emissions on the grid, and the local air</td>
                 </tr>
                 <tr>
-                  <td><strong>Gas</strong></td>
-                  <td>Cleaner than coal, flexible</td>
-                  <td>CO₂, import dependency</td>
+                  <td>
+                    <strong>Gas</strong>
+                  </td>
+                  <td>Flexible, quick to build, cleaner than coal</td>
+                  <td>Still fossil, and usually somebody else&rsquo;s gas</td>
                 </tr>
                 <tr>
-                  <td><strong>Nuclear</strong></td>
-                  <td>Low carbon, reliable, dense</td>
-                  <td>Waste, cost, public fear</td>
+                  <td>
+                    <strong>Nuclear</strong>
+                  </td>
+                  <td>Firm, dense, very low carbon, decades of life</td>
+                  <td>Slow and expensive to build, waste, imported fuel</td>
                 </tr>
                 <tr>
-                  <td><strong>Solar/Wind</strong></td>
-                  <td>Clean, falling costs</td>
-                  <td>Intermittent, land use</td>
+                  <td>
+                    <strong>Wind and solar</strong>
+                  </td>
+                  <td>The cheapest new generation there has ever been</td>
+                  <td>Only when the weather agrees, so storage, grid and backup</td>
                 </tr>
                 <tr>
-                  <td><strong>Hydro</strong></td>
-                  <td>Clean, reliable, storage</td>
-                  <td>Geographic limits, ecosystems</td>
+                  <td>
+                    <strong>Hydro</strong>
+                  </td>
+                  <td>Firm, clean, and the only storage that scales today</td>
+                  <td>You need the geography, and rivers have other claims on them</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </section>
 
-            <Callout type="warning" title="Be Skeptical">
-              Be skeptical of anyone claiming their solution has no trade-offs.
-            </Callout>
-
-            <h3>Questions to Ask Your Representatives</h3>
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Basic Questions</th>
-                  <th>Policy-Specific Questions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>What is our energy independence score?</td>
-                  <td>If we close this plant, what replaces it?</td>
-                </tr>
-                <tr>
-                  <td>What % of electricity from imports?</td>
-                  <td>If we buy panels from China, what&apos;s the risk?</td>
-                </tr>
-                <tr>
-                  <td>What if our supplier cuts us off?</td>
-                  <td>How much total cost, and who pays?</td>
-                </tr>
-                <tr>
-                  <td>How will this affect prices?</td>
-                  <td>What&apos;s the plan if this doesn&apos;t work?</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <p>
-              <strong>Don&apos;t accept vague answers. Demand specifics.</strong>
-            </p>
-          </section>
-
-          {/* Section 7: The Path Forward */}
-          <section id="forward">
-            <h2>7. The Path Forward</h2>
-
-            <h3>What Good Energy Policy Looks Like</h3>
-            <p>
-              Good energy policy balances:
-            </p>
-            <ul>
-              <li><strong>Affordability</strong> - reasonable costs</li>
-              <li><strong>Reliability</strong> - 24/7 availability</li>
-              <li><strong>Security</strong> - minimize dependencies</li>
-              <li><strong>Sustainability</strong> - environmental concerns</li>
-              <li><strong>Realism</strong> - engineering reality</li>
-            </ul>
-
-            <Callout type="info" title="The Energy Trilemma">
-              You can&apos;t maximize all at once. Trade-offs are inevitable.
-            </Callout>
-
-            <h3>What Bad Energy Policy Looks Like</h3>
-            <ul>
-              <li>Closing reliable plants before replacements are ready</li>
-              <li>Creating new dependencies while claiming &quot;independence&quot;</li>
-              <li>Ignoring costs or pushing them to future generations</li>
-              <li>Ideology over engineering (from both left and right)</li>
-              <li>Short-term thinking based on election cycles</li>
-              <li>Assuming technology miracles will save us</li>
-            </ul>
-
-            <h3>Countries Getting It (Mostly) Right</h3>
-            <div className="grid-3 my-6">
-              <div className="stat-card">
-                <div className="stat-card__flag"><FlagImg iso3="NOR" size={24} /></div>
-                <div className="stat-card__value">Norway</div>
-                <div className="stat-card__label">95%+ renewable, hydro-based, independent & affordable</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-card__flag"><FlagImg iso3="FRA" size={24} /></div>
-                <div className="stat-card__value">France</div>
-                <div className="stat-card__label">70% nuclear, low-carbon, 50-year strategic bet</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-card__flag"><FlagImg iso3="POL" size={24} /></div>
-                <div className="stat-card__value">Poland</div>
-                <div className="stat-card__label">Diversifying: nuclear + offshore wind + coal backup</div>
-              </div>
+        {/* Close */}
+        <section style={bandStyle}>
+          <div style={columnStyle}>
+            <Eyebrow tone="accent" style={{ marginBottom: 'var(--space-5)' }}>
+              Start here
+            </Eyebrow>
+            <Prose>
+              <h2>The argument is general. Your grid is not.</h2>
+              <p>
+                Each of the {pages.length} countries on this site has its own page, its own mix and
+                its own dependencies, and most of them are not what people assume. Pick one you
+                think you already know.
+              </p>
+            </Prose>
+            <div className="gg-action-row" style={actionRowStyle}>
+              <Button as={Link} href="/countries" variant="primary">
+                Browse every country
+              </Button>
+              <Button as={Link} href="/play" variant="secondary">
+                Or test what you know
+              </Button>
             </div>
+          </div>
+        </section>
 
-            <h3>The Hope</h3>
-            <Callout type="success" title="Good News">
-              Technology is improving, costs are falling, and awareness is rising (2022 was a wake-up call). Solutions exist.
-            </Callout>
-            <p>
-              The challenge: Build faster than ever while maintaining reliability, managing costs, navigating geopolitics. Hard, but doable - if we&apos;re smart.
-            </p>
-          </section>
-
-          {/* Section 8: Final Thoughts */}
-          <section id="final">
-            <h2>8. Final Thoughts</h2>
-
-            <h3>The Core Message</h3>
-            <p>
-              Energy is not just another policy issue. Energy is:
-            </p>
-            <ul>
-              <li>The foundation of prosperity</li>
-              <li>The basis of national security</li>
-              <li>The determinant of quality of life</li>
-              <li>The shape of the future we&apos;re building</li>
-            </ul>
-            <p>
-              When energy works, economies grow and futures look bright. When it fails, economies contract and countries become vulnerable. It really is that fundamental.
-            </p>
-
-            <h3>Why Grid Gorilla Exists</h3>
-            <p>
-              Energy policy deserves serious, honest, data-driven analysis. Transparency beats propaganda, data beats ideology, long-term thinking beats short-term politics, and informed citizens make better democracies.
-            </p>
-
-            <QuoteBlock>
-              Energy policy matters more than you think. It affects your wallet, your job, your security, your children&apos;s future. Pay attention. Ask questions. Vote with it in mind. The decisions being made right now will echo for decades.
-            </QuoteBlock>
-
-            <h3>Three Things You Can Do Right Now</h3>
-            <div className="grid-3 my-8">
-              <div className="action-card">
-                <div className="action-card__title">1. Explore Your Country</div>
-                <div className="action-card__description">
-                  Understand your country&apos;s energy reality
-                </div>
-                <Link href="/explore" className="action-card__button">
-                  Explore the map →
-                </Link>
-              </div>
-              <div className="action-card">
-                <div className="action-card__title">2. Ask Questions</div>
-                <div className="action-card__description">
-                  Ask about costs, backup plans, dependencies
-                </div>
-              </div>
-              <div className="action-card">
-                <div className="action-card__title">3. Share This</div>
-                <div className="action-card__description">
-                  Send to anyone who pays an electricity bill
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center py-6">
-              <p className="text-[var(--text-article-lg)] mb-2">Energy is too important for apathy.</p>
-              <p>Get informed. Ask questions. Demand better.</p>
-            </div>
-          </section>
-        </div>
-
-        {/* Back to top */}
-        <div className="mt-12 pt-6 border-t border-border text-center">
+        <div
+          style={{
+            borderTop: '1px solid var(--border-default)',
+            padding: 'var(--space-7) var(--gutter)',
+          }}
+        >
           <a
-            href="#"
-            className="text-[var(--text-article-base)] hover:text-primary transition-colors"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+            href="#top"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-mono-xs)',
+              letterSpacing: 'var(--ls-label)',
+              textTransform: 'uppercase',
+              color: 'var(--text-quiet)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: 44,
             }}
           >
-            ↑ Back to top
+            &uarr; Back to top
           </a>
         </div>
-        </div>
-      </ArticleShell>
+      </main>
 
       <SiteFooter />
     </div>
