@@ -261,7 +261,7 @@ export default async function WhyEnergyMattersPage() {
               <p className="lede">
                 Most people picture electricity as keeping the lights on. Lighting is a rounding
                 error. What the meter is really measuring is steel, fertiliser, clean water,
-                hospitals and data centres &mdash; which makes electricity per person the plainest
+                hospitals and data centres. That makes electricity per person the plainest
                 measure there is of what an economy can actually do.
               </p>
               <p>
@@ -288,7 +288,7 @@ export default async function WhyEnergyMattersPage() {
 
             <GorillaNote lead="Read the range, not the order.">
               {top.name} uses {spread} times what {bottom.name} does. That is not the same life
-              lived more simply &mdash; it is a ceiling on what {bottom.name} can build, and every
+              lived more simply. It is a ceiling on what {bottom.name} can build, and every
               other number on this site is a detail of it. Coverage is uneven, so each bar is that
               country&rsquo;s own latest full year rather than a common one; the most recent
               available runs from 2022 to {deuNow} depending on the country.
@@ -298,24 +298,24 @@ export default async function WhyEnergyMattersPage() {
               <p>What the difference actually buys:</p>
               <ul>
                 <li>
-                  <strong>Industry</strong> &mdash; steel at roughly 5,000 kWh a tonne, aluminium
-                  at 15,000. A country without cheap power does not smelt. It imports.
+                  <strong>Industry.</strong> Steel at roughly 5,000 kWh a tonne, aluminium at
+                  15,000. A country without cheap power does not smelt. It imports.
                 </li>
                 <li>
-                  <strong>Food</strong> &mdash; synthetic fertiliser, irrigation pumps, and a cold
-                  chain that reaches the last mile.
+                  <strong>Food.</strong> Synthetic fertiliser, irrigation pumps, and a cold chain
+                  that reaches the last mile.
                 </li>
                 <li>
-                  <strong>Health</strong> &mdash; theatres and ventilators that cannot pause,
-                  vaccines that have to stay cold, imaging that has to stay on.
+                  <strong>Health.</strong> Theatres and ventilators that cannot pause, vaccines
+                  that have to stay cold, imaging that has to stay on.
                 </li>
                 <li>
-                  <strong>Water</strong> &mdash; treatment and pumping, and desalination where
-                  there is no river to take it from.
+                  <strong>Water.</strong> Treatment and pumping, and desalination where there is
+                  no river to take it from.
                 </li>
                 <li>
-                  <strong>Everything digital</strong> &mdash; data centres, mobile networks, and
-                  the services a modern economy is now assembled from.
+                  <strong>Everything digital.</strong> Data centres, mobile networks, and the
+                  services a modern economy is now assembled from.
                 </li>
               </ul>
             </Prose>
@@ -372,7 +372,7 @@ export default async function WhyEnergyMattersPage() {
 
             <GorillaNote lead="Demand that leaves does not always come back.">
               Some of that fall is efficiency and mild winters, and some of it is production that
-              moved abroad &mdash; the series cannot tell you the split. What it can tell you is
+              moved abroad. The series cannot tell you the split. What it can tell you is
               that Germany still uses less electricity than it did before the shock, which is not
               what a recovery looks like.
             </GorillaNote>
@@ -526,7 +526,7 @@ export default async function WhyEnergyMattersPage() {
 
             <GorillaNote lead="Neither one gets to be the simple answer.">
               Germany has cut its own electricity emissions by {Math.round(deuCut)}% since{' '}
-              {deuYears[0]} and is still cutting &mdash; the half of the story a gap of{' '}
+              {deuYears[0]} and is still cutting. That is the half of the story a gap of{' '}
               {oneDp(emissionsRatio)}&times; hides. France imports 100% of the uranium its bet runs
               on, which is why its independence score is nothing like as high as its clean share.
               A 50-year decision buys one set of problems in exchange for another.
