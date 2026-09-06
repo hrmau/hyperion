@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 
 export interface OnThisPageItem {
@@ -13,25 +14,40 @@ export interface OnThisPageItem {
  * the standfirst and the first thing the reader came for, and heavy enough to
  * read as a section of the article rather than a way past it.
  *
- * A mono label and a ruled strip does the same job and gets out of the way. The
- * pill treatment comes from `.gg-toc a` in globals.css rather than from this
- * file, so the component supplies structure and spacing only and does not
- * restate colour, border or radius - the old markup declared all three again on
- * top of the design system.
+ * A mono label and a ruled strip does the same job and gets out of the way.
  *
- * The class hook is the component's own, not `.gg-prose nav a`, which is what
- * styled it originally. That selector only reached it while it happened to sit
- * inside a Prose block; the first page to place it outside one got bare green
- * prose links, which is exactly the wall of accent the rule exists to prevent.
+ * The pills are styled inline, like every other component in components/ds/,
+ * and deliberately not by a stylesheet rule any more. They were `.gg-prose nav
+ * a`, which only reached them while they happened to sit inside a Prose block -
+ * so the first page to place this outside one rendered a row of bare green
+ * prose links, exactly the wall of accent that rule exists to prevent. Moving
+ * it to a `.gg-toc a` hook fixed that and introduced a subtler version of the
+ * same fragility: the appearance still depended on one selector in one
+ * stylesheet reaching this markup.
  *
- * The one thing added is a 44px hit area, which the pills did not have.
+ * Inline, it cannot be defeated by layering, source order or a stale CSS
+ * bundle, and it wins over `.gg-prose a` on the pages where this does sit
+ * inside prose. The component looks the same everywhere because it carries its
+ * own appearance.
+ *
+ * The 44px hit area is ours too; the original pills did not have one.
  */
+const pillStyle: CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  minHeight: 44,
+  padding: '5px 11px',
+  borderRadius: 'var(--r-pill)',
+  border: '1px solid var(--line-strong)',
+  color: 'var(--text-secondary)',
+  fontSize: 'var(--fs-ui)',
+  textDecoration: 'none',
+};
 export default function OnThisPage({ items }: { items: OnThisPageItem[] }) {
   if (!items.length) return null;
 
   return (
     <nav
-      className="gg-toc"
       aria-label="On this page"
       style={{
         margin: 'var(--space-8) 0 var(--space-9)',
@@ -53,11 +69,7 @@ export default function OnThisPage({ items }: { items: OnThisPageItem[] }) {
       >
         {items.map(({ id, label }) => (
           <li key={id} style={{ padding: 0, margin: 0 }}>
-            <a
-              href={`#${id}`}
-              // Appearance is the design system's; only the hit area is ours.
-              style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44 }}
-            >
+            <a href={`#${id}`} style={pillStyle}>
               {label}
             </a>
           </li>
