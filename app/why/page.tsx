@@ -27,7 +27,7 @@ function Callout({ type = 'info', icon, title, children }: { type?: 'info' | 'wa
           <span>{title}</span>
         </div>
       )}
-      <p>{children}</p>
+      <div className="callout__body">{children}</div>
     </div>
   );
 }
@@ -78,22 +78,18 @@ export default function WhyEnergyMattersPage() {
         kicker="The argument"
         title="Why energy matters"
         standfirst="Electricity is not one sector among many. It is the input to all the others."
+        readingTime="30-40 min read"
+        updated="February 2026"
       >
         <div>
           {/* Hero Section */}
           <div className="mb-6">
-            
             <p className="text-[var(--text-article-lg)]">
               How electricity abundance shapes prosperity, security, and the future we&apos;re building for our children
             </p>
             <QuoteBlock>
               Every time you flip a light switch, charge your phone, or ride in an elevator, you&apos;re tapping into the foundation of modern civilization. But most of us never think about where that power comes from - until it&apos;s not there.
             </QuoteBlock>
-            <div className="flex items-center gap-4 text-muted">
-              <span>30-40 min read</span>
-              <span>•</span>
-              <span>Last updated: February 2026</span>
-            </div>
           </div>
 
           <OnThisPage
@@ -465,7 +461,12 @@ export default function WhyEnergyMattersPage() {
             </ul>
 
             <Callout type="danger" title="Red Flags">
-              Promises with no cost estimates • &quot;Just build more renewables&quot; with no backup plan • Closing reliable plants with no replacement ready • Claims of &quot;independence&quot; while increasing imports
+              <ul>
+                <li>Promises with no cost estimates</li>
+                <li>&quot;Just build more renewables&quot; with no backup plan</li>
+                <li>Closing reliable plants with no replacement ready</li>
+                <li>Claims of &quot;independence&quot; while increasing imports</li>
+              </ul>
             </Callout>
 
             <h3>Understand Trade-offs</h3>

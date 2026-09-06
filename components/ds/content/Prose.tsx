@@ -147,6 +147,7 @@ export interface ArticleShellProps {
   title: ReactNode;
   standfirst?: ReactNode;
   updated?: ReactNode;
+  readingTime?: ReactNode;
   children?: ReactNode;
 }
 
@@ -155,7 +156,7 @@ export interface ArticleShellProps {
  * reading measure. Keeps Story, Why, Methodology, Updates, Credits, Privacy
  * and Terms structurally identical so they read as one publication.
  */
-export function ArticleShell({ kicker, title, standfirst, updated, children }: ArticleShellProps) {
+export function ArticleShell({ kicker, title, standfirst, updated, readingTime, children }: ArticleShellProps) {
   // Left-aligned at the gutter, like every other page on the site, and wide
   // enough for what actually sits in it.
   //
@@ -172,7 +173,13 @@ export function ArticleShell({ kicker, title, standfirst, updated, children }: A
     <main className="gg-article" style={{ flex: 1 }}>
       <div style={{ padding: 'var(--band-y) var(--gutter) var(--space-9)' }}>
         <div style={column}>
-          <ArticleHeader kicker={kicker} title={title} standfirst={standfirst} updated={updated} />
+          <ArticleHeader
+            kicker={kicker}
+            title={title}
+            standfirst={standfirst}
+            updated={updated}
+            readingTime={readingTime}
+          />
         </div>
       </div>
       <div
