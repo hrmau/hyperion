@@ -66,7 +66,11 @@ export function ArticleHeader({
         <p
           style={{
             margin: 'var(--space-8) 0 0',
-            maxWidth: '52ch',
+            // 64ch, not 52. A standfirst is set at --fs-lead, so 52ch of it is
+            // about 610px in a 1000px column - narrow enough that a two-clause
+            // sentence broke across three lines with half the column empty
+            // beside it. 64ch still holds it well short of the full measure.
+            maxWidth: '64ch',
             fontSize: 'var(--fs-lead)',
             lineHeight: 'var(--lh-lead)',
             color: 'var(--text-secondary)',

@@ -153,13 +153,6 @@
 .gg-prose ul,
 .gg-prose ol { margin: 0 0 1.35em; padding: 0; list-style: none }
 .gg-prose li { position: relative; padding-left: 1.6em; margin-bottom: 0.5em }
-
-/* A callout holding a list rather than a sentence. The rule above gives a ul a
-   1.35em bottom margin, which inside a box is a gap under the last item.
-   Here and not in globals.css: that file's .callout rules sit in
-   @layer components, and a layered rule loses to an unlayered one whatever its
-   specificity - the margin it has to beat is set two lines up. */
-.gg-prose .callout__body > :last-child { margin-bottom: 0 }
 .gg-prose ul > li::before {
   content: "—";
   position: absolute; left: 0;

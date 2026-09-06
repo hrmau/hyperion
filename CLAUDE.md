@@ -221,6 +221,27 @@ the personalised hook. The logo links to `/`; anything meaning "the map" links t
 `/explore`. Nine links had to be sorted into those two groups when it moved, so
 check which one you mean.
 
+## The argument (`/why`)
+
+A **server component**, and deliberately so. It used to hard-code six per-capita
+figures in JSX; four had drifted, China's was out by 24%, and China had overtaken
+Germany, which inverted the ladder the section was built on. Every figure on the
+page is now read from `countries-yearly.json` at build time and moves on its own
+at the next refresh - the page that argues for following the numbers cannot be
+the one page that types them in.
+
+It is also the only content page besides `/story` that does **not** use
+`ArticleShell`. The body is full-bleed bands - hairline, mono eyebrow, one idea,
+one piece of evidence, one link into the data - which is the system's own layout
+language. `ArticleHeader` stays, so it still opens like the rest of the
+publication.
+
+Two things to keep if you edit it. Every band ends in a link, because the
+previous version ran 11,600px and linked out exactly once. And the conclusions
+ride on `GorillaNote` under a chart rather than in boxed callouts: there were 13
+of those, three of them labelled "The Lesson", which is what made it read as a
+lecture.
+
 ## The homepage (`/`)
 
 `/` is never rendered by `app/page.tsx` directly. `middleware.ts` rewrites it to
