@@ -15,10 +15,34 @@ interface CollapsibleSectionProps {
 }
 
 /**
+ * `text-sm font-medium` on this heading never applied. prose.css styles bare
+ * elements under .gg-prose, so `.gg-prose h2` (0,1,1) outranks `.text-sm`
+ * (0,1,0): every row rendered at 30px and carried the 2.4em/0.7em section
+ * rhythm inside the button, which made each closed accordion a 150px band with
+ * its label floating near the bottom - eleven of them down the page. Inline, so
+ * it wins outright rather than by another specificity race.
+ */
+const disclosureTitle: React.CSSProperties = {
+  margin: 0,
+  maxWidth: 'none',
+  fontSize: 'var(--fs-h4)',
+  fontWeight: 'var(--fw-semibold)' as React.CSSProperties['fontWeight'],
+  letterSpacing: 'var(--ls-h4)',
+  lineHeight: 'var(--lh-h4)',
+  color: 'var(--text-primary)',
+};
+
+/**
  * The header carried `rounded-lg px-2 -mx-2`, so its hover fill hung 8px past
  * the section on each side while the divider under it did not - the fill and the
  * rules simply did not line up. Full width now, and it clears the 44px control
  * floor, which py-3 alone did not.
+ *
+ * Full width with no padding then put the title hard against the left edge of
+ * the hover fill and the chevron hard against the right, so the row read as a
+ * band with nothing inside it. The content is inset instead of the fill being
+ * pulled out - the same 12px on the body below, so the header and what it
+ * discloses share a left edge while the rules stay full width.
  */
 function CollapsibleSection({ title, id, defaultOpen = false, children }: CollapsibleSectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -27,12 +51,12 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
     <section id={id} className="border-b border-border last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full min-h-[44px] py-3 flex items-center justify-between text-left hover:bg-inset transition-colors"
+        className="w-full min-h-[44px] px-3 py-3 flex items-center justify-between gap-4 text-left hover:bg-inset transition-colors"
         aria-expanded={isOpen}
       >
-        <h2 className="text-sm font-medium text-primary">{title}</h2>
+        <h2 style={disclosureTitle}>{title}</h2>
         <svg
-          className={`w-4 h-4 text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 shrink-0 text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -40,10 +64,45 @@ function CollapsibleSection({ title, id, defaultOpen = false, children }: Collap
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div hidden={!isOpen} className="pb-4 space-y-3">
+      <div hidden={!isOpen} className="px-3 pb-4 space-y-3">
         {children}
       </div>
     </section>
+  );
+}
+
+/**
+ * A pill is a label, not body copy. Without a size of its own it inherited the
+ * prose scale - 17px inside a 7.5px horizontal pad, which a rounded-full shape
+ * clips at both ends. Mono at --fs-mono-xs matches every other chip on the site
+ * (BlocSelector, MapModeSelector, CorrelationFilters).
+ *
+ * `tone` covers the three score bands in the worked examples, which used raw
+ * hex - amber, red and emerald, three saturated hues the palette does not have.
+ * Green means a good score, clay means one moving the wrong way, and everything
+ * else is a neutral chip.
+ */
+function Pill({ children, tone = 'neutral' }: { children: React.ReactNode; tone?: 'neutral' | 'good' | 'bad' }) {
+  const tones = {
+    neutral: { background: 'var(--ink-700)', color: 'var(--paper-a66)' },
+    good: { background: 'var(--green-wash)', color: 'var(--green)' },
+    bad: { background: 'rgba(191, 139, 111, 0.12)', color: 'var(--clay)' },
+  };
+
+  return (
+    <span
+      className="inline-block whitespace-nowrap rounded-full"
+      style={{
+        ...tones[tone],
+        padding: '3px 10px',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 'var(--fs-mono-xs)',
+        letterSpacing: '0.04em',
+        lineHeight: 1.5,
+      }}
+    >
+      {children}
+    </span>
   );
 }
 
@@ -177,28 +236,26 @@ export default function MethodologyPage() {
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4>Our World in Data Energy Dataset</h4>
-                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
-                  Primary Data Source
-                </span>
+                <Pill>Primary data source</Pill>
               </div>
               <p className="mb-3">
                 Comprehensive electricity generation, demand, emissions, and fossil fuel data compiled from multiple authoritative sources.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <span>Coverage:</span>
+                  <h4>Coverage</h4>
                   <ul className="mt-1 space-y-1">
-                    <li>• 220+ countries and territories</li>
-                    <li>• Annual data from 2000-present</li>
-                    <li>• Electricity by source (coal, gas, nuclear, hydro, wind, solar, etc.)</li>
-                    <li>• Demand, imports, and emissions data</li>
+                    <li>220+ countries and territories</li>
+                    <li>Annual data from 2000-present</li>
+                    <li>Electricity by source (coal, gas, nuclear, hydro, wind, solar, etc.)</li>
+                    <li>Demand, imports, and emissions data</li>
                     <li>
-                      • Emissions are <strong>lifecycle CO&#8322;e</strong>, not stack CO&#8322;: they
+                      Emissions are <strong>lifecycle CO&#8322;e</strong>, not stack CO&#8322;: they
                       include methane and the rest of the lifecycle, which is why a
                       gas-only grid can carry a higher intensity than a coal one
                     </li>
                     <li>
-                      • Our source publishes no geothermal column. The series behind it is
+                      Our source publishes no geothermal column. The series behind it is
                       &ldquo;other renewables excluding biofuel&rdquo;, which is geothermal plus
                       wave, tidal and some non-biogenic waste. We call it{' '}
                       <strong>geothermal</strong> only for the 18 grids where geothermal
@@ -210,11 +267,11 @@ export default function MethodologyPage() {
                   </ul>
                 </div>
                 <div>
-                  <span>Underlying sources:</span>
+                  <h4>Underlying sources</h4>
                   <ul className="mt-1 space-y-1">
-                    <li>• <strong>Ember</strong> - Electricity generation data</li>
-                    <li>• <strong>Energy Institute</strong> - Fossil fuel production/consumption</li>
-                    <li>• <strong>US EIA</strong> - Additional energy statistics</li>
+                    <li><strong>Ember</strong> - Electricity generation data</li>
+                    <li><strong>Energy Institute</strong> - Fossil fuel production/consumption</li>
+                    <li><strong>US EIA</strong> - Additional energy statistics</li>
                   </ul>
                 </div>
               </div>
@@ -247,9 +304,7 @@ export default function MethodologyPage() {
             <div className="card p-5 mb-4">
               <div className="flex items-start justify-between mb-3">
                 <h4>World Nuclear Association & EIA</h4>
-                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
-                  Uranium Production
-                </span>
+                <Pill>Uranium production</Pill>
               </div>
               <p className="mb-3">
                 Uranium mining production by country
@@ -281,29 +336,27 @@ export default function MethodologyPage() {
             <div className="card p-5">
               <div className="flex items-start justify-between mb-3">
                 <h4>World Bank & UNDP</h4>
-                <span className="bg-inset dark:bg-inset text-secondary dark:text-secondary px-2 py-1 rounded-full">
-                  Socioeconomic Data
-                </span>
+                <Pill>Socioeconomic data</Pill>
               </div>
               <p className="mb-3">
                 GDP, Human Development Index (HDI), life expectancy, and manufacturing output for our Energy & Prosperity correlations
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <span>Metrics:</span>
+                  <h4>Metrics</h4>
                   <ul className="mt-1 space-y-1">
-                    <li>• GDP per capita (PPP adjusted)</li>
-                    <li>• Human Development Index (HDI)</li>
-                    <li>• Life expectancy at birth</li>
-                    <li>• Manufacturing value per capita</li>
+                    <li>GDP per capita (PPP adjusted)</li>
+                    <li>Human Development Index (HDI)</li>
+                    <li>Life expectancy at birth</li>
+                    <li>Manufacturing value per capita</li>
                   </ul>
                 </div>
                 <div>
-                  <span>Why we chose it:</span>
+                  <h4>Why we chose it</h4>
                   <ul className="mt-1 space-y-1">
-                    <li>• Authoritative global coverage</li>
-                    <li>• Standardized methodology</li>
-                    <li>• Annual updates</li>
+                    <li>Authoritative global coverage</li>
+                    <li>Standardized methodology</li>
+                    <li>Annual updates</li>
                   </ul>
                 </div>
               </div>
@@ -544,9 +597,7 @@ Everyone Else: 0% (imports 100%)
                 <FlagImg iso3="DEU" size={20} />
                 <div>
                   <h4>Germany (2023)</h4>
-                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EAB308', color: 'white' }}>
-                    Score: 68.7 - Moderate
-                  </span>
+                  <Pill tone="neutral">Score 68.7 — moderate</Pill>
                 </div>
               </div>
 
@@ -601,9 +652,7 @@ TOTAL: 50.2 + 0 + 18.2 + 0.3 + 0.003 = 68.7 / 100`}
                 <FlagImg iso3="FRA" size={20} />
                 <div>
                   <h4>France (2023)</h4>
-                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
-                    Score: 20.2 - Critical Dependency
-                  </span>
+                  <Pill tone="bad">Score 20.2 — critical dependency</Pill>
                 </div>
               </div>
 
@@ -646,9 +695,9 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
               <div className="mt-4 p-4 bg-inset border border-border rounded-lg">
                 <h5 className="text-[var(--clay)] mb-2">Why we score it this way</h5>
                 <ul className="text-[var(--clay)] space-y-1">
-                  <li>• Uranium dependency is real: France imports 100% of uranium ore</li>
-                  <li>• Supply chain vulnerability: Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
-                  <li>• Educational mission: We&apos;re measuring <em>independence</em>, not <em>security</em></li>
+                  <li>Uranium dependency is real: France imports 100% of uranium ore</li>
+                  <li>Supply chain vulnerability: Uranium comes from politically unstable regions (Niger) or geopolitical competitors (Russia, Kazakhstan)</li>
+                  <li>Educational mission: We&apos;re measuring <em>independence</em>, not <em>security</em></li>
                 </ul>
 
                 <div className="mt-3 pt-3 border-t border-border">
@@ -667,9 +716,7 @@ TOTAL: 20.2 + 0 + 0 + 0 + 0.003 = 20.2 / 100`}
                 <FlagImg iso3="NOR" size={20} />
                 <div>
                   <h4>Norway (2023)</h4>
-                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
-                    Score: 97.4 - Energy Fortress
-                  </span>
+                  <Pill tone="good">Score 97.4 — energy fortress</Pill>
                 </div>
               </div>
 
@@ -711,9 +758,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 <FlagImg iso3="JPN" size={20} />
                 <div>
                   <h4>Japan (2023)</h4>
-                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#EF4444', color: 'white' }}>
-                    Score: 25.5 - Critical Dependency
-                  </span>
+                  <Pill tone="bad">Score 25.5 — critical dependency</Pill>
                 </div>
               </div>
 
@@ -752,9 +797,7 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
                 <FlagImg iso3="KAZ" size={20} />
                 <div>
                   <h4>Kazakhstan (2023)</h4>
-                  <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: '#059669', color: 'white' }}>
-                    Score: 100 - Energy Fortress
-                  </span>
+                  <Pill tone="good">Score 100 — energy fortress</Pill>
                 </div>
               </div>
 

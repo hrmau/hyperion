@@ -65,7 +65,13 @@
   line-height: 1.15;
   color: var(--paper);
   margin: 2.4em 0 0.7em;
-  max-width: 30ch;
+  /* 36ch, not 30ch. A heading measure keeps a long headline from running the
+     full column, but 30ch cut below the longest h2 the site actually has - the
+     numbered sections on /why are up to 33ch, so two of eight wrapped to a
+     second line for no reason, and eight sections of that is a page taller than
+     its content. Measured, not guessed: 36ch clears every h2 in the codebase
+     and still holds a genuinely long one back. */
+  max-width: 36ch;
 }
 .gg-prose h3 {
   font-size: clamp(19px, 1.7vw, 21px);
@@ -84,6 +90,35 @@
   color: var(--text-label);
   margin: 1.9em 0 0.7em;
 }
+
+/* h5 and h6 had no rule at all, so the reset left them at the inherited body
+   size and weight - "Electricity Mix (Ember)" set identically to the sentence
+   under it, thirteen times on /methodology alone.
+   Not another step down the display scale: h4 is already the mono label, the
+   smallest role the system has, so a further step would invert the hierarchy.
+   Body size in semibold paper instead - a sub-heading inside a card, which is
+   the only place these are used. */
+.gg-prose h5,
+.gg-prose h6 {
+  font-size: 1em;
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  margin: 1.5em 0 0.5em;
+}
+/* Colour in @layer components, not unlayered like the rules above, so a
+   `text-[var(--clay)]` on the element still wins - the worked examples set one
+   of these in clay deliberately. :where() alone was not enough: an unlayered
+   rule beats every layer whatever its specificity, which is the same reason the
+   legacy .card/.callout classes were moved into this layer. */
+@layer components {
+  .gg-prose h5,
+  .gg-prose h6 { color: var(--paper) }
+}
+/* Deliberately :first-child and not the blanket card reset above: a card here
+   holds several of these in sequence, and zeroing every one of them would jam
+   the second onto the list that ends the first. */
+.gg-prose :where(h5, h6):first-child { margin-top: 0 }
 .gg-prose > *:first-child { margin-top: 0 }
 
 /* Links in prose are underlined — colour alone is not an affordance. */
@@ -118,6 +153,13 @@
 .gg-prose ul,
 .gg-prose ol { margin: 0 0 1.35em; padding: 0; list-style: none }
 .gg-prose li { position: relative; padding-left: 1.6em; margin-bottom: 0.5em }
+
+/* A callout holding a list rather than a sentence. The rule above gives a ul a
+   1.35em bottom margin, which inside a box is a gap under the last item.
+   Here and not in globals.css: that file's .callout rules sit in
+   @layer components, and a layered rule loses to an unlayered one whatever its
+   specificity - the margin it has to beat is set two lines up. */
+.gg-prose .callout__body > :last-child { margin-bottom: 0 }
 .gg-prose ul > li::before {
   content: "—";
   position: absolute; left: 0;
