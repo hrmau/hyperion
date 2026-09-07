@@ -368,6 +368,40 @@ newly-false line in the PR body so it gets rewritten rather than silently shippe
 Dropped pairs stay in `question-insights.json` and return on their own if a later
 refresh brings them back into range.
 
+## Search and machine readers
+
+`app/sitemap.ts`, `app/robots.ts` and `app/llms.txt/route.ts` are the three
+generated surfaces. All three read the shipped data rather than listing routes by
+hand, so a country losing its page cannot leave a 404 in the sitemap.
+
+`/llms.txt` follows llmstxt.org and its counts and coverage years are computed at
+build time. Its "what to be careful about when quoting this site" section is the
+part that matters - independence is not security, comparisons need a common year,
+emissions are lifecycle CO2e, `null` is not `0`. Those are the mistakes the code
+guards against internally and had no other way to warn anyone about.
+
+`lib/structuredData.ts` builds the JSON-LD, `components/JsonLd.tsx` renders it.
+Country pages carry `Dataset` plus a breadcrumb, `/countries` the breadcrumb, and
+`/` a `WebSite`. Two omissions are deliberate and commented: no `SearchAction`,
+because `CountryFinder` is a client-side dropdown and there is no URL a query can
+be appended to; and no `FAQPage` on `/methodology`, because Google restricted that
+result to government and health sites in 2023.
+
+**Every value in the JSON-LD comes from the same variables the page renders** -
+the hook, the chart's own year span, the shares already computed. Structured data
+that disagrees with its own page is worse than none.
+
+**`/home/*` and `/countries/r/*` carry a canonical and must never carry a
+`noindex`.** Middleware rewrites rather than redirects, so their metadata is
+served *at* `/` and `/countries`: a noindex on the variant de-indexes the page it
+renders. Nothing links to them and they are not in the sitemap, which is what
+keeps the canonical sufficient.
+
+Social cards default from the root layout, which sets only `siteName`, `locale`,
+`type` and the card format. It must not set `og:title` or `og:url`: a route that
+declares no `openGraph` inherits the parent block whole, and those two made every
+page share as the homepage. Left out, Next fills them per page.
+
 ## Design system
 
 `docs/design-system/` is the source of truth — guideline cards, `.prompt.md`

@@ -20,6 +20,8 @@ import { GorillaNote } from '@/components/ds/core/GorillaNote';
 import { fuelShares, fuelSeries } from '@/lib/fuels';
 import { mapPathFor } from '@/lib/data';
 import CountryProfileLink from '@/components/CountryProfileLink';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd, countryDatasetJsonLd } from '@/lib/structuredData';
 import type { ProfileSource } from '@/lib/analytics';
 import { leadStat } from '@/lib/leadStat';
 import GridMetrics from '@/components/GridMetrics';
@@ -270,8 +272,33 @@ export default async function CountryPage({ params }: { params: Promise<{ iso3: 
     indep ? independenceMetric(indep.score, indep.label) : null,
   ].filter((m) => m !== null);
 
+  // Every value here is already on the page: the name and hook from `facts`,
+  // the span from the same `years` the chart is drawn from, and the measures
+  // from the same `shares`. Structured data that disagrees with its own page is
+  // worse than none.
+  const structuredData = [
+    countryDatasetJsonLd(facts, {
+      firstYear: seriesYears[0],
+      lastYear: seriesYears[seriesYears.length - 1],
+      measures: [
+        'Electricity generation (TWh)',
+        'Electricity demand (TWh)',
+        'Generation share by source (%)',
+        'Clean electricity share (%)',
+        'Electricity emissions (Mt CO2e)',
+        'Population',
+      ],
+    }),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Countries', path: '/countries' },
+      { name: facts.name },
+    ]),
+  ];
+
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <JsonLd data={structuredData} />
       <TopNav meta={`${facts.name} · ${year}`} />
 
       <main style={{ flex: 1, paddingBottom: 'var(--space-10)' }}>

@@ -7,6 +7,8 @@ import SiteFooter from '@/components/ds/nav/SiteFooter';
 import FlagImg from '@/components/FlagImg';
 import CountrySwitcher from '@/components/CountrySwitcher';
 import CountryProfileLink from '@/components/CountryProfileLink';
+import JsonLd from '@/components/JsonLd';
+import { websiteJsonLd } from '@/lib/structuredData';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Card } from '@/components/ds/core/Card';
 import { Stat } from '@/components/ds/core/Stat';
@@ -114,6 +116,13 @@ export default async function Home({ params }: { params: Promise<{ iso3: string 
 
   return (
     <div className="gg-page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Describes `/`, not the variant, for the same reason the canonical does:
+          this markup is served at `/`, and every variant serves the same. */}
+      <JsonLd
+        data={websiteJsonLd(
+          'Electricity generation, energy independence and prosperity for 214 countries, from Ember and Our World in Data.'
+        )}
+      />
       {/* No active item: the homepage is not one of the primary nav destinations,
           and marking Explore made it look as though you were already on the map. */}
       <TopNav />

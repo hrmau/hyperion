@@ -5,6 +5,8 @@ import SiteFooter from '@/components/ds/nav/SiteFooter';
 import FlagImg from '@/components/FlagImg';
 import CountryIndex, { type IndexEntry } from '@/components/CountryIndex';
 import CountryProfileLink from '@/components/CountryProfileLink';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/structuredData';
 import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Card } from '@/components/ds/core/Card';
 import { Button } from '@/components/ds/core/Button';
@@ -48,6 +50,12 @@ export default async function CountriesHub({ region }: CountriesHubProps) {
 
   return (
     <div className="gg-page min-h-screen flex flex-col">
+      {/* The trail every country page's breadcrumb points back through. Always
+          `/countries`, never the region variant, which is what the canonical
+          says too. */}
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Countries' }])}
+      />
       <TopNav meta={`${entries.length} countries`} />
 
       <main
