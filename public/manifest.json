@@ -1,11 +1,11 @@
 {
   "name": "Grid Gorilla",
   "short_name": "Grid Gorilla",
-  "description": "Interactive visualization of global electricity production by country and geopolitical bloc",
+  "description": "Electricity generation, energy independence and prosperity for 214 countries.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAF8",
-  "theme_color": "#1A1A1A",
+  "background_color": "#0f1416",
+  "theme_color": "#0f1416",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",

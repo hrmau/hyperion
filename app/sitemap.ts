@@ -85,6 +85,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
+      // Was missing. It is a published page with its own metadata and its own
+      // canonical, and the sitemap is the only thing that would have told a
+      // crawler it exists - the footer links it, but nothing else does.
+      url: `${baseUrl}/updates`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.4,
+    },
+    {
       url: `${baseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: 'yearly',

@@ -47,7 +47,13 @@ export async function generateStaticParams() {
  * This metadata is what `/` serves, and `/` must not describe itself
  * differently depending on where the reader happens to be sitting. The canonical
  * points at `/` from every variant so the `/home/*` paths cannot be indexed
- * separately from the homepage they render.
+ * separately from the homepage they render. *
+ * Do NOT add `robots: { index: false }` here to harden the canonical. This
+ * metadata is served AT the canonical URL, because the middleware rewrites
+ * rather than redirects - a noindex on the variant is a noindex on the page it
+ * renders, which would de-index `/`. The canonical is a hint and not a
+ * directive, which is a real weakness, but nothing links to the variants and
+ * they are not in the sitemap, so nothing reaches them to be confused by.
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
