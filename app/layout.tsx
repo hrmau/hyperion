@@ -36,9 +36,31 @@ export const metadata: Metadata = {
     default: 'Grid Gorilla',
     template: '%s | Grid Gorilla',
   },
-  description: "Interactive visualization of global electricity production by country and geopolitical bloc",
+  description:
+    'Electricity generation, energy independence and prosperity for 214 countries. One page per grid: what it burns, how clean it is, and how much of it the country makes itself.',
   alternates: {
     canonical: '/',
+  },
+  /**
+   * Social cards. Only /compare and /country/[iso3] declared these, so every
+   * other page - the homepage included - shared as a bare URL with whatever
+   * the platform guessed.
+   *
+   * Only siteName, locale, type and the card format live here. Deliberately no
+   * og:title, og:description or og:url: a child route that declares no
+   * `openGraph` of its own inherits this block wholesale, so a title here made
+   * every page on the site share as "Grid Gorilla" pointing at the homepage -
+   * measured on /why before this was cut back. Left out, Next fills og:title
+   * from each page's own `title` and og:url from its canonical, which is what
+   * was wanted.
+   */
+  openGraph: {
+    type: 'website',
+    siteName: 'Grid Gorilla',
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary',
   },
   icons: {
     icon: [

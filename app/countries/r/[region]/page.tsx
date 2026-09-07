@@ -25,7 +25,13 @@ export function generateStaticParams() {
  * Same reasoning as `/home/*`: this metadata is what `/countries` serves, and
  * `/countries` must not describe itself differently depending on where the
  * reader is sitting. The canonical is what stops the variants being indexed
- * alongside the page they render, and they are not in the sitemap either.
+ * alongside the page they render, and they are not in the sitemap either. *
+ * Do NOT add `robots: { index: false }` here to harden the canonical. This
+ * metadata is served AT the canonical URL, because the middleware rewrites
+ * rather than redirects - a noindex on the variant is a noindex on the page it
+ * renders, which would de-index `/countries`. The canonical is a hint and not a
+ * directive, which is a real weakness, but nothing links to the variants and
+ * they are not in the sitemap, so nothing reaches them to be confused by.
  */
 export const metadata: Metadata = {
   title: 'Electricity by country, A to Z',

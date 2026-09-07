@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Why electricity matters',
-  description: 'Why we built Grid Gorilla - making global energy data accessible.',
+  title: 'Why energy matters',
+  description:
+    'Electricity per person decides what a country can build, what it costs when the price moves, and who has leverage over it. The argument, with every figure read from the data.',
   alternates: {
     canonical: '/why',
   },
