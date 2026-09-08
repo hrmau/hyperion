@@ -397,10 +397,16 @@ served *at* `/` and `/countries`: a noindex on the variant de-indexes the page i
 renders. Nothing links to them and they are not in the sitemap, which is what
 keeps the canonical sufficient.
 
-Social cards default from the root layout, which sets only `siteName`, `locale`,
-`type` and the card format. It must not set `og:title` or `og:url`: a route that
-declares no `openGraph` inherits the parent block whole, and those two made every
-page share as the homepage. Left out, Next fills them per page.
+Social cards default from the root layout, which sets `siteName`, `locale`,
+`type`, the card format and the image. It must not set `og:title` or `og:url`: a
+route that declares no `openGraph` inherits the parent block whole, and those two
+made every page share as the homepage. Left out, Next fills them per page.
+
+That same replace-rather-than-merge behaviour is why `lib/seo.ts` exists.
+`/compare` and `/country/[iso3]` declare an `openGraph` of their own for the
+dynamic title, so they do **not** inherit the image and have to spread
+`OG_IMAGE` in explicitly. Any future route that declares its own block has to do
+the same, or it ships a card with no picture.
 
 ## Design system
 
