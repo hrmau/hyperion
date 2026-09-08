@@ -18,6 +18,7 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-mono-family",
   display: "swap",
 });
+import { OG_IMAGE, TWITTER_CARD } from "@/lib/seo";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
 
@@ -58,9 +59,11 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'Grid Gorilla',
     locale: 'en_GB',
+    images: [OG_IMAGE],
   },
   twitter: {
-    card: 'summary',
+    card: TWITTER_CARD,
+    images: [OG_IMAGE.url],
   },
   icons: {
     icon: [

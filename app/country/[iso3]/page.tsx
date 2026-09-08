@@ -22,6 +22,7 @@ import { mapPathFor } from '@/lib/data';
 import CountryProfileLink from '@/components/CountryProfileLink';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, countryDatasetJsonLd } from '@/lib/structuredData';
+import { OG_IMAGE, TWITTER_CARD } from '@/lib/seo';
 import type { ProfileSource } from '@/lib/analytics';
 import { leadStat } from '@/lib/leadStat';
 import GridMetrics from '@/components/GridMetrics';
@@ -87,8 +88,20 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title: `${title} | Grid Gorilla`, description, url, type: 'article', siteName: 'Grid Gorilla' },
-    twitter: { card: 'summary', title: `${title} | Grid Gorilla`, description },
+    openGraph: {
+      title: `${title} | Grid Gorilla`,
+      description,
+      url,
+      type: 'article',
+      siteName: 'Grid Gorilla',
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: TWITTER_CARD,
+      title: `${title} | Grid Gorilla`,
+      description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 
