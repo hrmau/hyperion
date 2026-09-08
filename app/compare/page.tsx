@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { OG_IMAGE, TWITTER_CARD } from '@/lib/seo';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { cache } from 'react';
@@ -73,8 +74,14 @@ export async function generateMetadata({
       description,
       url: '/compare',
       siteName: 'Grid Gorilla',
+      images: [OG_IMAGE],
     },
-    twitter: { card: 'summary', title: `${title} | Grid Gorilla`, description },
+    twitter: {
+      card: TWITTER_CARD,
+      title: `${title} | Grid Gorilla`,
+      description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 
