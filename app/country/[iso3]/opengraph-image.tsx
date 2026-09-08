@@ -42,6 +42,31 @@ export async function generateStaticParams() {
 const FONT_DIR = path.join(process.cwd(), 'assets', 'fonts');
 const asset = (dir: string, file: string) => fs.readFile(path.join(dir, file));
 
+/**
+ * Read once per worker, not once per country.
+ *
+ * This route runs 200 times at build time, and the fonts and the plate are the
+ * same every time - 309KB of file reads and a base64 encode of the plate,
+ * repeated 200 times, for four bytes of variation. Held as a module-scope
+ * promise so each build worker pays for it once.
+ */
+const chrome = (async () => {
+  const [grotesk, groteskBold, mono, plate] = await Promise.all([
+    asset(FONT_DIR, 'SpaceGrotesk-Medium.ttf'),
+    asset(FONT_DIR, 'SpaceGrotesk-Bold.ttf'),
+    asset(FONT_DIR, 'IBMPlexMono-Medium.ttf'),
+    fs.readFile(path.join(process.cwd(), 'public', 'og_country.png')),
+  ]);
+  return {
+    background: `data:image/png;base64,${plate.toString('base64')}`,
+    fonts: [
+      { name: 'Grotesk', data: grotesk, weight: 500 as const, style: 'normal' as const },
+      { name: 'Grotesk', data: groteskBold, weight: 700 as const, style: 'normal' as const },
+      { name: 'Mono', data: mono, weight: 500 as const, style: 'normal' as const },
+    ],
+  };
+})();
+
 /** Literal hex, not the `var(--fuel-*)` in lib/fuels: Satori resolves no custom properties. */
 const FUEL_HEX: Record<Fuel, string> = {
   wind: '#00c758',
@@ -61,19 +86,7 @@ export default async function Image({ params }: { params: Promise<{ iso3: string
   const { iso3 } = await params;
   const profile = await loadProfile(iso3);
 
-  const [grotesk, groteskBold, mono, plate] = await Promise.all([
-    asset(FONT_DIR, 'SpaceGrotesk-Medium.ttf'),
-    asset(FONT_DIR, 'SpaceGrotesk-Bold.ttf'),
-    asset(FONT_DIR, 'IBMPlexMono-Medium.ttf'),
-    fs.readFile(path.join(process.cwd(), 'public', 'og_country.png')),
-  ]);
-
-  const background = `data:image/png;base64,${plate.toString('base64')}`;
-  const fonts = [
-    { name: 'Grotesk', data: grotesk, weight: 500 as const, style: 'normal' as const },
-    { name: 'Grotesk', data: groteskBold, weight: 700 as const, style: 'normal' as const },
-    { name: 'Mono', data: mono, weight: 500 as const, style: 'normal' as const },
-  ];
+  const { background, fonts } = await chrome;
 
   // A country with no profile cannot happen through generateStaticParams, but
   // the route is reachable, and an OG image that throws is a broken share card.
