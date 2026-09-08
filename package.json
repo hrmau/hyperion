@@ -13,7 +13,8 @@
     "fetch-data": "node scripts/fetch-owid.js",
     "transform-data": "python3 scripts/transform-owid.py",
     "check-data": "node scripts/check-data.js",
-    "refresh-data": "npm run fetch-data && npm run transform-data && npm run generate-questions && npm run generate-facts && npm run check-data"
+    "refresh-data": "npm run fetch-data && npm run transform-data && npm run generate-questions && npm run generate-facts && npm run check-data",
+    "prune-deployments": "node scripts/prune-deployments.js"
   },
   "dependencies": {
     "d3": "^7.9.0",
