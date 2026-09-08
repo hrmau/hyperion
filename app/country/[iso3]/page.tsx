@@ -22,7 +22,7 @@ import { mapPathFor } from '@/lib/data';
 import CountryProfileLink from '@/components/CountryProfileLink';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbJsonLd, countryDatasetJsonLd } from '@/lib/structuredData';
-import { OG_IMAGE, TWITTER_CARD } from '@/lib/seo';
+import { TWITTER_CARD } from '@/lib/seo';
 import type { ProfileSource } from '@/lib/analytics';
 import { leadStat } from '@/lib/leadStat';
 import GridMetrics from '@/components/GridMetrics';
@@ -88,19 +88,21 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: url },
+    // No `images` here on purpose. The file-based `opengraph-image.tsx` beside
+    // this one generates a card per country, and Next only falls back to it
+    // when the metadata does not name an image itself - an explicit `images`
+    // wins, which is how the generated 200 got built and then never referenced.
     openGraph: {
       title: `${title} | Grid Gorilla`,
       description,
       url,
       type: 'article',
       siteName: 'Grid Gorilla',
-      images: [OG_IMAGE],
     },
     twitter: {
       card: TWITTER_CARD,
       title: `${title} | Grid Gorilla`,
       description,
-      images: [OG_IMAGE.url],
     },
   };
 }
