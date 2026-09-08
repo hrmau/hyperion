@@ -403,10 +403,23 @@ route that declares no `openGraph` inherits the parent block whole, and those tw
 made every page share as the homepage. Left out, Next fills them per page.
 
 That same replace-rather-than-merge behaviour is why `lib/seo.ts` exists.
-`/compare` and `/country/[iso3]` declare an `openGraph` of their own for the
-dynamic title, so they do **not** inherit the image and have to spread
-`OG_IMAGE` in explicitly. Any future route that declares its own block has to do
-the same, or it ships a card with no picture.
+`/compare` declares an `openGraph` of its own for the dynamic title, so it does
+**not** inherit the image and spreads `OG_IMAGE` in explicitly. Any future route
+that declares its own block has to do the same, or it ships a card with no
+picture.
+
+`/country/[iso3]` is the exception, and deliberately names no image at all:
+`opengraph-image.tsx` beside it generates one card per country, and Next only
+falls back to that file when the metadata does not name an image itself. An
+explicit `images` there silently wins - which is how 200 generated cards were
+built once and never referenced.
+
+That route composites text over `public/og_country.png`, the artwork with its
+copy removed. `public/og.png` keeps its own copy and stays the default
+everywhere else; the two must not be swapped. Satori reads TTF and OTF and
+**cannot read WOFF2**, which is all `next/font` produces, so both families are
+committed under `assets/fonts` - outside `public`, because nothing should serve
+them to a browser. Both are SIL OFL 1.1.
 
 ## Design system
 
