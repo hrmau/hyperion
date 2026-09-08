@@ -436,6 +436,33 @@ everywhere else; the two must not be swapped. Satori reads TTF and OTF and
 committed under `assets/fonts` - outside `public`, because nothing should serve
 them to a browser. Both are SIL OFL 1.1.
 
+## Deployment storage
+
+Vercel keeps the build output of every deployment, and this project stores
+roughly **160MB per build**: 401 prerendered pages (200 `/country/*` and 201
+`/home/*`), their RSC payloads, and 200 generated share cards. Both prerendered
+sets landed on 2026-08-31, which is where the storage curve bends.
+
+Measured, so a change can be argued about rather than guessed:
+
+| | |
+|---|---|
+| `.rsc` payloads | 68.9 MB |
+| `/country/[iso3]` | 81 MB, of which 16.8 MB is share cards |
+| `/home/[iso3]` | 51 MB for 201 variants |
+| HTML | 41.6 MB |
+| `public/` | 8.5 MB, mostly the 6.2MB `countries-yearly.json` |
+
+`npm run prune-deployments` deletes preview builds older than `--days` (14 by
+default). Dry run unless `--yes` is passed, and it never touches the production
+deployment or anything with an alias - those are skipped by inspection, not by
+trusting the API to refuse. Needs a `VERCEL_TOKEN`.
+
+Deleting is the only thing that reduces storage already used. If the per-build
+figure needs to come down instead, the biggest single item is `/home/*` at a
+third of every build - and `/countries` already shows the shape of that fix,
+shipping 6 region variants rather than 200 country ones.
+
 ## Design system
 
 `docs/design-system/` is the source of truth — guideline cards, `.prompt.md`
