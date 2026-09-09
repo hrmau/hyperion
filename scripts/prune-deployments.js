@@ -45,6 +45,8 @@ const TEAM = arg('team', process.env.VERCEL_TEAM_ID || null);
 const DAYS = Number(arg('days', 14));
 const APPLY = process.argv.includes('--yes');
 const ALL = process.argv.includes('--all');
+const WHY = process.argv.includes('--why');
+const KEEP_PROD = Number(arg('keep-production', 3));
 
 if (!TOKEN) {
   console.error('VERCEL_TOKEN is not set. Create one at vercel.com/account/tokens.');
@@ -56,6 +58,10 @@ if (!Number.isFinite(DAYS) || DAYS < 1) {
 }
 if (PROJECT && ALL) {
   console.error('Pass --project or --all, not both.');
+  process.exit(1);
+}
+if (!Number.isFinite(KEEP_PROD) || KEEP_PROD < 1) {
+  console.error(`--keep-production must be at least 1, got "${arg('keep-production', 3)}".`);
   process.exit(1);
 }
 
@@ -92,7 +98,39 @@ async function listProjects() {
  * applied by the API rather than by fetching everything and discarding most of
  * it. Paginated: `pagination.next` is the timestamp to continue from.
  */
-async function staleFor(projectId, cutoff) {
+/**
+ * An alias only protects a deployment if a *custom* domain points at it.
+ *
+ * Vercel assigns every deployment a `<project>-<hash>-<scope>.vercel.app` URL
+ * and a `<project>-git-<branch>-<scope>.vercel.app` one, so `aliasAssigned` is
+ * true for effectively everything. Trusting it protected 370 deployments out of
+ * 370 across 13 projects and reported nothing to delete, which is how the
+ * mistake surfaced. Only a hostname the account actually owns means someone is
+ * pointing at this build on purpose.
+ */
+const CUSTOM_DOMAIN = (host) => typeof host === 'string' && !host.endsWith('.vercel.app');
+const customDomains = (d) => (Array.isArray(d.alias) ? d.alias.filter(CUSTOM_DOMAIN) : []);
+
+/**
+ * The production deployments to keep whatever their age: the live one, plus a
+ * few behind it, because Vercel's instant rollback needs the previous builds to
+ * still exist. Deleting them does not break the site but does remove the
+ * one-click way back.
+ */
+async function protectedProduction(projectId) {
+  const page = await api(
+    `/v6/deployments?${qs(`projectId=${encodeURIComponent(projectId)}`, 'limit=40', team)}`
+  );
+  return new Set(
+    (page.deployments ?? [])
+      .filter((d) => d.target === 'production')
+      .sort((a, b) => b.created - a.created)
+      .slice(0, KEEP_PROD)
+      .map((d) => d.uid)
+  );
+}
+
+async function staleFor(projectId, cutoff, keepIds) {
   const found = [];
   let until = cutoff;
   for (;;) {
@@ -108,11 +146,13 @@ async function staleFor(projectId, cutoff) {
   const keep = [];
   const drop = [];
   for (const d of found) {
-    // `target` is 'production' for a production build. An alias means something
-    // points at this deployment by name - a domain, or a branch URL someone has
-    // bookmarked - so it is not a spare copy even when it is old.
-    const aliased = d.aliasAssigned || (Array.isArray(d.alias) && d.alias.length > 0);
-    if (d.target === 'production' || aliased) keep.push(d);
+    const domains = customDomains(d);
+    const reason = keepIds.has(d.uid)
+      ? 'recent production'
+      : domains.length > 0
+        ? `custom domain: ${domains.join(', ')}`
+        : null;
+    if (reason) keep.push({ ...d, reason });
     else drop.push(d);
   }
   return { keep, drop };
@@ -142,7 +182,8 @@ async function main() {
   const cutoff = Date.now() - DAYS * DAY;
   const plan = [];
   for (const project of targets) {
-    const { keep, drop } = await staleFor(project.id, cutoff);
+    const keepIds = await protectedProduction(project.id);
+    const { keep, drop } = await staleFor(project.id, cutoff, keepIds);
     plan.push({ project, keep, drop });
   }
 
@@ -154,7 +195,16 @@ async function main() {
     if (drop.length === 0 && keep.length === 0) continue;
     console.log(`  ${project.name.padEnd(28)} deletable ${String(drop.length).padStart(4)}   protected ${keep.length}`);
   }
-  console.log(`\n  deletable total: ${totalDrop}   protected (production or aliased): ${totalKeep}`);
+  console.log(`\n  deletable total: ${totalDrop}   protected: ${totalKeep}`);
+
+  if (WHY) {
+    console.log('\nWhy each protected deployment was kept:');
+    for (const { project, keep } of plan) {
+      for (const d of keep) {
+        console.log(`  ${project.name.padEnd(20)} ${d.url.padEnd(46)} ${d.reason}`);
+      }
+    }
+  }
 
   if (totalDrop === 0) {
     console.log('\nNothing to do.');

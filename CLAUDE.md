@@ -464,6 +464,14 @@ every one of them. The Vercel storage figure is account-wide, so `--all` is
 usually what is wanted. An unrecognised `--project` fails rather than returning
 an empty list, which would read exactly like "nothing to prune".
 
+**`aliasAssigned` does not mean what it sounds like.** Vercel gives every
+deployment a `<project>-<hash>.vercel.app` and a `<project>-git-<branch>.vercel.app`
+URL, so that field is true for effectively all of them - trusting it protected
+370 of 370 deployments across 13 projects and reported nothing to delete. Only a
+hostname that is not `*.vercel.app` counts as somebody pointing at a build on
+purpose. `--why` prints the reason each protected deployment was kept, which is
+how that was caught and how to check it again.
+
 Deleting is the only thing that reduces storage already used. If the per-build
 figure needs to come down instead, the biggest single item is `/home/*` at a
 third of every build - and `/countries` already shows the shape of that fix,
