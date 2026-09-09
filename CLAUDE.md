@@ -487,6 +487,20 @@ not. Every project now reports its live deployment and age on its own row, and a
 project whose live build cannot be resolved is **skipped rather than pruned**.
 The safe reading is never assumed.
 
+**"Keep the newest build" is not the same guarantee** and is not what protects
+the live one. After a rollback the newest deployment is precisely the build
+nobody is serving, and the newest may be a preview rather than a production
+build at all. It is kept anyway, labelled `newest deployment`, as a second line
+of defence costing one deployment per project - but the lookup is what does the
+work.
+
+The live id is also **confirmed to resolve**, with a direct fetch when it is not
+among the forty deployments already pulled. A project dormant for a year has its
+live build well outside that window, and "not in the list" and "does not exist"
+otherwise look identical - a stale `targets.production` would have protected an
+id matching nothing while the build actually serving the site sat in the
+deletable pile.
+
 Deleting is the only thing that reduces storage already used. If the per-build
 figure needs to come down instead, the biggest single item is `/home/*` at a
 third of every build - and `/countries` already shows the shape of that fix,
