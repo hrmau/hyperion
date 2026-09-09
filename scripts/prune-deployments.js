@@ -325,7 +325,38 @@ async function main() {
 
   let ok = 0;
   const failed = [];
-  for (const d of oldest) {
+
+  /*
+   * Deletes are sequential and each is a round trip, so a few hundred of them
+   * is a couple of minutes. The first version printed nothing until the last
+   * one returned, which for a destructive run is the wrong way round: an
+   * interrupted or hung run looked identical to one still working, and left no
+   * record of how far it had got. Progress is reported as it goes, and Ctrl-C
+   * reports what was already done rather than losing the count.
+   *
+   * Deliberately not parallel. Vercel rate-limits, and a 429 in the middle of
+   * this would surface as a deletion failure rather than as the throttle it is.
+   */
+  const summarise = () => {
+    console.log(`\nDeleted ${ok} of ${oldest.length}.`);
+    if (failed.length) {
+      console.log(`Failed (${failed.length}):`);
+      for (const f of failed) console.log(`  ${f}`);
+    }
+  };
+
+  let interrupted = false;
+  process.on('SIGINT', () => {
+    interrupted = true;
+    console.log('\n\nInterrupted.');
+    summarise();
+    console.log('\nRe-run the same command to continue - what is gone is already gone.');
+    process.exit(130);
+  });
+
+  console.log(`\nDeleting ${oldest.length}. This takes a while; nothing here is undoable.\n`);
+  for (const [i, d] of oldest.entries()) {
+    if (interrupted) break;
     const res = await fetch(`${API}/v13/deployments/${d.uid}${team ? `?${team}` : ''}`, {
       method: 'DELETE',
       headers,
@@ -335,14 +366,14 @@ async function main() {
     } else {
       failed.push(`${d.project} ${d.uid} -> ${res.status} ${(await res.text()).slice(0, 120)}`);
     }
+    const n = i + 1;
+    if (n % 25 === 0 || n === oldest.length) {
+      console.log(`  ${String(n).padStart(4)}/${oldest.length}   ok ${ok}   failed ${failed.length}`);
+    }
   }
 
-  console.log(`\nDeleted ${ok} of ${oldest.length}.`);
-  if (failed.length) {
-    console.log('Failed:');
-    for (const f of failed) console.log(`  ${f}`);
-    process.exitCode = 1;
-  }
+  summarise();
+  if (failed.length) process.exitCode = 1;
 }
 
 main().catch((err) => {
