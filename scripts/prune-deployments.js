@@ -334,14 +334,29 @@ async function main() {
    * record of how far it had got. Progress is reported as it goes, and Ctrl-C
    * reports what was already done rather than losing the count.
    *
-   * Deliberately not parallel. Vercel rate-limits, and a 429 in the middle of
-   * this would surface as a deletion failure rather than as the throttle it is.
+   * Deliberately not parallel, and that is not enough on its own: Vercel caps
+   * deletions at roughly 200 in ten minutes and then answers 429 `now-rm`. A
+   * run of 329 hit that ceiling, counted every remaining call as a failure and
+   * printed a hundred identical rate-limit lines. A 429 is not a deployment
+   * that would not delete, it is the account being told to wait, so the run
+   * stops there rather than spending the rest of the list on refusals.
    */
+  let throttled = false;
+
   const summarise = () => {
     console.log(`\nDeleted ${ok} of ${oldest.length}.`);
     if (failed.length) {
       console.log(`Failed (${failed.length}):`);
       for (const f of failed) console.log(`  ${f}`);
+    }
+    if (throttled) {
+      const left = oldest.length - ok - failed.length;
+      console.log(
+        `\nStopped early: Vercel rate-limited the account (about 200 deletions per`
+      );
+      console.log(`10 minutes). ${left} still to go.`);
+      console.log('Re-run the same command in ten minutes - the ones already deleted');
+      console.log('drop out of the plan, so it picks up where this left off.');
     }
   };
 
@@ -363,6 +378,9 @@ async function main() {
     });
     if (res.ok) {
       ok += 1;
+    } else if (res.status === 429) {
+      throttled = true;
+      break;
     } else {
       failed.push(`${d.project} ${d.uid} -> ${res.status} ${(await res.text()).slice(0, 120)}`);
     }
@@ -373,7 +391,7 @@ async function main() {
   }
 
   summarise();
-  if (failed.length) process.exitCode = 1;
+  if (failed.length || throttled) process.exitCode = 1;
 }
 
 main().catch((err) => {
