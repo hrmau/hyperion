@@ -173,6 +173,42 @@ including a headline that printed `rank - 1`.
 Family scores are normalised against each family's own distribution across all
 countries, against the 95th percentile rather than the max, before they compete.
 
+Four of the eleven families are about **consumption and trade rather than the
+generation mix**, and were added because 66 of 200 pages had an empty "Also true
+of" section: a small grid running on one fuel has no crossover, no absence and no
+trajectory. `net_imports_pct` and `emissions` were on every country-year and read
+by nothing in this file.
+
+| family | source | what it needs |
+|---|---|---|
+| `trade` | `net_imports_pct` | 8% of demand either way |
+| `intensity` | `emissions` vs the World aggregate | fires for every country |
+| `intensityTrend` | the same over 10 years | +10% dirtier, or -25% cleaner |
+| `peerIncome` | `socioeconomic.json` income band | 25% off the band median |
+
+Three things about them worth keeping:
+
+- **`intensity` is barred from the hero slot** via `SUPPORTING_ONLY`, unless a
+  country has nothing else. It fires for all 200 by design, and that same
+  universality makes it a bad lead - competing freely it took 27 heroes, which is
+  27 pages opening on one sentence with the numbers swapped. Switzerland led on
+  "cleaner than the world average" while first in the world for hydro sat below
+  it.
+- **Its score base clears `MIN_SCORE` deliberately.** Mexico at 3% above the
+  world figure and Bolivia at 5% scored under the floor and were dropped,
+  leaving two of the emptiest pages empty - the family failing at exactly the
+  countries it exists for. "About the same as the world" is the least
+  interesting version of the fact, not an unpublishable one.
+- **`peerIncome` names its comparison set.** The World Bank classifies roughly
+  fifty lower-middle-income countries and `socioeconomic.json` holds eighteen, so
+  the copy says "the 18 lower-middle-income countries here" rather than "the
+  typical" one. It shares the `percap` metric with `rank` on purpose, because the
+  selection step bars two facts on one metric and "third in the world per person"
+  beside "more than its income peers" is one fact told twice.
+
+Empty sections went from 66 to 11, and those eleven have no runners-up at all -
+nothing is being suppressed, they simply have two publishable facts each.
+
 Suppression rules mostly exist because a prototype produced the exact fact they
 kill, and each is commented with it. The two worth knowing: a bottom-end rank is
 only publishable for clean share and per-capita (being last for wind when you run

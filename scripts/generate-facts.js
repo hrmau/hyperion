@@ -194,6 +194,14 @@ for (const s of SOURCES) RANK_ENDS[s] = 'top';
 // ---------------------------------------------------------------------------
 
 const countries = read('countries-yearly.json');
+/**
+ * Income bands and the world aggregate. Both are comparison bases rather than
+ * subjects: a fact here is always about electricity, and these only say what to
+ * measure it against. `income_level` covers 88 countries, so the family that
+ * uses it simply does not fire for the rest.
+ */
+const socio = read('socioeconomic.json').countries;
+const worldAgg = read('owid-aggregates.json').aggregates.World;
 const BUILD_YEAR = new Date().getUTCFullYear();
 
 function latestOf(c) {
@@ -204,6 +212,29 @@ function latestOf(c) {
   }
   return null;
 }
+
+/** Grams of CO2e a kilowatt-hour. Lifecycle, per the note in lib/gridMetrics. */
+const intensityOf = (d) =>
+  d && d.emissions && d.emissions.total_mtco2 != null && d.total_generation_twh > 0
+    ? (d.emissions.total_mtco2 * 1e12) / (d.total_generation_twh * 1e9)
+    : null;
+
+/**
+ * The world figure every intensity fact is measured against.
+ *
+ * A rank alone reads as trivia in the middle of the table - "177th lowest of
+ * 200" tells a reader nothing they can use. A world average is a number they
+ * can place themselves against, and it is the only anchor that works for all
+ * 200 rather than just the two ends.
+ */
+const WORLD_INTENSITY = (() => {
+  const years = Object.keys(worldAgg.years).map(Number).sort((a, b) => b - a);
+  for (const y of years) {
+    const g = intensityOf(worldAgg.years[String(y)]);
+    if (g) return { g, year: y };
+  }
+  return null;
+})();
 
 /** One flat row per country at its latest usable year. */
 const rows = {};
@@ -225,6 +256,13 @@ for (const [iso3, c] of Object.entries(countries)) {
   };
   for (const s of SOURCES) r[s] = (g[s] && g[s].pct) || 0;
   r.percap = r.population ? (r.total * 1e9) / r.population : null;
+  // Demand, not generation: a heavy exporter generates far more than it uses,
+  // and "uses more than its income peers" has to mean what it says.
+  r.percapDemand =
+    r.population && l.data.demand_twh > 0 ? (l.data.demand_twh * 1e9) / r.population : null;
+  r.intensity = intensityOf(l.data);
+  r.trade = l.data.net_imports_pct;
+  r.band = (socio[iso3] && socio[iso3].income_level) || null;
   rows[iso3] = r;
 }
 
@@ -579,6 +617,180 @@ function checkValues(f) {
   return bad;
 }
 
+// --- trade -----------------------------------------------------------------
+/**
+ * Where a grid's power comes from when it does not come from its own stations.
+ *
+ * `net_imports_pct` was on every country-year and read by nothing in here, which
+ * is a large part of why 66 pages had an empty "Also true of": a small grid that
+ * runs on one fuel has no crossover, no absence and no trajectory, but it very
+ * often has a striking trade balance. Paraguay's whole story is that it exports.
+ *
+ * The floor is 8% of demand. Below that the flow is real but not a fact about
+ * the country - every interconnected grid trades a little in both directions.
+ */
+const MIN_TRADE_PCT = 8;
+
+families.trade = (r) => {
+  if (r.trade == null || Math.abs(r.trade) < MIN_TRADE_PCT) return [];
+  const pct = Math.abs(r.trade);
+  const importing = r.trade > 0;
+  // Saturates around half of demand: past that it is simply "most of it".
+  const score = Math.min(1, pct / 50);
+  return [
+    fact({
+      iso3: r.iso3,
+      family: 'trade',
+      score,
+      metric: 'trade',
+      year: r.year,
+      comparisonSet: 'world',
+      headline: importing
+        ? `${subj(r)} brings in ${pctStr(pct)} of the electricity it uses.`
+        : `${subj(r)} sends abroad the equivalent of ${pctStr(pct)} of what it uses.`,
+      detail: importing
+        ? `Its own power stations cover the rest.`
+        : `A net exporter, on the year's balance.`,
+      values: { net_imports_pct: round(pct) },
+    }),
+  ];
+};
+
+// --- intensity -------------------------------------------------------------
+/**
+ * How much carbon a kilowatt-hour carries, against the world.
+ *
+ * The only family here that fires for every country, which is deliberate: it is
+ * what keeps a page from having nothing to say. Emissions were the other field
+ * on every country-year that nothing in this file read.
+ *
+ * Lifecycle CO2e, not stack CO2 - the copy says CO2e for the reason
+ * lib/gridMetrics and /methodology both spell out, that a gas-only grid can
+ * carry a higher figure than a coal one.
+ *
+ * Within 12% of the world figure the honest sentence is "about the same", and
+ * saying so is better than dressing a middling number as a finding.
+ */
+families.intensity = (r) => {
+  if (r.intensity == null || !WORLD_INTENSITY) return [];
+  const w = WORLD_INTENSITY.g;
+  const pct = (r.intensity / w - 1) * 100;
+  const level = Math.abs(pct);
+  /*
+   * The base has to clear MIN_SCORE after normalisation, or the family fails at
+   * exactly the countries it exists for: Mexico at 3% above the world figure and
+   * Bolivia at 5% both scored under the floor and were dropped, leaving two of
+   * the emptiest pages empty. "About the same as the world" is the least
+   * interesting version of this fact, not an unpublishable one.
+   */
+  const score = Math.min(1, 0.5 + level / 150);
+
+  let headline;
+  if (level < 12) headline = `${possessive(r.name)} electricity is about as carbon-heavy as the world's.`;
+  else if (pct < 0) headline = `${possessive(r.name)} electricity is cleaner than the world average.`;
+  else headline = `${possessive(r.name)} electricity is dirtier than the world average.`;
+
+  const detail =
+    level < 12
+      ? `${round(r.intensity)} grams of CO2e a kilowatt-hour, against a world figure of ${round(w)}.`
+      : `${round(r.intensity)} grams of CO2e a kilowatt-hour against a world figure of ${round(w)} — ${pctStr(level)} ${pct < 0 ? 'below' : 'above'}.`;
+
+  return [
+    fact({ iso3: r.iso3, family: 'intensity', score, metric: 'intensity',
+      year: r.year, comparisonSet: 'world', headline, detail,
+      values: { g_per_kwh: round(r.intensity), world_g_per_kwh: round(w), diff_pct: round(level) } }),
+  ];
+};
+
+// --- intensity trend -------------------------------------------------------
+/**
+ * The same measure over a decade, which is a different claim from where a
+ * country sits today: a grid can be dirty and improving, or clean and slipping.
+ *
+ * Deliberately asymmetric. Getting dirtier is rarer and more surprising, so it
+ * publishes at 10%; cleaning up is the general direction of travel and has to
+ * clear 25% to be worth a card. Grids starting under 40g are excluded - a hydro
+ * country going from 10g to 20g doubles its intensity and means nothing.
+ */
+families.intensityTrend = (r) => {
+  const c = countries[r.iso3];
+  const y0 = String(r.year - 10);
+  const a = c.years[y0];
+  const b = c.years[String(r.year)];
+  if (!a || !b) return [];
+  const from = intensityOf(a);
+  const to = intensityOf(b);
+  if (from == null || to == null || from < 40) return [];
+
+  const pct = (to / from - 1) * 100;
+  const dirtier = pct >= 10;
+  const cleaner = pct <= -25;
+  if (!dirtier && !cleaner) return [];
+
+  const score = Math.min(1, Math.abs(pct) / 60);
+  return [
+    fact({ iso3: r.iso3, family: 'intensityTrend', score, metric: 'intensity_trend',
+      year: r.year, comparisonSet: '10y',
+      headline: dirtier
+        ? `${possessive(r.name)} grid has been getting more carbon-heavy, not less.`
+        : `${subj(r)} has taken the carbon out of its electricity fast.`,
+      detail: `${round(from)} grams of CO2e a kilowatt-hour in ${r.year - 10}, ${round(to)} in ${r.year}.`,
+      values: { from_g: round(from), to_g: round(to), from_year: r.year - 10, to_year: r.year } }),
+  ];
+};
+
+// --- peer by income --------------------------------------------------------
+/**
+ * Electricity per person against countries at the same income level.
+ *
+ * The subject is still electricity; income only supplies a fairer comparison
+ * group than region does. Vietnam next to Bangladesh says more than Vietnam
+ * next to Japan.
+ *
+ * The set is named rather than implied. The World Bank classifies roughly fifty
+ * lower-middle-income countries and this file holds eighteen, so "the typical
+ * lower-middle-income country" would be a claim about a population we do not
+ * have. The copy says how many are actually being compared.
+ *
+ * Shares the `percap` metric with the rank family on purpose: the selection step
+ * bars two facts on one metric, and "third in the world per person" beside "more
+ * than its income peers" is one fact told twice.
+ */
+const BAND_LABEL = {
+  high: 'high-income',
+  'upper-middle': 'upper-middle-income',
+  'lower-middle': 'lower-middle-income',
+  low: 'low-income',
+};
+
+const BAND_MEDIAN = (() => {
+  const by = {};
+  for (const r of ALL) if (r.band && r.percapDemand) (by[r.band] = by[r.band] || []).push(r.percapDemand);
+  const out = {};
+  for (const [band, list] of Object.entries(by)) {
+    const sorted = list.sort((a, b) => a - b);
+    out[band] = { median: sorted[Math.floor(sorted.length / 2)], n: sorted.length };
+  }
+  return out;
+})();
+
+families.peerIncome = (r) => {
+  if (!r.band || !r.percapDemand) return [];
+  const band = BAND_MEDIAN[r.band];
+  if (!band || band.n < MIN_SET) return [];
+  const pct = (r.percapDemand / band.median - 1) * 100;
+  if (Math.abs(pct) < 25) return [];
+
+  const score = Math.min(1, Math.abs(pct) / 150);
+  return [
+    fact({ iso3: r.iso3, family: 'peerIncome', score, metric: 'percap',
+      year: r.year, comparisonSet: r.band,
+      headline: `${subj(r)} uses ${pct > 0 ? 'far more' : 'far less'} electricity per person than countries at its income level.`,
+      detail: `${round(r.percapDemand).toLocaleString('en-GB')} kWh a year, against a median of ${round(band.median).toLocaleString('en-GB')} across the ${band.n} ${BAND_LABEL[r.band]} countries here.`,
+      values: { kwh: round(r.percapDemand), median_kwh: round(band.median), peers: band.n } }),
+  ];
+};
+
 // ---------------------------------------------------------------------------
 // Selection (spec section 4)
 // ---------------------------------------------------------------------------
@@ -593,6 +805,21 @@ function checkValues(f) {
  * engine exists to prevent. It still wins plenty of heroes on raw score.
  */
 const STORY_FAMILIES = new Set(['contradiction', 'crossover']);
+
+/**
+ * Families barred from the hero slot unless a country has nothing else.
+ *
+ * `intensity` fires for all 200 by design - that is what stops a page having
+ * nothing to say - and the same universality makes it a bad lead. Left to
+ * compete it took 27 heroes, which is 27 pages opening on one sentence with the
+ * numbers swapped, the failure this engine exists to prevent. Switzerland led on
+ * "cleaner than the world average" while first in the world for hydro sat below
+ * it.
+ *
+ * Not deleted from the hero pool outright: a country whose only publishable
+ * fact is its carbon intensity should lead with that rather than with nothing.
+ */
+const SUPPORTING_ONLY = new Set(['intensity']);
 
 /**
  * Normalise each family's scores against its own distribution across ALL
@@ -617,8 +844,12 @@ function selectFrom(r, raw) {
   if (!kept.length) return { facts: null };
 
   // Hero: the leader, unless a story-shaped fact is within 0.1 of it.
-  let hero = kept[0];
-  const challenger = kept.find((f) => STORY_FAMILIES.has(f.family) && f.score >= hero.score - 0.1);
+  // Supporting-only families step aside while anything else is available.
+  const heroPool = kept.filter((f) => !SUPPORTING_ONLY.has(f.family));
+  let hero = (heroPool.length ? heroPool : kept)[0];
+  const challenger = (heroPool.length ? heroPool : kept).find(
+    (f) => STORY_FAMILIES.has(f.family) && f.score >= hero.score - 0.1
+  );
   if (challenger) hero = challenger;
 
   // At most two per family, and never two facts about the same measure.
