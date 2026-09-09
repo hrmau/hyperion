@@ -458,6 +458,12 @@ default). Dry run unless `--yes` is passed, and it never touches the production
 deployment or anything with an alias - those are skipped by inspection, not by
 trusting the API to refuse. Needs a `VERCEL_TOKEN`.
 
+**Scope is explicit and has no default.** With no arguments it prints the
+account's projects and stops; `--project <name>` takes one and `--all` takes
+every one of them. The Vercel storage figure is account-wide, so `--all` is
+usually what is wanted. An unrecognised `--project` fails rather than returning
+an empty list, which would read exactly like "nothing to prune".
+
 Deleting is the only thing that reduces storage already used. If the per-build
 figure needs to come down instead, the biggest single item is `/home/*` at a
 third of every build - and `/countries` already shows the shape of that fix,
