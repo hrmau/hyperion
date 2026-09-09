@@ -325,24 +325,73 @@ async function main() {
 
   let ok = 0;
   const failed = [];
-  for (const d of oldest) {
+
+  /*
+   * Deletes are sequential and each is a round trip, so a few hundred of them
+   * is a couple of minutes. The first version printed nothing until the last
+   * one returned, which for a destructive run is the wrong way round: an
+   * interrupted or hung run looked identical to one still working, and left no
+   * record of how far it had got. Progress is reported as it goes, and Ctrl-C
+   * reports what was already done rather than losing the count.
+   *
+   * Deliberately not parallel, and that is not enough on its own: Vercel caps
+   * deletions at roughly 200 in ten minutes and then answers 429 `now-rm`. A
+   * run of 329 hit that ceiling, counted every remaining call as a failure and
+   * printed a hundred identical rate-limit lines. A 429 is not a deployment
+   * that would not delete, it is the account being told to wait, so the run
+   * stops there rather than spending the rest of the list on refusals.
+   */
+  let throttled = false;
+
+  const summarise = () => {
+    console.log(`\nDeleted ${ok} of ${oldest.length}.`);
+    if (failed.length) {
+      console.log(`Failed (${failed.length}):`);
+      for (const f of failed) console.log(`  ${f}`);
+    }
+    if (throttled) {
+      const left = oldest.length - ok - failed.length;
+      console.log(
+        `\nStopped early: Vercel rate-limited the account (about 200 deletions per`
+      );
+      console.log(`10 minutes). ${left} still to go.`);
+      console.log('Re-run the same command in ten minutes - the ones already deleted');
+      console.log('drop out of the plan, so it picks up where this left off.');
+    }
+  };
+
+  let interrupted = false;
+  process.on('SIGINT', () => {
+    interrupted = true;
+    console.log('\n\nInterrupted.');
+    summarise();
+    console.log('\nRe-run the same command to continue - what is gone is already gone.');
+    process.exit(130);
+  });
+
+  console.log(`\nDeleting ${oldest.length}. This takes a while; nothing here is undoable.\n`);
+  for (const [i, d] of oldest.entries()) {
+    if (interrupted) break;
     const res = await fetch(`${API}/v13/deployments/${d.uid}${team ? `?${team}` : ''}`, {
       method: 'DELETE',
       headers,
     });
     if (res.ok) {
       ok += 1;
+    } else if (res.status === 429) {
+      throttled = true;
+      break;
     } else {
       failed.push(`${d.project} ${d.uid} -> ${res.status} ${(await res.text()).slice(0, 120)}`);
     }
+    const n = i + 1;
+    if (n % 25 === 0 || n === oldest.length) {
+      console.log(`  ${String(n).padStart(4)}/${oldest.length}   ok ${ok}   failed ${failed.length}`);
+    }
   }
 
-  console.log(`\nDeleted ${ok} of ${oldest.length}.`);
-  if (failed.length) {
-    console.log('Failed:');
-    for (const f of failed) console.log(`  ${f}`);
-    process.exitCode = 1;
-  }
+  summarise();
+  if (failed.length || throttled) process.exitCode = 1;
 }
 
 main().catch((err) => {
