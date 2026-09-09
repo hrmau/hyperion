@@ -136,7 +136,8 @@ async function protectedProduction(project) {
    * here that takes a site down, so it is looked up rather than reasoned about.
    */
   const live = project.targets?.production?.id;
-  return { ids: new Set([...newest, live].filter(Boolean)), live };
+  const liveInfo = (page.deployments ?? []).find((d) => d.uid === live) ?? null;
+  return { ids: new Set([...newest, live].filter(Boolean)), live, liveInfo };
 }
 
 async function staleFor(projectId, cutoff, keepIds, live) {
@@ -193,18 +194,48 @@ async function main() {
   const cutoff = Date.now() - DAYS * DAY;
   const plan = [];
   for (const project of targets) {
-    const { ids: keepIds, live } = await protectedProduction(project);
+    const { ids: keepIds, live, liveInfo } = await protectedProduction(project);
     const { keep, drop } = await staleFor(project.id, cutoff, keepIds, live);
-    plan.push({ project, keep, drop });
+    plan.push({ project, keep, drop, live, liveInfo });
   }
+
+  /*
+   * A project whose live deployment cannot be resolved is skipped rather than
+   * pruned. Absence of a LIVE line is otherwise ambiguous - it reads the same
+   * whether the live build is simply newer than the cutoff, which is safe, or
+   * whether targets.production is missing and nothing is protecting it, which
+   * is the case that takes a site down. Reporting it per project removes the
+   * ambiguity; skipping it means the safe reading is never assumed.
+   */
+  const unresolved = plan.filter((p) => !p.live);
+  for (const p of unresolved) p.drop = [];
 
   const totalDrop = plan.reduce((n, p) => n + p.drop.length, 0);
   const totalKeep = plan.reduce((n, p) => n + p.keep.length, 0);
 
+  const liveStatus = ({ live, liveInfo, keep }) => {
+    if (!live) return 'live UNRESOLVED - skipped';
+    if (keep.some((d) => d.uid === live)) return `live ${age(liveInfo?.created ?? 0)} (protected)`;
+    return liveInfo
+      ? `live ${age(liveInfo.created)} (newer than cutoff)`
+      : 'live outside the last 40 deployments';
+  };
+
   console.log(`Older than ${DAYS} days, across ${targets.length} project(s):\n`);
-  for (const { project, keep, drop } of plan) {
-    if (drop.length === 0 && keep.length === 0) continue;
-    console.log(`  ${project.name.padEnd(28)} deletable ${String(drop.length).padStart(4)}   protected ${keep.length}`);
+  for (const entry of plan) {
+    const { project, keep, drop } = entry;
+    if (drop.length === 0 && keep.length === 0 && entry.live) continue;
+    console.log(
+      `  ${project.name.padEnd(20)} deletable ${String(drop.length).padStart(4)}   ` +
+        `protected ${String(keep.length).padStart(2)}   ${liveStatus(entry)}`
+    );
+  }
+
+  if (unresolved.length) {
+    console.log(
+      `\n  ${unresolved.length} project(s) skipped: no production target reported, so nothing`
+    );
+    console.log('  could be shown to be protecting the build that is serving them.');
   }
   console.log(`\n  deletable total: ${totalDrop}   protected: ${totalKeep}`);
 
