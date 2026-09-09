@@ -557,6 +557,14 @@ for reading, IBM Plex Mono for measuring, both via `next/font`.
 
 **Components** are in `components/ds/`, ported to TSX from the system's `.jsx`.
 
+`MixBar` reserves a 38px lane above every interactive bar for its hover readout,
+which is also where a `caption` goes if one is passed. A caller that renders its
+own label above the bar instead leaves that lane empty and puts 38px between a
+name and the thing it names - on /compare, against 16px to the next bar down, so
+each name read as belonging to the bar above it. The caption gives way to the
+readout rather than sharing the lane with it: while the pointer is on a band the
+chip says which fuel and the pointer says which bar.
+
 `lib/fuels.ts` owns the canonical fuel order, the fill and ink tokens, the
 sequential ramp and the mapping from our data sources. Never re-sort the order
 per country — charts that do lose comparability across pages. `SCALE_NEUTRAL`
