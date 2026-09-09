@@ -117,20 +117,29 @@ const customDomains = (d) => (Array.isArray(d.alias) ? d.alias.filter(CUSTOM_DOM
  * still exist. Deleting them does not break the site but does remove the
  * one-click way back.
  */
-async function protectedProduction(projectId) {
+async function protectedProduction(project) {
   const page = await api(
-    `/v6/deployments?${qs(`projectId=${encodeURIComponent(projectId)}`, 'limit=40', team)}`
+    `/v6/deployments?${qs(`projectId=${encodeURIComponent(project.id)}`, 'limit=40', team)}`
   );
-  return new Set(
-    (page.deployments ?? [])
-      .filter((d) => d.target === 'production')
-      .sort((a, b) => b.created - a.created)
-      .slice(0, KEEP_PROD)
-      .map((d) => d.uid)
-  );
+  const newest = (page.deployments ?? [])
+    .filter((d) => d.target === 'production')
+    .sort((a, b) => b.created - a.created)
+    .slice(0, KEEP_PROD)
+    .map((d) => d.uid);
+
+  /*
+   * The live deployment is read from the project rather than inferred as "the
+   * newest production build", because those are not the same thing after a
+   * rollback: rolling back promotes an older build, and the newest three would
+   * then be three builds nobody is serving while the one actually answering the
+   * domain sits outside the window and gets deleted. That is the only failure
+   * here that takes a site down, so it is looked up rather than reasoned about.
+   */
+  const live = project.targets?.production?.id;
+  return { ids: new Set([...newest, live].filter(Boolean)), live };
 }
 
-async function staleFor(projectId, cutoff, keepIds) {
+async function staleFor(projectId, cutoff, keepIds, live) {
   const found = [];
   let until = cutoff;
   for (;;) {
@@ -147,8 +156,10 @@ async function staleFor(projectId, cutoff, keepIds) {
   const drop = [];
   for (const d of found) {
     const domains = customDomains(d);
-    const reason = keepIds.has(d.uid)
-      ? 'recent production'
+    const reason = d.uid === live
+      ? 'LIVE production'
+      : keepIds.has(d.uid)
+        ? 'recent production'
       : domains.length > 0
         ? `custom domain: ${domains.join(', ')}`
         : null;
@@ -182,8 +193,8 @@ async function main() {
   const cutoff = Date.now() - DAYS * DAY;
   const plan = [];
   for (const project of targets) {
-    const keepIds = await protectedProduction(project.id);
-    const { keep, drop } = await staleFor(project.id, cutoff, keepIds);
+    const { ids: keepIds, live } = await protectedProduction(project);
+    const { keep, drop } = await staleFor(project.id, cutoff, keepIds, live);
     plan.push({ project, keep, drop });
   }
 
@@ -211,10 +222,19 @@ async function main() {
     return;
   }
 
-  // A rough figure, and said to be rough: the list endpoint does not report
-  // build output size, so this is one measured build times a count, and that
-  // measurement is this project's. Other projects will differ.
-  console.log(`\nApproximate storage freed: ~${fmt(totalDrop * 160 * 1024 ** 2)} (at ~160MB a build)`);
+  /*
+   * The list endpoint does not report build output size, so the only figure
+   * available is a count times a measured build. 160MB is this repo's build,
+   * and it does not transfer: multiplying it across thirteen mixed projects
+   * produced "52.34 GB" against an account total of 15.65 GB, which is not an
+   * estimate, it is a number that makes the rest of the output look unreliable.
+   * Quoted for one project, withheld for many.
+   */
+  if (targets.length === 1 && targets[0].name === 'gridgorilla') {
+    console.log(`\nApproximate storage freed: ~${fmt(totalDrop * 160 * 1024 ** 2)} (at ~160MB a build)`);
+  } else {
+    console.log('\nStorage freed is not estimated: build size differs per project and the API does not report it.');
+  }
 
   const oldest = plan
     .flatMap(({ project, drop }) => drop.map((d) => ({ ...d, project: project.name })))

@@ -472,6 +472,14 @@ hostname that is not `*.vercel.app` counts as somebody pointing at a build on
 purpose. `--why` prints the reason each protected deployment was kept, which is
 how that was caught and how to check it again.
 
+**The live deployment is read from the project, not inferred.** "The newest
+production build" and "the one answering the domain" are the same thing until
+somebody rolls back, and then they are not - the newest few would be builds
+nobody is serving while the live one sits outside the window and gets deleted.
+`targets.production.id` is looked up per project and always protected, labelled
+`LIVE production` by `--why`. It is the only failure in this script that takes a
+site down.
+
 Deleting is the only thing that reduces storage already used. If the per-build
 figure needs to come down instead, the biggest single item is `/home/*` at a
 third of every build - and `/countries` already shows the shape of that fix,
