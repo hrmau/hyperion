@@ -480,6 +480,13 @@ nobody is serving while the live one sits outside the window and gets deleted.
 `LIVE production` by `--why`. It is the only failure in this script that takes a
 site down.
 
+**The absence of a `LIVE production` line used to be ambiguous** - it read the
+same whether the live build was simply newer than the cutoff, which is safe, or
+whether `targets.production` was missing and nothing was protecting it, which is
+not. Every project now reports its live deployment and age on its own row, and a
+project whose live build cannot be resolved is **skipped rather than pruned**.
+The safe reading is never assumed.
+
 Deleting is the only thing that reduces storage already used. If the per-build
 figure needs to come down instead, the biggest single item is `/home/*` at a
 third of every build - and `/countries` already shows the shape of that fix,
