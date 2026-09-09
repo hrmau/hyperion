@@ -75,6 +75,12 @@ async function api(path) {
   return res.json();
 }
 
+/** Null when the thing is not there, rather than throwing. */
+async function apiMaybe(path) {
+  const res = await fetch(`${API}${path}`, { headers });
+  return res.ok ? res.json() : null;
+}
+
 const fmt = (n) => `${(n / 1024 ** 3).toFixed(2)} GB`;
 const age = (ms) => `${Math.floor((Date.now() - ms) / DAY)}d`;
 
@@ -136,11 +142,39 @@ async function protectedProduction(project) {
    * here that takes a site down, so it is looked up rather than reasoned about.
    */
   const live = project.targets?.production?.id;
-  const liveInfo = (page.deployments ?? []).find((d) => d.uid === live) ?? null;
-  return { ids: new Set([...newest, live].filter(Boolean)), live, liveInfo };
+
+  /*
+   * The live id is confirmed to resolve, not assumed to. A project that has not
+   * deployed in a year has its live build well outside the forty fetched here,
+   * and "not in the list" and "does not exist" looked identical - so a stale
+   * targets.production would have protected an id matching nothing while the
+   * build actually serving the site sat in the deletable pile.
+   */
+  let liveInfo = (page.deployments ?? []).find((d) => d.uid === live) ?? null;
+  if (live && !liveInfo) {
+    const fetched = await apiMaybe(`/v13/deployments/${live}${team ? `?${team}` : ''}`);
+    liveInfo = fetched ? { uid: live, created: fetched.createdAt ?? fetched.created ?? 0 } : null;
+  }
+
+  /*
+   * The newest deployment of any kind, kept as a second line of defence. It is
+   * not a substitute for the lookup above - after a rollback the newest build is
+   * precisely the one nobody is serving - but it costs one deployment per
+   * project and covers the case where this script's reasoning about which build
+   * is live turns out to be wrong again.
+   */
+  const newestOfAll = (page.deployments ?? []).sort((a, b) => b.created - a.created)[0]?.uid;
+
+  return {
+    ids: new Set([...newest, live, newestOfAll].filter(Boolean)),
+    live,
+    liveInfo,
+    liveMissing: Boolean(live) && !liveInfo,
+    newestOfAll,
+  };
 }
 
-async function staleFor(projectId, cutoff, keepIds, live) {
+async function staleFor(projectId, cutoff, keepIds, live, newestOfAll) {
   const found = [];
   let until = cutoff;
   for (;;) {
@@ -159,6 +193,8 @@ async function staleFor(projectId, cutoff, keepIds, live) {
     const domains = customDomains(d);
     const reason = d.uid === live
       ? 'LIVE production'
+      : d.uid === newestOfAll
+        ? 'newest deployment'
       : keepIds.has(d.uid)
         ? 'recent production'
       : domains.length > 0
@@ -194,9 +230,9 @@ async function main() {
   const cutoff = Date.now() - DAYS * DAY;
   const plan = [];
   for (const project of targets) {
-    const { ids: keepIds, live, liveInfo } = await protectedProduction(project);
-    const { keep, drop } = await staleFor(project.id, cutoff, keepIds, live);
-    plan.push({ project, keep, drop, live, liveInfo });
+    const p = await protectedProduction(project);
+    const { keep, drop } = await staleFor(project.id, cutoff, p.ids, p.live, p.newestOfAll);
+    plan.push({ project, keep, drop, ...p });
   }
 
   /*
@@ -207,18 +243,23 @@ async function main() {
    * is the case that takes a site down. Reporting it per project removes the
    * ambiguity; skipping it means the safe reading is never assumed.
    */
-  const unresolved = plan.filter((p) => !p.live);
+  // Either no production target at all, or one naming a deployment that is gone.
+  const unresolved = plan.filter((p) => !p.live || p.liveMissing);
   for (const p of unresolved) p.drop = [];
 
   const totalDrop = plan.reduce((n, p) => n + p.drop.length, 0);
   const totalKeep = plan.reduce((n, p) => n + p.keep.length, 0);
 
-  const liveStatus = ({ live, liveInfo, keep }) => {
+  const liveStatus = ({ live, liveInfo, liveMissing, keep }) => {
     if (!live) return 'live UNRESOLVED - skipped';
-    if (keep.some((d) => d.uid === live)) return `live ${age(liveInfo?.created ?? 0)} (protected)`;
-    return liveInfo
+    if (liveMissing) return 'live id does not resolve - skipped';
+    if (keep.some((d) => d.uid === live)) return `live ${age(liveInfo.created)} (protected)`;
+    // Compared against the cutoff rather than inferred from "not protected".
+    // A live build older than the cutoff that is not in the keep list has not
+    // been seen by the filter at all, which is not the same as being safe.
+    return liveInfo.created >= cutoff
       ? `live ${age(liveInfo.created)} (newer than cutoff)`
-      : 'live outside the last 40 deployments';
+      : `live ${age(liveInfo.created)} (NOT among candidates - check)`;
   };
 
   console.log(`Older than ${DAYS} days, across ${targets.length} project(s):\n`);
@@ -233,9 +274,10 @@ async function main() {
 
   if (unresolved.length) {
     console.log(
-      `\n  ${unresolved.length} project(s) skipped: no production target reported, so nothing`
+      `\n  ${unresolved.length} project(s) skipped: no production target, or one naming a`
     );
-    console.log('  could be shown to be protecting the build that is serving them.');
+    console.log('  deployment that no longer exists. Nothing could be shown to be protecting');
+    console.log('  the build serving them, so nothing of theirs is deleted.');
   }
   console.log(`\n  deletable total: ${totalDrop}   protected: ${totalKeep}`);
 
