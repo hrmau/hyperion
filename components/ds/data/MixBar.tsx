@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
+import { useRef, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import { FUEL_FILL, FUEL_LABEL, needsOutline, type Fuel } from '@/lib/fuels';
 
 export interface MixBarShare {
@@ -21,6 +21,20 @@ export interface MixBarProps extends HTMLAttributes<HTMLDivElement> {
    * table should not add 200 tab stops to reach the pagination below it.
    */
   interactive?: boolean;
+  /**
+   * Caption for the bar, rendered inside the reserved readout lane.
+   *
+   * A caller that puts its own label above the bar leaves the lane empty and
+   * ends up with 38px between the label and the thing it names, which on
+   * /compare was more than twice the 16px between one bar and the next label -
+   * so each label read as belonging to the bar above it. Passing it here puts
+   * it directly on top of its own bar and uses space already reserved.
+   *
+   * It shares the lane with the readout and gives way to it: while the pointer
+   * is on a band the chip says which fuel, and the pointer itself says which
+   * bar. They are never shown at once, so nothing overlaps.
+   */
+  caption?: ReactNode;
   style?: CSSProperties;
 }
 
@@ -63,6 +77,7 @@ export function MixBar({
   radius = 0,
   gap = 1,
   interactive = true,
+  caption,
   style,
   ...rest
 }: MixBarProps) {
@@ -169,6 +184,39 @@ export function MixBar({
           />
         ))}
       </div>
+
+      {caption && interactive && !current && (
+        <div
+          style={{
+            /*
+             * Pinned to the lane and aligned to its foot, so the caption sits
+             * just above the bar it names rather than floating midway between
+             * two of them.
+             *
+             * Not `bottom: 0`: an absolutely positioned child resolves that
+             * against the frame's padding box, which runs past the lane and
+             * under the bar - the first attempt put the name on top of the
+             * bands, overlapping by 14px.
+             */
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            height: READOUT_LANE,
+            display: 'flex',
+            alignItems: 'flex-end',
+            paddingBottom: 'var(--space-3)',
+            boxSizing: 'border-box',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--fs-mono-xxs)',
+            letterSpacing: 'var(--ls-label)',
+            textTransform: 'uppercase',
+            color: 'var(--text-label)',
+            pointerEvents: 'none',
+          }}
+        >
+          {caption}
+        </div>
+      )}
 
       {current && (
         <div

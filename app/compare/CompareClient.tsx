@@ -691,21 +691,17 @@ function ComparePageContent() {
                   screen said which was which, and the order is not something a
                   reader should have to infer from the columns above. */}
               <div style={{ display: 'grid', gap: 'var(--space-6)', maxWidth: 900 }}>
+                {/* The label goes to MixBar rather than above it. Sat here it
+                    left 38px of reserved readout lane between a name and its
+                    own bar, against 16px to the next one down - so each name
+                    read as belonging to the bar above it. */}
                 {[resolvedA, resolvedB].map((sel, i) => (
-                  <div key={`${sel.label}-${i}`}>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: 'var(--fs-mono-xxs)',
-                        letterSpacing: 'var(--ls-label)',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-label)',
-                      }}
-                    >
-                      {sel.label}
-                    </div>
-                    <MixBar shares={fuelShares(sel.yearData)} height={14} />
-                  </div>
+                  <MixBar
+                    key={`${sel.label}-${i}`}
+                    shares={fuelShares(sel.yearData)}
+                    height={14}
+                    caption={sel.label}
+                  />
                 ))}
               </div>
             </div>
