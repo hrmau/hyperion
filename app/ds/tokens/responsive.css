@@ -63,6 +63,14 @@
   .gg-explore-split > * { border-right: none !important }
   .gg-hero-split > * + *,
   .gg-explore-split > * + * { border-top: 1px solid var(--border-default) !important }
+  /*
+   * The divider needs room below it, and only this split lacks it. The hero's
+   * second column already carries 22px of band padding and opens on plain
+   * content; /explore's opens on a bordered card with none, so the stacked
+   * divider and the card's own top border landed 1px apart and read as one
+   * doubled line.
+   */
+  .gg-explore-split > * + * { padding-top: var(--space-8) !important }
   .gg-card-row { grid-template-columns: repeat(2, 1fr) !important }
   .gg-footer-grid { grid-template-columns: 1fr 1fr !important }
   .gg-tiles { grid-template-columns: repeat(auto-fill, 48px) !important }
@@ -170,6 +178,14 @@
   .gg-explore-split > * { border-right: none !important }
   .gg-hero-split > * + *,
   .gg-explore-split > * + * { border-top: 1px solid var(--border-default) !important }
+  /*
+   * The divider needs room below it, and only this split lacks it. The hero's
+   * second column already carries 22px of band padding and opens on plain
+   * content; /explore's opens on a bordered card with none, so the stacked
+   * divider and the card's own top border landed 1px apart and read as one
+   * doubled line.
+   */
+  .gg-explore-split > * + * { padding-top: var(--space-8) !important }
   .gg-card-row { grid-template-columns: repeat(2, 1fr) !important }
   .gg-footer-grid { grid-template-columns: 1fr 1fr !important }
   .gg-tiles { grid-template-columns: repeat(auto-fill, 48px) !important }
