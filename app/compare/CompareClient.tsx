@@ -28,7 +28,7 @@ import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Stat } from '@/components/ds/core/Stat';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
 import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
-import { CompareRow, CompareLegend, type CompareEncoding } from '@/components/ds/data/CompareRow';
+import { CompareRow, CompareLegend, TONE_A, TONE_B, type CompareEncoding } from '@/components/ds/data/CompareRow';
 import { carbonIntensity } from '@/lib/gridMetrics';
 import { distributionFor, rankOf, type CompareMetric } from '@/lib/compareDistribution';
 import { FuelLegend } from '@/components/ds/data/FuelLegend';
@@ -913,22 +913,40 @@ function ComparePageContent() {
               );
             })()}
 
-            <div style={{ marginTop: 'var(--space-8)' }}>
-              <h2 style={sectionHeading}>Mix, this year</h2>
+            {/*
+              A third block of "Head to head" rather than a section of its own.
+              It compares the same two selections as the two blocks above it, so
+              an h2 here made a heading outline where the second section held
+              exactly one item - and put a break between three things that are
+              one thing.
+            */}
+            <div style={{ marginTop: 'var(--space-10)', maxWidth: 900 }}>
+              <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>
+                Mix · what each grid actually ran on
+              </Eyebrow>
               {/* Two unlabelled bars are a quiz, not a comparison - nothing on
                   screen said which was which, and the order is not something a
                   reader should have to infer from the columns above. */}
-              <div style={{ display: 'grid', gap: 'var(--space-6)', maxWidth: 900 }}>
+              <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
                 {/* The label goes to MixBar rather than above it. Sat here it
                     left 38px of reserved readout lane between a name and its
                     own bar, against 16px to the next one down - so each name
-                    read as belonging to the bar above it. */}
-                {[resolvedA, resolvedB].map((sel, i) => (
+                    read as belonging to the bar above it.
+
+                    Coloured to the section's legend, so "green is Turkey" holds
+                    across all three blocks rather than only the two that use
+                    marks. The bands underneath are the fuel palette and carry
+                    their own meaning, but a caption is text and reads as
+                    identity. */}
+                {[
+                  { sel: resolvedA, tone: TONE_A },
+                  { sel: resolvedB, tone: TONE_B },
+                ].map(({ sel, tone }, i) => (
                   <MixBar
                     key={`${sel.label}-${i}`}
                     shares={fuelShares(sel.yearData)}
                     height={14}
-                    caption={sel.label}
+                    caption={<span style={{ color: tone }}>{sel.label}</span>}
                   />
                 ))}
               </div>
