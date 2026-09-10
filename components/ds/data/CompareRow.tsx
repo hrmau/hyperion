@@ -357,7 +357,6 @@ const Track = () => (
       left: 0,
       right: 0,
       height: TRACK_H,
-      borderRadius: TRACK_H,
       background: 'var(--bg-raised)',
     }}
   />
@@ -384,9 +383,14 @@ function Mark({ left, tone }: { left: number; tone: string }) {
   );
 }
 
+/*
+ * Square ends, like every other bar in the system: RankedBarList and MixBar both
+ * default to `radius = 0`, and a rounded bar sitting directly above a square mix
+ * bar read as a different product.
+ */
 const Bar = ({ pct, tone }: { pct: number; tone: string }) => (
-  <div style={{ height: 11, borderRadius: 3, background: 'var(--bg-raised)', overflow: 'hidden' }}>
-    <div style={{ width: `${pct}%`, height: '100%', background: tone, borderRadius: 3 }} />
+  <div style={{ height: 11, background: 'var(--bg-raised)', overflow: 'hidden' }}>
+    <div style={{ width: `${pct}%`, height: '100%', background: tone }} />
   </div>
 );
 

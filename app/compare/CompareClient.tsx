@@ -318,6 +318,14 @@ interface RowSpec {
   format: (v: number) => string;
   /** Decimal places `format` prints to, so the chip matches what is on screen. */
   dp?: number;
+  /**
+   * How the winner of this row reads in a sentence, after a country name.
+   *
+   * The winner is not always the larger number: on emissions and carbon
+   * intensity it is the smaller one, which is why the phrase is written for the
+   * winner rather than for the leader.
+   */
+  wins: string;
   of: (sel: ResolvedSelection) => number | null;
 }
 
@@ -342,22 +350,28 @@ const formatIntensity = (v: number) => `${Math.round(v)} g`;
 
 const ROWS: RowSpec[] = [
   { key: 'clean_pct', label: 'Clean electricity', encoding: 'share', higherIsBetter: true,
-    format: formatPercent, of: (s) => s.yearData.aggregates?.clean_pct ?? null },
+    format: formatPercent, wins: 'runs the cleaner grid',
+    of: (s) => s.yearData.aggregates?.clean_pct ?? null },
   { key: 'renewables_pct', label: 'Renewables', encoding: 'share', higherIsBetter: true,
-    format: formatPercent, of: (s) => s.yearData.aggregates?.renewables_pct ?? null },
+    format: formatPercent, wins: 'leans harder on renewables',
+    of: (s) => s.yearData.aggregates?.renewables_pct ?? null },
   { key: 'wind_solar_pct', label: 'Wind and solar', encoding: 'share', higherIsBetter: true,
-    format: formatPercent, of: (s) => s.yearData.aggregates?.wind_solar_pct ?? null },
+    format: formatPercent, wins: 'has built more wind and solar',
+    of: (s) => s.yearData.aggregates?.wind_solar_pct ?? null },
   { key: 'total_generation', label: 'Total generation', encoding: 'absolute', higherIsBetter: true,
-    format: formatTWh, of: (s) => (s.yearData.total_generation_twh > 0 ? s.yearData.total_generation_twh : null) },
+    format: formatTWh, wins: 'generates more electricity',
+    of: (s) => (s.yearData.total_generation_twh > 0 ? s.yearData.total_generation_twh : null) },
   { key: 'emissions', label: 'Power sector emissions', encoding: 'absolute', higherIsBetter: false,
-    format: formatEmissions, of: (s) => s.yearData.emissions?.total_mtco2 ?? null },
+    format: formatEmissions, wins: 'emits less from its power stations',
+    of: (s) => s.yearData.emissions?.total_mtco2 ?? null },
   /*
    * Derived, and worth its own row: raw emissions mostly measure how big a
    * country is, while intensity measures how dirty its grid is, and for the
    * same pair the two can point in opposite directions.
    */
   { key: 'carbon_intensity', label: 'Carbon intensity', encoding: 'absolute', higherIsBetter: false,
-    format: formatIntensity, dp: 0, of: (s) => carbonIntensity(s.yearData) },
+    format: formatIntensity, dp: 0, wins: 'carries less carbon in every kilowatt-hour',
+    of: (s) => carbonIntensity(s.yearData) },
 ];
 
 function scoreFor(sel: ResolvedSelection, fossilFuelData: FossilFuelData | null) {
@@ -745,7 +759,8 @@ function ComparePageContent() {
                   build(
                     {
                       key: 'independence', label: 'Energy independence', encoding: 'share',
-                      higherIsBetter: true, format: formatIndependenceScore, dp: 0, of: () => null,
+                      higherIsBetter: true, format: formatIndependenceScore, dp: 0,
+                      wins: 'is the more self-sufficient', of: () => null,
                     },
                     indepA.score,
                     indepB.score
@@ -770,11 +785,98 @@ function ComparePageContent() {
                 { title: 'Totals · each row scaled to its own maximum', rows: built.filter((r) => r.spec.encoding === 'absolute') },
               ];
 
+              /*
+               * The sentence at the top of the section.
+               *
+               * Derived rather than written, because the pairs are user-chosen
+               * and unbounded. What makes it worth having is that the two
+               * clauses usually pull against each other - France runs the
+               * cleaner grid and Poland is the more self-sufficient one - which
+               * is the finding the rows underneath spend seven lines making.
+               *
+               * Rows are compared by relative difference, not by the per-block
+               * gap used for ordering: a point gap and a ratio cannot be sorted
+               * against each other, and this has to pick across both blocks.
+               */
+              const decisive = built
+                .map((r) => {
+                  const max = Math.max(r.va, r.vb);
+                  if (!(max > 0)) return null;
+                  const rel = Math.abs(r.va - r.vb) / max;
+                  if (rel < 0.05) return null;
+                  const aWins = r.spec.higherIsBetter ? r.va > r.vb : r.va < r.vb;
+                  return { row: r, rel, aWins };
+                })
+                .filter((x): x is NonNullable<typeof x> => x !== null)
+                .sort((x, y) => y.rel - x.rel);
+
+              /*
+               * Wind and solar sit inside renewables, which sit inside clean.
+               * So a country that loses clean share badly can still "win" wind
+               * and solar, and the sentence then offers it as a counterpoint
+               * when it is an artefact: Iceland runs on hydro and geothermal,
+               * builds almost no wind or solar, and read as though Nigeria had
+               * out-built it. Same trap the fact engine's suppression rules
+               * exist for - being last for wind when you run on hydro is not a
+               * finding.
+               *
+               * A win on a subset metric is not a counterpoint when the other
+               * side took the superset decisively.
+               */
+              const SUPERSETS: Partial<Record<CompareMetric, CompareMetric[]>> = {
+                wind_solar_pct: ['renewables_pct', 'clean_pct'],
+                renewables_pct: ['clean_pct'],
+              };
+              const tookDecisively = (metric: CompareMetric, aWins: boolean) =>
+                decisive.some((d) => d.row.spec.key === metric && d.aWins === aWins && d.rel >= 0.2);
+
+              const bestFor = (aWins: boolean) =>
+                decisive.find((d) => {
+                  if (d.aWins !== aWins) return false;
+                  const parents = SUPERSETS[d.row.spec.key] ?? [];
+                  return !parents.some((parent) => tookDecisively(parent, !aWins));
+                });
+              const forA = bestFor(true);
+              const forB = bestFor(false);
+              // subjectName capitalises for sentence-initial use, theName does
+              // not. The second clause is mid-sentence, so it needs the latter
+              // or it reads "and The United States emits less".
+              const openA = subjectName(resolvedA.label);
+              const openB = subjectName(resolvedB.label);
+              const midB = theName(resolvedB.label);
+
+              let topline: string | null = null;
+              if (forA && forB) {
+                topline = `${openA} ${forA.row.spec.wins} and ${midB} ${forB.row.spec.wins}.`;
+              } else if (forA || forB) {
+                const only = (forA ?? forB)!;
+                const who = only.aWins ? openA : openB;
+                // A clean sweep is a finding too, and saying so beats picking
+                // one row out of it and implying the rest were close.
+                topline =
+                  decisive.length === built.length
+                    ? `${who} comes out ahead on all ${built.length} measures here.`
+                    : `${who} ${only.row.spec.wins}, and the rest are close.`;
+              }
+
               const codeA = resolvedA.iso3 ?? resolvedA.label;
               const codeB = resolvedB.iso3 ?? resolvedB.label;
 
               return (
                 <div style={{ maxWidth: 900 }}>
+                  {topline && (
+                    <p
+                      style={{
+                        margin: '0 0 var(--space-8)',
+                        maxWidth: '60ch',
+                        fontSize: 'var(--fs-lead)',
+                        lineHeight: 'var(--lh-lead)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      {topline}
+                    </p>
+                  )}
                   <CompareLegend a={resolvedA.label} b={resolvedB.label} />
                   <div style={{ display: 'grid', gap: 'var(--space-10)' }}>
                     {blocks.map(({ title, rows }) =>

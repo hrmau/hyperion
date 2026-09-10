@@ -412,6 +412,24 @@ that **leads the row and is still the wrong side of the world median**, which
 happens more often than it sounds. Where no rule fires it shows the rank alone
 rather than padding.
 
+**The topline sentence is derived, and picks across both blocks.** Rows are
+compared there by *relative* difference, not the per-block gap used for
+ordering - a point gap and a ratio cannot be sorted against each other. What
+makes it worth having is that the two clauses usually pull against each other:
+"France carries less carbon in every kilowatt-hour and Poland is the more
+self-sufficient" is the finding the seven rows underneath spend their length
+making.
+
+One suppression rule, and it is the fact engine's Iceland problem again. Wind
+and solar sit inside renewables, which sit inside clean, so a country losing
+clean share badly can still "win" wind and solar - and Iceland, which runs on
+hydro and geothermal, read as though **Nigeria** had out-built it. A win on a
+subset metric is not a counterpoint when the other side took the superset
+decisively.
+
+Both name forms are needed: `subjectName` capitalises for the opening clause and
+`theName` does not, or the sentence reads "and The United States emits less".
+
 **Rows are ordered by gap, widest first, within each block** - a point gap and a
 ratio are not comparable quantities, so they are never sorted against each other.
 
