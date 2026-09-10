@@ -28,6 +28,9 @@ import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Stat } from '@/components/ds/core/Stat';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
 import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
+import { CompareRow, type CompareEncoding } from '@/components/ds/data/CompareRow';
+import { carbonIntensity } from '@/lib/gridMetrics';
+import { worldMedian, type CompareMetric } from '@/lib/compareDistribution';
 import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { DonutStat } from '@/components/ds/data/DonutStat';
 import { MixBar } from '@/components/ds/data/MixBar';
@@ -186,42 +189,6 @@ function resolveSelection(
   }
 }
 
-function ComparisonBar({ label, valueA, valueB, formatFn, suffixA, suffixB }: {
-  label: string;
-  valueA: number;
-  valueB: number;
-  formatFn: (v: number) => string;
-  suffixA?: string;
-  suffixB?: string;
-}) {
-  const total = valueA + valueB;
-  const pctA = total > 0 ? (valueA / total) * 100 : 50;
-
-  return (
-    <div className="space-y-1.5">
-      <div className="text-xs text-secondary font-medium">{label}</div>
-      <div className="flex items-center gap-2">
-        <div className="w-20 text-right">
-          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueA)}{suffixA}</span>
-        </div>
-        <div className="flex-1 flex h-5 rounded-full overflow-hidden bg-inset">
-          <div
-            className="bg-blue-500 transition-all duration-500"
-            style={{ width: `${pctA}%` }}
-          />
-          <div
-            className="bg-amber-400 transition-all duration-500"
-            style={{ width: `${100 - pctA}%` }}
-          />
-        </div>
-        <div className="w-20">
-          <span className="text-[11px] font-medium text-primary tabular-nums">{formatFn(valueB)}{suffixB}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SelectionDropdown({ value, onChange, countries, type, onTypeChange }: {
   value: string;
   onChange: (id: string) => void;
@@ -335,6 +302,46 @@ function seriesFor(
   }
   return { years: [], series: fuelSeries([], () => undefined).series };
 }
+
+/**
+ * The head-to-head rows, in two blocks split by unit.
+ *
+ * Shares and scores share one 0-100 axis; absolutes are normalised per row. The
+ * two must not be mixed in a block, because a dumbbell on a shared axis is only
+ * honest when every row on it means the same thing.
+ */
+interface RowSpec {
+  key: CompareMetric;
+  label: string;
+  encoding: CompareEncoding;
+  higherIsBetter: boolean;
+  format: (v: number) => string;
+  /** Decimal places `format` prints to, so the chip matches what is on screen. */
+  dp?: number;
+  of: (sel: ResolvedSelection) => number | null;
+}
+
+const formatIntensity = (v: number) => `${Math.round(v)} g`;
+
+const ROWS: RowSpec[] = [
+  { key: 'clean_pct', label: 'Clean electricity', encoding: 'share', higherIsBetter: true,
+    format: formatPercent, of: (s) => s.yearData.aggregates?.clean_pct ?? null },
+  { key: 'renewables_pct', label: 'Renewables', encoding: 'share', higherIsBetter: true,
+    format: formatPercent, of: (s) => s.yearData.aggregates?.renewables_pct ?? null },
+  { key: 'wind_solar_pct', label: 'Wind and solar', encoding: 'share', higherIsBetter: true,
+    format: formatPercent, of: (s) => s.yearData.aggregates?.wind_solar_pct ?? null },
+  { key: 'total_generation', label: 'Total generation', encoding: 'absolute', higherIsBetter: true,
+    format: formatTWh, of: (s) => (s.yearData.total_generation_twh > 0 ? s.yearData.total_generation_twh : null) },
+  { key: 'emissions', label: 'Power sector emissions', encoding: 'absolute', higherIsBetter: false,
+    format: formatEmissions, of: (s) => s.yearData.emissions?.total_mtco2 ?? null },
+  /*
+   * Derived, and worth its own row: raw emissions mostly measure how big a
+   * country is, while intensity measures how dirty its grid is, and for the
+   * same pair the two can point in opposite directions.
+   */
+  { key: 'carbon_intensity', label: 'Carbon intensity', encoding: 'absolute', higherIsBetter: false,
+    format: formatIntensity, dp: 0, of: (s) => carbonIntensity(s.yearData) },
+];
 
 function scoreFor(sel: ResolvedSelection, fossilFuelData: FossilFuelData | null) {
   return calculateIndependenceScoreV2(
@@ -638,52 +645,112 @@ function ComparePageContent() {
             }}
           >
             <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Head to head</Eyebrow>
-            <div style={{ display: 'grid', gap: 'var(--space-7)', maxWidth: 900 }}>
-              <ComparisonBar
-                label="Total generation"
-                valueA={resolvedA.yearData.total_generation_twh}
-                valueB={resolvedB.yearData.total_generation_twh}
-                formatFn={formatTWh}
-              />
-              <ComparisonBar
-                label="Clean share"
-                valueA={resolvedA.yearData.aggregates.clean_pct}
-                valueB={resolvedB.yearData.aggregates.clean_pct}
-                formatFn={formatPercent}
-              />
-              <ComparisonBar
-                label="Renewables"
-                valueA={resolvedA.yearData.aggregates.renewables_pct}
-                valueB={resolvedB.yearData.aggregates.renewables_pct}
-                formatFn={formatPercent}
-              />
-              <ComparisonBar
-                label="Wind + solar"
-                valueA={resolvedA.yearData.aggregates.wind_solar_pct}
-                valueB={resolvedB.yearData.aggregates.wind_solar_pct}
-                formatFn={formatPercent}
-              />
-              <ComparisonBar
-                label="Emissions"
-                valueA={resolvedA.yearData.emissions.total_mtco2}
-                valueB={resolvedB.yearData.emissions.total_mtco2}
-                formatFn={formatEmissions}
-              />
-              {(() => {
-                const a = scoreFor(resolvedA, fossilFuelData);
-                const b = scoreFor(resolvedB, fossilFuelData);
-                return (
-                  <ComparisonBar
-                    label="Energy independence"
-                    valueA={a?.score ?? 0}
-                    valueB={b?.score ?? 0}
-                    formatFn={formatIndependenceScore}
-                    suffixA={a?.missingFossilData ? '*' : undefined}
-                    suffixB={b?.missingFossilData ? '*' : undefined}
-                  />
-                );
-              })()}
-            </div>
+            {(() => {
+              const indepA = scoreFor(resolvedA, fossilFuelData);
+              const indepB = scoreFor(resolvedB, fossilFuelData);
+
+              /*
+               * A bloc has no rank among countries: it contains them. So the
+               * world median is shown only when both sides are countries -
+               * the encoding is identical either way, and only the
+               * distribution furniture drops out.
+               */
+              const bothCountries = Boolean(resolvedA.iso3 && resolvedB.iso3);
+              const commonYear = Math.min(resolvedA.actualYear, resolvedB.actualYear);
+
+              const built = ROWS.map((spec) => {
+                const va = spec.of(resolvedA);
+                const vb = spec.of(resolvedB);
+                // A row where either side is missing is suppressed outright.
+                // Rendering it as zero would state something untrue.
+                if (va == null || vb == null) return null;
+                const m =
+                  bothCountries && countries
+                    ? worldMedian(spec.key, commonYear, countries, fossilFuelData)
+                    : null;
+                return { spec, va, vb, median: m?.median ?? null };
+              }).filter((r): r is NonNullable<typeof r> => r !== null);
+
+              if (indepA && indepB) {
+                const m =
+                  bothCountries && countries
+                    ? worldMedian('independence', commonYear, countries, fossilFuelData)
+                    : null;
+                built.push({
+                  spec: {
+                    key: 'independence', label: 'Energy independence', encoding: 'share',
+                    higherIsBetter: true, format: formatIndependenceScore, dp: 0, of: () => null,
+                  },
+                  va: indepA.score,
+                  vb: indepB.score,
+                  median: m?.median ?? null,
+                });
+              }
+
+              /*
+               * Ordered by how far apart the two are, widest first, so the row
+               * worth arguing about opens the section rather than whichever
+               * metric happened to be listed first. Sorted within a block: a
+               * point gap and a ratio are not comparable quantities.
+               */
+              const gapOf = (r: (typeof built)[number]) =>
+                r.spec.encoding === 'share'
+                  ? Math.abs(r.va - r.vb)
+                  : Math.min(r.va, r.vb) > 0
+                    ? Math.max(r.va, r.vb) / Math.min(r.va, r.vb)
+                    : Infinity;
+
+              const blocks: { title: string; rows: typeof built }[] = [
+                { title: 'Shares and scores', rows: built.filter((r) => r.spec.encoding === 'share') },
+                { title: 'Totals', rows: built.filter((r) => r.spec.encoding === 'absolute') },
+              ];
+
+              const codeA = resolvedA.iso3 ?? resolvedA.label;
+              const codeB = resolvedB.iso3 ?? resolvedB.label;
+
+              return (
+                <div style={{ display: 'grid', gap: 'var(--space-10)', maxWidth: 900 }}>
+                  {blocks.map(({ title, rows }) =>
+                    rows.length === 0 ? null : (
+                      <div key={title}>
+                        <Eyebrow style={{ marginBottom: 'var(--space-6)', color: 'var(--text-quiet)' }}>
+                          {title}
+                        </Eyebrow>
+                        <div style={{ display: 'grid', gap: 'var(--space-9)' }}>
+                          {[...rows].sort((x, y) => gapOf(y) - gapOf(x)).map((r) => (
+                            <CompareRow
+                              key={r.spec.key}
+                              label={r.spec.label}
+                              encoding={r.spec.encoding}
+                              higherIsBetter={r.spec.higherIsBetter}
+                              format={r.spec.format}
+                              dp={r.spec.dp}
+                              median={r.median}
+                              a={{
+                                code: codeA,
+                                value: r.va,
+                                suffix:
+                                  r.spec.key === 'independence' && indepA?.missingFossilData
+                                    ? '*'
+                                    : undefined,
+                              }}
+                              b={{
+                                code: codeB,
+                                value: r.vb,
+                                suffix:
+                                  r.spec.key === 'independence' && indepB?.missingFossilData
+                                    ? '*'
+                                    : undefined,
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              );
+            })()}
 
             <div style={{ marginTop: 'var(--space-8)' }}>
               <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Mix, this year</Eyebrow>
