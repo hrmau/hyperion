@@ -357,6 +357,45 @@ score is normalised within each family against its 95th percentile, so 82 of 200
 sit at exactly 1.0 and the ties fall out alphabetically. The file says so at
 length. `check-data.js` fails the build if a pick names a country with no page.
 
+## Head to head (`/compare`)
+
+`components/ds/data/CompareRow.tsx` renders one metric for two selections, and
+`lib/compareDistribution.ts` supplies the world median behind it. Both replaced a
+100%-stacked bar that split the track by `a / (a + b)`, which for two percentages
+is arithmetic on incompatible denominators - clean share 31.7% against 37.3% drew
+as 46/54 - and which flattened real gaps, because independence 68 against 3, a
+23x difference, drew as 96/4.
+
+**Two encodings, chosen by unit, never mixed in a block.** Shares and scores are
+a dumbbell on a shared 0-100 axis, so both marks sit on the scale the number
+actually lives on. Absolutes are paired bars normalised per row, because a
+linear axis spanning the generation range puts most countries in the first pixel.
+
+**Neither selection gets a hue.** The fuel ramp runs the whole cold-slate-to-green
+space - sage is solar, sage-deep is hydro, green is wind - so any colour picked
+for a country collides with a fuel in the mix bars directly below it. A filled
+mark is the first selection and a ring is the second, both in paper, with mono
+codes beside the values. That also survives the marks swapping sides when the
+leader changes, which position alone would not.
+
+**The chip is computed from the printed figures, not the raw ones.** Carbon
+intensity prints whole grams, and unrounded it read "14.2x" beside 41 g and
+589 g, which divide to 14.4. The extra precision was real and the inconsistency
+was still the reader's problem. `dp` on the row spec is what keeps them agreeing.
+
+**Rows are ordered by gap, widest first, within each block** - a point gap and a
+ratio are not comparable quantities, so they are never sorted against each other.
+
+**Bloc mode keeps the encoding and drops the median.** A bloc has no rank among
+countries because it contains them, but "the EU is 45% clean" is still a real
+number on a real axis. Switching blocs to a second encoding would mean two visual
+languages for one section.
+
+The independence median **excludes countries flagged `missingFossilData`** - half
+of those reporting in 2024. Their scores are deliberately conservative rather
+than inflated (that was the old behaviour, and it is fixed), so leaving them in
+drags the median down rather than up. Either way it is not a world median.
+
 ## Higher/Lower game (`/play`)
 
 Two countries, one metric, guess which is higher. Endless: a wrong answer resets
