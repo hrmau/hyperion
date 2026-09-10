@@ -24,7 +24,14 @@ export type CompareMetric =
   | 'carbon_intensity'
   | 'independence';
 
-const cache = new Map<string, { median: number; n: number } | null>();
+export interface Distribution {
+  /** Ascending, so a rank is an index. */
+  sorted: number[];
+  median: number;
+  n: number;
+}
+
+const cache = new Map<string, Distribution | null>();
 
 function valueOf(
   metric: CompareMetric,
@@ -71,13 +78,13 @@ function valueOf(
   }
 }
 
-/** Median of every country reporting `metric` in `year`, or null if too few. */
-export function worldMedian(
+/** Every country reporting `metric` in `year`, sorted, or null if too few. */
+export function distributionFor(
   metric: CompareMetric,
   year: number,
   countries: CountriesData,
   fossil: FossilFuelData | null
-): { median: number; n: number } | null {
+): Distribution | null {
   const key = `${metric}:${year}`;
   const hit = cache.get(key);
   if (hit !== undefined) return hit;
@@ -91,11 +98,28 @@ export function worldMedian(
   }
 
   // A median of a handful of countries is not a world figure.
+  values.sort((a, b) => a - b);
   const result =
     values.length >= 30
-      ? { median: values.sort((a, b) => a - b)[Math.floor(values.length / 2)], n: values.length }
+      ? { sorted: values, median: values[Math.floor(values.length / 2)], n: values.length }
       : null;
 
   cache.set(key, result);
   return result;
+}
+
+/**
+ * Where a value sits in the distribution, counted from the good end.
+ *
+ * `higherIsBetter` is what makes "96th cleanest" possible: for carbon intensity
+ * and emissions the good end is the low one, and reporting a raw ascending rank
+ * there would put the dirtiest grid first.
+ */
+export function rankOf(
+  value: number,
+  dist: Distribution,
+  higherIsBetter: boolean
+): { rank: number; n: number } {
+  const below = dist.sorted.filter((v) => v < value).length;
+  return { rank: higherIsBetter ? dist.n - below : below + 1, n: dist.n };
 }
