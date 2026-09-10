@@ -397,11 +397,17 @@ marks and values are one control, carrying the `+`/`-` marker `.gg-disclosure`
 already uses. `.gg-row-toggle` in globals.css supplies the hover step and the
 focus ring, because inline styles cannot express `:hover`.
 
-**Three heading levels, not one.** "Head to head" and "Mix, this year" are `h2`
-at `--fs-h4`, matching "Also true of X" on a country page; the country cards
-above are `--fs-h3`; the block labels inside stay `Eyebrow`. All three were
-eyebrows once, which made a section and a sub-block the same weight and left the
-page a flat list of mono labels with no way to tell what contained what.
+**One section, three blocks.** "Head to head" is the only `h2` below the country
+cards, at `--fs-h4` matching "Also true of X" on a country page; the cards above
+are `--fs-h3`; and shares, totals and mix are `Eyebrow` blocks inside it. The
+mix was its own `h2` for a while, which gave the page a heading outline whose
+second section held exactly one item, and put a break between three things that
+compare the same two selections.
+
+All of them were eyebrows before that, which was the opposite failure - a
+section and a sub-block at identical weight, and no way to tell what contained
+what. The mix captions carry the section's colours too, so "green is Turkey"
+holds across all three blocks and not only the two that use marks.
 
 **Opening below the row rather than floating.** Click or
 focus reveals both ranks, the median and a derived note; keyboard and touch get
