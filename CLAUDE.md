@@ -390,7 +390,20 @@ intensity prints whole grams, and unrounded it read "14.2x" beside 41 g and
 589 g, which divide to 14.4. The extra precision was real and the inconsistency
 was still the reader's problem. `dp` on the row spec is what keeps them agreeing.
 
-**The track is a button, and opens below the row rather than floating.** Click or
+**The whole row is the button, and opens below itself rather than floating.**
+The track alone put the target most of the row's width away from where a reader
+looks first, and nothing about a bare chart says it opens - so the label, chip,
+marks and values are one control, carrying the `+`/`-` marker `.gg-disclosure`
+already uses. `.gg-row-toggle` in globals.css supplies the hover step and the
+focus ring, because inline styles cannot express `:hover`.
+
+**Three heading levels, not one.** "Head to head" and "Mix, this year" are `h2`
+at `--fs-h4`, matching "Also true of X" on a country page; the country cards
+above are `--fs-h3`; the block labels inside stay `Eyebrow`. All three were
+eyebrows once, which made a section and a sub-block the same weight and left the
+page a flat list of mono labels with no way to tell what contained what.
+
+**Opening below the row rather than floating.** Click or
 focus reveals both ranks, the median and a derived note; keyboard and touch get
 exactly what a pointer gets, there is no positioning to clamp, and nothing
 overlays the thing it describes. The note is derived, not written per pair -
