@@ -321,6 +321,23 @@ interface RowSpec {
   of: (sel: ResolvedSelection) => number | null;
 }
 
+/**
+ * Section headings, matching the country pages.
+ *
+ * "Head to head", "Mix, this year" and the block labels were all Eyebrow, which
+ * made a section and a sub-block inside it the same weight - the page read as
+ * one flat list of mono labels with no way to tell what contained what. The
+ * sections are real headings now at --fs-h4, the same as "Also true of X" on a
+ * country page, and the blocks stay eyebrows one level down.
+ */
+const sectionHeading = {
+  margin: '0 0 var(--space-6)',
+  fontSize: 'var(--fs-h4)',
+  fontWeight: 'var(--fw-bold)' as const,
+  letterSpacing: 'var(--ls-h4)',
+  color: 'var(--text-primary)',
+};
+
 const formatIntensity = (v: number) => `${Math.round(v)} g`;
 
 const ROWS: RowSpec[] = [
@@ -644,7 +661,7 @@ function ComparePageContent() {
               borderTop: '1px solid var(--border-default)',
             }}
           >
-            <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>Head to head</Eyebrow>
+            <h2 style={sectionHeading}>Head to head</h2>
             {(() => {
               const indepA = scoreFor(resolvedA, fossilFuelData);
               const indepB = scoreFor(resolvedB, fossilFuelData);
@@ -795,7 +812,7 @@ function ComparePageContent() {
             })()}
 
             <div style={{ marginTop: 'var(--space-8)' }}>
-              <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Mix, this year</Eyebrow>
+              <h2 style={sectionHeading}>Mix, this year</h2>
               {/* Two unlabelled bars are a quiz, not a comparison - nothing on
                   screen said which was which, and the order is not something a
                   reader should have to infer from the columns above. */}

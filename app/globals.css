@@ -93,6 +93,20 @@ body {
     border-radius: var(--r-card);
   }
 
+  /* A whole comparison row is the disclosure control, not just the chart in it.
+     Inline styles cannot express :hover, and the row is the one place on the
+     page where nothing else signals there is more underneath. One step up the
+     ink ramp, per the interaction states card. */
+  .gg-row-toggle {
+    transition: background var(--dur-fast) var(--ease-out);
+    border-radius: var(--r-well);
+  }
+  .gg-row-toggle:hover { background: var(--bg-raised) }
+  .gg-row-toggle:focus-visible { outline: 2px solid var(--green); outline-offset: 2px }
+  /* The marker is text, matching .gg-disclosure: the system ships no icons. */
+  .gg-row-toggle .gg-row-marker::after { content: '+' }
+  .gg-row-toggle[aria-expanded='true'] .gg-row-marker::after { content: '\2212' }
+
   .card-hover {
     transition: background var(--dur-fast) var(--ease-out),
       border-color var(--dur-fast) var(--ease-out);

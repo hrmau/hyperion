@@ -144,7 +144,34 @@ export function CompareRow({
   const hasDetail = Boolean(a.rank || b.rank || a.note || b.note || medianNote);
 
   return (
-    <div style={{ borderTop: '1px solid var(--border-subtle)', padding: 'var(--space-7) 0', ...style }}>
+    <div style={{ borderTop: '1px solid var(--border-subtle)', ...style }}>
+      {/*
+        The whole row is the control, not just the chart inside it. The track
+        alone put the target most of the row's width away from where a reader
+        looks first - the metric name - and nothing about a bare chart says it
+        opens. Label, chip, marks and values are one button now, with the +/-
+        marker the rest of the site uses for a disclosure.
+      */}
+      <button
+        type="button"
+        className={hasDetail ? 'gg-row-toggle' : undefined}
+        aria-expanded={hasDetail ? open : undefined}
+        aria-controls={hasDetail ? panelId : undefined}
+        onClick={() => hasDetail && setOpen((v) => !v)}
+        style={{
+          appearance: 'none',
+          background: 'none',
+          border: 'none',
+          margin: 0,
+          padding: 'var(--space-7) var(--space-5)',
+          width: '100%',
+          textAlign: 'left',
+          font: 'inherit',
+          color: 'inherit',
+          cursor: hasDetail ? 'pointer' : 'default',
+          display: 'block',
+        }}
+      >
       <div
         style={{
           display: 'flex',
@@ -154,7 +181,29 @@ export function CompareRow({
           marginBottom: 'var(--space-5)',
         }}
       >
-        <span style={{ fontSize: 'var(--fs-body-sm)', color: 'var(--text-primary)' }}>{label}</span>
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'baseline',
+            gap: 'var(--space-4)',
+            fontSize: 'var(--fs-body-sm)',
+            color: 'var(--text-primary)',
+          }}
+        >
+          {hasDetail && (
+            <span
+              aria-hidden
+              className="gg-row-marker"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--fs-mono)',
+                color: 'var(--text-tertiary)',
+                width: '1ch',
+              }}
+            />
+          )}
+          {label}
+        </span>
         {rel && (
           <span
             style={{
@@ -177,23 +226,7 @@ export function CompareRow({
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
-        <button
-          type="button"
-          aria-expanded={hasDetail ? open : undefined}
-          aria-controls={hasDetail ? panelId : undefined}
-          onClick={() => hasDetail && setOpen((v) => !v)}
-          style={{
-            flex: 1,
-            minWidth: 0,
-            appearance: 'none',
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            margin: 0,
-            cursor: hasDetail ? 'pointer' : 'default',
-            display: 'block',
-          }}
-        >
+        <div style={{ flex: 1, minWidth: 0 }}>
           {encoding === 'share' ? (
             <div style={{ position: 'relative', height: MARK + 8 }}>
               <Track />
@@ -218,7 +251,7 @@ export function CompareRow({
               {medianPos != null && <MedianTick left={medianPos} full />}
             </div>
           )}
-        </button>
+        </div>
 
         <div style={{ display: 'grid', gap: 'var(--space-2)', flex: 'none' }}>
           {[
@@ -253,6 +286,8 @@ export function CompareRow({
         </div>
       </div>
 
+      </button>
+
       {hasDetail && open && (
         <div
           id={panelId}
@@ -260,7 +295,7 @@ export function CompareRow({
             display: 'flex',
             flexWrap: 'wrap',
             gap: 'var(--space-8)',
-            marginTop: 'var(--space-6)',
+            margin: '0 var(--space-5) var(--space-7)',
             padding: 'var(--space-6) var(--space-7)',
             borderRadius: 'var(--r-well)',
             background: 'var(--bg-raised)',
