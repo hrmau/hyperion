@@ -371,17 +371,33 @@ a dumbbell on a shared 0-100 axis, so both marks sit on the scale the number
 actually lives on. Absolutes are paired bars normalised per row, because a
 linear axis spanning the generation range puts most countries in the first pixel.
 
-**Neither selection gets a hue.** The fuel ramp runs the whole cold-slate-to-green
-space - sage is solar, sage-deep is hydro, green is wind - so any colour picked
-for a country collides with a fuel in the mix bars directly below it. A filled
-mark is the first selection and a ring is the second, both in paper, with mono
-codes beside the values. That also survives the marks swapping sides when the
-leader changes, which position alone would not.
+**Green is the first selection, paper the second, clay the world median.** An
+earlier pass gave neither a hue - a filled mark against a ring - on the grounds
+that the fuel ramp owns the whole cold-slate-to-green space and anything picked
+would collide with a fuel in the mix bars below. That was true and it was still
+wrong: two near-identical marks made the reader work out which country was which
+on every row, which is a worse failure than a colour that rhymes with a fuel two
+sections away. Green and paper are as far apart as this palette goes.
+
+Colour is never the only signal, which is what makes the collision survivable: a
+`CompareLegend` names both countries and the tick above the block, the value
+cells carry the mark's colour, and the ISO code sits in text beside every number.
+The chips are outlines rather than fills - a filled green chip would be the
+loudest thing on a page that spends green three times.
 
 **The chip is computed from the printed figures, not the raw ones.** Carbon
 intensity prints whole grams, and unrounded it read "14.2x" beside 41 g and
 589 g, which divide to 14.4. The extra precision was real and the inconsistency
 was still the reader's problem. `dp` on the row spec is what keeps them agreeing.
+
+**The track is a button, and opens below the row rather than floating.** Click or
+focus reveals both ranks, the median and a derived note; keyboard and touch get
+exactly what a pointer gets, there is no positioning to clamp, and nothing
+overlays the thing it describes. The note is derived, not written per pair -
+the pairs are user-chosen and unbounded - and the case worth naming is a country
+that **leads the row and is still the wrong side of the world median**, which
+happens more often than it sounds. Where no rule fires it shows the rank alone
+rather than padding.
 
 **Rows are ordered by gap, widest first, within each block** - a point gap and a
 ratio are not comparable quantities, so they are never sorted against each other.

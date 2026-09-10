@@ -28,9 +28,9 @@ import { Eyebrow } from '@/components/ds/core/Eyebrow';
 import { Stat } from '@/components/ds/core/Stat';
 import { GorillaNote } from '@/components/ds/core/GorillaNote';
 import { StackedAreaChart } from '@/components/ds/data/StackedAreaChart';
-import { CompareRow, type CompareEncoding } from '@/components/ds/data/CompareRow';
+import { CompareRow, CompareLegend, type CompareEncoding } from '@/components/ds/data/CompareRow';
 import { carbonIntensity } from '@/lib/gridMetrics';
-import { worldMedian, type CompareMetric } from '@/lib/compareDistribution';
+import { distributionFor, rankOf, type CompareMetric } from '@/lib/compareDistribution';
 import { FuelLegend } from '@/components/ds/data/FuelLegend';
 import { DonutStat } from '@/components/ds/data/DonutStat';
 import { MixBar } from '@/components/ds/data/MixBar';
@@ -651,72 +651,119 @@ function ComparePageContent() {
 
               /*
                * A bloc has no rank among countries: it contains them. So the
-               * world median is shown only when both sides are countries -
-               * the encoding is identical either way, and only the
-               * distribution furniture drops out.
+               * median and the ranks appear only when both sides are countries.
+               * The encoding is identical either way - switching blocs to a
+               * second visual language would mean two of them in one section.
                */
               const bothCountries = Boolean(resolvedA.iso3 && resolvedB.iso3);
               const commonYear = Math.min(resolvedA.actualYear, resolvedB.actualYear);
 
-              const built = ROWS.map((spec) => {
+              type Built = {
+                spec: RowSpec;
+                va: number;
+                vb: number;
+                median: number | null;
+                rankA?: string;
+                rankB?: string;
+                noteA?: string;
+                noteB?: string;
+                medianNote?: string;
+              };
+
+              const ordinal = (n: number) => {
+                const s = ['th', 'st', 'nd', 'rd'];
+                const v = n % 100;
+                return `${n}${s[(v - 20) % 10] || s[v] || s[0]}`;
+              };
+
+              const build = (spec: RowSpec, va: number, vb: number): Built => {
+                const dist =
+                  bothCountries && countries
+                    ? distributionFor(spec.key, commonYear, countries, fossilFuelData)
+                    : null;
+                if (!dist) return { spec, va, vb, median: null };
+
+                const ra = rankOf(va, dist, spec.higherIsBetter);
+                const rb = rankOf(vb, dist, spec.higherIsBetter);
+                const word = spec.higherIsBetter ? 'of' : 'cleanest of';
+
+                /*
+                 * The line that does the teaching, derived rather than written
+                 * per pair - the pairs are user-chosen and unbounded. Leading a
+                 * row while sitting below the world median is the case worth
+                 * naming, and it happens more often than it sounds.
+                 */
+                const noteFor = (v: number, other: number) => {
+                  const leads = spec.higherIsBetter ? v > other : v < other;
+                  const better = spec.higherIsBetter ? v > dist.median : v < dist.median;
+                  if (leads && !better) return 'Wins this row and is still on the wrong side of the world median.';
+                  const r = rankOf(v, dist, spec.higherIsBetter).rank;
+                  if (r <= Math.ceil(dist.n / 10)) return 'In the top tenth of countries reporting.';
+                  if (r > dist.n - Math.ceil(dist.n / 10)) return 'In the bottom tenth of countries reporting.';
+                  return undefined;
+                };
+
+                return {
+                  spec, va, vb,
+                  median: dist.median,
+                  rankA: `${ordinal(ra.rank)} ${word} ${ra.n}`,
+                  rankB: `${ordinal(rb.rank)} ${word} ${rb.n}`,
+                  noteA: noteFor(va, vb),
+                  noteB: noteFor(vb, va),
+                  medianNote: `Half of the ${dist.n} countries reporting in ${commonYear} sit on either side of this.`,
+                };
+              };
+
+              const built: Built[] = [];
+              for (const spec of ROWS) {
                 const va = spec.of(resolvedA);
                 const vb = spec.of(resolvedB);
                 // A row where either side is missing is suppressed outright.
                 // Rendering it as zero would state something untrue.
-                if (va == null || vb == null) return null;
-                const m =
-                  bothCountries && countries
-                    ? worldMedian(spec.key, commonYear, countries, fossilFuelData)
-                    : null;
-                return { spec, va, vb, median: m?.median ?? null };
-              }).filter((r): r is NonNullable<typeof r> => r !== null);
-
+                if (va == null || vb == null) continue;
+                built.push(build(spec, va, vb));
+              }
               if (indepA && indepB) {
-                const m =
-                  bothCountries && countries
-                    ? worldMedian('independence', commonYear, countries, fossilFuelData)
-                    : null;
-                built.push({
-                  spec: {
-                    key: 'independence', label: 'Energy independence', encoding: 'share',
-                    higherIsBetter: true, format: formatIndependenceScore, dp: 0, of: () => null,
-                  },
-                  va: indepA.score,
-                  vb: indepB.score,
-                  median: m?.median ?? null,
-                });
+                built.push(
+                  build(
+                    {
+                      key: 'independence', label: 'Energy independence', encoding: 'share',
+                      higherIsBetter: true, format: formatIndependenceScore, dp: 0, of: () => null,
+                    },
+                    indepA.score,
+                    indepB.score
+                  )
+                );
               }
 
               /*
                * Ordered by how far apart the two are, widest first, so the row
-               * worth arguing about opens the section rather than whichever
-               * metric happened to be listed first. Sorted within a block: a
+               * worth arguing about opens the block. Sorted within a block: a
                * point gap and a ratio are not comparable quantities.
                */
-              const gapOf = (r: (typeof built)[number]) =>
+              const gapOf = (r: Built) =>
                 r.spec.encoding === 'share'
                   ? Math.abs(r.va - r.vb)
                   : Math.min(r.va, r.vb) > 0
                     ? Math.max(r.va, r.vb) / Math.min(r.va, r.vb)
                     : Infinity;
 
-              const blocks: { title: string; rows: typeof built }[] = [
-                { title: 'Shares and scores', rows: built.filter((r) => r.spec.encoding === 'share') },
-                { title: 'Totals', rows: built.filter((r) => r.spec.encoding === 'absolute') },
+              const blocks = [
+                { title: 'Shares and scores · 0-100', rows: built.filter((r) => r.spec.encoding === 'share') },
+                { title: 'Totals · each row scaled to its own maximum', rows: built.filter((r) => r.spec.encoding === 'absolute') },
               ];
 
               const codeA = resolvedA.iso3 ?? resolvedA.label;
               const codeB = resolvedB.iso3 ?? resolvedB.label;
 
               return (
-                <div style={{ display: 'grid', gap: 'var(--space-10)', maxWidth: 900 }}>
-                  {blocks.map(({ title, rows }) =>
-                    rows.length === 0 ? null : (
-                      <div key={title}>
-                        <Eyebrow style={{ marginBottom: 'var(--space-6)', color: 'var(--text-quiet)' }}>
-                          {title}
-                        </Eyebrow>
-                        <div style={{ display: 'grid', gap: 'var(--space-9)' }}>
+                <div style={{ maxWidth: 900 }}>
+                  <CompareLegend a={resolvedA.label} b={resolvedB.label} />
+                  <div style={{ display: 'grid', gap: 'var(--space-10)' }}>
+                    {blocks.map(({ title, rows }) =>
+                      rows.length === 0 ? null : (
+                        <div key={title}>
+                          <Eyebrow style={{ marginBottom: 'var(--space-3)' }}>{title}</Eyebrow>
                           {[...rows].sort((x, y) => gapOf(y) - gapOf(x)).map((r) => (
                             <CompareRow
                               key={r.spec.key}
@@ -726,28 +773,23 @@ function ComparePageContent() {
                               format={r.spec.format}
                               dp={r.spec.dp}
                               median={r.median}
+                              medianNote={r.medianNote}
                               a={{
-                                code: codeA,
-                                value: r.va,
-                                suffix:
-                                  r.spec.key === 'independence' && indepA?.missingFossilData
-                                    ? '*'
-                                    : undefined,
+                                code: codeA, name: resolvedA.label, value: r.va,
+                                rank: r.rankA, note: r.noteA,
+                                suffix: r.spec.key === 'independence' && indepA?.missingFossilData ? '*' : undefined,
                               }}
                               b={{
-                                code: codeB,
-                                value: r.vb,
-                                suffix:
-                                  r.spec.key === 'independence' && indepB?.missingFossilData
-                                    ? '*'
-                                    : undefined,
+                                code: codeB, name: resolvedB.label, value: r.vb,
+                                rank: r.rankB, note: r.noteB,
+                                suffix: r.spec.key === 'independence' && indepB?.missingFossilData ? '*' : undefined,
                               }}
                             />
                           ))}
                         </div>
-                      </div>
-                    )
-                  )}
+                      )
+                    )}
+                  </div>
                 </div>
               );
             })()}
