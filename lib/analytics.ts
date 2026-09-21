@@ -1,10 +1,15 @@
 // Thin wrapper over GA4's gtag, plus the site's event vocabulary.
 //
-// GoogleAnalytics.tsx only injects gtag once the visitor has consented to
-// analytics cookies, so `window.gtag` is simply absent otherwise and every call
-// here becomes a no-op. That is the intended behaviour: never queue events for
-// a visitor who declined — and it means every number below is a floor, not a
-// count. Whatever share of visitors decline is missing from all of it.
+// GoogleAnalytics.tsx only injects gtag once analytics is allowed, so
+// `window.gtag` is simply absent otherwise and every call here becomes a no-op.
+// That is the intended behaviour: never queue events for a visitor who
+// declined.
+//
+// "Allowed" depends on where the visitor is (lib/consentRegion.ts). In Europe
+// it takes a yes in the banner, so European figures are a floor - whoever
+// declines is missing. Elsewhere it is on unless switched off, so those figures
+// are close to a count. **Do not compare regions by raw volume** in GA: the gap
+// between them is partly the banner.
 //
 // # The convention
 //

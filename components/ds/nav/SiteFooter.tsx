@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { MARK } from '@/components/ds/core/tokens';
 import dataMeta from '@/public/data/data-meta.json';
+import CookieSettingsButton from '@/components/CookieSettingsButton';
 
 /**
  * Site footer.
@@ -70,6 +71,8 @@ const SOURCES: { name: string; detail: string; href: string }[] = [
     href: 'https://data.worldbank.org',
   },
 ];
+
+const linkStyle: CSSProperties = { fontSize: 'var(--fs-body-sm)', color: 'var(--paper-a66)' };
 
 const labelStyle: CSSProperties = {
   fontFamily: 'var(--font-mono)',
@@ -146,14 +149,18 @@ export default function SiteFooter({ style }: SiteFooterProps) {
             >
               {col.links.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    style={{ fontSize: 'var(--fs-body-sm)', color: 'var(--paper-a66)' }}
-                  >
+                  <Link href={link.href} style={linkStyle}>
                     {link.label}
                   </Link>
                 </li>
               ))}
+              {/* A button among links, because it opens a panel rather than
+                  going anywhere. Beside Privacy, which is where people look. */}
+              {col.label === 'About' && (
+                <li>
+                  <CookieSettingsButton style={linkStyle} />
+                </li>
+              )}
             </ul>
           </nav>
         ))}

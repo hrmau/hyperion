@@ -13,7 +13,9 @@ const isDev = process.env.NODE_ENV === 'development';
  *
  * `unsafe-inline` for scripts is a real weakening and worth naming rather than
  * hiding. Next inlines bootstrap scripts, and the alternative is a per-request
- * nonce, which means running middleware on every route rather than just `/`.
+ * nonce. Middleware already runs on every page (for the consent region), so the
+ * cost is not that - it is that a nonce differs per response, which means no
+ * page can be prerendered, and 400 prerendered pages are the site.
  * Given there is no user content to inject, restricting script-src to two hosts
  * is most of the value at none of the cost. Revisit if the site ever accepts
  * input.

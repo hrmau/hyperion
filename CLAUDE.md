@@ -31,7 +31,8 @@ app/                  one directory per route
 components/           shared UI; navItems.ts is the single source of primary-nav truth
 lib/                  data loading, types, colour scales, scoring, game logic
                       facts.ts is server-only — it reads the filesystem
-middleware.ts         picks the homepage variant from cookie, then IP country
+middleware.ts         picks the homepage variant from cookie, then IP country;
+                      on every page, classifies the visitor for analytics consent
 public/data/          shipped JSON the client fetches at runtime
 data/                 raw + intermediate pipeline inputs (not served)
 scripts/              build-time data pipeline
@@ -694,9 +695,26 @@ missing fuel data) has a guard in CI that should not be dismissed without it.
 
 ## Analytics
 
-`lib/analytics.ts` is the only writer, and it no-ops unless the visitor has
-consented. **Every figure below is a floor, not a count** — whatever share of
-visitors decline analytics is missing from all of it.
+`lib/analytics.ts` is the only writer, and it no-ops unless analytics is
+allowed for the visitor. **Whether it is allowed depends on where they are**, so
+figures are not uniformly floors:
+
+- **EU, EEA, UK, Switzerland, and anywhere unknown**: opt-in. Analytics waits for
+  a yes in the banner, so these figures are a floor - whoever declines is missing.
+- **Everywhere else**: on by default, no banner, switched off from "Cookie
+  settings" in the footer. Close to a count.
+
+A saved choice always wins, in either direction. **Do not compare regions by raw
+volume** - part of the gap is the banner. Ireland and the UK, the launch
+audience, are on the opt-in side.
+
+`middleware.ts` runs on every page to make this work: pages are prerendered, so
+the browser has no other way to learn where it is. It writes
+`gg_consent_region` (`required` or `implied`, a session cookie, set only when it
+changes) and `lib/cookies.ts` reads it. The country list and why it is broader
+than "the EU" are in `lib/consentRegion.ts`. **A missing cookie reads as
+`required`** - the failure mode is a banner, never an unasked-for tag. Keep it
+that way.
 
 | Event | Parameters | Answers |
 |---|---|---|
@@ -741,7 +759,7 @@ worth knowing before changing anything:
   first thing to check.
 - **`script-src` carries `unsafe-inline`**, which is a real weakening and is
   commented as such. Next inlines bootstrap scripts and the alternative is a
-  per-request nonce, meaning middleware on every route rather than just `/`. The
+  per-request nonce, which would stop every page being prerendered. The
   site takes no user input, so there is nothing to inject; revisit if that
   changes. `unsafe-eval` is development-only, for Turbopack's HMR.
 - **`Strict-Transport-Security` is deliberately absent.** Vercel already serves
@@ -771,8 +789,8 @@ only thing between a cookie and the routing table.
 - Client pages are `'use client'` with a sibling `layout.tsx` that exports metadata.
 - Country flags come from `components/FlagImg.tsx` (CDN with an ISO2 text fallback),
   never raw emoji.
-- Analytics goes through `lib/analytics.ts`, which no-ops unless the visitor has
-  consented to analytics cookies. See the Analytics section for the event
+- Analytics goes through `lib/analytics.ts`, which no-ops unless analytics is
+  allowed for the visitor (opt-in in Europe, opt-out elsewhere). See the Analytics section for the event
   vocabulary; never call `trackEvent` with an ad-hoc name from a component.
 - `npm run lint` is clean, and `npm audit` reports zero vulnerabilities. Both
   were not true before; keep them that way rather than re-establishing a

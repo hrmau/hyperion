@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import {
   saveConsent,
   acceptAll,
@@ -10,16 +10,21 @@ import {
   getServerConsentSnapshot,
   getDecidedSnapshot,
   getServerDecidedSnapshot,
+  getSettingsOpenSnapshot,
+  getServerSettingsOpenSnapshot,
+  closeConsentSettings,
   type CookiePreferences,
 } from '@/lib/cookies';
 
 export default function CookieConsent() {
   const [dismissed, setDismissed] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettingsView, setShowSettingsView] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   // Consent is read through an external store rather than an effect. The server
   // snapshot says "already decided" so the banner cannot flash on a page that
-  // was never going to show it.
+  // was never going to show it - which, outside the consent region, is every
+  // page: `decided` is true there before anyone has clicked anything.
   const stored = useSyncExternalStore(
     subscribeConsent,
     getConsentSnapshot,
@@ -30,41 +35,64 @@ export default function CookieConsent() {
     getDecidedSnapshot,
     getServerDecidedSnapshot
   );
+  // Reopened from "Cookie settings" in the footer. Goes straight to the
+  // toggles, because someone who went looking for them wants to change one.
+  const reopened = useSyncExternalStore(
+    subscribeConsent,
+    getSettingsOpenSnapshot,
+    getServerSettingsOpenSnapshot
+  );
 
   const [draft, setDraft] = useState<CookiePreferences | null>(null);
   const preferences = draft ?? stored;
-  const setPreferences = setDraft;
-  const showBanner = !decided && !dismissed;
+  const showBanner = (!decided && !dismissed) || reopened;
+  const showSettings = showSettingsView || reopened;
 
-  // No reload any more: GoogleAnalytics subscribes to the same store, so the
-  // tag mounts the moment consent is granted. Reloading the page to start
-  // analytics was a jarring way to answer a cookie banner.
-  const handleAcceptAll = () => {
-    setPreferences(acceptAll());
+  // The footer link is at the bottom of a long page and the panel is fixed to
+  // the viewport, so without this a keyboard user's focus stays on the link
+  // while the thing it opened is somewhere else.
+  useEffect(() => {
+    if (reopened) panelRef.current?.focus();
+  }, [reopened]);
+
+  // No reload to turn analytics ON: GoogleAnalytics subscribes to the same
+  // store, so the tag mounts the moment consent is granted. Turning it OFF
+  // does reload - the tag cannot be unloaded once the page has it, so the only
+  // honest way to stop it is a fresh document. That now covers every exit, not
+  // just the settings panel, because a reopened banner can be answered with
+  // "Essential Only" by someone whose analytics is already running.
+  const finish = (next: CookiePreferences) => {
+    const wasRunning = stored.analytics;
+    setDraft(null);
     setDismissed(true);
-    setShowSettings(false);
+    setShowSettingsView(false);
+    if (wasRunning && !next.analytics) window.location.reload();
   };
 
-  const handleRejectOptional = () => {
-    setPreferences(rejectOptional());
-    setDismissed(true);
-    setShowSettings(false);
-  };
-
+  const handleAcceptAll = () => finish(acceptAll());
+  const handleRejectOptional = () => finish(rejectOptional());
   const handleSavePreferences = () => {
     saveConsent(preferences);
-    setDismissed(true);
-    setShowSettings(false);
-    // Turning analytics OFF still reloads: the tag cannot be unloaded once the
-    // page has it, so the only honest way to stop it is a fresh document.
-    if (!preferences.analytics) window.location.reload();
+    finish(preferences);
+  };
+
+  const handleBack = () => {
+    setDraft(null);
+    if (reopened) closeConsentSettings();
+    else setShowSettingsView(false);
   };
 
   if (!showBanner) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-      <div className="max-w-2xl mx-auto card p-4 md:p-6">
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        role="region"
+        aria-label="Cookie preferences"
+        className="max-w-2xl mx-auto card p-4 md:p-6 outline-none"
+      >
         {!showSettings ? (
           <>
             <div className="mb-4">
@@ -92,7 +120,7 @@ export default function CookieConsent() {
                 Essential Only
               </button>
               <button
-                onClick={() => setShowSettings(true)}
+                onClick={() => setShowSettingsView(true)}
                 className="px-4 py-2 text-xs font-medium text-muted hover:text-primary transition-colors"
               >
                 Manage Preferences
@@ -127,6 +155,7 @@ export default function CookieConsent() {
                     type="checkbox"
                     checked={true}
                     disabled
+                    aria-label="Essential cookies (always on)"
                     className="w-4 h-4 rounded border-border accent-positive opacity-60"
                   />
                 </div>
@@ -146,8 +175,9 @@ export default function CookieConsent() {
                   <input
                     type="checkbox"
                     checked={preferences.analytics}
+                    aria-label="Analytics cookies"
                     onChange={(e) =>
-                      setPreferences({ ...preferences, analytics: e.target.checked })
+                      setDraft({ ...preferences, analytics: e.target.checked })
                     }
                     className="w-4 h-4 rounded border-border accent-positive cursor-pointer"
                   />
@@ -163,10 +193,10 @@ export default function CookieConsent() {
                 Save Preferences
               </button>
               <button
-                onClick={() => setShowSettings(false)}
+                onClick={handleBack}
                 className="px-4 py-2 text-xs font-medium text-muted hover:text-primary transition-colors"
               >
-                Back
+                {reopened ? 'Close' : 'Back'}
               </button>
             </div>
           </>
