@@ -1,4 +1,13 @@
 // Cookie consent management
+//
+// Two inputs decide whether analytics runs. A choice the visitor has saved
+// always wins, in either direction. Without one, the default depends on where
+// they are: middleware.ts writes `gg_consent_region`, and a visitor whose
+// region does not require consent starts with analytics on and never sees the
+// banner - see lib/consentRegion.ts for where the line is and why. Everyone can
+// still change it from "Cookie settings" in the footer.
+
+import { CONSENT_REGION_COOKIE, type ConsentRegion } from '@/lib/consentRegion';
 
 export type CookiePreferences = {
   necessary: true; // Always true, cannot be changed
@@ -12,6 +21,22 @@ export const defaultPreferences: CookiePreferences = {
   necessary: true,
   analytics: false,
 };
+
+const impliedPreferences: CookiePreferences = {
+  necessary: true,
+  analytics: true,
+};
+
+/**
+ * The region middleware classified this visitor into. Missing - local dev, or
+ * any response the middleware did not touch - reads as `required`, so the
+ * failure mode is a banner and never an unasked-for tag.
+ */
+function consentRegion(): ConsentRegion {
+  if (typeof document === 'undefined') return 'required';
+  const match = document.cookie.match(new RegExp(`(?:^|; )${CONSENT_REGION_COOKIE}=([^;]*)`));
+  return match?.[1] === 'implied' ? 'implied' : 'required';
+}
 
 export function hasConsented(): boolean {
   if (typeof window === 'undefined') return false;
@@ -85,9 +110,21 @@ export function subscribeConsent(onChange: Listener): () => void {
   };
 }
 
-/** Current preferences, or defaults when nothing has been stored. */
+/**
+ * Current preferences: the saved choice, else the region's default.
+ *
+ * Cached for the life of the document, so a region cookie that changes during
+ * a visit - middleware re-derives it on client navigations too - never starts
+ * or stops the tag halfway through a page. It applies from the next load.
+ */
 export function getConsentSnapshot(): CookiePreferences {
-  if (cached === null) cached = hasConsented() ? getPreferences() : defaultPreferences;
+  if (cached === null) {
+    cached = hasConsented()
+      ? getPreferences()
+      : consentRegion() === 'implied'
+        ? impliedPreferences
+        : defaultPreferences;
+  }
   return cached;
 }
 
@@ -98,9 +135,12 @@ export function getServerConsentSnapshot(): CookiePreferences {
 
 let cachedDecided: boolean | null = null;
 
-/** Whether the visitor has answered the banner at all. */
+/**
+ * Whether the banner has nothing to ask: the visitor has answered it, or they
+ * are somewhere that does not require the question.
+ */
 export function getDecidedSnapshot(): boolean {
-  if (cachedDecided === null) cachedDecided = hasConsented();
+  if (cachedDecided === null) cachedDecided = hasConsented() || consentRegion() === 'implied';
   return cachedDecided;
 }
 
@@ -109,8 +149,40 @@ export function getServerDecidedSnapshot(): boolean {
   return true;
 }
 
+/**
+ * Whether the settings panel has been reopened from the footer.
+ *
+ * The footer is a server component and the banner lives in the root layout, so
+ * they share this flag rather than a prop. It is the only way a visitor who was
+ * never asked - anyone outside the consent region - can say no.
+ */
+let settingsOpen = false;
+
+export function openConsentSettings(): void {
+  settingsOpen = true;
+  notify();
+}
+
+export function closeConsentSettings(): void {
+  settingsOpen = false;
+  notify();
+}
+
+export function getSettingsOpenSnapshot(): boolean {
+  return settingsOpen;
+}
+
+export function getServerSettingsOpenSnapshot(): boolean {
+  return false;
+}
+
 function publish(prefs: CookiePreferences) {
   cached = prefs;
   cachedDecided = true;
+  settingsOpen = false;
+  notify();
+}
+
+function notify() {
   for (const listener of listeners) listener();
 }

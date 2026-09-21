@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         kicker="Legal"
         title="Privacy"
         standfirst="What this site collects, what it does not, and who it tells."
-        updated="February 2025"
+        updated="September 2026"
       >
         
 
@@ -42,7 +42,8 @@ export default function PrivacyPage() {
               from - a two-letter code supplied by our host with the request, such
               as <code>IE</code>. We do not receive your IP address, we do not log
               the code, and it is not written anywhere. It is used to pick a page and
-              then it is gone.
+              then it is gone. The same code decides whether we ask before using
+              analytics - see below.
             </p>
             <p>
               If you choose a different country with the &ldquo;change&rdquo; control, that choice
@@ -52,6 +53,30 @@ export default function PrivacyPage() {
               preference, in the same category as the best streak that <code>/play</code> keeps,
               so it is not part of the analytics consent choice below. Clearing your site data
               removes it, after which the homepage goes back to guessing.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2>When we ask before using analytics</h2>
+            <p>
+              If your connection appears to come from the European Union, the wider
+              European Economic Area, the United Kingdom or Switzerland, Google
+              Analytics does not run until you say yes to it in the cookie banner.
+              We also ask when we cannot tell where you are.
+            </p>
+            <p>
+              Everywhere else, Google Analytics is on by default and no banner is
+              shown. You can turn it off at any time from <strong>Cookie
+              settings</strong> at the foot of every page, and that choice is kept on
+              your device and respected wherever you are afterwards - as is a
+              choice made in the banner.
+            </p>
+            <p>
+              To remember which of those two cases applies, we set a cookie named{' '}
+              <code>gg_consent_region</code>. It holds one of two words,{' '}
+              <code>required</code> or <code>implied</code> - not your country - and
+              it is deleted when you close your browser. It is necessary for the
+              banner to work, so it is not itself part of the consent choice.
             </p>
           </section>
 

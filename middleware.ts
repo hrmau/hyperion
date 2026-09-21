@@ -3,6 +3,7 @@ import { getIso3 } from '@/lib/flags';
 import { REGION_SLUG } from '@/lib/regions';
 import countryPages from './public/data/country-pages.json';
 import countryRegions from './public/data/country-regions.json';
+import { CONSENT_REGION_COOKIE, consentRegionFor } from '@/lib/consentRegion';
 
 /**
  * Serves the homepage as the visitor's own country, and `/countries` as their
@@ -16,6 +17,10 @@ import countryRegions from './public/data/country-regions.json';
  * changes once a week.
  *
  * Order matters: an explicit choice beats a guess from an IP address.
+ *
+ * It also runs on every other page, for one job: telling the client whether
+ * this visitor must be asked before analytics runs. Every page is prerendered,
+ * so the browser has no other way to learn where it is - see lib/consentRegion.ts.
  */
 
 const PAGES = new Set(countryPages as string[]);
@@ -23,8 +28,31 @@ const REGIONS = countryRegions as Record<string, string>;
 const COOKIE = 'gg_country';
 
 export function middleware(req: NextRequest) {
-  const chosen = req.cookies.get(COOKIE)?.value?.toUpperCase();
   const detected = req.headers.get('x-vercel-ip-country');
+  const { pathname } = req.nextUrl;
+
+  const res =
+    pathname === '/' || pathname === '/countries'
+      ? personalise(req, detected)
+      : NextResponse.next();
+
+  // Written only when it changes, so a returning visitor's responses carry no
+  // Set-Cookie at all. Recomputed rather than trusted: someone who crosses a
+  // border mid-session should be classified by where they are now. A session cookie: it is re-derived on every request, so a longer lifetime
+  // would add nothing but a stale answer.
+  const region = consentRegionFor(detected);
+  if (req.cookies.get(CONSENT_REGION_COOKIE)?.value !== region) {
+    res.cookies.set(CONSENT_REGION_COOKIE, region, {
+      path: '/',
+      sameSite: 'lax',
+      secure: req.nextUrl.protocol === 'https:',
+    });
+  }
+  return res;
+}
+
+function personalise(req: NextRequest, detected: string | null): NextResponse {
+  const chosen = req.cookies.get(COOKIE)?.value?.toUpperCase();
 
   const iso3 =
     (chosen && PAGES.has(chosen) && chosen) ||
@@ -61,5 +89,8 @@ function pageFor(iso2: string): string | null {
 }
 
 export const config = {
-  matcher: ['/', '/countries'],
+  // Every page, and nothing that is not one: build assets, the data files and
+  // anything else with an extension, and the generated share cards, which a
+  // crawler fetches and which have no use for a consent cookie.
+  matcher: ['/((?!_next/|.*\\..*|.*opengraph-image).*)'],
 };
