@@ -85,8 +85,12 @@ export function countryDatasetJsonLd(
     // fresh date on every deploy learns to ignore the field.
     temporalCoverage: `${opts.firstYear}/${opts.lastYear}`,
     dateModified: `${facts.year}-12-31`,
+    // `Place`, not `Country`. Country is a Place subtype to schema.org, but
+    // Google's Dataset validator accepts only Text or Place here and does not
+    // walk the hierarchy - `Country` was reported as "Invalid object type for
+    // field spatialCoverage" in Search Console on every profile.
     spatialCoverage: {
-      '@type': 'Country',
+      '@type': 'Place',
       name: facts.name,
       identifier: facts.iso3,
     },
