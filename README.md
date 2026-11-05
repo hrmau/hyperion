@@ -75,8 +75,34 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Attribution
 
-Data provided by [Ember](https://ember-energy.org) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Data provided by [Ember](https://ember-energy.org) and
+[Our World in Data](https://ourworldindata.org), both under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-## License
+## Licence
 
-MIT
+Copyright (C) 2026 Artur Szalak and Grid Gorilla contributors.
+
+Three parts, because the repository holds three kinds of thing:
+
+| What | Licence |
+|---|---|
+| **Code** - everything not listed below | [GNU AGPL v3.0](LICENSE) |
+| **Data and written analysis** - `public/data/`, `data/`, and the insight lines and fact copy in `scripts/*.json` | [CC BY 4.0](LICENSE-DATA) |
+| **The Grid Gorilla name and logo** | Not licensed - see [TRADEMARKS.md](TRADEMARKS.md) |
+
+**The AGPL covers running the code as a website**, not only distributing it: if
+you deploy a modified copy where others can use it, you must offer those users
+its source under the same licence.
+
+**The data is CC BY 4.0 because its sources are.** Most of it is derived from
+Ember and Our World in Data, both CC BY 4.0, so reusing it means crediting them
+as well as Grid Gorilla. `socioeconomic.json` draws on the World Bank (CC BY 4.0)
+and UNDP's Human Development Reports.
+
+Third-party material keeps its own licence:
+
+- `public/data/world-110m.json` and `world-50m.json` - [world-atlas](https://github.com/topojson/world-atlas) (ISC), from Natural Earth (public domain)
+- `assets/fonts/` - SIL Open Font License 1.1, licence files alongside
+- The gorilla artwork - "Gorilla tattoo" by Astima, The Noun Project, CC BY 3.0
+- npm dependencies - their own licences, none of them vendored here
