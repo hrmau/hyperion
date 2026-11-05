@@ -81,7 +81,7 @@ Data provided by [Ember](https://ember-energy.org) and
 
 ## Licence
 
-Copyright (C) 2026 harimau and Grid Gorilla contributors.
+Copyright (C) 2026 Artur Szalak and Grid Gorilla contributors.
 
 Three parts, because the repository holds three kinds of thing:
 

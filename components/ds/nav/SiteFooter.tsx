@@ -21,6 +21,11 @@ import CookieSettingsButton from '@/components/CookieSettingsButton';
  * every page of the site. Do not remove it.
  */
 
+// The repository is AGPL-3.0. Pointing readers of the running site at its
+// source is what that licence asks of anyone else who deploys it, so the
+// original does the same.
+const SOURCE_REPO = 'https://github.com/hrmau/hyperion';
+
 const COLUMNS: { label: string; links: { label: string; href: string }[] }[] = [
   {
     label: 'Explore',
@@ -50,6 +55,7 @@ const COLUMNS: { label: string; links: { label: string; href: string }[] }[] = [
       { label: "What's new", href: '/updates' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
+      { label: 'Source code', href: SOURCE_REPO },
     ],
   },
 ];
@@ -149,9 +155,15 @@ export default function SiteFooter({ style }: SiteFooterProps) {
             >
               {col.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={linkStyle}>
-                    {link.label}
-                  </Link>
+                  {link.href.startsWith('http') ? (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href} style={linkStyle}>
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
               {/* A button among links, because it opens a panel rather than
