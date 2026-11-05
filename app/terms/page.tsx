@@ -76,8 +76,14 @@ export default function TermsPage() {
             <h2>Intellectual Property</h2>
             <p>
               The underlying data is provided by third parties under Creative Commons licenses.
-              The visualization design and code of Grid Gorilla are provided as-is. You may use screenshots
-              and data for non-commercial, educational purposes with appropriate attribution.
+              Grid Gorilla&apos;s own datasets and written analysis are published under CC BY 4.0: you may
+              reuse them, commercially or otherwise, provided you credit Grid Gorilla and the original
+              sources, Ember and Our World in Data. Screenshots may be shared on the same terms.
+            </p>
+            <p>
+              The source code is licensed under the GNU Affero General Public License v3.0. The Grid
+              Gorilla name and logo are not covered by either licence and may not be used to identify
+              another site or project.
             </p>
           </section>
 

@@ -1151,6 +1151,8 @@ TOTAL: 95.5 + 1.9 = 97.4 / 100`}
             <ul className="space-y-1">
               <li>Source data: CC BY 4.0 (Ember, OWID)</li>
               <li>Uranium data: Publicly available from WNA/EIA</li>
+              <li>Grid Gorilla&apos;s derived datasets and analysis: CC BY 4.0</li>
+              <li>Source code: GNU AGPL v3.0</li>
             </ul>
           </CollapsibleSection>
 
