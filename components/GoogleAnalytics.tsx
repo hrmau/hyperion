@@ -8,7 +8,11 @@ import {
   getServerConsentSnapshot,
 } from '@/lib/cookies';
 
-const GA_MEASUREMENT_ID = 'G-H89L3VC5L3';
+// Set in the Vercel production environment only. Unset - a local checkout, a
+// preview deployment, anybody's fork - means no tag at all, so a copy of this
+// repo can never report its traffic into gridgorilla.app's property. Inlined at
+// build time, as every NEXT_PUBLIC_ variable is.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export default function GoogleAnalytics() {
   // Read through an external store rather than an effect, so consent is never
@@ -19,7 +23,7 @@ export default function GoogleAnalytics() {
     getServerConsentSnapshot
   );
 
-  if (!prefs.analytics) return null;
+  if (!GA_MEASUREMENT_ID || !prefs.analytics) return null;
 
   return (
     <>

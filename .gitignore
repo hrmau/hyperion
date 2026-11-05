@@ -56,3 +56,10 @@ data/owid-source.json
 # Python bytecode from running the pipeline scripts
 __pycache__/
 *.pyc
+
+# Planning, specs, backlog and status notes live in docs/ and stay local: they
+# are never pushed. Only the design system, which the code points at as its
+# source of truth, is published. A new file dropped in docs/ is private by
+# default; publishing one means adding a `!` line here on purpose.
+/docs/*
+!/docs/design-system/
